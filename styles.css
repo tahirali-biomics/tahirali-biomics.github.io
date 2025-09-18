@@ -1,0 +1,64 @@
+/* Full-width banner */
+.navbar-brand img {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  height: 120px !important;
+  object-fit: cover;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  margin-bottom: 0;
+}
+
+/* Centered profile image, rounded corners */
+.profile-pic {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 20px;
+  box-shadow: 0 0 10px #aaa;
+  width: 200px;
+  margin-top: 1.5em;
+  margin-bottom: 1em;
+}
+
+/* Center name and subtitle */
+h1, .subtitle {
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 1.3em;
+  color: #444;
+  margin-bottom: 1em;
+}
+
+/* Navbar tabs under banner */
+.navbar {
+  margin-bottom: 0;
+}
+
+/* Social icons row */
+.social-icons {
+  text-align: center;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+.social-icons a {
+  font-size: 2.5em;
+  margin: 0 20px;
+  text-decoration: none;
+  vertical-align: middle;
+  transition: color 0.2s;
+}
+.social-icons a.email { color: #0072B2; }
+.social-icons a.linkedin { color: #0A66C2; }
+.social-icons a.facebook { color: #1877F3; }
+.social-icons a.twitter { color: #000; }
+.social-icons a.scholar { color: #333; }
+.social-icons a:hover { color: #e67e22; }
+
+/* Section headings */
+h2, h3 {
+  color: #2c3e50;
+  margin-top: 2em;
+}
