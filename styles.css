@@ -1,6 +1,14 @@
-/* Remove banner/logo from navbar */
-.navbar-brand img {
-  display: none !important;
+/* Sidebar styling */
+.sidebar nav {
+  font-size: 1.2em;
+  margin-top: 2em;
+}
+.sidebar-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 1em;
 }
 
 /* Centered profile image, rounded corners (not circle) */
@@ -26,12 +34,6 @@ h1, .subtitle {
   margin-bottom: 1em;
 }
 
-/* Navbar tabs under name/photo */
-.navbar {
-  margin-bottom: 0;
-  justify-content: center;
-}
-
 /* Social icons row */
 .social-icons {
   text-align: center;
@@ -39,7 +41,7 @@ h1, .subtitle {
   margin-bottom: 2em;
 }
 .social-icons a {
-  font-size: 3.5em;
+  font-size: 4em;
   margin: 0 25px;
   text-decoration: none;
   vertical-align: middle;
