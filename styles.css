@@ -1,22 +1,19 @@
-/* Sidebar: make tabs big, wide, with black border */
-.sidebar nav[role="navigation"] ul {
-  padding: 0;
+/* Make sidebar wider */
+.sidebar {
+  min-width: 320px !important;
+  width: 320px !important;
 }
 
-.sidebar nav[role="navigation"] li {
-  margin: 1.2em 0;
-  list-style: none;
-}
-
-.sidebar nav[role="navigation"] a {
+/* Make sidebar tabs big, wide, with black border */
+.sidebar-navigation .sidebar-link {
   display: block !important;
-  width: 80% !important;         /* Make tabs wide */
-  margin: 0 auto !important;
-  padding: 1em 0.5em !important; /* Make tabs tall */
-  font-size: 1.35em !important;  /* Make text bigger */
+  width: 80% !important;
+  margin: 1.2em auto !important;
+  padding: 1em 0.5em !important;
+  font-size: 1.3em !important;
   font-weight: bold !important;
   text-align: center !important;
-  border: 2.5px solid #111 !important;  /* Black border */
+  border: 2.5px solid #111 !important;
   border-radius: 14px !important;
   background: #fff !important;
   color: #222 !important;
@@ -24,8 +21,8 @@
   transition: background 0.2s, color 0.2s, border 0.2s;
 }
 
-.sidebar nav[role="navigation"] a:hover,
-.sidebar nav[role="navigation"] a.active {
+.sidebar-navigation .sidebar-link:hover,
+.sidebar-navigation .sidebar-link.active {
   background: #f5f5f5 !important;
   color: #0072B2 !important;
   border: 2.5px solid #0072B2 !important;
