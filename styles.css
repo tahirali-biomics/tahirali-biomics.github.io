@@ -4,31 +4,31 @@
 }
 
 .sidebar nav[role="navigation"] li {
-  margin: 1em 0;
+  margin: 1.2em 0;
   list-style: none;
 }
 
 .sidebar nav[role="navigation"] a {
-  display: block;
-  width: 75%; /* 3/4 of sidebar width */
-  margin: 0 auto;
-  padding: 1em 0.5em;
-  font-size: 1.3em;
-  font-weight: bold;
-  text-align: center;
-  border: 2px solid #111;
-  border-radius: 12px;
-  background: #fff;
+  display: block !important;
+  width: 80% !important;         /* Make tabs wide */
+  margin: 0 auto !important;
+  padding: 1em 0.5em !important; /* Make tabs tall */
+  font-size: 1.35em !important;  /* Make text bigger */
+  font-weight: bold !important;
+  text-align: center !important;
+  border: 2.5px solid #111 !important;  /* Black border */
+  border-radius: 14px !important;
+  background: #fff !important;
   color: #222 !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03) !important;
   transition: background 0.2s, color 0.2s, border 0.2s;
 }
 
 .sidebar nav[role="navigation"] a:hover,
 .sidebar nav[role="navigation"] a.active {
-  background: #f5f5f5;
+  background: #f5f5f5 !important;
   color: #0072B2 !important;
-  border: 2px solid #0072B2;
+  border: 2.5px solid #0072B2 !important;
 }
 
 /* Centered profile image, rounded corners (not circle) */
