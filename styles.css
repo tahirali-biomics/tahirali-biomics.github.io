@@ -84,3 +84,27 @@ h2, h3 {
   color: #2c3e50;
   margin-top: 2em;
 }
+
+/* Responsive sidebar: on small screens, make sidebar narrow and tabs smaller */
+@media (max-width: 900px) {
+  .sidebar {
+    min-width: 60px !important;
+    width: 60px !important;
+    max-width: 70px !important;
+  }
+  .sidebar-navigation .sidebar-link {
+    font-size: 0.85em !important;
+    padding: 0.3em 0.1em !important;
+    width: 95% !important;
+    margin: 0.15em auto !important;
+    border-width: 1px !important;
+  }
+  .profile-pic {
+    width: 120px !important;
+  }
+  .social-icons a {
+    font-size: 1.3em !important;
+    border-width: 0.7px !important;
+    padding: 0.05em 0.08em !important;
+  }
+}
