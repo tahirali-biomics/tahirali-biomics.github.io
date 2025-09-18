@@ -25,3 +25,6 @@ vendor/
 *.Rproj.user/
 *.Rhistory
 *.RData
+
+/.quarto/
+**/*.quarto_ipynb

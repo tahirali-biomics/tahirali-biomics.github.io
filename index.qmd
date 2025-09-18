@@ -1,0 +1,44 @@
+---
+title: "Dr. Tahir Ali"
+image: profile.jpg
+---
+
+![](profile.jpg){.profile-pic}
+
+# Dr. Tahir Ali
+
+**Evolutionary Biologist | Computational Geneticist | Science Communicator**
+
+<div style="text-align:center;">
+Institute for Plant Sciences
+University of Cologne
+Zülpicher Str. 47b, 50674 Cologne, Germany  
+📞 +49 (0)2214701139
+✉️ [ali_tahir99@hotmail.com](mailto:ali_tahir99@hotmail.com)    
+</div>
+
+---
+
+## About Me
+
+As a researcher, I am fascinated by the interplay of genes, environment, and time—how the invisible code of life shapes the visible world, and how history, chance, and adaptation leave their marks on genomes. My work in evolutionary genomics and plant adaptation is driven by a desire to understand not just the mechanisms of change, but the stories they tell about survival, resilience, and the beauty of diversity.
+
+But science is not my only passion. I am a lifelong reader and explorer, inspired by the psychological depth of Dostoevsky, the sweeping human dramas of Tolstoy, and the magical realism of Márquez and Grass. Like the Count of Monte Cristo, I believe in the power of transformation and the search for meaning. I find joy in traveling—whether wandering through ancient cities, hiking in wild landscapes, or simply observing the quiet poetry of everyday life.
+
+I see research as a form of exploration, not so different from the journeys of literary heroes: a quest to map the unknown, to connect the past and present, and to understand the complexity of nature and the human mind. I am drawn to questions of fate and free will, the tension between reason and emotion, and the ways in which our stories—scientific and personal—shape who we are.
+
+> “Man is what he believes.” — Anton Chekhov  
+> “The mystery of human existence lies not in just staying alive, but in finding something to live for.” — Dostoevsky
+
+---
+
+## Quick Links
+
+<div class="social-icons" style="text-align:center; margin-top:1em;">
+  <a href="mailto:ali_tahir99@hotmail.com" title="Email">📧</a>
+  <a href="https://www.linkedin.com/in/tahir-ali-phd-07398823/" title="LinkedIn">🔗</a>
+  <a href="https://www.facebook.com/share/1FXBkETf1z/" title="Facebook">📘</a>
+  <a href="https://x.com/TahirAli_PhD" title="Twitter">🐦</a>
+  <a href="https://scholar.google.com/citations?user=3FhH7eMAAAAJ&hl=en" title="Google Scholar">🎓</a>
+</div>
+
