@@ -1,4 +1,4 @@
-/* Sidebar: wider */
+/* Sidebar: wider for desktop only */
 .sidebar {
   min-width: 148px !important;
   width: 148px !important;
@@ -85,19 +85,19 @@ h2, h3 {
   margin-top: 2em;
 }
 
-/* Responsive sidebar: on small screens, make sidebar narrow and tabs smaller */
+/* Responsive sidebar: on small screens, let Quarto handle sidebar, make tabs smaller */
 @media (max-width: 900px) {
   .sidebar {
-    min-width: 60px !important;
-    width: 60px !important;
-    max-width: 70px !important;
+    min-width: 0 !important;
+    width: auto !important;
+    max-width: 100vw !important;
   }
   .sidebar-navigation .sidebar-link {
-    font-size: 0.85em !important;
+    font-size: 0.95em !important;
     padding: 0.3em 0.1em !important;
     width: 95% !important;
     margin: 0.15em auto !important;
-    border-width: 1px !important;
+    border-width: 1.2px !important;
   }
   .profile-pic {
     width: 120px !important;
