@@ -1,21 +1,21 @@
 /* Sidebar: slightly wider */
 .sidebar {
-  min-width: 126px !important;
-  width: 126px !important;
-  max-width: 130px !important;
+  min-width: 130px !important;
+  width: 130px !important;
+  max-width: 136px !important;
 }
 
 /* Sidebar tabs: slightly thicker border, compact, consistent */
 .sidebar-navigation .sidebar-link {
   display: block !important;
   width: 90% !important;
-  margin: 0.3em auto !important;
-  padding: 0.45em 0.1em !important;
+  margin: 0.4em auto !important;
+  padding: 0.40em 0.em !important;
   font-size: 0.95em !important;
   font-weight: bold !important;
   text-align: center !important;
   border: 1.7px solid #111 !important;   /* Increased border */
-  border-radius: 8px !important;
+  border-radius: 10px !important;
   background: #fff !important;
   color: #222 !important;
   box-shadow: 0 1px 4px rgba(0,0,0,0.03) !important;
@@ -65,7 +65,7 @@ h1, .subtitle {
   text-decoration: none;
   vertical-align: middle;
   border: 1.4px solid #111;
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 0.08em 0.13em;
   background: #fff;
   display: inline-block;
