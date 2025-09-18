@@ -1,0 +1,27 @@
+# Jekyll build and cache
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+.bundle/
+Gemfile.lock
+.ruby-version
+
+# Quarto build output
+_quarto/
+*.ipynb_checkpoints/
+
+# Node/npm
+node_modules/
+vendor/
+
+# OS/Editor files
+.DS_Store
+.idea/
+*.swp
+*.swo
+
+# RStudio/Quarto/Notebook
+*.Rproj.user/
+*.Rhistory
+*.RData
