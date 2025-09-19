@@ -1,96 +1,58 @@
-/* Profile header: name/contact left, photo right */
-.profile-header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 2em;
-  margin-top: 2em;
-}
-.profile-info {
-  flex: 2 1 320px;
-  min-width: 220px;
-  max-width: 60%;
-  padding-right: 2em;
-}
-.profile-photo {
-  flex: 1 1 180px;
-  min-width: 140px;
-  text-align: right;
-}
-.profile-pic {
-  border-radius: 20px;
-  box-shadow: 0 0 10px #aaa;
-  width: 160px;
-  margin: 0;
-}
-@media (max-width: 700px) {
-  .profile-header {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .profile-info, .profile-photo {
-    max-width: 100%;
-    padding: 0;
-    text-align: center;
-  }
-  .profile-pic {
-    width: 120px;
-    margin-top: 1em;
-  }
+/* Remove banner/logo from navbar */
+.navbar-brand img {
+  display: none !important;
 }
 
-/* Sidebar and social icons: keep your previous styles here */
-.sidebar {
-  min-width: 148px !important;
-  width: 148px !important;
-  max-width: 155px !important;
+/* Centered profile image, rounded corners (not circle) */
+.profile-pic {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 20px;
+  box-shadow: 0 0 10px #aaa;
+  width: 220px;
+  margin-top: 1.5em;
+  margin-bottom: 1em;
 }
-.sidebar-navigation .sidebar-link {
-  display: block !important;
-  width: 98% !important;
-  margin: 0.35em auto !important;
-  padding: 0.7em 0.2em !important;
-  font-size: 1.08em !important;
-  font-weight: bold !important;
-  text-align: center !important;
-  border: 2.2px solid #111 !important;
-  border-radius: 12px !important;
-  background: #fff !important;
-  color: #222 !important;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.03) !important;
-  transition: background 0.2s, color 0.2s, border 0.2s;
+
+/* Center name and subtitle */
+h1, .subtitle {
+  text-align: center;
 }
-.sidebar-navigation .sidebar-link:hover,
-.sidebar-navigation .sidebar-link.active {
-  background: #f5f5f5 !important;
-  color: #0072B2 !important;
-  border: 2.7px solid #0072B2 !important;
+
+.subtitle {
+  font-size: 1.3em;
+  color: #444;
+  margin-bottom: 1em;
 }
+
+/* Navbar tabs under name/photo */
+.navbar {
+  margin-bottom: 0;
+  justify-content: center;
+}
+
+/* Social icons row */
 .social-icons {
   text-align: center;
-  margin-top: 1.2em;
-  margin-bottom: 1.2em;
+  margin-top: 2em;
+  margin-bottom: 2em;
 }
 .social-icons a {
-  font-size: 2em;
-  margin: 0 2px;
+  font-size: 3.5em;
+  margin: 0 25px;
   text-decoration: none;
   vertical-align: middle;
-  border: 1px solid #111;
-  border-radius: 10px;
-  padding: 0.08em 0.13em;
-  background: #fff;
-  display: inline-block;
-  transition: color 0.2s, border 0.2s, background 0.2s;
+  transition: color 0.2s;
 }
 .social-icons a.email { color: #0072B2; }
 .social-icons a.linkedin { color: #0A66C2; font-weight: bold; }
 .social-icons a.facebook { color: #1877F3; font-weight: bold; }
 .social-icons a.twitter { color: #000; font-weight: bold; }
 .social-icons a.scholar { color: #333; }
-.social-icons a:hover { color: #e67e22; border-color: #e67e22; background: #f5f5f5; }
+.social-icons a:hover { color: #e67e22; }
+
+/* Section headings */
 h2, h3 {
   color: #2c3e50;
   margin-top: 2em;
