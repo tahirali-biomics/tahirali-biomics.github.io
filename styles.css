@@ -85,6 +85,11 @@ h2, h3 {
   margin-top: 2em;
 }
 
+/* Justify main content text for all paragraphs */
+main p {
+  text-align: justify;
+}
+
 /* Responsive sidebar: on small screens, let Quarto handle sidebar, make tabs smaller */
 @media (max-width: 900px) {
   .sidebar {
