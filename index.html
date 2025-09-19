@@ -24,6 +24,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
@@ -40,13 +41,13 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c0e50921447b84dd47501848616516bf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-42105feedb28a03e48ea2abeda27cbce.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
+  "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
+  "panel-placement": "start",
+  "type": "textbox",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -73,55 +74,71 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-sidebar docked fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    </a>
-    <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Dr.&nbsp;Tahir Ali</span>
-    </a>
-  </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
-<span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./cv.qmd"> 
-<span class="menu-text">CV</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./projects.qmd"> 
-<span class="menu-text">Projects</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./publications.qmd"> 
-<span class="menu-text">Publications</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./workshops.qmd"> 
-<span class="menu-text">Workshops</span></a>
-  </li>  
-</ul>
-          </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
-</div>
-      </div> <!-- /container-fluid -->
-    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Home</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cv.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CV</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./projects.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projects</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./publications.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Publications</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./teaching.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./workshops.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Workshops</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     
 <!-- main -->
@@ -130,28 +147,22 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="profile-header">
-<div class="profile-info">
-<pre><code>&lt;h1&gt;Dr. Tahir Ali&lt;/h1&gt;
-&lt;div class="subtitle"&gt;
-  &lt;b&gt;Evolutionary and Computational Biologist | Teacher &amp; Mentor | Exploring Genomes, Stories, and Change&lt;/b&gt;
-&lt;/div&gt;
-&lt;div style="text-align:left;"&gt;
-  Institute of Molecular Plant Ecology, University of Cologne&lt;br&gt;
-  Zülpicher Str. 47b, 50674 Cologne, Germany&lt;br&gt;
-  📞 +49 (0)2214701139 &amp;nbsp; | &amp;nbsp; ✉️ &lt;a href="mailto:tali@uni-koeln.de"&gt;tali@uni-koeln.de&lt;/a&gt; &amp;nbsp; | &amp;nbsp; &lt;a href="mailto:ali_tahir99@hotmail.com"&gt;ali_tahir99@hotmail.com&lt;/a&gt;
-&lt;/div&gt;</code></pre>
+<p><img src="profile.jpg" class="profile-pic img-fluid"></p>
+<section id="dr.-tahir-ali" class="level1">
+<h1>Dr.&nbsp;Tahir Ali</h1>
+<div class="subtitle">
+<p><strong>Evolutionary and Computational Biologist | Teacher &amp; Mentor | Exploring Genomes, Stories, and Change</strong></p>
 </div>
-<div class="profile-photo">
-<pre><code>&lt;img src="profile.jpg" class="profile-pic" alt="Tahir Ali"&gt;</code></pre>
-</div>
+<div style="text-align:center;">
+<p>Institute for Plant Sciences, University of Cologne<br> Zülpicher Str. 47b, 50674 Cologne, Germany<br> 📞 +49 (0)2214701139 &nbsp; | &nbsp; ✉️ <a href="mailto:tali@uni-koeln.de">tali@uni-koeln.de</a> &nbsp; | &nbsp; <a href="mailto:ali_tahir99@hotmail.com">ali_tahir99@hotmail.com</a></p>
 </div>
 <hr>
-<p><strong>My Journey in Science: Exploring Data and Complexity</strong></p>
-<p>I am an evolutionary and computational biologist, fascinated by the interplay of genes, environment, and time. My research in temporal genomics, adaptation, phylogeography, and selection seeks to understand how organisms respond to environmental change—how Darwin’s insight into “descent with modification” unfolds in real populations. Much of my work involves decoding genomes across time, tracing the signatures of survival and loss, and unraveling the mysteries of hybridization genetics. Increasingly, this means integrating multi-omics approaches with machine learning, combining layers of biological information with computational models to reveal patterns that might otherwise remain hidden. In practice, this often means writing scripts, building pipelines, and shaping raw data into insight—turning fragments of code into narratives about resilience, chance, and transformation.</p>
-<p>Equally important to me is teaching and mentoring. My journey as an educator spans more than two decades, from teaching basic college biology to guiding students through the complexities of ecological and evolutionary genomics. Helping students see connections between data and life is one of the most rewarding parts of my career. I see teaching as a way of opening doors: to curiosity, to critical thinking, and to the joy of discovery.</p>
+<section id="my-journey-in-science-exploring-data-and-complexity" class="level2">
+<h2 class="anchored" data-anchor-id="my-journey-in-science-exploring-data-and-complexity">My Journey in Science: Exploring Data and Complexity</h2>
+<p>I am an evolutionary and computational biologist, fascinated by the interplay of genes, environment, and time. My research in temporal genomics, adaptation, phylogeography, and selection seeks to understand how organisms respond to environmental change—how Darwin’s insight into “descent with modification” unfolds in real populations. Much of my work involves decoding genomes across time, tracing the signatures of survival and loss, and unravelling the mysteries of hybridisation genetics. Increasingly, this means integrating multiomics approaches with machine learning, combining layers of biological information with computational models to reveal patterns that might otherwise remain hidden. In practice, this often means writing scripts, building pipelines, and shaping raw data into insight—turning fragments of code into narratives about resilience, chance, and transformation.</p>
+<p>Equally important to me is teaching and mentoring. For nearly three decades, I have taught biology at many levels—from the foundations of genetics and ecology to the complexities of ecological and evolutionary genomics. Guiding students through this journey, helping them see connections between data and life, is one of the most rewarding parts of my career. I see teaching as a way of opening doors: to curiosity, to critical thinking, and to the joy of discovery.</p>
 <p>Beyond science, I draw inspiration from literature, history, and the worlds we build. The psychological depth of Dostoevsky, the vast social panoramas of Tolstoy, the magical realism of Márquez and Grass, and the dramatic flair of Dumas all shape how I think about complexity, transformation, and endurance. Just as genomes are living archives of struggle and adaptation, so too are cities, landscapes, and stories—layered with memory, resilience, and change.</p>
-<p>Outside of research and teaching, I find joy in travel: wandering through ancient streets, hiking wild trails, or noticing the quiet poetry of everyday life. Whether I am analyzing genetic data, mentoring students, reading a novel, or exploring a place shaped by centuries, I am drawn to the same questions: how change is inscribed in structure, how diversity emerges, and how the stories—scientific and personal—that we tell shape who we are.</p>
+<p>Outside of research and teaching, I find joy in travel, in wandering through ancient streets, hiking wild trails, or noticing the quiet poetry of everyday life. Whether I am analyzing genetic data, guiding students, reading a novel, or exploring a place shaped by centuries, I am drawn to the same questions: how change is inscribed in structure, how diversity emerges, and how the stories—scientific and personal—that we tell shape who we are.</p>
 <hr>
 <div class="social-icons">
 <p><a class="email" href="mailto:tali@uni-koeln.de" title="University Email">✉</a> <a class="email" href="mailto:ali_tahir99@hotmail.com" title="Personal Email">✉</a> <a class="linkedin" href="https://www.linkedin.com/in/tahir-ali-phd-07398823/" title="LinkedIn"><b>in</b></a> <a class="facebook" href="https://www.facebook.com/share/1FXBkETf1z/" title="Facebook"><b>f</b></a> <a class="twitter" href="https://x.com/TahirAli_PhD" title="Twitter"><b>X</b></a> <a class="scholar" href="https://scholar.google.com/citations?user=3FhH7eMAAAAJ&amp;hl=en" title="Google Scholar">🎓</a></p>
@@ -160,6 +171,8 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>“The mystery of human existence lies not in just staying alive, but in finding something to live for.” — Dostoevsky</strong></p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
