@@ -6,7 +6,7 @@ website:
   site-url: "https://tahirali-biomics.github.io"
   favicon: profile.jpg
   navbar:
-    logo: banner.jpg
+    pinned: true
     left:
       - text: "Home"
         file: index.qmd
@@ -18,19 +18,6 @@ website:
         file: publications.qmd
       - text: "Workshops"
         file: workshops.qmd
-  sidebar:
-    style: "docked"
-    search: true
-    contents:
-      - section: "Profile"
-        contents:
-          - index.qmd
-      - section: "Portfolio"
-        contents:
-          - cv.qmd
-          - projects.qmd
-          - publications.qmd
-          - workshops.qmd
   page-footer:
     left: "© 2024 Dr. Tahir Ali"
     right: "Built with [Quarto](https://quarto.org/)"
@@ -39,5 +26,4 @@ format:
   html:
     theme: cosmo
     css: styles.css
-    toc: true
-    toc-depth: 3
+    toc: false
