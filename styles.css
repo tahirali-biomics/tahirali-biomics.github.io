@@ -29,47 +29,16 @@
   border: 2.7px solid #0072B2 !important;
 }
 
-/* Profile header: name/contact left, photo right */
-.profile-header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 2em;
-  margin-top: 2em;
-}
-.profile-info {
-  flex: 2 1 320px;
-  min-width: 220px;
-  max-width: 60%;
-  padding-right: 2em;
-}
-.profile-photo {
-  flex: 1 1 180px;
-  min-width: 140px;
-  text-align: right;
-}
+/* Centered profile image, rounded corners (not circle) */
 .profile-pic {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   border-radius: 20px;
   box-shadow: 0 0 10px #aaa;
-  width: 160px;
-  margin: 0;
-}
-@media (max-width: 700px) {
-  .profile-header {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .profile-info, .profile-photo {
-    max-width: 100%;
-    padding: 0;
-    text-align: center;
-  }
-  .profile-pic {
-    width: 120px;
-    margin-top: 1em;
-  }
+  width: 180px;
+  margin-top: 1.5em;
+  margin-bottom: 1em;
 }
 
 /* Center name and subtitle */
@@ -81,11 +50,6 @@ h1, .subtitle {
   font-size: 1.1em;
   color: #444;
   margin-bottom: 1em;
-}
-
-/* Justify only the main text in .justified */
-.justified p {
-  text-align: justify;
 }
 
 /* Social icons row */
@@ -121,13 +85,9 @@ h2, h3 {
   margin-top: 2em;
 }
 
-/* Center the quote and make it bold */
-.quote {
-  text-align: center;
-  font-size: 1.15em;
-  margin-top: 2em;
-  margin-bottom: 2em;
-  font-weight: bold;
+/* Justify main content text for all paragraphs */
+main p {
+  text-align: justify;
 }
 
 /* Responsive sidebar: on small screens, let Quarto handle sidebar, make tabs smaller */
