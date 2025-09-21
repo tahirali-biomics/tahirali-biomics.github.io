@@ -122,36 +122,48 @@ div.social-icons > p > a {
   float: none;
 }
 
-/* CV top navigation tabs */
+/* CV top navigation tabs: smaller, always visible, wrap on mobile */
 .cv-nav {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1.2em;
-  margin: 1.5em 0 2em 0;
+  gap: 0.6em;
+  margin: 1.2em 0 1.5em 0;
 }
+
 .cv-nav a {
-  font-size: 1.1em;
+  font-size: 0.55em;           /* 50% smaller than before */
   font-weight: 600;
   color: #0072B2;
   background: #f5f5f5;
   border: 1.5px solid #0072B2;
   border-radius: 8px;
-  padding: 0.4em 1.2em;
+  padding: 0.2em 0.6em;         /* 50% less padding */
   text-decoration: none;
   transition: background 0.2s, color 0.2s, border 0.2s;
   box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-  margin-bottom: 0.5em;
+  margin-bottom: 0.3em;
+  white-space: nowrap;
 }
+
 .cv-nav a:hover, .cv-nav a:focus {
   background: #0072B2;
   color: #fff;
   border-color: #005580;
 }
 
-/* Center all main content text except headings and sidebar */
+/* Always show tabs on mobile, just smaller */
+@media (max-width: 700px) {
+  .cv-nav a {
+    font-size: 0.48em;
+    padding: 0.15em 0.4em;
+    margin-bottom: 0.2em;
+  }
+}
+
+/* Justify all main text except headings */
 main p, main ul, main ol, main li, main blockquote, main table, main dl, main dd {
-  text-align: center;
+  text-align: justify;
 }
 
 /* But keep headings left-aligned */
