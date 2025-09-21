@@ -107,4 +107,7 @@ h2, h3 {
     border-width: 0.7px !important;
     padding: 0.05em 0.08em !important;
   }
+  .justified {
+    text-align: justify;
+  }
 }
