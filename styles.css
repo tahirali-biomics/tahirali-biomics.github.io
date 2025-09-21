@@ -132,13 +132,13 @@ div.social-icons > p > a {
 }
 
 .cv-nav a {
-  font-size: 0.55em;           /* 50% smaller than before */
+  font-size: 0.58em;           /* 5% larger than before (was 0.55em) */
   font-weight: 600;
   color: #0072B2;
   background: #f5f5f5;
   border: 1.5px solid #0072B2;
   border-radius: 8px;
-  padding: 0.2em 0.6em;         /* 50% less padding */
+  padding: 0.21em 0.63em;      /* 5% more than before */
   text-decoration: none;
   transition: background 0.2s, color 0.2s, border 0.2s;
   box-shadow: 0 2px 8px rgba(0,0,0,0.03);
@@ -152,11 +152,10 @@ div.social-icons > p > a {
   border-color: #005580;
 }
 
-/* Always show tabs on mobile, just smaller */
 @media (max-width: 700px) {
   .cv-nav a {
-    font-size: 0.48em;
-    padding: 0.15em 0.4em;
+    font-size: 0.51em;         /* 5% more than before (was 0.48em) */
+    padding: 0.157em 0.42em;
     margin-bottom: 0.2em;
   }
 }
