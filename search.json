@@ -1,5 +1,95 @@
 [
   {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Projects",
+    "section": "",
+    "text": "Plant Adaptation & Local Genomics Pathogen & Microbiome Evolution Phylogeography & Systematics Conceptual & Methodological Advances Hybridisation Genomics (Ongoing) Temporal Genomics (Ongoing)",
+    "crumbs": [
+      "Projects"
+    ]
+  },
+  {
+    "objectID": "projects.html#plant-adaptation",
+    "href": "projects.html#plant-adaptation",
+    "title": "Projects",
+    "section": "Plant Adaptation & Local Genomics",
+    "text": "Plant Adaptation & Local Genomics\n\nSummary:\nThis project explores the genetic basis of plant adaptation to local environments and climate. Using Arabidopsis thaliana and other Brassicaceae, I have investigated how heat-induced secondary dormancy, selection, and local adaptation shape population structure and evolutionary trajectories. The work combines field experiments, high-throughput sequencing, and advanced statistical modeling to uncover the molecular signatures of adaptation and resilience in natural and experimental populations. These studies provide insights into the mechanisms by which plants cope with environmental stress and the evolutionary processes underlying local adaptation.\nKey publications: - Rahnamae, N., … T. Ali, … (2025) BioRxiv, accepted in New Phytologist - Tran, N. L. T., T. Ali, … (2025) Molecular Ecology - Ali, T., (2020) Critical Reviews in Plant Sciences",
+    "crumbs": [
+      "Projects"
+    ]
+  },
+  {
+    "objectID": "projects.html#pathogen-microbiome",
+    "href": "projects.html#pathogen-microbiome",
+    "title": "Projects",
+    "section": "Pathogen & Microbiome Evolution",
+    "text": "Pathogen & Microbiome Evolution\n\nSummary:\nThis project investigates the evolutionary dynamics of plant pathogens and microbiomes, focusing on genetic diversity, host-pathogen interactions, and environmental drivers of disease. My work on Alternaria pathogens in wild tomatoes and Plasmopara halstedii in sunflowers has provided new insights into pathogen population structure, virulence evolution, and the role of landscape heterogeneity. I have also contributed to studies on root endophytic fungi and the impact of microbiomes on plant health, using both field and laboratory approaches. These studies help to understand the co-evolution of plants and their associated microbial communities.\nKey publications: - Schmey, T., … Ali, T., … (2023) Environmental Microbiology - Kitner, M., … Ali, T., … (2022) Plant Pathology - Thines, M., Buaya, A., Ali, T., … (2020) Mycological Progress - Glynou, K., Ali, T., … (2017) Molecular Ecology - Glynou K., Ali T., … (2016) Environmental Microbiology - Cheikh-Ali Z., Glynou K., Ali T., … (2015) Phytochemistry - Kitner, M., … Ali, T., … (2015) Plant Pathology",
+    "crumbs": [
+      "Projects"
+    ]
+  },
+  {
+    "objectID": "projects.html#phylogeography",
+    "href": "projects.html#phylogeography",
+    "title": "Projects",
+    "section": "Phylogeography & Systematics",
+    "text": "Phylogeography & Systematics\n\nSummary:\nA major theme of my research is understanding the historical and spatial patterns of genetic diversity in plants and fungi. I have used phylogeographic and systematics approaches to clarify the taxonomy of Microthlaspi (Brassicaceae), reconstruct Pleistocene range dynamics, and describe new genera and species. My work integrates molecular phylogenetics, demographic modeling, and ecological niche modeling to explain how glaciation, migration, and hybridization have shaped the biodiversity of Eurasia and beyond.\nKey publications: - Vaculná, L., … Ali, T., … (2021) Conservation Genetics - Ali, T., Muñoz-Fuentes, V., … (2019) Flora - Brandrud, T.E., … Ali, T., … (2018) Mycological Progress - Bandini, D., … Ali, T., … (2018) Mycological Progress - Ali, T., Muñoz-Fuentes, V., … (2017) Flora - Ali, T., Runge, F., … (2016b) Flora - Ali, T., Schmuker, A., … (2016a) Taxon - Schneider, J.V., … Ali, T., … (2014) Molecular Phylogenetics and Evolution",
+    "crumbs": [
+      "Projects"
+    ]
+  },
+  {
+    "objectID": "projects.html#fungal-pathogen-diversity",
+    "href": "projects.html#fungal-pathogen-diversity",
+    "title": "Projects",
+    "section": "Fungal and Plant Pathogen Diversity",
+    "text": "Fungal and Plant Pathogen Diversity\n\nSummary:\nThis project focuses on the diversity, taxonomy, and evolutionary history of fungal and plant pathogens. I have contributed to the revision of European Inocybe species, the taxonomy and phylogeny of Cortinarius sect. Riederi, and the study of virulence shifts in Pseudoperonospora cubensis. These studies combine field sampling, molecular systematics, and population genetics to understand the emergence and spread of plant pathogens.\nKey publications: - Brandrud, T.E., … Ali, T., … (2018) Mycological Progress - Bandini, D., … Ali, T., … (2018) Mycological Progress - Kitner, M., … Ali, T., … (2015) Plant Pathology - Cheikh-Ali Z., Glynou K., Ali T., … (2015) Phytochemistry",
+    "crumbs": [
+      "Projects"
+    ]
+  },
+  {
+    "objectID": "projects.html#conceptual-methods",
+    "href": "projects.html#conceptual-methods",
+    "title": "Projects",
+    "section": "Conceptual & Methodological Advances",
+    "text": "Conceptual & Methodological Advances\n\nSummary:\nI am passionate about developing conceptual frameworks and computational tools for evolutionary biology and landscape genomics. My work includes creating toolkits for phylogeography, advancing methods for analyzing hybridization and introgression, and contributing to the understanding of how local environments shape genetic diversity. These projects often involve interdisciplinary collaboration and the integration of new statistical and computational approaches.\nKey publications: - Ali, T., (2020) Critical Reviews in Plant Sciences - Rahnamae, N., … T. Ali, … (2025) BioRxiv, accepted in New Phytologist - Tran, N. L. T., T. Ali, … (2025) Molecular Ecology",
+    "crumbs": [
+      "Projects"
+    ]
+  },
+  {
+    "objectID": "projects.html#hybridisation-genomics",
+    "href": "projects.html#hybridisation-genomics",
+    "title": "Projects",
+    "section": "Hybridisation Genomics (Ongoing)",
+    "text": "Hybridisation Genomics (Ongoing)\n\nSummary:\nThis ongoing project investigates the genetic and evolutionary consequences of hybridisation in natural and experimental plant populations. I am developing new approaches to study introgression, selection against hybrids, and the genomic architecture of reproductive barriers. The goal is to understand how hybridisation shapes genetic diversity, adaptation, and speciation, using a combination of fieldwork, genomics, and computational modeling. Publications are in preparation.",
+    "crumbs": [
+      "Projects"
+    ]
+  },
+  {
+    "objectID": "projects.html#temporal-genomics",
+    "href": "projects.html#temporal-genomics",
+    "title": "Projects",
+    "section": "Temporal Genomics (Ongoing)",
+    "text": "Temporal Genomics (Ongoing)\n\nSummary:\nIn this ongoing project, I am using temporal population genomics to study how allele frequencies change over time in response to environmental pressures. By analyzing time-series genomic data from natural and experimental populations, I aim to detect signatures of selection, infer demographic history, and understand the dynamics of adaptation and resilience. This work integrates high-throughput sequencing, statistical modeling, and evolutionary theory. Publications are forthcoming.",
+    "crumbs": [
+      "Projects"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Dr. Tahir Ali",
+    "section": "",
+    "text": "Dr. Tahir Ali\n\nEvolutionary and Computational Biologist | Teacher & Mentor | Exploring Genomes, Stories, and Change\n\n\nInstitute for Plant Sciences, University of Cologne Zülpicher Str. 47b, 50674 Cologne, Germany 📞 +49 (0)2214701139   |   ✉️ tali@uni-koeln.de   |   ali_tahir99@hotmail.com\n\n\n\nMy Journey in Science: Exploring Data and Complexity\nI am an evolutionary and computational biologist, fascinated by the interplay of genes, environment, and time. My research in temporal genomics, adaptation, phylogeography, and selection seeks to understand how organisms respond to environmental change—how Darwin’s insight into “descent with modification” unfolds in real populations. Much of my work involves decoding genomes across time, tracing the signatures of survival and loss, and unravelling the mysteries of hybridisation genetics. Increasingly, this means integrating multiomics approaches with machine learning, combining layers of biological information with computational models to reveal patterns that might otherwise remain hidden. In practice, this often means writing scripts, building pipelines, and shaping raw data into insight—turning fragments of code into narratives about resilience, chance, and transformation.\nEqually important to me is teaching and mentoring. My journey as an educator spans more than two decades, from teaching basic college biology to guiding students through the complexities of ecological and evolutionary genomics. Helping students see connections between data and life is one of the most rewarding parts of my career. I see teaching as a way of opening doors: to curiosity, to critical thinking, and to the joy of discovery.\nBeyond science, I draw inspiration from literature, history, and the worlds we build. The psychological depth of Dostoevsky, the vast social panoramas of Tolstoy, the magical realism of Márquez and Grass, and the dramatic flair of Dumas all shape how I think about complexity, transformation, and endurance. Just as genomes are living archives of struggle and adaptation, so too are cities, landscapes, and stories—layered with memory, resilience, and change.\nOutside of research and teaching, I find joy in travel, in wandering through ancient streets, hiking wild trails, or noticing the quiet poetry of everyday life. Whether I am analyzing genetic data, guiding students, reading a novel, or exploring a place shaped by centuries, I am drawn to the same questions: how change is inscribed in structure, how diversity emerges, and how the stories—scientific and personal—that we tell shape who we are.\n\n\n✉ ✉ in f X 🎓\n\n\nThe mystery of human existence lies not in just staying alive, but in finding something to live for. — Dostoevsky",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
     "objectID": "cv.html",
     "href": "cv.html",
     "title": "Dr. Tahir Ali",
@@ -87,16 +177,6 @@
     "text": "Selected Conferences, Workshops, and Invited Talks\n\nEcosystem Restoration: An overlooked opportunity for Economic growth (2021) Bahria University, Karachi, Pakistan.\nRole of Biodiversity and Ecosystem Restoration in Climate Change Mitigation (2020), International Conference on One Health, University of Veterinary and Animal Sciences, Lahore, Pakistan.\nMisconceptions about Evolution and the Mechanisms of Evolution (2020), University of Peshawar, Pakistan.\nFrom jargon to human: Translating Science to Kids (Workshop 2020), Friends For Future International Youth Conference.\nThe Talking Climate Workshop (2020), SDGs Academy, Pakistan.\nPleistocene Glaciation and Palearctic Phylogeography: Inferring Species Glacial Refugia and Recolonization Routes (2019), Monrepos Archaeological Research Center, Neuwied, Germany.\nModelling of Range-Wide Pathogen Pressure in an Annual Member of the Brassicaceae (2019), Wild Plant Pathosystems Conference, Frankfurt am Main, Germany.\nGenomics and Climate Adaptation (2018), Senckenberg Translational Biodiversity Genomics, Frankfurt am Main, Germany.\nDetermination of Genetic Diversity of Arabidopsis thaliana in the Italian Peninsula Using Next-Generation Genotyping (RAD-Seq) (Workshop, 2015), Botanikertag, Munich, Germany.\nInfluence of Climate and Geography on Occurrence of Infection in Microthlaspi perfoliatum (2014), German Mycological Society Congress, Mettlach-Orscholz, Germany.\nDiversity of Arabidopsis thaliana in Italy as Inferred from Next-Generation Genotyping in Relation to Biotic and Abiotic Factors (2013), Wild Plant Pathosystems Conference, Olomouc, Czech Republic.",
     "crumbs": [
       "CV"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Dr. Tahir Ali",
-    "section": "",
-    "text": "Dr. Tahir Ali\n\nEvolutionary and Computational Biologist | Teacher & Mentor | Exploring Genomes, Stories, and Change\n\n\nInstitute for Plant Sciences, University of Cologne Zülpicher Str. 47b, 50674 Cologne, Germany 📞 +49 (0)2214701139   |   ✉️ tali@uni-koeln.de   |   ali_tahir99@hotmail.com\n\n\n\nMy Journey in Science: Exploring Data and Complexity\nI am an evolutionary and computational biologist, fascinated by the interplay of genes, environment, and time. My research in temporal genomics, adaptation, phylogeography, and selection seeks to understand how organisms respond to environmental change—how Darwin’s insight into “descent with modification” unfolds in real populations. Much of my work involves decoding genomes across time, tracing the signatures of survival and loss, and unravelling the mysteries of hybridisation genetics. Increasingly, this means integrating multiomics approaches with machine learning, combining layers of biological information with computational models to reveal patterns that might otherwise remain hidden. In practice, this often means writing scripts, building pipelines, and shaping raw data into insight—turning fragments of code into narratives about resilience, chance, and transformation.\nEqually important to me is teaching and mentoring. My journey as an educator spans more than two decades, from teaching basic college biology to guiding students through the complexities of ecological and evolutionary genomics. Helping students see connections between data and life is one of the most rewarding parts of my career. I see teaching as a way of opening doors: to curiosity, to critical thinking, and to the joy of discovery.\nBeyond science, I draw inspiration from literature, history, and the worlds we build. The psychological depth of Dostoevsky, the vast social panoramas of Tolstoy, the magical realism of Márquez and Grass, and the dramatic flair of Dumas all shape how I think about complexity, transformation, and endurance. Just as genomes are living archives of struggle and adaptation, so too are cities, landscapes, and stories—layered with memory, resilience, and change.\nOutside of research and teaching, I find joy in travel, in wandering through ancient streets, hiking wild trails, or noticing the quiet poetry of everyday life. Whether I am analyzing genetic data, guiding students, reading a novel, or exploring a place shaped by centuries, I am drawn to the same questions: how change is inscribed in structure, how diversity emerges, and how the stories—scientific and personal—that we tell shape who we are.\n\n\n✉ ✉ in f X 🎓\n\n\nThe mystery of human existence lies not in just staying alive, but in finding something to live for. — Dostoevsky",
-    "crumbs": [
-      "Home"
     ]
   }
 ]

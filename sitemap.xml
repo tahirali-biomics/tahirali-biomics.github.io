@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://tahirali-biomics.github.io/cv.html</loc>
-    <lastmod>2025-09-21T12:04:45.670Z</lastmod>
+    <loc>https://tahirali-biomics.github.io/projects.html</loc>
+    <lastmod>2025-09-21T12:21:23.770Z</lastmod>
   </url>
   <url>
     <loc>https://tahirali-biomics.github.io/index.html</loc>
     <lastmod>2025-09-21T09:31:45.490Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tahirali-biomics.github.io/cv.html</loc>
+    <lastmod>2025-09-21T12:04:45.670Z</lastmod>
   </url>
 </urlset>
