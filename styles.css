@@ -113,6 +113,11 @@ h2, h3 {
   text-align: justify;
 }
 
-.social-icons p {
+div.social-icons p {
   text-align: center !important;
+}
+
+div.social-icons > p > a {
+  display: inline-block;
+  float: none;
 }
