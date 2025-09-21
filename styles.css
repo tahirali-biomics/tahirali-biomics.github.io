@@ -109,8 +109,6 @@ h2, h3 {
   }
 }
 
-/* Justify only the About Me section (My Journey in Science: Exploring Data and Complexity) */
-#my-journey-in-science-exploring-data-and-complexity + p,
-#my-journey-in-science-exploring-data-and-complexity + p ~ p {
+#my-journey-in-science-exploring-data-and-complexity p {
   text-align: justify;
 }
