@@ -112,3 +112,7 @@ h2, h3 {
 #my-journey-in-science-exploring-data-and-complexity p {
   text-align: justify;
 }
+
+.social-icons p {
+  text-align: center !important;
+}
