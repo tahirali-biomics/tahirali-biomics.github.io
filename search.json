@@ -4,57 +4,17 @@
     "href": "projects.html",
     "title": "Projects",
     "section": "",
-    "text": "Plant Adaptation & Local Genomics Pathogen & Microbiome Evolution Phylogeography & Systematics Conceptual & Methodological Advances Hybridisation Genomics (Ongoing) Temporal Genomics (Ongoing)",
+    "text": "High-Resolution Genomics Hybridisation Genomics Temporal Genomics Climate Adaptation & Seed Dormancy Systematics & Taxonomy Phylogeography of Microthlaspi Fungal Diversity & Communities Downy Mildew Pathogens",
     "crumbs": [
       "Projects"
     ]
   },
   {
-    "objectID": "projects.html#plant-adaptation",
-    "href": "projects.html#plant-adaptation",
+    "objectID": "projects.html#assembling_genomes",
+    "href": "projects.html#assembling_genomes",
     "title": "Projects",
-    "section": "Plant Adaptation & Local Genomics",
-    "text": "Plant Adaptation & Local Genomics\n\nSummary:\nThis project explores the genetic basis of plant adaptation to local environments and climate. Using Arabidopsis thaliana and other Brassicaceae, I have investigated how heat-induced secondary dormancy, selection, and local adaptation shape population structure and evolutionary trajectories. The work combines field experiments, high-throughput sequencing, and advanced statistical modeling to uncover the molecular signatures of adaptation and resilience in natural and experimental populations. These studies provide insights into the mechanisms by which plants cope with environmental stress and the evolutionary processes underlying local adaptation.\nKey publications: - Rahnamae, N., … T. Ali, … (2025) BioRxiv, accepted in New Phytologist - Tran, N. L. T., T. Ali, … (2025) Molecular Ecology - Ali, T., (2020) Critical Reviews in Plant Sciences",
-    "crumbs": [
-      "Projects"
-    ]
-  },
-  {
-    "objectID": "projects.html#pathogen-microbiome",
-    "href": "projects.html#pathogen-microbiome",
-    "title": "Projects",
-    "section": "Pathogen & Microbiome Evolution",
-    "text": "Pathogen & Microbiome Evolution\n\nSummary:\nThis project investigates the evolutionary dynamics of plant pathogens and microbiomes, focusing on genetic diversity, host-pathogen interactions, and environmental drivers of disease. My work on Alternaria pathogens in wild tomatoes and Plasmopara halstedii in sunflowers has provided new insights into pathogen population structure, virulence evolution, and the role of landscape heterogeneity. I have also contributed to studies on root endophytic fungi and the impact of microbiomes on plant health, using both field and laboratory approaches. These studies help to understand the co-evolution of plants and their associated microbial communities.\nKey publications: - Schmey, T., … Ali, T., … (2023) Environmental Microbiology - Kitner, M., … Ali, T., … (2022) Plant Pathology - Thines, M., Buaya, A., Ali, T., … (2020) Mycological Progress - Glynou, K., Ali, T., … (2017) Molecular Ecology - Glynou K., Ali T., … (2016) Environmental Microbiology - Cheikh-Ali Z., Glynou K., Ali T., … (2015) Phytochemistry - Kitner, M., … Ali, T., … (2015) Plant Pathology",
-    "crumbs": [
-      "Projects"
-    ]
-  },
-  {
-    "objectID": "projects.html#phylogeography",
-    "href": "projects.html#phylogeography",
-    "title": "Projects",
-    "section": "Phylogeography & Systematics",
-    "text": "Phylogeography & Systematics\n\nSummary:\nA major theme of my research is understanding the historical and spatial patterns of genetic diversity in plants and fungi. I have used phylogeographic and systematics approaches to clarify the taxonomy of Microthlaspi (Brassicaceae), reconstruct Pleistocene range dynamics, and describe new genera and species. My work integrates molecular phylogenetics, demographic modeling, and ecological niche modeling to explain how glaciation, migration, and hybridization have shaped the biodiversity of Eurasia and beyond.\nKey publications: - Vaculná, L., … Ali, T., … (2021) Conservation Genetics - Ali, T., Muñoz-Fuentes, V., … (2019) Flora - Brandrud, T.E., … Ali, T., … (2018) Mycological Progress - Bandini, D., … Ali, T., … (2018) Mycological Progress - Ali, T., Muñoz-Fuentes, V., … (2017) Flora - Ali, T., Runge, F., … (2016b) Flora - Ali, T., Schmuker, A., … (2016a) Taxon - Schneider, J.V., … Ali, T., … (2014) Molecular Phylogenetics and Evolution",
-    "crumbs": [
-      "Projects"
-    ]
-  },
-  {
-    "objectID": "projects.html#fungal-pathogen-diversity",
-    "href": "projects.html#fungal-pathogen-diversity",
-    "title": "Projects",
-    "section": "Fungal and Plant Pathogen Diversity",
-    "text": "Fungal and Plant Pathogen Diversity\n\nSummary:\nThis project focuses on the diversity, taxonomy, and evolutionary history of fungal and plant pathogens. I have contributed to the revision of European Inocybe species, the taxonomy and phylogeny of Cortinarius sect. Riederi, and the study of virulence shifts in Pseudoperonospora cubensis. These studies combine field sampling, molecular systematics, and population genetics to understand the emergence and spread of plant pathogens.\nKey publications: - Brandrud, T.E., … Ali, T., … (2018) Mycological Progress - Bandini, D., … Ali, T., … (2018) Mycological Progress - Kitner, M., … Ali, T., … (2015) Plant Pathology - Cheikh-Ali Z., Glynou K., Ali T., … (2015) Phytochemistry",
-    "crumbs": [
-      "Projects"
-    ]
-  },
-  {
-    "objectID": "projects.html#conceptual-methods",
-    "href": "projects.html#conceptual-methods",
-    "title": "Projects",
-    "section": "Conceptual & Methodological Advances",
-    "text": "Conceptual & Methodological Advances\n\nSummary:\nI am passionate about developing conceptual frameworks and computational tools for evolutionary biology and landscape genomics. My work includes creating toolkits for phylogeography, advancing methods for analyzing hybridization and introgression, and contributing to the understanding of how local environments shape genetic diversity. These projects often involve interdisciplinary collaboration and the integration of new statistical and computational approaches.\nKey publications: - Ali, T., (2020) Critical Reviews in Plant Sciences - Rahnamae, N., … T. Ali, … (2025) BioRxiv, accepted in New Phytologist - Tran, N. L. T., T. Ali, … (2025) Molecular Ecology",
+    "section": "High-Resolution Genomics of Plant–Microbe Systems (Ongoing)",
+    "text": "High-Resolution Genomics of Plant–Microbe Systems (Ongoing)\n\nSummary:\nThis project focuses on generating high-quality, chromosome-level genome assemblies for Brassicaceae species and their associated phyllosphere bacterial communities. Advanced sequencing technologies—including PacBio HiFi, Oxford Nanopore, Hi-C, and Illumina short-read platforms—are used to produce detailed genomic resources for both host plants and key bacterial “hub” taxa. These assemblies provide a foundation for studying genome structure, gene content, and evolutionary dynamics in both plants and their microbial partners. The resulting datasets contribute to multiple projects by enabling comparative analyses, facilitating the identification of functional genes, and supporting investigations into plant–microbe interactions.",
     "crumbs": [
       "Projects"
     ]
@@ -64,7 +24,7 @@
     "href": "projects.html#hybridisation-genomics",
     "title": "Projects",
     "section": "Hybridisation Genomics (Ongoing)",
-    "text": "Hybridisation Genomics (Ongoing)\n\nSummary:\nThis ongoing project investigates the genetic and evolutionary consequences of hybridisation in natural and experimental plant populations. I am developing new approaches to study introgression, selection against hybrids, and the genomic architecture of reproductive barriers. The goal is to understand how hybridisation shapes genetic diversity, adaptation, and speciation, using a combination of fieldwork, genomics, and computational modeling. Publications are in preparation.",
+    "text": "Hybridisation Genomics (Ongoing)\n\nSummary:\nHybridisation is a fundamental evolutionary process that generates novel genetic combinations, facilitates adaptation, and can drive the formation of new species. This project investigates how hybridisation and temporal selection shape genetic diversity and adaptation in Arabis and related Brassicaceae species. High-throughput sequencing, field experiments, and phenotyping are combined to analyse the genomic consequences of hybridisation in both experimental crosses and natural hybrid zones. Patterns of introgression, ancestry dynamics, and the architecture of reproductive barriers are examined to reveal how environmental factors and selection influence the persistence or loss of hybrid genotypes. Comparative analyses of hybrid populations provide insight into the evolutionary forces driving adaptation, the maintenance of species boundaries, and the role of hybridisation in diversification under changing environments.",
     "crumbs": [
       "Projects"
     ]
@@ -74,7 +34,57 @@
     "href": "projects.html#temporal-genomics",
     "title": "Projects",
     "section": "Temporal Genomics (Ongoing)",
-    "text": "Temporal Genomics (Ongoing)\n\nSummary:\nIn this ongoing project, I am using temporal population genomics to study how allele frequencies change over time in response to environmental pressures. By analyzing time-series genomic data from natural and experimental populations, I aim to detect signatures of selection, infer demographic history, and understand the dynamics of adaptation and resilience. This work integrates high-throughput sequencing, statistical modeling, and evolutionary theory. Publications are forthcoming.",
+    "text": "Temporal Genomics (Ongoing)\n\nSummary:\nTemporal genomics approaches are used to detect evolutionary change by tracking allele frequency shifts across generations. This project focuses on Arabidopsis lyrata populations sampled at two time points separated by ~10–20 generations, enabling direct observation of genetic responses to recent climate change. Genome-wide selection scans identify loci showing significant temporal shifts, pinpointing genomic regions under selection and providing evidence for adaptive evolution. By linking allele frequency changes to environmental trends (temperature, precipitation, snow cover), the research uncovers how natural selection acts on standing genetic variation. This work establishes a framework for studying rapid adaptation in natural populations and for predicting how species respond to ongoing environmental change.",
+    "crumbs": [
+      "Projects"
+    ]
+  },
+  {
+    "objectID": "projects.html#plant-adaptation",
+    "href": "projects.html#plant-adaptation",
+    "title": "Projects",
+    "section": "Climate Adaptation and Seed Dormancy in Plants",
+    "text": "Climate Adaptation and Seed Dormancy in Plants\n\nSummary:\nThis project investigates how plants respond to past and present climate change through the lenses of phylogeography, landscape genetics, and adaptive seed dormancy. By combining molecular genetics with ecological and spatial analyses, the research reveals how Quaternary climatic oscillations have shaped the genetic structure and distribution of species such as Adenophora liliifolia across Europe. The work highlights the importance of glacial refugia, postglacial recolonisation, and fragmentation of genetic diversity in shaping current biodiversity patterns. A comprehensive review of phylogeography and landscape genetics provides a conceptual and methodological framework for understanding species’ range dynamics and for designing studies that integrate genetics, geography, and ecology. In parallel, experimental studies on Arabidopsis thaliana demonstrate how heat-induced secondary dormancy acts as a key adaptive trait, enabling seeds to fine-tune germination timing in response to environmental cues. The genetic basis and ecological significance of secondary dormancy are explored, showing its role in population resilience and local adaptation under changing climates. Together, these studies advance our understanding of plant evolutionary responses to environmental variability and inform conservation strategies for maintaining genetic diversity.",
+    "crumbs": [
+      "Projects"
+    ]
+  },
+  {
+    "objectID": "projects.html#systematics",
+    "href": "projects.html#systematics",
+    "title": "Projects",
+    "section": "Systematics and Taxonomy of Microthlaspi and Coluteocarpeae",
+    "text": "Systematics and Taxonomy of Microthlaspi and Coluteocarpeae\n\nSummary:\nThis project addresses longstanding taxonomic challenges within the tribe Coluteocarpeae, focusing on the genus Microthlaspi and its relatives. Through detailed phylogenetic analyses using nuclear and chloroplast loci, the research clarifies relationships among key genera, leading to the recognition of new genera and species, and the redefinition of existing taxa. The work combines molecular data with critical morphological review, resulting in the discovery and description of new species and the resolution of cryptic diversity. These findings have important implications for the classification and evolutionary understanding of Brassicaceae, highlighting the need for integrative approaches in plant systematics. The project also provides comprehensive taxonomic treatments, distribution maps, and diagnostic illustrations, serving as a reference for future studies in this group.",
+    "crumbs": [
+      "Projects"
+    ]
+  },
+  {
+    "objectID": "projects.html#phylogeography",
+    "href": "projects.html#phylogeography",
+    "title": "Projects",
+    "section": "Phylogeography and Postglacial History of Microthlaspi",
+    "text": "Phylogeography and Postglacial History of Microthlaspi\n\nSummary:\nThis project investigates the evolutionary history, migration, and genetic structure of Microthlaspi species across Eurasia and North Africa. Using a combination of AFLP and sequence data, the research reveals how climatic heterogeneity, selfing, and fragmented distributions have shaped genetic diversity. The studies demonstrate that M. erraticum is far more widespread than previously thought, with populations spanning from the Alps to Central Asia. Analyses of M. perfoliatum show survival in multiple Pleistocene refugia and complex postglacial recolonisation routes, with Central Europe acting as a suture zone for genotypes from different refugia. The results highlight the interplay of climate, geography, and historical demography in shaping present-day biodiversity and provide molecular evidence for both ancient and recent migration events.",
+    "crumbs": [
+      "Projects"
+    ]
+  },
+  {
+    "objectID": "projects.html#fungal-diversity",
+    "href": "projects.html#fungal-diversity",
+    "title": "Projects",
+    "section": "Fungal Diversity, Systematics, and Plant-Associated Communities",
+    "text": "Fungal Diversity, Systematics, and Plant-Associated Communities\n\nSummary:\nThis project investigates the diversity, taxonomy, and ecological roles of fungi in both forest and plant-associated environments. Detailed phylogenetic and morphological analyses have clarified the taxonomy and evolutionary placement of Cortinarius sect. Riederi, leading to the description of new species and revealing its unique lineage among mushroom-forming fungi. Similarly, a comprehensive revision of Inocybe subgenus Inocybe in Central Europe has uncovered overlooked diversity and resolved complex synonymies, supported by molecular data. Beyond taxonomy, the project explores the structure and dynamics of root endophytic fungal communities in non-mycorrhizal plants such as Microthlaspi spp. Large-scale sampling and multilocus genotyping have shown that a few dominant fungal groups are widespread across Europe, with community composition shaped more by environmental gradients than by host genotype or geography. These studies highlight the hidden diversity, efficient dispersal, and ecological specialization of fungi, and provide a foundation for understanding their roles in plant health and ecosystem functioning.",
+    "crumbs": [
+      "Projects"
+    ]
+  },
+  {
+    "objectID": "projects.html#pathogen_evolution",
+    "href": "projects.html#pathogen_evolution",
+    "title": "Projects",
+    "section": "Emergence and Evolution of Downy Mildew Pathogens",
+    "text": "Emergence and Evolution of Downy Mildew Pathogens\n\nSummary:\nThis project investigates the emergence, spread, and evolutionary dynamics of downy mildew pathogens affecting both ornamental and crop plants in Europe. Recent work has documented the introduction and rapid spread of Peronospora aquilegiicola, a destructive pathogen of columbines, from East Asia to Britain and Germany, raising concerns about its potential impact on native and cultivated Aquilegia species. In parallel, population genetic studies of Pseudoperonospora cubensis, the causal agent of downy mildew in cucurbits, have revealed shifts in genetic structure and virulence, likely linked to hybridization or mutation events that broaden host range. Research on Plasmopara halstedii, a major pathogen of sunflower, has uncovered multiple introductions and distinct lineages across Europe, as well as evidence for host-associated genetic differentiation. These studies combine field surveillance, molecular phylogenetics, and population genomics to better understand the factors driving pathogen emergence, adaptation, and the risks posed to agriculture and biodiversity.",
     "crumbs": [
       "Projects"
     ]
