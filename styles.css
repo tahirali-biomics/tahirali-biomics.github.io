@@ -199,3 +199,36 @@ main h1, main h2, main h3, main h4, main h5, main h6 {
   color: #fff;
   border-color: #005580;
 }
+
+/* Publications page styles */
+
+.pub-year {
+  font-weight: 700;
+  font-size: 1.5em;
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+  color: #555;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.2em;
+}
+
+.publication {
+  margin-bottom: 1.2em;
+  font-size: 1em;
+  line-height: 1.4;
+}
+
+.publication p {
+  margin: 0;
+}
+
+.publication a {
+  color: #0072B2;
+  text-decoration: none;
+}
+
+.publication a:hover,
+.publication a:focus {
+  text-decoration: underline;
+  outline: none;
+}
