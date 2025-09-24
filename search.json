@@ -1,5 +1,17 @@
 [
   {
+    "objectID": "teaching/fst_app.html",
+    "href": "teaching/fst_app.html",
+    "title": "FST Interactive App",
+    "section": "",
+    "text": "Explore population‐genetic differentiation through real or simulated data.\nOpen in a new tab",
+    "crumbs": [
+      "Teaching",
+      "Interactive Apps",
+      "FST Simulator"
+    ]
+  },
+  {
     "objectID": "publications.html",
     "href": "publications.html",
     "title": "Publications",
@@ -197,6 +209,17 @@
     "text": "Emergence and Evolution of Downy Mildew Pathogens\n\nSummary:\nThis project investigates the emergence, spread, and evolutionary dynamics of downy mildew pathogens affecting both ornamental and crop plants in Europe. Recent work has documented the introduction and rapid spread of Peronospora aquilegiicola, a destructive pathogen of columbines, from East Asia to Britain and Germany, raising concerns about its potential impact on native and cultivated Aquilegia species. In parallel, population genetic studies of Pseudoperonospora cubensis, the causal agent of downy mildew in cucurbits, have revealed shifts in genetic structure and virulence, likely linked to hybridization or mutation events that broaden host range. Research on Plasmopara halstedii, a major pathogen of sunflower, has uncovered multiple introductions and distinct lineages across Europe, as well as evidence for host-associated genetic differentiation. These studies combine field surveillance, molecular phylogenetics, and population genomics to better understand the factors driving pathogen emergence, adaptation, and the risks posed to agriculture and biodiversity.",
     "crumbs": [
       "Projects"
+    ]
+  },
+  {
+    "objectID": "teaching/index.html",
+    "href": "teaching/index.html",
+    "title": "Teaching and Student Mentoring",
+    "section": "",
+    "text": "I design and lead practical exercises in population genetics and population & ecological genomics for bachelor students.\nThese activities combine lectures, hands-on data analysis, and interactive apps to help students understand key evolutionary processes such as genetic drift, selection, and population structure.\nBeyond formal courses, I also mentor students individually, guiding them through research projects and providing support in data analysis, experimental design, and scientific communication.",
+    "crumbs": [
+      "Teaching",
+      "Overview"
     ]
   }
 ]

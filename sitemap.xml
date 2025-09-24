@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://tahirali-biomics.github.io/teaching/fst_app.html</loc>
+    <lastmod>2025-09-24T12:48:40.320Z</lastmod>
+  </url>
+  <url>
     <loc>https://tahirali-biomics.github.io/publications.html</loc>
     <lastmod>2025-09-23T09:59:43.980Z</lastmod>
   </url>
@@ -15,5 +19,9 @@
   <url>
     <loc>https://tahirali-biomics.github.io/projects.html</loc>
     <lastmod>2025-09-23T10:25:36.880Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tahirali-biomics.github.io/teaching/index.html</loc>
+    <lastmod>2025-09-24T12:34:44.240Z</lastmod>
   </url>
 </urlset>
