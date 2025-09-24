@@ -4,21 +4,26 @@
     "href": "teaching/interactive.html",
     "title": "Interactive Apps",
     "section": "",
-    "text": "Collection of interactive Shiny apps used in my teaching.",
+    "text": "Interactive Apps\nCollection of interactive Shiny apps used in my teaching. Explore the interactive applications below:\n\nFST Simulator\nExplore population-genetic differentiation through real or simulated data.\nDrift Simulator\nSimulate genetic drift scenarios. (Create this page similarly)"
+  },
+  {
+    "objectID": "teaching/teaching.html",
+    "href": "teaching/teaching.html",
+    "title": "Teaching",
+    "section": "",
+    "text": "I design and lead practical exercises in population genetics and population & ecological genomics for bachelor students.\nThese activities combine lectures, hands-on data analysis, and interactive apps to help students understand key evolutionary processes such as genetic drift, selection, and population structure.\nBeyond formal courses, I also mentor students individually, guiding them through research projects and providing support in data analysis, experimental design, and scientific communication.\n\n\n\n\nInteractive Apps\nExercises\nTutorials",
     "crumbs": [
-      "Teaching",
-      "Interactive Apps"
+      "Teaching"
     ]
   },
   {
-    "objectID": "teaching/index.html",
-    "href": "teaching/index.html",
-    "title": "Teaching and Student Mentoring",
+    "objectID": "teaching/teaching.html#teaching-resources",
+    "href": "teaching/teaching.html#teaching-resources",
+    "title": "Teaching",
     "section": "",
-    "text": "I design and lead practical exercises in population genetics and population & ecological genomics for bachelor students.\nThese activities combine lectures, hands-on data analysis, and interactive apps to help students understand key evolutionary processes such as genetic drift, selection, and population structure.\nBeyond formal courses, I also mentor students individually, guiding them through research projects and providing support in data analysis, experimental design, and scientific communication.",
+    "text": "Interactive Apps\nExercises\nTutorials",
     "crumbs": [
-      "Teaching",
-      "Overview"
+      "Teaching"
     ]
   },
   {
@@ -226,11 +231,6 @@
     "href": "teaching/fst_app.html",
     "title": "FST Interactive App",
     "section": "",
-    "text": "Explore population‐genetic differentiation through real or simulated data.\nOpen in a new tab",
-    "crumbs": [
-      "Teaching",
-      "Interactive Apps",
-      "FST Simulator"
-    ]
+    "text": "Explore population‐genetic differentiation through real or simulated data.\nOpen in a new tab\n← Back to Interactive Apps"
   }
 ]
