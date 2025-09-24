@@ -232,3 +232,13 @@ main h1, main h2, main h3, main h4, main h5, main h6 {
   text-decoration: underline;
   outline: none;
 }
+
+/* === FST app box: wider to the RIGHT, slightly shorter === */
+.app-container {
+  /* Push the right boundary out by ~35% while keeping the left edge fixed */
+  max-width: 135%;
+  margin-left: 0;       /* keep original left margin */
+  margin-right: -35%;   /* expand only to the right */
+}
+
+

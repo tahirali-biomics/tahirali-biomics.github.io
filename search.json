@@ -1,124 +1,24 @@
 [
   {
-    "objectID": "teaching/fst_app.html",
-    "href": "teaching/fst_app.html",
-    "title": "FST Interactive App",
+    "objectID": "teaching/interactive.html",
+    "href": "teaching/interactive.html",
+    "title": "Interactive Apps",
     "section": "",
-    "text": "Explore population‐genetic differentiation through real or simulated data.\nOpen in a new tab",
+    "text": "Collection of interactive Shiny apps used in my teaching.",
     "crumbs": [
       "Teaching",
-      "Interactive Apps",
-      "FST Simulator"
+      "Interactive Apps"
     ]
   },
   {
-    "objectID": "publications.html",
-    "href": "publications.html",
-    "title": "Publications",
+    "objectID": "teaching/index.html",
+    "href": "teaching/index.html",
+    "title": "Teaching and Student Mentoring",
     "section": "",
-    "text": "2025\n\n\n\nRahnamae, N., L. Metzger, L. Hördemann, K. Korfmann, A. K. Khan, C. I. Dent, S. Amar, R. Y. Wijfjes, T. Ali, G. Schmitz, B. Stich, A. Tellier, and J. de Meaux. BioRxiv, 2025.07.03.662201. https://doi.org/10.1101/2025.07.03.662201 (accepted in New Phytologist)\n\n\n\n\nTran, N. L. T., T. Ali, G. Schmitz, and J. de Meaux. (2025) Heat-Induced Secondary Dormancy Contributes to Local Adaptation in Arabidopsis thaliana. Molecular Ecology, e70086. https://doi.org/10.1111/mec.70086\n\n\n\n\n2023\n\n\n\nSchmey, T., Small, C., Hoyoz, L. M., Ali, T., Gamboa, S., Mamami, B., Sepulveda, G. C., Thines, M., Stam, R. (2023) Small-spored Alternaria spp. (section Alternaria) are common pathogens on wild tomato species. Environmental Microbiology, 25(10), 1830–1846. https://doi.org/10.1111/1462-2920.16394\n\n\n\n\n2022\n\n\n\nKitner, M., Thines, M., Sedlářová, M., Vaculná, L., Bán, R., Körösi, K., Iwebor, M., Antonova, T., Ali, T., Nádvorník, P., Lebeda, A., Spring, O. (2022) Genetic structure of Plasmopara halstedii populations across Europe and South Russia. Plant Pathology, 72, 361–375. https://doi.org/10.1111/ppa.13666\n\n\n\n\n2021\n\n\n\nVaculná, L., Majeský, Ľ., Ali, T., Seregin, P. A., Prausová, R., Kapler, A., Iakushenko, D., Thines, M., Kitner, M. (2021) Phylogeography and population genetic diversity of endangered species Adenophora liliifolia (Campanulaceae). Conservation Genetics. https://doi.org/10.1007/s10592-021-01396-5\n\n\n\n\n2020\n\n\n\nAli, T. (2020) A conceptual framework and toolkit for phylogeography and landscape genomics. Critical Reviews in Plant Sciences. https://doi.org/10.1080/07352689.2020.1830232\n\n\n\n\nThines, M., Buaya, A., Ali, T., Brand, T. (2020) Peronospora aquilegiicola made its way to Germany: the start of a new pandemic? Mycological Progress, 19, 791-798. https://doi.org/10.1007/s11557-020-01596-2\n\n\n\n\n2019\n\n\n\nAli, T., Muñoz-Fuentes, V., Çelik, A., Schmuker, A., Buch, A., Dutbayev, A., Runge, F., Khaliq, I., Solovyeva, I., Gabrielyan, I., Maciá-Vicente, J. G., Glynou, K., Nigrelli, L., Vakhrusheva, L., Kitner, M., Ploch, S., Xia, X., Nowak, C., Thines, M. (2019) Out of Transcaucasia: Origin of Western and Central Palearctic populations of Microthlaspi perfoliatum. Flora, 253, 127-141. https://doi.org/10.1016/j.flora.2019.02.012\n\n\n\n\n2018\n\n\n\nBrandrud, T. E., Schmidt-Stohn, G., Liimatainen, K., Niskanen, T., Frøslev, T. G., Soop, K., Bojantchev, D., Kytövuori, I., Jeppesen, T. S., Bellù, F., Saar, G., Oertel, B., Ali, T., Thines, M., Dima, B. (2018) Cortinarius sect. Riederi: taxonomy and phylogeny of the new section with European and North American distribution. Mycological Progress, 17, 1323-1354. https://doi.org/10.1007/s11557-018-1443-0\n\n\n\n\nBandini, D., Oertel, B., Ploch, S., Ali, T., Vauras, J., Schneider, A., Scholler, M., Eberhardt, U., Thines, M. (2018) Revision of some central European species of Inocybe (Fr.: Fr.) Fr. subgenus Inocybe, with the description of five new species. Mycological Progress, 1-48. https://doi.org/10.1007/s11557-018-1439-9\n\n\n\n\n2017\n\n\n\nAli, T., Muñoz-Fuentes, V., Çelik, A., Schmuker, A., Buch, A., Dutbayev, A., Runge, F., Khaliq, I., Solovyeva, I., Gabrielyan, I., Maciá-Vicente, J. G., Glynou, K., Nigrelli, L., Vakhrusheva, L., Kitner, M., Ploch, S., Xia, X., Nowak, C., Thines, M. (2017) Genetic patterns reflecting Pleistocene range dynamics in the annual calcicole plant Microthlaspi erraticum across its Eurasian range. Flora, 236-237, 132-142. https://doi.org/10.1016/j.flora.2017.09.014\n\n\n\n\nGlynou, K., Ali, T., Haghi Kia, S., Thines, M., Maciá-Vicente, J. G. (2017) Intraspecific genetic diversity in root-endophytic fungi reflects efficient dispersal and environmental adaptation. Molecular Ecology. https://doi.org/10.1111/mec.14231\n\n\n\n\n2016\n\n\n\nAli, T., Runge, F., Ayan, D., Schmuker, A., Solovyeva, I., Nigrelli, L., Buch, A., Xia, X., Ploch, S., Orren, O., Kummer, V., Ҫelik, A., Vakhrusheva, L., Gabrielyan, I., Thines, M. (2016b) Range-wide complete taxon sampling of Microthlaspi reveals that Microthlaspi erraticum is widespread and ranges from the Alps to the Tien Shan. Flora, 225, 76-81. https://doi.org/10.1016/j.flora.2016.09.008\n\n\n\n\nAli, T., Schmuker, A., Runge, F., Solovyeva, I., Nigrelli, L., J, P., Buch, A., Xia, X., Ploch, S., Orren, O., Kummer, V., Linde-Laursen, I., Ørgaard, M., Hauser, T. P., Ҫelik, A., Thines, M. (2016a) Morphology, phylogeny, and taxonomy of Microthlaspi (Brassicaceae, Coluteocarpeae) and related genera. Taxon, 65(1), 79-98. https://doi.org/10.12705/651.6\n\n\n\n\nGlynou, K., Ali, T., Buch, A., Haghi Kia, S., Ploch, S., Xia, X., Çelik, A., Thines, M., Maciá-Vicente, J. G. (2016) The local environment determines the assembly of root endophytic fungi at a continental scale. Environmental Microbiology. https://doi.org/10.1111/1462-2920.13112\n\n\n\n\n2015\n\n\n\nCheikh-Ali, Z., Glynou, K., Ali, T., Ploch, S., Kaiser, M., Thines, M., Bode, H. B., Maciá-Vicente, J. G. (2015) Diversity of exophillic acid derivatives in strains of an endophytic Exophiala sp. Phytochemistry, 118, 83–93. https://doi.org/10.1016/j.phytochem.2015.08.006\n\n\n\n\nKitner, M., Lebeda, A., Sharma, R., Runge, F., Dvorák, P., Ali, T., Choi, Y.-J., Sedláková, B., Thines, M. (2015) Coincidence of virulence shifts and population genetic changes of Pseudoperonospora cubensis in the Czech Republic. Plant Pathology, 64, 1461–1470. https://doi.org/10.1111/ppa.12370\n\n\n\n\n2014\n\n\n\nSchneider, J. V., Bissiengou, P., Amaral Mdo, C., Ali, T., Fay, M. F., Thines, M., Sosef, M. S., Zizka, G., Chatrou, L. W. (2014) Phylogenetics, ancestral state reconstruction, and a new infrafamilial classification of the pantropical Ochnaceae (Medusagynaceae, Ochnaceae s.str., Quiinaceae) based on five DNA regions. Molecular Phylogenetics and Evolution, 78, 199–214. https://doi.org/10.1016/j.ympev.2014.05.018",
+    "text": "I design and lead practical exercises in population genetics and population & ecological genomics for bachelor students.\nThese activities combine lectures, hands-on data analysis, and interactive apps to help students understand key evolutionary processes such as genetic drift, selection, and population structure.\nBeyond formal courses, I also mentor students individually, guiding them through research projects and providing support in data analysis, experimental design, and scientific communication.",
     "crumbs": [
-      "Publications"
-    ]
-  },
-  {
-    "objectID": "cv.html",
-    "href": "cv.html",
-    "title": "Dr. Tahir Ali",
-    "section": "",
-    "text": "Profile Personal Info Skills Experience Education Collaborations Awards Talks",
-    "crumbs": [
-      "Résumé"
-    ]
-  },
-  {
-    "objectID": "cv.html#professional-profile",
-    "href": "cv.html#professional-profile",
-    "title": "Dr. Tahir Ali",
-    "section": "Professional Profile",
-    "text": "Professional Profile\nAn evolutionary biologist and computational geneticist with expertise in temporal genomics, hybridization genetics, and plant adaptation to climate change. Proven track record in whole-genome sequencing, bioinformatics pipelines, and interdisciplinary research, evidenced by 15+ publications and awards. Passionate about bridging science and society through biodiversity communication.",
-    "crumbs": [
-      "Résumé"
-    ]
-  },
-  {
-    "objectID": "cv.html#personal-information",
-    "href": "cv.html#personal-information",
-    "title": "Dr. Tahir Ali",
-    "section": "Personal Information",
-    "text": "Personal Information\n\nNationality: German\n\nLanguages: English (Fluent); German (Proficient); Urdu (Native)",
-    "crumbs": [
-      "Résumé"
-    ]
-  },
-  {
-    "objectID": "cv.html#computational-and-technical-skills",
-    "href": "cv.html#computational-and-technical-skills",
-    "title": "Dr. Tahir Ali",
-    "section": "Computational and Technical Skills",
-    "text": "Computational and Technical Skills\n\nProgramming & Data Science\n\nLanguages: Python, R, Bash, Perl\n\nData Analysis & Visualization: R (tidyverse, ggplot2), Python (pandas, numpy, matplotlib, seaborn), Jupyter\n\nStatistical Modeling: Generalized Linear/Additive Models (GLM/GAM), Bayesian Inference, Multivariate Statistics\n\nMachine Learning & HPC: Proficient with deep learning frameworks (PyTorch, TensorFlow) and high-performance computing (HPC) environments (e.g., Slurm)\n\n\n\nBioinformatics & Genomics\n\nGenome Assembly & Annotation: De novo hybrid genome assembly (Illumina, ONT, PacBio HiFi) and scaffolding (Hi-C)\nTemporal Population Genomics: Analysis of allele frequency change over time to detect signatures of selection (purifying and positive) and infer demographic history\nHybridization Genomics: Analysis of natural and experimental hybrid populations to investigate introgression, selection against hybrids, and barriers to gene flow\n\n\n\nPopulation Genetics & Phylogenetics Software\n\nVariant Calling & Filtering: GATK, ANGSD, BCFtools/SAMtools, Stacks, PLINK\nPopulation Structure & Demography: ADMIXTURE, STRUCTURE, fastsimcoal2, ∂a∂i, TreeMix, ABBA-BABA (D-statistics), DIYABC\nPhylogenetics & Phylogenomics: RAxML, MrBayes, BEAST, SplitsTree\n\n\n\nGeospatial Analysis (GIS)\n\nLandscape Genomics: Spatial analysis and visualization of genetic and ecological data using ArcGIS & QGIS\nSpecies Distribution Modeling (SDM): Ensemble modeling using multiple algorithms (MaxEnt, GLM, GAM, Random Forest, Boosted Regression Trees)\n\n\n\nWet-lab Skills\n\nMolecular Techniques: High-throughput DNA/RNA extraction, PCR, qPCR, gel electrophoresis, Sanger sequencing\nGenomic Library Preparation: ddRAD-seq, Oxford Nanopore (DNA/RNA), Illumina library prep\nMicrobiology: Aseptic technique for the isolation, culturing, and maintenance of bacteria and fungi for plant microbiome analysis and pathogen assays.",
-    "crumbs": [
-      "Résumé"
-    ]
-  },
-  {
-    "objectID": "cv.html#professional-experience",
-    "href": "cv.html#professional-experience",
-    "title": "Dr. Tahir Ali",
-    "section": "Professional Experience",
-    "text": "Professional Experience\n\nTeaching Assistant & Postdoctoral Researcher\nUniversity of Cologne, Germany | 2022 – Present\n\nCoordinate theoretical modules and teach practical classes in Population Genetics and Ecology; mentor BSc students in experimental design, phenotyping, whole‑genome sequencing (WGS) data analysis, and scientific interpretation; prepare and assess examinations.\nPerform genome assembly and annotation for Brassicaceae species using HiFi long-read, Hi-C, and Illumina short-read technologies.\nInvestigate plant evolutionary dynamics under climate change through temporal genomics, hybridization genetics, and common garden experiments.\nAssociated Member, DFG TRR 341; mentor and guide MSc/PhD students within TRR‑affiliated projects.\n\n\n\nPostdoctoral Researcher\nSenckenberg/LOEWE Center for Translational Biodiversity Genomics | 2019 – 2022\n\nCharacterized the impact of landscape heterogeneity on fine-scale genetic structure and gene flow in Microthlaspi erraticum using whole genome resequencing.\nDissected the effects of host genotype, microbiome, and abiotic factors on plant disease incidence.\nAssembled microbial genomes from Oxford Nanopore long-reads, polished with Illumina data.\nValidated functional roles of microbial taxa via synthetic microbiome inoculations in contrasting host genotypes\nGovernance and community roles: Member, Diversity & Inclusion Committee and TBG Steering Committee; part of the Young Scientists main speaker team (ECR network collaborating with the Board of Directors).\nOrganised institute-level events (annual retreats, Diversity Days, training workshops); participated in committee meetings on organisational issues and budgeting, gaining practical insight into decision-making processes.\n\n\n\nPhD Research Associate\nGoethe University & Senckenberg (SBiK-F), Frankfurt | 2011 – 2019\n\nClarified the systematics of Microthlaspi (Brassicaceae) by describing two new genera (Ihsanalshehbazia, Friedrichkarlmeyeria) and three new species.\nReconstructed Pleistocene range dynamics and post-glacial colonization routes of Palearctic plant populations using phylogeographic and demographic modeling.\nIntegrated ecological niche modeling with population genetics to explain spatial patterns of biodiversity.\nCoordinated international fieldwork across Europe, North Africa, and Asia (planning, permits, sampling logistics)\nDisseminated results through peer‑reviewed publications and conference presentations\n\n\n\nResearch Internship / MRes Project\nThe James Hutton Institute, UK | 2009 – 2010\n\nInvestigated alternative splicing in barley under cold/drought stress, identifying stress-responsive variants via RNA assays (RT-PCR/qPCR).\n\n\n\nLecturer in Botany/Biology\nKhawaja Fareed Govt. College, Pakistan | 2002 – 2008\n\nTaught undergraduate biology; designed curricula and assessments; supervised labs; advised students.\n\n\n\nGCE Advance Level Biology Teacher\nThe City School, Lahore/Vehari Branches, Pakistan | 1998 – 2002\n\nTaught A‑Level Biology; prepared students for examinations; coordinated practicals.\n\n\n\nResearch Internship / MSc Project\nUniversity of Agriculture, Faisalabad | 1997 – 1998\n\nEvaluated drought resistance in wheat germplasm from arid regions, using greenhouse/field screens and statistical analysis (ANOVA).",
-    "crumbs": [
-      "Résumé"
-    ]
-  },
-  {
-    "objectID": "cv.html#education-and-qualifications",
-    "href": "cv.html#education-and-qualifications",
-    "title": "Dr. Tahir Ali",
-    "section": "Education and Qualifications",
-    "text": "Education and Qualifications\n\nDoctor of Philosophy (Dr. rer. nat.)\nGoethe University & Senckenberg (SBiK-F), Frankfurt, Germany | 2019\nDissertation: “Morphology, systematics and phylogeography of Microthlaspi (Brassicaceae, Coluteocarpeae)”\nMaster of Research (MRes), Crops for the Future\nUniversity of Dundee, UK | 2010\nDissertation: “The Role of Alternative Splicing in Barley in Response to Cold/Drought Stress”\nMaster of Science (MSc), Botany\nUniversity of Agriculture Faisalabad, Pakistan | 1998\nDissertation: “Drought Resistance of Wheat Germplasm Collected from some Arid Regions of Baluchistan and Punjab”\nBachelor of Science (BSc), Chemistry, Botany, Zoology\nB.Z. University Multan, Pakistan | 1995",
-    "crumbs": [
-      "Résumé"
-    ]
-  },
-  {
-    "objectID": "cv.html#collaboration-projects",
-    "href": "cv.html#collaboration-projects",
-    "title": "Dr. Tahir Ali",
-    "section": "Collaboration Projects",
-    "text": "Collaboration Projects\n\nAssessed urbanization impacts on Solidago canadensis and Tanacetum vulgare via AFLP/MS-AFLP genotyping (University of Potsdam, Germany).\nConducted phylogenomics of fungal pathogens (Technical University of Munich, Germany).\nAnalyzed spatial diversity patterns and phylogeography of endangered plants (Palacký University Olomouc, Czech Republic)",
-    "crumbs": [
-      "Résumé"
-    ]
-  },
-  {
-    "objectID": "cv.html#awards--professional-service",
-    "href": "cv.html#awards--professional-service",
-    "title": "Dr. Tahir Ali",
-    "section": "Awards & Professional Service",
-    "text": "Awards & Professional Service\n\nAssociate Editor & Science Mentor, Frontiers for Young Minds Journal\nMember, IUCN Commission on Ecosystem Management (CEM) & Education & Communication (CEC)\nErich Oberdorfer Foundation Research Award (2019), Karlsruhe, Germany\nGoethe Graduate Academy Fellowship (2011-2015), Frankfurt, Germany\nGlobal Excellence Postgraduate Scholarship (2009), University of Dundee, UK\nStudents’ Award for Outstanding Biology Teaching (2005, 2007), Higher Education Dept., Pakistan",
-    "crumbs": [
-      "Résumé"
-    ]
-  },
-  {
-    "objectID": "cv.html#conferences-workshops-and-invited-talks",
-    "href": "cv.html#conferences-workshops-and-invited-talks",
-    "title": "Dr. Tahir Ali",
-    "section": "Selected Conferences, Workshops, and Invited Talks",
-    "text": "Selected Conferences, Workshops, and Invited Talks\n\nEcosystem Restoration: An overlooked opportunity for Economic growth (2021) Bahria University, Karachi, Pakistan.\nRole of Biodiversity and Ecosystem Restoration in Climate Change Mitigation (2020), International Conference on One Health, University of Veterinary and Animal Sciences, Lahore, Pakistan.\nMisconceptions about Evolution and the Mechanisms of Evolution (2020), University of Peshawar, Pakistan.\nFrom jargon to human: Translating Science to Kids (Workshop 2020), Friends For Future International Youth Conference.\nThe Talking Climate Workshop (2020), SDGs Academy, Pakistan.\nPleistocene Glaciation and Palearctic Phylogeography: Inferring Species Glacial Refugia and Recolonization Routes (2019), Monrepos Archaeological Research Center, Neuwied, Germany.\nModelling of Range-Wide Pathogen Pressure in an Annual Member of the Brassicaceae (2019), Wild Plant Pathosystems Conference, Frankfurt am Main, Germany.\nGenomics and Climate Adaptation (2018), Senckenberg Translational Biodiversity Genomics, Frankfurt am Main, Germany.\nDetermination of Genetic Diversity of Arabidopsis thaliana in the Italian Peninsula Using Next-Generation Genotyping (RAD-Seq) (Workshop, 2015), Botanikertag, Munich, Germany.\nInfluence of Climate and Geography on Occurrence of Infection in Microthlaspi perfoliatum (2014), German Mycological Society Congress, Mettlach-Orscholz, Germany.\nDiversity of Arabidopsis thaliana in Italy as Inferred from Next-Generation Genotyping in Relation to Biotic and Abiotic Factors (2013), Wild Plant Pathosystems Conference, Olomouc, Czech Republic.",
-    "crumbs": [
-      "Résumé"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Dr. Tahir Ali",
-    "section": "",
-    "text": "Dr. Tahir Ali\n\nEvolutionary and Computational Biologist | Teacher & Mentor | Exploring Genomes, Stories, and Change\n\n\nInstitute for Plant Sciences, University of Cologne Zülpicher Str. 47b, 50674 Cologne, Germany 📞 +49 (0)2214701139   |   ✉️ tali@uni-koeln.de   |   ali_tahir99@hotmail.com\n\n\n\nMy Journey in Science: Exploring Data and Complexity\nI am an evolutionary and computational biologist, fascinated by the interplay of genes, environment, and time. My research in temporal genomics, adaptation, phylogeography, and selection seeks to understand how organisms respond to environmental change—how Darwin’s insight into “descent with modification” unfolds in real populations. Much of my work involves decoding genomes across time, tracing the signatures of survival and loss, and unravelling the mysteries of hybridisation genetics. Increasingly, this means integrating multiomics approaches with machine learning, combining layers of biological information with computational models to reveal patterns that might otherwise remain hidden. In practice, this often means writing scripts, building pipelines, and shaping raw data into insight—turning fragments of code into narratives about resilience, chance, and transformation.\nEqually important to me is teaching and mentoring. My journey as an educator spans more than two decades, from teaching basic college biology to guiding students through the complexities of ecological and evolutionary genomics. Helping students see connections between data and life is one of the most rewarding parts of my career. I see teaching as a way of opening doors: to curiosity, to critical thinking, and to the joy of discovery.\nBeyond science, I draw inspiration from literature, history, and the worlds we build. The psychological depth of Dostoevsky, the vast social panoramas of Tolstoy, the magical realism of Márquez and Grass, and the dramatic flair of Dumas all shape how I think about complexity, transformation, and endurance. Just as genomes are living archives of struggle and adaptation, so too are cities, landscapes, and stories—layered with memory, resilience, and change.\nOutside of research and teaching, I find joy in travel, in wandering through ancient streets, hiking wild trails, or noticing the quiet poetry of everyday life. Whether I am analyzing genetic data, guiding students, reading a novel, or exploring a place shaped by centuries, I am drawn to the same questions: how change is inscribed in structure, how diversity emerges, and how the stories—scientific and personal—that we tell shape who we are.\n\n\n✉ ✉ in f X 🎓\n\n\nThe mystery of human existence lies not in just staying alive, but in finding something to live for. — Dostoevsky",
-    "crumbs": [
-      "Home"
+      "Teaching",
+      "Overview"
     ]
   },
   {
@@ -212,14 +112,125 @@
     ]
   },
   {
-    "objectID": "teaching/index.html",
-    "href": "teaching/index.html",
-    "title": "Teaching and Student Mentoring",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Dr. Tahir Ali",
     "section": "",
-    "text": "I design and lead practical exercises in population genetics and population & ecological genomics for bachelor students.\nThese activities combine lectures, hands-on data analysis, and interactive apps to help students understand key evolutionary processes such as genetic drift, selection, and population structure.\nBeyond formal courses, I also mentor students individually, guiding them through research projects and providing support in data analysis, experimental design, and scientific communication.",
+    "text": "Dr. Tahir Ali\n\nEvolutionary and Computational Biologist | Teacher & Mentor | Exploring Genomes, Stories, and Change\n\n\nInstitute for Plant Sciences, University of Cologne Zülpicher Str. 47b, 50674 Cologne, Germany 📞 +49 (0)2214701139   |   ✉️ tali@uni-koeln.de   |   ali_tahir99@hotmail.com\n\n\n\nMy Journey in Science: Exploring Data and Complexity\nI am an evolutionary and computational biologist, fascinated by the interplay of genes, environment, and time. My research in temporal genomics, adaptation, phylogeography, and selection seeks to understand how organisms respond to environmental change—how Darwin’s insight into “descent with modification” unfolds in real populations. Much of my work involves decoding genomes across time, tracing the signatures of survival and loss, and unravelling the mysteries of hybridisation genetics. Increasingly, this means integrating multiomics approaches with machine learning, combining layers of biological information with computational models to reveal patterns that might otherwise remain hidden. In practice, this often means writing scripts, building pipelines, and shaping raw data into insight—turning fragments of code into narratives about resilience, chance, and transformation.\nEqually important to me is teaching and mentoring. My journey as an educator spans more than two decades, from teaching basic college biology to guiding students through the complexities of ecological and evolutionary genomics. Helping students see connections between data and life is one of the most rewarding parts of my career. I see teaching as a way of opening doors: to curiosity, to critical thinking, and to the joy of discovery.\nBeyond science, I draw inspiration from literature, history, and the worlds we build. The psychological depth of Dostoevsky, the vast social panoramas of Tolstoy, the magical realism of Márquez and Grass, and the dramatic flair of Dumas all shape how I think about complexity, transformation, and endurance. Just as genomes are living archives of struggle and adaptation, so too are cities, landscapes, and stories—layered with memory, resilience, and change.\nOutside of research and teaching, I find joy in travel, in wandering through ancient streets, hiking wild trails, or noticing the quiet poetry of everyday life. Whether I am analyzing genetic data, guiding students, reading a novel, or exploring a place shaped by centuries, I am drawn to the same questions: how change is inscribed in structure, how diversity emerges, and how the stories—scientific and personal—that we tell shape who we are.\n\n\n✉ ✉ in f X 🎓\n\n\nThe mystery of human existence lies not in just staying alive, but in finding something to live for. — Dostoevsky",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "cv.html",
+    "href": "cv.html",
+    "title": "Dr. Tahir Ali",
+    "section": "",
+    "text": "Profile Personal Info Skills Experience Education Collaborations Awards Talks",
+    "crumbs": [
+      "Résumé"
+    ]
+  },
+  {
+    "objectID": "cv.html#professional-profile",
+    "href": "cv.html#professional-profile",
+    "title": "Dr. Tahir Ali",
+    "section": "Professional Profile",
+    "text": "Professional Profile\nAn evolutionary biologist and computational geneticist with expertise in temporal genomics, hybridization genetics, and plant adaptation to climate change. Proven track record in whole-genome sequencing, bioinformatics pipelines, and interdisciplinary research, evidenced by 15+ publications and awards. Passionate about bridging science and society through biodiversity communication.",
+    "crumbs": [
+      "Résumé"
+    ]
+  },
+  {
+    "objectID": "cv.html#personal-information",
+    "href": "cv.html#personal-information",
+    "title": "Dr. Tahir Ali",
+    "section": "Personal Information",
+    "text": "Personal Information\n\nNationality: German\n\nLanguages: English (Fluent); German (Proficient); Urdu (Native)",
+    "crumbs": [
+      "Résumé"
+    ]
+  },
+  {
+    "objectID": "cv.html#computational-and-technical-skills",
+    "href": "cv.html#computational-and-technical-skills",
+    "title": "Dr. Tahir Ali",
+    "section": "Computational and Technical Skills",
+    "text": "Computational and Technical Skills\n\nProgramming & Data Science\n\nLanguages: Python, R, Bash, Perl\n\nData Analysis & Visualization: R (tidyverse, ggplot2), Python (pandas, numpy, matplotlib, seaborn), Jupyter\n\nStatistical Modeling: Generalized Linear/Additive Models (GLM/GAM), Bayesian Inference, Multivariate Statistics\n\nMachine Learning & HPC: Proficient with deep learning frameworks (PyTorch, TensorFlow) and high-performance computing (HPC) environments (e.g., Slurm)\n\n\n\nBioinformatics & Genomics\n\nGenome Assembly & Annotation: De novo hybrid genome assembly (Illumina, ONT, PacBio HiFi) and scaffolding (Hi-C)\nTemporal Population Genomics: Analysis of allele frequency change over time to detect signatures of selection (purifying and positive) and infer demographic history\nHybridization Genomics: Analysis of natural and experimental hybrid populations to investigate introgression, selection against hybrids, and barriers to gene flow\n\n\n\nPopulation Genetics & Phylogenetics Software\n\nVariant Calling & Filtering: GATK, ANGSD, BCFtools/SAMtools, Stacks, PLINK\nPopulation Structure & Demography: ADMIXTURE, STRUCTURE, fastsimcoal2, ∂a∂i, TreeMix, ABBA-BABA (D-statistics), DIYABC\nPhylogenetics & Phylogenomics: RAxML, MrBayes, BEAST, SplitsTree\n\n\n\nGeospatial Analysis (GIS)\n\nLandscape Genomics: Spatial analysis and visualization of genetic and ecological data using ArcGIS & QGIS\nSpecies Distribution Modeling (SDM): Ensemble modeling using multiple algorithms (MaxEnt, GLM, GAM, Random Forest, Boosted Regression Trees)\n\n\n\nWet-lab Skills\n\nMolecular Techniques: High-throughput DNA/RNA extraction, PCR, qPCR, gel electrophoresis, Sanger sequencing\nGenomic Library Preparation: ddRAD-seq, Oxford Nanopore (DNA/RNA), Illumina library prep\nMicrobiology: Aseptic technique for the isolation, culturing, and maintenance of bacteria and fungi for plant microbiome analysis and pathogen assays.",
+    "crumbs": [
+      "Résumé"
+    ]
+  },
+  {
+    "objectID": "cv.html#professional-experience",
+    "href": "cv.html#professional-experience",
+    "title": "Dr. Tahir Ali",
+    "section": "Professional Experience",
+    "text": "Professional Experience\n\nTeaching Assistant & Postdoctoral Researcher\nUniversity of Cologne, Germany | 2022 – Present\n\nCoordinate theoretical modules and teach practical classes in Population Genetics and Ecology; mentor BSc students in experimental design, phenotyping, whole‑genome sequencing (WGS) data analysis, and scientific interpretation; prepare and assess examinations.\nPerform genome assembly and annotation for Brassicaceae species using HiFi long-read, Hi-C, and Illumina short-read technologies.\nInvestigate plant evolutionary dynamics under climate change through temporal genomics, hybridization genetics, and common garden experiments.\nAssociated Member, DFG TRR 341; mentor and guide MSc/PhD students within TRR‑affiliated projects.\n\n\n\nPostdoctoral Researcher\nSenckenberg/LOEWE Center for Translational Biodiversity Genomics | 2019 – 2022\n\nCharacterized the impact of landscape heterogeneity on fine-scale genetic structure and gene flow in Microthlaspi erraticum using whole genome resequencing.\nDissected the effects of host genotype, microbiome, and abiotic factors on plant disease incidence.\nAssembled microbial genomes from Oxford Nanopore long-reads, polished with Illumina data.\nValidated functional roles of microbial taxa via synthetic microbiome inoculations in contrasting host genotypes\nGovernance and community roles: Member, Diversity & Inclusion Committee and TBG Steering Committee; part of the Young Scientists main speaker team (ECR network collaborating with the Board of Directors).\nOrganised institute-level events (annual retreats, Diversity Days, training workshops); participated in committee meetings on organisational issues and budgeting, gaining practical insight into decision-making processes.\n\n\n\nPhD Research Associate\nGoethe University & Senckenberg (SBiK-F), Frankfurt | 2011 – 2019\n\nClarified the systematics of Microthlaspi (Brassicaceae) by describing two new genera (Ihsanalshehbazia, Friedrichkarlmeyeria) and three new species.\nReconstructed Pleistocene range dynamics and post-glacial colonization routes of Palearctic plant populations using phylogeographic and demographic modeling.\nIntegrated ecological niche modeling with population genetics to explain spatial patterns of biodiversity.\nCoordinated international fieldwork across Europe, North Africa, and Asia (planning, permits, sampling logistics)\nDisseminated results through peer‑reviewed publications and conference presentations\n\n\n\nResearch Internship / MRes Project\nThe James Hutton Institute, UK | 2009 – 2010\n\nInvestigated alternative splicing in barley under cold/drought stress, identifying stress-responsive variants via RNA assays (RT-PCR/qPCR).\n\n\n\nLecturer in Botany/Biology\nKhawaja Fareed Govt. College, Pakistan | 2002 – 2008\n\nTaught undergraduate biology; designed curricula and assessments; supervised labs; advised students.\n\n\n\nGCE Advance Level Biology Teacher\nThe City School, Lahore/Vehari Branches, Pakistan | 1998 – 2002\n\nTaught A‑Level Biology; prepared students for examinations; coordinated practicals.\n\n\n\nResearch Internship / MSc Project\nUniversity of Agriculture, Faisalabad | 1997 – 1998\n\nEvaluated drought resistance in wheat germplasm from arid regions, using greenhouse/field screens and statistical analysis (ANOVA).",
+    "crumbs": [
+      "Résumé"
+    ]
+  },
+  {
+    "objectID": "cv.html#education-and-qualifications",
+    "href": "cv.html#education-and-qualifications",
+    "title": "Dr. Tahir Ali",
+    "section": "Education and Qualifications",
+    "text": "Education and Qualifications\n\nDoctor of Philosophy (Dr. rer. nat.)\nGoethe University & Senckenberg (SBiK-F), Frankfurt, Germany | 2019\nDissertation: “Morphology, systematics and phylogeography of Microthlaspi (Brassicaceae, Coluteocarpeae)”\nMaster of Research (MRes), Crops for the Future\nUniversity of Dundee, UK | 2010\nDissertation: “The Role of Alternative Splicing in Barley in Response to Cold/Drought Stress”\nMaster of Science (MSc), Botany\nUniversity of Agriculture Faisalabad, Pakistan | 1998\nDissertation: “Drought Resistance of Wheat Germplasm Collected from some Arid Regions of Baluchistan and Punjab”\nBachelor of Science (BSc), Chemistry, Botany, Zoology\nB.Z. University Multan, Pakistan | 1995",
+    "crumbs": [
+      "Résumé"
+    ]
+  },
+  {
+    "objectID": "cv.html#collaboration-projects",
+    "href": "cv.html#collaboration-projects",
+    "title": "Dr. Tahir Ali",
+    "section": "Collaboration Projects",
+    "text": "Collaboration Projects\n\nAssessed urbanization impacts on Solidago canadensis and Tanacetum vulgare via AFLP/MS-AFLP genotyping (University of Potsdam, Germany).\nConducted phylogenomics of fungal pathogens (Technical University of Munich, Germany).\nAnalyzed spatial diversity patterns and phylogeography of endangered plants (Palacký University Olomouc, Czech Republic)",
+    "crumbs": [
+      "Résumé"
+    ]
+  },
+  {
+    "objectID": "cv.html#awards--professional-service",
+    "href": "cv.html#awards--professional-service",
+    "title": "Dr. Tahir Ali",
+    "section": "Awards & Professional Service",
+    "text": "Awards & Professional Service\n\nAssociate Editor & Science Mentor, Frontiers for Young Minds Journal\nMember, IUCN Commission on Ecosystem Management (CEM) & Education & Communication (CEC)\nErich Oberdorfer Foundation Research Award (2019), Karlsruhe, Germany\nGoethe Graduate Academy Fellowship (2011-2015), Frankfurt, Germany\nGlobal Excellence Postgraduate Scholarship (2009), University of Dundee, UK\nStudents’ Award for Outstanding Biology Teaching (2005, 2007), Higher Education Dept., Pakistan",
+    "crumbs": [
+      "Résumé"
+    ]
+  },
+  {
+    "objectID": "cv.html#conferences-workshops-and-invited-talks",
+    "href": "cv.html#conferences-workshops-and-invited-talks",
+    "title": "Dr. Tahir Ali",
+    "section": "Selected Conferences, Workshops, and Invited Talks",
+    "text": "Selected Conferences, Workshops, and Invited Talks\n\nEcosystem Restoration: An overlooked opportunity for Economic growth (2021) Bahria University, Karachi, Pakistan.\nRole of Biodiversity and Ecosystem Restoration in Climate Change Mitigation (2020), International Conference on One Health, University of Veterinary and Animal Sciences, Lahore, Pakistan.\nMisconceptions about Evolution and the Mechanisms of Evolution (2020), University of Peshawar, Pakistan.\nFrom jargon to human: Translating Science to Kids (Workshop 2020), Friends For Future International Youth Conference.\nThe Talking Climate Workshop (2020), SDGs Academy, Pakistan.\nPleistocene Glaciation and Palearctic Phylogeography: Inferring Species Glacial Refugia and Recolonization Routes (2019), Monrepos Archaeological Research Center, Neuwied, Germany.\nModelling of Range-Wide Pathogen Pressure in an Annual Member of the Brassicaceae (2019), Wild Plant Pathosystems Conference, Frankfurt am Main, Germany.\nGenomics and Climate Adaptation (2018), Senckenberg Translational Biodiversity Genomics, Frankfurt am Main, Germany.\nDetermination of Genetic Diversity of Arabidopsis thaliana in the Italian Peninsula Using Next-Generation Genotyping (RAD-Seq) (Workshop, 2015), Botanikertag, Munich, Germany.\nInfluence of Climate and Geography on Occurrence of Infection in Microthlaspi perfoliatum (2014), German Mycological Society Congress, Mettlach-Orscholz, Germany.\nDiversity of Arabidopsis thaliana in Italy as Inferred from Next-Generation Genotyping in Relation to Biotic and Abiotic Factors (2013), Wild Plant Pathosystems Conference, Olomouc, Czech Republic.",
+    "crumbs": [
+      "Résumé"
+    ]
+  },
+  {
+    "objectID": "publications.html",
+    "href": "publications.html",
+    "title": "Publications",
+    "section": "",
+    "text": "2025\n\n\n\nRahnamae, N., L. Metzger, L. Hördemann, K. Korfmann, A. K. Khan, C. I. Dent, S. Amar, R. Y. Wijfjes, T. Ali, G. Schmitz, B. Stich, A. Tellier, and J. de Meaux. BioRxiv, 2025.07.03.662201. https://doi.org/10.1101/2025.07.03.662201 (accepted in New Phytologist)\n\n\n\n\nTran, N. L. T., T. Ali, G. Schmitz, and J. de Meaux. (2025) Heat-Induced Secondary Dormancy Contributes to Local Adaptation in Arabidopsis thaliana. Molecular Ecology, e70086. https://doi.org/10.1111/mec.70086\n\n\n\n\n2023\n\n\n\nSchmey, T., Small, C., Hoyoz, L. M., Ali, T., Gamboa, S., Mamami, B., Sepulveda, G. C., Thines, M., Stam, R. (2023) Small-spored Alternaria spp. (section Alternaria) are common pathogens on wild tomato species. Environmental Microbiology, 25(10), 1830–1846. https://doi.org/10.1111/1462-2920.16394\n\n\n\n\n2022\n\n\n\nKitner, M., Thines, M., Sedlářová, M., Vaculná, L., Bán, R., Körösi, K., Iwebor, M., Antonova, T., Ali, T., Nádvorník, P., Lebeda, A., Spring, O. (2022) Genetic structure of Plasmopara halstedii populations across Europe and South Russia. Plant Pathology, 72, 361–375. https://doi.org/10.1111/ppa.13666\n\n\n\n\n2021\n\n\n\nVaculná, L., Majeský, Ľ., Ali, T., Seregin, P. A., Prausová, R., Kapler, A., Iakushenko, D., Thines, M., Kitner, M. (2021) Phylogeography and population genetic diversity of endangered species Adenophora liliifolia (Campanulaceae). Conservation Genetics. https://doi.org/10.1007/s10592-021-01396-5\n\n\n\n\n2020\n\n\n\nAli, T. (2020) A conceptual framework and toolkit for phylogeography and landscape genomics. Critical Reviews in Plant Sciences. https://doi.org/10.1080/07352689.2020.1830232\n\n\n\n\nThines, M., Buaya, A., Ali, T., Brand, T. (2020) Peronospora aquilegiicola made its way to Germany: the start of a new pandemic? Mycological Progress, 19, 791-798. https://doi.org/10.1007/s11557-020-01596-2\n\n\n\n\n2019\n\n\n\nAli, T., Muñoz-Fuentes, V., Çelik, A., Schmuker, A., Buch, A., Dutbayev, A., Runge, F., Khaliq, I., Solovyeva, I., Gabrielyan, I., Maciá-Vicente, J. G., Glynou, K., Nigrelli, L., Vakhrusheva, L., Kitner, M., Ploch, S., Xia, X., Nowak, C., Thines, M. (2019) Out of Transcaucasia: Origin of Western and Central Palearctic populations of Microthlaspi perfoliatum. Flora, 253, 127-141. https://doi.org/10.1016/j.flora.2019.02.012\n\n\n\n\n2018\n\n\n\nBrandrud, T. E., Schmidt-Stohn, G., Liimatainen, K., Niskanen, T., Frøslev, T. G., Soop, K., Bojantchev, D., Kytövuori, I., Jeppesen, T. S., Bellù, F., Saar, G., Oertel, B., Ali, T., Thines, M., Dima, B. (2018) Cortinarius sect. Riederi: taxonomy and phylogeny of the new section with European and North American distribution. Mycological Progress, 17, 1323-1354. https://doi.org/10.1007/s11557-018-1443-0\n\n\n\n\nBandini, D., Oertel, B., Ploch, S., Ali, T., Vauras, J., Schneider, A., Scholler, M., Eberhardt, U., Thines, M. (2018) Revision of some central European species of Inocybe (Fr.: Fr.) Fr. subgenus Inocybe, with the description of five new species. Mycological Progress, 1-48. https://doi.org/10.1007/s11557-018-1439-9\n\n\n\n\n2017\n\n\n\nAli, T., Muñoz-Fuentes, V., Çelik, A., Schmuker, A., Buch, A., Dutbayev, A., Runge, F., Khaliq, I., Solovyeva, I., Gabrielyan, I., Maciá-Vicente, J. G., Glynou, K., Nigrelli, L., Vakhrusheva, L., Kitner, M., Ploch, S., Xia, X., Nowak, C., Thines, M. (2017) Genetic patterns reflecting Pleistocene range dynamics in the annual calcicole plant Microthlaspi erraticum across its Eurasian range. Flora, 236-237, 132-142. https://doi.org/10.1016/j.flora.2017.09.014\n\n\n\n\nGlynou, K., Ali, T., Haghi Kia, S., Thines, M., Maciá-Vicente, J. G. (2017) Intraspecific genetic diversity in root-endophytic fungi reflects efficient dispersal and environmental adaptation. Molecular Ecology. https://doi.org/10.1111/mec.14231\n\n\n\n\n2016\n\n\n\nAli, T., Runge, F., Ayan, D., Schmuker, A., Solovyeva, I., Nigrelli, L., Buch, A., Xia, X., Ploch, S., Orren, O., Kummer, V., Ҫelik, A., Vakhrusheva, L., Gabrielyan, I., Thines, M. (2016b) Range-wide complete taxon sampling of Microthlaspi reveals that Microthlaspi erraticum is widespread and ranges from the Alps to the Tien Shan. Flora, 225, 76-81. https://doi.org/10.1016/j.flora.2016.09.008\n\n\n\n\nAli, T., Schmuker, A., Runge, F., Solovyeva, I., Nigrelli, L., J, P., Buch, A., Xia, X., Ploch, S., Orren, O., Kummer, V., Linde-Laursen, I., Ørgaard, M., Hauser, T. P., Ҫelik, A., Thines, M. (2016a) Morphology, phylogeny, and taxonomy of Microthlaspi (Brassicaceae, Coluteocarpeae) and related genera. Taxon, 65(1), 79-98. https://doi.org/10.12705/651.6\n\n\n\n\nGlynou, K., Ali, T., Buch, A., Haghi Kia, S., Ploch, S., Xia, X., Çelik, A., Thines, M., Maciá-Vicente, J. G. (2016) The local environment determines the assembly of root endophytic fungi at a continental scale. Environmental Microbiology. https://doi.org/10.1111/1462-2920.13112\n\n\n\n\n2015\n\n\n\nCheikh-Ali, Z., Glynou, K., Ali, T., Ploch, S., Kaiser, M., Thines, M., Bode, H. B., Maciá-Vicente, J. G. (2015) Diversity of exophillic acid derivatives in strains of an endophytic Exophiala sp. Phytochemistry, 118, 83–93. https://doi.org/10.1016/j.phytochem.2015.08.006\n\n\n\n\nKitner, M., Lebeda, A., Sharma, R., Runge, F., Dvorák, P., Ali, T., Choi, Y.-J., Sedláková, B., Thines, M. (2015) Coincidence of virulence shifts and population genetic changes of Pseudoperonospora cubensis in the Czech Republic. Plant Pathology, 64, 1461–1470. https://doi.org/10.1111/ppa.12370\n\n\n\n\n2014\n\n\n\nSchneider, J. V., Bissiengou, P., Amaral Mdo, C., Ali, T., Fay, M. F., Thines, M., Sosef, M. S., Zizka, G., Chatrou, L. W. (2014) Phylogenetics, ancestral state reconstruction, and a new infrafamilial classification of the pantropical Ochnaceae (Medusagynaceae, Ochnaceae s.str., Quiinaceae) based on five DNA regions. Molecular Phylogenetics and Evolution, 78, 199–214. https://doi.org/10.1016/j.ympev.2014.05.018",
+    "crumbs": [
+      "Publications"
+    ]
+  },
+  {
+    "objectID": "teaching/fst_app.html",
+    "href": "teaching/fst_app.html",
+    "title": "FST Interactive App",
+    "section": "",
+    "text": "Explore population‐genetic differentiation through real or simulated data.\nOpen in a new tab",
     "crumbs": [
       "Teaching",
-      "Overview"
+      "Interactive Apps",
+      "FST Simulator"
     ]
   }
 ]
