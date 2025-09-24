@@ -4,7 +4,7 @@
     "href": "teaching/interactive.html",
     "title": "Interactive Apps",
     "section": "",
-    "text": "Interactive Apps\nCollection of interactive Shiny apps used in my teaching. Explore the interactive applications below:\n\nFST Simulator\nExplore population-genetic differentiation through real or simulated data.\nDrift Simulator\nSimulate genetic drift scenarios. (Create this page similarly)"
+    "text": "Interactive Apps\nCollection of interactive Shiny apps used in my teaching. Explore the interactive applications below:\n\nFST Simulator\nExplore population-genetic differentiation through real or simulated data.\n\n#- Drift Simulator\n# Simulate genetic drift scenarios. (Create this page similarly)"
   },
   {
     "objectID": "teaching/teaching.html",
