@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://tahirali-biomics.github.io/teaching/AF_dandelion.html</loc>
+    <lastmod>2025-09-25T12:09:34.610Z</lastmod>
+  </url>
+  <url>
     <loc>https://tahirali-biomics.github.io/teaching/het_fst_app.html</loc>
     <lastmod>2025-09-25T10:09:34.340Z</lastmod>
   </url>
   <url>
     <loc>https://tahirali-biomics.github.io/teaching/interactive.html</loc>
-    <lastmod>2025-09-25T10:19:44.990Z</lastmod>
+    <lastmod>2025-09-25T12:11:55.730Z</lastmod>
   </url>
   <url>
     <loc>https://tahirali-biomics.github.io/teaching/teaching.html</loc>
@@ -35,5 +39,9 @@
   <url>
     <loc>https://tahirali-biomics.github.io/teaching/hwe_app.html</loc>
     <lastmod>2025-09-25T07:12:13.420Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tahirali-biomics.github.io/teaching/drift-app.html</loc>
+    <lastmod>2025-09-25T12:08:19.810Z</lastmod>
   </url>
 </urlset>

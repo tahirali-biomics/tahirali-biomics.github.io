@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "teaching/AF_dandelion.html",
+    "href": "teaching/AF_dandelion.html",
+    "title": "Dandelion Allele Frequency App",
+    "section": "",
+    "text": "Simulate and analyze the genetic basis of bitterness in dandelion greens.\nThis app lets you explore how dominance, Hardy-Weinberg equilibrium, and sampling affect the frequency of bitter and mild dandelions in a population, and helps you understand why observed and expected frequencies may differ in real-world samples.\nOpen in a new tab\n← Back to Interactive Apps\n\nThis interactive app allows you to: - Set the frequency of the mildness allele and sample size, and enter observed counts. - Calculate expected and observed frequencies of bitter and mild plants under Hardy-Weinberg equilibrium. - Compare your results and explore possible explanations for discrepancies. - Build intuition for how dominance, selection, and sampling affect genetic variation in natural populations."
+  },
+  {
     "objectID": "teaching/het_fst_app.html",
     "href": "teaching/het_fst_app.html",
     "title": "Het-FST Interactive App",
@@ -18,7 +25,7 @@
     "href": "teaching/interactive.html",
     "title": "Interactive Apps",
     "section": "",
-    "text": "Welcome to my collection of interactive Shiny apps designed to bring population genetics to life.\nThese tools allow students and researchers to move beyond static equations and experience evolutionary processes in real time.\nBy simulating Hardy-Weinberg equilibrium, genetic drift, and selection, these apps help build intuition for how chance, population size, and selection shape genetic diversity—core concepts that underpin modern evolutionary biology.\nExplore, experiment, and discover how simple rules can lead to complex patterns in nature.\nWhether you are new to population genetics or deepening your understanding, these apps are here to make abstract concepts tangible and engaging.\n\nHWE Simulator Simulate genotype and allele frequencies under Hardy-Weinberg equilibrium. Explore how population size, replication, and real or simulated data affect genetic expectations and the stability of genetic variation.\nFST Simulator\nVisualize how genetic differentiation (FST) evolves between populations under drift and selection. Adjust parameters and see how population structure emerges from evolutionary forces.\nHet-FST Simulator\nExplore how population divergence shapes genetic diversity and FST in real time."
+    "text": "Welcome to my collection of interactive Shiny apps designed to bring population genetics to life.\nThese tools allow students and researchers to move beyond static equations and experience evolutionary processes in real time.\nBy simulating Hardy-Weinberg equilibrium, genetic drift, and selection, these apps help build intuition for how chance, population size, and selection shape genetic diversity—core concepts that underpin modern evolutionary biology.\nExplore, experiment, and discover how simple rules can lead to complex patterns in nature.\nWhether you are new to population genetics or deepening your understanding, these apps are here to make abstract concepts tangible and engaging.\n\n\nHWE Simulator\nSimulate genotype and allele frequencies under Hardy-Weinberg equilibrium. Explore how population size, replication, and real or simulated data affect genetic expectations and the stability of genetic variation.\nGenetic Drift Simulator\nSimulate how random genetic drift changes allele frequencies over time. Experiment with population size, generations, and initial frequencies to see how chance can lead to fixation or loss—even without selection.\nDandelion Allele Frequency App\nSimulate and analyze the genetic basis of bitterness in dandelion greens. Explore how dominance, Hardy-Weinberg equilibrium, and sampling affect the frequency of bitter and mild plants, and compare observed and expected results.\nFST Simulator\nVisualize how genetic differentiation (FST) evolves between populations under drift and selection. Adjust parameters and see how population structure emerges from evolutionary forces.\nHet-FST Simulator\nExplore how population divergence shapes genetic diversity and FST in real time."
   },
   {
     "objectID": "teaching/teaching.html",
@@ -253,5 +260,12 @@
     "title": "HWE Interactive App",
     "section": "",
     "text": "Simulate genotype and allele frequencies under Hardy-Weinberg equilibrium and explore how population size, replication, and real or simulated data affect genetic expectations.\nOpen in a new tab\n← Back to Interactive Apps\n\nThis interactive app allows you to: - Simulate genotype and allele frequencies for different population sizes and replicates. - Compare observed and expected frequencies under Hardy-Weinberg equilibrium. - Upload your own SNP data or use sample data for exploration. - Visualize results and discuss how genetic drift and sample size affect Hardy-Weinberg expectations."
+  },
+  {
+    "objectID": "teaching/drift-app.html",
+    "href": "teaching/drift-app.html",
+    "title": "Genetic Drift Simulator",
+    "section": "",
+    "text": "Explore how random genetic drift shapes allele frequencies over time in finite populations.\nThis interactive app lets you simulate the fate of an allele under drift, experiment with population size, number of generations, initial allele frequency, and number of replicates, and see how randomness can lead to fixation or loss—even in the absence of selection.\nOpen in a new tab\n← Back to Interactive Apps\n\nThis interactive app allows you to: - Simulate allele frequency changes under genetic drift for different population sizes and generations. - Visualize the stochastic trajectories of multiple replicates. - Observe how population size and initial frequency affect the probability of fixation or loss. - Build intuition for the role of chance in evolution and the importance of genetic drift in small populations."
   }
 ]
