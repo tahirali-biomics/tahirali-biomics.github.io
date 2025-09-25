@@ -1,35 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://tahirali-biomics.github.io/teaching/hwe_app.html</loc>
-    <lastmod>2025-09-25T07:12:13.420Z</lastmod>
+    <loc>https://tahirali-biomics.github.io/teaching/het_fst_app.html</loc>
+    <lastmod>2025-09-25T10:09:34.340Z</lastmod>
   </url>
   <url>
-    <loc>https://tahirali-biomics.github.io/teaching/fst_app.html</loc>
-    <lastmod>2025-09-25T06:22:10.990Z</lastmod>
+    <loc>https://tahirali-biomics.github.io/teaching/interactive.html</loc>
+    <lastmod>2025-09-25T10:14:04.050Z</lastmod>
   </url>
   <url>
-    <loc>https://tahirali-biomics.github.io/publications.html</loc>
-    <lastmod>2025-09-23T09:59:43.980Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tahirali-biomics.github.io/cv.html</loc>
-    <lastmod>2025-09-21T12:04:45.670Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tahirali-biomics.github.io/index.html</loc>
-    <lastmod>2025-09-23T20:26:48.310Z</lastmod>
+    <loc>https://tahirali-biomics.github.io/teaching/teaching.html</loc>
+    <lastmod>2025-09-25T08:07:27.030Z</lastmod>
   </url>
   <url>
     <loc>https://tahirali-biomics.github.io/projects.html</loc>
     <lastmod>2025-09-23T10:25:36.880Z</lastmod>
   </url>
   <url>
-    <loc>https://tahirali-biomics.github.io/teaching/teaching.html</loc>
-    <lastmod>2025-09-25T08:03:58.490Z</lastmod>
+    <loc>https://tahirali-biomics.github.io/index.html</loc>
+    <lastmod>2025-09-23T20:26:48.310Z</lastmod>
   </url>
   <url>
-    <loc>https://tahirali-biomics.github.io/teaching/interactive.html</loc>
-    <lastmod>2025-09-25T08:05:22.230Z</lastmod>
+    <loc>https://tahirali-biomics.github.io/cv.html</loc>
+    <lastmod>2025-09-21T12:04:45.670Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tahirali-biomics.github.io/publications.html</loc>
+    <lastmod>2025-09-23T09:59:43.980Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tahirali-biomics.github.io/teaching/fst_app.html</loc>
+    <lastmod>2025-09-25T06:22:10.990Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tahirali-biomics.github.io/teaching/hwe_app.html</loc>
+    <lastmod>2025-09-25T07:12:13.420Z</lastmod>
   </url>
 </urlset>
