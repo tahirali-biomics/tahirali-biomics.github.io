@@ -216,9 +216,9 @@
   {
     "objectID": "teaching/teaching.html",
     "href": "teaching/teaching.html",
-    "title": "Teaching",
+    "title": "Teaching and Student Mentoring",
     "section": "",
-    "text": "I design and lead practical exercises in population genetics and population & ecological genomics for bachelor students.\nThese activities combine lectures, hands-on data analysis, and interactive apps to help students understand key evolutionary processes such as genetic drift, selection, and population structure.\nBeyond formal courses, I also mentor students individually, guiding them through research projects and providing support in data analysis, experimental design, and scientific communication.\n\n\n\n\nInteractive Apps\nExercises\nTutorials",
+    "text": "I design and lead practical exercises in population genetics and population & ecological genomics for bachelor students. These courses combine short lectures, guided tutorials, hands-on data analysis, and interactive apps to help students investigate key evolutionary processes such as Hardy–Weinberg equilibrium, FST and genetic drift, natural selection, and population structure. Beyond formal coursework, I supervise Bachelor’s and Master’s theses and mentor students individually, supporting them in research design, data analysis, and scientific communication to foster independent and creative thinking. —",
     "crumbs": [
       "Teaching"
     ]
@@ -226,9 +226,9 @@
   {
     "objectID": "teaching/teaching.html#teaching-resources",
     "href": "teaching/teaching.html#teaching-resources",
-    "title": "Teaching",
-    "section": "",
-    "text": "Interactive Apps\nExercises\nTutorials",
+    "title": "Teaching and Student Mentoring",
+    "section": "Teaching Resources",
+    "text": "Teaching Resources\n\nInteractive Apps\nExercises\nTutorials",
     "crumbs": [
       "Teaching"
     ]
@@ -238,6 +238,6 @@
     "href": "teaching/interactive.html",
     "title": "Interactive Apps",
     "section": "",
-    "text": "Collection of interactive Shiny apps used in my teaching. Explore the interactive applications below:\n\nFST Simulator\nExplore population-genetic differentiation through real or simulated data.\nHWE Simulator\nSimulate genotype and allele frequencies under Hardy-Weinberg equilibrium"
+    "text": "Welcome to my collection of interactive Shiny apps designed to bring population genetics to life.\nThese tools allow students and researchers to move beyond static equations and experience evolutionary processes in real time.\nBy simulating genetic drift, selection, and Hardy-Weinberg equilibrium, these apps help build intuition for how chance, population size, and selection shape genetic diversity—core concepts that underpin modern evolutionary biology.\nExplore, experiment, and discover how simple rules can lead to complex patterns in nature.\nWhether you are new to population genetics or deepening your understanding, these apps are here to make abstract concepts tangible and engaging.\n\nFST Simulator\nVisualize how genetic differentiation (FST) evolves between populations under drift and selection. Adjust parameters and see how population structure emerges from evolutionary forces.\nHWE Simulator Simulate genotype and allele frequencies under Hardy-Weinberg equilibrium. Explore how population size, replication, and real or simulated data affect genetic expectations and the stability of genetic variation."
   }
 ]
