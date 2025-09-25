@@ -1,3 +1,1 @@
-Dr. Tahir Ali | Evolutionary and Computational Biologist | Teacher & Mentor | Exploring Genomes, Stories, and Change
-
-Institute for Plant Sciences, University of Cologne, Zülpicher Str. 47b, 50674 Cologne, Germany
+**Dr. Tahir Ali** | Evolutionary and Computational Biologist | Teacher & Mentor | Exploring Genomes, Stories, and Change | Institute for Plant Sciences, University of Cologne, Zülpicher Str. 47b, 50674 Cologne, Germany. 
