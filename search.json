@@ -2,9 +2,9 @@
   {
     "objectID": "teaching/climate-explorer-app.html",
     "href": "teaching/climate-explorer-app.html",
-    "title": "Climate Explorer: Arabidopsis Bioclimatic Data App",
+    "title": "Climate Explorer: Bioclimatic Data App",
     "section": "",
-    "text": "Explore and visualize bioclimatic variables for Arabidopsis accessions in Spain and Sweden, or upload your own sample coordinates.\nThis interactive app lets you extract WorldClim climate data for any set of locations, plot accessions on a map with climate backgrounds, and explore correlations among climate variables.\nOpen in a new tab\n← Back to Interactive Apps\n\nThis interactive app allows you to: - Upload a CSV of sample coordinates or use example data. - Extract 19 WorldClim bioclimatic variables for each accession. - Visualize accessions on a map with a selected climate variable as a background raster. - Color accessions by country (Spain or Sweden). - Explore a correlation heatmap of all climate variables, with full variable names."
+    "text": "Climate Explorer: Bioclimatic Data App\nThis interactive app lets you extract and visualize WorldClim bioclimatic variables for any set of sample coordinates.\nYou can upload your own CSV file or use the provided example data (Arabidopsis thaliana accessions from Spain and Sweden).\nPlot your samples on a map, color them by any climate variable, and explore correlations among all extracted variables.\nOpen in a new tab\n← Back to Interactive Apps\n\nFeatures: - Upload a CSV of sample coordinates or use example data. - Extract 19 WorldClim bioclimatic variables for each sample. - Visualize samples on a map, colored by any selected climate variable. - Explore a correlation heatmap of all climate variables, with full variable names. - Download the full data table as a CSV."
   },
   {
     "objectID": "teaching/drift-app.html",
