@@ -39,7 +39,7 @@
     "href": "teaching/practical_day1.html#plot-fastq-read-quality-after-running-fastqc",
     "title": "Practical Day 1: FASTQ to VCF - Part 1",
     "section": "Plot: FASTQ Read Quality (after running FastQC)",
-    "text": "Plot: FASTQ Read Quality (after running FastQC)\n\nFigure: Example FastQC per-base quality plot. (Insert your own screenshot or plot here.)"
+    "text": "Plot: FASTQ Read Quality (after running FastQC)\n\nFigure: Example FastQC per-base quality plot."
   },
   {
     "objectID": "teaching/practical_day1.html#create-and-submit-a-slurm-script-for-fastqc-analysis",
