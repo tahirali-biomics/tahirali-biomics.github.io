@@ -46,14 +46,14 @@
     "href": "teaching/practical_day1.html#create-and-submit-a-slurm-script-for-fastqc-analysis",
     "title": "Practical Day 1: FASTQ to VCF - Part 1",
     "section": "Create and Submit a SLURM Script for FASTQC Analysis",
-    "text": "Create and Submit a SLURM Script for FASTQC Analysis\n#!/bin/bash -l\n\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=8\n#SBATCH --mem=10gb\n#SBATCH --time=01:00:00\n#SBATCH --account=UniKoeln\n#SBATCH --output=/home/group.kurse/qbius030/Practical_Day_1/fastqc/fastqc_repair.out\n#SBATCH --error=/home/group.kurse/qbius030/Practical_Day_1/fastqc/fastqc_repair.err\n\nmodule load fastqc\n\nINPUT_DIR=\"/home/group.kurse/qbius030/sample_project_data/\"\nOUTPUT_DIR=\"/home/group.kurse/qbius030/Practical_Day_1/fastqc\"\nmkdir -p $OUTPUT_DIR\n\nfor FILE in $INPUT_DIR/*Chr4_repair_1.fastq.gz $INPUT_DIR/*Chr4_repair_2.fastq.gz; do\n    fastqc -o $OUTPUT_DIR \"$FILE\"\ndone"
+    "text": "Create and Submit a SLURM Script for FASTQC Analysis\n#!/bin/bash -l\n\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=8\n#SBATCH --mem=10gb\n#SBATCH --time=01:00:00\n#SBATCH --account=UniKoeln\n#SBATCH --output=/home/group.kurse/qbius030/Practical_Day_1/fastqc/fastqc_repair.out\n#SBATCH --error=/home/group.kurse/qbius030/Practical_Day_1/fastqc/fastqc_repair.err\n\nmodule load bio/FastQC\n\nINPUT_DIR=\"/home/group.kurse/qbius030/sample_project_data/\"\nOUTPUT_DIR=\"/home/group.kurse/qbius030/Practical_Day_1/fastqc\"\nmkdir -p $OUTPUT_DIR\n\nfor FILE in $INPUT_DIR/*Chr4_repair_1.fastq.gz $INPUT_DIR/*Chr4_repair_2.fastq.gz; do\n    fastqc -o $OUTPUT_DIR \"$FILE\"\ndone"
   },
   {
     "objectID": "teaching/practical_day1.html#plot-multiqc-summary-after-running-multiqc-on-fastqc-results",
     "href": "teaching/practical_day1.html#plot-multiqc-summary-after-running-multiqc-on-fastqc-results",
     "title": "Practical Day 1: FASTQ to VCF - Part 1",
     "section": "Plot: MultiQC Summary (after running MultiQC on FastQC results)",
-    "text": "Plot: MultiQC Summary (after running MultiQC on FastQC results)\n\nFigure: Example MultiQC summary plot. (Insert your own screenshot or plot here.)"
+    "text": "Plot: MultiQC Summary (after running MultiQC on FastQC results)"
   },
   {
     "objectID": "teaching/practical_day1.html#how-to-fix-the-dos-line-breaks-error-on-a-linux-cluster",
