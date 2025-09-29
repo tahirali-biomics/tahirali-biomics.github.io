@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dr Tahir Ali | AG de Meaux">
+
+<title>Practical Day 1: FASTQ to VCF - Part 1 – Dr.&nbsp;Tahir Ali</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../profile.webp" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-937e9c81068435b0118f1eb8148751d3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-0LPGXESG7T"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
+</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Practical Day 1: FASTQ to VCF - Part 1</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projects</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../publications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Publications</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../cv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Résumé</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../teaching/teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../workshops.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Workshops</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#tools-to-be-used" id="toc-tools-to-be-used" class="nav-link" data-scroll-target="#tools-to-be-used">Tools to be Used</a></li>
+  <li><a href="#step-1-connecting-to-hpc-and-organizing-the-workspace" id="toc-step-1-connecting-to-hpc-and-organizing-the-workspace" class="nav-link" data-scroll-target="#step-1-connecting-to-hpc-and-organizing-the-workspace">Step 1: Connecting to HPC and Organizing the Workspace</a>
+  <ul class="collapse">
+  <li><a href="#connect-to-the-hpc" id="toc-connect-to-the-hpc" class="nav-link" data-scroll-target="#connect-to-the-hpc">Connect to the HPC</a></li>
+  <li><a href="#check-your-current-directory" id="toc-check-your-current-directory" class="nav-link" data-scroll-target="#check-your-current-directory">Check Your Current Directory</a></li>
+  <li><a href="#copy-raw-data-to-your-home-directory" id="toc-copy-raw-data-to-your-home-directory" class="nav-link" data-scroll-target="#copy-raw-data-to-your-home-directory">Copy Raw Data to Your Home Directory</a></li>
+  <li><a href="#create-a-directory-for-analysis" id="toc-create-a-directory-for-analysis" class="nav-link" data-scroll-target="#create-a-directory-for-analysis">Create a Directory for Analysis</a></li>
+  </ul></li>
+  <li><a href="#examine-the-contents-of-the-raw-fastq-files" id="toc-examine-the-contents-of-the-raw-fastq-files" class="nav-link" data-scroll-target="#examine-the-contents-of-the-raw-fastq-files">Examine the Contents of the Raw FASTQ Files</a>
+  <ul class="collapse">
+  <li><a href="#plot-fastq-read-quality-after-running-fastqc" id="toc-plot-fastq-read-quality-after-running-fastqc" class="nav-link" data-scroll-target="#plot-fastq-read-quality-after-running-fastqc"><em>Plot: FASTQ Read Quality (after running FastQC)</em></a></li>
+  </ul></li>
+  <li><a href="#instructions-for-running-bioinformatics-jobs-on-the-hpc" id="toc-instructions-for-running-bioinformatics-jobs-on-the-hpc" class="nav-link" data-scroll-target="#instructions-for-running-bioinformatics-jobs-on-the-hpc">Instructions for Running Bioinformatics Jobs on the HPC</a></li>
+  <li><a href="#step-2-quality-control-of-raw-fastq-reads-using-fastqc" id="toc-step-2-quality-control-of-raw-fastq-reads-using-fastqc" class="nav-link" data-scroll-target="#step-2-quality-control-of-raw-fastq-reads-using-fastqc">Step 2: Quality Control of raw FASTQ reads using fastqc</a>
+  <ul class="collapse">
+  <li><a href="#create-and-submit-a-slurm-script-for-fastqc-analysis" id="toc-create-and-submit-a-slurm-script-for-fastqc-analysis" class="nav-link" data-scroll-target="#create-and-submit-a-slurm-script-for-fastqc-analysis">Create and Submit a SLURM Script for FASTQC Analysis</a></li>
+  <li><a href="#plot-multiqc-summary-after-running-multiqc-on-fastqc-results" id="toc-plot-multiqc-summary-after-running-multiqc-on-fastqc-results" class="nav-link" data-scroll-target="#plot-multiqc-summary-after-running-multiqc-on-fastqc-results"><em>Plot: MultiQC Summary (after running MultiQC on FastQC results)</em></a></li>
+  <li><a href="#how-to-fix-the-dos-line-breaks-error-on-a-linux-cluster" id="toc-how-to-fix-the-dos-line-breaks-error-on-a-linux-cluster" class="nav-link" data-scroll-target="#how-to-fix-the-dos-line-breaks-error-on-a-linux-cluster">How to Fix the “DOS Line Breaks” Error on a Linux Cluster</a></li>
+  </ul></li>
+  <li><a href="#step-3-quality-trimming-of-raw-fastq-reads-using-trimmomatic" id="toc-step-3-quality-trimming-of-raw-fastq-reads-using-trimmomatic" class="nav-link" data-scroll-target="#step-3-quality-trimming-of-raw-fastq-reads-using-trimmomatic">Step 3: Quality trimming of raw FASTQ reads using Trimmomatic</a>
+  <ul class="collapse">
+  <li><a href="#plot-read-length-distribution-before-and-after-trimming" id="toc-plot-read-length-distribution-before-and-after-trimming" class="nav-link" data-scroll-target="#plot-read-length-distribution-before-and-after-trimming"><em>Plot: Read Length Distribution Before and After Trimming</em></a></li>
+  </ul></li>
+  <li><a href="#step-4-mapping-to-reference-using-bwa-mem2-samtools" id="toc-step-4-mapping-to-reference-using-bwa-mem2-samtools" class="nav-link" data-scroll-target="#step-4-mapping-to-reference-using-bwa-mem2-samtools">Step 4: Mapping to reference using BWA-mem2 + samtools</a>
+  <ul class="collapse">
+  <li><a href="#plot-mapping-quality-distribution" id="toc-plot-mapping-quality-distribution" class="nav-link" data-scroll-target="#plot-mapping-quality-distribution"><em>Plot: Mapping Quality Distribution</em></a></li>
+  </ul></li>
+  <li><a href="#step-5-run-and-configure-qualimap-for-bamqc-analysis" id="toc-step-5-run-and-configure-qualimap-for-bamqc-analysis" class="nav-link" data-scroll-target="#step-5-run-and-configure-qualimap-for-bamqc-analysis">Step 5: Run and Configure Qualimap for BAMQC Analysis</a>
+  <ul class="collapse">
+  <li><a href="#set-up-r-environment-for-plotting-with-qualimap" id="toc-set-up-r-environment-for-plotting-with-qualimap" class="nav-link" data-scroll-target="#set-up-r-environment-for-plotting-with-qualimap">Set Up R Environment for Plotting with Qualimap</a></li>
+  <li><a href="#create-and-submit-a-slurm-script-for-bamqc-analysis" id="toc-create-and-submit-a-slurm-script-for-bamqc-analysis" class="nav-link" data-scroll-target="#create-and-submit-a-slurm-script-for-bamqc-analysis">Create and Submit a SLURM Script for BAMQC Analysis</a></li>
+  <li><a href="#plot-qualimap-coverage-plot" id="toc-plot-qualimap-coverage-plot" class="nav-link" data-scroll-target="#plot-qualimap-coverage-plot"><em>Plot: Qualimap Coverage Plot</em></a></li>
+  </ul></li>
+  <li><a href="#wrapping-up-practical-day-one" id="toc-wrapping-up-practical-day-one" class="nav-link" data-scroll-target="#wrapping-up-practical-day-one">Wrapping Up Practical Day One</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Practical Day 1: FASTQ to VCF - Part 1</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dr Tahir Ali | AG de Meaux </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="learning-objectives" class="level1">
+<h1>Learning Objectives</h1>
+<ul>
+<li>Access the HPC (using MobaXterm on Windows or Terminal on Mac/Linux).</li>
+<li>Explore raw FASTQ read files and understand the structure of FASTQ data.</li>
+<li>Install new tools, set environment variables, or load pre-installed tools on the HPC system.</li>
+<li>Check the quality of FASTQ reads using tools like FASTQC and interpret the output statistics.</li>
+<li>Trim FASTQ reads to remove adapters or low-quality bases using appropriate tools.</li>
+<li>Write a script (bash/python, etc.) to automate workflows, such as running commands on multiple files in a for loop, and submit jobs to an HPC system using SLURM SBATCH scheduling.</li>
+</ul>
+<hr>
+</section>
+<section id="tools-to-be-used" class="level1">
+<h1>Tools to be Used</h1>
+<ul>
+<li><strong>FASTQC / MULTIQC:</strong> For quality control of FASTQ reads.</li>
+<li><strong>Trimmomatic / fastp:</strong> For read trimming.</li>
+<li><strong>BWA:</strong> For mapping reads to a reference genome.</li>
+<li><strong>SAMTOOLS:</strong> For conversion of SAM to BAM files.</li>
+<li><strong>QUALIMAP:</strong> For quality control of BAM files.</li>
+</ul>
+<hr>
+</section>
+<section id="step-1-connecting-to-hpc-and-organizing-the-workspace" class="level1">
+<h1>Step 1: Connecting to HPC and Organizing the Workspace</h1>
+<section id="connect-to-the-hpc" class="level2">
+<h2 class="anchored" data-anchor-id="connect-to-the-hpc">Connect to the HPC</h2>
+<p>For Windows users: Use MobaXterm. For Mac/Linux users: Use the Terminal application.<br>
+Log in to the HPC cluster using your login credentials.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-Y</span> qbius030@cheops.rrz.uni-koeln.de</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace 'qbius030' with your specific username.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Enter your password when prompted.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="check-your-current-directory" class="level2">
+<h2 class="anchored" data-anchor-id="check-your-current-directory">Check Your Current Directory</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If you are not in your home directory, navigate to it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /home/group.kurse/qbius030/</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace 'qbius030' with your specific username.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="copy-raw-data-to-your-home-directory" class="level2">
+<h2 class="anchored" data-anchor-id="copy-raw-data-to-your-home-directory">Copy Raw Data to Your Home Directory</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> /scratch/tali/Practical_Day_1/sample_project_data .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="create-a-directory-for-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="create-a-directory-for-analysis">Create a Directory for Analysis</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> Practical_Day_1/<span class="dt">{fastqc</span><span class="op">,</span><span class="dt">trimming</span><span class="op">,</span><span class="dt">mapping</span><span class="op">,</span><span class="dt">bamqc}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li><code>fastqc</code>: for storing quality control results of fastq files.</li>
+<li><code>trimming</code>: for storing trimmed read files.</li>
+<li><code>mapping</code>: for storing read mapping outputs.</li>
+<li><code>bamqc</code>: for storing quality control results of bam files.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="examine-the-contents-of-the-raw-fastq-files" class="level1">
+<h1>Examine the Contents of the Raw FASTQ Files</h1>
+<p>Navigate to the location of the raw FASTQ files:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /home/group.kurse/qbius030/sample_project_data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Example 1:</strong> View the first 8 lines of a FASTQ file to examine its structure.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> SRR1945488.Chr4_repair_1.fastq.gz <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 8</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Example 2:</strong> Count the number of reads in a compressed FASTQ file.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> SRR1945488.Chr4_repair_1.fastq.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Divide by 4 to get the number of reads.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Example 3:</strong> Print the second line of each read (sequence line) from a compressed FASTQ file.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> SRR1945488.Chr4_repair_1.fastq.gz <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'NR % 4 == 2 {print;}'</span> <span class="kw">|</span> <span class="fu">less</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Example 4:</strong> Print the first 10 sequences (second line of each read) from a compressed FASTQ file.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> SRR1945488.Chr4_repair_1.fastq.gz <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'NR % 4 == 2 {print;}'</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 10</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+<section id="plot-fastq-read-quality-after-running-fastqc" class="level2">
+<h2 class="anchored" data-anchor-id="plot-fastq-read-quality-after-running-fastqc"><em>Plot: FASTQ Read Quality (after running FastQC)</em></h2>
+<p><img src="fastqc_summary_plot.png" class="img-fluid"><br>
+<em>Figure: Example FastQC per-base quality plot. (Insert your own screenshot or plot here.)</em></p>
+<hr>
+</section>
+</section>
+<section id="instructions-for-running-bioinformatics-jobs-on-the-hpc" class="level1">
+<h1>Instructions for Running Bioinformatics Jobs on the HPC</h1>
+<p>For quality control and downstream processing of FASTQ files,<br>
+we will execute various tasks on the HPC using Bash scripts with for loops.</p>
+<p><strong>Steps:</strong> 1. Prepare your script using a text editor and save it as <code>your_bash_script.sh</code>. 2. Submit your job in the terminal using: <code>bash    sbatch your_bash_script.sh</code> 3. For more details, consult the <a href="https://rrzk.uni-koeln.de/sites/rrzk/HPC_Projekte/CHEOPS_Brief_Instructions.pdf">CHEOPS Brief Instructions</a>.</p>
+<hr>
+</section>
+<section id="step-2-quality-control-of-raw-fastq-reads-using-fastqc" class="level1">
+<h1>Step 2: Quality Control of raw FASTQ reads using fastqc</h1>
+<p>Check if required module is installed:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> avail</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="create-and-submit-a-slurm-script-for-fastqc-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="create-and-submit-a-slurm-script-for-fastqc-analysis">Create and Submit a SLURM Script for FASTQC Analysis</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --ntasks-per-node=8</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=10gb</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=01:00:00</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account=UniKoeln</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=/home/group.kurse/qbius030/Practical_Day_1/fastqc/fastqc_repair.out</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=/home/group.kurse/qbius030/Practical_Day_1/fastqc/fastqc_repair.err</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load fastqc</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="va">INPUT_DIR</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/sample_project_data/"</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="va">OUTPUT_DIR</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/Practical_Day_1/fastqc"</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">$OUTPUT_DIR</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> FILE <span class="kw">in</span> <span class="va">$INPUT_DIR</span>/<span class="pp">*</span>Chr4_repair_1.fastq.gz <span class="va">$INPUT_DIR</span>/<span class="pp">*</span>Chr4_repair_2.fastq.gz<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="ex">fastqc</span> <span class="at">-o</span> <span class="va">$OUTPUT_DIR</span> <span class="st">"</span><span class="va">$FILE</span><span class="st">"</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="plot-multiqc-summary-after-running-multiqc-on-fastqc-results" class="level2">
+<h2 class="anchored" data-anchor-id="plot-multiqc-summary-after-running-multiqc-on-fastqc-results"><em>Plot: MultiQC Summary (after running MultiQC on FastQC results)</em></h2>
+<p><img src="multiqc_summary.png" class="img-fluid"><br>
+<em>Figure: Example MultiQC summary plot. (Insert your own screenshot or plot here.)</em></p>
+<hr>
+</section>
+<section id="how-to-fix-the-dos-line-breaks-error-on-a-linux-cluster" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-fix-the-dos-line-breaks-error-on-a-linux-cluster">How to Fix the “DOS Line Breaks” Error on a Linux Cluster</h2>
+<p>If you see:</p>
+<pre><code>sbatch: error: Batch script contains DOS line breaks (\r\n)</code></pre>
+<p><strong>Fix with:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dos2unix</span> fastqc.sh</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="at">-v</span> fastqc.sh  <span class="co"># Check for ^M characters</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Check job status:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> qbius030</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>View HTML output in browser:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firefox</span> SRR1945697.Chr4_repair_paired_2_fastqc.html</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="step-3-quality-trimming-of-raw-fastq-reads-using-trimmomatic" class="level1">
+<h1>Step 3: Quality trimming of raw FASTQ reads using Trimmomatic</h1>
+<p>Check if required module is installed:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> avail</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Example SLURM script:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --ntasks-per-node=8</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=10gb</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=01:00:00</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account=UniKoeln</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=/home/group.kurse/qbius030/Practical_Day_1/trimming/fastqc_trim.out</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=/home/group.kurse/qbius030/Practical_Day_1/trimming/fastqc_trim.err</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load trimmomatic/</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="va">INPUT_DIR</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/sample_project_data"</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="va">OUTPUT_DIR</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/Practical_Day_1/trimming"</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="va">ADAPTERS</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/sample_project_data/adapters/Illumina_PE.fa"</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">$OUTPUT_DIR</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> FORWARD_FILE <span class="kw">in</span> <span class="va">${INPUT_DIR}</span>/<span class="pp">*</span>.Chr4_repair_1.fastq.gz<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>  <span class="va">REVERSE_FILE</span><span class="op">=</span><span class="st">"</span><span class="va">${FORWARD_FILE</span><span class="op">/</span><span class="ss">_1.fastq.gz</span><span class="op">/</span>_2.fastq.gz<span class="va">}</span><span class="st">"</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>  <span class="va">BASE_NAME</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">$FORWARD_FILE</span> _1.fastq.gz<span class="va">)</span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>  <span class="va">FORWARD_PAIRED</span><span class="op">=</span><span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/</span><span class="va">${BASE_NAME}</span><span class="st">_paired_1.fastq.gz"</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>  <span class="va">FORWARD_UNPAIRED</span><span class="op">=</span><span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/</span><span class="va">${BASE_NAME}</span><span class="st">_unpaired_1.fastq.gz"</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>  <span class="va">REVERSE_PAIRED</span><span class="op">=</span><span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/</span><span class="va">${BASE_NAME}</span><span class="st">_paired_2.fastq.gz"</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>  <span class="va">REVERSE_UNPAIRED</span><span class="op">=</span><span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/</span><span class="va">${BASE_NAME}</span><span class="st">_unpaired_2.fastq.gz"</span></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>  <span class="ex">java</span> <span class="at">-jar</span> <span class="va">$TRIMMOMATIC</span>/trimmomatic.jar PE <span class="dt">\</span></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">-threads</span> 4 <span class="dt">\</span></span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>    <span class="va">$FORWARD_FILE</span> <span class="dt">\</span></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>    <span class="va">$REVERSE_FILE</span> <span class="dt">\</span></span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>    <span class="va">$FORWARD_PAIRED</span> <span class="dt">\</span></span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>    <span class="va">$FORWARD_UNPAIRED</span> <span class="dt">\</span></span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>    <span class="va">$REVERSE_PAIRED</span> <span class="dt">\</span></span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>    <span class="va">$REVERSE_UNPAIRED</span> <span class="dt">\</span></span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>    ILLUMINACLIP:<span class="va">${ADAPTERS}</span>:2:30:10 <span class="dt">\</span></span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>    LEADING:3 <span class="dt">\</span></span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>    TRAILING:3 <span class="dt">\</span></span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>    SLIDINGWINDOW:4:15 <span class="dt">\</span></span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a>    MINLEN:36</span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+<section id="plot-read-length-distribution-before-and-after-trimming" class="level2">
+<h2 class="anchored" data-anchor-id="plot-read-length-distribution-before-and-after-trimming"><em>Plot: Read Length Distribution Before and After Trimming</em></h2>
+<p><img src="read_length_distribution.png" class="img-fluid"><br>
+<em>Figure: Example plot showing read length distribution before and after trimming.</em></p>
+<hr>
+</section>
+</section>
+<section id="step-4-mapping-to-reference-using-bwa-mem2-samtools" class="level1">
+<h1>Step 4: Mapping to reference using BWA-mem2 + samtools</h1>
+<p>Check if required module is installed:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> avail</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Example SLURM script:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --ntasks-per-node=8</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=10gb</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=01:00:00</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account=UniKoeln</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=/home/group.kurse/qbius030/Practical_Day_1/mapping/bwa_mapping.out</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=/home/group.kurse/qbius030/Practical_Day_1/mapping/bwa_mapping.err</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load bwamem2</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load samtools</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="va">INPUT_DIR</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/Practical_Day_1/trimming"</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="va">OUTPUT_DIR</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/Practical_Day_1/mapping"</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="va">REFERENCE</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/sample_project_data/reference_data/Arabidopsis_thaliana.TAIR10.dna.chromosome.4_98K.fasta"</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="co"># bwa-mem2 index $REFERENCE  # Uncomment if not already indexed</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> FORWARD_FILE <span class="kw">in</span> <span class="va">${INPUT_DIR}</span>/<span class="pp">*</span>_paired_1.fastq.gz<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>  <span class="va">REVERSE_FILE</span><span class="op">=</span><span class="st">"</span><span class="va">${FORWARD_FILE</span><span class="op">/</span><span class="ss">_paired_1.fastq.gz</span><span class="op">/</span>_paired_2.fastq.gz<span class="va">}</span><span class="st">"</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>  <span class="va">BASE_NAME</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">$FORWARD_FILE</span> _paired_1.fastq.gz<span class="va">)</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>  <span class="va">SAM_FILE</span><span class="op">=</span><span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/</span><span class="va">${BASE_NAME}</span><span class="st">.sam"</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>  <span class="va">BAM_FILE</span><span class="op">=</span><span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/</span><span class="va">${BASE_NAME}</span><span class="st">.bam"</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>  <span class="va">SORTED_BAM</span><span class="op">=</span><span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/</span><span class="va">${BASE_NAME}</span><span class="st">.sorted.bam"</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>  <span class="ex">bwa-mem2</span> mem <span class="at">-M</span> <span class="at">-t</span> 20 <span class="va">$REFERENCE</span> <span class="va">$FORWARD_FILE</span> <span class="va">$REVERSE_FILE</span> <span class="op">&gt;</span> <span class="va">$SAM_FILE</span></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>  <span class="ex">samtools</span> view <span class="at">-bS</span> <span class="va">$SAM_FILE</span> <span class="op">&gt;</span> <span class="va">$BAM_FILE</span></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>  <span class="ex">samtools</span> sort <span class="at">-@</span> 20 <span class="va">$BAM_FILE</span> <span class="at">-o</span> <span class="va">$SORTED_BAM</span></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>  <span class="ex">samtools</span> index <span class="va">$SORTED_BAM</span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rm</span> <span class="va">$SAM_FILE</span></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rm</span> <span class="va">$BAM_FILE</span></span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+<section id="plot-mapping-quality-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="plot-mapping-quality-distribution"><em>Plot: Mapping Quality Distribution</em></h2>
+<p><img src="mapping_quality_distribution.png" class="img-fluid"><br>
+<em>Figure: Example plot showing mapping quality distribution.</em></p>
+<hr>
+</section>
+</section>
+<section id="step-5-run-and-configure-qualimap-for-bamqc-analysis" class="level1">
+<h1>Step 5: Run and Configure Qualimap for BAMQC Analysis</h1>
+<section id="set-up-r-environment-for-plotting-with-qualimap" class="level2">
+<h2 class="anchored" data-anchor-id="set-up-r-environment-for-plotting-with-qualimap">Set Up R Environment for Plotting with Qualimap</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/R_libs</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> ~/.Rprofile</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>In R:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"XML"</span>, <span class="at">lib =</span> <span class="st">"~/R_libs"</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"optparse"</span>, <span class="at">lib =</span> <span class="st">"~/R_libs"</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"BiocManager"</span>, <span class="at">lib =</span> <span class="st">"~/R_libs"</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"NOISeq"</span>, <span class="at">lib =</span> <span class="st">"~/R_libs"</span>, <span class="at">force =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"Biobase"</span>, <span class="at">lib =</span> <span class="st">"~/R_libs"</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"getopt"</span>, <span class="at">lib =</span> <span class="st">"~/R_libs"</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">q</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Set .libPaths() to local library in .Rprofile:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> ~/.Rprofile</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Add this line:</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="ex">.libPaths</span><span class="er">(</span><span class="st">"/home/group.kurse/qbius030/R_libs"</span><span class="kw">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Check library path in R:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.libPaths</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="create-and-submit-a-slurm-script-for-bamqc-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="create-and-submit-a-slurm-script-for-bamqc-analysis">Create and Submit a SLURM Script for BAMQC Analysis</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --ntasks-per-node=8</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=10gb</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=01:00:00</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account=UniKoeln</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=/home/group.kurse/qbius030/Practical_Day_1/bamqc/bamqc.out</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=/home/group.kurse/qbius030/Practical_Day_1/bamqc/bamqc.err</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load qualimap</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="va">BAM_DIR</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/Practical_Day_1/mapping"</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="va">BAMQC_DIR</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/Practical_Day_1/bamqc"</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">$BAMQC_DIR</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> BAM_FILE <span class="kw">in</span> <span class="va">$BAM_DIR</span>/<span class="pp">*</span>.sorted.bam<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>  <span class="va">SAMPLE_NAME</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">$BAM_FILE</span> .sorted.bam<span class="va">)</span></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>  <span class="va">QUALIMAP_OUTPUT_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">$BAMQC_DIR</span><span class="st">/</span><span class="va">$SAMPLE_NAME</span><span class="st">"</span></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Running Qualimap BAMQC for </span><span class="va">$SAMPLE_NAME</span><span class="st">"</span></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>  <span class="ex">qualimap</span> bamqc <span class="at">-bam</span> <span class="va">$BAM_FILE</span> <span class="at">-outdir</span> <span class="va">$QUALIMAP_OUTPUT_DIR</span> <span class="at">-outformat</span> HTML <span class="at">-outfile</span> <span class="st">"</span><span class="va">${SAMPLE_NAME}</span><span class="st">_report.html"</span></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a><span class="va">INPUT_GROUPS_FILE</span><span class="op">=</span><span class="st">"</span><span class="va">$BAMQC_DIR</span><span class="st">/input_groups.txt"</span></span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-f</span> <span class="va">$INPUT_GROUPS_FILE</span></span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Creating input groups file for Multi-BAMQC"</span></span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> BAMQC_OUTPUT_DIR <span class="kw">in</span> <span class="va">$BAMQC_DIR</span>/<span class="pp">*</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="bu">[</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$BAMQC_OUTPUT_DIR</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>    <span class="va">SAMPLE_NAME</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">$BAMQC_OUTPUT_DIR)</span></span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="at">-e</span> <span class="st">"</span><span class="va">${SAMPLE_NAME}</span><span class="st">\t</span><span class="va">${BAMQC_OUTPUT_DIR}</span><span class="st">\t1"</span> <span class="op">&gt;&gt;</span> <span class="va">$INPUT_GROUPS_FILE</span></span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a>  <span class="cf">fi</span></span>
+<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a><span class="va">MULTIBAMQC_DIR</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/Practical_Day_1/bamqc/multibamqc"</span></span>
+<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">$MULTIBAMQC_DIR</span></span>
+<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Running Qualimap Multi-BAMQC"</span></span>
+<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a><span class="ex">qualimap</span> multi-bamqc <span class="at">-d</span> <span class="va">$INPUT_GROUPS_FILE</span> <span class="at">-outdir</span> <span class="va">$MULTIBAMQC_DIR</span> <span class="at">-outformat</span> PDF</span>
+<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-41"><a href="#cb25-41" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Qualimap analysis complete. Reports saved in </span><span class="va">$MULTIBAMQC_DIR</span><span class="st">."</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>View results using Firefox:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /home/group.kurse/qbius030/Practical_Day_1/bamqc/multibamqc</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="ex">firefox</span> report.pdf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="plot-qualimap-coverage-plot" class="level2">
+<h2 class="anchored" data-anchor-id="plot-qualimap-coverage-plot"><em>Plot: Qualimap Coverage Plot</em></h2>
+<p><img src="qualimap_coverage_plot.png" class="img-fluid"><br>
+<em>Figure: Example Qualimap coverage plot.</em></p>
+<hr>
+</section>
+</section>
+<section id="wrapping-up-practical-day-one" class="level1">
+<h1>Wrapping Up Practical Day One</h1>
+<p>Thank you for your active participation today! 🎉<br>
+Great job on tackling today’s challenges—we hope you found it engaging and insightful.<br>
+See you next week for more exciting learning and discoveries! Keep practicing and exploring until then! 🚀</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/tahirali-biomics\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2025 Dr.&nbsp;Tahir Ali</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Built with <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
