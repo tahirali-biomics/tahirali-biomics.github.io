@@ -1,129 +1,143 @@
 [
   {
-    "objectID": "teaching/practical_day1.html",
-    "href": "teaching/practical_day1.html",
+    "objectID": "teaching/tutorials/practical_day1.html",
+    "href": "teaching/tutorials/practical_day1.html",
     "title": "Practical Day 1: FASTQ to VCF - Part 1",
     "section": "",
     "text": "Access the HPC (using MobaXterm on Windows or Terminal on Mac/Linux).\nExplore raw FASTQ read files and understand the structure of FASTQ data.\nInstall new tools, set environment variables, or load pre-installed tools on the HPC system.\nCheck the quality of FASTQ reads using tools like FASTQC and interpret the output statistics.\nTrim FASTQ reads to remove adapters or low-quality bases using appropriate tools.\nWrite a script (bash/python, etc.) to automate workflows, such as running commands on multiple files in a for loop, and submit jobs to an HPC system using SLURM SBATCH scheduling."
   },
   {
-    "objectID": "teaching/practical_day1.html#connect-to-the-hpc",
-    "href": "teaching/practical_day1.html#connect-to-the-hpc",
+    "objectID": "teaching/tutorials/practical_day1.html#connect-to-the-hpc-ramses",
+    "href": "teaching/tutorials/practical_day1.html#connect-to-the-hpc-ramses",
     "title": "Practical Day 1: FASTQ to VCF - Part 1",
-    "section": "Connect to the HPC",
-    "text": "Connect to the HPC\nFor Windows users: Use MobaXterm. For Mac/Linux users: Use the Terminal application.\nLog in to the HPC cluster using your login credentials.\nssh -Y qbius030@cheops.rrz.uni-koeln.de\n# Replace 'qbius030' with your specific username.\n# Enter your password when prompted."
+    "section": "Connect to the HPC (RAMSES)",
+    "text": "Connect to the HPC (RAMSES)\nFor Windows users: Use MobaXterm. For Mac/Linux users: Use the Terminal application.\nLog in to the HPC cluster using your login credentials.\nssh -Y qbius030@ramses4.itcc.uni-koeln.de\n# Replace 'qbius030' with your specific username.\n# Enter your password when prompted."
   },
   {
-    "objectID": "teaching/practical_day1.html#check-your-current-directory",
-    "href": "teaching/practical_day1.html#check-your-current-directory",
+    "objectID": "teaching/tutorials/practical_day1.html#check-your-current-directory",
+    "href": "teaching/tutorials/practical_day1.html#check-your-current-directory",
     "title": "Practical Day 1: FASTQ to VCF - Part 1",
     "section": "Check Your Current Directory",
     "text": "Check Your Current Directory\npwd\nIf you are not in your home directory, navigate to it:\ncd /home/group.kurse/qbius030/\n# Replace 'qbius030' with your specific username."
   },
   {
-    "objectID": "teaching/practical_day1.html#copy-raw-data-to-your-home-directory",
-    "href": "teaching/practical_day1.html#copy-raw-data-to-your-home-directory",
+    "objectID": "teaching/tutorials/practical_day1.html#copy-raw-data-to-your-home-directory",
+    "href": "teaching/tutorials/practical_day1.html#copy-raw-data-to-your-home-directory",
     "title": "Practical Day 1: FASTQ to VCF - Part 1",
     "section": "Copy Raw Data to Your Home Directory",
     "text": "Copy Raw Data to Your Home Directory\ncp -r /scratch/tali/Practical_Day_1/sample_project_data ."
   },
   {
-    "objectID": "teaching/practical_day1.html#create-a-directory-for-analysis",
-    "href": "teaching/practical_day1.html#create-a-directory-for-analysis",
+    "objectID": "teaching/tutorials/practical_day1.html#create-a-directory-for-analysis",
+    "href": "teaching/tutorials/practical_day1.html#create-a-directory-for-analysis",
     "title": "Practical Day 1: FASTQ to VCF - Part 1",
     "section": "Create a Directory for Analysis",
     "text": "Create a Directory for Analysis\nmkdir -p Practical_Day_1/{fastqc,trimming,mapping,bamqc}\n\nfastqc: for storing quality control results of fastq files.\ntrimming: for storing trimmed read files.\nmapping: for storing read mapping outputs.\nbamqc: for storing quality control results of bam files."
   },
   {
-    "objectID": "teaching/practical_day1.html#plot-fastq-read-quality-after-running-fastqc",
-    "href": "teaching/practical_day1.html#plot-fastq-read-quality-after-running-fastqc",
+    "objectID": "teaching/tutorials/practical_day1.html#plot-fastq-read-quality",
+    "href": "teaching/tutorials/practical_day1.html#plot-fastq-read-quality",
     "title": "Practical Day 1: FASTQ to VCF - Part 1",
-    "section": "Plot: FASTQ Read Quality (after running FastQC)",
-    "text": "Plot: FASTQ Read Quality (after running FastQC)\n\nFigure: Example FastQC per-base quality plot."
+    "section": "Plot: FASTQ Read Quality",
+    "text": "Plot: FASTQ Read Quality\n\nFigure: Example FastQC per-base quality plot."
   },
   {
-    "objectID": "teaching/practical_day1.html#create-and-submit-a-slurm-script-for-fastqc-analysis",
-    "href": "teaching/practical_day1.html#create-and-submit-a-slurm-script-for-fastqc-analysis",
+    "objectID": "teaching/tutorials/practical_day1.html#create-and-submit-a-slurm-script-for-fastqc-analysis",
+    "href": "teaching/tutorials/practical_day1.html#create-and-submit-a-slurm-script-for-fastqc-analysis",
     "title": "Practical Day 1: FASTQ to VCF - Part 1",
     "section": "Create and Submit a SLURM Script for FASTQC Analysis",
     "text": "Create and Submit a SLURM Script for FASTQC Analysis\n#!/bin/bash -l\n\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=8\n#SBATCH --mem=10gb\n#SBATCH --time=01:00:00\n#SBATCH --account=UniKoeln\n#SBATCH --output=/home/group.kurse/qbius030/Practical_Day_1/fastqc/fastqc_repair.out\n#SBATCH --error=/home/group.kurse/qbius030/Practical_Day_1/fastqc/fastqc_repair.err\n\nmodule load bio/FastQC\n\nINPUT_DIR=\"/home/group.kurse/qbius030/sample_project_data/\"\nOUTPUT_DIR=\"/home/group.kurse/qbius030/Practical_Day_1/fastqc\"\nmkdir -p $OUTPUT_DIR\n\nfor FILE in $INPUT_DIR/*Chr4_repair_1.fastq.gz $INPUT_DIR/*Chr4_repair_2.fastq.gz; do\n    fastqc -o $OUTPUT_DIR \"$FILE\"\ndone"
   },
   {
-    "objectID": "teaching/practical_day1.html#plot-multiqc-summary-after-running-multiqc-on-fastqc-results",
-    "href": "teaching/practical_day1.html#plot-multiqc-summary-after-running-multiqc-on-fastqc-results",
+    "objectID": "teaching/tutorials/practical_day1.html#plot-multiqc-summary-after-running-multiqc-on-fastqc-results",
+    "href": "teaching/tutorials/practical_day1.html#plot-multiqc-summary-after-running-multiqc-on-fastqc-results",
     "title": "Practical Day 1: FASTQ to VCF - Part 1",
     "section": "Plot: MultiQC Summary (after running MultiQC on FastQC results)",
     "text": "Plot: MultiQC Summary (after running MultiQC on FastQC results)"
   },
   {
-    "objectID": "teaching/practical_day1.html#how-to-fix-the-dos-line-breaks-error-on-a-linux-cluster",
-    "href": "teaching/practical_day1.html#how-to-fix-the-dos-line-breaks-error-on-a-linux-cluster",
+    "objectID": "teaching/tutorials/practical_day1.html#how-to-fix-the-dos-line-breaks-error-on-a-linux-cluster",
+    "href": "teaching/tutorials/practical_day1.html#how-to-fix-the-dos-line-breaks-error-on-a-linux-cluster",
     "title": "Practical Day 1: FASTQ to VCF - Part 1",
     "section": "How to Fix the “DOS Line Breaks” Error on a Linux Cluster",
     "text": "How to Fix the “DOS Line Breaks” Error on a Linux Cluster\nIf you see:\nsbatch: error: Batch script contains DOS line breaks (\\r\\n)\nFix with:\ndos2unix fastqc.sh\ncat -v fastqc.sh  # Check for ^M characters\nCheck job status:\nsqueue -u qbius030\nView HTML output in browser:\nfirefox SRR1945697.Chr4_repair_paired_2_fastqc.html"
   },
   {
-    "objectID": "teaching/practical_day1.html#plot-read-length-distribution-before-and-after-trimming",
-    "href": "teaching/practical_day1.html#plot-read-length-distribution-before-and-after-trimming",
+    "objectID": "teaching/tutorials/practical_day1.html#plot-read-length-distribution-before-and-after-trimming",
+    "href": "teaching/tutorials/practical_day1.html#plot-read-length-distribution-before-and-after-trimming",
     "title": "Practical Day 1: FASTQ to VCF - Part 1",
     "section": "Plot: Read Length Distribution Before and After Trimming",
     "text": "Plot: Read Length Distribution Before and After Trimming\n\nFigure: Example plot showing read length distribution before and after trimming."
   },
   {
-    "objectID": "teaching/practical_day1.html#plot-mapping-quality-distribution",
-    "href": "teaching/practical_day1.html#plot-mapping-quality-distribution",
+    "objectID": "teaching/tutorials/practical_day1.html#plot-mapping-quality-distribution",
+    "href": "teaching/tutorials/practical_day1.html#plot-mapping-quality-distribution",
     "title": "Practical Day 1: FASTQ to VCF - Part 1",
     "section": "Plot: Mapping Quality Distribution",
     "text": "Plot: Mapping Quality Distribution\n\nFigure: Example plot showing mapping quality distribution."
   },
   {
-    "objectID": "teaching/practical_day1.html#set-up-r-environment-for-plotting-with-qualimap",
-    "href": "teaching/practical_day1.html#set-up-r-environment-for-plotting-with-qualimap",
+    "objectID": "teaching/tutorials/practical_day1.html#set-up-r-environment-for-plotting-with-qualimap",
+    "href": "teaching/tutorials/practical_day1.html#set-up-r-environment-for-plotting-with-qualimap",
     "title": "Practical Day 1: FASTQ to VCF - Part 1",
     "section": "Set Up R Environment for Plotting with Qualimap",
     "text": "Set Up R Environment for Plotting with Qualimap\nmkdir -p ~/R_libs\ntouch ~/.Rprofile\nIn R:\ninstall.packages(\"XML\", lib = \"~/R_libs\")\ninstall.packages(\"optparse\", lib = \"~/R_libs\")\ninstall.packages(\"BiocManager\", lib = \"~/R_libs\")\nBiocManager::install(\"NOISeq\", lib = \"~/R_libs\", force = TRUE)\nBiocManager::install(\"Biobase\", lib = \"~/R_libs\")\ninstall.packages(\"getopt\", lib = \"~/R_libs\")\nq()\nSet .libPaths() to local library in .Rprofile:\nnano ~/.Rprofile\n# Add this line:\n.libPaths(\"/home/group.kurse/qbius030/R_libs\")\nCheck library path in R:\n.libPaths()"
   },
   {
-    "objectID": "teaching/practical_day1.html#create-and-submit-a-slurm-script-for-bamqc-analysis",
-    "href": "teaching/practical_day1.html#create-and-submit-a-slurm-script-for-bamqc-analysis",
+    "objectID": "teaching/tutorials/practical_day1.html#create-and-submit-a-slurm-script-for-bamqc-analysis",
+    "href": "teaching/tutorials/practical_day1.html#create-and-submit-a-slurm-script-for-bamqc-analysis",
     "title": "Practical Day 1: FASTQ to VCF - Part 1",
     "section": "Create and Submit a SLURM Script for BAMQC Analysis",
     "text": "Create and Submit a SLURM Script for BAMQC Analysis\n#!/bin/bash -l\n\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=8\n#SBATCH --mem=10gb\n#SBATCH --time=01:00:00\n#SBATCH --account=UniKoeln\n#SBATCH --output=/home/group.kurse/qbius030/Practical_Day_1/bamqc/bamqc.out\n#SBATCH --error=/home/group.kurse/qbius030/Practical_Day_1/bamqc/bamqc.err\n\nmodule load qualimap\n\nBAM_DIR=\"/home/group.kurse/qbius030/Practical_Day_1/mapping\"\nBAMQC_DIR=\"/home/group.kurse/qbius030/Practical_Day_1/bamqc\"\nmkdir -p $BAMQC_DIR\n\nfor BAM_FILE in $BAM_DIR/*.sorted.bam; do\n  SAMPLE_NAME=$(basename $BAM_FILE .sorted.bam)\n  QUALIMAP_OUTPUT_DIR=\"$BAMQC_DIR/$SAMPLE_NAME\"\n  echo \"Running Qualimap BAMQC for $SAMPLE_NAME\"\n  qualimap bamqc -bam $BAM_FILE -outdir $QUALIMAP_OUTPUT_DIR -outformat HTML -outfile \"${SAMPLE_NAME}_report.html\"\ndone\n\nINPUT_GROUPS_FILE=\"$BAMQC_DIR/input_groups.txt\"\nrm -f $INPUT_GROUPS_FILE\n\necho \"Creating input groups file for Multi-BAMQC\"\nfor BAMQC_OUTPUT_DIR in $BAMQC_DIR/*; do\n  if [ -d \"$BAMQC_OUTPUT_DIR\" ]; then\n    SAMPLE_NAME=$(basename $BAMQC_OUTPUT_DIR)\n    echo -e \"${SAMPLE_NAME}\\t${BAMQC_OUTPUT_DIR}\\t1\" &gt;&gt; $INPUT_GROUPS_FILE\n  fi\ndone\n\nMULTIBAMQC_DIR=\"/home/group.kurse/qbius030/Practical_Day_1/bamqc/multibamqc\"\nmkdir -p $MULTIBAMQC_DIR\n\necho \"Running Qualimap Multi-BAMQC\"\nqualimap multi-bamqc -d $INPUT_GROUPS_FILE -outdir $MULTIBAMQC_DIR -outformat PDF\n\necho \"Qualimap analysis complete. Reports saved in $MULTIBAMQC_DIR.\"\nView results using Firefox:\ncd /home/group.kurse/qbius030/Practical_Day_1/bamqc/multibamqc\nfirefox report.pdf"
   },
   {
-    "objectID": "teaching/practical_day1.html#plot-qualimap-coverage-plot",
-    "href": "teaching/practical_day1.html#plot-qualimap-coverage-plot",
+    "objectID": "teaching/tutorials/practical_day1.html#plot-qualimap-coverage-plot",
+    "href": "teaching/tutorials/practical_day1.html#plot-qualimap-coverage-plot",
     "title": "Practical Day 1: FASTQ to VCF - Part 1",
     "section": "Plot: Qualimap Coverage Plot",
     "text": "Plot: Qualimap Coverage Plot\n\nFigure: Example Qualimap coverage plot."
   },
   {
-    "objectID": "teaching/climate-explorer-app.html",
-    "href": "teaching/climate-explorer-app.html",
+    "objectID": "teaching/apps/interactive.html",
+    "href": "teaching/apps/interactive.html",
+    "title": "Interactive Apps",
+    "section": "",
+    "text": "Welcome to my collection of interactive Shiny apps designed to bring the dynamics of population genetics and ecological genomics to life. These tools move beyond static equations, allowing students and researchers to experience evolutionary processes in real time. Through simulations of Hardy–Weinberg equilibrium, genetic drift, selection, and FST, you can build an intuitive understanding of how chance, population size, and natural selection shape genetic diversity—the foundation of modern evolutionary biology.\nAt the same time, the apps highlight the ecological dimension of genomics, showing how environmental variables, geography, and climate interact with genetic variation and adaptation. By linking genetic patterns to ecological context, they reveal the forces that drive biodiversity and help explain how populations respond to changing environments."
+  },
+  {
+    "objectID": "teaching/apps/interactive.html#explore-experiment-and-discover-how-simple-evolutionary-rules-combined-with-ecological-complexity-generate-the-remarkable-patterns-of-life-we-observe-in-nature.",
+    "href": "teaching/apps/interactive.html#explore-experiment-and-discover-how-simple-evolutionary-rules-combined-with-ecological-complexity-generate-the-remarkable-patterns-of-life-we-observe-in-nature.",
+    "title": "Interactive Apps",
+    "section": "Explore, experiment, and discover how simple evolutionary rules, combined with ecological complexity, generate the remarkable patterns of life we observe in nature.",
+    "text": "Explore, experiment, and discover how simple evolutionary rules, combined with ecological complexity, generate the remarkable patterns of life we observe in nature.\n\nHWE Simulator\nSimulate genotype and allele frequencies under Hardy-Weinberg equilibrium. Explore how population size, replication, and real or simulated data affect genetic expectations and the stability of genetic variation.\nGenetic Drift Simulator\nSimulate how random genetic drift changes allele frequencies over time. Experiment with population size, generations, and initial frequencies to see how chance can lead to fixation or loss—even without selection.\nDandelion Allele Frequency App\nSimulate and analyze the genetic basis of bitterness in dandelion greens. Explore how dominance, Hardy-Weinberg equilibrium, and sampling affect the frequency of bitter and mild plants, and compare observed and expected results.\nFST Simulator\nVisualize how genetic differentiation (FST) evolves between populations under drift and selection. Adjust parameters and see how population structure emerges from evolutionary forces.\nHet-FST Simulator\nExplore how population divergence shapes genetic diversity and FST in real time.\nClimate Explorer\nExplore our Climate Explorer app to interact with bioclimatic data across Arabidopsis populations and custom locations."
+  },
+  {
+    "objectID": "teaching/apps/het_fst_app.html",
+    "href": "teaching/apps/het_fst_app.html",
+    "title": "Het-FST Interactive App",
+    "section": "",
+    "text": "Explore how genetic diversity and differentiation arise in populations!\nThis interactive app lets you experiment with allele frequencies and see, in real time, how heterozygosity (H) and FST change as populations diverge or become more similar.\nBy adjusting the sliders, you can discover the mathematical beauty behind population genetics and develop an intuition for how evolutionary forces shape genetic variation.\nUse this tool to test your predictions, visualize key concepts, and deepen your understanding of how genetic structure evolves.\nOpen in a new tab\n← Back to Interactive Apps"
+  },
+  {
+    "objectID": "teaching/apps/het_fst_app.html#visualizing-heterozygosity-and-fst-for-two-populations",
+    "href": "teaching/apps/het_fst_app.html#visualizing-heterozygosity-and-fst-for-two-populations",
+    "title": "Het-FST Interactive App",
+    "section": "",
+    "text": "Explore how genetic diversity and differentiation arise in populations!\nThis interactive app lets you experiment with allele frequencies and see, in real time, how heterozygosity (H) and FST change as populations diverge or become more similar.\nBy adjusting the sliders, you can discover the mathematical beauty behind population genetics and develop an intuition for how evolutionary forces shape genetic variation.\nUse this tool to test your predictions, visualize key concepts, and deepen your understanding of how genetic structure evolves.\nOpen in a new tab\n← Back to Interactive Apps"
+  },
+  {
+    "objectID": "teaching/apps/AF_dandelion.html",
+    "href": "teaching/apps/AF_dandelion.html",
+    "title": "Dandelion Allele Frequency App",
+    "section": "",
+    "text": "Simulate and analyze the genetic basis of bitterness in dandelion greens.\nThis app lets you explore how dominance, Hardy-Weinberg equilibrium, and sampling affect the frequency of bitter and mild dandelions in a population, and helps you understand why observed and expected frequencies may differ in real-world samples.\nOpen in a new tab\n← Back to Interactive Apps\n\nThis interactive app allows you to: - Set the frequency of the mildness allele and sample size, and enter observed counts. - Calculate expected and observed frequencies of bitter and mild plants under Hardy-Weinberg equilibrium. - Compare your results and explore possible explanations for discrepancies. - Build intuition for how dominance, selection, and sampling affect genetic variation in natural populations."
+  },
+  {
+    "objectID": "teaching/apps/climate-explorer-app.html",
+    "href": "teaching/apps/climate-explorer-app.html",
     "title": "Climate Explorer: Bioclimatic Data App",
     "section": "",
     "text": "Climate Explorer: Bioclimatic Data App\nThis interactive app lets you extract and visualize WorldClim bioclimatic variables for any set of sample coordinates.\nYou can upload your own CSV file or use the provided example data (Arabidopsis thaliana accessions from Spain and Sweden).\nPlot your samples on a map, color them by any climate variable, and explore correlations among all extracted variables.\nOpen in a new tab\n← Back to Interactive Apps\n\nFeatures: - Upload a CSV of sample coordinates or use example data. - Extract 19 WorldClim bioclimatic variables for each sample. - Visualize samples on a map, colored by any selected climate variable. - Explore a correlation heatmap of all climate variables, with full variable names. - Download the full data table as a CSV."
-  },
-  {
-    "objectID": "teaching/drift-app.html",
-    "href": "teaching/drift-app.html",
-    "title": "Genetic Drift Simulator",
-    "section": "",
-    "text": "Explore how random genetic drift shapes allele frequencies over time in finite populations.\nThis interactive app lets you simulate the fate of an allele under drift, experiment with population size, number of generations, initial allele frequency, and number of replicates, and see how randomness can lead to fixation or loss—even in the absence of selection.\nOpen in a new tab\n← Back to Interactive Apps\n\nThis interactive app allows you to: - Simulate allele frequency changes under genetic drift for different population sizes and generations. - Visualize the stochastic trajectories of multiple replicates. - Observe how population size and initial frequency affect the probability of fixation or loss. - Build intuition for the role of chance in evolution and the importance of genetic drift in small populations."
-  },
-  {
-    "objectID": "teaching/hwe_app.html",
-    "href": "teaching/hwe_app.html",
-    "title": "HWE Interactive App",
-    "section": "",
-    "text": "Simulate genotype and allele frequencies under Hardy-Weinberg equilibrium and explore how population size, replication, and real or simulated data affect genetic expectations.\nOpen in a new tab\n← Back to Interactive Apps\n\nThis interactive app allows you to: - Simulate genotype and allele frequencies for different population sizes and replicates. - Compare observed and expected frequencies under Hardy-Weinberg equilibrium. - Upload your own SNP data or use sample data for exploration. - Visualize results and discuss how genetic drift and sample size affect Hardy-Weinberg expectations."
-  },
-  {
-    "objectID": "teaching/fst_app.html",
-    "href": "teaching/fst_app.html",
-    "title": "FST Interactive App",
-    "section": "",
-    "text": "Explore population‐genetic differentiation through real or simulated data.\nOpen in a new tab\n← Back to Interactive Apps"
   },
   {
     "objectID": "publications.html",
@@ -346,43 +360,29 @@
     ]
   },
   {
-    "objectID": "teaching/interactive.html",
-    "href": "teaching/interactive.html",
-    "title": "Interactive Apps",
+    "objectID": "teaching/apps/drift-app.html",
+    "href": "teaching/apps/drift-app.html",
+    "title": "Genetic Drift Simulator",
     "section": "",
-    "text": "Welcome to my collection of interactive Shiny apps designed to bring the dynamics of population genetics and ecological genomics to life. These tools move beyond static equations, allowing students and researchers to experience evolutionary processes in real time. Through simulations of Hardy–Weinberg equilibrium, genetic drift, selection, and FST, you can build an intuitive understanding of how chance, population size, and natural selection shape genetic diversity—the foundation of modern evolutionary biology.\nAt the same time, the apps highlight the ecological dimension of genomics, showing how environmental variables, geography, and climate interact with genetic variation and adaptation. By linking genetic patterns to ecological context, they reveal the forces that drive biodiversity and help explain how populations respond to changing environments."
+    "text": "Explore how random genetic drift shapes allele frequencies over time in finite populations.\nThis interactive app lets you simulate the fate of an allele under drift, experiment with population size, number of generations, initial allele frequency, and number of replicates, and see how randomness can lead to fixation or loss—even in the absence of selection.\nOpen in a new tab\n← Back to Interactive Apps\n\nThis interactive app allows you to: - Simulate allele frequency changes under genetic drift for different population sizes and generations. - Visualize the stochastic trajectories of multiple replicates. - Observe how population size and initial frequency affect the probability of fixation or loss. - Build intuition for the role of chance in evolution and the importance of genetic drift in small populations."
   },
   {
-    "objectID": "teaching/interactive.html#explore-experiment-and-discover-how-simple-evolutionary-rules-combined-with-ecological-complexity-generate-the-remarkable-patterns-of-life-we-observe-in-nature.",
-    "href": "teaching/interactive.html#explore-experiment-and-discover-how-simple-evolutionary-rules-combined-with-ecological-complexity-generate-the-remarkable-patterns-of-life-we-observe-in-nature.",
-    "title": "Interactive Apps",
-    "section": "Explore, experiment, and discover how simple evolutionary rules, combined with ecological complexity, generate the remarkable patterns of life we observe in nature.",
-    "text": "Explore, experiment, and discover how simple evolutionary rules, combined with ecological complexity, generate the remarkable patterns of life we observe in nature.\n\nHWE Simulator\nSimulate genotype and allele frequencies under Hardy-Weinberg equilibrium. Explore how population size, replication, and real or simulated data affect genetic expectations and the stability of genetic variation.\nGenetic Drift Simulator\nSimulate how random genetic drift changes allele frequencies over time. Experiment with population size, generations, and initial frequencies to see how chance can lead to fixation or loss—even without selection.\nDandelion Allele Frequency App\nSimulate and analyze the genetic basis of bitterness in dandelion greens. Explore how dominance, Hardy-Weinberg equilibrium, and sampling affect the frequency of bitter and mild plants, and compare observed and expected results.\nFST Simulator\nVisualize how genetic differentiation (FST) evolves between populations under drift and selection. Adjust parameters and see how population structure emerges from evolutionary forces.\nHet-FST Simulator\nExplore how population divergence shapes genetic diversity and FST in real time.\nClimate Explorer\nExplore our Climate Explorer app to interact with bioclimatic data across Arabidopsis populations and custom locations."
-  },
-  {
-    "objectID": "teaching/het_fst_app.html",
-    "href": "teaching/het_fst_app.html",
-    "title": "Het-FST Interactive App",
+    "objectID": "teaching/apps/fst_app.html",
+    "href": "teaching/apps/fst_app.html",
+    "title": "FST Interactive App",
     "section": "",
-    "text": "Explore how genetic diversity and differentiation arise in populations!\nThis interactive app lets you experiment with allele frequencies and see, in real time, how heterozygosity (H) and FST change as populations diverge or become more similar.\nBy adjusting the sliders, you can discover the mathematical beauty behind population genetics and develop an intuition for how evolutionary forces shape genetic variation.\nUse this tool to test your predictions, visualize key concepts, and deepen your understanding of how genetic structure evolves.\nOpen in a new tab\n← Back to Interactive Apps"
+    "text": "Explore population‐genetic differentiation through real or simulated data.\nOpen in a new tab\n← Back to Interactive Apps"
   },
   {
-    "objectID": "teaching/het_fst_app.html#visualizing-heterozygosity-and-fst-for-two-populations",
-    "href": "teaching/het_fst_app.html#visualizing-heterozygosity-and-fst-for-two-populations",
-    "title": "Het-FST Interactive App",
+    "objectID": "teaching/apps/hwe_app.html",
+    "href": "teaching/apps/hwe_app.html",
+    "title": "HWE Interactive App",
     "section": "",
-    "text": "Explore how genetic diversity and differentiation arise in populations!\nThis interactive app lets you experiment with allele frequencies and see, in real time, how heterozygosity (H) and FST change as populations diverge or become more similar.\nBy adjusting the sliders, you can discover the mathematical beauty behind population genetics and develop an intuition for how evolutionary forces shape genetic variation.\nUse this tool to test your predictions, visualize key concepts, and deepen your understanding of how genetic structure evolves.\nOpen in a new tab\n← Back to Interactive Apps"
+    "text": "Simulate genotype and allele frequencies under Hardy-Weinberg equilibrium and explore how population size, replication, and real or simulated data affect genetic expectations.\nOpen in a new tab\n← Back to Interactive Apps\n\nThis interactive app allows you to: - Simulate genotype and allele frequencies for different population sizes and replicates. - Compare observed and expected frequencies under Hardy-Weinberg equilibrium. - Upload your own SNP data or use sample data for exploration. - Visualize results and discuss how genetic drift and sample size affect Hardy-Weinberg expectations."
   },
   {
-    "objectID": "teaching/AF_dandelion.html",
-    "href": "teaching/AF_dandelion.html",
-    "title": "Dandelion Allele Frequency App",
-    "section": "",
-    "text": "Simulate and analyze the genetic basis of bitterness in dandelion greens.\nThis app lets you explore how dominance, Hardy-Weinberg equilibrium, and sampling affect the frequency of bitter and mild dandelions in a population, and helps you understand why observed and expected frequencies may differ in real-world samples.\nOpen in a new tab\n← Back to Interactive Apps\n\nThis interactive app allows you to: - Set the frequency of the mildness allele and sample size, and enter observed counts. - Calculate expected and observed frequencies of bitter and mild plants under Hardy-Weinberg equilibrium. - Compare your results and explore possible explanations for discrepancies. - Build intuition for how dominance, selection, and sampling affect genetic variation in natural populations."
-  },
-  {
-    "objectID": "teaching/Hands-on Genomics Tutorials.html",
-    "href": "teaching/Hands-on Genomics Tutorials.html",
+    "objectID": "teaching/tutorials/Hands-on Genomics Tutorials.html",
+    "href": "teaching/tutorials/Hands-on Genomics Tutorials.html",
     "title": "Hands-on Genomics Tutorials",
     "section": "",
     "text": "Welcome to the collection of hands-on bioinformatics exercises for the course.\nEach exercise is designed to help you build practical skills in genomics, data analysis, and computational biology, using real data and modern tools.\nYou can browse, read, and copy-paste code directly from each exercise page.\n\n\nPractical Day 1: FASTQ to VCF - Part 1\nFrom raw sequencing data to variant calls: learn how to access the HPC, explore FASTQ files, run quality control, trim reads, and map to a reference genome using real tools and scripts."
