@@ -4,98 +4,49 @@
     "href": "teaching/tutorials/practical_day1.html",
     "title": "Practical Day 1: FASTQ to VCF - Part 1",
     "section": "",
-    "text": "Access the HPC (using MobaXterm on Windows or Terminal on Mac/Linux).\nExplore raw FASTQ read files and understand the structure of FASTQ data.\nInstall new tools, set environment variables, or load pre-installed tools on the HPC system.\nCheck the quality of FASTQ reads using tools like FASTQC and interpret the output statistics.\nTrim FASTQ reads to remove adapters or low-quality bases using appropriate tools.\nWrite a script (bash/python, etc.) to automate workflows, such as running commands on multiple files in a for loop, and submit jobs to an HPC system using SLURM SBATCH scheduling."
+    "text": "Access the HPC (using MobaXterm on Windows or Terminal on Mac/Linux).\nExplore raw FASTQ read files and understand the structure of FASTQ data.\nInstall new tools, set environment variables, or load pre-installed tools on the HPC system.\nCheck the quality of FASTQ reads using tools like FASTQC and interpret the output statistics.\nTrim FASTQ reads to remove adapters or low-quality bases using appropriate tools.\nWrite a script (bash/python, etc.) to automate workflows, such as running commands on multiple files in a for loop, and submit jobs to an HPC system using SLURM SBATCH scheduling.\n\n\n\n\n\nFASTQC / MULTIQC: For quality control of FASTQ reads.\nTrimmomatic / fastp: For read trimming.\nBWA: For mapping reads to a reference genome.\nSAMTOOLS: For conversion of SAM to BAM files.\nQUALIMAP: For quality control of BAM files."
   },
   {
-    "objectID": "teaching/tutorials/practical_day1.html#connect-to-the-hpc-ramses",
-    "href": "teaching/tutorials/practical_day1.html#connect-to-the-hpc-ramses",
+    "objectID": "teaching/tutorials/practical_day1.html#tools-to-be-used",
+    "href": "teaching/tutorials/practical_day1.html#tools-to-be-used",
     "title": "Practical Day 1: FASTQ to VCF - Part 1",
-    "section": "Connect to the HPC (RAMSES)",
-    "text": "Connect to the HPC (RAMSES)\nFor Windows users: Use MobaXterm. For Mac/Linux users: Use the Terminal application.\nLog in to the HPC cluster using your login credentials.\nssh -Y qbius030@ramses4.itcc.uni-koeln.de\n# Replace 'qbius030' with your specific username.\n# Enter your password when prompted."
+    "section": "",
+    "text": "FASTQC / MULTIQC: For quality control of FASTQ reads.\nTrimmomatic / fastp: For read trimming.\nBWA: For mapping reads to a reference genome.\nSAMTOOLS: For conversion of SAM to BAM files.\nQUALIMAP: For quality control of BAM files."
   },
   {
-    "objectID": "teaching/tutorials/practical_day1.html#check-your-current-directory",
-    "href": "teaching/tutorials/practical_day1.html#check-your-current-directory",
+    "objectID": "teaching/tutorials/practical_day1.html#connect-to-the-hpc",
+    "href": "teaching/tutorials/practical_day1.html#connect-to-the-hpc",
     "title": "Practical Day 1: FASTQ to VCF - Part 1",
-    "section": "Check Your Current Directory",
-    "text": "Check Your Current Directory\npwd\nIf you are not in your home directory, navigate to it:\ncd /home/group.kurse/qbius030/\n# Replace 'qbius030' with your specific username."
+    "section": "Connect to the HPC",
+    "text": "Connect to the HPC\nFor Windows users: Use MobaXterm. For Mac/Linux users: Use the Terminal application.\nLog in to the HPC cluster using your login credentials.\nssh -Y qbius030@@ramses1.itcc.uni-koeln.de\n# Replace 'qbius030' with your specific username.\n# Enter passphrase for key '/Users/tahirali/.ssh/ramses_key', if prompted:\n# Duo two-factor login for qbius030\nCheck Your Current Directory\npwd\n\nIf you are not in your home directory, navigate to it:\n\ncd /home/group.kurse/qbius030/\n# Replace 'qbius030' with your specific username.\nCopy Raw Data to Your Home Directory\ncp -r /scratch/tali/Practical_Day_1/sample_project_data .\nCreate a Directory for Analysis\nmkdir -p Practical_Day_1/{fastqc,trimming,mapping,bamqc}\n\nfastqc: for storing quality control results of fastq files.\ntrimming: for storing trimmed read files.\nmapping: for storing read mapping outputs.\nbamqc: for storing quality control results of bam files."
   },
   {
-    "objectID": "teaching/tutorials/practical_day1.html#copy-raw-data-to-your-home-directory",
-    "href": "teaching/tutorials/practical_day1.html#copy-raw-data-to-your-home-directory",
+    "objectID": "teaching/tutorials/practical_day1.html#exploring-contents-of-fastq-file",
+    "href": "teaching/tutorials/practical_day1.html#exploring-contents-of-fastq-file",
     "title": "Practical Day 1: FASTQ to VCF - Part 1",
-    "section": "Copy Raw Data to Your Home Directory",
-    "text": "Copy Raw Data to Your Home Directory\ncp -r /scratch/tali/Practical_Day_1/sample_project_data ."
+    "section": "Exploring Contents of FASTQ File",
+    "text": "Exploring Contents of FASTQ File\nNavigate to the location of the raw FASTQ files:\ncd /home/group.kurse/qbius030/sample_project_data/fastq\nExample 1: View the first 8 lines of a FASTQ file to examine its structure.\nzcat SRR1945488.Chr4_repair_1.fastq.gz | head -n 8\nExample 2: Count the number of reads in a compressed FASTQ file.\nzcat SRR1945488.Chr4_repair_1.fastq.gz | wc -l\n# Divide by 4 to get the number of reads.\nExample 3: Print the second line of each read (sequence line) from a compressed FASTQ file.\nzcat SRR1945488.Chr4_repair_1.fastq.gz | awk 'NR % 4 == 2 {print;}' | less\nExample 4: Print the first 10 sequences (second line of each read) from a compressed FASTQ file.\nzcat SRR1945488.Chr4_repair_1.fastq.gz | awk 'NR % 4 == 2 {print;}' | head -n 10"
   },
   {
-    "objectID": "teaching/tutorials/practical_day1.html#create-a-directory-for-analysis",
-    "href": "teaching/tutorials/practical_day1.html#create-a-directory-for-analysis",
+    "objectID": "teaching/tutorials/practical_day1.html#quality-control-of-raw-fastq-reads-using-fastqc",
+    "href": "teaching/tutorials/practical_day1.html#quality-control-of-raw-fastq-reads-using-fastqc",
     "title": "Practical Day 1: FASTQ to VCF - Part 1",
-    "section": "Create a Directory for Analysis",
-    "text": "Create a Directory for Analysis\nmkdir -p Practical_Day_1/{fastqc,trimming,mapping,bamqc}\n\nfastqc: for storing quality control results of fastq files.\ntrimming: for storing trimmed read files.\nmapping: for storing read mapping outputs.\nbamqc: for storing quality control results of bam files."
+    "section": "Quality Control of Raw FASTQ Reads Using FastQC",
+    "text": "Quality Control of Raw FASTQ Reads Using FastQC\nCheck if required module is installed:\nmodule avail\nExample SLURM script for FastQC Analysis\n#!/bin/bash -l\n\n#SBATCH --job-name=fastqc\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=8\n#SBATCH --mem=10gb\n#SBATCH --time=01:00:00\n#SBATCH --account=UniKoeln\n#SBATCH --output=/home/group.kurse/qbius030/Practical_Day_1/fastqc/fastqc_repair.out\n#SBATCH --error=/home/group.kurse/qbius030/Practical_Day_1/fastqc/fastqc_repair.err\n\nmodule load bio/FastQC\n\nINPUT_DIR=\"/home/group.kurse/qbius030/sample_project_data/fastq\"\nOUTPUT_DIR=\"/home/group.kurse/qbius030/Practical_Day_1/fastqc\"\nmkdir -p $OUTPUT_DIR\n\nfor FILE in $INPUT_DIR/*Chr4_repair_1.fastq.gz $INPUT_DIR/*Chr4_repair_2.fastq.gz; do\n    fastqc -o $OUTPUT_DIR \"$FILE\"\ndone\nFixing the “DOS Line Breaks” Error on a HPC Cluster\n\nIf you see:\n\nsbatch: error: Batch script contains DOS line breaks (\\r\\n)\nFix with:\ndos2unix fastqc.sh\ncat -v fastqc.sh  # Check for ^M characters\nCheck job status:\nsqueue -u qbius030\nView HTML output in browser: Open the .html file with a web browser (adjust the path as needed):\nfirefox SRR1945488.Chr4_repair_paired_2_fastqc.html\n Figure: FastQC per-base quality plot"
   },
   {
-    "objectID": "teaching/tutorials/practical_day1.html#plot-fastq-read-quality",
-    "href": "teaching/tutorials/practical_day1.html#plot-fastq-read-quality",
+    "objectID": "teaching/tutorials/practical_day1.html#summarize-fastqc-results-with-multiqc",
+    "href": "teaching/tutorials/practical_day1.html#summarize-fastqc-results-with-multiqc",
     "title": "Practical Day 1: FASTQ to VCF - Part 1",
-    "section": "Plot: FASTQ Read Quality",
-    "text": "Plot: FASTQ Read Quality\n\nFigure: Example FastQC per-base quality plot."
-  },
-  {
-    "objectID": "teaching/tutorials/practical_day1.html#create-and-submit-a-slurm-script-for-fastqc-analysis",
-    "href": "teaching/tutorials/practical_day1.html#create-and-submit-a-slurm-script-for-fastqc-analysis",
-    "title": "Practical Day 1: FASTQ to VCF - Part 1",
-    "section": "Create and Submit a SLURM Script for FASTQC Analysis",
-    "text": "Create and Submit a SLURM Script for FASTQC Analysis\n#!/bin/bash -l\n\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=8\n#SBATCH --mem=10gb\n#SBATCH --time=01:00:00\n#SBATCH --account=UniKoeln\n#SBATCH --output=/home/group.kurse/qbius030/Practical_Day_1/fastqc/fastqc_repair.out\n#SBATCH --error=/home/group.kurse/qbius030/Practical_Day_1/fastqc/fastqc_repair.err\n\nmodule load bio/FastQC\n\nINPUT_DIR=\"/home/group.kurse/qbius030/sample_project_data/\"\nOUTPUT_DIR=\"/home/group.kurse/qbius030/Practical_Day_1/fastqc\"\nmkdir -p $OUTPUT_DIR\n\nfor FILE in $INPUT_DIR/*Chr4_repair_1.fastq.gz $INPUT_DIR/*Chr4_repair_2.fastq.gz; do\n    fastqc -o $OUTPUT_DIR \"$FILE\"\ndone"
-  },
-  {
-    "objectID": "teaching/tutorials/practical_day1.html#plot-multiqc-summary-after-running-multiqc-on-fastqc-results",
-    "href": "teaching/tutorials/practical_day1.html#plot-multiqc-summary-after-running-multiqc-on-fastqc-results",
-    "title": "Practical Day 1: FASTQ to VCF - Part 1",
-    "section": "Plot: MultiQC Summary (after running MultiQC on FastQC results)",
-    "text": "Plot: MultiQC Summary (after running MultiQC on FastQC results)"
-  },
-  {
-    "objectID": "teaching/tutorials/practical_day1.html#how-to-fix-the-dos-line-breaks-error-on-a-linux-cluster",
-    "href": "teaching/tutorials/practical_day1.html#how-to-fix-the-dos-line-breaks-error-on-a-linux-cluster",
-    "title": "Practical Day 1: FASTQ to VCF - Part 1",
-    "section": "How to Fix the “DOS Line Breaks” Error on a Linux Cluster",
-    "text": "How to Fix the “DOS Line Breaks” Error on a Linux Cluster\nIf you see:\nsbatch: error: Batch script contains DOS line breaks (\\r\\n)\nFix with:\ndos2unix fastqc.sh\ncat -v fastqc.sh  # Check for ^M characters\nCheck job status:\nsqueue -u qbius030\nView HTML output in browser:\nfirefox SRR1945697.Chr4_repair_paired_2_fastqc.html"
-  },
-  {
-    "objectID": "teaching/tutorials/practical_day1.html#plot-read-length-distribution-before-and-after-trimming",
-    "href": "teaching/tutorials/practical_day1.html#plot-read-length-distribution-before-and-after-trimming",
-    "title": "Practical Day 1: FASTQ to VCF - Part 1",
-    "section": "Plot: Read Length Distribution Before and After Trimming",
-    "text": "Plot: Read Length Distribution Before and After Trimming\n\nFigure: Example plot showing read length distribution before and after trimming."
+    "section": "Summarize FastQC Results with MultiQC",
+    "text": "Summarize FastQC Results with MultiQC\nmodule load bio/MultiQC/\ncd fastqc\nmultiqc .\n Figure: MultiQC Summary (after running MultiQC on FastQC results)"
   },
   {
     "objectID": "teaching/tutorials/practical_day1.html#plot-mapping-quality-distribution",
     "href": "teaching/tutorials/practical_day1.html#plot-mapping-quality-distribution",
     "title": "Practical Day 1: FASTQ to VCF - Part 1",
     "section": "Plot: Mapping Quality Distribution",
-    "text": "Plot: Mapping Quality Distribution\n\nFigure: Example plot showing mapping quality distribution."
-  },
-  {
-    "objectID": "teaching/tutorials/practical_day1.html#set-up-r-environment-for-plotting-with-qualimap",
-    "href": "teaching/tutorials/practical_day1.html#set-up-r-environment-for-plotting-with-qualimap",
-    "title": "Practical Day 1: FASTQ to VCF - Part 1",
-    "section": "Set Up R Environment for Plotting with Qualimap",
-    "text": "Set Up R Environment for Plotting with Qualimap\nmkdir -p ~/R_libs\ntouch ~/.Rprofile\nIn R:\ninstall.packages(\"XML\", lib = \"~/R_libs\")\ninstall.packages(\"optparse\", lib = \"~/R_libs\")\ninstall.packages(\"BiocManager\", lib = \"~/R_libs\")\nBiocManager::install(\"NOISeq\", lib = \"~/R_libs\", force = TRUE)\nBiocManager::install(\"Biobase\", lib = \"~/R_libs\")\ninstall.packages(\"getopt\", lib = \"~/R_libs\")\nq()\nSet .libPaths() to local library in .Rprofile:\nnano ~/.Rprofile\n# Add this line:\n.libPaths(\"/home/group.kurse/qbius030/R_libs\")\nCheck library path in R:\n.libPaths()"
-  },
-  {
-    "objectID": "teaching/tutorials/practical_day1.html#create-and-submit-a-slurm-script-for-bamqc-analysis",
-    "href": "teaching/tutorials/practical_day1.html#create-and-submit-a-slurm-script-for-bamqc-analysis",
-    "title": "Practical Day 1: FASTQ to VCF - Part 1",
-    "section": "Create and Submit a SLURM Script for BAMQC Analysis",
-    "text": "Create and Submit a SLURM Script for BAMQC Analysis\n#!/bin/bash -l\n\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=8\n#SBATCH --mem=10gb\n#SBATCH --time=01:00:00\n#SBATCH --account=UniKoeln\n#SBATCH --output=/home/group.kurse/qbius030/Practical_Day_1/bamqc/bamqc.out\n#SBATCH --error=/home/group.kurse/qbius030/Practical_Day_1/bamqc/bamqc.err\n\nmodule load qualimap\n\nBAM_DIR=\"/home/group.kurse/qbius030/Practical_Day_1/mapping\"\nBAMQC_DIR=\"/home/group.kurse/qbius030/Practical_Day_1/bamqc\"\nmkdir -p $BAMQC_DIR\n\nfor BAM_FILE in $BAM_DIR/*.sorted.bam; do\n  SAMPLE_NAME=$(basename $BAM_FILE .sorted.bam)\n  QUALIMAP_OUTPUT_DIR=\"$BAMQC_DIR/$SAMPLE_NAME\"\n  echo \"Running Qualimap BAMQC for $SAMPLE_NAME\"\n  qualimap bamqc -bam $BAM_FILE -outdir $QUALIMAP_OUTPUT_DIR -outformat HTML -outfile \"${SAMPLE_NAME}_report.html\"\ndone\n\nINPUT_GROUPS_FILE=\"$BAMQC_DIR/input_groups.txt\"\nrm -f $INPUT_GROUPS_FILE\n\necho \"Creating input groups file for Multi-BAMQC\"\nfor BAMQC_OUTPUT_DIR in $BAMQC_DIR/*; do\n  if [ -d \"$BAMQC_OUTPUT_DIR\" ]; then\n    SAMPLE_NAME=$(basename $BAMQC_OUTPUT_DIR)\n    echo -e \"${SAMPLE_NAME}\\t${BAMQC_OUTPUT_DIR}\\t1\" &gt;&gt; $INPUT_GROUPS_FILE\n  fi\ndone\n\nMULTIBAMQC_DIR=\"/home/group.kurse/qbius030/Practical_Day_1/bamqc/multibamqc\"\nmkdir -p $MULTIBAMQC_DIR\n\necho \"Running Qualimap Multi-BAMQC\"\nqualimap multi-bamqc -d $INPUT_GROUPS_FILE -outdir $MULTIBAMQC_DIR -outformat PDF\n\necho \"Qualimap analysis complete. Reports saved in $MULTIBAMQC_DIR.\"\nView results using Firefox:\ncd /home/group.kurse/qbius030/Practical_Day_1/bamqc/multibamqc\nfirefox report.pdf"
-  },
-  {
-    "objectID": "teaching/tutorials/practical_day1.html#plot-qualimap-coverage-plot",
-    "href": "teaching/tutorials/practical_day1.html#plot-qualimap-coverage-plot",
-    "title": "Practical Day 1: FASTQ to VCF - Part 1",
-    "section": "Plot: Qualimap Coverage Plot",
-    "text": "Plot: Qualimap Coverage Plot\n\nFigure: Example Qualimap coverage plot."
+    "text": "Plot: Mapping Quality Distribution\n\n\nCode\n# Load required packages\nsuppressPackageStartupMessages({\n  library(Rsamtools)\n  library(ggplot2)\n  library(dplyr)\n})\n\n# Set working directory to BAM folder\nsetwd(\"/home/tahirali/RAMSES_mount/tali/qbio/mapping\")\n\n# Get list of all BAM files in the directory\nbam_files &lt;- list.files(pattern = \"\\\\.bam$\", full.names = TRUE)\n\n# Function to extract MAPQ from BAM\nget_mapq &lt;- function(bamfile) {\n  param &lt;- ScanBamParam(what = \"mapq\")\n  aln &lt;- scanBam(bamfile, param = param)[[1]]\n  data.frame(MAPQ = aln$mapq, Sample = basename(bamfile))\n}\n\n# Extract MAPQ for all BAMs\nmapq_list &lt;- lapply(bam_files, get_mapq)\nmapq_df &lt;- bind_rows(mapq_list)\n\n# Clean: remove NA\nmapq_df &lt;- mapq_df %&gt;% filter(!is.na(MAPQ), MAPQ &gt;= 0)\n\n# Density plot across BAMs\nggplot(mapq_df, aes(x = MAPQ, color = Sample)) +\n  geom_density(size = 0.7, alpha = 0.5) +\n  theme_bw() +\n  theme(\n    plot.title = element_text(hjust = 0.5),   # center title\n    legend.position = \"none\"\n  ) +\n  labs(\n    title = \"Mapping Quality Distribution across BAMs\",\n    x = \"MAPQ score\", y = \"Density\"\n  )\n\n\n\n\n\n\n\n\n\nCode\n# line plot of MAPQ counts per BAM\n\nmapq_summary &lt;- mapq_df %&gt;%\n  group_by(Sample, MAPQ) %&gt;%\n  summarise(Count = n(), .groups = \"drop\")\n\nggplot(mapq_summary, aes(x = MAPQ, y = Count, color = Sample)) +\n  geom_line(alpha = 0.7) +\n  theme_bw() +\n  theme(\n    plot.title = element_text(hjust = 0.5),   # center title\n    legend.position = \"none\"\n  ) +\n  labs(\n    title = \"Mapping Quality (per BAM)\",\n    x = \"MAPQ\", y = \"Read count\"\n  )\n\n\n\n\n\n\n\n\n\nCode\n# Summarise mapping quality categories per BAM\nmapq_stats &lt;- mapq_df %&gt;%\n  group_by(Sample) %&gt;%\n  summarise(\n    Total_Reads = n(),\n    MAPQ_0 = sum(MAPQ == 0),\n    MAPQ_40 = sum(MAPQ == 40),\n    MAPQ_60 = sum(MAPQ == 60),\n    High_Quality = sum(MAPQ &gt;= 30),\n    .groups = \"drop\"\n  ) %&gt;%\n  mutate(\n    Pct_MAPQ_0 = round(100 * MAPQ_0 / Total_Reads, 2),\n    Pct_MAPQ_40 = round(100 * MAPQ_40 / Total_Reads, 2),\n    Pct_MAPQ_60 = round(100 * MAPQ_60 / Total_Reads, 2),\n    Pct_HighQ  = round(100 * High_Quality / Total_Reads, 2)\n  )\n\nmapq_stats\n\n\n# A tibble: 76 × 10\n   Sample Total_Reads MAPQ_0 MAPQ_40 MAPQ_60 High_Quality Pct_MAPQ_0 Pct_MAPQ_40\n   &lt;chr&gt;        &lt;int&gt;  &lt;int&gt;   &lt;int&gt;   &lt;int&gt;        &lt;int&gt;      &lt;dbl&gt;       &lt;dbl&gt;\n 1 SRR19…       46464    351    1578   37250        43817       0.76        3.4 \n 2 SRR19…         552      6      16     444          517       1.09        2.9 \n 3 SRR19…       13886    122     463   10940        13001       0.88        3.33\n 4 SRR19…       46814    714    2242   38471        44272       1.53        4.79\n 5 SRR19…       99536    283    3079   85575        95817       0.28        3.09\n 6 SRR19…       58504    318    2171   50009        56529       0.54        3.71\n 7 SRR19…      215983    512    6092  189581       210189       0.24        2.82\n 8 SRR19…      127704    448    4269  110560       123877       0.35        3.34\n 9 SRR19…      108071   2873    5878   86237       101018       2.66        5.44\n10 SRR19…       95490    363    3475   81489        92226       0.38        3.64\n# ℹ 66 more rows\n# ℹ 2 more variables: Pct_MAPQ_60 &lt;dbl&gt;, Pct_HighQ &lt;dbl&gt;\n\n\nCode\n# Overall summary across all BAMs\nmapq_overall &lt;- mapq_df %&gt;%\n  summarise(\n    Total_Reads = n(),\n    MAPQ_0 = sum(MAPQ == 0),\n    MAPQ_40 = sum(MAPQ == 40),\n    MAPQ_60 = sum(MAPQ == 60),\n    High_Quality = sum(MAPQ &gt;= 30)\n  ) %&gt;%\n  mutate(\n    Pct_MAPQ_0 = round(100 * MAPQ_0 / Total_Reads, 2),\n    Pct_MAPQ_40 = round(100 * MAPQ_40 / Total_Reads, 2),\n    Pct_MAPQ_60 = round(100 * MAPQ_60 / Total_Reads, 2),\n    Pct_HighQ  = round(100 * High_Quality / Total_Reads, 2)\n  )\n\nmapq_overall\n\n\n  Total_Reads MAPQ_0 MAPQ_40 MAPQ_60 High_Quality Pct_MAPQ_0 Pct_MAPQ_40\n1     4897097 281284  276177 3619254      4332374       5.74        5.64\n  Pct_MAPQ_60 Pct_HighQ\n1       73.91     88.47"
   },
   {
     "objectID": "teaching/apps/interactive.html",

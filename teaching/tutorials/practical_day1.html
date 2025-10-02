@@ -190,41 +190,27 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul class="collapse">
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a>
+  <ul class="collapse">
   <li><a href="#tools-to-be-used" id="toc-tools-to-be-used" class="nav-link" data-scroll-target="#tools-to-be-used">Tools to be Used</a></li>
-  <li><a href="#step-1-connecting-to-hpc-and-organizing-the-workspace" id="toc-step-1-connecting-to-hpc-and-organizing-the-workspace" class="nav-link" data-scroll-target="#step-1-connecting-to-hpc-and-organizing-the-workspace">Step 1: Connecting to HPC and Organizing the Workspace</a>
-  <ul class="collapse">
-  <li><a href="#connect-to-the-hpc-ramses" id="toc-connect-to-the-hpc-ramses" class="nav-link" data-scroll-target="#connect-to-the-hpc-ramses">Connect to the HPC (RAMSES)</a></li>
-  <li><a href="#check-your-current-directory" id="toc-check-your-current-directory" class="nav-link" data-scroll-target="#check-your-current-directory">Check Your Current Directory</a></li>
-  <li><a href="#copy-raw-data-to-your-home-directory" id="toc-copy-raw-data-to-your-home-directory" class="nav-link" data-scroll-target="#copy-raw-data-to-your-home-directory">Copy Raw Data to Your Home Directory</a></li>
-  <li><a href="#create-a-directory-for-analysis" id="toc-create-a-directory-for-analysis" class="nav-link" data-scroll-target="#create-a-directory-for-analysis">Create a Directory for Analysis</a></li>
   </ul></li>
-  <li><a href="#examine-the-contents-of-the-raw-fastq-files" id="toc-examine-the-contents-of-the-raw-fastq-files" class="nav-link" data-scroll-target="#examine-the-contents-of-the-raw-fastq-files">Examine the Contents of the Raw FASTQ Files</a>
+  <li><a href="#connecting-to-hpc-ramses-and-organizing-the-workspace" id="toc-connecting-to-hpc-ramses-and-organizing-the-workspace" class="nav-link" data-scroll-target="#connecting-to-hpc-ramses-and-organizing-the-workspace">Connecting to HPC (RAMSES) and Organizing the Workspace</a>
   <ul class="collapse">
-  <li><a href="#plot-fastq-read-quality" id="toc-plot-fastq-read-quality" class="nav-link" data-scroll-target="#plot-fastq-read-quality"><em>Plot: FASTQ Read Quality</em></a></li>
+  <li><a href="#connect-to-the-hpc" id="toc-connect-to-the-hpc" class="nav-link" data-scroll-target="#connect-to-the-hpc">Connect to the HPC</a></li>
   </ul></li>
-  <li><a href="#instructions-for-running-bioinformatics-jobs-on-the-hpc" id="toc-instructions-for-running-bioinformatics-jobs-on-the-hpc" class="nav-link" data-scroll-target="#instructions-for-running-bioinformatics-jobs-on-the-hpc">Instructions for Running Bioinformatics Jobs on the HPC</a></li>
-  <li><a href="#step-2-quality-control-of-raw-fastq-reads-using-fastqc" id="toc-step-2-quality-control-of-raw-fastq-reads-using-fastqc" class="nav-link" data-scroll-target="#step-2-quality-control-of-raw-fastq-reads-using-fastqc">Step 2: Quality Control of raw FASTQ reads using fastqc</a>
+  <li><a href="#instructions-for-running-bioinformatics-jobs-on-the-hpc-ramses" id="toc-instructions-for-running-bioinformatics-jobs-on-the-hpc-ramses" class="nav-link" data-scroll-target="#instructions-for-running-bioinformatics-jobs-on-the-hpc-ramses">Instructions for Running Bioinformatics Jobs on the HPC (RAMSES)</a></li>
+  <li><a href="#examine-fastq-files-and-evaluate-sequencing-quality" id="toc-examine-fastq-files-and-evaluate-sequencing-quality" class="nav-link" data-scroll-target="#examine-fastq-files-and-evaluate-sequencing-quality">Examine FASTQ Files and Evaluate Sequencing Quality</a>
   <ul class="collapse">
-  <li><a href="#create-and-submit-a-slurm-script-for-fastqc-analysis" id="toc-create-and-submit-a-slurm-script-for-fastqc-analysis" class="nav-link" data-scroll-target="#create-and-submit-a-slurm-script-for-fastqc-analysis">Create and Submit a SLURM Script for FASTQC Analysis</a></li>
-  <li><a href="#plot-multiqc-summary-after-running-multiqc-on-fastqc-results" id="toc-plot-multiqc-summary-after-running-multiqc-on-fastqc-results" class="nav-link" data-scroll-target="#plot-multiqc-summary-after-running-multiqc-on-fastqc-results"><em>Plot: MultiQC Summary (after running MultiQC on FastQC results)</em></a></li>
-  <li><a href="#how-to-fix-the-dos-line-breaks-error-on-a-linux-cluster" id="toc-how-to-fix-the-dos-line-breaks-error-on-a-linux-cluster" class="nav-link" data-scroll-target="#how-to-fix-the-dos-line-breaks-error-on-a-linux-cluster">How to Fix the “DOS Line Breaks” Error on a Linux Cluster</a></li>
+  <li><a href="#exploring-contents-of-fastq-file" id="toc-exploring-contents-of-fastq-file" class="nav-link" data-scroll-target="#exploring-contents-of-fastq-file">Exploring Contents of FASTQ File</a></li>
+  <li><a href="#quality-control-of-raw-fastq-reads-using-fastqc" id="toc-quality-control-of-raw-fastq-reads-using-fastqc" class="nav-link" data-scroll-target="#quality-control-of-raw-fastq-reads-using-fastqc">Quality Control of Raw FASTQ Reads Using FastQC</a></li>
+  <li><a href="#summarize-fastqc-results-with-multiqc" id="toc-summarize-fastqc-results-with-multiqc" class="nav-link" data-scroll-target="#summarize-fastqc-results-with-multiqc">Summarize FastQC Results with MultiQC</a></li>
   </ul></li>
-  <li><a href="#step-3-quality-trimming-of-raw-fastq-reads-using-trimmomatic" id="toc-step-3-quality-trimming-of-raw-fastq-reads-using-trimmomatic" class="nav-link" data-scroll-target="#step-3-quality-trimming-of-raw-fastq-reads-using-trimmomatic">Step 3: Quality trimming of raw FASTQ reads using Trimmomatic</a>
+  <li><a href="#quality-trimming-of-raw-fastq-reads-using-trimmomatic" id="toc-quality-trimming-of-raw-fastq-reads-using-trimmomatic" class="nav-link" data-scroll-target="#quality-trimming-of-raw-fastq-reads-using-trimmomatic">Quality trimming of raw FASTQ reads using Trimmomatic</a></li>
+  <li><a href="#mapping-to-reference-using-bwa-samtools" id="toc-mapping-to-reference-using-bwa-samtools" class="nav-link" data-scroll-target="#mapping-to-reference-using-bwa-samtools">Mapping to reference using BWA + SAMtools</a>
   <ul class="collapse">
-  <li><a href="#plot-read-length-distribution-before-and-after-trimming" id="toc-plot-read-length-distribution-before-and-after-trimming" class="nav-link" data-scroll-target="#plot-read-length-distribution-before-and-after-trimming"><em>Plot: Read Length Distribution Before and After Trimming</em></a></li>
+  <li><a href="#plot-mapping-quality-distribution" id="toc-plot-mapping-quality-distribution" class="nav-link" data-scroll-target="#plot-mapping-quality-distribution">Plot: Mapping Quality Distribution</a></li>
   </ul></li>
-  <li><a href="#step-4-mapping-to-reference-using-bwa-mem2-samtools" id="toc-step-4-mapping-to-reference-using-bwa-mem2-samtools" class="nav-link" data-scroll-target="#step-4-mapping-to-reference-using-bwa-mem2-samtools">Step 4: Mapping to reference using BWA-mem2 + samtools</a>
-  <ul class="collapse">
-  <li><a href="#plot-mapping-quality-distribution" id="toc-plot-mapping-quality-distribution" class="nav-link" data-scroll-target="#plot-mapping-quality-distribution"><em>Plot: Mapping Quality Distribution</em></a></li>
-  </ul></li>
-  <li><a href="#step-5-run-and-configure-qualimap-for-bamqc-analysis" id="toc-step-5-run-and-configure-qualimap-for-bamqc-analysis" class="nav-link" data-scroll-target="#step-5-run-and-configure-qualimap-for-bamqc-analysis">Step 5: Run and Configure Qualimap for BAMQC Analysis</a>
-  <ul class="collapse">
-  <li><a href="#set-up-r-environment-for-plotting-with-qualimap" id="toc-set-up-r-environment-for-plotting-with-qualimap" class="nav-link" data-scroll-target="#set-up-r-environment-for-plotting-with-qualimap">Set Up R Environment for Plotting with Qualimap</a></li>
-  <li><a href="#create-and-submit-a-slurm-script-for-bamqc-analysis" id="toc-create-and-submit-a-slurm-script-for-bamqc-analysis" class="nav-link" data-scroll-target="#create-and-submit-a-slurm-script-for-bamqc-analysis">Create and Submit a SLURM Script for BAMQC Analysis</a></li>
-  <li><a href="#plot-qualimap-coverage-plot" id="toc-plot-qualimap-coverage-plot" class="nav-link" data-scroll-target="#plot-qualimap-coverage-plot"><em>Plot: Qualimap Coverage Plot</em></a></li>
-  </ul></li>
-  <li><a href="#wrapping-up-practical-day-one" id="toc-wrapping-up-practical-day-one" class="nav-link" data-scroll-target="#wrapping-up-practical-day-one">Wrapping Up Practical Day One</a></li>
+  <li><a href="#run-and-configure-qualimap-for-bamqc-analysis" id="toc-run-and-configure-qualimap-for-bamqc-analysis" class="nav-link" data-scroll-target="#run-and-configure-qualimap-for-bamqc-analysis">Run and Configure Qualimap for BAMQC Analysis</a></li>
   </ul>
 </nav>
     </div>
@@ -267,9 +253,8 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <li>Write a script (bash/python, etc.) to automate workflows, such as running commands on multiple files in a for loop, and submit jobs to an HPC system using SLURM SBATCH scheduling.</li>
 </ul>
 <hr>
-</section>
-<section id="tools-to-be-used" class="level1">
-<h1>Tools to be Used</h1>
+<section id="tools-to-be-used" class="level2">
+<h2 class="anchored" data-anchor-id="tools-to-be-used">Tools to be Used</h2>
 <ul>
 <li><strong>FASTQC / MULTIQC:</strong> For quality control of FASTQ reads.</li>
 <li><strong>Trimmomatic / fastp:</strong> For read trimming.</li>
@@ -279,289 +264,501 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </ul>
 <hr>
 </section>
-<section id="step-1-connecting-to-hpc-and-organizing-the-workspace" class="level1">
-<h1>Step 1: Connecting to HPC and Organizing the Workspace</h1>
-<section id="connect-to-the-hpc-ramses" class="level2">
-<h2 class="anchored" data-anchor-id="connect-to-the-hpc-ramses">Connect to the HPC (RAMSES)</h2>
+</section>
+<section id="connecting-to-hpc-ramses-and-organizing-the-workspace" class="level1">
+<h1>Connecting to HPC (RAMSES) and Organizing the Workspace</h1>
+<section id="connect-to-the-hpc" class="level2">
+<h2 class="anchored" data-anchor-id="connect-to-the-hpc">Connect to the HPC</h2>
 <p>For Windows users: Use MobaXterm. For Mac/Linux users: Use the Terminal application.<br>
 Log in to the HPC cluster using your login credentials.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-Y</span> qbius030@ramses4.itcc.uni-koeln.de</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-Y</span> qbius030@@ramses1.itcc.uni-koeln.de</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace 'qbius030' with your specific username.</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Enter your password when prompted.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="check-your-current-directory" class="level2">
-<h2 class="anchored" data-anchor-id="check-your-current-directory">Check Your Current Directory</h2>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Enter passphrase for key '/Users/tahirali/.ssh/ramses_key', if prompted:</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Duo two-factor login for qbius030</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Check Your Current Directory</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>If you are not in your home directory, navigate to it:</p>
+<ul>
+<li>If you are not in your home directory, navigate to it:</li>
+</ul>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /home/group.kurse/qbius030/</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace 'qbius030' with your specific username.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="copy-raw-data-to-your-home-directory" class="level2">
-<h2 class="anchored" data-anchor-id="copy-raw-data-to-your-home-directory">Copy Raw Data to Your Home Directory</h2>
+<p><strong>Copy Raw Data to Your Home Directory</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> /scratch/tali/Practical_Day_1/sample_project_data .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="create-a-directory-for-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="create-a-directory-for-analysis">Create a Directory for Analysis</h2>
+<p><strong>Create a Directory for Analysis</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> Practical_Day_1/<span class="dt">{fastqc</span><span class="op">,</span><span class="dt">trimming</span><span class="op">,</span><span class="dt">mapping</span><span class="op">,</span><span class="dt">bamqc}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
-<li><code>fastqc</code>: for storing quality control results of fastq files.</li>
-<li><code>trimming</code>: for storing trimmed read files.</li>
-<li><code>mapping</code>: for storing read mapping outputs.</li>
-<li><code>bamqc</code>: for storing quality control results of bam files.</li>
+<li><strong>fastqc</strong>: for storing quality control results of fastq files.</li>
+<li><strong>trimming</strong>: for storing trimmed read files.</li>
+<li><strong>mapping</strong>: for storing read mapping outputs.</li>
+<li><strong>bamqc</strong>: for storing quality control results of bam files.</li>
 </ul>
-<hr>
 </section>
 </section>
-<section id="examine-the-contents-of-the-raw-fastq-files" class="level1">
-<h1>Examine the Contents of the Raw FASTQ Files</h1>
-<p>Navigate to the location of the raw FASTQ files:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /home/group.kurse/qbius030/sample_project_data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Example 1:</strong> View the first 8 lines of a FASTQ file to examine its structure.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> SRR1945488.Chr4_repair_1.fastq.gz <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 8</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Example 2:</strong> Count the number of reads in a compressed FASTQ file.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> SRR1945488.Chr4_repair_1.fastq.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Divide by 4 to get the number of reads.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Example 3:</strong> Print the second line of each read (sequence line) from a compressed FASTQ file.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> SRR1945488.Chr4_repair_1.fastq.gz <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'NR % 4 == 2 {print;}'</span> <span class="kw">|</span> <span class="fu">less</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Example 4:</strong> Print the first 10 sequences (second line of each read) from a compressed FASTQ file.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> SRR1945488.Chr4_repair_1.fastq.gz <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'NR % 4 == 2 {print;}'</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 10</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<hr>
-<section id="plot-fastq-read-quality" class="level2">
-<h2 class="anchored" data-anchor-id="plot-fastq-read-quality"><em>Plot: FASTQ Read Quality</em></h2>
-<p><img src="fastqc_summary_plot.webp" class="img-fluid"><br>
-<em>Figure: Example FastQC per-base quality plot.</em></p>
-<hr>
-</section>
-</section>
-<section id="instructions-for-running-bioinformatics-jobs-on-the-hpc" class="level1">
-<h1>Instructions for Running Bioinformatics Jobs on the HPC</h1>
+<section id="instructions-for-running-bioinformatics-jobs-on-the-hpc-ramses" class="level1">
+<h1>Instructions for Running Bioinformatics Jobs on the HPC (RAMSES)</h1>
 <p>For quality control and downstream processing of FASTQ files,<br>
 we will execute various tasks on the HPC using Bash scripts with for loops.</p>
-<p><strong>Steps:</strong> 1. Prepare your script using a text editor and save it as <code>your_bash_script.sh</code>. 2. Submit your job in the terminal using: <code>bash    sbatch your_bash_script.sh</code> 3. For more details, consult the <a href="https://rrzk.uni-koeln.de/sites/rrzk/HPC_Projekte/CHEOPS_Brief_Instructions.pdf">CHEOPS Brief Instructions</a>.</p>
-<hr>
+<p><strong>Steps:</strong></p>
+<ol type="1">
+<li><p>Prepare your script using a text editor and save it as <code>your_bash_script.sh</code>.</p></li>
+<li><p>Submit your job in the terminal using:</p></li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> your_bash_script.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="3" type="1">
+<li>For more details, consult the <a href="https://gitlab.git.nrw/uzk-itcc-hpc/itcc-hpc-ramses/-/wikis/Documentation">RAMSES Brief Instructions</a>.</li>
+</ol>
 </section>
-<section id="step-2-quality-control-of-raw-fastq-reads-using-fastqc" class="level1">
-<h1>Step 2: Quality Control of raw FASTQ reads using fastqc</h1>
-<p>Check if required module is installed:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> avail</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<section id="create-and-submit-a-slurm-script-for-fastqc-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="create-and-submit-a-slurm-script-for-fastqc-analysis">Create and Submit a SLURM Script for FASTQC Analysis</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --ntasks-per-node=8</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=10gb</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=01:00:00</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account=UniKoeln</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=/home/group.kurse/qbius030/Practical_Day_1/fastqc/fastqc_repair.out</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=/home/group.kurse/qbius030/Practical_Day_1/fastqc/fastqc_repair.err</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load bio/FastQC</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="va">INPUT_DIR</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/sample_project_data/"</span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="va">OUTPUT_DIR</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/Practical_Day_1/fastqc"</span></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">$OUTPUT_DIR</span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> FILE <span class="kw">in</span> <span class="va">$INPUT_DIR</span>/<span class="pp">*</span>Chr4_repair_1.fastq.gz <span class="va">$INPUT_DIR</span>/<span class="pp">*</span>Chr4_repair_2.fastq.gz<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="ex">fastqc</span> <span class="at">-o</span> <span class="va">$OUTPUT_DIR</span> <span class="st">"</span><span class="va">$FILE</span><span class="st">"</span></span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<hr>
+<section id="examine-fastq-files-and-evaluate-sequencing-quality" class="level1">
+<h1>Examine FASTQ Files and Evaluate Sequencing Quality</h1>
+<section id="exploring-contents-of-fastq-file" class="level2">
+<h2 class="anchored" data-anchor-id="exploring-contents-of-fastq-file">Exploring Contents of FASTQ File</h2>
+<p><strong>Navigate to the location of the raw FASTQ files:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /home/group.kurse/qbius030/sample_project_data/fastq</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Example 1:</strong> View the first 8 lines of a FASTQ file to examine its structure.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> SRR1945488.Chr4_repair_1.fastq.gz <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 8</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Example 2:</strong> Count the number of reads in a compressed FASTQ file.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> SRR1945488.Chr4_repair_1.fastq.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Divide by 4 to get the number of reads.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Example 3:</strong> Print the second line of each read (sequence line) from a compressed FASTQ file.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> SRR1945488.Chr4_repair_1.fastq.gz <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'NR % 4 == 2 {print;}'</span> <span class="kw">|</span> <span class="fu">less</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Example 4:</strong> Print the first 10 sequences (second line of each read) from a compressed FASTQ file.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> SRR1945488.Chr4_repair_1.fastq.gz <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'NR % 4 == 2 {print;}'</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 10</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="plot-multiqc-summary-after-running-multiqc-on-fastqc-results" class="level2">
-<h2 class="anchored" data-anchor-id="plot-multiqc-summary-after-running-multiqc-on-fastqc-results"><em>Plot: MultiQC Summary (after running MultiQC on FastQC results)</em></h2>
-<p><img src="multiqc_summary.webp" class="img-fluid"></p>
-<hr>
-</section>
-<section id="how-to-fix-the-dos-line-breaks-error-on-a-linux-cluster" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-fix-the-dos-line-breaks-error-on-a-linux-cluster">How to Fix the “DOS Line Breaks” Error on a Linux Cluster</h2>
-<p>If you see:</p>
-<pre><code>sbatch: error: Batch script contains DOS line breaks (\r\n)</code></pre>
+<section id="quality-control-of-raw-fastq-reads-using-fastqc" class="level2">
+<h2 class="anchored" data-anchor-id="quality-control-of-raw-fastq-reads-using-fastqc">Quality Control of Raw FASTQ Reads Using FastQC</h2>
+<p><strong>Check if required module is installed:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> avail</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Example SLURM script for FastQC Analysis</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=fastqc</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --ntasks-per-node=8</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=10gb</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=01:00:00</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account=UniKoeln</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=/home/group.kurse/qbius030/Practical_Day_1/fastqc/fastqc_repair.out</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=/home/group.kurse/qbius030/Practical_Day_1/fastqc/fastqc_repair.err</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load bio/FastQC</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="va">INPUT_DIR</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/sample_project_data/fastq"</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="va">OUTPUT_DIR</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/Practical_Day_1/fastqc"</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">$OUTPUT_DIR</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> FILE <span class="kw">in</span> <span class="va">$INPUT_DIR</span>/<span class="pp">*</span>Chr4_repair_1.fastq.gz <span class="va">$INPUT_DIR</span>/<span class="pp">*</span>Chr4_repair_2.fastq.gz<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    <span class="ex">fastqc</span> <span class="at">-o</span> <span class="va">$OUTPUT_DIR</span> <span class="st">"</span><span class="va">$FILE</span><span class="st">"</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Fixing the “DOS Line Breaks” Error on a HPC Cluster</strong></p>
+<ul>
+<li>If you see:</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch:</span> error: Batch script contains DOS line breaks <span class="er">(</span><span class="ex">\r\n</span><span class="kw">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Fix with:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dos2unix</span> fastqc.sh</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="at">-v</span> fastqc.sh  <span class="co"># Check for ^M characters</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Check job status:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> qbius030</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>View HTML output in browser:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firefox</span> SRR1945697.Chr4_repair_paired_2_fastqc.html</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<hr>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dos2unix</span> fastqc.sh</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="at">-v</span> fastqc.sh  <span class="co"># Check for ^M characters</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Check job status:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> qbius030</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>View HTML output in browser: Open the .html file with a web browser (adjust the path as needed):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firefox</span> SRR1945488.Chr4_repair_paired_2_fastqc.html</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="fastqc_summary_plot.webp" class="img-fluid"> <strong>Figure: FastQC per-base quality plot</strong></p>
+</section>
+<section id="summarize-fastqc-results-with-multiqc" class="level2">
+<h2 class="anchored" data-anchor-id="summarize-fastqc-results-with-multiqc">Summarize FastQC Results with MultiQC</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load bio/MultiQC/</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> fastqc</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="ex">multiqc</span> .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="multiqc_summary.webp" class="img-fluid"> <strong>Figure: MultiQC Summary (after running MultiQC on FastQC results)</strong></p>
 </section>
 </section>
-<section id="step-3-quality-trimming-of-raw-fastq-reads-using-trimmomatic" class="level1">
-<h1>Step 3: Quality trimming of raw FASTQ reads using Trimmomatic</h1>
-<p>Check if required module is installed:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> avail</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Example SLURM script:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --ntasks-per-node=8</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=10gb</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=01:00:00</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account=UniKoeln</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=/home/group.kurse/qbius030/Practical_Day_1/trimming/fastqc_trim.out</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=/home/group.kurse/qbius030/Practical_Day_1/trimming/fastqc_trim.err</span></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load bio/Trimmomatic/</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="va">INPUT_DIR</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/sample_project_data"</span></span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="va">OUTPUT_DIR</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/Practical_Day_1/trimming"</span></span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="va">ADAPTERS</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/sample_project_data/adapters/Illumina_PE.fa"</span></span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">$OUTPUT_DIR</span></span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> FORWARD_FILE <span class="kw">in</span> <span class="va">${INPUT_DIR}</span>/<span class="pp">*</span>.Chr4_repair_1.fastq.gz<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>  <span class="va">REVERSE_FILE</span><span class="op">=</span><span class="st">"</span><span class="va">${FORWARD_FILE</span><span class="op">/</span><span class="ss">_1.fastq.gz</span><span class="op">/</span>_2.fastq.gz<span class="va">}</span><span class="st">"</span></span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>  <span class="va">BASE_NAME</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">$FORWARD_FILE</span> _1.fastq.gz<span class="va">)</span></span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>  <span class="va">FORWARD_PAIRED</span><span class="op">=</span><span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/</span><span class="va">${BASE_NAME}</span><span class="st">_paired_1.fastq.gz"</span></span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>  <span class="va">FORWARD_UNPAIRED</span><span class="op">=</span><span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/</span><span class="va">${BASE_NAME}</span><span class="st">_unpaired_1.fastq.gz"</span></span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>  <span class="va">REVERSE_PAIRED</span><span class="op">=</span><span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/</span><span class="va">${BASE_NAME}</span><span class="st">_paired_2.fastq.gz"</span></span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>  <span class="va">REVERSE_UNPAIRED</span><span class="op">=</span><span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/</span><span class="va">${BASE_NAME}</span><span class="st">_unpaired_2.fastq.gz"</span></span>
-<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>  <span class="ex">java</span> <span class="at">-jar</span> <span class="va">$TRIMMOMATIC</span>/trimmomatic.jar PE <span class="dt">\</span></span>
-<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">-threads</span> 4 <span class="dt">\</span></span>
-<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>    <span class="va">$FORWARD_FILE</span> <span class="dt">\</span></span>
-<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>    <span class="va">$REVERSE_FILE</span> <span class="dt">\</span></span>
-<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>    <span class="va">$FORWARD_PAIRED</span> <span class="dt">\</span></span>
-<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>    <span class="va">$FORWARD_UNPAIRED</span> <span class="dt">\</span></span>
-<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>    <span class="va">$REVERSE_PAIRED</span> <span class="dt">\</span></span>
-<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>    <span class="va">$REVERSE_UNPAIRED</span> <span class="dt">\</span></span>
-<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>    ILLUMINACLIP:<span class="va">${ADAPTERS}</span>:2:30:10 <span class="dt">\</span></span>
-<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>    LEADING:3 <span class="dt">\</span></span>
-<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>    TRAILING:3 <span class="dt">\</span></span>
-<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>    SLIDINGWINDOW:4:15 <span class="dt">\</span></span>
-<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a>    MINLEN:36</span>
-<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<hr>
-<section id="plot-read-length-distribution-before-and-after-trimming" class="level2">
-<h2 class="anchored" data-anchor-id="plot-read-length-distribution-before-and-after-trimming"><em>Plot: Read Length Distribution Before and After Trimming</em></h2>
-<p><img src="read_length_distribution.webp" class="img-fluid"><br>
-<em>Figure: Example plot showing read length distribution before and after trimming.</em></p>
-<hr>
-</section>
-</section>
-<section id="step-4-mapping-to-reference-using-bwa-mem2-samtools" class="level1">
-<h1>Step 4: Mapping to reference using BWA-mem2 + samtools</h1>
-<p>Check if required module is installed:</p>
+<section id="quality-trimming-of-raw-fastq-reads-using-trimmomatic" class="level1">
+<h1>Quality trimming of raw FASTQ reads using Trimmomatic</h1>
+<p><strong>Check if required module is installed:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> avail</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Example SLURM script:</strong></p>
+<p><strong>Example SLURM script for FASTQ trimming:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --ntasks-per-node=8</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=10gb</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=01:00:00</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account=UniKoeln</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=/home/group.kurse/qbius030/Practical_Day_1/mapping/bwa_mapping.out</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=/home/group.kurse/qbius030/Practical_Day_1/mapping/bwa_mapping.err</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load bwamem2</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load samtools</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=trimming</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --ntasks-per-node=8</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=10gb</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=01:00:00</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account=UniKoeln</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=/home/group.kurse/qbius030/Practical_Day_1/trimming/fastqc_trim.out</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=/home/group.kurse/qbius030/Practical_Day_1/trimming/fastqc_trim.err</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load bio/Trimmomatic/</span>
 <span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="va">INPUT_DIR</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/Practical_Day_1/trimming"</span></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="va">OUTPUT_DIR</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/Practical_Day_1/mapping"</span></span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="va">REFERENCE</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/sample_project_data/reference_data/Arabidopsis_thaliana.TAIR10.dna.chromosome.4_98K.fasta"</span></span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="co"># bwa-mem2 index $REFERENCE  # Uncomment if not already indexed</span></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> FORWARD_FILE <span class="kw">in</span> <span class="va">${INPUT_DIR}</span>/<span class="pp">*</span>_paired_1.fastq.gz<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>  <span class="va">REVERSE_FILE</span><span class="op">=</span><span class="st">"</span><span class="va">${FORWARD_FILE</span><span class="op">/</span><span class="ss">_paired_1.fastq.gz</span><span class="op">/</span>_paired_2.fastq.gz<span class="va">}</span><span class="st">"</span></span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>  <span class="va">BASE_NAME</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">$FORWARD_FILE</span> _paired_1.fastq.gz<span class="va">)</span></span>
-<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>  <span class="va">SAM_FILE</span><span class="op">=</span><span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/</span><span class="va">${BASE_NAME}</span><span class="st">.sam"</span></span>
-<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>  <span class="va">BAM_FILE</span><span class="op">=</span><span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/</span><span class="va">${BASE_NAME}</span><span class="st">.bam"</span></span>
-<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>  <span class="va">SORTED_BAM</span><span class="op">=</span><span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/</span><span class="va">${BASE_NAME}</span><span class="st">.sorted.bam"</span></span>
-<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>  <span class="ex">bwa-mem2</span> mem <span class="at">-M</span> <span class="at">-t</span> 20 <span class="va">$REFERENCE</span> <span class="va">$FORWARD_FILE</span> <span class="va">$REVERSE_FILE</span> <span class="op">&gt;</span> <span class="va">$SAM_FILE</span></span>
-<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>  <span class="ex">samtools</span> view <span class="at">-bS</span> <span class="va">$SAM_FILE</span> <span class="op">&gt;</span> <span class="va">$BAM_FILE</span></span>
-<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>  <span class="ex">samtools</span> sort <span class="at">-@</span> 20 <span class="va">$BAM_FILE</span> <span class="at">-o</span> <span class="va">$SORTED_BAM</span></span>
-<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>  <span class="ex">samtools</span> index <span class="va">$SORTED_BAM</span></span>
-<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rm</span> <span class="va">$SAM_FILE</span></span>
-<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rm</span> <span class="va">$BAM_FILE</span></span>
-<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<hr>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="va">INPUT_DIR</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/sample_project_data"</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="va">OUTPUT_DIR</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/Practical_Day_1/trimming"</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="va">ADAPTERS</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/sample_project_data/adapters/Illumina_PE.fa"</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">$OUTPUT_DIR</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> FORWARD_FILE <span class="kw">in</span> <span class="va">${INPUT_DIR}</span>/<span class="pp">*</span>.Chr4_repair_1.fastq.gz<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>  <span class="va">REVERSE_FILE</span><span class="op">=</span><span class="st">"</span><span class="va">${FORWARD_FILE</span><span class="op">/</span><span class="ss">_1.fastq.gz</span><span class="op">/</span>_2.fastq.gz<span class="va">}</span><span class="st">"</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>  <span class="va">BASE_NAME</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">$FORWARD_FILE</span> _1.fastq.gz<span class="va">)</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>  <span class="va">FORWARD_PAIRED</span><span class="op">=</span><span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/</span><span class="va">${BASE_NAME}</span><span class="st">_paired_1.fastq.gz"</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>  <span class="va">FORWARD_UNPAIRED</span><span class="op">=</span><span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/</span><span class="va">${BASE_NAME}</span><span class="st">_unpaired_1.fastq.gz"</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>  <span class="va">REVERSE_PAIRED</span><span class="op">=</span><span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/</span><span class="va">${BASE_NAME}</span><span class="st">_paired_2.fastq.gz"</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>  <span class="va">REVERSE_UNPAIRED</span><span class="op">=</span><span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/</span><span class="va">${BASE_NAME}</span><span class="st">_unpaired_2.fastq.gz"</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>  <span class="ex">java</span> <span class="at">-jar</span> <span class="va">$EBROOTTRIMMOMATIC</span>/trimmomatic-0.39.jar PE <span class="dt">\</span></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">-threads</span> 4 <span class="dt">\</span></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>    <span class="va">$FORWARD_FILE</span> <span class="dt">\</span></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>    <span class="va">$REVERSE_FILE</span> <span class="dt">\</span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>    <span class="va">$FORWARD_PAIRED</span> <span class="dt">\</span></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>    <span class="va">$FORWARD_UNPAIRED</span> <span class="dt">\</span></span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>    <span class="va">$REVERSE_PAIRED</span> <span class="dt">\</span></span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>    <span class="va">$REVERSE_UNPAIRED</span> <span class="dt">\</span></span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>    ILLUMINACLIP:<span class="va">${ADAPTERS}</span>:2:30:10 <span class="dt">\</span></span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>    LEADING:3 <span class="dt">\</span></span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>    TRAILING:3 <span class="dt">\</span></span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>    SLIDINGWINDOW:4:15 <span class="dt">\</span></span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>    MINLEN:36</span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Compare Raw vs.&nbsp;Trimmed Reads with FastQC and MultiQC</strong></p>
+<p><img src="read_length_distribution.webp" class="img-fluid"><br>
+<strong>Figure: plot showing read length distribution before and after trimming.</strong> ————————————————————————</p>
+</section>
+<section id="mapping-to-reference-using-bwa-samtools" class="level1">
+<h1>Mapping to reference using BWA + SAMtools</h1>
+<p><strong>Check if required module is installed:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> avail</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Example SLURM script for Mapping:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=mapping</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --ntasks-per-node=8</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=10gb</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=01:00:00</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account=UniKoeln</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=/home/group.kurse/qbius030/Practical_Day_1/mapping/bwa_mapping.out</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=/home/group.kurse/qbius030/Practical_Day_1/mapping/bwa_mapping.err</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> purge</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load bio/BWA/0.7.18-GCCcore-12.3.0</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load bio/SAMtools/1.18-GCC-12.3.0</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="va">INPUT_DIR</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/Practical_Day_1/trimming"</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="va">OUTPUT_DIR</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/Practical_Day_1/mapping"</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="va">REFERENCE</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/sample_project_data/reference_data/Arabidopsis_thaliana.TAIR10.dna.chromosome.4_98K.fasta"</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a><span class="co"># bwa index $REFERENCE  # Uncomment if not already indexed</span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> FORWARD_FILE <span class="kw">in</span> <span class="va">${INPUT_DIR}</span>/<span class="pp">*</span>_paired_1.fastq.gz<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>  <span class="va">REVERSE_FILE</span><span class="op">=</span><span class="st">"</span><span class="va">${FORWARD_FILE</span><span class="op">/</span><span class="ss">_paired_1.fastq.gz</span><span class="op">/</span>_paired_2.fastq.gz<span class="va">}</span><span class="st">"</span></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>  <span class="va">BASE_NAME</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">$FORWARD_FILE</span> _paired_1.fastq.gz<span class="va">)</span></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>  <span class="va">SAM_FILE</span><span class="op">=</span><span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/</span><span class="va">${BASE_NAME}</span><span class="st">.sam"</span></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>  <span class="va">BAM_FILE</span><span class="op">=</span><span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/</span><span class="va">${BASE_NAME}</span><span class="st">.bam"</span></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>  <span class="va">SORTED_BAM</span><span class="op">=</span><span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/</span><span class="va">${BASE_NAME}</span><span class="st">.sorted.bam"</span></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>  <span class="ex">bwa</span> mem <span class="at">-M</span> <span class="at">-t</span> 20 <span class="va">$REFERENCE</span> <span class="va">$FORWARD_FILE</span> <span class="va">$REVERSE_FILE</span> <span class="op">&gt;</span> <span class="va">$SAM_FILE</span></span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>  <span class="ex">samtools</span> view <span class="at">-bS</span> <span class="va">$SAM_FILE</span> <span class="op">&gt;</span> <span class="va">$BAM_FILE</span></span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>  <span class="ex">samtools</span> sort <span class="at">-@</span> 20 <span class="va">$BAM_FILE</span> <span class="at">-o</span> <span class="va">$SORTED_BAM</span></span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>  <span class="ex">samtools</span> index <span class="va">$SORTED_BAM</span></span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rm</span> <span class="va">$SAM_FILE</span></span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rm</span> <span class="va">$BAM_FILE</span></span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <section id="plot-mapping-quality-distribution" class="level2">
-<h2 class="anchored" data-anchor-id="plot-mapping-quality-distribution"><em>Plot: Mapping Quality Distribution</em></h2>
-<p><img src="mapping_quality_distribution.png" class="img-fluid"><br>
-<em>Figure: Example plot showing mapping quality distribution.</em></p>
-<hr>
+<h2 class="anchored" data-anchor-id="plot-mapping-quality-distribution">Plot: Mapping Quality Distribution</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required packages</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>({</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(Rsamtools)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(ggplot2)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(dplyr)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Set working directory to BAM folder</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"/home/tahirali/RAMSES_mount/tali/qbio/mapping"</span>)</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Get list of all BAM files in the directory</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>bam_files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">pattern =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">.bam$"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to extract MAPQ from BAM</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>get_mapq <span class="ot">&lt;-</span> <span class="cf">function</span>(bamfile) {</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>  param <span class="ot">&lt;-</span> <span class="fu">ScanBamParam</span>(<span class="at">what =</span> <span class="st">"mapq"</span>)</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>  aln <span class="ot">&lt;-</span> <span class="fu">scanBam</span>(bamfile, <span class="at">param =</span> param)[[<span class="dv">1</span>]]</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">MAPQ =</span> aln<span class="sc">$</span>mapq, <span class="at">Sample =</span> <span class="fu">basename</span>(bamfile))</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract MAPQ for all BAMs</span></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>mapq_list <span class="ot">&lt;-</span> <span class="fu">lapply</span>(bam_files, get_mapq)</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>mapq_df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(mapq_list)</span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean: remove NA</span></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>mapq_df <span class="ot">&lt;-</span> mapq_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(MAPQ), MAPQ <span class="sc">&gt;=</span> <span class="dv">0</span>)</span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Density plot across BAMs</span></span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mapq_df, <span class="fu">aes</span>(<span class="at">x =</span> MAPQ, <span class="at">color =</span> Sample)) <span class="sc">+</span></span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">size =</span> <span class="fl">0.7</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),   <span class="co"># center title</span></span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"none"</span></span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Mapping Quality Distribution across BAMs"</span>,</span>
+<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"MAPQ score"</span>, <span class="at">y =</span> <span class="st">"Density"</span></span>
+<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="practical_day1_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># line plot of MAPQ counts per BAM</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>mapq_summary <span class="ot">&lt;-</span> mapq_df <span class="sc">%&gt;%</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Sample, MAPQ) <span class="sc">%&gt;%</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mapq_summary, <span class="fu">aes</span>(<span class="at">x =</span> MAPQ, <span class="at">y =</span> Count, <span class="at">color =</span> Sample)) <span class="sc">+</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),   <span class="co"># center title</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"none"</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Mapping Quality (per BAM)"</span>,</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"MAPQ"</span>, <span class="at">y =</span> <span class="st">"Read count"</span></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="practical_day1_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarise mapping quality categories per BAM</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>mapq_stats <span class="ot">&lt;-</span> mapq_df <span class="sc">%&gt;%</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Sample) <span class="sc">%&gt;%</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Total_Reads =</span> <span class="fu">n</span>(),</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">MAPQ_0 =</span> <span class="fu">sum</span>(MAPQ <span class="sc">==</span> <span class="dv">0</span>),</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">MAPQ_40 =</span> <span class="fu">sum</span>(MAPQ <span class="sc">==</span> <span class="dv">40</span>),</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">MAPQ_60 =</span> <span class="fu">sum</span>(MAPQ <span class="sc">==</span> <span class="dv">60</span>),</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">High_Quality =</span> <span class="fu">sum</span>(MAPQ <span class="sc">&gt;=</span> <span class="dv">30</span>),</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pct_MAPQ_0 =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> MAPQ_0 <span class="sc">/</span> Total_Reads, <span class="dv">2</span>),</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pct_MAPQ_40 =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> MAPQ_40 <span class="sc">/</span> Total_Reads, <span class="dv">2</span>),</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pct_MAPQ_60 =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> MAPQ_60 <span class="sc">/</span> Total_Reads, <span class="dv">2</span>),</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pct_HighQ  =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> High_Quality <span class="sc">/</span> Total_Reads, <span class="dv">2</span>)</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>mapq_stats</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 76 × 10
+   Sample Total_Reads MAPQ_0 MAPQ_40 MAPQ_60 High_Quality Pct_MAPQ_0 Pct_MAPQ_40
+   &lt;chr&gt;        &lt;int&gt;  &lt;int&gt;   &lt;int&gt;   &lt;int&gt;        &lt;int&gt;      &lt;dbl&gt;       &lt;dbl&gt;
+ 1 SRR19…       46464    351    1578   37250        43817       0.76        3.4 
+ 2 SRR19…         552      6      16     444          517       1.09        2.9 
+ 3 SRR19…       13886    122     463   10940        13001       0.88        3.33
+ 4 SRR19…       46814    714    2242   38471        44272       1.53        4.79
+ 5 SRR19…       99536    283    3079   85575        95817       0.28        3.09
+ 6 SRR19…       58504    318    2171   50009        56529       0.54        3.71
+ 7 SRR19…      215983    512    6092  189581       210189       0.24        2.82
+ 8 SRR19…      127704    448    4269  110560       123877       0.35        3.34
+ 9 SRR19…      108071   2873    5878   86237       101018       2.66        5.44
+10 SRR19…       95490    363    3475   81489        92226       0.38        3.64
+# ℹ 66 more rows
+# ℹ 2 more variables: Pct_MAPQ_60 &lt;dbl&gt;, Pct_HighQ &lt;dbl&gt;</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Overall summary across all BAMs</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>mapq_overall <span class="ot">&lt;-</span> mapq_df <span class="sc">%&gt;%</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Total_Reads =</span> <span class="fu">n</span>(),</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">MAPQ_0 =</span> <span class="fu">sum</span>(MAPQ <span class="sc">==</span> <span class="dv">0</span>),</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">MAPQ_40 =</span> <span class="fu">sum</span>(MAPQ <span class="sc">==</span> <span class="dv">40</span>),</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">MAPQ_60 =</span> <span class="fu">sum</span>(MAPQ <span class="sc">==</span> <span class="dv">60</span>),</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">High_Quality =</span> <span class="fu">sum</span>(MAPQ <span class="sc">&gt;=</span> <span class="dv">30</span>)</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pct_MAPQ_0 =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> MAPQ_0 <span class="sc">/</span> Total_Reads, <span class="dv">2</span>),</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pct_MAPQ_40 =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> MAPQ_40 <span class="sc">/</span> Total_Reads, <span class="dv">2</span>),</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pct_MAPQ_60 =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> MAPQ_60 <span class="sc">/</span> Total_Reads, <span class="dv">2</span>),</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pct_HighQ  =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> High_Quality <span class="sc">/</span> Total_Reads, <span class="dv">2</span>)</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>mapq_overall</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Total_Reads MAPQ_0 MAPQ_40 MAPQ_60 High_Quality Pct_MAPQ_0 Pct_MAPQ_40
+1     4897097 281284  276177 3619254      4332374       5.74        5.64
+  Pct_MAPQ_60 Pct_HighQ
+1       73.91     88.47</code></pre>
+</div>
+</div>
 </section>
 </section>
-<section id="step-5-run-and-configure-qualimap-for-bamqc-analysis" class="level1">
-<h1>Step 5: Run and Configure Qualimap for BAMQC Analysis</h1>
-<section id="set-up-r-environment-for-plotting-with-qualimap" class="level2">
-<h2 class="anchored" data-anchor-id="set-up-r-environment-for-plotting-with-qualimap">Set Up R Environment for Plotting with Qualimap</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/R_libs</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> ~/.Rprofile</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="run-and-configure-qualimap-for-bamqc-analysis" class="level1">
+<h1>Run and Configure Qualimap for BAMQC Analysis</h1>
+<p><strong>Check if required module is installed:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> avail bio/ <span class="kw">|</span> <span class="fu">grep</span> qualimap</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>If available, load it:</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load bio/qualimap/<span class="op">&lt;</span>version<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>If not available, download and install Qualimap locally:</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /home/group.kurse/qbius030/tools/</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://bitbucket.org/kokonech/qualimap/downloads/qualimap_v2.3.zip</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> qualimap_v2.3.zip</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'export PATH="/home/group.kurse/qbius030/tools/qualimap_v2.3:$PATH"'</span> <span class="op">&gt;&gt;</span> ~/.bashrc</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Try running Qualimap:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qualimap</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li><p>If you see this error: <strong>Unrecognized VM option ‘MaxPermSize=1024m’ Error: Could not create the Java Virtual Machine.</strong></p></li>
+<li><p>Edit the Qualimap launch script:</p></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> /home/group.kurse/qbius030/tools/qualimap_v2.3/qualimap</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Press Ctrl+W and search for MaxPermSize</li>
+<li>Find the line: <strong>java_options=“-Xms32m -Xmx$JAVA_MEM_SIZE -XX:MaxPermSize=1024m”</strong></li>
+<li>Change it to: <strong>java_options=“-Xms32m -Xmx$JAVA_MEM_SIZE” - Save (Ctrl+O, Enter) and exit (Ctrl+X)</strong></li>
+</ul>
+<p><strong>Set Up R Environment for Plotting with Qualimap</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/R_libs</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'.libPaths("/home/group.kurse/qbius030/R_libs/")'</span> <span class="op">&gt;&gt;</span> ~/.Rprofile</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>In R:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"XML"</span>, <span class="at">lib =</span> <span class="st">"~/R_libs"</span>)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"optparse"</span>, <span class="at">lib =</span> <span class="st">"~/R_libs"</span>)</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"BiocManager"</span>, <span class="at">lib =</span> <span class="st">"~/R_libs"</span>)</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"NOISeq"</span>, <span class="at">lib =</span> <span class="st">"~/R_libs"</span>, <span class="at">force =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"Biobase"</span>, <span class="at">lib =</span> <span class="st">"~/R_libs"</span>)</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"getopt"</span>, <span class="at">lib =</span> <span class="st">"~/R_libs"</span>)</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">q</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Set .libPaths() to local library in .Rprofile:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> ~/.Rprofile</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Add this line:</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="ex">.libPaths</span><span class="er">(</span><span class="st">"/home/group.kurse/qbius030/R_libs"</span><span class="kw">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Check library path in R:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.libPaths</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="create-and-submit-a-slurm-script-for-bamqc-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="create-and-submit-a-slurm-script-for-bamqc-analysis">Create and Submit a SLURM Script for BAMQC Analysis</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --ntasks-per-node=8</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=10gb</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=01:00:00</span></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account=UniKoeln</span></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=/home/group.kurse/qbius030/Practical_Day_1/bamqc/bamqc.out</span></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=/home/group.kurse/qbius030/Practical_Day_1/bamqc/bamqc.err</span></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load qualimap</span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="va">BAM_DIR</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/Practical_Day_1/mapping"</span></span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="va">BAMQC_DIR</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/Practical_Day_1/bamqc"</span></span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">$BAMQC_DIR</span></span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> BAM_FILE <span class="kw">in</span> <span class="va">$BAM_DIR</span>/<span class="pp">*</span>.sorted.bam<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>  <span class="va">SAMPLE_NAME</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">$BAM_FILE</span> .sorted.bam<span class="va">)</span></span>
-<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>  <span class="va">QUALIMAP_OUTPUT_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">$BAMQC_DIR</span><span class="st">/</span><span class="va">$SAMPLE_NAME</span><span class="st">"</span></span>
-<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Running Qualimap BAMQC for </span><span class="va">$SAMPLE_NAME</span><span class="st">"</span></span>
-<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>  <span class="ex">qualimap</span> bamqc <span class="at">-bam</span> <span class="va">$BAM_FILE</span> <span class="at">-outdir</span> <span class="va">$QUALIMAP_OUTPUT_DIR</span> <span class="at">-outformat</span> HTML <span class="at">-outfile</span> <span class="st">"</span><span class="va">${SAMPLE_NAME}</span><span class="st">_report.html"</span></span>
-<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
-<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a><span class="va">INPUT_GROUPS_FILE</span><span class="op">=</span><span class="st">"</span><span class="va">$BAMQC_DIR</span><span class="st">/input_groups.txt"</span></span>
-<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-f</span> <span class="va">$INPUT_GROUPS_FILE</span></span>
-<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Creating input groups file for Multi-BAMQC"</span></span>
-<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> BAMQC_OUTPUT_DIR <span class="kw">in</span> <span class="va">$BAMQC_DIR</span>/<span class="pp">*</span><span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="bu">[</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$BAMQC_OUTPUT_DIR</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>    <span class="va">SAMPLE_NAME</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">$BAMQC_OUTPUT_DIR)</span></span>
-<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="at">-e</span> <span class="st">"</span><span class="va">${SAMPLE_NAME}</span><span class="st">\t</span><span class="va">${BAMQC_OUTPUT_DIR}</span><span class="st">\t1"</span> <span class="op">&gt;&gt;</span> <span class="va">$INPUT_GROUPS_FILE</span></span>
-<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a>  <span class="cf">fi</span></span>
-<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
-<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a><span class="va">MULTIBAMQC_DIR</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/Practical_Day_1/bamqc/multibamqc"</span></span>
-<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">$MULTIBAMQC_DIR</span></span>
-<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Running Qualimap Multi-BAMQC"</span></span>
-<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a><span class="ex">qualimap</span> multi-bamqc <span class="at">-d</span> <span class="va">$INPUT_GROUPS_FILE</span> <span class="at">-outdir</span> <span class="va">$MULTIBAMQC_DIR</span> <span class="at">-outformat</span> PDF</span>
-<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-41"><a href="#cb25-41" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Qualimap analysis complete. Reports saved in </span><span class="va">$MULTIBAMQC_DIR</span><span class="st">."</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.libPaths</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "/run/media/tahirali/2a4efc98-aaa3-4a01-a063-37db1463f3a8/tools/anaconda/envs/quarto-env/lib/R/library"</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>my_lib <span class="ot">&lt;-</span> <span class="st">"/run/media/tahirali/2a4efc98-aaa3-4a01-a063-37db1463f3a8/tools/anaconda/envs/quarto-env/lib/R/library"</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>cran_pkgs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"optparse"</span>, <span class="st">"XML"</span>)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>bioc_pkgs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"NOISeq"</span>, <span class="st">"Rsamtools"</span>, <span class="st">"Repitools"</span>, <span class="st">"rtracklayer"</span>)</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>is_installed <span class="ot">&lt;-</span> <span class="cf">function</span>(pkg, lib) {</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  pkg <span class="sc">%in%</span> <span class="fu">rownames</span>(<span class="fu">installed.packages</span>(<span class="at">lib.loc =</span> lib))</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Set CRAN mirror only for CRAN packages</span></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">repos =</span> <span class="fu">c</span>(<span class="at">CRAN =</span> <span class="st">"https://cloud.r-project.org"</span>))</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (pkg <span class="cf">in</span> cran_pkgs) {</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is_installed</span>(pkg, my_lib)) {</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(pkg, <span class="at">lib =</span> my_lib)</span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Do NOT set options(repos=...) before BiocManager::install()</span></span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is_installed</span>(<span class="st">"BiocManager"</span>, my_lib)) {</span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"BiocManager"</span>, <span class="at">lib =</span> my_lib)</span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="at">version =</span> <span class="st">"3.20"</span>)</span>
+<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (pkg <span class="cf">in</span> bioc_pkgs) {</span>
+<span id="cb37-25"><a href="#cb37-25" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is_installed</span>(pkg, my_lib)) {</span>
+<span id="cb37-26"><a href="#cb37-26" aria-hidden="true" tabindex="-1"></a>    BiocManager<span class="sc">::</span><span class="fu">install</span>(pkg, <span class="at">lib =</span> my_lib)</span>
+<span id="cb37-27"><a href="#cb37-27" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb37-28"><a href="#cb37-28" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p><strong>Example SLURM Script for BAMQC Analysis</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=bamqc</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=1:00:00</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=4</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=16gb</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account=UniKoeln</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=/home/group.kurse/qbius030/Practical_Day_1/bamqc/bamqc.out</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=/home/group.kurse/qbius030/Practical_Day_1/bamqc/bamqc.err</span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a><span class="va">BAM_DIR</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/Practical_Day_1/mapping"</span></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a><span class="va">BAMQC_DIR</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/Practical_Day_1/bamqc"</span></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a><span class="va">MULTIBAMQC_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">$BAMQC_DIR</span><span class="st">/multibamqc"</span></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">"</span><span class="va">$BAMQC_DIR</span><span class="st">"</span> <span class="st">"</span><span class="va">$MULTIBAMQC_DIR</span><span class="st">"</span></span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Run Qualimap BAMQC for each sorted BAM file</span></span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> BAM_FILE <span class="kw">in</span> <span class="st">"</span><span class="va">$BAM_DIR</span><span class="st">"</span>/<span class="pp">*</span>.sorted.bam<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>  <span class="va">SAMPLE_NAME</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="st">"</span><span class="va">$BAM_FILE</span><span class="st">"</span> .sorted.bam<span class="va">)</span></span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>  <span class="va">QUALIMAP_OUTPUT_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">$BAMQC_DIR</span><span class="st">/</span><span class="va">$SAMPLE_NAME</span><span class="st">"</span></span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Running Qualimap BAMQC for </span><span class="va">$SAMPLE_NAME</span><span class="st">"</span></span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>  <span class="ex">qualimap</span> bamqc <span class="dt">\</span></span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">-bam</span> <span class="st">"</span><span class="va">$BAM_FILE</span><span class="st">"</span> <span class="dt">\</span></span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">-outdir</span> <span class="st">"</span><span class="va">$QUALIMAP_OUTPUT_DIR</span><span class="st">"</span> <span class="dt">\</span></span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">-outformat</span> HTML <span class="dt">\</span></span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">-outfile</span> <span class="st">"</span><span class="va">${SAMPLE_NAME}</span><span class="st">_report"</span></span>
+<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare input groups file for multi-bamqc</span></span>
+<span id="cb38-30"><a href="#cb38-30" aria-hidden="true" tabindex="-1"></a><span class="va">INPUT_GROUPS_FILE</span><span class="op">=</span><span class="st">"</span><span class="va">$BAMQC_DIR</span><span class="st">/input_groups.txt"</span></span>
+<span id="cb38-31"><a href="#cb38-31" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-f</span> <span class="st">"</span><span class="va">$INPUT_GROUPS_FILE</span><span class="st">"</span></span>
+<span id="cb38-32"><a href="#cb38-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-33"><a href="#cb38-33" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Creating input groups file for Multi-BAMQC"</span></span>
+<span id="cb38-34"><a href="#cb38-34" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> BAMQC_OUTPUT_DIR <span class="kw">in</span> <span class="st">"</span><span class="va">$BAMQC_DIR</span><span class="st">"</span>/<span class="pp">*</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb38-35"><a href="#cb38-35" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="bu">[</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$BAMQC_OUTPUT_DIR</span><span class="st">"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="bu">[</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$BAMQC_OUTPUT_DIR</span><span class="st">/genome_results.txt"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb38-36"><a href="#cb38-36" aria-hidden="true" tabindex="-1"></a>    <span class="va">SAMPLE_NAME</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="st">"</span><span class="va">$BAMQC_OUTPUT_DIR</span><span class="st">"</span><span class="va">)</span></span>
+<span id="cb38-37"><a href="#cb38-37" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="at">-e</span> <span class="st">"</span><span class="va">${SAMPLE_NAME}</span><span class="st">\t</span><span class="va">${BAMQC_OUTPUT_DIR}</span><span class="st">\t1"</span> <span class="op">&gt;&gt;</span> <span class="st">"</span><span class="va">$INPUT_GROUPS_FILE</span><span class="st">"</span></span>
+<span id="cb38-38"><a href="#cb38-38" aria-hidden="true" tabindex="-1"></a>  <span class="cf">fi</span></span>
+<span id="cb38-39"><a href="#cb38-39" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb38-40"><a href="#cb38-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-41"><a href="#cb38-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Run Qualimap Multi-BAMQC</span></span>
+<span id="cb38-42"><a href="#cb38-42" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Running Qualimap Multi-BAMQC"</span></span>
+<span id="cb38-43"><a href="#cb38-43" aria-hidden="true" tabindex="-1"></a><span class="ex">qualimap</span> multi-bamqc <span class="dt">\</span></span>
+<span id="cb38-44"><a href="#cb38-44" aria-hidden="true" tabindex="-1"></a>  <span class="at">-d</span> <span class="st">"</span><span class="va">$INPUT_GROUPS_FILE</span><span class="st">"</span> <span class="dt">\</span></span>
+<span id="cb38-45"><a href="#cb38-45" aria-hidden="true" tabindex="-1"></a>  <span class="at">-outdir</span> <span class="st">"</span><span class="va">$MULTIBAMQC_DIR</span><span class="st">"</span> <span class="dt">\</span></span>
+<span id="cb38-46"><a href="#cb38-46" aria-hidden="true" tabindex="-1"></a>  <span class="at">-outformat</span> PDF</span>
+<span id="cb38-47"><a href="#cb38-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-48"><a href="#cb38-48" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Qualimap analysis complete. Reports saved in </span><span class="va">$MULTIBAMQC_DIR</span><span class="st">."</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>View results using Firefox:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /home/group.kurse/qbius030/Practical_Day_1/bamqc/multibamqc</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="ex">firefox</span> report.pdf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<hr>
-</section>
-<section id="plot-qualimap-coverage-plot" class="level2">
-<h2 class="anchored" data-anchor-id="plot-qualimap-coverage-plot"><em>Plot: Qualimap Coverage Plot</em></h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /home/group.kurse/qbius030/Practical_Day_1/bamqc/multibamqc</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="ex">firefox</span> report.pdf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Use MultiQC to Summarize Qualimap QC of All Samples</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=multiqc</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=1:00:00</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=4</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=16gb</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account=UniKoeln</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=/home/group.kurse/qbius030/Practical_Day_1/bamqc/bamqc.out</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=/home/group.kurse/qbius030/Practical_Day_1/bamqc/bamqc.err</span></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> purge</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load bio/MultiQC/1.22.3-foss-2023b</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a><span class="va">BAMQC_DIR</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/Practical_Day_1/bamqc"</span></span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a><span class="va">MULTIBAMQC_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">$BAMQC_DIR</span><span class="st">/multiqc_report"</span></span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">"</span><span class="va">${MULTIBAMQC_DIR}</span><span class="st">"</span></span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"====================================================="</span></span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Running MultiQC on Qualimap BAM QC results..."</span></span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Output Directory: </span><span class="va">${MULTIBAMQC_DIR}</span><span class="st">"</span></span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"====================================================="</span></span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a><span class="ex">multiqc</span> <span class="st">"</span><span class="va">${BAMQC_DIR}</span><span class="st">"</span> <span class="at">-o</span> <span class="st">"</span><span class="va">${MULTIBAMQC_DIR}</span><span class="st">"</span></span>
+<span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"MultiQC report generated in: </span><span class="va">${MULTIBAMQC_DIR}</span><span class="st">"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><img src="qualimap_coverage_plot.png" class="img-fluid"><br>
-<em>Figure: Example Qualimap coverage plot.</em></p>
-<hr>
-</section>
-</section>
-<section id="wrapping-up-practical-day-one" class="level1">
-<h1>Wrapping Up Practical Day One</h1>
+<strong>Figure: Qualimap coverage plot.</strong></p>
+<p><strong>Wrapping Up Practical Day One</strong></p>
 <p>Thank you for your active participation today! 🎉<br>
 Great job on tackling today’s challenges—we hope you found it engaging and insightful.<br>
 See you next week for more exciting learning and discoveries! Keep practicing and exploring until then! 🚀</p>
