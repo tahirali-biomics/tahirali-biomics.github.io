@@ -18,7 +18,7 @@
     "href": "teaching/tutorials/Hands-on Genomics Tutorials.html",
     "title": "Hands-on Genomics Tutorials",
     "section": "",
-    "text": "Welcome to the collection of hands-on bioinformatics exercises for the course.\nEach exercise is designed to help you build practical skills in genomics, data analysis, and computational biology, using real data and modern tools.\nYou can browse, read, and copy-paste code directly from each exercise page.\n\n\nPractical Day 1: FASTQ to VCF - Part 1\nFrom raw sequencing data to variant calls: learn how to access the HPC, explore FASTQ files, run quality control, trim reads, and map to a reference genome using real tools and scripts."
+    "text": "Welcome to the collection of hands-on bioinformatics exercises for the course.\nEach exercise is designed to help you build practical skills in genomics, data analysis, and computational biology, using real data and modern tools.\nYou can browse, read, and copy-paste code directly from each exercise page.\n\n\nPractical Day 1: FASTQ to VCF - Part 1\nFrom raw sequencing data to variant calls: learn how to access the HPC, explore FASTQ files, run quality control, trim reads, and map to a reference genome using real tools and scripts.\nPractical Day 2: FASTQ to VCF - Part 2\nFrom filtered BAM files to analysed variants: learn how to perform BAM filtering, call and filter variants, explore VCF files, and perform dimensionality reduction (PCA) on real datasets using R and HPC tools."
   },
   {
     "objectID": "teaching/apps/hwe_app.html",
