@@ -1,71 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://tahirali-biomics.github.io/teaching/tutorials/practical_day3.html</loc>
-    <lastmod>2025-10-07T09:15:41.050Z</lastmod>
+    <loc>https://tahirali-biomics.github.io/workshops/workshops.html</loc>
+    <lastmod>2025-10-09T20:40:57.000Z</lastmod>
   </url>
   <url>
-    <loc>https://tahirali-biomics.github.io/teaching/tutorials/practical_day1.html</loc>
-    <lastmod>2025-10-06T10:27:27.280Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tahirali-biomics.github.io/teaching/apps/coalescent-explorer-app.html</loc>
-    <lastmod>2025-10-09T07:50:54.350Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tahirali-biomics.github.io/teaching/apps/hwe_app.html</loc>
-    <lastmod>2025-09-25T07:12:13.420Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tahirali-biomics.github.io/teaching/apps/fst_app.html</loc>
-    <lastmod>2025-09-25T06:22:10.990Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tahirali-biomics.github.io/teaching/apps/drift-app.html</loc>
-    <lastmod>2025-09-25T12:18:42.590Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tahirali-biomics.github.io/teaching/teaching.html</loc>
-    <lastmod>2025-09-30T07:10:39.210Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tahirali-biomics.github.io/projects.html</loc>
-    <lastmod>2025-09-23T10:25:36.880Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tahirali-biomics.github.io/index.html</loc>
-    <lastmod>2025-09-23T20:26:48.310Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tahirali-biomics.github.io/cv.html</loc>
-    <lastmod>2025-09-21T12:04:45.670Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tahirali-biomics.github.io/publications.html</loc>
-    <lastmod>2025-10-03T22:17:03.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tahirali-biomics.github.io/teaching/apps/climate-explorer-app.html</loc>
-    <lastmod>2025-09-29T11:04:20.570Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tahirali-biomics.github.io/teaching/apps/AF_dandelion.html</loc>
-    <lastmod>2025-09-25T12:20:44.660Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tahirali-biomics.github.io/teaching/apps/het_fst_app.html</loc>
-    <lastmod>2025-09-25T10:09:34.340Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tahirali-biomics.github.io/teaching/apps/interactive.html</loc>
-    <lastmod>2025-10-08T15:02:33.410Z</lastmod>
+    <loc>https://tahirali-biomics.github.io/teaching/tutorials/practical_day2.html</loc>
+    <lastmod>2025-10-06T08:42:46.540Z</lastmod>
   </url>
   <url>
     <loc>https://tahirali-biomics.github.io/teaching/tutorials/Hands-on Genomics Tutorials.html</loc>
     <lastmod>2025-10-05T07:44:55.000Z</lastmod>
   </url>
   <url>
-    <loc>https://tahirali-biomics.github.io/teaching/tutorials/practical_day2.html</loc>
-    <lastmod>2025-10-06T08:42:46.540Z</lastmod>
+    <loc>https://tahirali-biomics.github.io/teaching/apps/interactive.html</loc>
+    <lastmod>2025-10-08T15:02:33.410Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tahirali-biomics.github.io/teaching/apps/het_fst_app.html</loc>
+    <lastmod>2025-09-25T10:09:34.340Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tahirali-biomics.github.io/teaching/apps/AF_dandelion.html</loc>
+    <lastmod>2025-09-25T12:20:44.660Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tahirali-biomics.github.io/teaching/apps/climate-explorer-app.html</loc>
+    <lastmod>2025-09-29T11:04:20.570Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tahirali-biomics.github.io/publications.html</loc>
+    <lastmod>2025-10-03T22:17:03.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tahirali-biomics.github.io/cv.html</loc>
+    <lastmod>2025-09-21T12:04:45.670Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tahirali-biomics.github.io/index.html</loc>
+    <lastmod>2025-09-23T20:26:48.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tahirali-biomics.github.io/projects.html</loc>
+    <lastmod>2025-09-23T10:25:36.880Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tahirali-biomics.github.io/teaching/teaching.html</loc>
+    <lastmod>2025-10-09T20:32:23.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tahirali-biomics.github.io/teaching/apps/drift-app.html</loc>
+    <lastmod>2025-09-25T12:18:42.590Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tahirali-biomics.github.io/teaching/apps/fst_app.html</loc>
+    <lastmod>2025-09-25T06:22:10.990Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tahirali-biomics.github.io/teaching/apps/hwe_app.html</loc>
+    <lastmod>2025-09-25T07:12:13.420Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tahirali-biomics.github.io/teaching/apps/coalescent-explorer-app.html</loc>
+    <lastmod>2025-10-09T20:54:11.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tahirali-biomics.github.io/teaching/tutorials/practical_day1.html</loc>
+    <lastmod>2025-10-06T10:27:27.280Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tahirali-biomics.github.io/teaching/tutorials/practical_day3.html</loc>
+    <lastmod>2025-10-07T09:15:41.050Z</lastmod>
   </url>
 </urlset>
