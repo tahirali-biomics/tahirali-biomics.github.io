@@ -255,71 +255,13 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Core multivariate analysis packages</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(adegenet)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(FactoMineR)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.1     ✔ stringr   1.5.2
-✔ ggplot2   4.0.0     ✔ tibble    3.3.0
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.1.0     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: permute</code></pre>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(adegenet)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: ade4
-
-   /// adegenet 2.1.11 is loaded ////////////
-
-   &gt; overview: '?adegenet'
-   &gt; tutorials/doc/questions: 'adegenetWeb()' 
-   &gt; bug reports/feature requests: adegenetIssues()</code></pre>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(FactoMineR)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'FactoMineR'
-
-The following object is masked from 'package:ade4':
-
-    reconst</code></pre>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa</code></pre>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'reshape2'
-
-The following object is masked from 'package:tidyr':
-
-    smiths</code></pre>
-</div>
 </div>
 </section>
 <section id="generate-example-data" class="level2">
@@ -334,78 +276,62 @@ The following object is masked from 'package:tidyr':
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Population labels</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>pop <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">paste0</span>(<span class="st">"Pop"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>), <span class="at">each =</span> <span class="dv">20</span>)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Coordinates (latitude, longitude)</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">Lat =</span> <span class="fu">rep</span>(<span class="fu">seq</span>(<span class="dv">45</span>, <span class="dv">49</span>, <span class="at">length.out =</span> <span class="dv">5</span>), <span class="at">each =</span> <span class="dv">20</span>) <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="fl">0.1</span>),</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">Lon =</span> <span class="fu">rep</span>(<span class="fu">seq</span>(<span class="dv">8</span>, <span class="dv">14</span>, <span class="at">length.out =</span> <span class="dv">5</span>), <span class="at">each =</span> <span class="dv">20</span>) <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="fl">0.1</span>)</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Climate gradients (Temp, Prec, Elev, Season)</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>clim <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">Temp =</span> <span class="dv">8</span> <span class="sc">+</span> <span class="fl">0.9</span> <span class="sc">*</span> coords<span class="sc">$</span>Lat <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="fl">0.4</span>),</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">Prec =</span> <span class="dv">800</span> <span class="sc">-</span> <span class="dv">50</span> <span class="sc">*</span> coords<span class="sc">$</span>Lat <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">10</span>),</span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">Elev =</span> <span class="dv">100</span> <span class="sc">*</span> (coords<span class="sc">$</span>Lat <span class="sc">-</span> <span class="dv">44</span>) <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">20</span>),</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">Season =</span> <span class="dv">5</span> <span class="sc">+</span> <span class="fl">0.4</span> <span class="sc">*</span> coords<span class="sc">$</span>Lon <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="fl">0.5</span>)</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Population-level effects on traits</span></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>pop_effects <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">Pop =</span> <span class="fu">paste0</span>(<span class="st">"Pop"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>),</span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">LeafShift =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="at">length.out =</span> <span class="dv">5</span>),</span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">FlowerShift =</span> <span class="fu">seq</span>(<span class="dv">3</span>, <span class="sc">-</span><span class="dv">3</span>, <span class="at">length.out =</span> <span class="dv">5</span>)</span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Trait data influenced by both population and climate</span></span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>traits <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">LeafArea =</span> <span class="dv">20</span> <span class="sc">+</span></span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.6</span> <span class="sc">*</span> clim<span class="sc">$</span>Temp <span class="sc">-</span> <span class="fl">0.01</span> <span class="sc">*</span> clim<span class="sc">$</span>Prec <span class="sc">+</span></span>
-<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>    pop_effects<span class="sc">$</span>LeafShift[<span class="fu">match</span>(pop, pop_effects<span class="sc">$</span>Pop)] <span class="sc">+</span></span>
-<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="fl">0.6</span>),</span>
-<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">FlowerTime =</span> <span class="dv">100</span> <span class="sc">-</span></span>
-<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2.0</span> <span class="sc">*</span> clim<span class="sc">$</span>Temp <span class="sc">+</span> <span class="fl">0.04</span> <span class="sc">*</span> clim<span class="sc">$</span>Season <span class="sc">+</span></span>
-<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>    pop_effects<span class="sc">$</span>FlowerShift[<span class="fu">match</span>(pop, pop_effects<span class="sc">$</span>Pop)] <span class="sc">+</span></span>
-<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="fl">1.5</span>),</span>
-<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">Height =</span> <span class="dv">30</span> <span class="sc">+</span></span>
-<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.5</span> <span class="sc">*</span> clim<span class="sc">$</span>Temp <span class="sc">-</span> <span class="fl">0.03</span> <span class="sc">*</span> clim<span class="sc">$</span>Elev <span class="sc">+</span></span>
-<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>    pop_effects<span class="sc">$</span>LeafShift[<span class="fu">match</span>(pop, pop_effects<span class="sc">$</span>Pop)] <span class="sc">+</span></span>
-<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Genotype data with population differentiation</span></span>
-<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>geno <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="dv">100</span>, <span class="at">ncol =</span> <span class="dv">50</span>))</span>
-<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
-<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>, <span class="at">length.out =</span> <span class="dv">5</span>)[i]</span>
-<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>  geno[((i<span class="dv">-1</span>)<span class="sc">*</span><span class="dv">20</span><span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>(i<span class="sc">*</span><span class="dv">20</span>), ] <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rbinom</span>(<span class="dv">20</span><span class="sc">*</span><span class="dv">50</span>, <span class="dv">2</span>, <span class="at">prob =</span> p), <span class="at">nrow =</span> <span class="dv">20</span>)</span>
-<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(geno) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"SNP"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>)</span>
-<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine metadata</span></span>
-<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="at">Pop =</span> pop, coords, clim, traits)</span>
-<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Population labels</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>pop <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">paste0</span>(<span class="st">"Pop"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>), <span class="at">each =</span> <span class="dv">20</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Coordinates (latitude, longitude)</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">Lat =</span> <span class="fu">rep</span>(<span class="fu">seq</span>(<span class="dv">45</span>, <span class="dv">49</span>, <span class="at">length.out =</span> <span class="dv">5</span>), <span class="at">each =</span> <span class="dv">20</span>) <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="fl">0.1</span>),</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">Lon =</span> <span class="fu">rep</span>(<span class="fu">seq</span>(<span class="dv">8</span>, <span class="dv">14</span>, <span class="at">length.out =</span> <span class="dv">5</span>), <span class="at">each =</span> <span class="dv">20</span>) <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="fl">0.1</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Climate gradients (Temp, Prec, Elev, Season)</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>clim <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">Temp =</span> <span class="dv">8</span> <span class="sc">+</span> <span class="fl">0.9</span> <span class="sc">*</span> coords<span class="sc">$</span>Lat <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="fl">0.4</span>),</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">Prec =</span> <span class="dv">800</span> <span class="sc">-</span> <span class="dv">50</span> <span class="sc">*</span> coords<span class="sc">$</span>Lat <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">10</span>),</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">Elev =</span> <span class="dv">100</span> <span class="sc">*</span> (coords<span class="sc">$</span>Lat <span class="sc">-</span> <span class="dv">44</span>) <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">20</span>),</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">Season =</span> <span class="dv">5</span> <span class="sc">+</span> <span class="fl">0.4</span> <span class="sc">*</span> coords<span class="sc">$</span>Lon <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="fl">0.5</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Population-level effects on traits</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>pop_effects <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">Pop =</span> <span class="fu">paste0</span>(<span class="st">"Pop"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>),</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">LeafShift =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="at">length.out =</span> <span class="dv">5</span>),</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">FlowerShift =</span> <span class="fu">seq</span>(<span class="dv">3</span>, <span class="sc">-</span><span class="dv">3</span>, <span class="at">length.out =</span> <span class="dv">5</span>)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Trait data influenced by both population and climate</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>traits <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">LeafArea =</span> <span class="dv">20</span> <span class="sc">+</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.6</span> <span class="sc">*</span> clim<span class="sc">$</span>Temp <span class="sc">-</span> <span class="fl">0.01</span> <span class="sc">*</span> clim<span class="sc">$</span>Prec <span class="sc">+</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    pop_effects<span class="sc">$</span>LeafShift[<span class="fu">match</span>(pop, pop_effects<span class="sc">$</span>Pop)] <span class="sc">+</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="fl">0.6</span>),</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">FlowerTime =</span> <span class="dv">100</span> <span class="sc">-</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2.0</span> <span class="sc">*</span> clim<span class="sc">$</span>Temp <span class="sc">+</span> <span class="fl">0.04</span> <span class="sc">*</span> clim<span class="sc">$</span>Season <span class="sc">+</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    pop_effects<span class="sc">$</span>FlowerShift[<span class="fu">match</span>(pop, pop_effects<span class="sc">$</span>Pop)] <span class="sc">+</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="fl">1.5</span>),</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">Height =</span> <span class="dv">30</span> <span class="sc">+</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.5</span> <span class="sc">*</span> clim<span class="sc">$</span>Temp <span class="sc">-</span> <span class="fl">0.03</span> <span class="sc">*</span> clim<span class="sc">$</span>Elev <span class="sc">+</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    pop_effects<span class="sc">$</span>LeafShift[<span class="fu">match</span>(pop, pop_effects<span class="sc">$</span>Pop)] <span class="sc">+</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Genotype data with population differentiation</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>geno <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="dv">100</span>, <span class="at">ncol =</span> <span class="dv">50</span>))</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>, <span class="at">length.out =</span> <span class="dv">5</span>)[i]</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>  geno[((i<span class="dv">-1</span>)<span class="sc">*</span><span class="dv">20</span><span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>(i<span class="sc">*</span><span class="dv">20</span>), ] <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rbinom</span>(<span class="dv">20</span><span class="sc">*</span><span class="dv">50</span>, <span class="dv">2</span>, <span class="at">prob =</span> p), <span class="at">nrow =</span> <span class="dv">20</span>)</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(geno) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"SNP"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>)</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine metadata</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="at">Pop =</span> pop, coords, clim, traits)</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>  ID  Pop      Lat      Lon     Temp      Prec      Elev   Season LeafArea
-1  1 Pop1 44.94395 7.928959 49.32908 -1454.350  92.92412 7.870637 62.78536
-2  2 Pop1 44.97698 8.025688 49.00425 -1456.376  74.32520 7.713426 61.94990
-3  3 Pop1 45.15587 7.975331 48.53423 -1467.179 102.89212 8.703525 61.77233
-4  4 Pop1 45.00705 7.965246 48.72362 -1460.878 100.12825 8.561629 60.93331
-5  5 Pop1 45.01293 7.904838 48.34590 -1455.018 114.70680 7.407352 62.03195
-6  6 Pop1 45.17151 7.995497 48.46386 -1455.264  84.13972 8.150625 61.50451
-  FlowerTime   Height
-1   3.564334 50.23310
-2   2.989375 49.61436
-3   5.240048 50.03555
-4   6.073493 50.51090
-5   4.557430 49.00802
-6   7.283285 49.85184</code></pre>
-</div>
 </div>
 </section>
 <section id="pca-on-trait-data" class="level2">
@@ -416,23 +342,17 @@ such as morphological traits or environmental variables.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>trait_pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(dat[, <span class="fu">c</span>(<span class="st">"LeafArea"</span>, <span class="st">"FlowerTime"</span>, <span class="st">"Height"</span>)], <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_biplot</span>(</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  trait_pca,</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">habillage =</span> dat<span class="sc">$</span>Pop,</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">addEllipses =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">repel =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"PCA of Trait Variation Across Populations"</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>trait_pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(dat[, <span class="fu">c</span>(<span class="st">"LeafArea"</span>, <span class="st">"FlowerTime"</span>, <span class="st">"Height"</span>)], <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_biplot</span>(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  trait_pca,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">habillage =</span> dat<span class="sc">$</span>Pop,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">addEllipses =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">repel =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"PCA of Trait Variation Across Populations"</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-ℹ Please use `linewidth` instead.
-ℹ The deprecated feature was likely used in the ggpubr package.
-  Please report the issue at &lt;https://github.com/kassambara/ggpubr/issues&gt;.</code></pre>
-</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -465,18 +385,18 @@ such as genetic data (allele frequencies, SNPs, or F_ST matrices).</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Euclidean distance on scaled genotypes</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>gen_dist <span class="ot">&lt;-</span> <span class="fu">dist</span>(<span class="fu">scale</span>(geno))</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>pcoa_res <span class="ot">&lt;-</span> <span class="fu">cmdscale</span>(gen_dist, <span class="at">k =</span> <span class="dv">2</span>, <span class="at">eig =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>pcoa_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pcoa_res<span class="sc">$</span>points)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(pcoa_df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"PCoA1"</span>, <span class="st">"PCoA2"</span>)</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>pcoa_df<span class="sc">$</span>Pop <span class="ot">&lt;-</span> dat<span class="sc">$</span>Pop</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pcoa_df, <span class="fu">aes</span>(PCoA1, PCoA2, <span class="at">color =</span> Pop)) <span class="sc">+</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"PCoA on Genetic Data"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Euclidean distance on scaled genotypes</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>gen_dist <span class="ot">&lt;-</span> <span class="fu">dist</span>(<span class="fu">scale</span>(geno))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>pcoa_res <span class="ot">&lt;-</span> <span class="fu">cmdscale</span>(gen_dist, <span class="at">k =</span> <span class="dv">2</span>, <span class="at">eig =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>pcoa_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pcoa_res<span class="sc">$</span>points)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(pcoa_df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"PCoA1"</span>, <span class="st">"PCoA2"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>pcoa_df<span class="sc">$</span>Pop <span class="ot">&lt;-</span> dat<span class="sc">$</span>Pop</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pcoa_df, <span class="fu">aes</span>(PCoA1, PCoA2, <span class="at">color =</span> Pop)) <span class="sc">+</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"PCoA on Genetic Data"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -504,8 +424,8 @@ such as genetic data (allele frequencies, SNPs, or F_ST matrices).</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>dapc_res <span class="ot">&lt;-</span> <span class="fu">dapc</span>(geno, dat<span class="sc">$</span>Pop, <span class="at">n.pca =</span> <span class="dv">20</span>, <span class="at">n.da =</span> <span class="dv">4</span>)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">scatter</span>(dapc_res, <span class="at">scree.da =</span> <span class="cn">TRUE</span>, <span class="at">bg =</span> <span class="st">"white"</span>, <span class="at">pch =</span> <span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dapc_res <span class="ot">&lt;-</span> <span class="fu">dapc</span>(geno, dat<span class="sc">$</span>Pop, <span class="at">n.pca =</span> <span class="dv">20</span>, <span class="at">n.da =</span> <span class="dv">4</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">scatter</span>(dapc_res, <span class="at">scree.da =</span> <span class="cn">TRUE</span>, <span class="at">bg =</span> <span class="st">"white"</span>, <span class="at">pch =</span> <span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -538,70 +458,9 @@ such as genetic data (allele frequencies, SNPs, or F_ST matrices).</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>rda_res <span class="ot">&lt;-</span> <span class="fu">rda</span>(<span class="fu">scale</span>(geno) <span class="sc">~</span> Temp <span class="sc">+</span> Prec <span class="sc">+</span> Elev <span class="sc">+</span> Season, <span class="at">data =</span> dat)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rda_res)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-rda(formula = scale(geno) ~ Temp + Prec + Elev + Season, data = dat) 
-
-Partitioning of variance:
-              Inertia Proportion
-Total           50.00     1.0000
-Constrained     24.98     0.4996
-Unconstrained   25.02     0.5004
-
-Eigenvalues, and their contribution to the variance 
-
-Importance of components:
-                         RDA1     RDA2     RDA3     RDA4     PC1     PC2
-Eigenvalue            24.1902 0.353892 0.273640 0.163182 1.43970 1.36617
-Proportion Explained   0.4838 0.007078 0.005473 0.003264 0.02879 0.02732
-Cumulative Proportion  0.4838 0.490882 0.496355 0.499618 0.52841 0.55574
-                          PC3     PC4     PC5     PC6     PC7     PC8     PC9
-Eigenvalue            1.32264 1.29197 1.16598 1.08045 1.02384 0.96713 0.90273
-Proportion Explained  0.02645 0.02584 0.02332 0.02161 0.02048 0.01934 0.01805
-Cumulative Proportion 0.58219 0.60803 0.63135 0.65296 0.67343 0.69278 0.71083
-                        PC10    PC11    PC12    PC13    PC14    PC15    PC16
-Eigenvalue            0.8752 0.80890 0.78919 0.77270 0.70259 0.68472 0.67310
-Proportion Explained  0.0175 0.01618 0.01578 0.01545 0.01405 0.01369 0.01346
-Cumulative Proportion 0.7283 0.74451 0.76030 0.77575 0.78980 0.80350 0.81696
-                         PC17    PC18    PC19    PC20    PC21     PC22     PC23
-Eigenvalue            0.59371 0.58568 0.55313 0.54661 0.52614 0.477618 0.461842
-Proportion Explained  0.01187 0.01171 0.01106 0.01093 0.01052 0.009552 0.009237
-Cumulative Proportion 0.82883 0.84055 0.85161 0.86254 0.87306 0.882616 0.891853
-                          PC24     PC25     PC26     PC27     PC28     PC29
-Eigenvalue            0.449154 0.402901 0.389152 0.368931 0.350728 0.315360
-Proportion Explained  0.008983 0.008058 0.007783 0.007379 0.007015 0.006307
-Cumulative Proportion 0.900836 0.908894 0.916677 0.924055 0.931070 0.937377
-                          PC30     PC31     PC32     PC33     PC34     PC35
-Eigenvalue            0.285034 0.272317 0.249898 0.243261 0.235318 0.207397
-Proportion Explained  0.005701 0.005446 0.004998 0.004865 0.004706 0.004148
-Cumulative Proportion 0.943078 0.948524 0.953522 0.958387 0.963094 0.967242
-                         PC36     PC37     PC38     PC39    PC40     PC41
-Eigenvalue            0.19051 0.184759 0.168346 0.156458 0.14149 0.125222
-Proportion Explained  0.00381 0.003695 0.003367 0.003129 0.00283 0.002504
-Cumulative Proportion 0.97105 0.974747 0.978114 0.981243 0.98407 0.986577
-                          PC42     PC43     PC44     PC45     PC46     PC47
-Eigenvalue            0.119716 0.107752 0.094117 0.087432 0.076919 0.057455
-Proportion Explained  0.002394 0.002155 0.001882 0.001749 0.001538 0.001149
-Cumulative Proportion 0.988972 0.991127 0.993009 0.994758 0.996296 0.997445
-                         PC48      PC49      PC50
-Eigenvalue            0.05049 0.0429336 0.0343095
-Proportion Explained  0.00101 0.0008587 0.0006862
-Cumulative Proportion 0.99846 0.9993138 1.0000000
-
-Accumulated constrained eigenvalues
-Importance of components:
-                         RDA1    RDA2    RDA3     RDA4
-Eigenvalue            24.1902 0.35389 0.27364 0.163182
-Proportion Explained   0.9683 0.01417 0.01095 0.006532
-Cumulative Proportion  0.9683 0.98251 0.99347 1.000000</code></pre>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rda_res, <span class="at">scaling =</span> <span class="dv">2</span>, <span class="at">main =</span> <span class="st">"RDA: Genetic Variation ~ Climate"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>rda_res <span class="ot">&lt;-</span> <span class="fu">rda</span>(<span class="fu">scale</span>(geno) <span class="sc">~</span> Temp <span class="sc">+</span> Prec <span class="sc">+</span> Elev <span class="sc">+</span> Season, <span class="at">data =</span> dat)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rda_res)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rda_res, <span class="at">scaling =</span> <span class="dv">2</span>, <span class="at">main =</span> <span class="st">"RDA: Genetic Variation ~ Climate"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -612,20 +471,8 @@ Cumulative Proportion  0.9683 0.98251 0.99347 1.000000</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(rda_res)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(rda_res)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Permutation test for rda under reduced model
-Permutation: free
-Number of permutations: 999
-
-Model: rda(formula = scale(geno) ~ Temp + Prec + Elev + Season, data = dat)
-         Df Variance      F Pr(&gt;F)    
-Model     4   24.981 23.714  0.001 ***
-Residual 95   25.019                  
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</div>
 </div>
 <p>🧭 <strong>Interpretation:</strong></p>
 <ul>
@@ -647,24 +494,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>rda_trait <span class="ot">&lt;-</span> <span class="fu">rda</span>(traits <span class="sc">~</span> Temp <span class="sc">+</span> Prec <span class="sc">+</span> Elev <span class="sc">+</span> Season, <span class="at">data =</span> dat)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(rda_trait)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Permutation test for rda under reduced model
-Permutation: free
-Number of permutations: 999
-
-Model: rda(formula = traits ~ Temp + Prec + Elev + Season, data = dat)
-         Df Variance      F Pr(&gt;F)    
-Model     4   38.447 245.21  0.001 ***
-Residual 95    3.724                  
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rda_trait, <span class="at">scaling =</span> <span class="dv">2</span>, <span class="at">main =</span> <span class="st">"RDA: Traits ~ Climate"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>rda_trait <span class="ot">&lt;-</span> <span class="fu">rda</span>(traits <span class="sc">~</span> Temp <span class="sc">+</span> Prec <span class="sc">+</span> Elev <span class="sc">+</span> Season, <span class="at">data =</span> dat)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(rda_trait)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rda_trait, <span class="at">scaling =</span> <span class="dv">2</span>, <span class="at">main =</span> <span class="st">"RDA: Traits ~ Climate"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -691,14 +523,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>trait_scores <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(trait_pca<span class="sc">$</span>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(trait_scores, dat[, <span class="fu">c</span>(<span class="st">"Temp"</span>, <span class="st">"Prec"</span>, <span class="st">"Elev"</span>, <span class="st">"Season"</span>)])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>trait_scores <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(trait_pca<span class="sc">$</span>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(trait_scores, dat[, <span class="fu">c</span>(<span class="st">"Temp"</span>, <span class="st">"Prec"</span>, <span class="st">"Elev"</span>, <span class="st">"Season"</span>)])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>         Temp       Prec       Elev     Season
-PC1 0.9557092 -0.9648432 0.97736718 0.84289173
-PC2 0.1757250 -0.1070145 0.02305903 0.05024031</code></pre>
-</div>
 </div>
 <p>🌡️ <strong>Interpretation:</strong></p>
 <ul>
