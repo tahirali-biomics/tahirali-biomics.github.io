@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dr Tahir Ali | AG de Meaux">
+
+<title>Practical Day 2: FASTQ to VCF - Part 2 – Dr.&nbsp;Tahir Ali</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../profile.webp" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-da71b349b2a5b190adc08b2de5cfba23.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-0LPGXESG7T"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
+</script>
+<link href="../../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="../../site_libs/plotly-binding-4.11.0/plotly.js"></script>
+<script src="../../site_libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="../../site_libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="../../site_libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="../../site_libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+<link href="../../site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="../../site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Practical Day 2: FASTQ to VCF - Part 2</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projects</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../publications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Publications</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../cv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Résumé</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../teaching/teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../workshops/workshops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Workshops</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">💻 Codes</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a>
+  <ul class="collapse">
+  <li><a href="#tools-to-be-used" id="toc-tools-to-be-used" class="nav-link" data-scroll-target="#tools-to-be-used">Tools to be Used</a></li>
+  </ul></li>
+  <li><a href="#connecting-to-hpc-ramses-and-organizing-the-workspace" id="toc-connecting-to-hpc-ramses-and-organizing-the-workspace" class="nav-link" data-scroll-target="#connecting-to-hpc-ramses-and-organizing-the-workspace">Connecting to HPC (RAMSES) and Organizing the Workspace</a></li>
+  <li><a href="#instructions-for-running-bioinformatics-jobs-on-the-hpc-ramses" id="toc-instructions-for-running-bioinformatics-jobs-on-the-hpc-ramses" class="nav-link" data-scroll-target="#instructions-for-running-bioinformatics-jobs-on-the-hpc-ramses">Instructions for Running Bioinformatics Jobs on the HPC (RAMSES)</a></li>
+  <li><a href="#bam-filtering-variant-calling-and-filtering" id="toc-bam-filtering-variant-calling-and-filtering" class="nav-link" data-scroll-target="#bam-filtering-variant-calling-and-filtering">BAM Filtering, Variant Calling, and Filtering</a></li>
+  <li><a href="#understanding-the-vcf-format" id="toc-understanding-the-vcf-format" class="nav-link" data-scroll-target="#understanding-the-vcf-format">Understanding the VCF Format</a></li>
+  <li><a href="#dimentionality-reduction" id="toc-dimentionality-reduction" class="nav-link" data-scroll-target="#dimentionality-reduction">Dimentionality Reduction</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Practical Day 2: FASTQ to VCF - Part 2</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dr Tahir Ali | AG de Meaux </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="learning-objectives" class="level1">
+<h1>Learning Objectives</h1>
+<ul>
+<li>Filtering BAM files</li>
+<li>Variant calling</li>
+<li>Format conversion: bcf to vcf</li>
+<li>Variant filtering</li>
+<li>Shorten sample names in vcf file</li>
+<li>Count number of variants</li>
+<li>Understanding the VCF Format: Extracting and Visualizing Information from VCF Files</li>
+<li>First Peek into Your Dataset - Dimensionality Reduction (Principal Component Analysis)</li>
+</ul>
+<hr>
+<section id="tools-to-be-used" class="level2">
+<h2 class="anchored" data-anchor-id="tools-to-be-used">Tools to be Used</h2>
+<ul>
+<li><strong>SAMTOOLS:</strong> Used for processing and filtering alignment files in BAM format</li>
+<li><strong>BCFTOOLS:</strong> Used for variant calling, manipulating BCF/VCF files, and applying filters</li>
+<li><strong>VCFTOOLS:</strong> Used for analyzing, filtering, and summarizing data within VCF files</li>
+<li><strong>R/RSTUDIO</strong> (R-packages: vcfR, tidyverse, adegenet, etc )</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="connecting-to-hpc-ramses-and-organizing-the-workspace" class="level1">
+<h1>Connecting to HPC (RAMSES) and Organizing the Workspace</h1>
+<p><strong>Connect to the HPC</strong></p>
+<p>For Windows users: Use MobaXterm. For Mac/Linux users: Use the Terminal application.<br>
+Log in to the HPC cluster using your login credentials.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-Y</span> qbius030@@ramses1.itcc.uni-koeln.de</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace 'qbius030' with your specific username.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Enter passphrase for key '/Users/tahirali/.ssh/ramses_key', if prompted:</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Duo two-factor login for qbius030</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Check Your Current Directory</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>If you are not in your home directory, navigate to it:</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /home/group.kurse/qbius030/</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace 'qbius030' with your specific username.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Copy Raw Data to Your Home Directory</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> /scratch/tali/Practical_Day_1/sample_project_data .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Create a Directory for Analysis</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> Practical_Day_2/<span class="dt">{filtered_bam</span><span class="op">,</span><span class="dt">variant_calling</span><span class="op">,</span><span class="dt">variant_filtering}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li><strong>fastqc</strong>: for storing quality control results of fastq files.</li>
+<li><strong>trimming</strong>: for storing trimmed read files.</li>
+<li><strong>mapping</strong>: for storing read mapping outputs.</li>
+<li><strong>bamqc</strong>: for storing quality control results of bam files.</li>
+</ul>
+</section>
+<section id="instructions-for-running-bioinformatics-jobs-on-the-hpc-ramses" class="level1">
+<h1>Instructions for Running Bioinformatics Jobs on the HPC (RAMSES)</h1>
+<p>For quality control and downstream processing of FASTQ files,<br>
+we will execute various tasks on the HPC using Bash scripts with for loops.</p>
+<p><strong>Steps:</strong></p>
+<ol type="1">
+<li><p>Prepare your script using a text editor and save it as <code>your_bash_script.sh</code>.</p></li>
+<li><p>Submit your job in the terminal using:</p></li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> your_bash_script.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="3" type="1">
+<li>For more details, consult the <a href="https://gitlab.git.nrw/uzk-itcc-hpc/itcc-hpc-ramses/-/wikis/Documentation">RAMSES Brief Instructions</a>.</li>
+</ol>
+</section>
+<section id="bam-filtering-variant-calling-and-filtering" class="level1">
+<h1>BAM Filtering, Variant Calling, and Filtering</h1>
+<p><strong>Create and Submit a SLURM Script for BAM to VCF Analysis</strong></p>
+<p><strong>Check if required module is installed:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> avail</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Example SLURM Script</strong> (bam_bcf_vcf.sh)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=bam2vcf</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --ntasks-per-node=8</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=10gb</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=01:00:00</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account=UniKoeln</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=/home/group.kurse/qbius030/Practical_Day_2/bam_bcf_vcf.out</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=/home/group.kurse/qbius030/Practical_Day_2/bam_bcf_vcf.err</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Define paths</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="va">input_bam_dir</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/Practical_Day_1/mapping"</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="va">output_filtered_bam_dir</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/Practical_Day_2/filtered_bam"</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="va">output_variant_calling_dir</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/Practical_Day_2/variant_calling"</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="va">output_variant_filtering_dir</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/Practical_Day_2/variant_filtering"</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="va">reference_fasta</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/sample_project_data/reference_data/Arabidopsis_thaliana.TAIR10.dna.chromosome.4_98K.fasta"</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Create output directories if they do not exist</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">"</span><span class="va">$output_filtered_bam_dir</span><span class="st">"</span> <span class="st">"</span><span class="va">$output_variant_calling_dir</span><span class="st">"</span> <span class="st">"</span><span class="va">$output_variant_filtering_dir</span><span class="st">"</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required modules</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load bio/SAMtools/1.18-GCC-12.3.0</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load bio/BCFtools/1.18-GCC-12.3.0</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co"># List BAM file prefixes</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="va">samples</span><span class="op">=</span><span class="va">$(</span><span class="fu">ls</span> <span class="st">"</span><span class="va">${input_bam_dir}</span><span class="st">"</span>/<span class="pp">*</span>Chr4_repair.sorted.bam <span class="kw">|</span> <span class="fu">xargs</span> <span class="at">-n</span> 1 basename <span class="kw">|</span> <span class="fu">sed</span> <span class="st">'s/\.Chr4_repair.sorted.bam//'</span><span class="va">)</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Samples: </span><span class="va">$samples</span><span class="st">"</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="co">##### Process each BAM file</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Quality filtering and removing PCR duplicates with Samtools </span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="co"># keep only properly aligned paired-end reads (-f 3)</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Mapping quality (-q 30)</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Exclude secondary alignments and reads failing quality checks (-F 264)</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove duplicates (samtools rmdup)</span></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sample <span class="kw">in</span> <span class="va">$samples</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Processing </span><span class="va">$sample</span><span class="st">..."</span></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Filter and remove PCR duplicates</span></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>    <span class="ex">samtools</span> view <span class="at">-b</span> <span class="at">-o</span> <span class="st">"</span><span class="va">${output_filtered_bam_dir}</span><span class="st">/</span><span class="va">${sample}</span><span class="st">.Chr4_BamQualFilt-f3Q30F264.bam"</span> <span class="dt">\</span></span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>        <span class="at">-f</span> 3 <span class="at">-q</span> 30 <span class="at">-F</span> 264 <span class="st">"</span><span class="va">${input_bam_dir}</span><span class="st">/</span><span class="va">${sample}</span><span class="st">.Chr4_repair.sorted.bam"</span></span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>    <span class="ex">samtools</span> rmdup <span class="at">-s</span> <span class="st">"</span><span class="va">${output_filtered_bam_dir}</span><span class="st">/</span><span class="va">${sample}</span><span class="st">.Chr4_BamQualFilt-f3Q30F264.bam"</span> <span class="dt">\</span></span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="va">${output_filtered_bam_dir}</span><span class="st">/</span><span class="va">${sample}</span><span class="st">.Chr4_BamQualFilt-f3Q30F264_nodup.bam"</span></span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Index filtered BAM file</span></span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>    <span class="ex">samtools</span> index <span class="st">"</span><span class="va">${output_filtered_bam_dir}</span><span class="st">/</span><span class="va">${sample}</span><span class="st">.Chr4_BamQualFilt-f3Q30F264_nodup.bam"</span></span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a><span class="co">## Variant calling with bcftools</span></span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Call variants using bcftools mpileup (15 min) and call (3-5 minutes)commands</span></span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Activate Base Alignment Quality computation (-E)</span></span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a><span class="co"># Minimum base quality (-q 30)</span></span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a><span class="co"># Minimum calling threshold for variant alleles (-p 0.01) Variants with an allele frequency of at least 1% will be called.</span></span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Starting variant calling..."</span></span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> mpileup <span class="at">-E</span> <span class="at">-q</span> 30 <span class="at">--threads</span> 8 <span class="at">-o</span> <span class="st">"</span><span class="va">${output_variant_calling_dir}</span><span class="st">/SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP.bcf"</span> <span class="dt">\</span></span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>    <span class="at">--annotate</span> FORMAT/AD,FORMAT/DP <span class="at">-f</span> <span class="st">"</span><span class="va">$reference_fasta</span><span class="st">"</span> <span class="at">-b</span> <span class="op">&lt;(</span><span class="fu">ls</span> <span class="st">"</span><span class="va">${output_filtered_bam_dir}</span><span class="st">"</span>/<span class="pp">*</span>nodup.bam<span class="op">)</span></span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> call <span class="at">-c</span> <span class="at">-p</span> 0.01 <span class="at">-O</span> z <span class="at">--threads</span> 8 <span class="at">-o</span> <span class="st">"</span><span class="va">${output_variant_calling_dir}</span><span class="st">/SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_raw.vcf.gz"</span> <span class="dt">\</span></span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a>    <span class="st">"</span><span class="va">${output_variant_calling_dir}</span><span class="st">/SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP.bcf"</span></span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter monomorphic sites</span></span>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Filtering monomorphic variants..."</span></span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> view <span class="at">-i</span> <span class="st">'AC&gt;0'</span> <span class="st">"</span><span class="va">${output_variant_calling_dir}</span><span class="st">/SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_raw.vcf.gz"</span> <span class="dt">\</span></span>
+<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a>    <span class="at">-o</span> <span class="st">"</span><span class="va">${output_variant_calling_dir}</span><span class="st">/SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_OnlyPolymorphic.vcf.gz"</span></span>
+<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a><span class="co"># Simplify sample names</span></span>
+<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Simplifying sample names..."</span></span>
+<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> <span class="st">"</span><span class="va">${output_variant_calling_dir}</span><span class="st">/SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_OnlyPolymorphic.vcf.gz"</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span> <span class="st">'\t'</span> <span class="st">'BEGIN {OFS="\t"} {if ($1 ~ /^#CHROM/) {for (i=10; i&lt;=NF; i++) {sub(".*/", "", $i); sub("\\.Chr4_BamQualFilt-f3Q30F264_nodup\\.bam", "", $i)}} print}'</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a><span class="fu">gzip</span> <span class="at">-c</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">${output_variant_calling_dir}</span><span class="st">/SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_OnlyPolymorphic_shortNam.vcf.gz"</span></span>
+<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a><span class="co"># Load vcftools and perform additional filtering</span></span>
+<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load bio/VCFtools/0.1.16-GCC-12.3.0</span>
+<span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Applying additional filters..."</span></span>
+<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a><span class="ex">vcftools</span> <span class="at">--gzvcf</span> <span class="st">"</span><span class="va">${output_variant_calling_dir}</span><span class="st">/SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_OnlyPolymorphic_shortNam.vcf.gz"</span> <span class="dt">\</span></span>
+<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a>    <span class="at">--minDP</span> 10 <span class="at">--minGQ</span> 20 <span class="at">--minQ</span> 30 <span class="at">--max-missing</span> 0.80 <span class="at">--remove-indels</span> <span class="at">--max-alleles</span> 2 <span class="at">--recode</span> <span class="at">--recode-INFO-all</span> <span class="at">--stdout</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a><span class="fu">gzip</span> <span class="at">-c</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">${output_variant_filtering_dir}</span><span class="st">/SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_OnlyPolymorphic_shortNam_DP10GQ20Q30_Mis80NoIndel.vcf.gz"</span></span>
+<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Pipeline completed."</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Fixing the “DOS Line Breaks” Error on a HPC Cluster</strong></p>
+<ul>
+<li>If you see:</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch:</span> error: Batch script contains DOS line breaks <span class="er">(</span><span class="ex">\r\n</span><span class="kw">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Fix with:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dos2unix</span> fastqc.sh</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="at">-v</span> fastqc.sh  <span class="co"># Check for ^M characters</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Check job status:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> qbius030</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="understanding-the-vcf-format" class="level1">
+<h1>Understanding the VCF Format</h1>
+<p><strong>Extracting Information from VCF Files</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># List samples</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> query <span class="at">-l</span> SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_OnlyPolymorphic_shortNam_DP10GQ20Q30_Mis80NoIndel.vcf.gz</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Count number of samples</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> query <span class="at">-l</span> SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_OnlyPolymorphic_shortNam_DP10GQ20Q30_Mis80NoIndel.vcf.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># List of positions</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> query <span class="at">-f</span> <span class="st">'%POS\n'</span> SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_OnlyPolymorphic_shortNam_DP10GQ20Q30_Mis80NoIndel.vcf.gz <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 10</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co"># List of positions and alleles</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> query <span class="at">-f</span> <span class="st">'%CHROM %POS %REF %ALT\n'</span> SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_OnlyPolymorphic_shortNam_DP10GQ20Q30_Mis80NoIndel.vcf.gz <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 10</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracting per-sample tags</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> query <span class="at">-f</span> <span class="st">'%CHROM %POS[\t%GT\t%PL]\n'</span> SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_OnlyPolymorphic_shortNam_DP10GQ20Q30_Mis80NoIndel.vcf.gz <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 10</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="dimentionality-reduction" class="level1">
+<h1>Dimentionality Reduction</h1>
+<p>You need to perform this part in R, download required files to your local system and copy these to newly created direcory named “VCF2PCA”</p>
+<ul>
+<li><p>Accesions.csv</p></li>
+<li><p>SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_OnlyPolymorphic_shortNam_DP10GQ20Q30_Mis80NoIndel.vcf.gz</p></li>
+<li><p>At_Chr4.fasta</p></li>
+<li><p>At_Chr4.gff</p></li>
+</ul>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Step 1: Load necessary libraries ----</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># These libraries help in handling VCF data, visualizing results, and performing PCA.</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vcfR)          <span class="co"># To work with VCF (Variant Call Format) files</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)     <span class="co"># For data manipulation and visualization</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(adegenet)      <span class="co"># For genetic data analysis</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)    <span class="co"># For enhanced PCA visualizations</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(FactoMineR)    <span class="co"># For multivariate analysis (e.g., PCA)</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)  <span class="co"># For beautiful color palettes</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)       <span class="co"># For better label placement in ggplot</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(htmlwidgets)   <span class="co"># For interactive widgets</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="do">### Step 2: Set working directory ----</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the directory where your data files are stored</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"/home/tahirali/RAMSES_mount/tali/qbio/Practical_Day_2/VCF2PCA"</span>) <span class="co"># Adjust path as needed</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()  <span class="co"># Confirm the directory</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "/home/tahirali/RAMSES_mount/tali/qbio/Practical_Day_2/VCF2PCA"</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Step 3: Input data ----</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Import metadata, VCF file, reference genome, and annotation file</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>accessions <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Accesions.csv"</span>) <span class="co"># Metadata linking samples to populations</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>vcf <span class="ot">&lt;-</span> <span class="fu">read.vcfR</span>(<span class="st">"SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_OnlyPolymorphic_shortNam_DP10GQ20Q30_Mis80NoIndel.vcf.gz"</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>) <span class="co"># VCF file containing variants</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>dna <span class="ot">&lt;-</span> ape<span class="sc">::</span><span class="fu">read.dna</span>(<span class="st">"At_Chr4.fasta"</span>, <span class="at">format =</span> <span class="st">"fasta"</span>) <span class="co"># Reference genome sequence</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>gff <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"At_Chr4.gff"</span>, <span class="at">sep=</span><span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">quote=</span><span class="st">""</span>) <span class="co"># Genome annotation file</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="do">### Step 4: Perform PCA (Principal Component Analysis) ----</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># PCA simplifies high-dimensional genetic data to a few informative axes.</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert VCF to a genind object (compatible with genetic data analysis tools)</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>genind_vcf <span class="ot">&lt;-</span> <span class="fu">vcfR2genind</span>(vcf)</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Scale the data (normalize allele counts for PCA)</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>genind_vcf_scaled <span class="ot">=</span> <span class="fu">scaleGen</span>(genind_vcf, <span class="at">NA.method =</span> <span class="st">"mean"</span>)</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform PCA with 10 axes retained</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>pca <span class="ot">&lt;-</span> <span class="fu">dudi.pca</span>(genind_vcf_scaled, <span class="at">cent =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="cn">FALSE</span>, <span class="at">scannf =</span> <span class="cn">FALSE</span>, <span class="at">nf =</span> <span class="dv">10</span>)</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize eigenvalues (variance explained by each axis)</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>axis_all <span class="ot">=</span> pca<span class="sc">$</span>eig <span class="sc">/</span> <span class="fu">sum</span>(pca<span class="sc">$</span>eig)</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(axis_all[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>], <span class="at">main =</span> <span class="st">"PCA eigenvalues"</span>) <span class="co"># Barplot of variance explained</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="practical_day2_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Step 5: Associate PCA results with metadata ----</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Map sample names and populations to PCA results</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>pca_axis <span class="ot">&lt;-</span> pca<span class="sc">$</span>li</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>pca_eigenval <span class="ot">&lt;-</span> pca<span class="sc">$</span>eig[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(pca_axis)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   76 obs. of  10 variables:
+ $ Axis1 : num  14.211 -0.118 5.967 17.765 12.074 ...
+ $ Axis2 : num  1.9641 0.0128 0.8732 2.0144 -15.8247 ...
+ $ Axis3 : num  -8.62086 0.00503 -2.885 -5.29714 36.91014 ...
+ $ Axis4 : num  -0.4681 0.0252 -2.5024 -2.922 28.1062 ...
+ $ Axis5 : num  3.7328 -0.0821 0.67 -1.0985 30.7881 ...
+ $ Axis6 : num  -2.5632 -0.0331 -4.3249 -1.9293 -11.879 ...
+ $ Axis7 : num  -1.4683 0.0241 -2.4562 1.7935 0.8952 ...
+ $ Axis8 : num  -1.3808 -0.1064 0.0997 1.5308 0.8609 ...
+ $ Axis9 : num  1.4522 0.0134 0.8002 -3.1388 2.3339 ...
+ $ Axis10: num  -5.962 0.101 -3.186 3.213 -5.38 ...</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set names</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>ind_names<span class="ot">&lt;-</span> <span class="fu">rownames</span>(genind_vcf_scaled)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>pca_axis<span class="sc">$</span>ind <span class="ot">&lt;-</span> ind_names</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>ind_names</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "SRR1945488" "SRR1945489" "SRR1945492" "SRR1945591" "SRR1945592"
+ [6] "SRR1945604" "SRR1945605" "SRR1945607" "SRR1945608" "SRR1945617"
+[11] "SRR1945629" "SRR1945632" "SRR1945688" "SRR1945690" "SRR1945691"
+[16] "SRR1945692" "SRR1945693" "SRR1945694" "SRR1945697" "SRR1945709"
+[21] "SRR1945713" "SRR1945715" "SRR1945718" "SRR1945719" "SRR1945720"
+[26] "SRR1945721" "SRR1945725" "SRR1945752" "SRR1945761" "SRR1945762"
+[31] "SRR1945792" "SRR1945898" "SRR1945965" "SRR1945986" "SRR1946001"
+[36] "SRR1946007" "SRR1946064" "SRR1946072" "SRR1946073" "SRR1946090"
+[41] "SRR1946091" "SRR1946118" "SRR1946119" "SRR1946124" "SRR1946127"
+[46] "SRR1946131" "SRR1946134" "SRR1946136" "SRR1946138" "SRR1946142"
+[51] "SRR1946144" "SRR1946158" "SRR1946161" "SRR1946163" "SRR1946164"
+[56] "SRR1946170" "SRR1946174" "SRR1946178" "SRR1946185" "SRR1946193"
+[61] "SRR1946384" "SRR1946387" "SRR1946402" "SRR1946404" "SRR1946406"
+[66] "SRR1946410" "SRR1946415" "SRR1946416" "SRR1946421" "SRR1946426"
+[71] "SRR1946430" "SRR1946433" "SRR1946442" "SRR1946444" "SRR1946454"
+[76] "SRR1946455"</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a new column named "Population" to your data frame</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(accessions)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sample pop     lat    long      cs admixture_group     SRR_No
+1   1254 SWE 59.4333 17.0167 CS77379    north_sweden SRR1945488
+2   1257 SWE 59.4333 17.0167 CS77380    north_sweden SRR1945489
+3   1552 SWE 63.0833 18.3667 CS77251    north_sweden SRR1945492
+4   5856 SWE 63.0167 17.4914 CS76806    north_sweden SRR1945591
+5   5860 SWE 62.6814 18.0165 CS77913    north_sweden SRR1945592
+6   6009 SWE 62.8770 18.1770 CS76826    north_sweden SRR1945604</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>population_labels <span class="ot">&lt;-</span> accessions[<span class="fu">match</span>(ind_names, accessions<span class="sc">$</span>SRR_No), <span class="st">"pop"</span>]</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>pca_axis<span class="sc">$</span>Population <span class="ot">&lt;-</span> population_labels <span class="co"># Add population info</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>pop <span class="ot">&lt;-</span> population_labels</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co"># remake data.frame</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>pca_2 <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(<span class="fu">data.frame</span>(pca_axis, population_labels))</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(pca_eigenval)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>n <span class="co"># use this number PC=1:n</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Step 6: Plot PCA results ----</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co"># first convert to percentage variance explained</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>pve <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">PC =</span> <span class="dv">1</span><span class="sc">:</span>n, <span class="at">pve =</span> pca_eigenval<span class="sc">/</span><span class="fu">sum</span>(pca_eigenval)<span class="sc">*</span><span class="dv">100</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># make plot</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pve, <span class="fu">aes</span>(PC, pve)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>a <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Percentage variance explained"</span>) <span class="sc">+</span> <span class="fu">theme_light</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="practical_day2_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the cumulative sum of the percentage variance explained</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cumsum</span>(pve<span class="sc">$</span>pve)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  28.60425  40.46850  51.28026  59.97823  68.17440  76.03698  82.47864
+ [8]  88.63700  94.42852 100.00000</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot PC1 vs PC2 with population colors</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>PC1_2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pca_2, <span class="fu">aes</span>(Axis1, Axis2, <span class="at">col =</span> pop)) <span class="sc">+</span> </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>)) <span class="sc">+</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span> </span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">paste0</span>(<span class="st">"PC1 ("</span>, <span class="fu">signif</span>(pve<span class="sc">$</span>pve[<span class="dv">1</span>], <span class="dv">3</span>), <span class="st">"%)"</span>)) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="fu">paste0</span>(<span class="st">"PC2 ("</span>, <span class="fu">signif</span>(pve<span class="sc">$</span>pve[<span class="dv">2</span>], <span class="dv">3</span>), <span class="st">"%)"</span>))</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>PC1_2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="practical_day2_files/figure-html/unnamed-chunk-1-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot PC1 vs PC3 with population colors</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>PC1_3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pca_2, <span class="fu">aes</span>(Axis1, Axis3, <span class="at">col =</span> pop)) <span class="sc">+</span> </span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>)) <span class="sc">+</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span> </span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">paste0</span>(<span class="st">"PC1 ("</span>, <span class="fu">signif</span>(pve<span class="sc">$</span>pve[<span class="dv">1</span>], <span class="dv">3</span>), <span class="st">"%)"</span>)) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="fu">paste0</span>(<span class="st">"PC3 ("</span>, <span class="fu">signif</span>(pve<span class="sc">$</span>pve[<span class="dv">3</span>], <span class="dv">3</span>), <span class="st">"%)"</span>))</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>PC1_3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="practical_day2_files/figure-html/unnamed-chunk-1-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot PC2 vs PC3 with population colors</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>PC2_3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pca_2, <span class="fu">aes</span>(Axis2, Axis3, <span class="at">col =</span> pop)) <span class="sc">+</span> </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>)) <span class="sc">+</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span> </span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">paste0</span>(<span class="st">"PC2 ("</span>, <span class="fu">signif</span>(pve<span class="sc">$</span>pve[<span class="dv">2</span>], <span class="dv">3</span>), <span class="st">"%)"</span>)) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="fu">paste0</span>(<span class="st">"PC3 ("</span>, <span class="fu">signif</span>(pve<span class="sc">$</span>pve[<span class="dv">3</span>], <span class="dv">3</span>), <span class="st">"%)"</span>))</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>PC2_3 </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="practical_day2_files/figure-html/unnamed-chunk-1-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save plots to your working directory</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"PCA12.png"</span>, PC1_2, <span class="at">width =</span> <span class="dv">1800</span>, <span class="at">height =</span> <span class="dv">1200</span>, <span class="at">units =</span> <span class="st">"px"</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"PCA13.png"</span>, PC1_3, <span class="at">width =</span> <span class="dv">1800</span>, <span class="at">height =</span> <span class="dv">1200</span>, <span class="at">units =</span> <span class="st">"px"</span>)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"PCA23.png"</span>, PC2_3, <span class="at">width =</span> <span class="dv">1800</span>, <span class="at">height =</span> <span class="dv">1200</span>, <span class="at">units =</span> <span class="st">"px"</span>)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a labeled plot</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>pca_label <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pca_2, <span class="fu">aes</span>(Axis1, Axis2, <span class="at">col =</span> pop, <span class="at">label =</span> ind)) <span class="sc">+</span> </span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="co"># size of points</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>, <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span>  <span class="co"># Use geom_text_repel() for label repulsion</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>)) <span class="sc">+</span> </span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">paste0</span>(<span class="st">"PC1 ("</span>, <span class="fu">signif</span>(pve<span class="sc">$</span>pve[<span class="dv">1</span>], <span class="dv">2</span>), <span class="st">"%)"</span>)) <span class="sc">+</span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="fu">paste0</span>(<span class="st">"PC2 ("</span>, <span class="fu">signif</span>(pve<span class="sc">$</span>pve[<span class="dv">2</span>], <span class="dv">2</span>), <span class="st">"%)"</span>))</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>pca_label</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="practical_day2_files/figure-html/unnamed-chunk-1-6.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Step 7: Interactive 3D Visualization ----</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Use plotly to create an interactive 3D plot of PCA results</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co">#3D plots</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>pca_3d <span class="ot">&lt;-</span> <span class="fu">plot_ly</span>(pca_2, <span class="at">x =</span> <span class="sc">~</span>Axis1, <span class="at">y =</span> <span class="sc">~</span>Axis2, <span class="at">z =</span> <span class="sc">~</span>Axis3, <span class="at">color =</span>pop, <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>) ) <span class="sc">%&gt;%</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_markers</span>(<span class="at">size =</span> <span class="dv">12</span>)</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>pca_3d <span class="ot">&lt;-</span> pca_3d <span class="sc">%&gt;%</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layout</span>(</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Arabidopsis thaliana Accessions (Sweden &amp; Spain)"</span>,</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">scene =</span> <span class="fu">list</span>(<span class="at">bgcolor =</span> <span class="st">"#e5ecf6"</span>)</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>pca_3d</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-fdbdf83399a513c49398" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-fdbdf83399a513c49398">{"x":{"visdat":{"1944dd70a885":["function () ","plotlyVisDat"]},"cur_data":"1944dd70a885","attrs":{"1944dd70a885":{"x":{},"y":{},"z":{},"color":["SWE","SWE","SWE","SWE","SWE","SWE","SWE","SWE","SWE","SWE","SWE","SWE","SWE","SWE","SWE","SWE","SWE","SWE","SWE","SWE","SWE","SWE","SWE","SWE","SWE","SWE","SWE","SWE","SWE","SWE","ESP","ESP","SWE","ESP","SWE","SWE","SWE","SWE","SWE","SWE","SWE","ESP","ESP","ESP","ESP","ESP","ESP","ESP","ESP","ESP","ESP","ESP","ESP","ESP","ESP","ESP","ESP","ESP","ESP","ESP","ESP","ESP","ESP","ESP","ESP","ESP","ESP","ESP","ESP","ESP","ESP","ESP","ESP","ESP","ESP","ESP"],"colors":["red","blue"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d","mode":"markers","size":12,"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Arabidopsis thaliana Accessions (Sweden & Spain)","scene":{"bgcolor":"#e5ecf6","xaxis":{"title":"Axis1"},"yaxis":{"title":"Axis2"},"zaxis":{"title":"Axis3"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[-25.511546906851617,-8.5320097343312202,-21.892304997671189,-14.067323408210665,-22.395085459830959,-12.949914673043228,-20.631459551769645,-17.31888437928589,-35.326599261581514,-28.829173328955534,-18.270145277028281,-16.972268651485049,-38.827061533928216,-26.198637955584214,-33.733527790796607,-29.53896079657035,-3.4268336368629724,-13.904626651152526,-22.57550774594516,-19.245416526117893,-13.371245595979719,-11.092790247430923,-24.695686981202474,-18.472877349822184,-22.46474830171033,-7.8264822217927312,-32.55865104244144,-21.812291138794226,-40.581021655506227,-19.475251081181913,-14.269146168154395,-26.009584911491647,-29.357583198605294,-26.349135078262421,-25.672239557967323,-24.734207370805208,-22.781378523556356,-20.149987286607256],"y":[29.405866738032579,-5.3302508311377617,-18.417890161538519,-6.0094347374821906,-18.316013362485887,4.6048320619747596,-3.743199482297936,-15.434657794056143,44.519468607883041,-26.091045992052941,-2.7730767813927493,-17.936472854571186,39.174743269088815,-22.063570164024387,39.739182269704528,38.300522143330092,5.5580036692891621,-3.7869040439922164,-7.2950469314856585,-16.998027074184591,-12.416716575777405,-14.172296899310426,-17.190350319335849,-9.7286594485432669,-15.354466343572229,5.8665862178913049,-23.352383390280828,21.003119858807469,35.347395695654505,1.3379957728000094,-3.7780706184002928,-14.392257458514488,-25.411458045263817,10.881404406314273,32.536527071673881,-11.966714876347469,-16.281701864506562,-9.8366316031587804],"z":[3.9356212445053558,-2.2420770932160052,-8.2049759715676718,-16.288469566266514,4.721313274862637,-11.709504438375927,-5.1321541595224272,-18.667638804379227,21.735139592487393,7.2897352295015159,-12.294670332454382,-1.3620328760987439,20.873247621675752,9.5766257458377666,15.268566417853828,5.7844250935803023,-14.244918573126135,-15.921707559462629,-4.7236633172987021,-3.9662506509260593,-11.13094101037607,-9.1400936211980586,-4.2202193974124551,-15.570965630869111,-15.613578901409964,-5.0624666065511903,1.8530532743146215,-6.2613845851144667,12.002499201553956,-0.0446688394526348,-5.7727329487502912,2.1167502804238691,5.2749255588375519,14.399865265846822,-6.8858183197623086,-8.8390530695356659,3.3562138403812996,-15.64029423881024],"type":"scatter3d","mode":"markers","name":"ESP","marker":{"color":"rgba(255,0,0,1)","size":[55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55],"sizemode":"area","line":{"color":"rgba(255,0,0,1)"}},"textfont":{"color":"rgba(255,0,0,1)","size":55},"error_y":{"color":"rgba(255,0,0,1)","width":55},"error_x":{"color":"rgba(255,0,0,1)","width":55},"line":{"color":"rgba(255,0,0,1)","width":55},"frame":null},{"x":[14.211450260915004,-0.11815186907376896,5.9668736601902594,17.765202202537292,12.073959657188402,29.948011617505145,34.485749167385151,24.841473607038772,16.660700172974888,17.685325373590935,23.436717753333003,26.68687023877585,18.814389246061417,23.483487090789119,32.383098603952284,33.232305128042846,33.059538061004119,31.285024100154828,30.773992392672895,27.96459254117989,36.212769841705438,19.938582216734151,19.285626490985347,13.412362591503157,28.938592736110081,26.259419617299741,22.753703366405755,23.568360358314628,15.931242789673334,19.42246141743593,0.26872951694555247,2.6354990052772687,17.27092899675786,3.0212671693557769,33.176170710912324,30.051457452370823,34.168497717954025,30.865314976355116],"y":[1.9641401696362661,0.012845781111605378,0.87317032581246268,2.0143770359049582,-15.824722476129889,4.4273626459582163,6.579425691612494,4.2359330308881207,2.5483796272020172,-12.407257659514823,5.1526669838737575,3.3801102851094926,-8.3928528979014718,-9.2285626194461248,5.064461401588388,5.9484213136648361,6.1302659943078934,4.4342575863034535,4.1233407569207454,4.2982099175637396,7.2765638969389643,-10.027460685851931,4.51235585666518,1.4855370803224002,5.9139449029189661,5.5228013364298016,3.6353685968137541,3.1970540381234618,1.6549344213383257,-6.3791144882548565,-0.2700649394135034,-7.8389567620072782,-17.244942040502089,0.95222593511102505,3.6842822997708646,6.0573063658262765,6.8357379913002241,5.5001031712731834],"z":[-8.6208636053031196,0.0050295126167527069,-2.884997574154347,-5.2971380596378816,36.910137831734872,-7.6222179168421,-7.19090750263421,-10.345412938737093,-10.532740105622048,40.529720002059747,-3.4708287552413259,-8.443771881565409,39.515521474701913,42.343674006516018,-4.2717251218792898,-4.9050540480893865,-4.5687321068439557,-7.106127823257717,0.55815078622118031,-6.5162973375156135,-3.4757713076630647,36.399503021202889,-12.584947767679955,-9.9654139778834896,-11.941365550069159,-5.3125559806520828,-6.6475791123719947,-4.2453572605934786,-1.8793142811765933,2.0259531917085774,-0.48369050745020647,5.6844384674304846,52.569851252700765,0.14654179974429365,-1.4377709979106272,-4.8491341221690618,-4.7166080647653521,-6.6198987686551183],"type":"scatter3d","mode":"markers","name":"SWE","marker":{"color":"rgba(0,0,255,1)","size":[55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55],"sizemode":"area","line":{"color":"rgba(0,0,255,1)"}},"textfont":{"color":"rgba(0,0,255,1)","size":55},"error_y":{"color":"rgba(0,0,255,1)","width":55},"error_x":{"color":"rgba(0,0,255,1)","width":55},"line":{"color":"rgba(0,0,255,1)","width":55},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveWidget</span>(pca_3d, <span class="st">"3D_PCA.html"</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="do">### Step 8: Multidimensional Splom Visualization ----</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Explore relationships between multiple principal components simultaneously</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cumsum</span>(pve<span class="sc">$</span>pve)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  28.60425  40.46850  51.28026  59.97823  68.17440  76.03698  82.47864
+ [8]  88.63700  94.42852 100.00000</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>tit <span class="ot">=</span> <span class="st">'Total Explained Variance = 59.98 %'</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>axis <span class="ot">=</span> <span class="fu">list</span>(<span class="at">showline=</span><span class="cn">FALSE</span>,</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">zeroline=</span><span class="cn">FALSE</span>,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">gridcolor=</span><span class="st">'#ffff'</span>,</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">ticklen=</span><span class="dv">4</span>)</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>fig <span class="ot">&lt;-</span> pca_2 <span class="sc">%&gt;%</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_ly</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_trace</span>(</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">'splom'</span>,</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">dimensions =</span> <span class="fu">list</span>(</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(<span class="at">label=</span><span class="st">'PC1 (28.6%)'</span>, <span class="at">values=</span><span class="sc">~</span>Axis1),</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(<span class="at">label=</span><span class="st">'PC2 (11.9%)'</span>, <span class="at">values=</span><span class="sc">~</span>Axis2),</span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(<span class="at">label=</span><span class="st">'PC3 (10.8%)'</span>, <span class="at">values=</span><span class="sc">~</span>Axis3),</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(<span class="at">label=</span><span class="st">'PC4 (8.7%)'</span>, <span class="at">values=</span><span class="sc">~</span>Axis4)</span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="sc">~</span>pop, <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span>),</span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">marker =</span> <span class="fu">list</span>(</span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">size =</span> <span class="dv">7</span></span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">style</span>(<span class="at">diagonal =</span> <span class="fu">list</span>(<span class="at">visible =</span> F)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layout</span>(</span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">title=</span> tit,</span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">hovermode=</span><span class="st">'closest'</span>,</span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">dragmode=</span> <span class="st">'select'</span>,</span>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot_bgcolor=</span><span class="st">'rgba(240,240,240, 0.95)'</span>,</span>
+<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">xaxis=</span><span class="fu">list</span>(<span class="at">domain=</span><span class="cn">NULL</span>, <span class="at">showline=</span>F, <span class="at">zeroline=</span>F, <span class="at">gridcolor=</span><span class="st">'#ffff'</span>, <span class="at">ticklen=</span><span class="dv">4</span>),</span>
+<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">yaxis=</span><span class="fu">list</span>(<span class="at">domain=</span><span class="cn">NULL</span>, <span class="at">showline=</span>F, <span class="at">zeroline=</span>F, <span class="at">gridcolor=</span><span class="st">'#ffff'</span>, <span class="at">ticklen=</span><span class="dv">4</span>),</span>
+<span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">xaxis2=</span>axis,</span>
+<span id="cb34-31"><a href="#cb34-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">xaxis3=</span>axis,</span>
+<span id="cb34-32"><a href="#cb34-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">xaxis4=</span>axis,</span>
+<span id="cb34-33"><a href="#cb34-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">yaxis2=</span>axis,</span>
+<span id="cb34-34"><a href="#cb34-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">yaxis3=</span>axis,</span>
+<span id="cb34-35"><a href="#cb34-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">yaxis4=</span>axis</span>
+<span id="cb34-36"><a href="#cb34-36" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb34-37"><a href="#cb34-37" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">warn=</span><span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb34-38"><a href="#cb34-38" aria-hidden="true" tabindex="-1"></a>fig</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-779a534f12928b69ec20" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-779a534f12928b69ec20">{"x":{"visdat":{"1944d2c700540":["function () ","plotlyVisDat"]},"cur_data":"1944d2c700540","attrs":{"1944d2c700540":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"splom","dimensions":[{"label":"PC1 (28.6%)","values":{}},{"label":"PC2 (11.9%)","values":{}},{"label":"PC3 (10.8%)","values":{}},{"label":"PC4 (8.7%)","values":{}}],"color":{},"colors":["red","blue","green"],"marker":{"size":7},"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"hovermode":"closest","showlegend":true,"title":"Total Explained Variance = 59.98 %","dragmode":"select","plot_bgcolor":"rgba(240,240,240, 0.95)","xaxis":{"domain":[],"showline":false,"zeroline":false,"gridcolor":"#ffff","ticklen":4},"yaxis":{"domain":[],"showline":false,"zeroline":false,"gridcolor":"#ffff","ticklen":4},"xaxis2":{"showline":false,"zeroline":false,"gridcolor":"#ffff","ticklen":4},"xaxis3":{"showline":false,"zeroline":false,"gridcolor":"#ffff","ticklen":4},"xaxis4":{"showline":false,"zeroline":false,"gridcolor":"#ffff","ticklen":4},"yaxis2":{"showline":false,"zeroline":false,"gridcolor":"#ffff","ticklen":4},"yaxis3":{"showline":false,"zeroline":false,"gridcolor":"#ffff","ticklen":4},"yaxis4":{"showline":false,"zeroline":false,"gridcolor":"#ffff","ticklen":4}},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"type":"splom","dimensions":[{"label":"PC1 (28.6%)","values":[14.211450260915004,-0.11815186907376896,5.9668736601902594,17.765202202537292,12.073959657188402,29.948011617505145,34.485749167385151,24.841473607038772,16.660700172974888,17.685325373590935,23.436717753333003,26.68687023877585,18.814389246061417,23.483487090789119,32.383098603952284,33.232305128042846,33.059538061004119,31.285024100154828,30.773992392672895,27.96459254117989,36.212769841705438,19.938582216734151,19.285626490985347,13.412362591503157,28.938592736110081,26.259419617299741,22.753703366405755,23.568360358314628,15.931242789673334,19.42246141743593,-25.511546906851617,-8.5320097343312202,0.26872951694555247,-21.892304997671189,2.6354990052772687,17.27092899675786,3.0212671693557769,33.176170710912324]},{"label":"PC2 (11.9%)","values":[1.9641401696362661,0.012845781111605378,0.87317032581246268,2.0143770359049582,-15.824722476129889,4.4273626459582163,6.579425691612494,4.2359330308881207,2.5483796272020172,-12.407257659514823,5.1526669838737575,3.3801102851094926,-8.3928528979014718,-9.2285626194461248,5.064461401588388,5.9484213136648361,6.1302659943078934,4.4342575863034535,4.1233407569207454,4.2982099175637396,7.2765638969389643,-10.027460685851931,4.51235585666518,1.4855370803224002,5.9139449029189661,5.5228013364298016,3.6353685968137541,3.1970540381234618,1.6549344213383257,-6.3791144882548565,29.405866738032579,-5.3302508311377617,-0.2700649394135034,-18.417890161538519,-7.8389567620072782,-17.244942040502089,0.95222593511102505,3.6842822997708646]},{"label":"PC3 (10.8%)","values":[-8.6208636053031196,0.0050295126167527069,-2.884997574154347,-5.2971380596378816,36.910137831734872,-7.6222179168421,-7.19090750263421,-10.345412938737093,-10.532740105622048,40.529720002059747,-3.4708287552413259,-8.443771881565409,39.515521474701913,42.343674006516018,-4.2717251218792898,-4.9050540480893865,-4.5687321068439557,-7.106127823257717,0.55815078622118031,-6.5162973375156135,-3.4757713076630647,36.399503021202889,-12.584947767679955,-9.9654139778834896,-11.941365550069159,-5.3125559806520828,-6.6475791123719947,-4.2453572605934786,-1.8793142811765933,2.0259531917085774,3.9356212445053558,-2.2420770932160052,-0.48369050745020647,-8.2049759715676718,5.6844384674304846,52.569851252700765,0.14654179974429365,-1.4377709979106272]},{"label":"PC4 (8.7%)","values":[-0.4680855942582075,0.0252170746200077,-2.5024481620616692,-2.9220004649742251,28.10622454098603,-4.5003374936297025,-3.5912195915153218,-4.2659008198500556,-2.9012513914276039,-9.0075713160164934,-2.8477086227761466,-2.7360576240887577,-6.9964053159079365,-9.4174841320254501,-3.5471158713847397,-4.6358896769328233,-5.193960878770163,-3.903070637541187,0.17062975252102425,-3.7089581513796781,-6.2875193418877373,16.497691923348459,-1.6906495800970338,-0.68953789729901205,-2.4934227256276409,-4.0880091894820083,-2.2528812700612471,-3.8241293949114863,-2.1404363709505052,4.1433289733184671,5.1337000358045373,6.88998676714459,-0.44753110276085029,18.822193856268008,-15.56558960288884,39.509529094340138,-0.42023310710104556,-1.4375007413916374]}],"marker":{"color":"rgba(255,0,0,1)","size":7,"line":{"color":"rgba(255,0,0,1)"}},"name":"ESP","frame":null,"diagonal":{"visible":false}},{"type":"splom","dimensions":[{"label":"PC1 (28.6%)","values":[30.051457452370823,34.168497717954025,30.865314976355116,-14.067323408210665,-22.395085459830959,-12.949914673043228,-20.631459551769645,-17.31888437928589,-35.326599261581514,-28.829173328955534,-18.270145277028281,-16.972268651485049,-38.827061533928216,-26.198637955584214,-33.733527790796607,-29.53896079657035,-3.4268336368629724,-13.904626651152526,-22.57550774594516,-19.245416526117893,-13.371245595979719,-11.092790247430923,-24.695686981202474,-18.472877349822184,-22.46474830171033,-7.8264822217927312,-32.55865104244144,-21.812291138794226,-40.581021655506227,-19.475251081181913,-14.269146168154395,-26.009584911491647,-29.357583198605294,-26.349135078262421,-25.672239557967323,-24.734207370805208,-22.781378523556356,-20.149987286607256]},{"label":"PC2 (11.9%)","values":[6.0573063658262765,6.8357379913002241,5.5001031712731834,-6.0094347374821906,-18.316013362485887,4.6048320619747596,-3.743199482297936,-15.434657794056143,44.519468607883041,-26.091045992052941,-2.7730767813927493,-17.936472854571186,39.174743269088815,-22.063570164024387,39.739182269704528,38.300522143330092,5.5580036692891621,-3.7869040439922164,-7.2950469314856585,-16.998027074184591,-12.416716575777405,-14.172296899310426,-17.190350319335849,-9.7286594485432669,-15.354466343572229,5.8665862178913049,-23.352383390280828,21.003119858807469,35.347395695654505,1.3379957728000094,-3.7780706184002928,-14.392257458514488,-25.411458045263817,10.881404406314273,32.536527071673881,-11.966714876347469,-16.281701864506562,-9.8366316031587804]},{"label":"PC3 (10.8%)","values":[-4.8491341221690618,-4.7166080647653521,-6.6198987686551183,-16.288469566266514,4.721313274862637,-11.709504438375927,-5.1321541595224272,-18.667638804379227,21.735139592487393,7.2897352295015159,-12.294670332454382,-1.3620328760987439,20.873247621675752,9.5766257458377666,15.268566417853828,5.7844250935803023,-14.244918573126135,-15.921707559462629,-4.7236633172987021,-3.9662506509260593,-11.13094101037607,-9.1400936211980586,-4.2202193974124551,-15.570965630869111,-15.613578901409964,-5.0624666065511903,1.8530532743146215,-6.2613845851144667,12.002499201553956,-0.0446688394526348,-5.7727329487502912,2.1167502804238691,5.2749255588375519,14.399865265846822,-6.8858183197623086,-8.8390530695356659,3.3562138403812996,-15.64029423881024]},{"label":"PC4 (8.7%)","values":[-2.6532609299548691,-4.8944218783450655,-3.1072247462454259,10.341540928576242,-17.815977051690943,9.0785435986725034,-2.9558742801497995,9.9548185271074079,-13.270618360085345,-30.772090995615773,10.413694774267027,-9.8157089746864514,-11.742015902279652,-28.121887342216823,-10.136281465304567,-6.9077099544995839,11.524443584764164,15.023140733642691,-10.352013487090447,11.446180625239212,1.128077809662869,12.411545775419212,2.7524273457626998,10.766866633673981,20.935326396339594,7.5953183278824197,-18.266396134640175,10.730671807332918,-8.3412939765617988,-1.2403285836671574,6.203990510306423,-8.9951703540290957,-25.807426276341847,50.342504655895297,14.40985667650647,-13.228259774988334,-12.042491070023887,20.59190687801398]}],"marker":{"color":"rgba(0,255,0,1)","size":7,"line":{"color":"rgba(0,255,0,1)"}},"name":"SWE","frame":null,"diagonal":{"visible":false}}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<hr>
+<p><strong>Wrapping Up Practical Day Two</strong></p>
+<p>You’ve made great progress today and demonstrated excellent teamwork and dedication. It’s inspiring to see your enthusiasm as you dive deeper into these concepts.</p>
+<p>Remember, every step you take brings you closer to mastering these skills. Keep up the curiosity and effort, and don’t hesitate to explore further on your own!</p>
+<p>Looking forward to seeing you next time for more exciting challenges and discoveries. Have a great evening! 🌱</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/tahirali-biomics\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2024 Dr.&nbsp;Tahir Ali</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Built with <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
