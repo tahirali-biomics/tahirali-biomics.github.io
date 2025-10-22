@@ -197,16 +197,16 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
    
   <ul class="collapse">
   <li><a href="#overview-motivation" id="toc-overview-motivation" class="nav-link active" data-scroll-target="#overview-motivation">🌍 Overview &amp; Motivation</a></li>
-  <li><a href="#load-required-packages" id="toc-load-required-packages" class="nav-link" data-scroll-target="#load-required-packages">🧩 1. Load Required Packages</a></li>
-  <li><a href="#generate-example-data" id="toc-generate-example-data" class="nav-link" data-scroll-target="#generate-example-data">🧬 2. Generate Example Data</a></li>
-  <li><a href="#pca-on-trait-data" id="toc-pca-on-trait-data" class="nav-link" data-scroll-target="#pca-on-trait-data">📊 3. PCA on Trait Data</a></li>
-  <li><a href="#pcoa-on-genetic-data" id="toc-pcoa-on-genetic-data" class="nav-link" data-scroll-target="#pcoa-on-genetic-data">🌐 4. PCoA on Genetic Data</a></li>
-  <li><a href="#dapc-discriminant-analysis-of-principal-components" id="toc-dapc-discriminant-analysis-of-principal-components" class="nav-link" data-scroll-target="#dapc-discriminant-analysis-of-principal-components">🎯 5. DAPC – Discriminant Analysis of Principal Components</a></li>
-  <li><a href="#rda-linking-genetic-variation-to-climate" id="toc-rda-linking-genetic-variation-to-climate" class="nav-link" data-scroll-target="#rda-linking-genetic-variation-to-climate">🌿 6. RDA – Linking Genetic Variation to Climate</a></li>
-  <li><a href="#traitenvironment-rda" id="toc-traitenvironment-rda" class="nav-link" data-scroll-target="#traitenvironment-rda">🌼 7. Trait–Environment RDA</a></li>
-  <li><a href="#correlation-between-trait-pca-climate" id="toc-correlation-between-trait-pca-climate" class="nav-link" data-scroll-target="#correlation-between-trait-pca-climate">🔍 8. Correlation between Trait PCA &amp; Climate</a></li>
-  <li><a href="#choosing-the-right-method" id="toc-choosing-the-right-method" class="nav-link" data-scroll-target="#choosing-the-right-method">🧠 9. Choosing the Right Method</a></li>
-  <li><a href="#student-exercises" id="toc-student-exercises" class="nav-link" data-scroll-target="#student-exercises">🧩 10. Student Exercises</a></li>
+  <li><a href="#load-required-packages" id="toc-load-required-packages" class="nav-link" data-scroll-target="#load-required-packages">Load Required Packages</a></li>
+  <li><a href="#generate-example-data" id="toc-generate-example-data" class="nav-link" data-scroll-target="#generate-example-data">Generate Example Data</a></li>
+  <li><a href="#pca-on-trait-data" id="toc-pca-on-trait-data" class="nav-link" data-scroll-target="#pca-on-trait-data">PCA on Trait Data</a></li>
+  <li><a href="#pcoa-on-genetic-data" id="toc-pcoa-on-genetic-data" class="nav-link" data-scroll-target="#pcoa-on-genetic-data">PCoA on Genetic Data</a></li>
+  <li><a href="#dapc-discriminant-analysis-of-principal-components" id="toc-dapc-discriminant-analysis-of-principal-components" class="nav-link" data-scroll-target="#dapc-discriminant-analysis-of-principal-components">DAPC – Discriminant Analysis of Principal Components</a></li>
+  <li><a href="#rda-linking-genetic-variation-to-climate" id="toc-rda-linking-genetic-variation-to-climate" class="nav-link" data-scroll-target="#rda-linking-genetic-variation-to-climate">RDA – Linking Genetic Variation to Climate</a></li>
+  <li><a href="#traitenvironment-rda" id="toc-traitenvironment-rda" class="nav-link" data-scroll-target="#traitenvironment-rda">Trait–Environment RDA</a></li>
+  <li><a href="#correlation-between-trait-pca-climate" id="toc-correlation-between-trait-pca-climate" class="nav-link" data-scroll-target="#correlation-between-trait-pca-climate">Correlation between Trait PCA &amp; Climate</a></li>
+  <li><a href="#choosing-the-right-method" id="toc-choosing-the-right-method" class="nav-link" data-scroll-target="#choosing-the-right-method">Choosing the Right Method</a></li>
+  <li><a href="#student-exercises" id="toc-student-exercises" class="nav-link" data-scroll-target="#student-exercises">Student Exercises</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">📚 References</a></li>
   </ul>
 </nav>
@@ -250,7 +250,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <hr>
 </section>
 <section id="load-required-packages" class="level2">
-<h2 class="anchored" data-anchor-id="load-required-packages">🧩 1. Load Required Packages</h2>
+<h2 class="anchored" data-anchor-id="load-required-packages">Load Required Packages</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -265,7 +265,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </div>
 </section>
 <section id="generate-example-data" class="level2">
-<h2 class="anchored" data-anchor-id="generate-example-data">🧬 2. Generate Example Data</h2>
+<h2 class="anchored" data-anchor-id="generate-example-data">Generate Example Data</h2>
 <p>We simulate a dataset that mimics a <strong>natural population sampled across environmental gradients</strong>.</p>
 <ul>
 <li><p><strong>Five populations</strong> distributed across latitudinal and climatic gradients</p></li>
@@ -351,7 +351,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </div>
 </section>
 <section id="pca-on-trait-data" class="level2">
-<h2 class="anchored" data-anchor-id="pca-on-trait-data">📊 3. PCA on Trait Data</h2>
+<h2 class="anchored" data-anchor-id="pca-on-trait-data">PCA on Trait Data</h2>
 <p><strong>PCA (Principal Component Analysis)</strong> identifies axes that capture the largest variance among <strong>continuous, normally distributed quantitative traits</strong>,<br>
 such as morphological traits or environmental variables.</p>
 <p>PCA reduces correlated traits into a few orthogonal axes that explain the most variance.</p>
@@ -377,24 +377,24 @@ such as morphological traits or environmental variables.</p>
 </div>
 </div>
 </div>
-<p>🧠 <strong>Interpretation:</strong></p>
+<p><strong>Interpretation:</strong></p>
 <ul>
 <li><p>PCA works best for <strong>continuous, normally distributed traits</strong>.</p></li>
 <li><p>The first axis often reflects <strong>temperature or size-related variation</strong>, while the second may capture <strong>timing (phenology)</strong> or secondary trait effects.</p></li>
 <li><p>Populations may now see some clustering or structure.</p></li>
 </ul>
-<p>🧠 <strong>Additional thinking:</strong></p>
+<p><strong>Additional thinking:</strong></p>
 <ul>
 <li><p>Which traits drive the first PCA axis?</p></li>
 <li><p>Are populations separated along climatic gradients (e.g., warmer vs.&nbsp;cooler sites)?</p></li>
 </ul>
-<p>📘 <strong>When to use PCA:</strong></p>
+<p><strong>When to use PCA:</strong></p>
 <blockquote class="blockquote">
 <p>Use PCA for <em>quantitative</em>, <em>continuous</em> data with potential collinearity (e.g., multiple traits or climate variables).</p>
 </blockquote>
 </section>
 <section id="pcoa-on-genetic-data" class="level2">
-<h2 class="anchored" data-anchor-id="pcoa-on-genetic-data">🌐 4. PCoA on Genetic Data</h2>
+<h2 class="anchored" data-anchor-id="pcoa-on-genetic-data">PCoA on Genetic Data</h2>
 <p><strong>PCoA (Principal Coordinates Analysis)</strong> is used when data are <strong>distance-based</strong> or <strong>non-continuous</strong>,<br>
 such as genetic data (allele frequencies, SNPs, or F_ST matrices).</p>
 <p>Here we compute Euclidean distances on scaled genotypes and visualize population structure.</p>
@@ -422,16 +422,16 @@ such as genetic data (allele frequencies, SNPs, or F_ST matrices).</p>
 </div>
 </div>
 </div>
-<p>🧬 <strong>Interpretation:</strong></p>
+<p><strong>Interpretation:</strong></p>
 <p>Populations should now cluster according to their allele frequency differences.</p>
-<p>📘 <strong>When to use PCoA:</strong></p>
+<p><strong>When to use PCoA:</strong></p>
 <blockquote class="blockquote">
 <p>Use PCoA when data are <strong>non-continous or distance-based</strong> (e.g., SNP genotypes, Bray–Curtis dissimilarities, phylogenetic) rather than raw quantitative measurements.</p>
 <p>It does not assume normality or linear relationships, unlike PCA.</p>
 </blockquote>
 </section>
 <section id="dapc-discriminant-analysis-of-principal-components" class="level2">
-<h2 class="anchored" data-anchor-id="dapc-discriminant-analysis-of-principal-components">🎯 5. DAPC – Discriminant Analysis of Principal Components</h2>
+<h2 class="anchored" data-anchor-id="dapc-discriminant-analysis-of-principal-components">DAPC – Discriminant Analysis of Principal Components</h2>
 <p><strong>DAPC (Discriminant Analysis of Principal Components)</strong> explicitly maximizes <strong>between-group variation</strong> (such as predfined groups - populations) while minimizing <strong>within-group variation</strong>.</p>
 <ul>
 <li><p>It’s ideal for <strong>population genetic structure</strong>, where you want clear group assignment.</p></li>
@@ -451,12 +451,12 @@ such as genetic data (allele frequencies, SNPs, or F_ST matrices).</p>
 </div>
 </div>
 </div>
-<p>🧩 <strong>Interpretation:</strong></p>
+<p><strong>Interpretation:</strong></p>
 <ul>
 <li><p>How distinct are populations?</p></li>
 <li><p>Which PCs contribute most to discrimination?</p></li>
 </ul>
-<p>📘 <strong>When to use DAPC:</strong></p>
+<p><strong>When to use DAPC:</strong></p>
 <blockquote class="blockquote">
 <ul>
 <li><p>DAPC is <strong>supervised</strong> (you tell it group labels).</p></li>
@@ -467,7 +467,7 @@ such as genetic data (allele frequencies, SNPs, or F_ST matrices).</p>
 </blockquote>
 </section>
 <section id="rda-linking-genetic-variation-to-climate" class="level2">
-<h2 class="anchored" data-anchor-id="rda-linking-genetic-variation-to-climate">🌿 6. RDA – Linking Genetic Variation to Climate</h2>
+<h2 class="anchored" data-anchor-id="rda-linking-genetic-variation-to-climate">RDA – Linking Genetic Variation to Climate</h2>
 <p><strong>RDA (Redundancy Analysis)</strong> is a constrained ordination that directly relates response variables (e.g., SNPs, traits) to explanatory variables (e.g., climate).</p>
 <p>It’s a linear model version of PCA where predictors constrain the ordination axes.</p>
 <p>Let’s see if climate predicts genetic structure.</p>
@@ -563,12 +563,12 @@ Residual 95   25.019
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-<p>🧭 <strong>Interpretation:</strong></p>
+<p><strong>Interpretation:</strong></p>
 <ul>
 <li><p>Which climatic variable has stronger association?</p></li>
 <li><p>How much of the genetic variance is “explained” vs residual?</p></li>
 </ul>
-<p>📘 <strong>When to use RDA:</strong></p>
+<p><strong>When to use RDA:</strong></p>
 <blockquote class="blockquote">
 <ul>
 <li><p>Use RDA when exploring <strong>how much of the variation is explained</strong> by environmental predictors.</p></li>
@@ -578,7 +578,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </blockquote>
 </section>
 <section id="traitenvironment-rda" class="level2">
-<h2 class="anchored" data-anchor-id="traitenvironment-rda">🌼 7. Trait–Environment RDA</h2>
+<h2 class="anchored" data-anchor-id="traitenvironment-rda">Trait–Environment RDA</h2>
 <p>Now, let’s see how <strong>traits</strong> (instead of SNPs) relate to environmental variables.</p>
 <div class="cell">
 <details class="code-fold">
@@ -610,19 +610,19 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 </div>
-<p>📈 <strong>Interpretation:</strong></p>
+<p><strong>Interpretation:</strong></p>
 <ul>
 <li><p>Traits aligning with <strong>Temp or Elev</strong> vectors indicate possible adaptation.</p></li>
 <li><p>RDA here connects functional traits to the environment.</p></li>
 </ul>
-<p>🧠 <strong>Additional thinking:</strong></p>
+<p><strong>Additional thinking:</strong></p>
 <ul>
 <li><p>Which traits are most influenced by temperature or precipitation?</p></li>
 <li><p>Are these relationships statistically significant?</p></li>
 </ul>
 </section>
 <section id="correlation-between-trait-pca-climate" class="level2">
-<h2 class="anchored" data-anchor-id="correlation-between-trait-pca-climate">🔍 8. Correlation between Trait PCA &amp; Climate</h2>
+<h2 class="anchored" data-anchor-id="correlation-between-trait-pca-climate">Correlation between Trait PCA &amp; Climate</h2>
 <p>We can test how much trait variation axes (PCA scores) relate to climate gradients.</p>
 <div class="cell">
 <details class="code-fold">
@@ -636,14 +636,14 @@ PC1 0.9557092 -0.9648432 0.97736718 0.84289173
 PC2 0.1757250 -0.1070145 0.02305903 0.05024031</code></pre>
 </div>
 </div>
-<p>🌡️ <strong>Interpretation:</strong></p>
+<p><strong>Interpretation:</strong></p>
 <ul>
 <li><p>Strong correlations show <strong>environmentally structured trait variation</strong>.</p></li>
 <li><p>For example, PCA1 may track <strong>temperature-driven size variation</strong>.</p></li>
 </ul>
 </section>
 <section id="choosing-the-right-method" class="level2">
-<h2 class="anchored" data-anchor-id="choosing-the-right-method">🧠 9. Choosing the Right Method</h2>
+<h2 class="anchored" data-anchor-id="choosing-the-right-method">Choosing the Right Method</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -688,7 +688,7 @@ PC2 0.1757250 -0.1070145 0.02305903 0.05024031</code></pre>
 </table>
 </section>
 <section id="student-exercises" class="level2">
-<h2 class="anchored" data-anchor-id="student-exercises">🧩 10. Student Exercises</h2>
+<h2 class="anchored" data-anchor-id="student-exercises">Student Exercises</h2>
 <ol type="1">
 <li><p>Replace simulated climate data with <strong>real data</strong> (e.g., WorldClim or CHELSA).</p></li>
 <li><p>Add more traits (height, seed mass, SLA) and rerun PCA.</p></li>
