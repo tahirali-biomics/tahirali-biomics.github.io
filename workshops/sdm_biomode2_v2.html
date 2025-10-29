@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Dr Tahir Ali | AG de Meaux">
 
-<title>🌿 Species Habitat Suitability Modelling with biomod2 – Dr.&nbsp;Tahir Ali</title>
+<title>Species Habitat Suitability Modelling with biomod2 – Dr.&nbsp;Tahir Ali</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -139,7 +140,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">🌿 Species Habitat Suitability Modelling with biomod2</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Species Habitat Suitability Modelling with biomod2</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -208,11 +209,11 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
    
   <ul class="collapse">
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#species-occurrence-data" id="toc-species-occurrence-data" class="nav-link" data-scroll-target="#species-occurrence-data">🌍 Species Occurrence Data</a></li>
+  <li><a href="#species-occurrence-data" id="toc-species-occurrence-data" class="nav-link" data-scroll-target="#species-occurrence-data">Species Occurrence Data</a></li>
   <li><a href="#environmental-predictors" id="toc-environmental-predictors" class="nav-link" data-scroll-target="#environmental-predictors">Environmental Predictors</a></li>
   <li><a href="#data-formatting-for-biomod2" id="toc-data-formatting-for-biomod2" class="nav-link" data-scroll-target="#data-formatting-for-biomod2">Data Formatting for biomod2</a></li>
   <li><a href="#run-sdms" id="toc-run-sdms" class="nav-link" data-scroll-target="#run-sdms">Run SDMs</a></li>
-  <li><a href="#model-evaluation" id="toc-model-evaluation" class="nav-link" data-scroll-target="#model-evaluation">📈 Model Evaluation</a></li>
+  <li><a href="#model-evaluation" id="toc-model-evaluation" class="nav-link" data-scroll-target="#model-evaluation">Model Evaluation</a></li>
   <li><a href="#variable-importance" id="toc-variable-importance" class="nav-link" data-scroll-target="#variable-importance">Variable Importance</a></li>
   <li><a href="#project-to-current-environment" id="toc-project-to-current-environment" class="nav-link" data-scroll-target="#project-to-current-environment">Project to Current Environment</a></li>
   <li><a href="#ensemble-modeling" id="toc-ensemble-modeling" class="nav-link" data-scroll-target="#ensemble-modeling">Ensemble Modeling</a></li>
@@ -231,14 +232,19 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">🌿 Species Habitat Suitability Modelling with biomod2</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
-<p class="subtitle lead">AG de Meaux – Workshop by Dr.&nbsp;Tahir Ali</p>
+<div class="quarto-title-block"><div><h1 class="title">Species Habitat Suitability Modelling with biomod2</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dr Tahir Ali | AG de Meaux </p>
+          </div>
+  </div>
     
   
     
@@ -266,7 +272,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </section>
 </section>
 <section id="species-occurrence-data" class="level1">
-<h1>🌍 Species Occurrence Data</h1>
+<h1>Species Occurrence Data</h1>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
@@ -425,7 +431,7 @@ Projected CRS: WGS 84 / UTM zone 30N
 <hr>
 </section>
 <section id="model-evaluation" class="level1">
-<h1>📈 Model Evaluation</h1>
+<h1>Model Evaluation</h1>
 <p><strong>Code</strong></p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
@@ -563,7 +569,7 @@ Projected CRS: WGS 84 / UTM zone 30N
 </div>
 </div>
 <p>The weighted mean ensemble (EMwmean) gives higher weight to better-performing algorithms.</p>
-<p><strong>🔍 Why it looks compressed</strong> - biomod2’s internal plotting code does not preserve the raster’s coordinate ratio. - It sets up a multi-panel layout (mfrow) to plot multiple ensemble models side by side. - Each panel is drawn with equal x/y units, not the spatial extent ratio, so the map looks “squished”.</p>
+<p><strong>Why it looks compressed</strong> - biomod2’s internal plotting code does not preserve the raster’s coordinate ratio. - It sets up a multi-panel layout (mfrow) to plot multiple ensemble models side by side. - Each panel is drawn with equal x/y units, not the spatial extent ratio, so the map looks “squished”.</p>
 <p><strong>Solution</strong> - Extract predictions and plot with terra::plot()</p>
 <p>This gives you correct aspect ratio and prettier maps:</p>
 <div class="cell" data-layout-align="center">
@@ -880,7 +886,7 @@ Projected CRS: WGS 84 / UTM zone 30N
 </section>
 <section id="try-it-yourself" class="level1">
 <h1>Try It Yourself</h1>
-<p>💡 Modify one of the following:</p>
+<p>Modify one of the following:</p>
 <ul>
 <li>Use <strong>different algorithms</strong> (e.g., Maxent, XGBoost).</li>
 <li>Add <strong>pseudo-absence generation</strong>.</li>
@@ -1378,8 +1384,8 @@ Projected CRS: WGS 84 / UTM zone 30N
   });
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "🌿 Species Habitat Suitability Modelling with biomod2"</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "AG de Meaux – Workshop by Dr. Tahir Ali"</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Species Habitat Suitability Modelling with biomod2"</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Dr Tahir Ali | AG de Meaux"</span></span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
 <span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
 <span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
@@ -1581,7 +1587,7 @@ Projected CRS: WGS 84 / UTM zone 30N
 <span id="cb27-204"><a href="#cb27-204" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-205"><a href="#cb27-205" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
 <span id="cb27-206"><a href="#cb27-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-207"><a href="#cb27-207" aria-hidden="true" tabindex="-1"></a><span class="fu"># 📈 Model Evaluation</span></span>
+<span id="cb27-207"><a href="#cb27-207" aria-hidden="true" tabindex="-1"></a><span class="fu"># Model Evaluation</span></span>
 <span id="cb27-208"><a href="#cb27-208" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-209"><a href="#cb27-209" aria-hidden="true" tabindex="-1"></a>**Code**</span>
 <span id="cb27-210"><a href="#cb27-210" aria-hidden="true" tabindex="-1"></a></span>
@@ -1692,7 +1698,7 @@ Projected CRS: WGS 84 / UTM zone 30N
 <span id="cb27-315"><a href="#cb27-315" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-316"><a href="#cb27-316" aria-hidden="true" tabindex="-1"></a>The weighted mean ensemble (EMwmean) gives higher weight to better-performing algorithms.</span>
 <span id="cb27-317"><a href="#cb27-317" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-318"><a href="#cb27-318" aria-hidden="true" tabindex="-1"></a>**🔍 Why it looks compressed** - biomod2's internal plotting code does not preserve the raster’s coordinate ratio. - It sets up a multi-panel layout (mfrow) to plot multiple ensemble models side by side. - Each panel is drawn with equal x/y units, not the spatial extent ratio, so the map looks "squished".</span>
+<span id="cb27-318"><a href="#cb27-318" aria-hidden="true" tabindex="-1"></a>**Why it looks compressed** - biomod2's internal plotting code does not preserve the raster’s coordinate ratio. - It sets up a multi-panel layout (mfrow) to plot multiple ensemble models side by side. - Each panel is drawn with equal x/y units, not the spatial extent ratio, so the map looks "squished".</span>
 <span id="cb27-319"><a href="#cb27-319" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-320"><a href="#cb27-320" aria-hidden="true" tabindex="-1"></a>**Solution** - Extract predictions and plot with terra::plot()</span>
 <span id="cb27-321"><a href="#cb27-321" aria-hidden="true" tabindex="-1"></a></span>
@@ -1945,7 +1951,7 @@ Projected CRS: WGS 84 / UTM zone 30N
 <span id="cb27-568"><a href="#cb27-568" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-569"><a href="#cb27-569" aria-hidden="true" tabindex="-1"></a><span class="fu"># Try It Yourself</span></span>
 <span id="cb27-570"><a href="#cb27-570" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-571"><a href="#cb27-571" aria-hidden="true" tabindex="-1"></a>💡 Modify one of the following:</span>
+<span id="cb27-571"><a href="#cb27-571" aria-hidden="true" tabindex="-1"></a>Modify one of the following:</span>
 <span id="cb27-572"><a href="#cb27-572" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-573"><a href="#cb27-573" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Use **different algorithms** (e.g., Maxent, XGBoost).</span>
 <span id="cb27-574"><a href="#cb27-574" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Add **pseudo-absence generation**.</span>
