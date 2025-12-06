@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr Tahir Ali | Miss Ainaz Mostafanejad | AG demeaux">
 
-<title>Building a De Novo RADseq Analysis Workflow with STACKS for Non-Model Species</title>
+<title>Building a De Novo RADseq Analysis Workflow with STACKS for Non-Model Species – Dr.&nbsp;Tahir Ali</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -59,27 +59,141 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="De novo RADseq genotyping_files/libs/clipboard/clipboard.min.js"></script>
-<script src="De novo RADseq genotyping_files/libs/quarto-html/quarto.js" type="module"></script>
-<script src="De novo RADseq genotyping_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="De novo RADseq genotyping_files/libs/quarto-html/popper.min.js"></script>
-<script src="De novo RADseq genotyping_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="De novo RADseq genotyping_files/libs/quarto-html/anchor.min.js"></script>
-<link href="De novo RADseq genotyping_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="De novo RADseq genotyping_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="De novo RADseq genotyping_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="De novo RADseq genotyping_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="De novo RADseq genotyping_files/libs/bootstrap/bootstrap-8e780e093a7a7e890386471efeaa8635.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../profile.webp" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-da71b349b2a5b190adc08b2de5cfba23.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-0LPGXESG7T"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
+</script>
 
 
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="quarto-light">
+<body class="nav-sidebar docked quarto-light">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-  <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Building a De Novo RADseq Analysis Workflow with STACKS for Non-Model Species</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projects</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../publications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Publications</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../cv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Résumé</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../teaching/teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../workshops/workshops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Workshops</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Codes</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
    
   <ul class="collapse">
   <li><a href="#de-novo-radseq-analysis-pipeline-for-non-model-species" id="toc-de-novo-radseq-analysis-pipeline-for-non-model-species" class="nav-link active" data-scroll-target="#de-novo-radseq-analysis-pipeline-for-non-model-species">De Novo RADseq Analysis Pipeline for Non-Model Species</a>
@@ -147,7 +261,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   </ul>
 </nav>
-</div>
+    </div>
+<!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -230,7 +345,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="implementation-script" class="level2">
 <h2 class="anchored" data-anchor-id="implementation-script">Implementation Script</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env bash</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=demux_24D324</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=48:00:00</span></span>
@@ -337,7 +452,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span></span>
 <span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
 <span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"All pools processed successfully."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"All pools processed successfully."</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="quality-control-checks" class="level2">
 <h2 class="anchored" data-anchor-id="quality-control-checks">Quality Control Checks</h2>
@@ -380,7 +495,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="implementation-script-1" class="level2">
 <h2 class="anchored" data-anchor-id="implementation-script-1">Implementation Script</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>{r}</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>{r}</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env Rscript</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -502,7 +617,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="at">ylab=</span><span class="st">'Population'</span>, <span class="at">line=</span><span class="dv">2</span>)</span>
 <span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a><span class="do">### Close PDF</span></span>
-<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="fastqc-analysis-for-sequence-quality" class="level2">
 <h2 class="anchored" data-anchor-id="fastqc-analysis-for-sequence-quality">FASTQC Analysis for Sequence Quality</h2>
@@ -526,7 +641,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="fastqc-implementation" class="level2">
 <h2 class="anchored" data-anchor-id="fastqc-implementation">FastQC Implementation</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>{r}</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>{r}</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -614,7 +729,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a><span class="co"># show me the samples that have less than 10% of the number of reads as the median sample from this experiment (these should be dropped immediately)</span></span>
 <span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Median sample contains"</span>, <span class="fu">median</span>(stats.info<span class="sc">$</span>tot.seq), <span class="st">"reads. The following samples contain less than"</span>, <span class="fu">median</span>(stats.info<span class="sc">$</span>tot.seq)<span class="sc">*</span>.<span class="dv">1</span>, <span class="st">"reads (10% of the median), and should likely be dropped"</span>))</span>
 <span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(stats.info[stats.info<span class="sc">$</span>tot.seq <span class="sc">&lt;</span> <span class="fu">median</span>(stats.info<span class="sc">$</span>tot.seq)<span class="sc">*</span>.<span class="dv">1</span>,])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(stats.info[stats.info<span class="sc">$</span>tot.seq <span class="sc">&lt;</span> <span class="fu">median</span>(stats.info<span class="sc">$</span>tot.seq)<span class="sc">*</span>.<span class="dv">1</span>,])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="sample-organization-and-population-mapping" class="level1">
@@ -644,7 +759,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="implementation-script-2" class="level2">
 <h2 class="anchored" data-anchor-id="implementation-script-2">Implementation Script</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=sort_by_pop</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=48:00:00</span></span>
@@ -703,7 +818,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
 <span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"------------------------------------"</span></span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Sorting complete."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Sorting complete."</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="population-map-generation" class="level2">
 <h2 class="anchored" data-anchor-id="population-map-generation">Population Map Generation</h2>
@@ -718,7 +833,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Consistent with STACKS requirements</p></li>
 <li><p>Used for population-aware analyses</p></li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=make_popmaps</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=02:00:00</span></span>
@@ -749,7 +864,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>      <span class="bu">echo</span> <span class="st">" No valid samples found for </span><span class="va">$sp</span><span class="st"> — popmap is empty."</span></span>
 <span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>  <span class="cf">fi</span></span>
 <span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span></span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 </section>
@@ -832,7 +947,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Use RADstackshelpR for evaluation</p></li>
 <li><p>Select m maximizing R80 loci</p></li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=ustacks_by_species_m</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=48:00:00</span></span>
@@ -904,12 +1019,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rm</span> <span class="at">-rf</span> <span class="st">"</span><span class="va">$TMPDIR</span><span class="st">"</span></span>
 <span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Finished ustacks for </span><span class="va">$sample</span><span class="st"> (species=</span><span class="va">$SPECIES</span><span class="st">, m=</span><span class="va">$M</span><span class="st">). Log: </span><span class="va">$LOG_FILE</span><span class="st">"</span></span>
-<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="complete-stacks-pipeline-execution" class="level2">
 <h2 class="anchored" data-anchor-id="complete-stacks-pipeline-execution">Complete STACKS Pipeline Execution</h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=NGS_stacks_post_ustacks</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=48:00:00</span></span>
@@ -1001,7 +1116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a>    <span class="cf">done</span></span>
 <span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
 <span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"All m directories processed successfully (missing species skipped automatically)"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"All m directories processed successfully (missing species skipped automatically)"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="radstackshelpr-for-parameter-optimization" class="level2">
 <h2 class="anchored" data-anchor-id="radstackshelpr-for-parameter-optimization">RADstackshelpR for Parameter Optimization</h2>
@@ -1012,7 +1127,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>Higher R80</strong>: More complete dataset for population analyses</p></li>
 <li><p><strong>Trade-off</strong>: Increasing stringency reduces total markers but improves data completeness</p></li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=radstacks_opt_m</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=04:00:00</span></span>
@@ -1094,7 +1209,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a><span class="st">p &lt;- vis_loci(output = m.out);  ggsave("vis_loci_m3-m7.pdf", p, width=7, height=5)</span></span>
 <span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a><span class="st">cat("</span><span class="dt">\n</span><span class="st">All plots saved in:", out_dir, "</span><span class="dt">\n</span><span class="st">")</span></span>
-<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a><span class="op">RSCRIPT</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a><span class="op">RSCRIPT</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="optimizing-parameter-m-1" class="level2">
@@ -1115,7 +1230,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>Plateau in R80</strong>: Indicates optimal stringency reached</p></li>
 <li><p><strong>Sudden drop in R80</strong>: May indicate excessive paralog merging</p></li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=ustacks_specxM</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=48:00:00</span></span>
@@ -1193,7 +1308,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"✓ finished: </span><span class="va">$sample</span><span class="st"> (log: </span><span class="va">$LOG_FILE</span><span class="st">)"</span></span>
 <span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
 <span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Done SPECIES=</span><span class="va">${SPECIES}</span><span class="st">, m=</span><span class="va">${OPT_M}</span><span class="st">, M=</span><span class="va">${M}</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Done SPECIES=</span><span class="va">${SPECIES}</span><span class="st">, m=</span><span class="va">${OPT_M}</span><span class="st">, M=</span><span class="va">${M}</span><span class="st">"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="optimizing-parameter-n" class="level2">
@@ -1214,7 +1329,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Select n maximizing shared loci without excessive merging</p></li>
 <li><p>Consider biological expectations for population divergence</p></li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=stacks_post_n</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=48:00:00</span></span>
@@ -1330,12 +1445,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-114"><a href="#cb10-114" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"→ Running populations..."</span></span>
 <span id="cb10-115"><a href="#cb10-115" aria-hidden="true" tabindex="-1"></a><span class="ex">populations</span> <span class="at">-P</span> . <span class="at">-M</span> <span class="st">"</span><span class="va">$POPMAP</span><span class="st">"</span> <span class="at">--vcf</span> <span class="at">-t</span> <span class="st">"</span><span class="va">$THREADS</span><span class="st">"</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">tee</span> <span class="st">"</span><span class="va">$LOG_DIR</span><span class="st">/populations.log"</span></span>
 <span id="cb10-116"><a href="#cb10-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-117"><a href="#cb10-117" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"✓ Finished species=</span><span class="va">$SPECIES</span><span class="st"> n=</span><span class="va">${n}</span><span class="st"> — Output: </span><span class="va">$WORK_DIR</span><span class="st">/populations.snps.vcf"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-117"><a href="#cb10-117" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"✓ Finished species=</span><span class="va">$SPECIES</span><span class="st"> n=</span><span class="va">${n}</span><span class="st"> — Output: </span><span class="va">$WORK_DIR</span><span class="st">/populations.snps.vcf"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="comprehensive-optimization-visualization" class="level2">
 <h2 class="anchored" data-anchor-id="comprehensive-optimization-visualization">Comprehensive Optimization Visualization</h2>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>{r}</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>{r}</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env Rscript</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
@@ -1380,7 +1495,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a><span class="co"># optional: save to file</span></span>
 <span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a><span class="co"># (uncomment one of these)</span></span>
 <span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="st">"stacks_parameter_optimization_grid.pdf"</span>, combined, <span class="at">width =</span> <span class="dv">14</span>, <span class="at">height =</span> <span class="dv">10</span>)</span>
-<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot2::ggsave("stacks_parameter_optimization_grid.png", combined, width = 14, height = 10, dpi = 300)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot2::ggsave("stacks_parameter_optimization_grid.png", combined, width = 14, height = 10, dpi = 300)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="variant-filtering-with-snpfiltr" class="level1">
@@ -1465,7 +1580,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="implementation" class="level2">
 <h2 class="anchored" data-anchor-id="implementation">Implementation</h2>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=snpsfiltR_filter</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=06:00:00</span></span>
@@ -1570,7 +1685,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-103"><a href="#cb12-103" aria-hidden="true" tabindex="-1"></a><span class="st"># ---- 8) Write filtered VCF ----</span></span>
 <span id="cb12-104"><a href="#cb12-104" aria-hidden="true" tabindex="-1"></a><span class="st">vcfR::write.vcf(x = vcf, file = OUT_VCF)</span></span>
 <span id="cb12-105"><a href="#cb12-105" aria-hidden="true" tabindex="-1"></a><span class="st">cat("✓ Done. Wrote:", OUT_VCF, "</span><span class="dt">\n</span><span class="st">")</span></span>
-<span id="cb12-106"><a href="#cb12-106" aria-hidden="true" tabindex="-1"></a><span class="op">RSCRIPT</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-106"><a href="#cb12-106" aria-hidden="true" tabindex="-1"></a><span class="op">RSCRIPT</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="quality-assessment-with-pca" class="level1">
@@ -1601,7 +1716,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="implementation-1" class="level2">
 <h2 class="anchored" data-anchor-id="implementation-1">Implementation</h2>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=pca_filtered</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=04:00:00</span></span>
@@ -1747,7 +1862,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-144"><a href="#cb13-144" aria-hidden="true" tabindex="-1"></a><span class="st">                 file = csv_out, row.names = FALSE)</span></span>
 <span id="cb13-145"><a href="#cb13-145" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-146"><a href="#cb13-146" aria-hidden="true" tabindex="-1"></a><span class="st">cat("✓ PCA saved to:\n - ", pdf_out, "\n - ", csv_out, "\n", sep = "")</span></span>
-<span id="cb13-147"><a href="#cb13-147" aria-hidden="true" tabindex="-1"></a><span class="op">RSCRIPT</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-147"><a href="#cb13-147" aria-hidden="true" tabindex="-1"></a><span class="op">RSCRIPT</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="coverage-analysis" class="level1">
@@ -1778,7 +1893,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="implementation-2" class="level2">
 <h2 class="anchored" data-anchor-id="implementation-2">Implementation</h2>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>{r}</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>{r}</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># CONFIG</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================</span></span>
@@ -1956,7 +2071,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-176"><a href="#cb14-176" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">"Wrote coverage summary to: "</span>, OUT_CSV)</span>
 <span id="cb14-177"><a href="#cb14-177" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-178"><a href="#cb14-178" aria-hidden="true" tabindex="-1"></a><span class="co"># Quick peek</span></span>
-<span id="cb14-179"><a href="#cb14-179" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(coverage_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-179"><a href="#cb14-179" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(coverage_df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="conclusion" class="level1">
@@ -1998,11 +2113,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <hr>
 <p><em>This workflow represents best practices for de novo RADseq analysis and should be adapted based on specific study requirements and biological considerations.</em></p>
+
+
 </section>
 </section>
 
-</main>
-<!-- /main column -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -2054,13 +2170,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -2075,7 +2192,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/tahirali-biomics\.github\.io");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -2403,6 +2520,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   });
   </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2024 Dr.&nbsp;Tahir Ali</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Built with <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
 
 
 
