@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>🌍 Climate Impact Simulator Interactive App – Dr.&nbsp;Tahir Ali</title>
+<title>🌍 Climate Impact Simulator – Dr.&nbsp;Tahir Ali</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -92,7 +92,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">🌍 Climate Impact Simulator Interactive App</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">🌍 Climate Impact Simulator</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -161,7 +161,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">🌍 Climate Impact Simulator Interactive App</h1>
+<h1 class="title">🌍 Climate Impact Simulator</h1>
 </div>
 
 
@@ -178,228 +178,130 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </header>
 
 
-<p><em>Explore how climate, land use, and policy choices interact to shape environmental resilience.</em> 🌱</p>
+<p><em>Explore how climate, land use, and policy choices interact to shape environmental resilience.</em><br>
+<em>Educational tool using approximate climate and environmental data — <strong>not for policy or operational decisions</strong></em>.</p>
 <hr>
 <section id="what-is-the-climate-impact-simulator" class="level3">
-<h3 class="anchored" data-anchor-id="what-is-the-climate-impact-simulator">💡 <strong>What is the Climate Impact Simulator?</strong></h3>
-<p>The <strong>Climate Impact Simulator</strong> is an interactive Shiny app designed as a <strong>teaching and learning tool</strong> for:</p>
+<h3 class="anchored" data-anchor-id="what-is-the-climate-impact-simulator"><strong>What is the Climate Impact Simulator?</strong></h3>
+<p>The <strong>Climate Impact Simulator</strong> is an interactive <strong>Shiny app</strong> designed for <strong>teaching and exploratory learning</strong> in:</p>
 <ul>
-<li><strong>Climate science &amp; geography</strong></li>
-<li><strong>Environmental sustainability &amp; policy</strong></li>
-<li><strong>Systems thinking and scenario analysis</strong></li>
+<li>Climate science and geography<br>
+</li>
+<li>Environmental sustainability and policy<br>
+</li>
+<li>Systems thinking and scenario analysis</li>
 </ul>
-<p>Learners can choose a city (or custom coordinates), then explore how:</p>
-<ul>
-<li><strong>Historical climate patterns</strong> (temperature &amp; precipitation),</li>
-<li><strong>Environmental pressures</strong> (deforestation, emissions, water use, etc.), and</li>
-<li><strong>Policy levers</strong> (renewable energy, public transport, reforestation, agriculture)</li>
-</ul>
-<p>combine to influence an overall <strong>Climate Resilience Index</strong> from 0–10.</p>
+<p>Users select a city (or custom coordinates) and explore how <strong>climate patterns</strong>, <strong>environmental pressures</strong>, and <strong>policy levers</strong> combine to shape an overall <strong>Climate Resilience Index (0–10)</strong>.</p>
 <hr>
 </section>
-<section id="app-features" class="level3">
-<h3 class="anchored" data-anchor-id="app-features">🌟 <strong>App Features</strong></h3>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Feature</th>
-<th style="text-align: left;">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">🗺️ <strong>Interactive map</strong></td>
-<td style="text-align: left;">Select world cities or custom coordinates and see their resilience score on a map</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">📈 <strong>Walter–Lieth climate diagram</strong></td>
-<td style="text-align: left;">Visualize monthly temperature and precipitation with dry and frost months highlighted</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">🌡️ <strong>Climate Resilience Index</strong></td>
-<td style="text-align: left;">A composite score (0–10) combining forest, air, urban, energy, water, and agriculture components</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">🎚️ <strong>Environmental factor sliders</strong></td>
-<td style="text-align: left;">Adjust deforestation, urbanization, renewables, emissions, water use, etc., and watch the index respond in real time</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">🔄 <strong>Scenario presets</strong></td>
-<td style="text-align: left;">One-click <strong>Current</strong>, <strong>Optimistic</strong>, and <strong>Pessimistic</strong> scenarios to compare futures</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">📊 <strong>Component &amp; sensitivity plots</strong></td>
-<td style="text-align: left;">Radar and bar plots show which factors contribute most to resilience or risk</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">📥 <strong>Report export</strong></td>
-<td style="text-align: left;">Generate a summary report (HTML) for assignments, lab notes, or reflection tasks</td>
-</tr>
-</tbody>
-</table>
+<section id="core-features" class="level3">
+<h3 class="anchored" data-anchor-id="core-features"><strong>Core Features</strong></h3>
+<ul>
+<li>🗺️ <strong>Interactive map</strong> to select cities or custom locations<br>
+</li>
+<li>📈 <strong>Walter–Lieth climate diagram</strong> showing monthly temperature, precipitation, dry months, and frost months<br>
+</li>
+<li>🌡️ <strong>Climate Resilience Index (0–10)</strong> summarizing multiple environmental dimensions<br>
+</li>
+<li>🎚️ <strong>Adjustable environmental levers</strong> (deforestation, renewables, emissions, water use, transport, agriculture)<br>
+</li>
+<li>🔄 <strong>Scenario presets</strong>: <em>Current</em>, <em>Optimistic</em>, and <em>Pessimistic</em><br>
+</li>
+<li>📊 <strong>Radar and bar plots</strong> highlighting component contributions and sensitivities<br>
+</li>
+<li>📥 <strong>HTML report export</strong> for labs, assignments, and reflection</li>
+</ul>
 <hr>
 </section>
 <section id="launch-the-app" class="level3">
-<h3 class="anchored" data-anchor-id="launch-the-app">🚀 <strong>Launch the App</strong></h3>
-<p>👉 Open the Climate Impact Simulator and start exploring:</p>
-<p><a href="https://tahirali-biomics2.shinyapps.io/Climate-impact-simulator-app/">Open in a new tab</a></p>
+<h3 class="anchored" data-anchor-id="launch-the-app"><strong>Launch the App</strong></h3>
+<p>👉 <a href="https://tahirali-biomics2.shinyapps.io/Climate-impact-simulator-app/">Open the Climate Impact Simulator</a></p>
 <p><a href="interactive.html">← Back to Interactive Apps</a></p>
 <div class="app-container" style="position:relative;padding-bottom:100%;height:0;overflow:hidden;">
 <p><iframe src="https://tahirali-biomics2.shinyapps.io/Climate-impact-simulator-app/" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" sandbox="allow-scripts allow-same-origin allow-forms" title="Climate Impact Simulator Shiny app"></iframe></p>
 </div>
 <hr>
 </section>
-<section id="data-and-approximations" class="level3">
-<h3 class="anchored" data-anchor-id="data-and-approximations">📊 <strong>Data and Approximations</strong></h3>
-<p>The app is built for <strong>conceptual exploration</strong>, not for official decision‑making. It uses <strong>realistic but simplified</strong> data sources:</p>
-<section id="climate-data-temperature-precipitation" class="level4">
-<h4 class="anchored" data-anchor-id="climate-data-temperature-precipitation">1. Climate data (temperature &amp; precipitation)</h4>
+<section id="data-and-assumptions" class="level3">
+<h3 class="anchored" data-anchor-id="data-and-assumptions">📊 <strong>Data and Assumptions</strong></h3>
+<p>This app is built for <strong>conceptual understanding</strong>, not quantitative decision-making.</p>
+<section id="climate-data" class="level4">
+<h4 class="anchored" data-anchor-id="climate-data">Climate data</h4>
 <ul>
-<li>For a small set of major cities (e.g.&nbsp;<strong>Berlin, London, Paris, New York, Mexico City, São Paulo</strong>), the app uses <strong>approximate monthly climate normals</strong> based on typical climatology (mean monthly temperature and precipitation in the right ballpark for 20th–21st‑century averages).</li>
-<li>For other locations, the app uses <strong>generic climate patterns by latitude band</strong>, for example:
+<li>Uses <strong>approximate monthly climate normals</strong> for a limited set of major cities.</li>
+<li>Other locations rely on <strong>latitude-based climate archetypes</strong> (tropical, temperate, subarctic).</li>
+<li>Climate diagrams are derived from:
 <ul>
-<li>Low latitudes: warm, wet, weak seasonality (tropical).</li>
-<li>Mid latitudes: moderate temperatures with clear seasons (temperate/continental).</li>
-<li>High latitudes: cold, strong seasonal cycle (subarctic).</li>
+<li>Monthly mean temperature</li>
+<li>Approximate minimum and maximum temperature</li>
+<li>Monthly precipitation</li>
 </ul></li>
-<li>A <strong>Walter–Lieth climate diagram</strong> is calculated from:
-<ul>
-<li>Monthly mean temperature (Tmean)</li>
-<li>Approximate Tmin and Tmax</li>
-<li>Monthly precipitation (Precip)</li>
-</ul></li>
-<li><strong>Dry months</strong> (P &lt; 2 × Tmean) and <strong>frost months</strong> (Tmin &lt; 0 °C) are flagged to support teaching about climate classification and seasonal water balance.</li>
+<li><strong>Dry months</strong> (P &lt; 2 × Tmean) and <strong>frost months</strong> (Tmin &lt; 0 °C) are flagged for teaching climate classification and water balance.</li>
 </ul>
 <blockquote class="blockquote">
-<p><strong>Important:</strong><br>
-Climate values are <strong>approximate and synthetic</strong>, calibrated to be realistic but <strong>not taken from a specific gridded dataset or live API</strong>. They are suitable for teaching patterns and concepts, not for local planning.</p>
+<p>Climate values are <strong>synthetic but realistic</strong> and are <strong>not drawn from live APIs or gridded datasets</strong>.</p>
 </blockquote>
 </section>
-<section id="environmental-indicators-deforestation-aqi-etc." class="level4">
-<h4 class="anchored" data-anchor-id="environmental-indicators-deforestation-aqi-etc.">2. Environmental indicators (deforestation, AQI, etc.)</h4>
-<p>For each selected city/region, the app provides environmental indicators such as:</p>
+<section id="environmental-indicators" class="level4">
+<h4 class="anchored" data-anchor-id="environmental-indicators">Environmental indicators</h4>
+<p>Indicators such as deforestation, AQI, renewables, emissions, water use, and transport share are:</p>
 <ul>
-<li><strong>Deforestation rate (%/year)</strong></li>
-<li><strong>Urbanization rate (%/year)</strong></li>
-<li><strong>Renewable energy share (%)</strong></li>
-<li><strong>CO₂ emissions change (%)</strong></li>
-<li><strong>Sustainable agriculture share (%)</strong></li>
-<li><strong>Water use change (%)</strong></li>
-<li><strong>Public transport usage (%)</strong></li>
-<li><strong>Reforested area (%)</strong></li>
-<li><strong>Air Quality Index (AQI, 0–500)</strong></li>
-<li><strong>Fire risk index</strong></li>
+<li><strong>Plausible, region-informed starting values</strong><br>
+</li>
+<li><strong>Scenario-friendly and user-adjustable</strong><br>
+</li>
+<li><strong>Not real-time or officially sourced statistics</strong></li>
 </ul>
-<p>These values are:</p>
-<ul>
-<li><strong>Plausible approximations</strong> informed by:
-<ul>
-<li>Typical values for country income level and region,</li>
-<li>Known qualitative patterns (e.g.&nbsp;higher AQI in megacities with heavy traffic; higher renewables in some European countries).</li>
-</ul></li>
-<li><strong>Not directly sourced</strong> from official datasets (e.g.&nbsp;not pulled from WHO, Copernicus, or national statistics in real time).</li>
-<li>Intended for <strong>scenario exploration and comparative teaching</strong>, not for quantitative assessment of a specific city.</li>
-</ul>
-<p>Each environmental variable can be adjusted manually, and the <strong>starting (“Current”) values</strong> for well‑known cities are chosen to be <strong>reasonable but simplified</strong>.</p>
+<p>They are intended to support <strong>comparative reasoning and intuition-building</strong>, not city-level assessment.</p>
 <hr>
 </section>
 </section>
-<section id="how-the-climate-resilience-index-works-conceptually" class="level3">
-<h3 class="anchored" data-anchor-id="how-the-climate-resilience-index-works-conceptually">🧮 <strong>How the Climate Resilience Index Works (Conceptually)</strong></h3>
-<p>The app combines several components into a single <strong>0–10 index</strong>:</p>
+<section id="climate-resilience-index-conceptual-design" class="level3">
+<h3 class="anchored" data-anchor-id="climate-resilience-index-conceptual-design">🧮 <strong>Climate Resilience Index (Conceptual Design)</strong></h3>
+<p>The <strong>0–10 index</strong> combines weighted sub-scores from:</p>
 <ul>
-<li><strong>Forest &amp; land use</strong> (deforestation, reforestation, fire risk)</li>
-<li><strong>Air quality &amp; emissions</strong> (CO₂ change, AQI, renewables)</li>
-<li><strong>Urban planning &amp; transport</strong> (urbanization, public transport)</li>
-<li><strong>Energy systems</strong> (renewables, air quality)</li>
-<li><strong>Water &amp; agriculture</strong> (water use, sustainable agriculture, deforestation)</li>
+<li>Forests and land use<br>
+</li>
+<li>Air quality and emissions<br>
+</li>
+<li>Energy systems<br>
+</li>
+<li>Urban planning and transport<br>
+</li>
+<li>Water use and agriculture</li>
 </ul>
-<p>Each component is:</p>
-<ol type="1">
-<li>Scaled to a <strong>0–10 sub‑score</strong>, where higher is better (more resilient/sustainable).</li>
-<li>Combined with <strong>weights</strong> into an overall index.</li>
-</ol>
-<p>The exact formulas are visible in the code, and you can use them in class to discuss:</p>
+<p>Each component is scaled to a <strong>0–10 score</strong> and combined using transparent weights. This design supports classroom discussion on:</p>
 <ul>
-<li>Why some factors are weighted more heavily (e.g.&nbsp;forests vs.&nbsp;transport),</li>
-<li>How index construction always involves <strong>value judgments and trade‑offs</strong>,</li>
-<li>How different weighting schemes could change rankings.</li>
-</ul>
-<hr>
-</section>
-<section id="using-the-app-for-teaching-learning" class="level3">
-<h3 class="anchored" data-anchor-id="using-the-app-for-teaching-learning">🎓 <strong>Using the App for Teaching &amp; Learning</strong></h3>
-<p>This app is ideal for:</p>
-<section id="climate-geography-labs" class="level4">
-<h4 class="anchored" data-anchor-id="climate-geography-labs">1. <strong>Climate &amp; geography labs</strong></h4>
-<ul>
-<li>Explore how <strong>climate types</strong> (tropical, temperate, subarctic) look in a <strong>Walter–Lieth diagram</strong>.</li>
-<li>Identify <strong>dry months</strong> and discuss water stress.</li>
-<li>Compare <strong>cities at different latitudes</strong> and on different continents.</li>
-</ul>
-</section>
-<section id="environmental-science-sustainability-courses" class="level4">
-<h4 class="anchored" data-anchor-id="environmental-science-sustainability-courses">2. <strong>Environmental science &amp; sustainability courses</strong></h4>
-<ul>
-<li>Show how <strong>deforestation</strong> or higher <strong>emissions</strong> reduce the resilience index.</li>
-<li>Demonstrate benefits of <strong>increasing renewable energy</strong> or <strong>public transport</strong>.</li>
-<li>Discuss <strong>AQI categories</strong> (good, moderate, unhealthy) and their health/environment impacts.</li>
-</ul>
-</section>
-<section id="scenario-analysis-systems-thinking" class="level4">
-<h4 class="anchored" data-anchor-id="scenario-analysis-systems-thinking">3. <strong>Scenario analysis &amp; systems thinking</strong></h4>
-<ul>
-<li>Start with <strong>Current</strong> conditions for a city.</li>
-<li>Switch to <strong>Optimistic</strong> and <strong>Pessimistic</strong> presets:
-<ul>
-<li>How do the radar plot and component bars change?</li>
-<li>Which levers (renewables, reforestation, transport) are most powerful?</li>
-</ul></li>
-<li>Assign students to:
-<ul>
-<li>Design a policy package that raises the score from, say, 5.2 to ≥7.5.</li>
-<li>Compare trade‑offs (e.g.&nbsp;rapid urbanization vs.&nbsp;investment in public transit).</li>
-</ul></li>
-</ul>
-</section>
-<section id="assignments-and-reflective-reports" class="level4">
-<h4 class="anchored" data-anchor-id="assignments-and-reflective-reports">4. <strong>Assignments and reflective reports</strong></h4>
-<ul>
-<li>The app’s <strong>report export</strong> can be used in:
-<ul>
-<li>Lab exercises (“Generate a report for Berlin and briefly interpret each component.”)</li>
-<li>Group projects (“Compare three cities on different continents under optimistic scenarios.”)</li>
-</ul></li>
-<li>Students can attach the generated report as an appendix and focus on <strong>interpretation</strong> and <strong>policy discussion</strong>.</li>
+<li>Indicator selection and weighting<br>
+</li>
+<li>Trade-offs and value judgments<br>
+</li>
+<li>How index construction influences rankings</li>
 </ul>
 <hr>
 </section>
-</section>
-<section id="what-this-tool-is-and-is-not" class="level3">
-<h3 class="anchored" data-anchor-id="what-this-tool-is-and-is-not">🚦 <strong>What this tool is and is not</strong></h3>
-<p>✅ <strong>Good for:</strong></p>
+<section id="teaching-applications" class="level3">
+<h3 class="anchored" data-anchor-id="teaching-applications">🎓 <strong>Teaching Applications</strong></h3>
 <ul>
-<li>Building <strong>intuition</strong> about:
-<ul>
-<li>Climate patterns and diagrams</li>
-<li>How multiple environmental indicators interact</li>
-<li>Effects of policy choices and scenarios on a composite index</li>
-</ul></li>
-<li>Supporting <strong>discussion, debate, and critical thinking</strong> in class.</li>
+<li><strong>Climate &amp; geography</strong>: interpret Walter–Lieth diagrams, dry months, and latitudinal patterns<br>
+</li>
+<li><strong>Sustainability &amp; policy</strong>: test how renewables, reforestation, or transport investment affect resilience<br>
+</li>
+<li><strong>Systems thinking</strong>: compare scenarios and identify high-impact levers<br>
+</li>
+<li><strong>Assignments</strong>: generate reports and focus on interpretation rather than data collection</li>
 </ul>
-<p>❌ <strong>Not for:</strong></p>
-<ul>
-<li>Official carbon accounting or environmental reporting</li>
-<li>Detailed risk assessment at city scale</li>
-<li>Real‑time monitoring of climate or air quality</li>
-</ul>
-<p>You should make this clear to students:<br>
-<strong>Values are approximate and illustrative</strong>, not an authoritative database.</p>
 <hr>
+</section>
+<section id="scope-and-limitations" class="level3">
+<h3 class="anchored" data-anchor-id="scope-and-limitations">🚦 <strong>Scope and Limitations</strong></h3>
+<p><strong>Suitable for:</strong> - Teaching climate patterns and environmental interactions<br>
+- Scenario exploration and discussion<br>
+- Building intuition about policy trade-offs</p>
+<p><strong>Not suitable for:</strong> - Official reporting or planning<br>
+- Fine-scale risk assessment<br>
+- Real-time monitoring</p>
+<p><strong>All values are illustrative and pedagogical.</strong></p>
 
 
 </section>
