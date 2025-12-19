@@ -11,7 +11,7 @@
 
 <meta name="author" content="Dr Tahir Ali | AG de Meaux" />
 
-<meta name="date" content="2025-12-11" />
+<meta name="date" content="2025-12-19" />
 
 <title>Population Genetics Analysis of Arabidopsis thaliana</title>
 
@@ -355,23 +355,30 @@ thaliana</h1>
 <h3 class="subtitle">Practical Session 5 - Genome-wide vs Defence Gene
 Diversity Analysis</h3>
 <h4 class="author">Dr Tahir Ali | AG de Meaux</h4>
-<h4 class="date">December 11, 2025</h4>
+<h4 class="date">December 19, 2025</h4>
 
 </div>
 
 
+<div id="copy-required-data" class="section level3">
+<h3>Copy Required Data:</h3>
+<p><strong>Copy the required directory to your home directory</strong>
+(<strong>Replace</strong> every instance of <strong>qbiad019</strong>
+with <strong>your own username.</strong>)</p>
+<pre class="bash"><code>cp -r /scratch/qbio/Practical_Session_5 /home/group.kurse/qbiad019</code></pre>
 <p><strong>Set up the path to the working directory</strong></p>
 <pre class="r"><code># Set the knitr root directory - this PERSISTS
 # replace both path to &quot;/home/group.kurse/qbiadxxx/Practical_Session_5
-knitr::opts_knit$set(root.dir = &quot;/scratch/qbio/Practical_Session_5&quot;)
+knitr::opts_knit$set(root.dir = &quot;/home/group.kurse/qbiad019/Practical_Session_5&quot;)
 
 # Also set DATA_DIR variable for reference
-DATA_DIR &lt;- &quot;/scratch/qbio/Practical_Session_5&quot;
+DATA_DIR &lt;- &quot;/home/group.kurse/qbiad019/Practical_Session_5&quot;
 
 cat(&quot;Knitr root.dir set to:&quot;, knitr::opts_knit$get(&quot;root.dir&quot;), &quot;\n&quot;)</code></pre>
-<pre><code>## Knitr root.dir set to: /scratch/qbio/Practical_Session_5</code></pre>
+<pre><code>## Knitr root.dir set to: /home/group.kurse/qbiad019/Practical_Session_5</code></pre>
 <pre class="r"><code>cat(&quot;Files available:&quot;, paste(list.files()[1:3], collapse=&quot;, &quot;), &quot;\n&quot;)</code></pre>
-<pre><code>## Files available: gene_analysis_results, Practical_Day_5.html, Practical_Day_5.qmd</code></pre>
+<pre><code>## Files available: Practical_Day_5_files, Practical_Day_5.qmd, vcf</code></pre>
+</div>
 <div id="summary" class="section level1">
 <h1>Summary</h1>
 <p>Natural populations evolve under the combined action of
@@ -483,7 +490,6 @@ aligned.</p>
 </ul>
 <pre class="r"><code># --- 1) Load and inspect VCF ---------------------------------
 # Load the VCF file
-setwd(&quot;/scratch/qbio/Practical_Session_5&quot;)
 vcf_full &lt;- readVcf(&quot;vcf/1001genomes_snp-short-indel_only_ACGTN_Dp10GQ20Q30_NoIndel_Bialleleic_80PcMissing_80SwEs.vcf.recode.vcf.gz&quot;)
 
 # Get chromosome names from VCF
@@ -1869,7 +1875,7 @@ conflicts_prefer(dplyr::first)</code></pre>
 cat(&quot;Loading gene annotations from GFF file...\n&quot;)</code></pre>
 <pre><code>## Loading gene annotations from GFF file...</code></pre>
 <pre class="r"><code># Read the GFF file
-gff_path &lt;- &quot;/scratch/qbio/Practical_Session_5/vcf/GFF_final_with_annotation_2_gff&quot;
+gff_path &lt;- &quot;vcf/GFF_final_with_annotation_2_gff&quot;
 if (file.exists(gff_path)) {
   gff &lt;- read.delim(gff_path, 
                     header = TRUE, sep = &quot;\t&quot;, stringsAsFactors = FALSE)
@@ -2420,9 +2426,9 @@ gene_results_dir &lt;- &quot;gene_analysis_results&quot;
 if (!dir.exists(gene_results_dir)) {
   dir.create(gene_results_dir)
   cat(&quot;Created directory:&quot;, gene_results_dir, &quot;\n&quot;)
-}
-
-# Save all relevant data
+}</code></pre>
+<pre><code>## Created directory: gene_analysis_results</code></pre>
+<pre class="r"><code># Save all relevant data
 if (exists(&quot;overlap_df&quot;) &amp;&amp; nrow(overlap_df) &gt; 0) {
   write_csv(overlap_df, file.path(gene_results_dir, &quot;gene_outlier_overlaps.csv&quot;))
   cat(&quot;✓ Saved: gene_outlier_overlaps.csv\n&quot;)
