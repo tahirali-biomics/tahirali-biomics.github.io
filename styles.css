@@ -29,14 +29,14 @@
   border: 2.7px solid #0072B2 !important;
 }
 
-/* Centered profile image, rounded corners (not circle) */
+/* Centered profile image, rounded corners (not circle 180px-> 300px) */ 
 .profile-pic {
   display: block;
   margin-left: auto;
   margin-right: auto;
   border-radius: 20px;
   box-shadow: 0 0 10px #aaa;
-  width: 250px;
+  width: 300px;
   margin-top: 1.5em;
   margin-bottom: 1em;
 }
