@@ -4,7 +4,7 @@
     "href": "workshops/workshops.html",
     "title": "Hands-on Workshops & Training",
     "section": "",
-    "text": "Practical, hands-on workshops introducing data wrangling in R, Bash, and Python — and diving into advanced themes in evolutionary and ecological genomics.\n\nLearn by doing — explore evolution, adaptation, and biodiversity through data, code, and discovery. ️ —\n\n\nAbout These Workshops\nThese interactive computational workshops are designed to turn theoretical concepts into practical skills.\nThrough Python (JupyterLab), R, and Bash/Linux, participants gain hands-on experience in analysing genomic and ecological data — from allele frequency dynamics to species distribution modelling.\nEach session blends: - Conceptual introductions\n\nGuided coding exercises\nData exploration and visualisation\nCollaborative problem-solving and discussion\n\n\n\n\nWorkshop Categories\n\n R & Statistical Genomics\n Ecological & Distribution Modeling\n\n\n Population Genomics & Landscape Genetics \n Python & JupyterLab\n Bash & Linux Essentials\n\n\n\n\nWorkshop Themes\nExplore how advanced tools reveal patterns of evolution, hybridization, and adaptation — from genes to ecosystems:\n\n\n\n\n\n\n\n\nTopic\nCore Tools\nFocus\n\n\n\n\nLinux & Bash for Bioinformatics\nbash · awk · sed · Slurm · HPC\nAutomate genomic workflows and manage high-performance computing tasks\n\n\nIntroduction to R\nR · RStudio · tidyverse · tidymodels · ggplot2\nBuild a foundation in R programming, visualization, and data manipulation\n\n\nTemporal Genomics\nR · Python · dadi · SFS · snpEff · GERP · phyloP · GPN\nTrack allele frequency shifts and detect selection through time\n\n\nHybridization Genomics\nANGSD · GATK · bcftools · vcftools · plink\nQuantify introgression and genomic ancestry in hybrid zones\n\n\nTrait & Genotype-based Distribution Models\nR · caret · SDMtoolbox · GAM · GLM\nIntegrate phenotypic and genomic predictors into distribution models\n\n\nPhylogeography & Population Structure\nSTRUCTURE · ADMIXTURE · DAPC · PCAngsd · poppr\nInfer connectivity, admixture, and population differentiation\n\n\nGWAS & Functional Genomics\nPLINK · GEMMA · GAPIT · R\nIdentify adaptive loci and genotype–phenotype associations\n\n\nGene Ontology & Selection Tests\ntopGO · clusterProfiler · scikit-bio\nInterpret biological functions underlying signals of selection\n\n\nSpecies Distribution Models (SDMs)\nR · Python · biomod2 · maxent · scikit-learn\nPredict species ranges and responses to climate change\n\n\n\n\n\n\nAim\nEmpower students, researchers, and educators to bridge evolutionary theory, genomic data, and computational methods — building the skills needed to analyze, visualize, and interpret complex biological data.",
+    "text": "Practical, hands-on workshops introducing data wrangling in R, Bash, and Python — and diving into advanced themes in evolutionary and ecological genomics.\n\nLearn by doing — explore evolution, adaptation, and biodiversity through data, code, and discovery.\n\n\n\nAbout These Workshops\nThese interactive computational workshops are designed to turn theoretical concepts into practical skills.\nThrough Python (JupyterLab), R, and Bash/Linux, participants gain hands-on experience in analysing genomic and ecological data — from allele frequency dynamics to species distribution modelling.\nEach session blends: - Conceptual introductions - Guided coding exercises - Data exploration and visualisation - Collaborative problem-solving and discussion\n\n\n\nWorkshop Categories\n\n R & Statistical Genomics\n Ecological & Distribution Modeling\n  Environmental Statistics and Spatial Modeling for Conservation\n\n\n Population Genomics & Landscape Genetics \n Python & JupyterLab\n Bash & Linux Essentials\n\n\n\n\nWorkshop Themes\nExplore how advanced tools reveal patterns of evolution, hybridization, and adaptation — from genes to ecosystems:\n\n\n\n\n\n\n\n\nTopic\nCore Tools\nFocus\n\n\n\n\nLinux & Bash for Bioinformatics\nbash · awk · sed · Slurm · HPC\nAutomate genomic workflows and manage high-performance computing tasks\n\n\nIntroduction to R\nR · RStudio · tidyverse · tidymodels · ggplot2\nBuild a foundation in R programming, visualization, and data manipulation\n\n\nSpatial Ecology & Ecological Modeling\nsf, terra, ggplot2, dplyr, spatstat, spdep, tmap, dismo, randomForest, blockCV, mlr3\nSpatial sampling theory, spatial point-pattern analysis, BioClim climate predictors, multivariate analysis, and machine learning approaches for species distribution modeling (SDM) with spatial cross-validation\n\n\nSpecies Distribution Models (SDMs)\nR · Python · biomod2 · maxent · scikit-learn\nPredict species ranges and responses to climate change\n\n\nTemporal Genomics\nR · Python · dadi · SFS · snpEff · GERP · phyloP · GPN\nTrack allele frequency shifts and detect selection through time\n\n\nHybridization Genomics\nANGSD · GATK · bcftools · vcftools · plink\nQuantify introgression and genomic ancestry in hybrid zones\n\n\nTrait & Genotype-based Distribution Models\nR · caret · SDMtoolbox · GAM · GLM\nIntegrate phenotypic and genomic predictors into distribution models\n\n\nPhylogeography & Population Structure\nSTRUCTURE · ADMIXTURE · DAPC · PCAngsd · poppr\nInfer connectivity, admixture, and population differentiation\n\n\nGWAS & Functional Genomics\nPLINK · GEMMA · GAPIT · R\nIdentify adaptive loci and genotype–phenotype associations\n\n\nGene Ontology & Selection Tests\ntopGO · clusterProfiler · scikit-bio\nInterpret biological functions underlying signals of selection\n\n\n\n\n\n\nAim\nEmpower students, researchers, and educators to bridge evolutionary theory, genomic data, spatial ecology & modeling and computational methods — building the skills needed to analyze, visualize, and interpret complex biological data.",
     "crumbs": [
       "Workshops"
     ]
@@ -826,5 +826,96 @@
     "crumbs": [
       "Résumé"
     ]
+  },
+  {
+    "objectID": "workshops/workshops_old_final.html",
+    "href": "workshops/workshops_old_final.html",
+    "title": "Hands-on Workshops & Training",
+    "section": "",
+    "text": "Practical, hands-on workshops introducing data wrangling in R, Bash, and Python — and diving into advanced themes in evolutionary and ecological genomics.\n\nLearn by doing — explore evolution, adaptation, and biodiversity through data, code, and discovery. ️ —\n\n\nAbout These Workshops\nThese interactive computational workshops are designed to turn theoretical concepts into practical skills.\nThrough Python (JupyterLab), R, and Bash/Linux, participants gain hands-on experience in analysing genomic and ecological data — from allele frequency dynamics to species distribution modelling.\nEach session blends: - Conceptual introductions\n\nGuided coding exercises\nData exploration and visualisation\nCollaborative problem-solving and discussion\n\n\n\n\nWorkshop Categories\n\n R & Statistical Genomics\n Ecological & Distribution Modeling\n\n\n Population Genomics & Landscape Genetics \n Python & JupyterLab\n Bash & Linux Essentials\n\n\n\n\nWorkshop Themes\nExplore how advanced tools reveal patterns of evolution, hybridization, and adaptation — from genes to ecosystems:\n\n\n\n\n\n\n\n\nTopic\nCore Tools\nFocus\n\n\n\n\nLinux & Bash for Bioinformatics\nbash · awk · sed · Slurm · HPC\nAutomate genomic workflows and manage high-performance computing tasks\n\n\nIntroduction to R\nR · RStudio · tidyverse · tidymodels · ggplot2\nBuild a foundation in R programming, visualization, and data manipulation\n\n\nTemporal Genomics\nR · Python · dadi · SFS · snpEff · GERP · phyloP · GPN\nTrack allele frequency shifts and detect selection through time\n\n\nHybridization Genomics\nANGSD · GATK · bcftools · vcftools · plink\nQuantify introgression and genomic ancestry in hybrid zones\n\n\nTrait & Genotype-based Distribution Models\nR · caret · SDMtoolbox · GAM · GLM\nIntegrate phenotypic and genomic predictors into distribution models\n\n\nPhylogeography & Population Structure\nSTRUCTURE · ADMIXTURE · DAPC · PCAngsd · poppr\nInfer connectivity, admixture, and population differentiation\n\n\nGWAS & Functional Genomics\nPLINK · GEMMA · GAPIT · R\nIdentify adaptive loci and genotype–phenotype associations\n\n\nGene Ontology & Selection Tests\ntopGO · clusterProfiler · scikit-bio\nInterpret biological functions underlying signals of selection\n\n\nSpecies Distribution Models (SDMs)\nR · Python · biomod2 · maxent · scikit-learn\nPredict species ranges and responses to climate change\n\n\n\n\n\n\nAim\nEmpower students, researchers, and educators to bridge evolutionary theory, genomic data, and computational methods — building the skills needed to analyze, visualize, and interpret complex biological data."
+  },
+  {
+    "objectID": "workshops/workshops (copy).html",
+    "href": "workshops/workshops (copy).html",
+    "title": "🌿 Hands-on Workshops & Training 🗺",
+    "section": "",
+    "text": "Practical, hands-on workshops introducing data wrangling in R, Bash, and Python — and diving into advanced themes in evolutionary and ecological genomics.\n\n_Learn by doing — explore evolution, adaptation, and biodiversity through data, code, and discovery. ️ —\n\n\n🎓 About These Workshops\nThese interactive computational workshops are designed to turn theoretical concepts into practical skills.\nThrough Python (JupyterLab), R, and Bash/Linux, participants gain hands-on experience in analysing genomic and ecological data — from allele frequency dynamics to species distribution modelling.\nEach session blends: - 🧩 Conceptual introductions - 💻 Guided coding exercises - 📊 Data exploration and visualisation - 🤝 Collaborative problem-solving and discussion\n\n\n\nWorkshop Categories\n\n📊 R & Statistical Genomics\n🌿 Ecological & Distribution Modeling\n\n\n🐍 Python & JupyterLab\n💻 Bash & Linux Essentials\n🧬 Population & Evolutionary Genomics\n\n\n\n\n🔬 Workshop Themes\nExplore how advanced tools reveal patterns of evolution, hybridization, and adaptation — from genes to ecosystems:\n\n\n\n\n\n\n\n\n🌍 Topic\n🧰 Core Tools\n🎯 Focus\n\n\n\n\nLinux & Bash for Bioinformatics\nbash · awk · sed · Slurm · HPC\nAutomate genomic workflows and manage high-performance computing tasks\n\n\nIntroduction to R\nR · RStudio · tidyverse · tidymodels · ggplot2\nBuild a foundation in R programming, visualization, and data manipulation\n\n\nTemporal Genomics\nR · Python · dadi · SFS · snpEff · GERP · phyloP · GPN\nTrack allele frequency shifts and detect selection through time\n\n\nHybridization Genomics\nANGSD · GATK · bcftools · vcftools · plink\nQuantify introgression and genomic ancestry in hybrid zones\n\n\nTrait & Genotype-based Distribution Models\nR · caret · SDMtoolbox · GAM · GLM\nIntegrate phenotypic and genomic predictors into distribution models\n\n\nPhylogeography & Population Structure\nSTRUCTURE · ADMIXTURE · DAPC · PCAngsd · poppr\nInfer connectivity, admixture, and population differentiation\n\n\nGWAS & Functional Genomics\nPLINK · GEMMA · GAPIT · R\nIdentify adaptive loci and genotype–phenotype associations\n\n\nGene Ontology & Selection Tests\ntopGO · clusterProfiler · scikit-bio\nInterpret biological functions underlying signals of selection\n\n\nSpecies Distribution Models (SDMs)\nR · Python · biomod2 · maxent · scikit-learn\nPredict species ranges and responses to climate change\n\n\n\n\n\n\n🌱 Aim\nEmpower students, researchers, and educators to bridge evolutionary theory, genomic data, and computational methods — building the skills needed to analyze, visualize, and interpret complex biological data."
+  },
+  {
+    "objectID": "workshops/advanced_spatial_ecology_sdm.html",
+    "href": "workshops/advanced_spatial_ecology_sdm.html",
+    "title": "Environmental Statistics and Spatial Modeling for Conservation",
+    "section": "",
+    "text": "Audience\nResearchers in Ecology, Environmental Science, Conservation Biology\n\n\n\n\nPrerequisites\nIntroductory Statistics, Ecological Foundations, Basic R (helpful but not required)\n\n\nFormat\n5 sessions x 90 minutes (30 min theory + 60 min hands-on R practice)"
+  },
+  {
+    "objectID": "workshops/advanced_spatial_ecology_sdm.html#statistical-biostatistics-machine-learning-for-ecological-modeling",
+    "href": "workshops/advanced_spatial_ecology_sdm.html#statistical-biostatistics-machine-learning-for-ecological-modeling",
+    "title": "Environmental Statistics and Spatial Modeling for Conservation",
+    "section": "",
+    "text": "Audience\nResearchers in Ecology, Environmental Science, Conservation Biology\n\n\n\n\nPrerequisites\nIntroductory Statistics, Ecological Foundations, Basic R (helpful but not required)\n\n\nFormat\n5 sessions × 90 minutes (30 min theory + 60 min hands-on R practice)"
+  },
+  {
+    "objectID": "workshops/advanced_spatial_ecology_sdm.html#course-overview",
+    "href": "workshops/advanced_spatial_ecology_sdm.html#course-overview",
+    "title": "Environmental Statistics and Spatial Modeling for Conservation",
+    "section": "Course Overview",
+    "text": "Course Overview\nThis advanced course integrates key concepts from spatial ecology, biostatistics, and machine learning to build statistically rigorous ecological models.\nThe workshop combines ecological theory with practical R-based spatial modeling workflows, enabling participants to design robust sampling strategies and build reproducible species distribution models (SDMs).\nCore topics include:\n\nSpatial sampling theory\nBiostatistical diagnostics\nBioClim climate predictors\nMultivariate ecological analysis\nMachine learning for SDM\nSpatial cross-validation\n\nParticipants will learn to interpret models using biological reasoning and statistical rigor."
+  },
+  {
+    "objectID": "workshops/advanced_spatial_ecology_sdm.html#spatial-ecology-ecological-modeling-framework",
+    "href": "workshops/advanced_spatial_ecology_sdm.html#spatial-ecology-ecological-modeling-framework",
+    "title": "Environmental Statistics and Spatial Modeling for Conservation",
+    "section": "Spatial Ecology & Ecological Modeling Framework",
+    "text": "Spatial Ecology & Ecological Modeling Framework\n\n\n\n\n\n\n\n\nTopic\nTools\nFocus\n\n\n\n\nSpatial Ecology & Ecological Modeling\nsf, terra, ggplot2, dplyr, spatstat, spdep, tmap, dismo, randomForest, blockCV, mlr3\nSpatial sampling theory, spatial point-pattern analysis, BioClim climate predictors, multivariate analysis, and machine learning for species distribution modeling with spatial cross-validation"
+  },
+  {
+    "objectID": "workshops/advanced_spatial_ecology_sdm.html#schedule-sessions",
+    "href": "workshops/advanced_spatial_ecology_sdm.html#schedule-sessions",
+    "title": "Environmental Statistics and Spatial Modeling for Conservation",
+    "section": "Schedule & Sessions",
+    "text": "Schedule & Sessions\n\n\nSession 1 - Spatial Sampling & Ecological Inference\n\nRandom, systematic, stratified, transect sampling designs\n\nRoad and river sampling bias\n\nDendritic network dependence\n\nMoran’s I and spatial autocorrelation\n\nEffective sample size\n\n[Session 1 Materials\n\n\nSession 2 - Data Exploration & Normalization\n\nDistribution diagnostics (histograms, QQ plots, density plots)\n\nTransformations: log, Box-Cox, scaling\n\nOutlier detection (Isolation Forest)\n\nEcological interpretation of transformations\n\n\n\nSession 3 - Collinearity & Regularization\n\nCorrelation matrices\n\nVariance Inflation Factor (VIF)\n\nEcological trade-offs in variable selection\n\nRidge regression, LASSO, Elastic Net\n\n\n\nSession 4 - Multivariate & Dimensionality Reduction\n\nPCA interpretation in ecological space\n\nLoadings and gradient interpretation\n\nUMAP / t-SNE visualization\n\nClimate niche space analysis\n\n\n\nSession 5 - Habitat Suitability / Species Distribution Modeling (SDM)\n\nGLM and GAM foundations\n\nRandom Forest and Boosted Trees\n\nRegularized MaxEnt modeling\n\nVariable importance and interpretation\n\nSpatial cross-validation"
+  },
+  {
+    "objectID": "workshops/advanced_spatial_ecology_sdm.html#software-requirements",
+    "href": "workshops/advanced_spatial_ecology_sdm.html#software-requirements",
+    "title": "Environmental Statistics and Spatial Modeling for Conservation",
+    "section": "Software Requirements",
+    "text": "Software Requirements\nPlease install R &gt;= 4.2 and RStudio before Session 1.\n\nInstall Required R Packages\n# Data manipulation and visualization\ninstall.packages(c(\"tidyverse\",\"dplyr\",\"tidyr\",\"ggplot2\"))\n\n# Spatial data\ninstall.packages(c(\"sf\",\"terra\",\"spdep\",\"tmap\"))\n\n# Statistical modeling\ninstall.packages(c(\"MASS\",\"car\",\"glmnet\",\"mgcv\"))\n\n# Machine learning\ninstall.packages(c(\"caret\",\"randomForest\",\"gbm\",\"dismo\"))\n\n# Multivariate analysis\ninstall.packages(c(\"vegan\",\"FactoMineR\",\"factoextra\"))\n\n# Outlier detection\ninstall.packages(\"isolationForest\")\n\n# Spatial cross-validation\ninstall.packages(c(\"blockCV\",\"spatialsample\"))\n\n# Advanced machine learning workflow\ninstall.packages(\"mlr3\")"
+  },
+  {
+    "objectID": "workshops/advanced_spatial_ecology_sdm.html#workshop-format-materials",
+    "href": "workshops/advanced_spatial_ecology_sdm.html#workshop-format-materials",
+    "title": "Environmental Statistics and Spatial Modeling for Conservation",
+    "section": "Workshop Format & Materials",
+    "text": "Workshop Format & Materials\nEach session includes:\n\n30 minutes theoretical concepts\n60 minutes hands-on R analysis\ndatasets and scripts provided beforehand\nreproducible ecological modeling workflows\n\nSessions build progressively:\n\nSpatial sampling\n\nData diagnostics\n\nCollinearity and regularization\n\nMultivariate ecological space\n\nSpecies distribution modeling\n\nFinal session includes model comparison and spatial cross-validation.\nSession links will be activated one week before each workshop."
+  },
+  {
+    "objectID": "workshops/advanced_spatial_ecology_sdm.html#learning-objectives",
+    "href": "workshops/advanced_spatial_ecology_sdm.html#learning-objectives",
+    "title": "Environmental Statistics and Spatial Modeling for Conservation",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy the end of this workshop participants will be able to:\n\nDesign ecologically meaningful spatial sampling strategies\nDiagnose statistical distributions and transformations\nDetect multicollinearity in environmental predictors\nApply dimensionality reduction to ecological datasets\nBuild species distribution models using multiple algorithms\nInterpret model predictions in ecological context\nApply spatial cross-validation to avoid overfitting"
+  },
+  {
+    "objectID": "workshops/advanced_spatial_ecology_sdm.html#recommended-reading",
+    "href": "workshops/advanced_spatial_ecology_sdm.html#recommended-reading",
+    "title": "Environmental Statistics and Spatial Modeling for Conservation",
+    "section": "Recommended Reading",
+    "text": "Recommended Reading\n\nCore Books\n\nZuur et al. (2009) Mixed Effects Models and Extensions in Ecology with R\n\nJames et al. (2021) An Introduction to Statistical Learning\n\nFranklin (2010) Mapping Species Distributions\n\n\n\nKey Papers\n\nDormann et al. (2007) Methods to account for spatial autocorrelation\n\nElith et al. (2006) Novel methods for predicting species distributions\n\nValavi et al. (2019) blockCV for spatial cross-validation"
+  },
+  {
+    "objectID": "workshops/advanced_spatial_ecology_sdm.html#instructor-information",
+    "href": "workshops/advanced_spatial_ecology_sdm.html#instructor-information",
+    "title": "Environmental Statistics and Spatial Modeling for Conservation",
+    "section": "Instructor Information",
+    "text": "Instructor Information\nWorkshop Facilitator:\nTahir Ali\nContact:\nEmail available upon registration\nOffice Hours:\nBy appointment during the workshop series."
+  },
+  {
+    "objectID": "workshops/advanced_spatial_ecology_sdm.html#license",
+    "href": "workshops/advanced_spatial_ecology_sdm.html#license",
+    "title": "Environmental Statistics and Spatial Modeling for Conservation",
+    "section": "License",
+    "text": "License\nThese workshop materials are shared under CC BY-SA 4.0.\n\nBack to Workshops Home"
   }
 ]

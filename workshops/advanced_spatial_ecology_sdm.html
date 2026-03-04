@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Dr Tahir Ali | AG de Meaux | TRR341 Ecological Genomics | University of Cologne">
 
-<title>Hands-on Workshops &amp; Training – Dr.&nbsp;Tahir Ali</title>
+<title>Environmental Statistics and Spatial Modeling for Conservation – Dr.&nbsp;Tahir Ali</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -41,7 +77,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-d06107c61514b348b5496435b78bae49.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a2ddb4935833c2dfbcbb6be7037c094d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -81,9 +117,10 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 
 
 <link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-sidebar docked fullcontent quarto-light">
+<body class="nav-sidebar docked quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -92,7 +129,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../workshops/workshops.html">Workshops</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Environmental Statistics and Spatial Modeling for Conservation</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -140,7 +177,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../workshops/workshops.html" class="sidebar-item-text sidebar-link active">
+  <a href="../workshops/workshops.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Workshops</span></a>
   </div>
 </li>
@@ -155,19 +192,48 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#course-overview" id="toc-course-overview" class="nav-link active" data-scroll-target="#course-overview">Course Overview</a></li>
+  <li><a href="#spatial-ecology-ecological-modeling-framework" id="toc-spatial-ecology-ecological-modeling-framework" class="nav-link" data-scroll-target="#spatial-ecology-ecological-modeling-framework">Spatial Ecology &amp; Ecological Modeling Framework</a></li>
+  <li><a href="#schedule-sessions" id="toc-schedule-sessions" class="nav-link" data-scroll-target="#schedule-sessions">Schedule &amp; Sessions</a></li>
+  <li><a href="#software-requirements" id="toc-software-requirements" class="nav-link" data-scroll-target="#software-requirements">Software Requirements</a>
+  <ul class="collapse">
+  <li><a href="#install-required-r-packages" id="toc-install-required-r-packages" class="nav-link" data-scroll-target="#install-required-r-packages">Install Required R Packages</a></li>
+  </ul></li>
+  <li><a href="#workshop-format-materials" id="toc-workshop-format-materials" class="nav-link" data-scroll-target="#workshop-format-materials">Workshop Format &amp; Materials</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#recommended-reading" id="toc-recommended-reading" class="nav-link" data-scroll-target="#recommended-reading">Recommended Reading</a>
+  <ul class="collapse">
+  <li><a href="#core-books" id="toc-core-books" class="nav-link" data-scroll-target="#core-books">Core Books</a></li>
+  <li><a href="#key-papers" id="toc-key-papers" class="nav-link" data-scroll-target="#key-papers">Key Papers</a></li>
+  </ul></li>
+  <li><a href="#license" id="toc-license" class="nav-link" data-scroll-target="#license">License</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Hands-on Workshops &amp; Training</h1>
+<h1 class="title">Environmental Statistics and Spatial Modeling for Conservation</h1>
+<p class="subtitle lead">Statistical Biostatistics + Machine Learning for Ecological Modeling</p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dr Tahir Ali | AG de Meaux | TRR341 Ecological Genomics | University of Cologne </p>
+          </div>
+  </div>
     
   
     
@@ -178,35 +244,47 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </header>
 
 
-<p><strong>Practical, hands-on workshops introducing data wrangling in R, Bash, and Python — and diving into advanced themes in evolutionary and ecological genomics.</strong></p>
-<blockquote class="blockquote">
-<p>Learn by doing — explore evolution, adaptation, and biodiversity through data, code, and discovery.</p>
-</blockquote>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Audience</strong></th>
+<th style="text-align: left;">Researchers in Ecology, Environmental Science, Conservation Biology</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Prerequisites</strong></td>
+<td style="text-align: left;">Introductory Statistics, Ecological Foundations, Basic R (helpful but not required)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Format</strong></td>
+<td style="text-align: left;">5 sessions x 90 minutes (30 min theory + 60 min hands-on R practice)</td>
+</tr>
+</tbody>
+</table>
 <hr>
-<section id="about-these-workshops" class="level3">
-<h3 class="anchored" data-anchor-id="about-these-workshops">About These Workshops</h3>
-<p>These <strong>interactive computational workshops</strong> are designed to turn theoretical concepts into practical skills.<br>
-Through <strong>Python (JupyterLab)</strong>, <strong>R</strong>, and <strong>Bash/Linux</strong>, participants gain hands-on experience in analysing genomic and ecological data — from <strong>allele frequency dynamics</strong> to <strong>species distribution modelling</strong>.</p>
-<p><strong>Each session blends:</strong> - <em>Conceptual introductions</em> - <em>Guided coding exercises</em> - <em>Data exploration and visualisation</em> - <em>Collaborative problem-solving and discussion</em></p>
+<section id="course-overview" class="level2">
+<h2 class="anchored" data-anchor-id="course-overview">Course Overview</h2>
+<p>This advanced course integrates key concepts from <strong>spatial ecology, biostatistics, and machine learning</strong> to build statistically rigorous ecological models.</p>
+<p>The workshop combines ecological theory with practical <strong>R-based spatial modeling workflows</strong>, enabling participants to design robust sampling strategies and build reproducible <strong>species distribution models (SDMs)</strong>.</p>
+<p>Core topics include:</p>
+<ul>
+<li><strong>Spatial sampling theory</strong></li>
+<li><strong>Biostatistical diagnostics</strong></li>
+<li><strong>BioClim climate predictors</strong></li>
+<li><strong>Multivariate ecological analysis</strong></li>
+<li><strong>Machine learning for SDM</strong></li>
+<li><strong>Spatial cross-validation</strong></li>
+</ul>
+<p>Participants will learn to interpret models using <strong>biological reasoning and statistical rigor</strong>.</p>
 <hr>
 </section>
-<section id="workshop-categories" class="level3">
-<h3 class="anchored" data-anchor-id="workshop-categories">Workshop Categories</h3>
-<div class="tab-links" style="margin-top: 1em; margin-bottom: 2em;">
-<p><a href="multivariate_workshop_2.html" class="tab-link" target="_self" style="margin-right: 0.6em; padding: 0.35em 0.8em; border: 1.2px solid #0072B2; border-radius: 6px; background: #f8f8f8; color: #0072B2; font-weight: 600; font-size: 0.9em; text-decoration: none;"> R &amp; Statistical Genomics</a></p>
-<p><a href="sdm_biomode2_v2.html" class="tab-link" target="_self" style="margin-right: 0.6em; padding: 0.35em 0.8em; border: 1.2px solid #0072B2; border-radius: 6px; background: #f8f8f8; color: #0072B2; font-weight: 600; font-size: 0.9em; text-decoration: none;"> Ecological &amp; Distribution Modeling</a></p>
-<p><!-- NEW WORKSHOP LINK ADDED HERE (Advanced Spatial Ecology) --> <a href="../workshops/advanced_spatial_ecology_sdm.html" class="tab-link" target="_self" style="margin-right: 0.6em; padding: 0.35em 0.8em; border: 1.2px solid #0072B2; border-radius: 6px; background: #f8f8f8; color: #0072B2; font-weight: 600; font-size: 0.9em; text-decoration: none;"> Environmental Statistics and Spatial Modeling for Conservation</a></p>
-</div>
-<div class="tab-links" style="margin-bottom: 2em;">
-<p><a href="Integrative_Landscape_Genomics.html" class="tab-link" target="_self" style="margin-right: 0.6em; padding: 0.35em 0.8em; border: 1.2px solid #0072B2; border-radius: 6px; background: #f8f8f8; color: #0072B2; font-weight: 600; font-size: 0.9em; text-decoration: none;"> Population Genomics &amp; Landscape Genetics </a></p>
-<p><a href="Temporal_Genomics_Workshop_TemporalGenomics.html" class="tab-link" target="_self" style="margin-right: 0.6em; padding: 0.35em 0.8em; border: 1.2px solid #0072B2; border-radius: 6px; background: #f8f8f8; color: #0072B2; font-weight: 600; font-size: 0.9em; text-decoration: none;"> Python &amp; JupyterLab</a></p>
-<p><a href="workshops/bash_workshops.html" class="tab-link" target="_self" style="margin-right: 0.6em; padding: 0.35em 0.8em; border: 1.2px solid #0072B2; border-radius: 6px; background: #f8f8f8; color: #0072B2; font-weight: 600; font-size: 0.9em; text-decoration: none;"> Bash &amp; Linux Essentials</a></p>
-</div>
-<hr>
-</section>
-<section id="workshop-themes" class="level3">
-<h3 class="anchored" data-anchor-id="workshop-themes">Workshop Themes</h3>
-<p>Explore how advanced tools reveal patterns of evolution, hybridization, and adaptation — from genes to ecosystems:</p>
+<section id="spatial-ecology-ecological-modeling-framework" class="level2">
+<h2 class="anchored" data-anchor-id="spatial-ecology-ecological-modeling-framework">Spatial Ecology &amp; Ecological Modeling Framework</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -215,70 +293,191 @@ Through <strong>Python (JupyterLab)</strong>, <strong>R</strong>, and <strong>Ba
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;"><strong>Topic</strong></th>
-<th style="text-align: left;"><strong>Core Tools</strong></th>
-<th style="text-align: left;"><strong>Focus</strong></th>
+<th>Topic</th>
+<th>Tools</th>
+<th>Focus</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><strong>Linux &amp; Bash for Bioinformatics</strong></td>
-<td style="text-align: left;"><code>bash</code> · <code>awk</code> · <code>sed</code> · <code>Slurm</code> · HPC</td>
-<td style="text-align: left;">Automate genomic workflows and manage high-performance computing tasks</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Introduction to R</strong></td>
-<td style="text-align: left;"><code>R</code> · <code>RStudio</code> · <code>tidyverse</code> · <code>tidymodels</code> · <code>ggplot2</code></td>
-<td style="text-align: left;">Build a foundation in R programming, visualization, and data manipulation</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Spatial Ecology &amp; Ecological Modeling</strong></td>
-<td style="text-align: left;"><code>sf</code>, <code>terra</code>, <code>ggplot2</code>, <code>dplyr</code>, <code>spatstat</code>, <code>spdep</code>, <code>tmap</code>, <code>dismo</code>, <code>randomForest</code>, <code>blockCV</code>, <code>mlr3</code></td>
-<td style="text-align: left;">Spatial sampling theory, spatial point-pattern analysis, BioClim climate predictors, multivariate analysis, and machine learning approaches for species distribution modeling (SDM) with spatial cross-validation</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Species Distribution Models (SDMs)</strong></td>
-<td style="text-align: left;"><code>R</code> · <code>Python</code> · <code>biomod2</code> · <code>maxent</code> · <code>scikit-learn</code></td>
-<td style="text-align: left;">Predict species ranges and responses to climate change</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Temporal Genomics</strong></td>
-<td style="text-align: left;"><code>R</code> · <code>Python</code> · <code>dadi</code> · <code>SFS</code> · <code>snpEff</code> · <code>GERP</code> · <code>phyloP</code> · <code>GPN</code></td>
-<td style="text-align: left;">Track allele frequency shifts and detect selection through time</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Hybridization Genomics</strong></td>
-<td style="text-align: left;"><code>ANGSD</code> · <code>GATK</code> · <code>bcftools</code> · <code>vcftools</code> · <code>plink</code></td>
-<td style="text-align: left;">Quantify introgression and genomic ancestry in hybrid zones</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Trait &amp; Genotype-based Distribution Models</strong></td>
-<td style="text-align: left;"><code>R</code> · <code>caret</code> · <code>SDMtoolbox</code> · <code>GAM</code> · <code>GLM</code></td>
-<td style="text-align: left;">Integrate phenotypic and genomic predictors into distribution models</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Phylogeography &amp; Population Structure</strong></td>
-<td style="text-align: left;"><code>STRUCTURE</code> · <code>ADMIXTURE</code> · <code>DAPC</code> · <code>PCAngsd</code> · <code>poppr</code></td>
-<td style="text-align: left;">Infer connectivity, admixture, and population differentiation</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>GWAS &amp; Functional Genomics</strong></td>
-<td style="text-align: left;"><code>PLINK</code> · <code>GEMMA</code> · <code>GAPIT</code> · <code>R</code></td>
-<td style="text-align: left;">Identify adaptive loci and genotype–phenotype associations</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Gene Ontology &amp; Selection Tests</strong></td>
-<td style="text-align: left;"><code>topGO</code> · <code>clusterProfiler</code> · <code>scikit-bio</code></td>
-<td style="text-align: left;">Interpret biological functions underlying signals of selection</td>
+<td><strong>Spatial Ecology &amp; Ecological Modeling</strong></td>
+<td><code>sf</code>, <code>terra</code>, <code>ggplot2</code>, <code>dplyr</code>, <code>spatstat</code>, <code>spdep</code>, <code>tmap</code>, <code>dismo</code>, <code>randomForest</code>, <code>blockCV</code>, <code>mlr3</code></td>
+<td>Spatial sampling theory, spatial point-pattern analysis, BioClim climate predictors, multivariate analysis, and machine learning for species distribution modeling with spatial cross-validation</td>
 </tr>
 </tbody>
 </table>
 <hr>
 </section>
-<section id="aim" class="level3">
-<h3 class="anchored" data-anchor-id="aim">Aim</h3>
-<p>Empower students, researchers, and educators to bridge <strong>evolutionary theory</strong>, <strong>genomic data</strong>, <strong>spatial ecology &amp; modeling</strong> and <strong>computational methods</strong> — building the skills needed to analyze, visualize, and interpret complex biological data.</p>
+<section id="schedule-sessions" class="level2">
+<h2 class="anchored" data-anchor-id="schedule-sessions">Schedule &amp; Sessions</h2>
+<div class="session-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin:2rem 0;">
+<section id="session-1---spatial-sampling-ecological-inference" class="level3" style="border:1px solid #2c7fb8;border-radius:12px;padding:1.5rem;background:#f9fcff;">
+<h3 class="anchored" data-anchor-id="session-1---spatial-sampling-ecological-inference"><a href="Hands-on-Session_1.html">Session 1 - Spatial Sampling &amp; Ecological Inference</a></h3>
+<ul>
+<li>Random, systematic, stratified, transect sampling designs<br>
+</li>
+<li>Road and river sampling bias<br>
+</li>
+<li>Dendritic network dependence<br>
+</li>
+<li>Moran’s I and spatial autocorrelation<br>
+</li>
+<li>Effective sample size</li>
+</ul>
+<p>[Session 1 Materials</p>
+</section>
+<section id="session-2---data-exploration-normalization" class="level3" style="border:1px solid #2c7fb8;border-radius:12px;padding:1.5rem;background:#f9fcff;">
+<h3 class="anchored" data-anchor-id="session-2---data-exploration-normalization"><a href="Hands-on-Session_2.html">Session 2 - Data Exploration &amp; Normalization</a></h3>
+<ul>
+<li>Distribution diagnostics (histograms, QQ plots, density plots)<br>
+</li>
+<li>Transformations: log, Box-Cox, scaling<br>
+</li>
+<li>Outlier detection (Isolation Forest)<br>
+</li>
+<li>Ecological interpretation of transformations</li>
+</ul>
+</section>
+<section id="session-3---collinearity-regularization" class="level3" style="border:1px solid #2c7fb8;border-radius:12px;padding:1.5rem;background:#f9fcff;">
+<h3 class="anchored" data-anchor-id="session-3---collinearity-regularization"><a href="Hands-on-Session_3.html">Session 3 - Collinearity &amp; Regularization</a></h3>
+<ul>
+<li>Correlation matrices<br>
+</li>
+<li>Variance Inflation Factor (VIF)<br>
+</li>
+<li>Ecological trade-offs in variable selection<br>
+</li>
+<li>Ridge regression, LASSO, Elastic Net</li>
+</ul>
+</section>
+<section id="session-4---multivariate-dimensionality-reduction" class="level3" style="border:1px solid #2c7fb8;border-radius:12px;padding:1.5rem;background:#f9fcff;">
+<h3 class="anchored" data-anchor-id="session-4---multivariate-dimensionality-reduction"><a href="Hands-on-Session_4.html">Session 4 - Multivariate &amp; Dimensionality Reduction</a></h3>
+<ul>
+<li>PCA interpretation in ecological space<br>
+</li>
+<li>Loadings and gradient interpretation<br>
+</li>
+<li>UMAP / t-SNE visualization<br>
+</li>
+<li>Climate niche space analysis</li>
+</ul>
+</section>
+<section id="session-5---habitat-suitability-species-distribution-modeling-sdm" class="level3" style="border:1px solid #2c7fb8;border-radius:12px;padding:1.5rem;background:#f9fcff;">
+<h3 class="anchored" data-anchor-id="session-5---habitat-suitability-species-distribution-modeling-sdm"><a href="Hands-on-Session_5.html">Session 5 - Habitat Suitability / Species Distribution Modeling (SDM)</a></h3>
+<ul>
+<li>GLM and GAM foundations<br>
+</li>
+<li>Random Forest and Boosted Trees<br>
+</li>
+<li>Regularized MaxEnt modeling<br>
+</li>
+<li>Variable importance and interpretation<br>
+</li>
+<li>Spatial cross-validation</li>
+</ul>
+</section>
+</div>
 <hr>
+</section>
+<section id="software-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="software-requirements">Software Requirements</h2>
+<p>Please install <strong>R &gt;= 4.2</strong> and <strong>RStudio</strong> before Session 1.</p>
+<section id="install-required-r-packages" class="level3">
+<h3 class="anchored" data-anchor-id="install-required-r-packages">Install Required R Packages</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data manipulation and visualization</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"tidyverse"</span>,<span class="st">"dplyr"</span>,<span class="st">"tidyr"</span>,<span class="st">"ggplot2"</span>))</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Spatial data</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"sf"</span>,<span class="st">"terra"</span>,<span class="st">"spdep"</span>,<span class="st">"tmap"</span>))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Statistical modeling</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"MASS"</span>,<span class="st">"car"</span>,<span class="st">"glmnet"</span>,<span class="st">"mgcv"</span>))</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Machine learning</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"caret"</span>,<span class="st">"randomForest"</span>,<span class="st">"gbm"</span>,<span class="st">"dismo"</span>))</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Multivariate analysis</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"vegan"</span>,<span class="st">"FactoMineR"</span>,<span class="st">"factoextra"</span>))</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Outlier detection</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"isolationForest"</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Spatial cross-validation</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"blockCV"</span>,<span class="st">"spatialsample"</span>))</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Advanced machine learning workflow</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"mlr3"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="workshop-format-materials" class="level2">
+<h2 class="anchored" data-anchor-id="workshop-format-materials">Workshop Format &amp; Materials</h2>
+<p>Each session includes:</p>
+<ul>
+<li><strong>30 minutes theoretical concepts</strong></li>
+<li><strong>60 minutes hands-on R analysis</strong></li>
+<li>datasets and scripts provided beforehand</li>
+<li>reproducible ecological modeling workflows</li>
+</ul>
+<p>Sessions build progressively:</p>
+<ol type="1">
+<li>Spatial sampling<br>
+</li>
+<li>Data diagnostics<br>
+</li>
+<li>Collinearity and regularization<br>
+</li>
+<li>Multivariate ecological space<br>
+</li>
+<li>Species distribution modeling</li>
+</ol>
+<p>Final session includes <strong>model comparison and spatial cross-validation</strong>.</p>
+<p>Session links will be activated one week before each workshop.</p>
+<hr>
+</section>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<p>By the end of this workshop participants will be able to:</p>
+<ul>
+<li>Design <strong>ecologically meaningful spatial sampling strategies</strong></li>
+<li>Diagnose <strong>statistical distributions and transformations</strong></li>
+<li>Detect <strong>multicollinearity in environmental predictors</strong></li>
+<li>Apply <strong>dimensionality reduction to ecological datasets</strong></li>
+<li>Build <strong>species distribution models using multiple algorithms</strong></li>
+<li>Interpret model predictions in <strong>ecological context</strong></li>
+<li>Apply <strong>spatial cross-validation to avoid overfitting</strong></li>
+</ul>
+<hr>
+</section>
+<section id="recommended-reading" class="level2">
+<h2 class="anchored" data-anchor-id="recommended-reading">Recommended Reading</h2>
+<section id="core-books" class="level3">
+<h3 class="anchored" data-anchor-id="core-books">Core Books</h3>
+<ul>
+<li>Zuur et al.&nbsp;(2009) <em>Mixed Effects Models and Extensions in Ecology with R</em><br>
+</li>
+<li>James et al.&nbsp;(2021) <em>An Introduction to Statistical Learning</em><br>
+</li>
+<li>Franklin (2010) <em>Mapping Species Distributions</em></li>
+</ul>
+</section>
+<section id="key-papers" class="level3">
+<h3 class="anchored" data-anchor-id="key-papers">Key Papers</h3>
+<ul>
+<li>Dormann et al.&nbsp;(2007) Methods to account for spatial autocorrelation<br>
+</li>
+<li>Elith et al.&nbsp;(2006) Novel methods for predicting species distributions<br>
+</li>
+<li>Valavi et al.&nbsp;(2019) blockCV for spatial cross-validation</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="license" class="level2">
+<h2 class="anchored" data-anchor-id="license">License</h2>
+<p>These workshop materials are shared under <strong>CC BY-SA 4.0</strong>.</p>
+<hr>
+<p><a href="workshops.html">Back to Workshops Home</a></p>
 
 
 </section>
