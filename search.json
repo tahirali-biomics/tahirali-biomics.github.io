@@ -1449,5 +1449,383 @@
     "title": "Session 5: Species Distribution Modeling — GLM/GAM + ML + Spatial CV",
     "section": "Session Info for Reproducibility",
     "text": "Session Info for Reproducibility\n\n\nCode\ncat(\"\\n=== SESSION INFO ===\\n\")\nprint(sessionInfo())\n\n\n\n=== SESSION INFO ===\nR version 4.4.3 (2025-02-28)\nPlatform: x86_64-conda-linux-gnu\nRunning under: Fedora Linux 39 (Workstation Edition)\n\nMatrix products: default\nBLAS/LAPACK: /run/media/tahirali/2a4efc98-aaa3-4a01-a063-37db1463f3a8/tools/anaconda/envs/quarto-env/lib/libopenblasp-r0.3.30.so;  LAPACK version 3.12.0\n\nlocale:\n [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              \n [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    \n [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   \n [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 \n [9] LC_ADDRESS=C               LC_TELEPHONE=C            \n[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       \n\ntime zone: Europe/Berlin\ntzcode source: system (glibc)\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nother attached packages:\n [1] MASS_7.3-65       pROC_1.19.0.1     maxnet_0.1.4      ranger_0.18.0    \n [5] mgcv_1.9-3        nlme_3.1-168      glmnet_4.1-10     Matrix_1.7-4     \n [9] car_3.1-3         carData_3.0-5     patchwork_1.3.2   viridis_0.6.5    \n[13] viridisLite_0.4.2 sf_1.1-0          terra_1.8-70      tidyr_1.3.1      \n[17] dplyr_1.1.4       ggplot2_4.0.0    \n\nloaded via a namespace (and not attached):\n [1] gtable_0.3.6       shape_1.4.6.1      xfun_0.53          htmlwidgets_1.6.4 \n [5] lattice_0.22-7     vctrs_0.6.5        tools_4.4.3        generics_0.1.4    \n [9] tibble_3.3.0       proxy_0.4-27       pkgconfig_2.0.3    KernSmooth_2.23-26\n[13] RColorBrewer_1.1-3 S7_0.2.0           lifecycle_1.0.4    compiler_4.4.3    \n[17] farver_2.1.2       textshaping_1.0.3  codetools_0.2-20   htmltools_0.5.8.1 \n[21] class_7.3-23       yaml_2.3.10        Formula_1.2-5      pillar_1.11.1     \n[25] classInt_0.4-11    iterators_1.0.14   abind_1.4-8        foreach_1.5.2     \n[29] tidyselect_1.2.1   digest_0.6.37      purrr_1.1.0        labeling_0.4.3    \n[33] splines_4.4.3      fastmap_1.2.0      grid_4.4.3         cli_3.6.5         \n[37] magrittr_2.0.4     survival_3.8-3     e1071_1.7-16       withr_3.0.2       \n[41] scales_1.4.0       rmarkdown_2.30     gridExtra_2.3      ragg_1.5.0        \n[45] evaluate_1.0.5     knitr_1.50         rlang_1.1.6        Rcpp_1.1.0        \n[49] glue_1.8.0         DBI_1.2.3          jsonlite_2.0.0     R6_2.6.1          \n[53] systemfonts_1.3.1  units_0.8-7"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html",
+    "href": "teaching/tutorials/awk_sed_reference.html",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "",
+    "text": "awk and sed are UNIX stream editors that process text files line-by-line without loading them into memory. In population genomics pipelines they are indispensable for manipulating VCF, BED, GTF, TSV, and FASTA files that are too large for spreadsheet software and too simple to justify writing a full Python script.\nThis document catalogises every awk and sed command used in this pipeline, grouped by biological purpose, with explanation of the syntax, why that approach was chosen over alternatives (Python, R, bcftools), and common pitfalls.\nQuick reference to AWK structure:\nawk 'BEGIN{...}  pattern{action}  END{...}' input_file\n         ↑               ↑                ↑\n    runs once       runs per          runs once\n    at start      matching line       at end\nKey built-in variables:\n\n\n\nVariable\nMeaning\n\n\n\n\nNR\ntotal record (line) number\n\n\nNF\nnumber of fields on current line\n\n\n$0\nentire current line\n\n\n$1, $2, ...\nfirst, second, … field\n\n\nFS\ninput field separator (default: whitespace)\n\n\nOFS\noutput field separator (default: space)\n\n\n-F\"x\"\nset input field separator to x"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#gtf-scaffold-chromosome-renaming",
+    "href": "teaching/tutorials/awk_sed_reference.html#gtf-scaffold-chromosome-renaming",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "2.1 1.1 GTF scaffold → chromosome renaming",
+    "text": "2.1 1.1 GTF scaffold → chromosome renaming\nContext: The A. lyrata ssp. petraea GTF annotation used scaffold names (scaffold_1 … scaffold_8) while the genome FASTA used INSDC chromosome accessions (CM047395.1 … CM047402.1). All downstream tools (BCFtools, snpEff, BEDTools) require matching names between reference and annotation.\nawk 'BEGIN{\n  map[\"scaffold_1\"] = \"CM047395.1\";\n  map[\"scaffold_2\"] = \"CM047396.1\";\n  map[\"scaffold_3\"] = \"CM047397.1\";\n  map[\"scaffold_4\"] = \"CM047398.1\";\n  map[\"scaffold_5\"] = \"CM047399.1\";\n  map[\"scaffold_6\"] = \"CM047400.1\";\n  map[\"scaffold_7\"] = \"CM047401.1\";\n  map[\"scaffold_8\"] = \"CM047402.1\"\n} $1 in map { $1 = map[$1] } 1' original.gtf \\\n  | grep \"^CM047\" \\\n  &gt; Arabidopsis_lyrata_petraea_genome.annotation_Scaffold1-8Mod_CM047.gtf\nExplanation:\n\nBEGIN{...} — initialises an associative array map before any line is processed. Array keys are old names; values are new INSDC accessions.\n$1 in map — tests whether field 1 (chromosome column in GTF) exists as a key in map.\n$1 = map[$1] — replaces the old scaffold name with the new accession in-place.\nThe bare 1 at the end is a true pattern with no action, which causes awk to print the (possibly modified) line (print $0 is the default action).\n| grep \"^CM047\" — discards all unassembled scaffold lines that were not remapped, keeping only the 8 chromosomes.\n\nWhy awk rather than sed? sed could do single replacements (sed 's/scaffold_1/CM047395.1/') but would require 8 separate sed calls or a complex multi-expression command (sed -e 's/.../.../' -e ...). The awk associative array handles all 8 in one pass, which is both faster and more readable. It also correctly targets only field 1 ($1), preventing accidental replacement of “scaffold_1” appearing in the gene_id or attribute columns."
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#creating-a-bed-file-from-a-tsv-position-table-wrong-version-documented-bug",
+    "href": "teaching/tutorials/awk_sed_reference.html#creating-a-bed-file-from-a-tsv-position-table-wrong-version-documented-bug",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "3.1 2.1 Creating a BED file from a TSV position table — WRONG version (documented bug)",
+    "text": "3.1 2.1 Creating a BED file from a TSV position table — WRONG version (documented bug)\nThis command was initially used and produced an empty VCF output:\n# ❌ WRONG — produces empty intervals (start == end in BED = no sequence)\nawk 'NR&gt;1 {print $1\"\\t\"$2\"\\t\"$2}' \\\n  conservation_scores_matching_vcf_sites.tsv \\\n  &gt; conservation_scores_matching_vcf_sites.bed\n\n# First lines of the bad BED:\n# CM047395.1    78    78     ← empty interval: [78,78) contains nothing\n# CM047395.1    85    85\nWhy it failed: In BED format, [start, end) means the interval includes positions from start up to but not including end. When start == end, the interval is empty. bcftools view -R found zero variants because no VCF positions fell inside an empty interval."
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#corrected-bed-file-0-based-start",
+    "href": "teaching/tutorials/awk_sed_reference.html#corrected-bed-file-0-based-start",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "3.2 2.2 Corrected BED file — 0-based start",
+    "text": "3.2 2.2 Corrected BED file — 0-based start\n# ✓ CORRECT — 0-based start = VCF position − 1\nawk 'NR&gt;1 {print $1\"\\t\"$2-1\"\\t\"$2}' \\\n  conservation_scores_matching_vcf_sites.tsv \\\n  &gt; conservation_scores_matching_vcf_sites.bed\n\n# First lines of the correct BED:\n# CM047395.1    77    78     ← interval [77,78) contains VCF position 78 ✓\n# CM047395.1    84    85\n# CM047395.1    91    92\nExplanation:\n\nNR&gt;1 — skips the header line (record number &gt; 1).\n$1 — chromosome (column 1 of TSV).\n$2-1 — BED start = VCF position − 1 (converts to 0-based).\n$2 — BED end = VCF position (the 1-based position is the exclusive end).\n\"\\t\" — explicit tab separator (critical: BED must be tab-delimited).\n\nVerification after fix:\nbcftools view -H \\\n  insamples_polarized.vcf.recode.vcf.filtered_conservation_sites.vcf.gz \\\n  | wc -l\n# Expected and obtained: 4,415,651"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#bed-directly-from-tsv-alternative-one-liner",
+    "href": "teaching/tutorials/awk_sed_reference.html#bed-directly-from-tsv-alternative-one-liner",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "3.3 2.3 BED directly from TSV (alternative one-liner)",
+    "text": "3.3 2.3 BED directly from TSV (alternative one-liner)\n# Create BED from conservation TSV in one step (used in snpEff filtering)\nawk 'NR&gt;1 {print $1\"\\t\"$2-1\"\\t\"$2}' \\\n  /projects/ag-demeaux/tali/Jupyter_labs/vcf_filtered_to_conservation_positions/\\\nconservation_scores_matching_vcf_sites.tsv \\\n  &gt; conservation_scores_matching_vcf_sites.bed"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#bed-from-colon-separated-position-keys",
+    "href": "teaching/tutorials/awk_sed_reference.html#bed-from-colon-separated-position-keys",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "3.4 2.4 BED from colon-separated position keys",
+    "text": "3.4 2.4 BED from colon-separated position keys\nContext: When position keys are stored as chr:position strings, convert back to BED for bcftools:\n# Input format: CM047395.1:78\nawk -F':' '{print $1\"\\t\"$2-1\"\\t\"$2}' \\\n  matched_position_keys.txt \\\n  &gt; positions_from_keys.bed\nExplanation:\n\n-F':' — sets the field separator to colon.\n$1 — chromosome part before the colon.\n$2-1 — position part after the colon, minus 1 for 0-based BED start.\n$2 — 1-based end position."
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#extract-position-keys-from-conservation-tsv",
+    "href": "teaching/tutorials/awk_sed_reference.html#extract-position-keys-from-conservation-tsv",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "4.1 3.1 Extract position keys from conservation TSV",
+    "text": "4.1 3.1 Extract position keys from conservation TSV\n# Create chr:pos keys (skip header with NR&gt;1)\nawk 'NR&gt;1 {print $1\":\"$2}' \\\n  /projects/ag-demeaux/tali/Jupyter_labs/vcf_filtered_to_conservation_positions/\\\nconservation_scores_matching_vcf_sites.tsv \\\n  &gt; /projects/ag-demeaux/tali/Jupyter_labs/vcf_filtered_to_conservation_positions/\\\nmatched_position_keys.txt\nExplanation:\n\n$1 — chromosome column.\n\":\" — literal colon separator (no spaces).\n$2 — position column.\nOutput: one key per line, e.g. CM047395.1:78.\n\nWhy this format? Colon-separated keys are a standard convention that avoids ambiguity (chromosomes never contain colons; positions are integers). This allows set operations in Python (common = set(df1_keys).intersection(df2_keys)) without needing to join on multiple columns."
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#create-dummy-outgroup-genotype-from-allele-frequencies",
+    "href": "teaching/tutorials/awk_sed_reference.html#create-dummy-outgroup-genotype-from-allele-frequencies",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "5.1 4.1 Create dummy outgroup genotype from allele frequencies",
+    "text": "5.1 4.1 Create dummy outgroup genotype from allele frequencies\nContext: polarizeVCFbyOutgroup.py requires a VCF individual column to determine ancestral allele. Rather than using a single outgroup individual (which may have missing data), a consensus majority-vote genotype is constructed from the 7-outgroup allele frequency table.\n# vcftools --freq2 output format:\n# CHROM  POS  N_ALLELES  N_CHR  {ALLELE:FREQ}  {ALLELE:FREQ}\n# Column 5 = REF allele frequency; column 6 = ALT allele frequency\n# Columns are space-separated but freq uses : internally\n\nawk 'NR&gt;1 { print ($5 &gt; $6) ? \"0/0\" : \"1/1\" }' \\\n  outgroup/outgroup_freq.frq \\\n  &gt; outgroup/dummy_genotype.txt\nExplanation:\n\nNR&gt;1 — skips the header.\n($5 &gt; $6) ? \"0/0\" : \"1/1\" — ternary conditional:\n\nIf REF frequency &gt; ALT frequency → outgroup is homozygous REF (0/0) → keep current polarisation.\nIf ALT frequency ≥ REF frequency → outgroup is homozygous ALT (1/1) → switch REF/ALT.\n\nThis encodes the majority-allele consensus across all 7 outgroup individuals.\n\nLimitation: Sites where the outgroup frequencies are exactly equal (0.5) are assigned 1/1 (switches). An alternative is to remove such sites with | awk '$5 != $6'. Sites where the outgroup is heterozygous or ambiguous are later removed by polarizeVCFbyOutgroup.py unless --keep is specified."
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#filter-gerp-bed-to-evolutionarily-constrained-sites",
+    "href": "teaching/tutorials/awk_sed_reference.html#filter-gerp-bed-to-evolutionarily-constrained-sites",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "6.1 5.1 Filter GERP BED to evolutionarily constrained sites",
+    "text": "6.1 5.1 Filter GERP BED to evolutionarily constrained sites\nContext: The raw GERP output covers all sites in the genome. For the selection analyses, only sites with evidence of evolutionary constraint (RS ≥ 4) are retained.\n# concatenated_gerp.bed columns:\n# $1=chr  $2=start  $3=end  $4=?  $5=?  $6=GERP_RS_score\n\nawk '$6 &gt;= 4' \\\n  results_18_genomes_Lastal/gerp/concatenated_gerp.bed \\\n  &gt; results_18_genomes_Lastal/gerp/concatenated_filt_gerp.bed\n# Result: 67,974,179 constrained sites\nExplanation:\n\n$6 &gt;= 4 — pattern only (no action block): print lines where GERP RS score ≥ 4. When no action is specified, awk’s default action is to print the whole line.\nGERP RS ≥ 4 is a standard threshold for strong evolutionary constraint (corresponds to approximately 4 substitutions rejected per site across the phylogeny).\n\nWhy awk rather than grep or Python? grep cannot filter on numeric column values. Python pandas would work but adds overhead for loading a file with ~67 million lines. Awk processes the BED at disk read speed (~2 GB/s) without RAM constraints."
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#matching-phylop-bed-to-filtered-gerp-positions",
+    "href": "teaching/tutorials/awk_sed_reference.html#matching-phylop-bed-to-filtered-gerp-positions",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "6.2 5.2 Matching phyloP BED to filtered GERP positions",
+    "text": "6.2 5.2 Matching phyloP BED to filtered GERP positions\n# Extract phyloP scores for the same 67M positions as filtered GERP\n# (uses bedtools intersect in practice, but position matching via awk works for TSVs)\nawk 'NR==FNR{pos[$1\"\\t\"$2]=1; next} ($1\"\\t\"$2) in pos' \\\n  concatenated_filt_gerp.bed \\\n  concatenated_phyloP.bed \\\n  &gt; concatenated_filt_phyloP.bed\nExplanation:\n\nNR==FNR — NR is the global record counter; FNR is the per-file record counter. When they are equal, we are reading the FIRST file (GERP).\npos[$1\"\\t\"$2]=1 — stores chromosome+position as a key in the pos array.\nnext — skip to the next line (don’t execute the second block for file 1).\n($1\"\\t\"$2) in pos — for lines in the SECOND file (phyloP), print only if the chromosome+position key exists in pos.\n\nThis is the standard two-file lookup pattern in awk, avoiding the need for sort | join or a Python merge."
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#shorten-sample-names-in-vcf",
+    "href": "teaching/tutorials/awk_sed_reference.html#shorten-sample-names-in-vcf",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "7.1 6.1 Shorten sample names in VCF",
+    "text": "7.1 6.1 Shorten sample names in VCF\nContext: BCFtools generates sample names from BAM file paths or read group tags, producing long strings like A_Al21_Plech23_1-8ChrOnly_BamQualFilt-f3Q30F264_nodup_realigned_sorted. Short names (Plech23_A) are required for downstream R/Python code.\n# Create a mapping file: old_name → new_name\n# Then use bcftools reheader (preferred) or awk on the VCF header\n\n# Using awk directly on VCF (for inspection/debugging)\nawk '\n/^#CHROM/ {\n  for (i=10; i&lt;=NF; i++) {\n    # Remove long suffix from sample names\n    gsub(\"_1-8ChrOnly_BamQualFilt-f3Q30F264_nodup_realigned_sorted\", \"\", $i);\n    gsub(\"A_Al[0-9]+_\", \"\", $i)\n  }\n  print $0; next\n}\n{ print $0 }\n' raw_vcf.vcf &gt; renamed_vcf.vcf\nExplanation:\n\n/^#CHROM/ — matches the VCF header line that contains sample names (starts with #CHROM).\nfor (i=10; i&lt;=NF; i++) — loops over fields 10 onwards (VCF sample columns start at column 10).\ngsub(\"pattern\", \"replacement\", $i) — global substitution on field $i (replaces all occurrences).\nnext — after printing the modified header, skip to next line.\n{ print $0 } — prints all non-header lines unchanged.\n\nBetter practice: Use bcftools reheader -s sample_names.txt for safety, as it validates the number of samples matches. The awk approach is shown here for transparency about what the renaming does."
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#extract-sample-names-list-from-vcf",
+    "href": "teaching/tutorials/awk_sed_reference.html#extract-sample-names-list-from-vcf",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "7.2 6.2 Extract sample names list from VCF",
+    "text": "7.2 6.2 Extract sample names list from VCF\n# Print sample names one per line (columns 10+)\nawk '/^#CHROM/ {\n  for (i=10; i&lt;=NF; i++) print $i\n}' all_samples.vcf &gt; sample_names.txt"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#count-samples-in-vcf-header",
+    "href": "teaching/tutorials/awk_sed_reference.html#count-samples-in-vcf-header",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "7.3 6.3 Count samples in VCF header",
+    "text": "7.3 6.3 Count samples in VCF header\nawk '/^#CHROM/ {print NF-9; exit}' all_samples.vcf\n# Output: 64 (total in-group samples)\nExplanation:\n\nNF - 9 — total fields minus the 9 fixed VCF columns (CHROM, POS, ID, REF, ALT, QUAL, FILTER, INFO, FORMAT).\nexit — stop processing after the header line is found."
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#count-snps-non-header-lines",
+    "href": "teaching/tutorials/awk_sed_reference.html#count-snps-non-header-lines",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "8.1 7.1 Count SNPs (non-header lines)",
+    "text": "8.1 7.1 Count SNPs (non-header lines)\n# Count variants in a VCF (excluding header lines starting with #)\nawk '!/^#/' all_samples_filtered.vcf | wc -l\n# Or equivalently:\ngrep -c \"^[^#]\" all_samples_filtered.vcf\nExplanation:\n\n!/^#/ — the ! negates the match; prints lines NOT starting with #."
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#extract-chromosome-names",
+    "href": "teaching/tutorials/awk_sed_reference.html#extract-chromosome-names",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "8.2 7.2 Extract chromosome names",
+    "text": "8.2 7.2 Extract chromosome names\n# Get unique chromosome names from VCF\nawk '!/^#/ {print $1}' all_samples.vcf | sort -u"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#filter-vcf-to-specific-chromosomes-awk-alternative-to-bcftools",
+    "href": "teaching/tutorials/awk_sed_reference.html#filter-vcf-to-specific-chromosomes-awk-alternative-to-bcftools",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "8.3 7.3 Filter VCF to specific chromosomes (awk alternative to bcftools)",
+    "text": "8.3 7.3 Filter VCF to specific chromosomes (awk alternative to bcftools)\n# Keep only chromosomes 1-8 (useful when bcftools not available)\nawk '\n/^#/ {print; next}                    # print header lines\n$1 ~ /^CM0473(9[5-9]|[0-9]{2})\\.1$/ {print}  # print chr lines\n' all_samples_raw.vcf &gt; all_samples_chrs1-8.vcf"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#count-allele-counts-to-verify-polarisation",
+    "href": "teaching/tutorials/awk_sed_reference.html#count-allele-counts-to-verify-polarisation",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "8.4 7.4 Count allele counts to verify polarisation",
+    "text": "8.4 7.4 Count allele counts to verify polarisation\n# Check that AC=0 sites were removed (should find none)\nawk '!/^#/ && $8 ~ /AC=0/' filtered_vcf.vcf | wc -l\n\n# Count sites by AC value\nawk '!/^#/ {\n  match($8, /AC=([0-9]+)/, arr)\n  ac[arr[1]]++\n}\nEND {for (v in ac) print v, ac[v]}' filtered_vcf.vcf | sort -n"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#split-vcf-by-chromosome-for-parallel-processing",
+    "href": "teaching/tutorials/awk_sed_reference.html#split-vcf-by-chromosome-for-parallel-processing",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "8.5 7.5 Split VCF by chromosome (for parallel processing)",
+    "text": "8.5 7.5 Split VCF by chromosome (for parallel processing)\nContext: The GPN probability computation runs as a SLURM array with one job per chromosome. The polarised VCF is split first.\n# Split by chromosome using awk\nfor CHR in CM047395.1 CM047396.1 CM047397.1 CM047398.1 \\\n           CM047399.1 CM047400.1 CM047401.1 CM047402.1; do\n  awk -v chr=\"$CHR\" \\\n    '/^#/ {print; next} $1==chr {print}' \\\n    insamples_polarized.vcf.recode.vcf \\\n    &gt; split.${CHR}_insamples_polarized.vcf.recode.vcf\ndone\nExplanation:\n\n-v chr=\"$CHR\" — passes the shell variable $CHR into awk as chr.\n/^#/ {print; next} — always prints header lines.\n$1==chr {print} — prints only lines where chromosome column equals chr."
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#compute-derived-allele-frequency-from-allele-counts",
+    "href": "teaching/tutorials/awk_sed_reference.html#compute-derived-allele-frequency-from-allele-counts",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "9.1 8.1 Compute derived allele frequency from allele counts",
+    "text": "9.1 8.1 Compute derived allele frequency from allele counts\nContext: The dadi .data file stores allele counts (e.g., 12 REF + 2 ALT reads). Derived allele frequency = ALT_count / (REF_count + ALT_count).\n# Columns in vcf_genotypes_matching_conservation_sites.tsv:\n# Allele1=REF count for Has02, Has23, Plech02, Plech23\n# Allele2=ALT count for Has02.1, Has23.1, Plech02.1, Plech23.1\n\nawk 'NR&gt;1 {\n  freq_has02 = $4 / ($4 + $9)    # ALT_Has02 / total_Has02\n  freq_has23 = $5 / ($5 + $10)\n  freq_plech02 = $6 / ($6 + $11)\n  freq_plech23 = $7 / ($7 + $12)\n  print $13, $14, freq_has02, freq_has23, freq_plech02, freq_plech23\n}' vcf_genotypes_matching_conservation_sites.tsv"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#compute-δp-derived-allele-frequency-change-per-site",
+    "href": "teaching/tutorials/awk_sed_reference.html#compute-δp-derived-allele-frequency-change-per-site",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "9.2 8.2 Compute Δp (derived allele frequency change) per site",
+    "text": "9.2 8.2 Compute Δp (derived allele frequency change) per site\n# Delta-p = freq_t1 - freq_t0\nawk 'NR&gt;1 {\n  if ($4+$5 &gt; 0 && $6+$7 &gt; 0)\n    dp = ($6/($6+$7)) - ($4/($4+$5))\n  else\n    dp = \"NA\"\n  print $1, $2, dp\n}' OFS=\"\\t\" freq_table.tsv &gt; delta_p.tsv"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#filter-allele-frequency-table-by-maf",
+    "href": "teaching/tutorials/awk_sed_reference.html#filter-allele-frequency-table-by-maf",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "9.3 8.3 Filter allele frequency table by MAF",
+    "text": "9.3 8.3 Filter allele frequency table by MAF\n# Retain sites with MAF &gt;= 0.05 in all four populations\nawk 'NR&gt;1 {\n  f1=$4; f2=$5; f3=$6; f4=$7\n  maf1 = (f1&lt;0.5) ? f1 : 1-f1\n  maf2 = (f2&lt;0.5) ? f2 : 1-f2\n  maf3 = (f3&lt;0.5) ? f3 : 1-f3\n  maf4 = (f4&lt;0.5) ? f4 : 1-f4\n  if (maf1&gt;=0.05 && maf2&gt;=0.05 && maf3&gt;=0.05 && maf4&gt;=0.05)\n    print $0\n}' allelefreq_phyloP_gerp_gpn_Alyr.tsv &gt; allelefreq_MAF05.tsv"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#extract-gene-coordinates-from-gtf",
+    "href": "teaching/tutorials/awk_sed_reference.html#extract-gene-coordinates-from-gtf",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "10.1 9.1 Extract gene coordinates from GTF",
+    "text": "10.1 9.1 Extract gene coordinates from GTF\n# Extract gene start/end/ID from GTF (feature column == \"gene\")\nawk '$3==\"gene\" {\n  match($9, /gene_id \"([^\"]+)\"/, arr)\n  print $1, $4, $5, arr[1]\n}' OFS=\"\\t\" genes.gtf &gt; gene_coordinates.bed\nExplanation:\n\n$3==\"gene\" — selects only lines where the feature column is “gene”.\nmatch($9, /regex/, arr) — POSIX extended regex match on the attribute column. The capture group ([^\"]+) extracts the gene ID between quotes into arr[1].\nOFS=\"\\t\" — sets output field separator to tab (important for BED format)."
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#count-genes-per-chromosome",
+    "href": "teaching/tutorials/awk_sed_reference.html#count-genes-per-chromosome",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "10.2 9.2 Count genes per chromosome",
+    "text": "10.2 9.2 Count genes per chromosome\nawk '$3==\"gene\" {count[$1]++}\nEND {for (c in count) print c, count[c]}' \\\n  genes.gtf | sort -k1,1"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#extract-cds-regions-for-conservation-analysis",
+    "href": "teaching/tutorials/awk_sed_reference.html#extract-cds-regions-for-conservation-analysis",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "10.3 9.3 Extract CDS regions for conservation analysis",
+    "text": "10.3 9.3 Extract CDS regions for conservation analysis\n# Extract CDS coordinates (used for snpEff validation)\nawk '$3==\"CDS\" {print $1\"\\t\"$4-1\"\\t\"$5\"\\t\"$7}' OFS=\"\\t\" \\\n  genes.gtf &gt; cds_regions.bed\nNote: CDS in GTF is 1-based inclusive; BED requires 0-based start ($4-1)."
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#count-sequences-in-fasta",
+    "href": "teaching/tutorials/awk_sed_reference.html#count-sequences-in-fasta",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "11.1 10.1 Count sequences in FASTA",
+    "text": "11.1 10.1 Count sequences in FASTA\n# Count number of sequences\nawk '/^&gt;/ {count++} END {print count}' genome.fna\n# Output: 3,209 (8 chromosomes + unassembled scaffolds)\n\n# Count only chromosome-length sequences (&gt; 10 Mb)\n# (uses awk multi-line approach)\nawk '/^&gt;/ {if (seq) {if (len&gt;10000000) count++}; seq=$0; len=0; next}\n     {len+=length($0)}\n     END {if (seq && len&gt;10000000) count++; print count}' genome.fna"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#extract-specific-chromosome-fasta",
+    "href": "teaching/tutorials/awk_sed_reference.html#extract-specific-chromosome-fasta",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "11.2 10.2 Extract specific chromosome FASTA",
+    "text": "11.2 10.2 Extract specific chromosome FASTA\n# Extract chromosome CM047395.1 from multi-FASTA\nawk '/^&gt;CM047395\\.1$/{found=1} found{print} /^&gt;CM0473/ && !/^&gt;CM047395\\.1$/{found=0}' \\\n  genome.fna &gt; chr1.fna"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#identify-soft-masked-lowercase-repeat-regions",
+    "href": "teaching/tutorials/awk_sed_reference.html#identify-soft-masked-lowercase-repeat-regions",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "11.3 10.3 Identify soft-masked (lowercase = repeat) regions",
+    "text": "11.3 10.3 Identify soft-masked (lowercase = repeat) regions\nContext: The generate_softmasked_ranges.py Python script does this, but an awk equivalent for documentation:\n# Identify runs of lowercase (repeat-masked) nucleotides\nawk '\n/^&gt;/ {chr=$0; sub(\"&gt;\",\"\",chr); pos=0; in_mask=0; mask_start=0; next}\n{\n  for (i=1; i&lt;=length($0); i++) {\n    pos++\n    c = substr($0, i, 1)\n    if (c ~ /[acgt]/) {          # lowercase = masked\n      if (!in_mask) {mask_start=pos; in_mask=1}\n    } else {\n      if (in_mask) {print chr\"\\t\"mask_start-1\"\\t\"pos-1; in_mask=0}\n    }\n  }\n}\nEND {if (in_mask) print chr\"\\t\"mask_start-1\"\\t\"pos}\n' genome.fna &gt; softmasked_regions.bed"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#array-job-chromosome-indexing",
+    "href": "teaching/tutorials/awk_sed_reference.html#array-job-chromosome-indexing",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "12.1 11.1 Array job chromosome indexing",
+    "text": "12.1 11.1 Array job chromosome indexing\nContext: SLURM array jobs (#SBATCH --array=1-8) provide each job with $SLURM_ARRAY_TASK_ID (1–8). An awk-style bash array indexes into chromosomes.\n#!/bin/bash\n#SBATCH --array=1-8\n\n# The chromosome list is a bash array (0-indexed)\nCHRS=(CM047395.1 CM047396.1 CM047397.1 CM047398.1 \\\n      CM047399.1 CM047400.1 CM047401.1 CM047402.1)\n\n# SLURM_ARRAY_TASK_ID is 1-based; bash arrays are 0-based\nCHR=${CHRS[$SLURM_ARRAY_TASK_ID-1]}\n# Task 1 → index 0 → CM047395.1\n# Task 8 → index 7 → CM047402.1\nNote: This is bash array indexing rather than awk, but the pattern ($SLURM_ARRAY_TASK_ID-1) looks identical to awk arithmetic and is documented here for clarity."
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#log-parsing-extract-runtime-per-chromosome",
+    "href": "teaching/tutorials/awk_sed_reference.html#log-parsing-extract-runtime-per-chromosome",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "12.2 11.2 Log parsing: extract runtime per chromosome",
+    "text": "12.2 11.2 Log parsing: extract runtime per chromosome\n# Extract wall time per chromosome from pipeline log\nawk '/✓ CM/ {\n  match($0, /CM[0-9]+\\.[0-9]+ in ([0-9]+\\.[0-9]+)s/, arr)\n  print $2, arr[1]\"s\"\n}' pipeline.log"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#check-which-chromosomes-completed",
+    "href": "teaching/tutorials/awk_sed_reference.html#check-which-chromosomes-completed",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "12.3 11.3 Check which chromosomes completed",
+    "text": "12.3 11.3 Check which chromosomes completed\nawk '/✓ CM/ {print $2, \"DONE\"}\n     /ERROR/ {print $0}' \\\n  pipeline.log | column -t"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#replace-scaffold-names-in-gtf-sed-alternative-to-awk",
+    "href": "teaching/tutorials/awk_sed_reference.html#replace-scaffold-names-in-gtf-sed-alternative-to-awk",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "13.1 12.1 Replace scaffold names in GTF (sed alternative to awk)",
+    "text": "13.1 12.1 Replace scaffold names in GTF (sed alternative to awk)\n# Using multiple -e expressions (less clean than awk for 8 replacements)\nsed -e 's/^scaffold_1\\t/CM047395.1\\t/' \\\n    -e 's/^scaffold_2\\t/CM047396.1\\t/' \\\n    -e 's/^scaffold_3\\t/CM047397.1\\t/' \\\n    -e 's/^scaffold_4\\t/CM047398.1\\t/' \\\n    -e 's/^scaffold_5\\t/CM047399.1\\t/' \\\n    -e 's/^scaffold_6\\t/CM047400.1\\t/' \\\n    -e 's/^scaffold_7\\t/CM047401.1\\t/' \\\n    -e 's/^scaffold_8\\t/CM047402.1\\t/' \\\n  original.gtf | grep \"^CM047\" &gt; renamed.gtf\nExplanation:\n\n^scaffold_1\\t — anchors to line start (^) and requires a tab (\\t) after the name (prevents matching scaffold_10 when looking for scaffold_1).\n-e — allows multiple sed expressions in one call.\n\nRecommendation: Use the awk associative array version (Category 1) for this task. The sed approach requires 8 separate -e flags and is less maintainable."
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#remove-snpeff-version-comment-lines-from-vcf",
+    "href": "teaching/tutorials/awk_sed_reference.html#remove-snpeff-version-comment-lines-from-vcf",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "13.2 12.2 Remove snpEff version comment lines from VCF",
+    "text": "13.2 12.2 Remove snpEff version comment lines from VCF\n# Remove SnpEff command-line comment lines added to VCF header\nsed '/^##SnpEffCmd/d' \\\n  snpEff_Ann_insamples_polarized.vcf &gt; clean_header.vcf\nExplanation:\n\n/^##SnpEffCmd/d — delete (d) lines matching the pattern.\n^##SnpEffCmd — matches lines starting with ##SnpEffCmd (snpEff adds these)."
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#replace-sample-name-prefix-in-vcf-header",
+    "href": "teaching/tutorials/awk_sed_reference.html#replace-sample-name-prefix-in-vcf-header",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "13.3 12.3 Replace sample name prefix in VCF header",
+    "text": "13.3 12.3 Replace sample name prefix in VCF header\n# Replace long BAM path prefix in sample names in the #CHROM header line\nsed '/^#CHROM/ s/\\/scratch\\/tali\\/bam\\///g' all_samples.vcf &gt; renamed.vcf\nExplanation:\n\n/^#CHROM/ — address: only apply to lines matching ^#CHROM.\ns/pattern/replacement/g — substitute the path prefix with nothing (delete it).\n\\/scratch\\/tali\\/bam\\/ — escaped forward slashes in the pattern."
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#fix-windows-line-endings-in-input-files",
+    "href": "teaching/tutorials/awk_sed_reference.html#fix-windows-line-endings-in-input-files",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "13.4 12.4 Fix Windows line endings in input files",
+    "text": "13.4 12.4 Fix Windows line endings in input files\n# Remove carriage returns (Windows \\r\\n → Unix \\n)\nsed 's/\\r//' windows_file.txt &gt; unix_file.txt\n# Or in-place:\nsed -i 's/\\r//' windows_file.txt"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#add-chromosome-prefix-to-bed-file",
+    "href": "teaching/tutorials/awk_sed_reference.html#add-chromosome-prefix-to-bed-file",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "13.5 12.5 Add chromosome prefix to BED file",
+    "text": "13.5 12.5 Add chromosome prefix to BED file\n# Some tools require \"chr\" prefix; add it if missing\nsed 's/^CM/chr_CM/' regions.bed &gt; regions_prefixed.bed"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#comment-out-lines-in-config-files",
+    "href": "teaching/tutorials/awk_sed_reference.html#comment-out-lines-in-config-files",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "13.6 12.6 Comment out lines in config files",
+    "text": "13.6 12.6 Comment out lines in config files\nContext: snpEff configuration requires modifying snpEff.config.\n# Comment out the default Arabidopsis thaliana database entry\nsed 's/^arabidopsis_thaliana/#arabidopsis_thaliana/' \\\n  snpEff.config &gt; snpEff_modified.config\n\n# Append custom database entry\necho \"Arabidopsis_lyrata_petraea.genome = A. lyrata petraea MJ09-11\" \\\n  &gt;&gt; snpEff_custom.config"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#remove-trailing-whitespace",
+    "href": "teaching/tutorials/awk_sed_reference.html#remove-trailing-whitespace",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "13.7 12.7 Remove trailing whitespace",
+    "text": "13.7 12.7 Remove trailing whitespace\n# Clean trailing spaces/tabs from sample name files\nsed 's/[[:space:]]*$//' sample_names.txt &gt; sample_names_clean.txt"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#full-gtf-preparation-pipeline",
+    "href": "teaching/tutorials/awk_sed_reference.html#full-gtf-preparation-pipeline",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "14.1 13.1 Full GTF preparation pipeline",
+    "text": "14.1 13.1 Full GTF preparation pipeline\n# Complete GTF preparation: rename + clean + filter in one pipeline\ncat original.gtf \\\n  | awk 'BEGIN{\n      map[\"scaffold_1\"]=\"CM047395.1\"; map[\"scaffold_2\"]=\"CM047396.1\";\n      map[\"scaffold_3\"]=\"CM047397.1\"; map[\"scaffold_4\"]=\"CM047398.1\";\n      map[\"scaffold_5\"]=\"CM047399.1\"; map[\"scaffold_6\"]=\"CM047400.1\";\n      map[\"scaffold_7\"]=\"CM047401.1\"; map[\"scaffold_8\"]=\"CM047402.1\"\n    } $1 in map {$1=map[$1]} 1' \\\n  | grep \"^CM047\" \\\n  | sed '/^##SnpEffCmd/d' \\\n  &gt; Arabidopsis_lyrata_petraea_genome.annotation_Scaffold1-8Mod_CM047.gtf"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#vcf-allele-count-summary",
+    "href": "teaching/tutorials/awk_sed_reference.html#vcf-allele-count-summary",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "14.2 13.2 VCF → allele count summary",
+    "text": "14.2 13.2 VCF → allele count summary\n# Count transitions vs transversions from VCF\nawk '!/^#/ {\n  ref=$4; alt=$5\n  if (length(ref)==1 && length(alt)==1) {\n    pair = ref\"&gt;\"alt\n    counts[pair]++\n  }\n}\nEND {\n  ti=counts[\"A&gt;G\"]+counts[\"G&gt;A\"]+counts[\"C&gt;T\"]+counts[\"T&gt;C\"]\n  tv=0\n  for (p in counts) tv+=counts[p]\n  tv -= ti\n  printf \"Transitions: %d\\nTransversions: %d\\nTi/Tv: %.2f\\n\", ti, tv, ti/tv\n}' filtered_vcf.vcf"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#generate-per-chromosome-snp-counts-from-vcf",
+    "href": "teaching/tutorials/awk_sed_reference.html#generate-per-chromosome-snp-counts-from-vcf",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "14.3 13.3 Generate per-chromosome SNP counts from VCF",
+    "text": "14.3 13.3 Generate per-chromosome SNP counts from VCF\n# Useful for verifying chromosome-by-chromosome processing\nawk '!/^#/ {counts[$1]++}\nEND {\n  for (c in counts) print c, counts[c]\n}' filtered.vcf | sort -t'.' -k2 -n\n# Sort by chromosome number extracted from CM04739X.1"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#merge-conservation-score-files-across-chromosomes",
+    "href": "teaching/tutorials/awk_sed_reference.html#merge-conservation-score-files-across-chromosomes",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "14.4 13.4 Merge conservation score files across chromosomes",
+    "text": "14.4 13.4 Merge conservation score files across chromosomes\n# Concatenate per-chromosome BED files with header from first file only\nawk 'FNR==1 && NR!=1 {next} 1' \\\n  gerp/chr_CM047395.1.bed \\\n  gerp/chr_CM047396.1.bed \\\n  gerp/chr_CM047397.1.bed \\\n  gerp/chr_CM047398.1.bed \\\n  gerp/chr_CM047399.1.bed \\\n  gerp/chr_CM047400.1.bed \\\n  gerp/chr_CM047401.1.bed \\\n  gerp/chr_CM047402.1.bed \\\n  &gt; gerp/concatenated_gerp.bed\nExplanation:\n\nFNR==1 && NR!=1 {next} — for lines that are the first line of a file (FNR==1) but not the very first line overall (NR!=1), skip them. This removes the header from all files except the first.\n1 — print all other lines."
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#verify-expected-number-of-columns-in-tsv",
+    "href": "teaching/tutorials/awk_sed_reference.html#verify-expected-number-of-columns-in-tsv",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "15.1 14.1 Verify expected number of columns in TSV",
+    "text": "15.1 14.1 Verify expected number of columns in TSV\n# Check that all lines have exactly 10 columns (allelefreq TSV)\nawk 'NF!=10 {print NR\": \"NF\" columns: \"$0}' \\\n  allelefreq_phyloP_gerp_gpn_Alyr.tsv | head -20\n# Prints offending lines; no output = all lines have 10 columns"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#check-for-missing-data-in-key-columns",
+    "href": "teaching/tutorials/awk_sed_reference.html#check-for-missing-data-in-key-columns",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "15.2 14.2 Check for missing data in key columns",
+    "text": "15.2 14.2 Check for missing data in key columns\n# Count missing values (NA or empty) in derived frequency columns\nawk 'NR&gt;1 {\n  for (i=4; i&lt;=7; i++)\n    if ($i==\"NA\" || $i==\"\") missing++\n}\nEND {print \"Missing values:\", missing}' \\\n  allelefreq_phyloP_gerp_gpn_Alyr.tsv"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#check-bed-file-coordinate-order",
+    "href": "teaching/tutorials/awk_sed_reference.html#check-bed-file-coordinate-order",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "15.3 14.3 Check BED file coordinate order",
+    "text": "15.3 14.3 Check BED file coordinate order\n# Verify BED start &lt; end for all intervals\nawk '$2 &gt;= $3 {print NR\": start(\"$2\") &gt;= end(\"$3\"): \"$0}' \\\n  conservation_scores_matching_vcf_sites.bed | head\n# No output = all intervals valid"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#verify-chromosome-names-match-between-vcf-and-bed",
+    "href": "teaching/tutorials/awk_sed_reference.html#verify-chromosome-names-match-between-vcf-and-bed",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "15.4 14.4 Verify chromosome names match between VCF and BED",
+    "text": "15.4 14.4 Verify chromosome names match between VCF and BED\n# Extract unique chromosome names from each file and compare\necho \"=== VCF chromosomes ===\"\nawk '!/^#/ {print $1}' polarized.vcf | sort -u\n\necho \"=== BED chromosomes ===\"\nawk '{print $1}' conservation_sites.bed | sort -u"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#count-samples-per-population-group",
+    "href": "teaching/tutorials/awk_sed_reference.html#count-samples-per-population-group",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "15.5 14.5 Count samples per population group",
+    "text": "15.5 14.5 Count samples per population group\n# Count how many sample names contain each population label\nawk '/^#CHROM/ {\n  has02=0; has23=0; plech02=0; plech23=0\n  for (i=10; i&lt;=NF; i++) {\n    if ($i ~ /Has02/) has02++\n    if ($i ~ /Has23/) has23++\n    if ($i ~ /Plech02/) plech02++\n    if ($i ~ /Plech23/) plech23++\n  }\n  print \"Has02:\", has02, \"Has23:\", has23, \"Plech02:\", plech02, \"Plech23:\", plech23\n}' all_samples.vcf\n# Expected: Has02: 12  Has23: 20  Plech02: 12  Plech23: 20"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#convert-vcf-to-dadi-input-format-awk-pipeline-verification",
+    "href": "teaching/tutorials/awk_sed_reference.html#convert-vcf-to-dadi-input-format-awk-pipeline-verification",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "16.1 15.1 Convert VCF to dadi input format (awk pipeline verification)",
+    "text": "16.1 15.1 Convert VCF to dadi input format (awk pipeline verification)\n# Verify that the perl conversion produced the expected output\n# Check first 5 data lines of the .data file\nawk 'NR&gt;1 && NR&lt;=6' \\\n  insamples_polarized.vcf2dadi/insamples_polarized.vcf.recode.vcf.gz.data\n\n# Count total SNPs in dadi file (skip header)\nawk 'NR&gt;1 {count++} END{print count}' \\\n  insamples_polarized.vcf.recode.vcf.gz.data\n# Expected: 12,250,277"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#extract-positions-from-vcf-for-gpn-scoring",
+    "href": "teaching/tutorials/awk_sed_reference.html#extract-positions-from-vcf-for-gpn-scoring",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "16.2 15.2 Extract positions from VCF for GPN scoring",
+    "text": "16.2 15.2 Extract positions from VCF for GPN scoring\nContext: The GPN scoring script requires a plain text file with one 1-based position per line, per chromosome.\n# Extract all positions for chromosome CM047395.1\nawk '!/^#/ && $1==\"CM047395.1\" {print $2}' \\\n  insamples_polarized.vcf.recode.vcf \\\n  &gt; positions_CM047395.1.txt\n\n# Or loop over all chromosomes\nfor CHR in CM047395.1 CM047396.1 CM047397.1 CM047398.1 \\\n           CM047399.1 CM047400.1 CM047401.1 CM047402.1; do\n  awk -v chr=\"$CHR\" '!/^#/ && $1==chr {print $2}' \\\n    insamples_polarized.vcf.recode.vcf \\\n    &gt; positions_${CHR}.txt\n  echo \"$CHR: $(wc -l &lt; positions_${CHR}.txt) positions\"\ndone"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#format-ne-estimation-output-for-downstream-use",
+    "href": "teaching/tutorials/awk_sed_reference.html#format-ne-estimation-output-for-downstream-use",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "16.3 15.3 Format Ne estimation output for downstream use",
+    "text": "16.3 15.3 Format Ne estimation output for downstream use\n# Extract mean Ne from bootstrap log files\nawk '/Mean =/ {\n  match($0, /Mean = ([0-9.]+)/, arr)\n  print FILENAME, arr[1]\n}' Ne_bootstrap_Has.log Ne_bootstrap_Plech.log\n\n# Expected output:\n# Ne_bootstrap_Has.log    148.77\n# Ne_bootstrap_Plech.log  356.97"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#patterns",
+    "href": "teaching/tutorials/awk_sed_reference.html#patterns",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "17.1 Patterns",
+    "text": "17.1 Patterns\n\n\n\nPattern\nMatches\n\n\n\n\n/regex/\nlines matching regex\n\n\n!/regex/\nlines NOT matching regex\n\n\n$1==\"value\"\nfield 1 equals value\n\n\n$2 &gt;= 4\nfield 2 ≥ 4 (numeric)\n\n\nNR&gt;1\nall lines except first\n\n\nNR==FNR\nlines in first file (two-file processing)\n\n\nBEGIN\nbefore any input\n\n\nEND\nafter all input\n\n\n/^#/\nlines starting with #\n\n\n!/^#/\nlines not starting with #"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#arithmetic-and-strings",
+    "href": "teaching/tutorials/awk_sed_reference.html#arithmetic-and-strings",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "17.2 Arithmetic and strings",
+    "text": "17.2 Arithmetic and strings\n# Arithmetic\nawk '{print $2 - 1}'          # subtract 1 from field 2\nawk '{print $3 / $4}'          # divide fields\nawk '{sum += $5} END {print sum/NR}'  # mean of column 5\n\n# String operations\nawk '{sub(\"old\",\"new\",$1)}'    # replace first occurrence in $1\nawk '{gsub(\"old\",\"new\",$0)}'   # replace all in entire line\nawk '{print length($0)}'        # line length\nawk '{print substr($1,1,10)}'   # first 10 chars of field 1\nawk '{print toupper($1)}'       # uppercase\nawk '{split($1, arr, \":\")}; {print arr[1], arr[2]}' # split on :"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#output-formatting",
+    "href": "teaching/tutorials/awk_sed_reference.html#output-formatting",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "17.3 Output formatting",
+    "text": "17.3 Output formatting\n# Tab-separated output\nawk '{print $1\"\\t\"$2\"\\t\"$3}'\nawk 'BEGIN{OFS=\"\\t\"} {print $1,$2,$3}'  # equivalent\n\n# Printf (C-style formatting)\nawk '{printf \"%.4f\\n\", $5/$6}'   # 4 decimal places\nawk '{printf \"%s\\t%d\\t%d\\n\", $1, $2-1, $2}'  # BED format"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#two-file-lookups",
+    "href": "teaching/tutorials/awk_sed_reference.html#two-file-lookups",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "17.4 Two-file lookups",
+    "text": "17.4 Two-file lookups\n# Classic two-file join: print lines from file2 if key in file1\nawk 'NR==FNR{keys[$1]=1; next}   # load keys from file1\n     $1 in keys {print}' \\        # print matching lines from file2\n  file1.txt file2.txt"
+  },
+  {
+    "objectID": "teaching/tutorials/awk_sed_reference.html#sed-quick-reference",
+    "href": "teaching/tutorials/awk_sed_reference.html#sed-quick-reference",
+    "title": "AWK & SED Commands in the Arabidopsis lyrata Temporal Genomics Pipeline",
+    "section": "17.5 SED quick reference",
+    "text": "17.5 SED quick reference\n\n\n\nCommand\nEffect\n\n\n\n\nsed 's/old/new/'\nReplace first old with new\n\n\nsed 's/old/new/g'\nReplace all old with new\n\n\nsed '/pattern/d'\nDelete lines matching pattern\n\n\nsed -n '/pattern/p'\nPrint only lines matching pattern\n\n\nsed '1d'\nDelete first line (remove header)\n\n\nsed -i 's/old/new/g' file\nIn-place edit\n\n\nsed 's/\\r//'\nRemove Windows carriage returns\n\n\nsed 's/[[:space:]]*$//'\nRemove trailing whitespace\n\n\nsed '/^#/!s/^/prefix_/'\nAdd prefix to non-comment lines"
   }
 ]
