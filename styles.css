@@ -57,25 +57,38 @@ h1, .subtitle {
   text-align: center;
   margin-top: 1.2em;
   margin-bottom: 1.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.45em;
+  flex-wrap: wrap;
 }
 
 .social-icons a {
-  font-size: 2em;
-  margin: 0 2px;
+  font-size: 1.35em;
+  width: 2.05em;
+  height: 2.05em;
+  margin: 0;
   text-decoration: none;
   vertical-align: middle;
   border: 1px solid #111;
   border-radius: 10px;
-  padding: 0.08em 0.13em;
+  padding: 0;
   background: #fff;
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
   transition: color 0.2s, border 0.2s, background 0.2s;
 }
 
 .social-icons a.email { color: #0072B2; }
+.social-icons a.uni-email { color: #003b7a; }
+.social-icons a.personal-email { color: #0f766e; }
 .social-icons a.linkedin { color: #0A66C2; font-weight: bold; }
 .social-icons a.facebook { color: #1877F3; font-weight: bold; }
 .social-icons a.twitter { color: #000; font-weight: bold; }
+.social-icons a.bluesky { color: #1185fe; font-weight: bold; }
 .social-icons a.scholar { color: #333; }
 .social-icons a:hover { color: #e67e22; border-color: #e67e22; background: #f5f5f5; }
 
@@ -103,9 +116,11 @@ h2, h3 {
     width: 120px !important;
   }
   .social-icons a {
-    font-size: 1.3em !important;
+    font-size: 1.1em !important;
+    width: 1.9em !important;
+    height: 1.9em !important;
     border-width: 0.7px !important;
-    padding: 0.05em 0.08em !important;
+    padding: 0 !important;
   }
 }
 
@@ -115,10 +130,12 @@ h2, h3 {
 
 div.social-icons p {
   text-align: center !important;
+  margin: 0 !important;
+  display: contents;
 }
 
 div.social-icons > p > a {
-  display: inline-block;
+  display: inline-flex;
   float: none;
 }
 
