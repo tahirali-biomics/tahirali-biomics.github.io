@@ -1,0 +1,1553 @@
+---
+title: "Practical Day 3: Exploring GO-Term Enrichment, Diversity (Tajima's D & Pi), and Divergence (FST) Stats"
+author: "Dr Tahir Ali | AG de Meaux"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    code-copy: true
+    code-fold: true
+    code-summary: "Code"
+    code-overflow: wrap
+---
+
+# Learning Objectives
+
+-   GO (Gene Ontology) Enrichment Analysis
+-   Estimate and plot genome-wide FST, Tajima's D, Pi
+-   Plot climatic variables and extract climate data using coordinates
+
+------------------------------------------------------------------------
+
+## Tools to be Used
+
+-   **STACKS**
+-   **R/RSTUDIO** (R-packages: TopGo, PopGenome, etc.)
+
+------------------------------------------------------------------------
+
+# Connecting to HPC (RAMSES) and Organizing the Workspace
+
+**Connect to the HPC**
+
+For Windows users: Use MobaXterm. For Mac/Linux users: Use the Terminal application.\
+Log in to the HPC cluster using your login credentials.
+
+``` bash
+ssh -Y qbius030@@ramses1.itcc.uni-koeln.de
+# Replace 'qbius030' with your specific username.
+# Enter passphrase for key '/Users/tahirali/.ssh/ramses_key', if prompted:
+# Duo two-factor login for qbius030
+```
+
+**Check Your Current Directory**
+
+``` bash
+pwd
+```
+
+-   If you are not in your home directory, navigate to it:
+
+``` bash
+cd /home/group.kurse/qbius030/
+# Replace 'qbius030' with your specific username.
+```
+
+**Copy Raw Data to Your Home Directory**
+
+``` bash
+cp -r /scratch/tali/Practical_Day_3 .
+```
+
+# Instructions for Running Bioinformatics Jobs on the HPC (RAMSES)
+
+For quality control and downstream processing of FASTQ files,\
+we will execute various tasks on the HPC using Bash scripts with for loops.
+
+**Steps:**
+
+1.  Prepare your script using a text editor and save it as `your_bash_script.sh`.
+
+2.  Submit your job in the terminal using:
+
+``` bash
+sbatch your_bash_script.sh
+```
+
+3.  For more details, consult the [RAMSES Brief Instructions](https://gitlab.git.nrw/uzk-itcc-hpc/itcc-hpc-ramses/-/wikis/Documentation).
+
+# GO (Gene Ontology) Enrichment Analysis
+
+The enrichment analysis identifies which Gene Ontology (GO) terms are over-represented or under-represented within a given gene set, based on their annotations. To conduct this analysis, we require an estimate of genome-wide FST values to measure genetic differentiation between two groups (populations) of samples, using variants provided in a VCF file. For the estimation of genome-wide FST, we will use the software STACKS.
+
+## Estimate Genome-wide FST values
+
+**Create and Submit a SLURM Script for BAM to VCF Analysis**
+
+**Check if required module is installed:**
+
+``` bash
+module avail
+```
+
+**Example SLURM Script** (stacks.sh)
+
+``` bash
+#!/bin/bash -l
+
+#SBATCH --job-name=stacks
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=8
+#SBATCH --mem=40gb
+#SBATCH --time=01:00:00
+#SBATCH --account=UniKoeln
+#SBATCH --error=/home/group.kurse/qbius030/Practical_Day_3/stacks/stacks_pop.err
+#SBATCH --output=/home/group.kurse/qbius030/Practical_Day_3/stacks/stacks_pop.out
+
+# Load the stacks module
+module load bio/Stacks/2.62-foss-2022a
+
+# Input directory
+input_dir="/home/group.kurse/qbius030/Practical_Day_3/vcf"
+
+# Output directory
+output_dir="/home/group.kurse/qbius030/Practical_Day_3/stacks"
+
+populations -V "${input_dir}/1001genomes_snp-short-indel_only_ACGTN_Dp10GQ20Q30_NoIndel_Bialleleic_80PcMissing_80SwEs_DefenseOnly.vcf.gz" --popmap "/home/group.kurse/qbius030/Practical_Day_3/stacks/pop.txt" --fstats -t 10 --structure -O "${output_dir}"
+```
+
+**Fixing the “DOS Line Breaks” Error on a HPC Cluster**
+
+-   If you see:
+
+``` bash
+sbatch: error: Batch script contains DOS line breaks (\r\n)
+```
+
+**Fix with:**
+
+``` bash
+dos2unix fastqc.sh
+cat -v fastqc.sh  # Check for ^M characters
+```
+
+**Check job status:**
+
+``` bash
+squeue -u qbius030
+```
+
+## Prepare input file for GO Term Enrichment Analysis
+
+**Process the STACKS output in R using the following script**
+
+-   Create a new directory on your local system named "Practical_Day_3" and within it, create a subdirectory called "GO_Enrichment_Analysis".
+
+-   Download the file "1001genomes_snp-short-indel_only_ACGTN_Dp10GQ20Q30_NoIndel_Bialleleic_80PcMissing_80SwEs_DefenseOnly.p.fst_SWE-ESP.tsv" from Cheops and save it in the "GO_Enrichment_Analysis" directory.
+
+-   Use the following R script to process the STACKS output file.
+
+-   Make sure to replace the file name with the actual file name generated in your STACKS output directory:/home/group.kurse/qbius030/Practical_Day_3/stacks.
+
+-   
+
+```{.r}
+# Function to check and install missing packages
+# This function ensures that a required package is installed on the system.
+# If the package is not installed, it will automatically install it.
+check_and_install <- function(pkg) {
+  # Check if the package is already installed
+  if (!requireNamespace(pkg, quietly = TRUE)) {  # requireNamespace checks if the package is available without loading it
+    # Notify the user that the package is missing and will be installed
+    cat(sprintf("Package '%s' is not installed. Installing now...\n", pkg))
+    # Install the missing package along with its dependencies
+    install.packages(pkg, dependencies = TRUE)
+  }
+}
+
+# Define a list of required CRAN packages
+# These are packages that your script or project depends on
+required_packages <- c("readr", "dplyr")  # Specify the names of required packages in a character vector
+
+# Loop through each package in the list and ensure it is installed
+for (pkg in required_packages) {
+  check_and_install(pkg)  # Call the custom function to check and install each package
+}
+
+# Check if the BiocManager package is installed
+# BiocManager is necessary for installing Bioconductor packages
+if (!requireNamespace("BiocManager", quietly = TRUE)) {
+  # If BiocManager is not installed, notify the user and install it
+  install.packages("BiocManager")
+}
+
+# Use BiocManager to install the GenomicRanges package
+# GenomicRanges is a Bioconductor package used for genomic data analysis
+BiocManager::install("GenomicRanges")
+
+# Load the required libraries
+library(readr)           # For reading and writing data
+library(GenomicRanges)   # For working with genomic ranges
+library(dplyr)           # For data manipulation
+
+# Set the working directory to the folder on you local system (Windows or Mac) "GO_Enrichment_Analysis"
+setwd("/home/tahirali/RAMSES_mount/tali/qbio/Practical_Day_3/GO_Enrichment_Analysis")
+
+# -------------------
+# Read and process the STACKS output file
+# -------------------
+
+# Download stacks.sh script output file with the extension " *.p.fst_SWE-ESP.tsv" to your local system and copy this to "GO_Enrichment_Analysis" directory
+# Read the STACKS FST file. Don't forget to change name to your actual file name.
+fstats <- read.table("1001genomes_snp-short-indel_only_ACGTN_Dp10GQ20Q30_NoIndel_Bialleleic_80PcMissing_80SwEs_DefenseOnly.p.fst_SWE-ESP.tsv", header = FALSE)
+
+# Assign meaningful column names
+# Names of these columns are explained here: https://catchenlab.life.illinois.edu/stacks/manual/#pfiles
+# 6.6.3 populations.fst_Y-Z.tsv: FST calculations for each pair of populations
+colnames(fstats) <- gsub(" ", "_", c(
+  "Locus ID",	"Pop 1 ID",	"Pop 2 ID",	"Chr",	"BP",	"Column",	"Overall Pi",	"AMOVA Fst",
+  "Fishers P",	"Odds Ratio",	"CI Low",	"CI High",	"LOD",	"Corrected AMOVA Fst",	
+  "Smoothed AMOVA Fst",	"Smoothed AMOVA Fst P-value",	"Window SNP Count"
+))
+
+# Subset the FST file to focus on key columns
+fstats_fst <- data.frame(
+  Chr = fstats$Chr,         # Chromosome
+  BP = fstats$BP,           # Base Pair position
+  Fishers_P = fstats$Fishers_P, # Fisher's P-value
+  AMOVA_Fst = fstats$AMOVA_Fst  # FST value
+)
+
+# Display the first few rows of the subsetted data
+print(head(fstats_fst, n = 5))
+
+# -------------------
+# Read the annotation file
+# -------------------
+
+# Read the annotation file (e.g., GFF format), Change the .gff file name to the file provided for your dataset, this file is provided in "Practical_Day_3/At_gff" directory.
+annot <- read.delim("At_defense_only.gff", header = FALSE)
+
+# Assign column names for better readability
+colnames(annot) <- c(
+  "gene_id", "chr", "tair_version", "type", "start", "end", "empty1",
+  "strand", "empty2", "gene_id2", "gene_id3", "type_name", "short_description", "curation"
+)
+
+# Subset the annotation file to retain relevant columns
+annot_subset <- data.frame(
+  gene_id = annot$gene_id,
+  chr = annot$chr,
+  start = annot$start,
+  end = annot$end
+)
+
+# Standardize chromosome notation for consistency with STACKS output
+annot_subset$chr <- sub("Chr", "", annot_subset$chr)
+
+# -------------------
+# Create GRanges objects and find overlaps
+# -------------------
+
+# Convert FST data to GRanges
+gr_fst <- GRanges(
+  seqnames = fstats_fst$Chr, 
+  ranges = IRanges(start = fstats_fst$BP, end = fstats_fst$BP),
+  fst = fstats_fst$AMOVA_Fst,
+  p_value = fstats_fst$Fishers_P
+)
+
+# Convert annotation data to GRanges
+gr_annotation <- GRanges(
+  seqnames = annot_subset$chr, 
+  ranges = IRanges(start = annot_subset$start, end = annot_subset$end),
+  gene_id = annot_subset$gene_id
+)
+
+# Find overlaps between FST data and annotation data
+ovl <- findOverlaps(gr_fst, gr_annotation, type = "any", select = "all", ignore.strand = TRUE)
+
+# Extract overlapping genes and FST data
+overlapping_genes <- as.data.frame(gr_annotation[subjectHits(ovl)])
+overlapping_fst <- as.data.frame(gr_fst[queryHits(ovl)])
+
+# Rename columns for consistency
+colnames(overlapping_genes)[colnames(overlapping_genes) == "seqnames"] <- "chrom"
+colnames(overlapping_fst)[colnames(overlapping_fst) == "seqnames"] <- "chrom"
+
+# Remove unnecessary columns
+overlapping_genes <- overlapping_genes[, !(names(overlapping_genes) %in% "strand")]
+overlapping_fst <- overlapping_fst[, !(names(overlapping_fst) %in% "strand")]
+
+# Write results to files
+write.table(overlapping_genes, "overlapping_genes_SWE_ESP.txt", sep = "\t", row.names = FALSE, quote = FALSE)
+write.table(overlapping_fst, "overlapping_fst_SWE_ESP.txt", sep = "\t", row.names = FALSE, quote = FALSE)
+```
+
+**Process the Rscript output file in RAMSES terminal using BEDTools**
+
+-   Copy these files (overlapping_genes_SWE_ESP.txt & overlapping_fst_SWE_ESP.txt) to RAMSES to directory "/home/group.kurse/qbius030/Practical_Day_3/GO_Enrichment_Analysis" using MobaXterm (Windows)/Cyberduck(Mac)
+-   Use BEDTools to identify loci within genomic boundaries of defense-related genes
+
+``` bash
+# Command to run in terminal:
+module load bio/BEDTools/2.31.1-GCC-13.2.0
+bedtools intersect -wa -wb -a overlapping_genes_SWE_ESP.txt -b overlapping_fst_SWE_ESP.txt > overlapping_genes_fst_SWE_ESP.txt
+```
+
+**Process BEDTools output in R using following RScript**
+- Download the BEDTools output "overlapping_genes_fst_SWE_ESP.txt" to your local system and copy to "GO_Enrichment_Analysis" directory
+
+```{.r}
+setwd("/home/tahirali/RAMSES_mount/tali/qbio/Practical_Day_3/GO_Enrichment_Analysis")
+# Read BEDTools output
+ovl_genes_fst <- read.delim("overlapping_genes_fst_SWE_ESP.txt", header = FALSE)
+
+# Assign column names
+colnames(ovl_genes_fst) <- c(
+  "chr", "gene_start", "gene_end", "gene_width", "gene_id", 
+  "chrom", "snp_start", "snp_end", "snp_width", "fst", "p_value"
+)
+
+print(head(ovl_genes_fst, n=5))
+
+# subset ovl_genes_fst
+# Create a subset of the "ovl_genes_fst" dataframe with selected columns
+ovl_genes_fst_sub <- data.frame(
+  gene_id = ovl_genes_fst$gene_id,
+  fst = ovl_genes_fst$fst,
+  p_value = ovl_genes_fst$p_value
+)  
+print(head(ovl_genes_fst_sub, n=5))
+
+# Drop integers after decimal point in `gene_id`
+ovl_genes_fst_sub$gene_id <- sub("\\.\\d+", "", ovl_genes_fst_sub$gene_id)
+
+# Sort by gene_id, FST (descending), and p-value (ascending)
+sorted_data <- ovl_genes_fst_sub %>%
+  arrange(gene_id, desc(fst), p_value)
+print(head(sorted_data, n=5))
+
+# Retain unique genes with the highest FST and lowest p-value
+unique_data <- sorted_data %>%
+  group_by(gene_id) %>%
+  filter(row_number() == 1)
+  
+print(head(unique_data, n=5))
+
+# Write final data to file for GO analysis
+write.table(unique_data, "GO_input_SWE_ESP.txt", sep = "\t", row.names = FALSE, quote = FALSE)
+
+```
+
+## Perform GO Terms Enrichment Analysis
+- This script performs Gene Ontology (GO) enrichment analysis using the topGO package.
+- It is designed to investigate whether genes with SNPs showing significant FST values
+ between two populations are enriched for specific biological processes.
+- These genes may have accumulated genetic variations and diverged due to selective pressures
+ associated with differing environmental conditions between the populations.
+ 
+**The analysis requires:**
+- A list of genes of interest (e.g., genes with significant FST values).
+- A background list of all genes (representing the genomic baseline).
+The results help identify enriched GO terms, shedding light on biological processes potentially under selection in the population due to specific environmental pressures.
+
+```{.r}
+# Define required packages
+required_packages <- c(
+  "BiocManager", 
+  "KEGGREST", 
+  "org.At.tair.db", 
+  "Rgraphviz", 
+  "topGO", 
+  "biomaRt", 
+  "ggplot2", 
+  "AnnotationDbi", 
+  "clusterProfiler", 
+  "scales"
+)
+
+# Install missing packages
+for (pkg in required_packages) {  # Iterate through each package
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    message(paste("Installing", pkg, "..."))
+    if (pkg %in% c("org.At.tair.db", "Rgraphviz", "topGO", "AnnotationDbi", "clusterProfiler", "KEGGREST")) {
+      BiocManager::install(pkg)
+    } else {
+      install.packages(pkg)
+    }
+  } else {
+    message(paste(pkg, "is already installed."))
+  }
+}
+
+# Load libraries quietly without printing anything
+invisible(lapply(required_packages, library, character.only = TRUE, quietly = TRUE, warn.conflicts = FALSE))
+
+
+setwd("/home/tahirali/RAMSES_mount/tali/qbio/Practical_Day_3/GO_Enrichment_Analysis")
+
+# Load gene list file
+gene_list <- read.table("GO_input_SWE_ESP.txt", header = TRUE)  # Read input file with gene names and p-values
+
+# Step 1: Prepare gene universe
+univ <- gene_list[, 3]  # Extract third column with p-values
+names(univ) <- gene_list[, 1]  # Assign gene names from the first column as names for p-values
+univ <- univ[!is.na(univ)]  # Remove any genes with missing p-values (NA)
+
+# Step 2: Clean universe for genes in org.At.tair.db
+univ_clean <- names(univ)[names(univ) %in% keys(org.At.tair.db)]  # Keep only genes present in the Arabidopsis gene database
+
+# Step 3: Define selection function for significant genes
+# The function selects genes with a p-value less than 0.05 (adjust as needed)
+selection <- function(allScore) { return(allScore < 0.05) }
+
+# Step 4: Run GO enrichment analysis
+# 'topGOdata' initializes the analysis; "BP" stands for Biological Process
+tGOdata <- new(
+  "topGOdata", 
+  description = "GO Enrichment Analysis",  # Description for the analysis
+  ontology = "BP",  # Ontology type (Biological Process)
+  geneSel = selection,  # Apply selection function for significant genes
+  allGenes = univ,  # Universe of all genes
+  nodeSize = 10,  # Minimum number of genes per GO term
+  mapping = "org.At.tair.db",  # Use Arabidopsis database for gene annotations
+  annot = annFUN.org  # Annotation function for the database
+)
+
+# Fisher and KS tests are two methods to check if the most significant genes are enriched for specific GO terms.
+# Fisher's exact test compares the observed and expected significant genes for each GO term.
+# The KS test compares the distribution of gene p-values with the expected distribution.
+
+# Based on previous project experience, Fisher's test (p<0.01) with weight01 algorithm identified informative GO terms.
+# The KS test was less effective in identifying meaningful GO terms, often identifying basic terms like "biological process" or "cellular process."
+
+# Step 5: Run Gene Enrichment Analysis with the "elim" algorithm
+# Fisher statistic
+results.fisher <- runTest(tGOdata, algorithm = "elim", statistic = "fisher")
+
+# KS statistic
+results.ks <- runTest(tGOdata, algorithm = "elim", statistic = "ks")
+
+# Step 6: Generate enrichment table
+# Create a table of GO enrichment results sorted by p-value for Fisher test
+goEnrichment_Fisher <- GenTable(
+  tGOdata, 
+  Fisher_p_value = results.fisher,  # Add Fisher p-values to the table
+  orderBy = "Fisher_p_value",  # Sort by p-value
+  topNodes = 50  # Display top 50 terms
+)
+
+# Create a table of GO enrichment results sorted by p-value for KS test
+goEnrichment_KS <- GenTable(
+  tGOdata, 
+  KS_p_value = results.ks,  # Add KS p-values to the table
+  orderBy = "KS_p_value",  # Sort by p-value
+  topNodes = 50  # Display top 50 terms
+)
+
+# Step 7: Clean and prepare data for plotting
+# Convert p-values to numeric format and remove NAs
+goEnrichment_Fisher$Fisher_p_value <- as.numeric(goEnrichment_Fisher$Fisher_p_value)
+goEnrichment_Fisher <- goEnrichment_Fisher[!is.na(goEnrichment_Fisher$Fisher_p_value), ]  # Remove rows with NA values
+
+goEnrichment_KS$KS_p_value <- as.numeric(goEnrichment_KS$KS_p_value)
+goEnrichment_KS <- goEnrichment_KS[!is.na(goEnrichment_KS$KS_p_value), ]  # Remove rows with NA values
+
+# Select top N terms (e.g., top 10)
+ntop <- 10
+ggdata_Fisher <- goEnrichment_Fisher[1:ntop, ]  # Select top 10 GO terms for Fisher
+ggdata_Fisher$Term <- factor(ggdata_Fisher$Term, levels = rev(ggdata_Fisher$Term))  # Reverse order for y-axis
+
+ggdata_KS <- goEnrichment_KS[1:ntop, ]  # Select top 10 GO terms for KS
+ggdata_KS$Term <- factor(ggdata_KS$Term, levels = rev(ggdata_KS$Term))  # Reverse order for y-axis
+
+# Step 8: Bubble plot visualization
+# Fisher test plot
+p_fisher <- ggplot(ggdata_Fisher, aes(x = Fisher_p_value, y = Term, size = Annotated, color = Fisher_p_value)) +
+  geom_point(alpha = 0.7) +  # Plot bubbles with transparency
+  geom_text(aes(label = Annotated), vjust = 0.5, hjust = 0.5, size = 3, color = "black") +  # Add text labels inside bubbles
+  scale_size_continuous(range = c(5, 19)) +  # Adjust bubble sizes based on annotation count
+  scale_color_continuous(low = "red", high = "gold") +  # Color gradient from red to gold based on p-value
+  theme_minimal() +  # Minimal theme for clean plot
+  labs(
+    size = "Count",  # Label for bubble size
+    color = "Fisher_p_value",  # Label for color scale
+    x = "Fisher_p_value",  # Label for x-axis
+    y = "GO Terms"  # Label for y-axis
+  ) +
+  theme(
+    panel.border = element_rect(color = "grey", fill = NA, size = 1),  # Add border around the plot
+    legend.position = "right",  # Position legend on the right
+    axis.text = element_text(size = 10),  # Adjust axis text size
+    axis.title = element_text(size = 10)  # Adjust axis title size
+  )
+
+# KS test plot
+p_ks <- ggplot(ggdata_KS, aes(x = KS_p_value, y = Term, size = Annotated, color = KS_p_value)) +
+  geom_point(alpha = 0.7) +  # Plot bubbles with transparency
+  geom_text(aes(label = Annotated), vjust = 0.5, hjust = 0.5, size = 3, color = "black") +  # Add text labels inside bubbles
+  scale_size_continuous(range = c(5, 19)) +  # Adjust bubble sizes based on annotation count
+  scale_color_continuous(low = "red", high = "gold") +  # Color gradient from red to gold based on p-value
+  theme_minimal() +  # Minimal theme for clean plot
+  labs(
+    size = "Count",  # Label for bubble size
+    color = "KS_p_value",  # Label for color scale
+    x = "KS_p_value",  # Label for x-axis
+    y = "GO Terms"  # Label for y-axis
+  ) +
+  theme(
+    panel.border = element_rect(color = "grey", fill = NA, size = 1),  # Add border around the plot
+    legend.position = "right",  # Position legend on the right
+    axis.text = element_text(size = 10),  # Adjust axis text size
+    axis.title = element_text(size = 10)  # Adjust axis title size
+  )
+
+# Step 9: Display the plot
+# Show the plots for Fisher and KS tests
+print(p_fisher)  # Display Fisher plot
+print(p_ks)  # Display KS plot
+```
+
+# Estimate Diversity (Tajima'D & Pi) and Diveregence (FST) measures
+**Steps to Install Required R Packages and Resolve Issues with PopGenome Installation** (Generally works for all types of systems)
+- Install the Latest Version of Rtools: Download the appropriate RtoolsXX installer based on your R version. Run the downloaded executable to complete the installation.
+- Install the devtools Package and then install PopGenome from Github 
+
+**Uncomment the following lines if PopGenome and its dependencies are not already installed.**
+```{.r}
+#install.packages("devtools")
+#library(devtools)
+# https://github.com/pievos101/PopGenome
+#devtools::install_github("pievos101/PopGenome")
+#library(PopGenome)
+```
+
+**Additional Steps to Resolve PopGenome Installation Issues** (Windows Systems)
+If the above steps fail to install PopGenome, follow these instructions:
+- Install R version 4.3.2 .
+- Install Strawberry Perl, which includes g++ support.
+- Install the latest version of Rtools (if not already installed).
+- Set Windows Path Variables to include the installation directories for Rtools and Strawberry Perl.
+- Install the following dependencies in R:
+
+```{.r}
+#install.packages("ff")
+#install.packages("tidyverse")
+```
+
+- Finally, install PopGenome using
+
+```{.r}
+#devtools::install_github("pievos101/PopGenome")
+```
+- For additional help, consult the document “Installation_Steps_PopGenome_R_(Windows)” uploaded in Practical_Day_3. You can also use the "PopGenome_2.7.5.tar" file provided in the same folder.
+
+**Estimate and plot Fst and Tajima'D and Neutrality stats using PopGenome**
+
+```{.r}
+# Function to check and install missing packages
+check_and_install <- function(pkg, bioc = FALSE) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    if (bioc) {
+      if (!requireNamespace("BiocManager", quietly = TRUE)) {
+        install.packages("BiocManager")
+      }
+      cat(sprintf("Installing Bioconductor package '%s'...\n", pkg))
+      BiocManager::install(pkg)
+    } else {
+      cat(sprintf("Installing CRAN package '%s'...\n", pkg))
+      install.packages(pkg, dependencies = TRUE)
+    }
+  }
+}
+
+# List of CRAN packages
+cran_packages <- c("vcfR", "readr", "tibble", "dplyr", "tidyr", "ggplot2", "dunn.test")
+
+# List of Bioconductor packages
+bioc_packages <- c("VariantAnnotation")
+
+# Install CRAN packages
+for (pkg in cran_packages) {
+  check_and_install(pkg)
+}
+
+# Install Bioconductor packages
+for (pkg in bioc_packages) {
+  check_and_install(pkg, bioc = TRUE)
+}
+
+# Load the libraries after installation
+library(PopGenome)      # For population genetics analyses
+library(vcfR)           # For reading VCF files
+library(VariantAnnotation) # For working with genomic data
+library(readr)          # For reading delimited files
+library(tibble)         # For working with tibbles (data frames)
+library(dplyr)          # For data manipulation
+library(tidyr)          # For reshaping data
+library(ggplot2)        # For data visualization
+library(dunn.test)      # For post-hoc testing following Kruskal-Wallis
+library(conflicted)
+library(GenomicRanges)  # Load GenomicRanges library to handle genomic data
+
+# Prefer dplyr explicitly to avoid conflicts
+conflicts_prefer(dplyr::filter)
+conflicts_prefer(dplyr::select)
+conflicts_prefer(dplyr::mutate)
+conflicts_prefer(Biostrings::setdiff)
+conflicts_prefer(dplyr::setdiff)
+conflicts_prefer(base::setdiff)
+
+# Set working directory to "Practical_Day_3/vcf"on your local system (adjust path as needed)
+
+setwd("/home/tahirali/RAMSES_mount/tali/qbio/Practical_Day_3/vcf")
+
+# You can download all required files RAMSES "/scratch/tali/Practical_Day_3/vcf".
+
+# Use VariantAnnotation to extract more details about chromosomes and positions
+vcf <- suppressMessages(
+	readVcf("1001genomes_snp-short-indel_only_ACGTN_Dp10GQ20Q30_NoIndel_Bialleleic_80PcMissing_80SwEs_DefenseOnly.vcf.gz")
+)
+chromosomes <- seqlevels(vcf) # Get chromosome names
+
+# Calculate start and end positions for each chromosome
+chromosome_ranges <- data.frame(CHROM = character(), Start = numeric(), End = numeric(), stringsAsFactors = FALSE)
+for (chrom in chromosomes) {
+  positions <- start(vcf[seqnames(vcf) == chrom])
+  chromosome_ranges <- rbind(chromosome_ranges, data.frame(CHROM = chrom, Start = min(positions), End = max(positions)))
+}
+print(chromosome_ranges)
+
+# Define genomic ranges for chromosomes to be analyzed
+# These ranges correspond to the positions on the chromosomes of interest
+chr1start <- 498388; chr1end <- 30328659
+chr2start <- 239712; chr2end <- 12856814
+chr3start <- 15234290; chr3end <- 23418687
+chr4start <- 239712; chr4end <- 12856814
+chr5start <- 15234290; chr5end <- 23418687
+
+# Load chromosome-specific data into PopGenome (Uncomment the chromosome you want to use)
+# Choose a specific chromosome to analyse by uncommenting the appropriate line.
+
+# Example: chromosome 1 (only variants in defense genes across the whole genome)
+At_Chr <- suppressMessages(
+	readVCF("1001genomes_snp-short-indel_only_ACGTN_Dp10GQ20Q30_NoIndel_Bialleleic_80PcMissing_80SwEs_DefenseOnly.vcf.gz", numcols=189, tid="1", frompos = chr1start, topos = chr1end, include.unknown = TRUE)
+)
+# Define populations using metadata (Ensure you have the "pop1.txt" file with the correct format)
+population_info <- read_delim("pop1.txt", delim = "\t")  # Two columns: sample ID and population
+populations <- split(population_info$sample, population_info$pop) # Create list of populations
+At_Chr <- set.populations(At_Chr, populations, diploid = TRUE) # Assign populations to PopGenome object
+
+# Define sliding windows for analysis
+window_size <- 100; window_jump <- 50
+strt <- chr1start; end <- chr1end  # Set start and end for chromosome 1 (update for others)
+window_start <- seq(from = strt, to = end, by = window_jump) # Generate start positions for sliding windows
+window_stop <- window_start + window_size                   # Calculate stop positions
+window_start <- window_start[window_stop < end]             # Remove windows exceeding chromosome length
+window_stop <- window_stop[window_stop < end]
+windows <- data.frame(start = window_start, stop = window_stop, mid = window_start + (window_stop - window_start) / 2)
+
+# Transform data into sliding windows and calculate statistics
+At_sw <- suppressMessages(
+	sliding.window.transform(At_Chr, width = 100, jump = 50, type = 2)
+)
+####### Calculating sliding window estimates of nucleotide diversity and differentiation #####
+
+# Step 1: Calculating nucleotide diversity (pi), FST, and d_XY_ (absolute nucleotide divergence between populations).
+# The diversity.stats function calculates various diversity statistics including pi and sets up for d_XY_ calculation.
+At_sw <- suppressMessages(
+	diversity.stats(At_sw, pi = TRUE)  
+)	# Calculates nucleotide diversity (pi) and sets up d_XY_
+At_sw <- suppressMessages(
+	neutrality.stats(At_sw)
+)	# Calculates neutrality statistics
+
+# Checking neutrality for populations (1 and 2). # Un comment if you want to print header
+# head(get.neutrality(At_sw)[[1]])  # Population 1
+# head(get.neutrality(At_sw)[[2]])  # Population 2
+
+# Extract Tajima's D and adjust for scale
+td <- At_sw@Tajima.D / 100  # Divide by 100 to scale it
+
+# Assign population names to the Tajima's D data
+colnames(td) <- paste0(names(populations), "_td")
+
+# Step 2: Calculate FST using nucleotide data (mode = "nucleotide" for sliding window averages)
+At_sw <- suppressMessages(
+	F_ST.stats(At_sw, mode = "nucleotide")
+) # Calculate FST for nucleotide data
+
+# Step 3: Extract statistics for visualization
+
+# Extract nucleotide diversity and correct for window size (100 bp)
+nd <- At_sw@nuc.diversity.within / 100  # Nucleotide diversity (pi)
+colnames(nd) <- paste0(names(populations), "_pi")  # Set population names for diversity data
+
+# Extract FST values and transpose the matrix for easier comparison
+fst <- t(At_sw@nuc.F_ST.pairwise)  # Pairwise FST, transposed to have windows in rows
+# Correct column names for FST (pairwise comparison names)
+# Modify Fst column names
+x <- colnames(fst)
+for (i in seq_along(populations)) {
+  x <- sub(paste0("pop", i), names(populations)[i], x)
+}
+colnames(fst) <- paste0(sub("/", "_", x), "_fst")
+head(fst)
+
+# Step 4: Combine all statistics into a single data frame for visualization
+library(tibble)
+At_data <- tibble::as_tibble(data.frame(windows, nd, fst, td))  # Add Tajima's D (td) to the final dataset
+
+head(At_data)
+# Filter out rows where any column has zero or NA values
+filtered_stats <- At_data  %>%
+  dplyr::filter(
+    !if_any(dplyr::everything(), ~ . == 0 | is.na(.))
+  )
+
+# Print the filtered tibble
+head(filtered_stats, n = 5)
+
+###########################
+## Create a Facet plot ----
+###########################
+# To set Fst values smaller than zero to zero using dplyr and %>%, we use mutate and across
+hs <- At_data %>%
+  dplyr::select(mid, ESP_pi, SWE_pi, ESP_td, SWE_td, ESP_SWE_fst) %>%  # Select relevant columns
+  dplyr::mutate(dplyr::across(c(ESP_SWE_fst), ~ ifelse(. < 0, 0, .)))  # Set negative Fst values to 0
+
+# Use gather to reshape the data for easier plotting
+hs_g <- tidyr::gather(hs, -mid, key = "stat", value = "value")
+# 'gather' collapses data by statistics ('stat'), keeping 'mid' as a fixed column
+
+# Create a plot with facets to visualize the data
+a <- ggplot(hs_g, aes(mid/10^6, value, colour = stat)) + geom_line()
+a <- a + facet_grid(stat~., scales = "free_y")  # Split data by 'stat' into separate panels
+a <- a + xlab("Position (Mb)")  # Label the x-axis
+a + theme_light() + theme(legend.position = "none")  # Use a light theme and remove legend
+
+# Reorder the 'stat' factor levels for plotting order
+x <- factor(hs_g$stat)  # Convert 'stat' to a factor
+x <- factor(x, levels(x)[c(2, 1, 3, 4, 5)])  # Rearrange factor levels for desired order
+hs_g$stat <- x  # Update the factor in the dataset
+
+# Replot with reordered facets
+a <- ggplot(hs_g, aes(mid/10^6, value, colour = stat)) + geom_line()
+a <- a + facet_grid(stat~., scales = "free_y")
+a <- a + xlab("Position (Mb)")
+a + theme_light() + theme(legend.position = "none")  # Final plot with reordered facets
+
+###########################
+## Tajima's D Box plot ----
+###########################
+
+# Prepare the data for box plot
+# Select columns from `At_data` that contain "td" in the column names (i.e., columns related to Tajima's D)
+# Gather these columns into a long-format data frame where each row represents a value for "td" for a given population.
+td_g <- At_data %>%
+  dplyr::select(dplyr::contains("td")) %>%
+  tidyr::gather(key = "populations", value = "td")
+
+# Remove rows with missing values to ensure clean data for plotting
+td_g2 <- na.omit(td_g)
+
+# Apply a log transformation to the `td` values for better visualization in the box plot
+td_g2$log_td <- log10(td_g2$td)
+
+# Create a boxplot using ggplot2
+# - x: populations (ESP and SWE).
+# - y: log-transformed Tajima's D values (`log_td`).
+# - fill: color by population.
+a_td2 <- ggplot(td_g2, aes(x = populations, y = log_td, fill = populations)) +
+  geom_boxplot(color = "black") +  # Create boxplot with black borders
+  theme_light() +  # Apply a light theme
+  scale_fill_manual(breaks = c("SWE_td", "ESP_td"), values = c("red", "blue")) +  # Set custom colors for populations
+  labs(fill="Countries") +  # Set legend title
+  xlab(NULL) +  # Remove x-axis label
+  ylab("Tajima's D") +  # Label for y-axis
+  ggtitle("Boxplot of Tajima's D for SWE and ESP Populations") +  # Set plot title
+  theme(plot.title = element_text(size = rel(1.5)),
+        axis.text.x = element_text(size = rel(1.5)), 
+        legend.title = element_text(size = rel(1.5)),
+        legend.text = element_text(size = rel(1.5)),
+        axis.text.y = element_text(size = rel(1.5)), 
+        axis.title.y = element_text(size = rel(1.5), angle = 90))  # Customize font sizes and angle for readability
+
+# Display the boxplot
+print(a_td2)
+
+# When comparing two boxplots to determine if they are statistically different, one can perform
+# statistical tests such as the t-test or Wilcoxon rank-sum test. 
+# Wilcoxon rank-sum test
+wilcox_test_result <- wilcox.test(log_td ~ populations, data = td_g2)
+
+# Print the test result
+print(wilcox_test_result)
+
+# Add p-value to the plot
+a_td2 + annotate("text",size = 6, x = 1.5, y = -1.3, label = paste("wilcox_test p-value =", format.pval(wilcox_test_result$p.value, digits = 3)))
+
+########
+# When you have more than two groups (four in this case), and you want to compare the 
+# central tendency of the distributions, you might consider using analysis of variance (ANOVA) or
+# its non-parametric counterpart, the Kruskal-Wallis test.
+#######
+
+# Perform Kruskal-Wallis test to compare Tajima's D across populations
+kruskal_test_result <- kruskal.test(log_td ~ populations, data = td_g2)
+
+# Add Kruskal-Wallis test p-value to the plot as annotation
+# - annotate() adds the text annotation with p-value at the specified coordinates
+a_td2 + annotate("text", size = 4, x = 1.5, y = -1.3, 
+                 label = paste("Kruskal-Wallis p-value =", format.pval(kruskal_test_result$p.value, digits = 3)))
+
+## Tajima's D density distribution ----
+
+# Prepare the data for density plot
+# Log-transform the Tajima's D values for both SWE and ESP populations, removing missing values and NaN values.
+subset_SWE_td <- log(At_data$SWE_td[!is.na(At_data$SWE_td) & !is.nan(log(At_data$SWE_td))])
+subset_ESP_td <- log(At_data$ESP_td[!is.na(At_data$ESP_td) & !is.nan(log(At_data$ESP_td))])
+
+# Plot the density distribution for Tajima's D for SWE and ESP populations
+# - Density plot for SWE population in red, setting x-axis limits for the plot.
+plot(density(subset_SWE_td), col = "red", main = "", cex.lab = 1.2, xlim = c(-12.5,-1.5)) 
+title(main = "Tajima's D distribution for SWE and ESP populations", adj = 0.5, cex.main = 1.0)  # Center the title
+
+# Add density plot for ESP population in blue
+lines(density(subset_ESP_td), col="blue")
+
+# Add a legend to the plot indicating which color corresponds to which population
+legend("topright", legend=c("SWE", "ESP"),
+       col=c("red", "blue"), lty=2,
+       title="Population", cex = 1.2)
+
+# Perform Kruskal-Wallis test for comparing the distribution of Tajima's D between SWE and ESP populations
+td_data <- list(
+  SWE = subset_SWE_td,
+  ESP = subset_ESP_td
+)
+kruskal_result <- kruskal.test(td_data)
+
+# Perform post-hoc Dunn's test if Kruskal-Wallis is significant (p < 0.05)
+if (kruskal_result$p.value < 0.05) {
+  dunn_result <- dunn.test(td_data)
+  
+  # Print the post-hoc Dunn's test results
+  print(dunn_result)
+}
+
+# Add a legend with Kruskal-Wallis p-value to the plot
+legend("topleft", 
+       legend=paste("Kruskal-Wallis p-value:", format(kruskal_result$p.value, digits=6)), 
+       bty="n",  # No border for the legend box
+       cex=1.0)  # Adjust size of text in the legend
+
+###################
+## Pi Box plot ----
+###################
+
+# Prepare the data for box plot
+# Select columns from `At_data` that contain "td" in the column names (i.e., columns related to Tajima's D)
+# Gather these columns into a long-format data frame where each row represents a value for "td" for a given population.
+pi_g <- At_data %>%
+  dplyr::select(contains("pi")) %>%
+  tidyr::gather(key = "populations", value = "pi")
+
+# Remove rows with missing values to ensure clean data for plotting
+pi_g2 <- na.omit(pi_g)
+
+# Apply a log transformation to the `td` values for better visualization in the box plot
+pi_g2$log_pi <- log10(pi_g2$pi)
+
+# Create a boxplot using ggplot2
+# - x: populations (ESP and SWE).
+# - y: log-transformed Pi values (`log_pi`).
+# - fill: color by population.
+a_pi2 <- ggplot(pi_g2, aes(x = populations, y = log_pi, fill = populations)) +
+  geom_boxplot(color = "black") +  # Create boxplot with black borders
+  theme_light() +  # Apply a light theme
+  scale_fill_manual(breaks = c("SWE_pi", "ESP_pi"), values = c("red", "blue")) +  # Set custom colors for populations
+  labs(fill="Countries") +  # Set legend title
+  xlab(NULL) +  # Remove x-axis label
+  ylab("Pi") +  # Label for y-axis
+  ggtitle("Boxplot of Pi for SWE and ESP Populations") +  # Set plot title
+  theme(plot.title = element_text(size = rel(1.5)),
+        axis.text.x = element_text(size = rel(1.5)), 
+        legend.title = element_text(size = rel(1.5)),
+        legend.text = element_text(size = rel(1.5)),
+        axis.text.y = element_text(size = rel(1.5)), 
+        axis.title.y = element_text(size = rel(1.5), angle = 90))  # Customize font sizes and angle for readability
+
+# Display the boxplot
+print(a_pi2)
+
+# When comparing two boxplots to determine if they are statistically different, one can perform
+# statistical tests such as the t-test or Wilcoxon rank-sum test. 
+# Wilcoxon rank-sum test
+wilcox_test_result <- wilcox.test(log_pi ~ populations, data = pi_g2)
+
+# Print the test result
+print(wilcox_test_result)
+
+# Add p-value to the plot
+a_pi2 + annotate("text",size = 6, x = 1.5, y = -1.3, label = paste("wilcox_test p-value =", format.pval(wilcox_test_result$p.value, digits = 3)))
+
+########
+# When you have more than two groups (four in this case), and you want to compare the 
+# central tendency of the distributions, you might consider using analysis of variance (ANOVA) or
+# its non-parametric counterpart, the Kruskal-Wallis test.
+#######
+
+# Perform Kruskal-Wallis test to compare Tajima's D across populations
+kruskal_test_result <- kruskal.test(log_pi ~ populations, data = pi_g2)
+
+# Add Kruskal-Wallis test p-value to the plot as annotation
+# - annotate() adds the text annotation with p-value at the specified coordinates
+a_pi2 + annotate("text", size = 6, x = 1.5, y = -1.3, 
+                 label = paste("Kruskal-Wallis p =", format.pval(kruskal_test_result$p.value, digits = 3)))
+
+################################
+## Pi density distribution ----
+################################
+
+# Prepare the data for density plot
+# Log-transform the Tajima's D values for both SWE and ESP populations, removing missing values and NaN values.
+subset_SWE_pi <- log(At_data$SWE_pi[!is.na(At_data$SWE_pi) & !is.nan(log(At_data$SWE_pi))])
+subset_ESP_pi <- log(At_data$ESP_pi[!is.na(At_data$ESP_pi) & !is.nan(log(At_data$ESP_pi))])
+
+# Plot the density distribution for Tajima's D for SWE and ESP populations
+# - Density plot for SWE population in red, setting x-axis limits for the plot.
+plot(density(subset_SWE_pi), col = "red", main = "", cex.lab = 1.2, xlim = c(-12.5,-1.5), ylim=c(0,0.0016)) 
+title(main = "Pi distribution for SWE and ESP populations", adj = 0.5, cex.main = 1.0)  # Center the title
+
+# Add density plot for ESP population in blue
+lines(density(subset_ESP_pi), col="blue")
+
+# Add a legend to the plot indicating which color corresponds to which population
+legend("topright", legend=c("SWE", "ESP"),
+       col=c("red", "blue"), lty=2,
+       title="Population", cex = 1.2)
+
+# Perform Kruskal-Wallis test for comparing the distribution of Tajima's D between SWE and ESP populations
+td_data <- list(
+  SWE = subset_SWE_td,
+  ESP = subset_ESP_td
+)
+kruskal_result <- kruskal.test(td_data)
+
+# Perform post-hoc Dunn's test if Kruskal-Wallis is significant (p < 0.05)
+if (kruskal_result$p.value < 0.05) {
+  dunn_result <- dunn.test(td_data)
+  
+  # Print the post-hoc Dunn's test results
+  print(dunn_result)
+}
+
+# Add a legend with Kruskal-Wallis p-value to the plot
+legend("topleft", 
+       legend=paste("Kruskal-Wallis p-value:", format(kruskal_result$p.value, digits=6)), 
+       bty="n",  # No border for the legend box
+       cex=1.0)  # Adjust size of text in the legend
+
+####################################
+#  Plotting FST along Chromosome
+#  Visualizing FST outliers
+####################################
+# Chr. 1
+head(At_data)
+
+# Provide summary statistics for the IT_SW_fst column
+summary(At_data$ESP_SWE_fst)
+
+#Filter out rows where IT_SW_fst is not equal to zero and create a  histogram using the non-zero values.
+non_zero_data <- At_data[At_data$ESP_SWE_fst != 0, ]
+
+# Plot histogram of non-zero IT_SW_fst values
+ggplot(non_zero_data, aes(x = ESP_SWE_fst)) +
+  geom_histogram(binwidth = 0.01, fill = "skyblue", color = "black",  alpha = 0.7) +
+  labs(title = "Histogram of non-zero ESP_SWE_fst", x = "ESP_SWE_fst", y  = "Frequency")
+
+# Filter out zero and negative values
+positive_data <- At_data[At_data$ESP_SWE_fst > 0, ]
+
+# Display the first few rows of the positive_data
+head(positive_data)
+
+# Plot histogram of positive IT_SW_fst values
+ggplot(positive_data, aes(x = ESP_SWE_fst)) +
+  geom_histogram(binwidth = 0.01, fill = "skyblue", color = "black",  alpha = 0.7) +
+  labs(title = "Histogram of positive ESP_SWE_fst", x = "ESP_SWE_fst", y  = "Frequency")
+
+# Set threshold for 95% and 99%
+threshold_95 <- quantile(positive_data$ESP_SWE_fst, 0.95, na.rm = TRUE)
+threshold_99 <- quantile(positive_data$ESP_SWE_fst, 0.99, na.rm = TRUE)
+
+# Plot histogram with threshold marked
+ggplot(positive_data, aes(x = ESP_SWE_fst)) +
+  geom_histogram(binwidth = 0.01, fill = "skyblue", color = "black",  alpha = 0.7) +
+  labs(title = "Histogram of positive ESP_SWE_fst", x = "ESP_SWE_fst", y  = "Frequency") +
+  geom_vline(xintercept = threshold_95, colour = "orange", linetype =  "dashed", size = 1)+
+  geom_vline(xintercept = threshold_99, colour = "red", linetype =  "dashed", size = 1)
+
+# Add outlier columns based on thresholds
+positive_data$outlier_95 <- ifelse(positive_data$ESP_SWE_fst >  threshold_95, "Outlier", "Non-outlier")
+positive_data$outlier_99 <- ifelse(positive_data$ESP_SWE_fst >  threshold_99, "Outlier", "Non-outlier")
+
+# Display the first few rows of the updated positive_data
+head(positive_data)
+
+# Create a FST scatter plot along the chromosome
+a <- ggplot(positive_data, aes(mid, ESP_SWE_fst)) + geom_point()
+a <- a + xlab("Position (Mb)") + ylab(expression(italic(F)[ST]))
+a <- a + theme_light()
+a
+
+# Estimate mean FST value
+mean_fst <- mean(positive_data$ESP_SWE_fst)
+mean_fst
+
+# Filter rows where the 'outlier_95' column has the value "Outlier"
+out_95 <- filter(positive_data, outlier_95 == "Outlier")
+
+# Filter rows where the 'outlier_99' column has the value "Outlier"
+out_99 <- filter(positive_data, outlier_99 == "Outlier")
+
+
+# Print the first 5 rows of the 'out_95' data frame
+print(out_95, n = 5)
+
+
+# Print the first 5 rows of the 'out_99' data frame
+print(out_99, n = 5)
+
+# Adding a chromosome column to the data
+out_99$chromosome <- 'Chr1'
+out_95$chromosome <- 'Chr1'
+
+# Create a Scatterplot with marked outliers, FST mean line, and customized legend
+
+top <- ggplot(positive_data, aes(mid/10^6, ESP_SWE_fst)) +
+  geom_point(aes(colour = ifelse(outlier_99 == "Outlier", "Outlier 99%",
+                                 ifelse(outlier_95 == "Outlier", "Outlier 95%", "Non-outlier"))),
+             size = 1.5) +
+  scale_colour_manual(values = c("Non-outlier" = "black", "Outlier 95%" = "orange", "Outlier 99%" = "red")) +
+  geom_hline(yintercept = mean_fst, colour = "blue") +
+  xlab("Position on Chromosome (Mb)") + ylab(expression(italic(F)[ST])) +
+  theme_light() +
+  ggtitle("Chromosome 1") +
+  theme(plot.title = element_text(hjust = 0.5), legend.position = "none")
+
+# Print the combined plot with an overall title
+print(top, n = 5)
+
+####################################
+###### Assignment to Genes ##########
+####################################
+
+# find "outlier genes" by comparing genomic regions identified as outliers with the locations of 
+# genes annotated in a GFF (General Feature Format) file.
+
+# Reference genome file
+gff <- read.delim("/home/tahirali/RAMSES_mount/tali/qbio/Practical_Day_3/At_gff/GFF_final_with_annotation_2_gff", header = FALSE)
+# Read the GFF file, which contains genomic annotations (genes, exons, etc.). The file does not have column headers initially.
+
+# Add column names to the data frame for easier access
+colnames(gff) <- c("model_name", "chromosome", "source", "type", "start", "end", "score", "strand", "phase", "attributes")
+# Assign meaningful column names to the data (e.g., model name, chromosome, feature type, start/end positions)
+
+# Remove the first row that is without any data (probably an empty row)
+gff <- gff[-1,]
+
+# Convert the 'start' and 'end' columns to numeric data types (they might be read as factors or characters initially)
+gff$start <- as.numeric(as.character(gff$start))
+gff$end <- as.numeric(as.character(gff$end))
+
+# Filter the data to exclude non-gene types (e.g., UTRs, introns, exons, etc.) 
+# We focus only on the main gene annotations.
+filtered_annotation <- subset(gff, !(type %in% c("UTR", "intron", "exon", "five_prime_UTR", "three_prime_UTR", "chromosome")))
+# The 'type' column in the GFF file contains different feature types like UTR, exon, intron, etc. We filter out those we're not interested in.
+
+# Preparation of outlier data
+# 95% outlier
+
+# Rename the 6th column to match the naming convention (standardizing column names)
+colnames(out_95)[6] <- "ESP_SWE_fst"
+
+# Remove rows with 99% outliers, as we're focusing on the 95% outliers here.
+outs_95 <- out_95[out_95$outlier_99 != "Outlier", ]
+# The "outlier_99" column in the 'out_95' dataset indicates whether a row is an outlier. We filter out rows marked as "Outlier" in that column.
+
+# 99% outlier
+# Rename the 6th column to match the naming convention for consistency
+colnames(out_99)[6] <- "ESP_SWE_fst"
+out_99  # View the data for 99% outliers
+
+# Manually assign chromosome information to 'out_99' since it might be missing or inconsistent.
+out_99$chromosome <- c("Chr1")
+# In this example, we are assuming the outliers in 'out_99' are located on "Chr1". In real data, this would be dynamically assigned based on actual information.
+
+# Search for overlaps between outlier regions and gene regions
+
+# Create a GRanges object for the gene annotations from the filtered GFF file.
+# GRanges is a specialized object from the GenomicRanges package for storing genomic ranges efficiently.
+gene_ranges <- GRanges(
+  seqnames = filtered_annotation$chromosome,  # Chromosome information
+  ranges = IRanges(start = filtered_annotation$start, end = filtered_annotation$end)  # Genomic range (start and end positions)
+)
+
+# Create a GRanges object for the outlier regions (95% outliers)
+outlier_ranges_95 <- GRanges(
+  seqnames = outs_95$chromosome,  # Chromosome information for the 95% outliers
+  ranges = IRanges(start = outs_95$start, end = outs_95$stop)  # Outlier start and end positions
+)
+
+# Create a GRanges object for the outlier regions (99% outliers)
+outlier_ranges <- GRanges(
+  seqnames = out_99$chromosome,  # Chromosome information for the 99% outliers
+  ranges = IRanges(start = out_99$start, end = out_99$stop)  # Outlier start and end positions
+)
+
+# Find overlaps between the outlier regions and gene regions
+# 'findOverlaps' function identifies overlapping ranges between two GRanges objects
+overlaps_95 <- findOverlaps(outlier_ranges_95, gene_ranges, type = "any", select = "all", ignore.strand = TRUE)
+overlaps <- findOverlaps(outlier_ranges, gene_ranges, type = "any", select = "all", ignore.strand = TRUE)
+# These lines find the overlaps between the 95% and 99% outlier regions and the gene regions. It returns the indices of overlapping genes.
+
+# Extract the indices of overlapping genes for the 95% and 99% outlier regions
+overlapping_genes_indices_95 <- subjectHits(overlaps_95)
+overlapping_genes_indices <- subjectHits(overlaps)
+# 'subjectHits' extracts the indices of genes from the filtered annotation that overlap with the outlier regions.
+
+# Retrieve the actual gene information for the overlapping genes based on the indices.
+overlapping_genes_95 <- filtered_annotation[overlapping_genes_indices_95, ]
+overlapping_genes <- filtered_annotation[overlapping_genes_indices, ]
+
+# These lines fetch the actual gene annotations (rows of the filtered GFF file) that correspond to the overlapping regions. 
+##############################################################################################################
+### Compare diversity statistics for each population within defense-related genes versus the whole genome  ###
+##############################################################################################################
+
+vcf_full <- readVcf("1001genomes_snp-short-indel_only_ACGTN_Dp10GQ20Q30_NoIndel_Bialleleic_80PcMissing_80SwEs.vcf.recode.vcf.gz")
+chromosomes <- seqlevels(vcf) # Get chromosome names
+
+# Calculate start and end positions for each chromosome
+chromosome_ranges <- data.frame(CHROM = character(), Start = numeric(), End = numeric(), stringsAsFactors = FALSE)
+for (chrom in chromosomes) {
+  positions <- start(vcf[seqnames(vcf) == chrom])
+  chromosome_ranges <- rbind(chromosome_ranges, data.frame(CHROM = chrom, Start = min(positions), End = max(positions)))
+}
+print(chromosome_ranges)
+#CHROM Start      End
+#1     1  2784 30422721
+#2     2 24180 19697399
+#3     3  1705 23459492
+#4     4  1552 18584482
+#5     5   115 26974567
+
+# Define genomic ranges for chromosomes to be analyzed
+# These ranges correspond to the positions on the chromosomes of interest
+chr1start <- 2784; chr1end <- 30422721
+chr2start <- 24180; chr2end <- 19697399
+chr3start <- 1705; chr3end <- 23459492
+chr4start <- 1552; chr4end <- 18584482
+chr5start <- 115; chr5end <- 26974567
+# Example: chromosome 1 (use all the variants across the whole genome)
+At_full_Chr <- suppressMessages(
+	readVCF("1001genomes_snp-short-indel_only_ACGTN_Dp10GQ20Q30_NoIndel_Bialleleic_80PcMissing_80SwEs.vcf.recode.vcf.gz", numcols=189, tid="1", frompos = chr1start, topos = chr1end, include.unknown = TRUE)
+)
+# Define populations using metadata (Ensure you have the "pop1.txt" file with the correct format)
+population_info <- read_delim("pop1.txt", delim = "\t")  # Two columns: sample ID and population
+populations <- split(population_info$sample, population_info$pop) # Create list of populations
+At_full_Chr <- set.populations(At_full_Chr, populations, diploid = TRUE) # Assign populations to PopGenome object
+
+# Define sliding windows for analysis
+window_size <- 100; window_jump <- 50
+strt <- chr1start; end <- chr1end  # Set start and end for chromosome 1 (update for others)
+window_start <- seq(from = strt, to = end, by = window_jump) # Generate start positions for sliding windows
+window_stop <- window_start + window_size                   # Calculate stop positions
+window_start <- window_start[window_stop < end]             # Remove windows exceeding chromosome length
+window_stop <- window_stop[window_stop < end]
+windows <- data.frame(start = window_start, stop = window_stop, mid = window_start + (window_stop - window_start) / 2)
+
+# Transform data into sliding windows and calculate statistics
+At_full_sw <- suppressMessages(
+	sliding.window.transform(At_full_Chr, width = 100, jump = 50, type = 2)
+)
+####### Calculating sliding window estimates of nucleotide diversity and differentiation #####
+
+# Step 1: Calculating nucleotide diversity (pi), FST, and d_XY_ (absolute nucleotide divergence between populations).
+# The diversity.stats function calculates various diversity statistics including pi and sets up for d_XY_ calculation.
+At_full_sw <- suppressMessages(
+	diversity.stats(At_full_sw, pi = TRUE)
+)	# Calculates nucleotide diversity (pi) and sets up d_XY_
+At_full_sw <- suppressMessages(
+	neutrality.stats(At_full_sw)  
+)	# Calculates neutrality statistics
+
+# Checking neutrality for populations (1 and 2), # Uncomment if you want to print header
+# head(get.neutrality(At_full_sw)[[1]])  # Population 1
+# head(get.neutrality(At_full_sw)[[2]])  # Population 2
+
+# Extract Tajima's D and adjust for scale
+td_full <- At_full_sw@Tajima.D / 100  # Divide by 100 to scale it
+
+# Assign population names to the Tajima's D data
+colnames(td_full) <- paste0(names(populations), "_td")
+
+# Wrap functions in `suppressMessages()` and/or `suppressWarnings()
+# For functions that print messages explicitly:
+# Step 2: Calculate FST using nucleotide data (mode = "nucleotide" for sliding window averages)
+At_full_sw <- suppressMessages(
+	F_ST.stats(At_full_sw, mode = "nucleotide")
+)	# Calculate FST for nucleotide data
+
+# Step 3: Extract statistics for visualization
+
+# Extract nucleotide diversity and correct for window size (100 bp)
+nd_full <- At_full_sw@nuc.diversity.within / 100  # Nucleotide diversity (pi)
+colnames(nd_full) <- paste0(names(populations), "_pi")  # Set population names for diversity data
+
+# Extract FST values and transpose the matrix for easier comparison
+fst_full <- t(At_full_sw@nuc.F_ST.pairwise)  # Pairwise FST, transposed to have windows in rows
+# Correct column names for FST (pairwise comparison names)
+# Modify Fst column names
+x <- colnames(fst_full)
+for (i in seq_along(populations)) {
+  x <- sub(paste0("pop", i), names(populations)[i], x)
+}
+colnames(fst_full) <- paste0(sub("/", "_", x), "_fst")
+# head(fst_full) # Uncomment if you want to print header
+
+# Step 4: Combine all statistics into a single data frame for visualization
+library(tibble)
+At_data_full <- as.tibble(data.frame(windows, nd_full, fst_full, td_full))  # Add Tajima's D (td) to the final dataset
+
+# head(At_data_full) # Uncomment if you want to print header
+
+# Filter out rows where any column has zero or NA values
+filtered_stats_full <- At_data_full  %>%
+  filter(
+    !if_any(everything(), ~ . == 0 | is.na(.))
+  )
+
+# Print the filtered tibble
+head(filtered_stats_full, n = 5)
+
+###########################
+## Create a Facet plot ----
+###########################
+# To set Fst values smaller than zero to zero using dplyr and %>%, we use mutate and across
+hs_full <- At_data_full %>%
+  select(mid, ESP_pi, SWE_pi, ESP_td, SWE_td, ESP_SWE_fst) %>%  # Select relevant columns
+  mutate(across(c(ESP_SWE_fst), ~ ifelse(. < 0, 0, .)))  # Set negative Fst values to 0
+
+# Use gather to reshape the data for easier plotting
+hs_g_full <- gather(hs_full, -mid, key = "stat", value = "value")
+# 'gather' collapses data by statistics ('stat'), keeping 'mid' as a fixed column
+
+# Create a plot with facets to visualize the data
+a_full <- ggplot(hs_g_full, aes(mid/10^6, value, colour = stat)) + geom_line()
+a_full <- a_full + facet_grid(stat~., scales = "free_y")  # Split data by 'stat' into separate panels
+a_full <- a_full + xlab("Position (Mb)")  # Label the x-axis
+a_full + theme_light() + theme(legend.position = "none")  # Use a light theme and remove legend
+
+# Reorder the 'stat' factor levels for plotting order
+x_full <- factor(hs_g_full$stat)  # Convert 'stat' to a factor
+x_full <- factor(x_full, levels(x_full)[c(2, 1, 3, 4, 5)])  # Rearrange factor levels for desired order
+hs_g_full$stat <- x_full  # Update the factor in the dataset
+
+# Replot with reordered facets
+a_full <- ggplot(hs_g_full, aes(mid/10^6, value, colour = stat)) + geom_line()
+a_full <- a_full + facet_grid(stat~., scales = "free_y")
+a_full <- a_full + xlab("Position (Mb)")
+a_full + theme_light() + theme(legend.position = "none")  # Final plot with reordered facets
+
+# Load selected positions from chromosome (e.g., gene 4 5kb upstream and downstream of defense-related genes)
+
+bed <- read.table("At_defense_only.bed")
+head(bed)
+
+# Assign column names to the bed file
+colnames(bed) <- c("chr", "begin", "end")
+DF<-vector(length=nrow(At_data_full))
+
+# Initialize the DF column in At_data
+At_data_full$DF <- vector(length = nrow(At_data_full)) 
+
+# You need to ensure that 'windows', 'nd', and 'td' are defined earlier or replaced with correct values
+At_data_full <- as.tibble(data.frame(windows, nd_full, td_full, DF))
+
+# Tag each window that overlaps a DF (Defense-related region)
+for (i in 2:nrow(bed)) {
+  At_data_full$DF[which(At_data_full$start > bed$begin[i] & At_data_full$stop < bed$end[i])] <- "DF"
+}
+
+# Convert DF column to a factor
+At_data_full$DF <- as.factor(At_data_full$DF) 
+
+# Display summary of At_data
+summary(At_data_full)
+
+# Check and print values in DF other than FALSE
+df_counts_full <- table(At_data_full$DF) 
+print(df_counts_full[df_counts_full > 0 & names(df_counts_full) != "FALSE"])
+
+# Extract unique values from the DF column excluding FALSE
+other_values_full <- unique(At_data_full$DF[At_data_full$DF != "FALSE"]) 
+print(other_values_full)
+
+#####
+# Spain (assumed to be a region or a variable)
+#####
+
+# Kolmogorov-Smirnov test - Compare the distributions of Pi
+sub1 <- At_data_full$ESP_pi[At_data_full$DF == "DF"]
+sub2 <- At_data_full$ESP_pi[At_data_full$DF != "DF"]
+ks.test(sub1, sub2)  # Difference is significant if windows are small, otherwise not.
+
+# Draw Density plot for "Pi"
+plot(density(log(At_data_full$ESP_pi)), main="Distribution log Pi (Spain)")
+lines(density(log(At_data_full$ESP_pi[At_data_full$DF == "DF"])), col="blue")
+
+# Create density plot with ggplot
+p <- ggplot(At_data_full, aes(x = ESP_pi, fill = DF))
+p + geom_density(alpha = 0.4)
+
+# Estimate the lowest value of the x-axis for the density plot
+lowest_x <- min(At_data_full$ESP_pi, na.rm = TRUE)
+lowest_x
+
+# Create density plot with defined x-axis limits
+p <- ggplot(At_data_full, aes(x = ESP_pi, fill = DF)) +
+  geom_density(alpha = 0.4) +
+  scale_x_continuous(limits = c(-0.01, max(At_data_full$ESP_pi, na.rm = TRUE))) +  # Set x-axis limit
+  ggtitle("Distribution Tajima D")
+# Center the title
+p <- p + ggtitle("Distribution Tajima D (Spain)") +
+  theme(plot.title = element_text(hjust = 0.5))  # Adjust the hjust value for centering
+# Plot the distribution
+p
+
+# Kolmogorov-Smirnov test - Compare the distributions of Tajima's D
+sub1 <- At_data_full$ESP_td[At_data_full$DF == "DF"]
+sub2 <- At_data_full$ESP_td[At_data_full$DF != "DF"]
+ks.test(sub1, sub2)
+
+# Draw Density plot for "Tajima's D"
+plot(density((At_data_full$ESP_td), na.rm = TRUE), main="Distribution Tajima D")
+lines(density((At_data_full$ESP_td[At_data_full$DF == "DF"]), na.rm = TRUE), col="red")
+
+# Create density plot with ggplot
+p <- ggplot(At_data_full, aes(x = ESP_td, fill = DF))
+p + geom_density(alpha = 0.4)
+
+# Estimate the lowest value of the x-axis for the density plot
+lowest_x <- min(At_data_full$ESP_td, na.rm = TRUE)
+lowest_x
+
+# Create density plot with defined x-axis limits
+p <- ggplot(At_data_full, aes(x = ESP_td, fill = DF)) +
+  geom_density(alpha = 0.4) +
+  scale_x_continuous(limits = c(-0.02, max(At_data_full$ESP_td, na.rm = TRUE))) +  # Set x-axis limit
+  ggtitle("Distribution Tajima D")
+# Center the title
+p <- p + ggtitle("Distribution Tajima D (Spain)") +
+  theme(plot.title = element_text(hjust = 0.5))  # Adjust the hjust value for centering
+# Plot the distribution
+p
+
+# Plot along the chromosome using ggplot
+sub1 <- At_data_full[At_data_full$DF == "DF", ]
+sub2 <- At_data_full[At_data_full$DF != "DF", ]
+p <- ggplot(sub2, aes(mid, ESP_pi))
+p + geom_point(size = 2) + geom_point(data = sub1, color = "red", size = 3)
+
+p <- ggplot(sub2, aes(mid, ESP_td))
+p + geom_point(size = 2) + geom_point(data = sub1, color = "red", size = 3)
+```
+
+# Extracting and Plotting Bioclimatic Variables for Sample Coordinates
+Use the following R script to extract and plot climate variables for the sample coordinates.
+- Create a new folder/directory on your local system named "get_data_climate_variables"
+
+```{.r}
+##  R Script to Extract and Plot Bioclimatic Variables for Sample Coordinates
+# List of required packages
+required_packages <- c("sp", "raster", "geodata", "terra", "rnaturalearth", "rnaturalearthdata", "sf", "RColorBrewer")
+
+# Set a default CRAN mirror
+options(repos = c(CRAN = "https://cloud.r-project.org/"))
+
+# Check if each package is installed, if not, install it
+for (pkg in required_packages) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    install.packages(pkg)
+  }
+}
+
+# Install heatmaply if not available
+if (!requireNamespace("heatmaply", quietly = TRUE)) {
+  install.packages("heatmaply")
+}
+
+# Load required libraries for spatial analysis, data manipulation, and plotting
+library(sp)                 # For spatial data handling
+library(raster)             # For raster data manipulation
+library(geodata)            # For accessing global climate data
+library(terra)              # For working with spatial data
+library(rnaturalearth)      # For country boundary data
+library(rnaturalearthdata)  # For accessing natural earth datasets
+library(sf)                 # For handling spatial data in simple feature format
+library(RColorBrewer)       # For color palettes
+library(heatmaply)          # For interactive heatmaps
+library(conflicted)         # For managing namespace conflicts
+
+# Declare which package functions to prefer in case of conflicts
+conflicts_prefer(
+  terra::as.data.frame,
+  terra::extract,
+  base::unique              #  safest choice for unique()
+)
+
+# Specify the working directory to load and save data
+#  Update this path to your local system's directory
+setwd("/run/media/tahirali/Expansion/Data_Tali/QBIO/QBIO_WS2024-25/Exercise_practical/Practical_Day_3/get_data_climate_variables")
+
+# Load sample coordinates and preview
+data_file <- "coordinates.txt"
+samples <- read.table(data_file, header = TRUE)
+head(samples)
+
+# Extract longitude and latitude columns
+lon <- samples$lon
+lat <- samples$lat
+
+# Prepare coordinate data frame
+xy <- samples[, c("lon", "lat")]
+str(xy)
+
+# Convert to spatial points
+coordinates(xy) <- c("lon", "lat")
+
+# Define buffer extent (2° around sampling area)
+buffer_extent <- extent(xy) + c(-2, 2, -2, 2)
+
+# Load BioClim data
+# Either download from geodata or use pre-downloaded folder
+biodata <- worldclim_global(
+  var = "bio",
+  res = 10,
+  path = "/run/media/tahirali/Expansion/Data_Tali/QBIO/QBIO_WS2024-25/Exercise_practical/Practical_Day_3/get_data_climate_variables"
+)
+
+# Assign meaningful names to the 19 BioClim variables
+bioclim_names <- c(
+  "Annual_Mean_Temperature",
+  "Mean_Diurnal_Range",
+  "Isothermality",
+  "Temperature_Seasonality",
+  "Max_Temperature_of_Warmest_Month",
+  "Min_Temperature_of_Coldest_Month",
+  "Temperature_Annual_Range",
+  "Mean_Temperature_of_Wettest_Quarter",
+  "Mean_Temperature_of_Driest_Quarter",
+  "Mean_Temperature_of_Warmest_Quarter",
+  "Mean_Temperature_of_Coldest_Quarter",
+  "Annual_Precipitation",
+  "Precipitation_of_Wettest_Month",
+  "Precipitation_of_Driest_Month",
+  "Precipitation_Seasonality",
+  "Precipitation_of_Wettest_Quarter",
+  "Precipitation_of_Driest_Quarter",
+  "Precipitation_of_Warmest_Quarter",
+  "Precipitation_of_Coldest_Quarter"
+)
+names(biodata) <- bioclim_names
+
+# Crop BioClim data to sampling area
+biodata_cropped <- crop(biodata, buffer_extent)
+
+# Define color palette
+colors <- colorRampPalette(c("#00007F", "blue", "#007FFF", "cyan", 
+                             "#7FFF7F", "yellow", "#FF7F00", "red", "#7F0000"))
+
+# Load and transform country boundaries
+countries <- ne_countries(scale = "medium", returnclass = "sf")
+countries <- st_transform(countries, crs = st_crs(terra::crs(biodata_cropped)))
+
+# Define plotting function
+plot_layer <- function(index) {
+  layer_name <- names(biodata_cropped)[index]
+  
+  plot(biodata_cropped[[index]], col = colors(100), 
+       main = paste(" ", layer_name))
+  
+  points(xy$lon, xy$lat, col = "black", bg = "white", pch = 21, cex = 0.8)
+  plot(st_geometry(countries), add = TRUE, border = "black", lwd = 1)
+  
+  mtext("Longitude", side = 1, line = 4.0)
+  mtext("Latitude", side = 2, line = -3.0)
+}
+
+# Example plot (BIO1: Annual Mean Temperature)
+plot_layer(1)
+
+# Example plot (BIO12: Annual_Precipitation)
+plot_layer(12)
+
+```
+
+```{.r}
+# Extract bioclimatic variables for sampling coordinates
+xy_df <- base::as.data.frame(xy)
+biodata_extract <- terra::extract(biodata[[1:19]], xy_df, df = TRUE)
+summary(biodata_extract)
+
+# Exclude ID column and compute correlation matrix
+numeric_data <- biodata_extract[, -which(names(biodata_extract) == "ID")]
+correlation_matrix <- cor(numeric_data, use = "pairwise.complete.obs")
+
+# Replace any NA or Inf values with 0
+correlation_matrix[is.na(correlation_matrix) | is.infinite(correlation_matrix)] <- 0
+
+# Plot heatmap
+heatmaply(
+  correlation_matrix, 
+  symm = TRUE,
+  clustering_distance_rows = "correlation",
+  clustering_distance_cols = "correlation",
+  show_dendrogram = c(TRUE, TRUE),
+  col = colorRampPalette(RColorBrewer::brewer.pal(11, "RdBu"))(100),
+  main = "Heatmap of Co-association among Climate Variables for Arabidopsis thaliana",
+  width = 1000,   # outer plot box width
+  height = 800,   # outer plot box height
+  plot_method = "plotly",
+  margins = c(l = 200, r = 200, b = 200, t = 200) # increase margins to shrink heatmap area
+)
+
+# Combine and save extracted data
+samples_bio <- cbind(samples, biodata_extract)
+write.table(samples_bio, file = "extracted_bioclim_variables.txt",
+            row.names = FALSE, col.names = TRUE)
+
+# Optional: Save each variable separately
+# for (i in 1:19) {
+#   layer_name <- names(biodata)[i]
+#   extracted_data <- terra::extract(biodata[[i]], xy_df, df = TRUE)
+#   write.table(extracted_data, 
+#               file = paste0("bio_variable_", i, "_", layer_name, ".txt"),
+#               row.names = FALSE, col.names = TRUE)
+# }
+```
+
+------------------------------------------------------------------------
+**Wrapping Up Practical Day Three**
+
+Great job, everyone! 🌟 🌱
+You’ve made incredible strides today, and your teamwork and dedication are truly impressive. It’s wonderful to see you embrace new challenges and continue to push forward with enthusiasm.
+
+As we head into the winter holidays, I want to wish you a very Happy Christmas and a joyful New Year!
+
+Looking forward to continuing this journey together after the break. Keep exploring, stay curious, and take this opportunity to enjoy your well-deserved rest! See you soon! 🎄❄
+

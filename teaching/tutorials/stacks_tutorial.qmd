@@ -1,0 +1,1763 @@
+---
+title: "Building a De Novo RADseq Analysis Workflow with STACKS for Non-Model Species"
+author: "Dr Tahir Ali | Miss Ainaz Mostafanejad | AG demeaux"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    code-copy: true
+    code-fold: true
+    code-summary: "Code"
+    code-overflow: wrap
+---
+
+# De Novo RADseq Analysis Pipeline for Non-Model Species
+
+## Summary
+
+This document presents a comprehensive, reproducible workflow for analyzing RADseq (Restriction-site Associated DNA sequencing) data from non-model organisms using the STACKS pipeline. The protocol covers demultiplexing, quality control, parameter optimization, variant calling, and filtering to generate high-quality SNP datasets suitable for population genetic analyses. The workflow is optimized for de novo studies where reference genomes are unavailable.
+
+## Key Resources
+
+-   Catchen et al. (2013): *STACKS: An analysis tool set for population genomics* : <https://pubmed.ncbi.nlm.nih.gov/23701397/>
+-   DeRaad (2021): *RADstackshelpR: An R package for STACKS optimization* : <https://devonderaad.github.io/RADstackshelpR>
+-   SNPfiltR: *R package to streamline and automate the process of choosing appropriate filtering parameters for next-gen SNP datasets* : <https://devonderaad.github.io/SNPfiltR/>
+-   Rochette et al (2019): *STACKS 2: Analytical methods for paired-end sequencing improve RADseq-based population genomics* : <https://pubmed.ncbi.nlm.nih.gov/31550391/>
+
+# 1 Demultiplexing and Cleaning
+
+## Overview
+
+The initial processing of RADseq data involves demultiplexing pooled sequencing reads and removing PCR duplicates. This critical first step separates samples by their unique barcodes while maintaining data integrity through quality filtering and duplicate removal.
+
+## Key Steps and Interpretations
+
+### **PCR Duplicate Removal (`clone_filter`)**
+
+-   **Purpose**: Identifies and removes PCR duplicates to avoid artificial inflation of allele frequencies
+-   **Key parameters**:
+    -   `--oligo-len-1 5`: Matches the 5bp inline barcode
+    -   `-y gzfastq`: Maintains compressed output for storage efficiency
+-   **Interpretation**: High duplicate rates (\>20%) may indicate over-amplification or insufficient starting DNA
+
+### **Sample Demultiplexing (`process_radtags`)**
+
+-   **Purpose**: Separates reads by sample using barcode sequences and validates restriction sites
+-   **Critical parameters**:
+    -   `-r`: Rescue barcodes and RAD sites
+    -   `-c`: Clean data, remove reads with uncalled bases
+    -   `-q`: Discard reads with low quality scores
+    -   `--barcode_dist_1 1`: Allows one mismatch in barcode recognition
+    -   `-e kpnI`: Specifies restriction enzyme for site validation
+-   **Interpretation**: Check output logs for barcode recovery rates; \<90% recovery may indicate barcode design issues or sequencing errors
+
+## Implementation Script
+
+``` bash
+{bash}
+#!/usr/bin/env bash
+#SBATCH --job-name=demux_24D324
+#SBATCH --time=48:00:00
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=120G
+#SBATCH --mail-type=END,FAIL
+#SBATCH --output=/scratch/RADseq/out_NGS/logs/%x_%A_%a.out
+#SBATCH --error=/scratch/RADseq/out_NGS/logs/%x_%A_%a.err
+#SBATCH --array=0-4
+
+module load bio/Stacks/2.62-foss-2022a
+
+set -euo pipefail
+shopt -s nullglob
+
+# ========================
+# CONFIGURATION
+# ========================
+THREADS=16
+FASTQ_DIR="/scratch/RADseq/NGS_24D324"
+OUTROOT="/scratch/RADseq/out_NGS/samples_demulti"
+DUPREM_ROOT="$OUTROOT/duprem"
+ENZYME="kpnI"
+INLINE_FLAG="--inline_null"
+BARCODE_MISMATCH="--barcode_dist_1 1"
+
+mkdir -p "$OUTROOT" "$DUPREM_ROOT" "/scratch/RADseq/out_NGS/logs"
+
+# ========================
+# Define Pool Numbers
+# ========================
+POOLS=(3 4 8 9 10)
+
+# If running as an array task, select exactly one pool for this task
+if [[ -n "${SLURM_ARRAY_TASK_ID:-}" ]]; then
+  POOLS=("${POOLS[$SLURM_ARRAY_TASK_ID]}")
+fi
+
+# Loop over pools (or set POOL_NUM manually if you want to process just one)
+for POOL_NUM in "${POOLS[@]}"; do
+  echo "=== Starting demultiplexing for Pool ${POOL_NUM}: $(date) ==="
+
+  BARFILE="$FASTQ_DIR/barcodes_pool${POOL_NUM}.txt"
+  R1=($FASTQ_DIR/*24D324-${POOL_NUM}_*_L000_R1_001.fastq.gz)
+  R2=($FASTQ_DIR/*24D324-${POOL_NUM}_*_L000_R2_001.fastq.gz)
+
+  if [[ ${#R1[@]} -ne 1 || ${#R2[@]} -ne 1 ]]; then
+    echo "ERROR: Could not uniquely find R1/R2 for pool ${POOL_NUM}" >&2
+    continue
+  fi
+
+  echo "  R1: ${R1[0]}"
+  echo "  R2: ${R2[0]}"
+  echo "  Barcodes: $BARFILE"
+  echo
+
+  # ------------------------
+  # 1. Remove PCR duplicates
+  # ------------------------
+  DUPREM_POOL="$DUPREM_ROOT/pool${POOL_NUM}"
+  mkdir -p "$DUPREM_POOL"
+  CLONE_LOG="$DUPREM_POOL/clone_filter_pool${POOL_NUM}.log"
+
+  clone_filter -1 "${R1[0]}" -2 "${R2[0]}" \
+      -o "$DUPREM_POOL" \
+      -i gzfastq \
+      --oligo-len-1 5 \
+      $INLINE_FLAG \
+      -y gzfastq \
+      >"$CLONE_LOG" 2>&1
+
+  echo "clone_filter completed (log: $CLONE_LOG)"
+
+  CF_R1=($DUPREM_POOL/*_R1_*.fq.gz)
+  CF_R2=($DUPREM_POOL/*_R2_*.fq.gz)
+
+  if [[ ${#CF_R1[@]} -eq 0 || ${#CF_R2[@]} -eq 0 ]]; then
+    echo "ERROR: clone_filter produced no output for Pool ${POOL_NUM}" >&2
+    continue
+  fi
+
+  # ------------------------
+  # 2. Process RADtags (demultiplex)
+  # ------------------------
+  POOL_OUT="$OUTROOT/pool${POOL_NUM}"
+  mkdir -p "$POOL_OUT"
+  RAD_LOG="$POOL_OUT/process_radtags_pool${POOL_NUM}.log"
+
+  process_radtags -1 "${CF_R1[0]}" -2 "${CF_R2[0]}" \
+      -o "$POOL_OUT" \
+      -b "$BARFILE" \
+      -e "$ENZYME" \
+      -r -c -q \
+      -i gzfastq \
+      $INLINE_FLAG \
+      $BARCODE_MISMATCH \
+      -t 140 \
+      -T "$THREADS" \
+      -D \
+      >"$RAD_LOG" 2>&1
+
+  echo "process_radtags completed (log: $RAD_LOG)"
+  echo "=== Pool ${POOL_NUM} finished successfully: $(date) ==="
+  echo
+done
+
+echo "All pools processed successfully."
+```
+
+## Quality Control Checks
+
+After demultiplexing:
+
+1.  Verify file sizes are reasonable (\>1MB per sample)
+
+2.  Check duplicate rates in clone_filter logs
+
+3.  Review process_radtags logs for barcode recovery rates
+
+# 2 Quality Control and Read Distribution Analysis
+
+## Overview
+
+Post-demultiplexing QC ensures data quality and identifies samples that may need exclusion due to low coverage or technical issues. This step is critical for downstream analysis success.
+
+## Per-Sample Read Distribution Analysis
+
+### **Key Metrics to Monitor**
+
+1.  **Proportion of Library**: Each sample's contribution to total sequencing output
+
+2.  **Retained Reads**: Absolute count after quality filtering
+
+3.  **Retention Fraction**: Ratio of retained to total reads per sample
+
+### **Interpretation Guidelines**
+
+-   **Acceptable range**: 70-95% retention fraction
+
+-   **Red flags**:
+
+    -   Retention \<50%: Possible barcode/index issues
+
+    -   Extreme variation in library proportion: Unequal pooling
+
+    -   Consistent low retention across samples: General sequencing quality issues
+
+## Implementation Script
+
+``` r
+{r}
+
+#!/usr/bin/env Rscript
+
+# Plot Stacks-Process Radtags per-sample statistics
+
+## Input data
+
+### Path to output PDFs
+pdfPath <- '/scratch/labdelwa/tali/raw_data/07032023/samples/pool1/pdf'
+
+### Path to `per_sample_counts.tsv` file
+procRadtagsLogPath <- '/scratch/labdelwa/tali/raw_data/07032023/samples/pool1/per_sample_counts.tsv'
+
+### Open the file as a dataframe
+processRadtags <- read.delim(procRadtagsLogPath)
+
+### Check column names
+print(colnames(processRadtags))  # Optional debug
+
+### Add the population identifier (extract it from the sample names)
+processRadtags$PopID <- sapply(strsplit(processRadtags$Filename, '_'),
+                               function(x){x[2]})
+
+## Calculate overall statistics
+totalReads <- sum(processRadtags$Total)
+totalRetained <- sum(processRadtags$Retained.Reads)
+percRetained <- totalRetained / totalReads
+
+## Plots
+
+### Initialize PDF
+pdf(paste0(pdfPath, '/process_radtags_stats.pdf'), width=8, height=8)
+
+### A. Proportion of Library
+
+#### Calculate percentage of total reads
+processRadtags$PercTotal <- processRadtags$Total / totalReads
+summary(processRadtags$PercTotal)
+sd(processRadtags$PercTotal)
+
+#### Sort the dataframe by the percent total
+processRadtags <- processRadtags[order(processRadtags$PercTotal),]
+
+#### Plot dotchart
+dotchart(processRadtags$PercTotal,
+         labels = processRadtags$Filename,
+         xlab='',
+         xlim=c(0,0.08))
+title(xlab='Proportion of Library', line=2)
+abline(v=mean(processRadtags$PercTotal), lty=2, col='#b22222')
+
+#### Per-population Boxplot
+boxplot(PercTotal~PopID, data=processRadtags,
+        las=1,
+        xlab='',
+        ylab='',
+        col=c("#E69F00", "#56B4E9"),
+        horizontal = TRUE,
+        ylim=c(0,0.08))
+title(xlab='Proportion of Library', line=2)
+title(ylab='Population', line=2)
+
+### B. Reads per-sample
+
+#### Stats
+summary(processRadtags$Retained.Reads)
+sd(processRadtags$Retained.Reads)
+
+#### Sort
+processRadtags <- processRadtags[order(processRadtags$Retained.Reads),]
+
+#### Dotchart
+dotchart(processRadtags$Retained.Reads / 1e6,
+         labels = processRadtags$Filename,
+         xlab='',
+         xlim=c(0, max(processRadtags$Retained.Reads) / 1e6))
+title(xlab='Retained Reads (M)', line=2)
+abline(v=mean(processRadtags$Retained.Reads / 1e6), lty=2, col='#b22222')
+
+#### Per-population boxplot
+par(mar=c(3,3,0.5,0.5) + 0.1)
+boxplot(Retained.Reads / 1e6 ~ PopID, data=processRadtags,
+        las=1,
+        xlab='',
+        ylab='',
+        col=c("#E69F00", "#56B4E9"),
+        horizontal = TRUE,
+        ylim=c(0, max(processRadtags$Retained.Reads / 1e6)))
+title(xlab='Retained Reads (M)', line=2)
+title(ylab='Population', line=2)
+
+### C. Percent retained
+
+#### Calculate percent retained
+processRadtags$PercRetained <- processRadtags$Retained.Reads / processRadtags$Total
+summary(processRadtags$PercRetained)
+sd(processRadtags$PercRetained)
+
+#### Sort
+processRadtags <- processRadtags[order(processRadtags$PercRetained),]
+
+#### Dotchart
+dotchart(processRadtags$PercRetained,
+         labels = processRadtags$Filename,
+         xlab='',
+         xlim=c(0.4,1))
+title(xlab='Proportion of Retained Reads', line=2)
+abline(v=mean(processRadtags$PercRetained), lty=2, col='#b22222')
+
+#### Per-population Boxplot
+boxplot(PercRetained~PopID, data=processRadtags,
+        las=1,
+        xlab='',
+        ylab='',
+        col=c("#E69F00", "#56B4E9"),
+        horizontal = TRUE,
+        ylim=c(0.4,1))
+title(xlab='Proportion of Retained Reads', line=2)
+title(ylab='Population', line=2)
+
+### Close PDF
+dev.off()
+```
+
+## FASTQC Analysis for Sequence Quality
+
+### **Critical QC Metrics**
+
+1.  **Per-base sequence quality**: Should be \>Q30 for most bases
+
+2.  **Sequence duplication levels**: High duplication (\>20%) may indicate PCR artifacts
+
+3.  **GC content**: Should match organism's expected GC distribution
+
+4.  **Adapter contamination**: Should be minimal (\<5%)
+
+### **Sample Exclusion Criteria**
+
+-   **Hard cutoff**: Samples with \<10% of median read count
+
+-   **Consider exclusion**: Poor quality scores or high adapter contamination
+
+-   **Investigation needed**: Abnormal GC distributions
+
+## FastQC Implementation
+
+``` r
+{r}
+library(gridExtra)
+library(knitr)
+library(ggplot2)
+library(fastqcr)
+
+### ONLY THIS CHUNK REQUIRES MODIFICATION###
+### assign directory locations here:
+
+# specify full path to directory containing a .fastq.gz file for each sample
+fq.dir <- "/media/bene/Data1/tali/raw_data/07032023/samples/pool1/"
+
+# specify full path to the output directory where you want 
+qc.dir <- "/media/bene/Data1/tali/raw_data/07032023/samples/pool1/qc"
+
+# run fastqc on all .fastq.gz files, through r
+fastqc(fq.dir = fq.dir, # FASTQ files directory
+       qc.dir = qc.dir, # Results directory
+       threads = 4      # Number of threads
+       )
+
+# List of files in the output directory to ensure fastqc worked
+list.files(qc.dir)
+
+# create a character vector where each value is the full path to the .zip created by fastqc() for a given sample
+samps <- list.files(qc.dir, full.names = T, pattern = "*.zip")
+
+# plot qc test results for each sample
+for (i in samps){
+  # read info for given sample from the .zip file generated in the previous step
+  samp.info <- qc_read(i)
+  # open blank list to hold qc visualizations for the given sample
+  plot <- list()
+  # do qc for the given sample
+  plot[[1]] <- qc_plot(samp.info, "Basic statistics")
+  plot[[2]] <- qc_plot(samp.info, "Per sequence quality scores")
+  plot[[3]] <- qc_plot(samp.info, "Sequence duplication levels")
+  # visualize tables
+  print(paste0("QC results for sample ", gsub(".*/", "", i)))
+
+  cat('\n')
+
+  print(kable(plot[[1]]))
+
+  cat('\n')
+
+  # visualize plots
+  grid.arrange(plot[[2]],plot[[3]],
+               ncol=2)
+  
+  # clear plot to hold info for next sample
+  rm(plot)
+}
+
+# aggregate the reports by pointing this function to the folder holding output of fastqc()
+qc <- qc_aggregate(qc.dir, progressbar = F)
+
+# stats per sample
+knitr::kable(qc_stats(qc))
+
+### solid red line = median sample value
+### dashed red line = 10% of median sample value
+
+# save stats info as an object
+stats.info <- qc_stats(qc)
+# make tot.seq numeric
+stats.info$tot.seq <- as.numeric(stats.info$tot.seq)
+
+# make histogram of number of sequence reads for each sample
+ggplot(stats.info, aes(x=tot.seq))+
+              geom_histogram(color="black", fill="white", bins=20)+
+              geom_vline(aes(xintercept=median(tot.seq)), color = "red")+
+              geom_vline(aes(xintercept=median(tot.seq)*.1), color = "red", lty=14)+
+              theme_classic()+
+              xlab("Number of sequencing reads")
+
+# solid red line = median sample value
+# dashed red line = 10% of median sample value
+ggplot(stats.info, aes(x=tot.seq))+
+              geom_histogram(color="black", fill="white", bins=200)+
+              geom_vline(aes(xintercept=median(tot.seq)), color = "red")+
+              geom_vline(aes(xintercept=median(tot.seq)*.1), color = "red", lty=14)+
+              theme_classic()+
+              xlab("Number of sequencing reads")
+
+# show me the samples that have less than 10% of the number of reads as the median sample from this experiment (these should be dropped immediately)
+print(paste("Median sample contains", median(stats.info$tot.seq), "reads. The following samples contain less than", median(stats.info$tot.seq)*.1, "reads (10% of the median), and should likely be dropped"))
+
+knitr::kable(stats.info[stats.info$tot.seq < median(stats.info$tot.seq)*.1,])
+```
+
+# 3 Sample Organization and Population Mapping
+
+## Overview
+
+Organizing demultiplexed files by population facilitates downstream analysis and ensures proper population assignments for genetic analyses.
+
+## File Organization Strategy
+
+### **Rationale**
+
+-   Group samples by population for parallel processing
+
+-   Maintain consistent sample naming conventions
+
+-   Enable population-specific parameter optimization
+
+### **Key Considerations**
+
+1.  Remove empty population directories before analysis
+
+2.  Verify all expected samples are present
+
+3.  Ensure consistent naming across populations
+
+## Implementation Script
+
+``` bash
+{bash}
+#!/bin/bash -l
+#SBATCH --job-name=sort_by_pop
+#SBATCH --time=48:00:00
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=60G
+#SBATCH --output=/scratch/RADseq/out_NGS/logs/%x_%j.out
+#SBATCH --error=/scratch/RADseq/out_NGS/logs/%x_%j.err
+#SBATCH --mail-type=END,FAIL
+
+set -euo pipefail
+
+# =====================================================
+# Copy demultiplexed FASTQ files from pool directories
+# into population directories (AC, AS, GV, PV, HM, CJ, SG, PS)
+# Population name is extracted from the filename pattern:
+# e.g., pool3/a_PV_10_11.1.fq.gz → population = PV
+# =====================================================
+
+BASE_DIR="/scratch/RADseq/out_NGS/samples_demulti"
+OUT_DIR="$BASE_DIR/samples_by_pop"
+
+# Create output directories for all populations
+mkdir -p "$OUT_DIR"/{AC,AS,GV,PV,HM,CJ,SG,PS}
+
+echo "→ Starting file sorting by population..."
+echo
+
+# Loop through all pool directories
+for pool in "$BASE_DIR"/pool*; do
+  echo "Processing $pool ..."
+  
+  # Loop through all fq.gz files in each pool
+  for file in "$pool"/*.fq.gz; do
+    [[ -e "$file" ]] || continue  # skip empty dirs
+
+    # Extract population (between first and second underscore)
+    filename=$(basename "$file")
+    pop=$(echo "$filename" | cut -d'_' -f2)
+
+    # Ensure population directory exists
+    mkdir -p "$OUT_DIR/$pop"
+
+    # Copy file to corresponding population folder
+    cp "$file" "$OUT_DIR/$pop/"
+  done
+done
+
+echo
+echo "All files copied into $OUT_DIR/{AC,AS,GV,PV,HM,CJ,SG,PS}"
+echo "Summary of copied files:"
+echo "------------------------------------"
+
+for pop in AC AS GV PV HM CJ SG PS; do
+  count=$(find "$OUT_DIR/$pop" -type f -name "*.fq.gz" | wc -l)
+  echo "  $pop: $count files"
+done
+
+echo "------------------------------------"
+echo "Sorting complete."
+```
+
+## Population Map Generation
+
+### **Purpose**
+
+Creates sample-to-population mappings required by STACKS modules (cstacks, sstacks, gstacks, populations)
+
+### **File Format**
+
+-   Tab-separated: `sample_id\tpopulation`
+
+-   Consistent with STACKS requirements
+
+-   Used for population-aware analyses
+
+``` bash
+{bash}
+#!/bin/bash -l
+#SBATCH --job-name=make_popmaps
+#SBATCH --time=02:00:00
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=8G
+#SBATCH --output=/scratch/RADseq/out_NGS/logs/%x_%j.out
+#SBATCH --error=/scratch/RADseq/out_NGS/logs/%x_%j.err
+#SBATCH --mail-type=END,FAIL
+
+set -euo pipefail
+
+BASE_DIR="/scratch/RADseq/out_NGS/samples_demulti/samples_by_pop"
+
+for sp in AS GV PV HM CJ SG; do
+  OUTDIR="$BASE_DIR/$sp"
+  POPMAP="$OUTDIR/${sp}_popmap.txt"
+  echo "Generating $POPMAP..."
+
+  # Exclude files containing ".rem."
+  find "$OUTDIR" -type f -name "*.1.fq.gz" | grep -v '\.rem\.' | \
+    sed 's#.*/##' | sed 's/\..*$//' | \
+    awk -F'_' '{print $0 "\t" $1}' > "$POPMAP"
+
+  if [[ -s "$POPMAP" ]]; then
+      echo "Popmap for $sp:"
+      head "$POPMAP"
+  else
+      echo " No valid samples found for $sp — popmap is empty."
+  fi
+  echo
+done
+```
+
+# 4 STACKS Pipeline: Parameter Optimization
+
+## Overview
+
+The STACKS pipeline for de novo RADseq analysis requires optimization of three key parameters (m, M, n) that control locus formation, allele merging, and catalog building. Systematic optimization ensures balance between data retention and quality.
+
+## Understanding STACKS Parameters
+
+### **Parameter Definitions and Effects**
+
+| Parameter | Meaning | Controls | Typical Range | Biological Interpretation |
+|:---|:---|:---|:---|:---|
+| **m** | Minimum depth to form a stack | Locus detection threshold | 3-7 | Higher values reduce false loci from sequencing errors |
+| **M** | Mismatches allowed within individuals | Allele merging tolerance | 1-8 | Balances allelic variation vs. paralog merging |
+| **n** | Mismatches allowed across individuals | Catalog building stringency | M-1 to M+1 | Controls cross-sample locus homology |
+
+### **Optimization Strategy**
+
+1.  **Sequential optimization**: m → M → n
+
+2.  **Trade-off consideration**: Locus number vs. data quality
+
+3.  **R80 criterion**: 80% sample completeness threshold
+
+## 4.1 Optimizing Parameter m
+
+### **Biological Significance**
+
+-   **m = minimum stack depth**: Controls false positive loci from sequencing errors
+
+-   **Too low**: Includes error-derived false loci
+
+-   **Too high**: Excludes genuine low-coverage loci
+
+-   **Optimal**: Maximizes informative loci while minimizing errors
+
+### **Implementation Strategy**
+
+-   Sweep m from 3 to 7
+
+-   Use RADstackshelpR for evaluation
+
+-   Select m maximizing R80 loci
+
+``` bash
+{bash}
+#!/bin/bash -l
+#SBATCH --job-name=ustacks_by_species_m
+#SBATCH --time=48:00:00
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=120G
+#SBATCH --array=0-29
+#SBATCH --output=/scratch/RADseq/out_NGS/logs/%x_%A_%a.out
+#SBATCH --error=/scratch/RADseq/out_NGS/logs/%x_%A_%a.err
+#SBATCH --mail-type=END,FAIL
+
+# ========================
+# CONFIG
+# ========================
+set -euo pipefail
+module load bio/Stacks/2.62-foss-2022a
+
+BASE_DIR="/scratch/RADseq/out_NGS/samples_demulti/samples_by_pop"
+OUT_BASE="/scratch/RADseq/out_NGS/samples_demulti/samples_by_pop/ustacks_by_species"
+LOG_DIR="$OUT_BASE/logs"
+THREADS=16
+mkdir -p "$OUT_BASE" "$LOG_DIR"
+
+# Define lists (AC, PS removed)
+SPECIES_LIST=(AS GV PV HM CJ SG)
+M_LIST=(3 4 5 6 7)
+
+# Map array index → species × m
+SPECIES=${SPECIES_LIST[$((SLURM_ARRAY_TASK_ID / 5))]}
+M=${M_LIST[$((SLURM_ARRAY_TASK_ID % 5))]}
+
+echo "=== Running array task ${SLURM_ARRAY_TASK_ID} for SPECIES=$SPECIES with m=$M ==="
+
+SAMPLES_DIR="$BASE_DIR/$SPECIES"
+
+if [[ ! -d "$SAMPLES_DIR" ]]; then
+  echo " No directory for species '$SPECIES' — skipping."
+  exit 0
+fi
+
+# Collect all single-end fq files, excluding ".rem."
+files=($(find "$SAMPLES_DIR" -type f -name "*.1.fq.gz" | grep -v '\.rem\.' | sort))
+NFILES=${#files[@]}
+if (( NFILES == 0 )); then
+  echo "  No valid fastq files found for $SPECIES — skipping."
+  exit 0
+fi
+
+# ========================
+# Run ustacks for each sample at this m
+# ========================
+for ((i=0; i<NFILES; i++)); do
+  fq="${files[$i]}"
+  sample=$(basename "$fq" | sed 's/\..*$//')
+  echo "=== Running ustacks for species=$SPECIES, sample=$sample, m=$M ==="
+
+  OUTDIR="$OUT_BASE/m${M}/$SPECIES"
+  mkdir -p "$OUTDIR"
+
+  LOG_FILE="$LOG_DIR/ustacks_${SPECIES}_${sample}_m${M}.log"
+
+  # Optional: use node-local tmp for speed
+  TMPDIR=/tmp/ustacks_${SLURM_JOB_ID}_${SPECIES}_m${M}
+  mkdir -p "$TMPDIR"
+  export TMPDIR
+
+  ustacks -f "$fq" -o "$OUTDIR" -i "$((i+1))" -m "$M" -p "$THREADS" \
+    >"$LOG_FILE" 2>&1
+
+  rm -rf "$TMPDIR"
+
+  echo "Finished ustacks for $sample (species=$SPECIES, m=$M). Log: $LOG_FILE"
+done
+```
+
+## Complete STACKS Pipeline Execution
+
+``` bash
+{bash}
+#!/bin/bash -l
+#SBATCH --job-name=NGS_stacks_post_ustacks
+#SBATCH --time=48:00:00
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=120G
+#SBATCH --array=0-29
+#SBATCH --output=/scratch/RADseq/out_NGS/logs/%x_%A_%a.out
+#SBATCH --error=/scratch/RADseq/out_NGS/logs/%x_%A_%a.err
+#SBATCH --mail-type=END,FAIL
+
+set -euo pipefail
+module load bio/Stacks/2.62-foss-2022a
+
+# ------------------------
+# Minimal changes ONLY where needed
+# ------------------------
+BASE_DIR="/scratch/RADseq/out_NGS"
+USTACKS_BASE="$BASE_DIR/samples_demulti/samples_by_pop/ustacks_by_species"
+SAMPLES_BASE="$BASE_DIR/samples_demulti/samples_by_pop"
+THREADS=16
+
+# Array mapping (6 species × 5 m-values = 30 tasks)
+SPECIES_LIST=(AS GV PV HM CJ SG)
+M_LIST=(m3 m4 m5 m6 m7)
+TARGET_SPECIES=${SPECIES_LIST[$((SLURM_ARRAY_TASK_ID / 5))]}
+TARGET_M=${M_LIST[$((SLURM_ARRAY_TASK_ID % 5))]}
+
+# ------------------------
+# only the species list should get updated,
+# and self-filtering was added to respect the array target.
+# ------------------------
+
+# Loop over all m directories
+for mval in m3 m4 m5 m6 m7; do
+    # Array self-filter:
+    [[ "$mval" == "$TARGET_M" ]] || continue
+
+    echo "=== Processing m directory: $mval ==="
+    M_DIR="$USTACKS_BASE/$mval"
+    
+    # Loop over species
+    for sp in AS GV PV HM CJ SG; do
+        # Array self-filter:
+        [[ "$sp" == "$TARGET_SPECIES" ]] || continue
+
+        STACKS_DIR="$M_DIR/$sp"
+        if [[ ! -d "$STACKS_DIR" ]]; then
+            echo " No ustacks results for species '$sp' in $mval — skipping."
+            continue
+        fi
+        
+        cd "$STACKS_DIR" || { echo "ERROR: Cannot cd to $STACKS_DIR"; continue; }
+        
+        # Generate popmap safely from existing tags
+        POPMAP="$STACKS_DIR/${sp}_popmap.txt"
+        echo "→ Generating popmap for $sp in $mval..."
+        ls *.tags.tsv* | sed 's/.tags.tsv.gz\?$//' | awk -v pop="$sp" '{print $0 "\t" pop}' > "$POPMAP"
+
+        if [[ ! -s "$POPMAP" ]]; then
+            echo " No valid samples for $sp in $mval — skipping."
+            continue
+        fi
+        echo "Popmap contains $(wc -l < "$POPMAP") entries"
+        
+        # Verify ustacks outputs
+        if ! ls *.tags.tsv* >/dev/null 2>&1; then
+            echo " No .tags.tsv files for $sp in $mval — skipping."
+            continue
+        fi
+
+        # Run Stacks pipeline step by step with logging
+        echo "→ Running cstacks..."
+        cstacks -P . -M "$POPMAP" -p "$THREADS" 2>&1 | tee "$STACKS_DIR/cstacks.log"
+        
+        echo "→ Running sstacks..."
+        sstacks -P . -M "$POPMAP" -p "$THREADS" 2>&1 | tee "$STACKS_DIR/sstacks.log"
+        
+        echo "→ Running tsv2bam..."
+        tsv2bam -P . -M "$POPMAP" -t "$THREADS" 2>&1 | tee "$STACKS_DIR/tsv2bam.log"
+        
+        echo "→ Running gstacks..."
+        gstacks -P . -M "$POPMAP" -t "$THREADS" 2>&1 | tee "$STACKS_DIR/gstacks.log"
+        
+        echo "→ Running populations..."
+        populations -P . -M "$POPMAP" --vcf -t "$THREADS" 2>&1 | tee "$STACKS_DIR/populations.log"
+        
+        echo "Finished species $sp in $mval — VCF: $STACKS_DIR/populations.snps.vcf"
+        echo
+    done
+done
+
+echo "All m directories processed successfully (missing species skipped automatically)"
+```
+
+## RADstackshelpR for Parameter Optimization
+
+### **R80 Criterion Interpretation**
+
+-   **R80 SNPs/Loci**: Number of SNPs/loci present in ≥80% of samples
+
+-   **Higher R80**: More complete dataset for population analyses
+
+-   **Trade-off**: Increasing stringency reduces total markers but improves data completeness
+
+``` bash
+{bash}
+#!/bin/bash -l
+#SBATCH --job-name=radstacks_opt_m
+#SBATCH --time=04:00:00
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=16G
+#SBATCH --array=0-5
+#SBATCH --output=/scratch/RADseq/out_NGS/logs/%x_%A_%a.out
+#SBATCH --error=/scratch/RADseq/out_NGS/logs/%x_%A_%a.err
+#SBATCH --mail-type=END,FAIL
+
+set -euo pipefail
+module load lang/R/4.4.1-gfbf-2023b
+
+# -----------------------------
+# DEFINE SPECIES FOR ARRAY
+# -----------------------------
+SPECIES_LIST=(AS GV PV HM CJ SG)
+SPECIES="${SPECIES_LIST[$SLURM_ARRAY_TASK_ID]}"
+
+USTACKS_BASE="/scratch/RADseq/out_NGS/samples_demulti/samples_by_pop/ustacks_by_species"
+VCF_NAME="populations.snps.vcf"
+
+# -----------------------------
+# RUN R INLINE
+# -----------------------------
+Rscript --vanilla - <<RSCRIPT
+# ========================
+# RADstackshelpR: optimize m (3–7) and visualize
+# ========================
+
+library(RADstackshelpR)
+library(ggplot2)
+
+species <- "$SPECIES"
+ustacks_base <- "$USTACKS_BASE"
+vcf_name <- "$VCF_NAME"
+
+cat("Running RADstackshelpR optimize_m for species:", species, "\n")
+
+# ---- Build paths to VCFs ----
+ms <- 3:7
+paths <- setNames(
+  file.path(ustacks_base, paste0("m", ms), species, vcf_name),
+  paste0("m", ms)
+)
+paths <- as.list(paths)   # → make $ access valid
+
+print(paths)
+
+# ---- sanity check ----
+missing <- names(paths)[!file.exists(unlist(paths))]
+if (length(missing)) {
+  msg <- paste0("Could not find VCF(s) for: ", paste(missing, collapse = ", "),
+                "\nChecked paths:\n", paste(paste(names(paths), unlist(paths), sep=': '), collapse = '\n'))
+  stop(msg)
+}
+
+# ---- optimize m across the five runs ----
+m.out <- optimize_m(
+  m3 = paths\$m3,
+  m4 = paths\$m4,
+  m5 = paths\$m5,
+  m6 = paths\$m6,
+  m7 = paths\$m7
+)
+
+cat("\nR80 totals (higher is better, subject to missingness trade-offs):\n")
+print(m.out\$snp.R80)
+print(m.out\$loci.R80)
+
+# ---- save visualizations ----
+out_dir <- file.path(ustacks_base, species, "RADstackshelpR_outputs")
+dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+setwd(out_dir)
+cat("\nSaving plots into:", out_dir, "\n")
+
+p <- vis_depth(output = m.out); ggsave("vis_depth_m3-m7.pdf", p, width=7, height=5)
+p <- vis_snps(output = m.out);  ggsave("vis_snps_m3-m7.pdf", p, width=7, height=5)
+p <- vis_loci(output = m.out);  ggsave("vis_loci_m3-m7.pdf", p, width=7, height=5)
+
+cat("\nAll plots saved in:", out_dir, "\n")
+RSCRIPT
+```
+
+## 4.2 Optimizing Parameter M
+
+### **Biological Significance**
+
+-   **M = within-individual mismatch tolerance**: Controls allele vs. paralog discrimination
+
+-   **Too low**: Splits true alleles into separate loci (fragmentation)
+
+-   **Too high**: Merges paralogs into single loci (collapsing)
+
+-   **Optimal**: Maximizes true allele detection while minimizing paralog merging
+
+### **Interpretation of Results**
+
+-   **Increasing M**: Generally increases locus count but risks paralog collapse
+
+-   **Plateau in R80**: Indicates optimal stringency reached
+
+-   **Sudden drop in R80**: May indicate excessive paralog merging
+
+``` bash
+{bash}
+#!/bin/bash -l
+#SBATCH --job-name=ustacks_specxM
+#SBATCH --time=48:00:00
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=120G
+#SBATCH --array=0-47
+#SBATCH --output=/scratch/RADseq/out_NGS/logs/%x_%A_%a.out
+#SBATCH --error=/scratch/RADseq/out_NGS/logs/%x_%A_%a.err
+#SBATCH --mail-type=END,FAIL
+
+set -euo pipefail
+module load bio/Stacks/2.62-foss-2022a
+
+# -----------------------
+# CONFIG (paths & threads)
+# -----------------------
+BASE_DIR="/scratch/RADseq/out_NGS/samples_demulti/samples_by_pop"
+OUT_BASE="/scratch/RADseq/out_NGS/samples_demulti/samples_by_pop/ustacks_by_species_M"
+LOG_DIR="$OUT_BASE/logs"
+THREADS=16
+mkdir -p "$OUT_BASE" "$LOG_DIR"
+
+# -----------------------
+# Array mapping: species × M
+# 6 species × 8 M-values = 48 tasks (0..47)
+# -----------------------
+SPECIES_LIST=(AS GV PV HM CJ SG)
+M_LIST=(1 2 3 4 5 6 7 8)
+
+SPECIES=${SPECIES_LIST[$((SLURM_ARRAY_TASK_ID / 8))]}
+M=${M_LIST[$((SLURM_ARRAY_TASK_ID % 8))]}
+
+# Per-species optimal m (your values)
+declare -A M_OPT_BY_SPECIES=(
+  [AS]=3
+  [GV]=3
+  [PV]=4
+  [HM]=5
+  [CJ]=3
+  [SG]=3
+)
+OPT_M="${M_OPT_BY_SPECIES[$SPECIES]:-3}"
+
+echo "== Task ${SLURM_ARRAY_TASK_ID}: SPECIES=${SPECIES}, m=${OPT_M}, M=${M} =="
+
+SAMPLES_DIR="$BASE_DIR/$SPECIES"
+if [[ ! -d "$SAMPLES_DIR" ]]; then
+  echo " No directory for species '$SPECIES' — skipping."
+  exit 0
+fi
+
+# Collect single-end fq files, excluding ".rem."
+mapfile -t files < <(find "$SAMPLES_DIR" -type f -name "*.1.fq.gz" | grep -v '\.rem\.' | sort)
+NFILES=${#files[@]}
+if (( NFILES == 0 )); then
+  echo " No valid fastq files found for $SPECIES — skipping."
+  exit 0
+fi
+
+OUTDIR="$OUT_BASE/m${OPT_M}_M${M}/$SPECIES"
+mkdir -p "$OUTDIR"
+
+# -----------------------
+# Run ustacks for this SPECIES × M over all samples
+# -----------------------
+for ((i=0; i<NFILES; i++)); do
+  fq="${files[$i]}"
+  sample="$(basename "$fq" | sed 's/\..*$//')"
+  echo ">>> ustacks: species=$SPECIES sample=$sample m=${OPT_M} M=${M}"
+
+  LOG_FILE="$LOG_DIR/ustacks_${SPECIES}_${sample}_m${OPT_M}_M${M}.log"
+  ustacks -f "$fq" -o "$OUTDIR" -i "$((i+1))" -m "$OPT_M" -M "$M" -p "$THREADS" \
+    >"$LOG_FILE" 2>&1
+
+  echo "✓ finished: $sample (log: $LOG_FILE)"
+done
+
+echo "Done SPECIES=${SPECIES}, m=${OPT_M}, M=${M}"
+```
+
+## 4.3 Optimizing Parameter n
+
+### **Biological Significance**
+
+-   **n = cross-individual mismatch tolerance**: Controls catalog building stringency
+
+-   **Too low**: Fragments homologous loci across samples
+
+-   **Too high**: Merges non-homologous loci
+
+-   **Optimal**: Typically n = M or M±1
+
+### **Strategy**
+
+-   Test n = {M-1, M, M+1}
+
+-   Select n maximizing shared loci without excessive merging
+
+-   Consider biological expectations for population divergence
+
+``` bash
+{bash}
+#!/bin/bash -l
+#SBATCH --job-name=stacks_post_n
+#SBATCH --time=48:00:00
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=128G
+#SBATCH --array=0-17        # 6 species × up to 3 n-values = 18 jobs
+#SBATCH --output=/scratch/RADseq/out_NGS/logs/log/%x_%A_%a.out
+#SBATCH --error=/scratch/RADseq/out_NGS/logs/log/%x_%A_%a.err
+#SBATCH --mail-type=END,FAIL
+
+set -euo pipefail
+module load bio/Stacks/2.62-foss-2022a
+
+# ========================
+# CONFIG
+# ========================
+BASE_DIR="/scratch/RADseq/out_NGS"
+USTACKS_BASE="/scratch/RADseq/out_NGS/samples_demulti/samples_by_pop/ustacks_by_species_M"
+THREADS=16
+
+# Define species and their optimal m/M
+SPECIES_LIST=(AS GV PV HM CJ SG)
+declare -A OPT_M_BY_SPECIES=(
+  [AS]=3
+  [GV]=3
+  [PV]=4
+  [HM]=5
+  [CJ]=3
+  [SG]=3
+)
+declare -A OPT_BIGM_BY_SPECIES=(
+  [AS]=1
+  [GV]=1
+  [PV]=2
+  [HM]=2
+  [CJ]=1
+  [SG]=2
+)
+
+# ========================
+# MAP array index → species × n
+# ========================
+species_index=$(( SLURM_ARRAY_TASK_ID / 3 ))
+n_index=$(( SLURM_ARRAY_TASK_ID % 3 ))
+SPECIES="${SPECIES_LIST[$species_index]}"
+OPT_M="${OPT_M_BY_SPECIES[$SPECIES]}"
+OPT_BIGM="${OPT_BIGM_BY_SPECIES[$SPECIES]}"
+
+# compute actual n = M–1, M, M+1
+case $n_index in
+  0) n=$((OPT_BIGM - 1));;
+  1) n=$((OPT_BIGM));;
+  2) n=$((OPT_BIGM + 1));;
+esac
+
+# skip invalid n ≤ 0
+if (( n <= 0 )); then
+  echo "Skipping invalid n=${n} for species=${SPECIES} (M=${OPT_BIGM})"
+  exit 0
+fi
+
+echo "Running job for species=$SPECIES (m=$OPT_M, M=$OPT_BIGM, n=$n)"
+
+# ========================
+# PATH SETUP
+# ========================
+M_DIR="$USTACKS_BASE/m${OPT_M}_M${OPT_BIGM}"
+STACKS_DIR="$M_DIR/$SPECIES"
+
+if [[ ! -d "$STACKS_DIR" ]]; then
+  echo "No ustacks results for species '$SPECIES' — skipping."
+  exit 0
+fi
+
+WORK_DIR="$STACKS_DIR/n${n}"
+mkdir -p "$WORK_DIR"
+cd "$WORK_DIR" || { echo "ERROR: Cannot cd to $WORK_DIR"; exit 1; }
+
+# ---- Safe symlink creation ----
+for ext in tags.tsv.gz snps.tsv.gz alleles.tsv.gz models.tsv.gz; do
+  for src in ../*."$ext"; do
+    [[ -e "$src" ]] && ln -sf "$src" .
+  done
+done
+
+# ---- Popmap ----
+POPMAP="$WORK_DIR/${SPECIES}_popmap.txt"
+ls *.tags.tsv* | sed 's/.tags.tsv.gz\?$//' | awk -v pop="$SPECIES" '{print $0 "\t" pop}' > "$POPMAP"
+
+if [[ ! -s "$POPMAP" ]]; then
+  echo "No valid samples for $SPECIES (n=${n}) — skipping."
+  exit 0
+fi
+
+LOG_DIR="$WORK_DIR/logs_n${n}"
+mkdir -p "$LOG_DIR"
+
+# ========================
+# STACKS PIPELINE
+# ========================
+echo "→ Running cstacks..."
+cstacks -P . -M "$POPMAP" -n "$n" -p "$THREADS" 2>&1 | tee "$LOG_DIR/cstacks.log"
+
+echo "→ Running sstacks..."
+sstacks -P . -M "$POPMAP" -p "$THREADS" 2>&1 | tee "$LOG_DIR/sstacks.log"
+
+echo "→ Running tsv2bam..."
+tsv2bam -P . -M "$POPMAP" -t "$THREADS" 2>&1 | tee "$LOG_DIR/tsv2bam.log"
+
+echo "→ Running gstacks..."
+gstacks -P . -M "$POPMAP" -t "$THREADS" 2>&1 | tee "$LOG_DIR/gstacks.log"
+
+echo "→ Running populations..."
+populations -P . -M "$POPMAP" --vcf -t "$THREADS" 2>&1 | tee "$LOG_DIR/populations.log"
+
+echo "✓ Finished species=$SPECIES n=${n} — Output: $WORK_DIR/populations.snps.vcf"
+```
+
+## Comprehensive Optimization Visualization
+
+``` r
+{r}
+#!/usr/bin/env Rscript
+
+# ==========================================
+# One-figure overview of m, M, n optimization
+# ==========================================
+
+# packages
+if (!requireNamespace("gridExtra", quietly = TRUE)) {
+  stop("Package 'gridExtra' is not installed. Install with: install.packages('gridExtra')")
+}
+library(gridExtra)
+
+# sanity checks
+missing_objs <- c("m.out","M.out","n.out")[!vapply(c("m.out","M.out","n.out"), exists, logical(1))]
+if (length(missing_objs)) {
+  stop(paste("Missing objects in environment:", paste(missing_objs, collapse=", "),
+             "\nRun your optimize scripts first (m.out, M.out, n.out)."))
+}
+
+# build plot list
+gl <- list()
+gl[[1]] <- vis_depth(output = m.out)                     # m: depth
+gl[[2]] <- vis_snps(output = m.out, stacks_param = "m")  # m: SNPs
+gl[[3]] <- vis_loci(output = m.out, stacks_param = "m")  # m: loci
+gl[[4]] <- vis_snps(output = M.out, stacks_param = "M")  # M: SNPs
+gl[[5]] <- vis_loci(output = M.out, stacks_param = "M")  # M: loci
+gl[[6]] <- vis_snps(output = n.out, stacks_param = "n")  # n: SNPs
+gl[[7]] <- vis_loci(output = n.out, stacks_param = "n")  # n: loci
+
+# arrange into one figure
+layout_mat <- rbind(
+  c(1,1,2,2,3,3),
+  c(4,4,4,5,5,5),
+  c(6,6,6,7,7,7)
+)
+
+combined <- gridExtra::arrangeGrob(grobs = gl, layout_matrix = layout_mat)
+
+# draw to the current device
+grid::grid.newpage(); grid::grid.draw(combined)
+
+# optional: save to file
+# (uncomment one of these)
+ggplot2::ggsave("stacks_parameter_optimization_grid.pdf", combined, width = 14, height = 10)
+# ggplot2::ggsave("stacks_parameter_optimization_grid.png", combined, width = 14, height = 10, dpi = 300)
+```
+
+# 5 Variant Filtering with SNPfiltR
+
+## Overview
+
+After parameter optimization, the raw VCF contains numerous artifacts requiring filtering. SNPfiltR provides a systematic approach to remove low-quality variants while retaining biologically meaningful polymorphisms.
+
+## Filtering Strategy and Rationale
+
+### **Filtering Steps and Biological Justification**
+
+| Step | Purpose | Biological Rationale | Typical Cutoffs |
+|:---|:---|:---|:---|
+| **Hard Filter (DP/GQ)** | Remove low-confidence genotypes | Sequencing errors and low coverage reduce genotype reliability | DP≥5, GQ≥30 |
+| **Missing by Sample** | Exclude poor-quality individuals | Samples with high missing data bias population statistics | ≤70% missing |
+| **Missing by SNP** | Ensure locus completeness | Loci missing in many samples have limited utility | ≤20% missing (R80) |
+| **Biallelic Filter** | Remove multi-allelic sites | Multi-allelic sites often indicate paralogs or alignment errors | Biallelic only |
+| **Minor Allele Count** | Remove rare variants | Singletons often represent sequencing errors | MAC≥1 |
+| **Allele Balance** | Filter false heterozygotes | Deviant allele ratios indicate paralogs or genotyping errors | 0.25-0.75 |
+| **Max Depth** | Remove paralogous loci | Extreme depth suggests collapsed paralogs | ≤50× mean depth |
+
+### **Interpretation of Filtering Effects**
+
+-   **Progressive filtering**: Each step should remove \<10% of remaining variants
+
+-   **Balanced approach**: Avoid over-filtering that removes true biological variation
+
+-   **Population-specific tuning**: Adjust cutoffs based on sample characteristics
+
+## Implementation
+
+``` bash
+{bash}
+#!/bin/bash -l
+#SBATCH --job-name=snpsfiltR_filter
+#SBATCH --time=06:00:00
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=16G
+#SBATCH --array=0-5
+#SBATCH --output=/scratch/RADseq/out_NGS/logs9/%x_%A_%a.out
+#SBATCH --error=/scratch/RADseq/out_NGS/logs9/%x_%A_%a.err
+#SBATCH --mail-type=END,FAIL
+
+set -euo pipefail
+module load lang/R/4.4.1-gfbf-2023b
+
+# -------------------------------------
+# SPECIES mapping for the array
+# -------------------------------------
+SPECIES_LIST=(AS GV PV HM CJ SG)
+SPECIES="${SPECIES_LIST[$SLURM_ARRAY_TASK_ID]}"
+
+# Paths — adjust only if your folder structure changes
+BASE_DIR="/scratch/RADseq/out_NGS/samples_demulti/samples_by_pop/ustacks_by_species_M"
+
+# Optimal (m, M, n) values for each species (from your final table)
+declare -A OPT_m_BY_SPECIES=(
+  [AS]=3 [GV]=3 [PV]=4 [HM]=5 [CJ]=3 [SG]=3
+)
+declare -A OPT_M_BY_SPECIES=(
+  [AS]=1 [GV]=1 [PV]=2 [HM]=2 [CJ]=1 [SG]=2
+)
+declare -A OPT_n_BY_SPECIES=(
+  [AS]=2 [GV]=2 [PV]=3 [HM]=3 [CJ]=2 [SG]=3
+)
+OPT_m="${OPT_m_BY_SPECIES[$SPECIES]}"
+OPT_M="${OPT_M_BY_SPECIES[$SPECIES]}"
+OPT_n="${OPT_n_BY_SPECIES[$SPECIES]}"
+
+VCF_PATH="$BASE_DIR/m${OPT_m}_M${OPT_M}/${SPECIES}/n${OPT_n}/n${OPT_n}_populations.snps.vcf"
+POPMAP_PATH="$BASE_DIR/m${OPT_m}_M${OPT_M}/${SPECIES}/${SPECIES}_popmap.txt"
+OUT_VCF_PATH="$BASE_DIR/m${OPT_m}_M${OPT_M}/${SPECIES}/n${OPT_n}/SNPfiltR/filtered_n${OPT_n}.snps.vcf.gz"
+
+# -------------------------------------
+# Run R inline
+# -------------------------------------
+Rscript --vanilla - <<RSCRIPT
+#!/usr/bin/env Rscript
+
+# =========================
+# Filtering with SNPfiltR
+# =========================
+VCF     <- "$VCF_PATH"
+POPMAP  <- "$POPMAP_PATH"   # two columns: sample_id \t population
+OUT_VCF <- "$OUT_VCF_PATH"
+
+# Tunable cutoffs 
+MIN_DP        <- 5
+MIN_GQ        <- 30
+MAX_MISS_SAMP <- 0.70
+MAX_MISS_SNP  <- 0.20
+MIN_MAC       <- 1
+AB_MIN        <- 0.25
+AB_MAX        <- 0.75
+MAX_MEAN_DP   <- NA
+
+suppressPackageStartupMessages({
+  library(vcfR)
+  library(SNPfiltR)
+})
+
+cat("=== Running SNPfiltR for species: $SPECIES ===\n")
+cat("Input:", VCF, "\nPopmap:", POPMAP, "\nOutput:", OUT_VCF, "\n\n")
+
+vcf <- vcfR::read.vcfR(VCF, verbose = FALSE)
+popmap_df <- tryCatch({
+  read.table(POPMAP, sep = "\t", header = FALSE,
+             col.names = c("id","pop"), stringsAsFactors = FALSE)
+}, error = function(e) NULL)
+
+# ---- 1) Genotype-level hard filter: depth & GQ ----
+vcf <- SNPfiltR::hard_filter(vcfR = vcf, depth = MIN_DP, gq = MIN_GQ)
+
+# ---- 2) Drop low-quality samples ----
+vcf <- SNPfiltR::missing_by_sample(vcfR = vcf, popmap = popmap_df, cutoff = MAX_MISS_SAMP)
+
+# ---- 3) Enforce per-locus completeness ----
+vcf <- SNPfiltR::missing_by_snp(vcfR = vcf, cutoff = MAX_MISS_SNP)
+
+# ---- 4) Keep only biallelic SNPs ----
+vcf <- SNPfiltR::filter_biallelic(vcfR = vcf)
+
+# ---- 5) Remove invariants / singletons ----
+vcf <- SNPfiltR::min_mac(vcfR = vcf, min.mac = MIN_MAC)
+
+# ---- 6) Filter heterozygotes by allele balance ----
+vcf <- SNPfiltR::filter_allele_balance(vcfR = vcf,
+                                       min.ratio = AB_MIN, max.ratio = AB_MAX)
+
+# ---- 7) Optionally drop paralogous high-depth loci ----
+if (!is.na(MAX_MEAN_DP)) {
+  vcf <- SNPfiltR::max_depth(vcfR = vcf, maxdepth = MAX_MEAN_DP)
+}
+
+# ---- 8) Write filtered VCF ----
+vcfR::write.vcf(x = vcf, file = OUT_VCF)
+cat("✓ Done. Wrote:", OUT_VCF, "\n")
+RSCRIPT
+```
+
+# 6 Quality Assessment with PCA
+
+## Overview
+
+Principal Component Analysis (PCA) provides a rapid assessment of filtered SNP data quality, revealing population structure, outliers, and potential batch effects.
+
+## Interpretation Guidelines
+
+### **Expected PCA Patterns**
+
+-   **Clear population clustering**: Indicates strong population structure
+
+-   **Within-population cohesion**: Suggests good genotyping consistency
+
+-   **Outliers**: May indicate sample contamination or mislabeling
+
+-   **Batch effects**: Systematic separation by sequencing run or library prep
+
+### **Troubleshooting**
+
+-   **No structure**: May indicate over-filtering or insufficient markers
+
+-   **Extreme outliers**: Investigate sample quality or contamination
+
+-   **Unexpected clustering**: Check population assignments and metadata
+
+## Implementation
+
+``` bash
+{bash}
+#!/bin/bash -l
+#SBATCH --job-name=pca_filtered
+#SBATCH --time=04:00:00
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=12G
+#SBATCH --array=0-5
+#SBATCH --output=/scratch/RADseq/out_NGS/logs01/%x_%A_%a.out
+#SBATCH --error=/scratch/RADseq/out_NGS/logs01/%x_%A_%a.err
+#SBATCH --mail-type=END,FAIL
+
+set -euo pipefail
+module load lang/R/4.4.1-gfbf-2023b
+
+SPECIES_LIST=(AS GV PV HM CJ SG)
+SPECIES="${SPECIES_LIST[$SLURM_ARRAY_TASK_ID]}"
+
+BASE_DIR="/scratch/RADseq/out_NGS/samples_demulti/samples_by_pop/ustacks_by_species_M"
+OUT_DIR="/scratch/RADseq/out_NGS/pca"
+mkdir -p "$OUT_DIR"
+
+declare -A OPT_m_BY_SPECIES=([AS]=3 [GV]=3 [PV]=4 [HM]=5 [CJ]=3 [SG]=3)
+declare -A OPT_M_BY_SPECIES=([AS]=1 [GV]=1 [PV]=2 [HM]=2 [CJ]=1 [SG]=2)
+declare -A OPT_n_BY_SPECIES=([AS]=2 [GV]=2 [PV]=3 [HM]=3 [CJ]=2 [SG]=3)
+
+OPT_m="${OPT_m_BY_SPECIES[$SPECIES]}"
+OPT_M="${OPT_M_BY_SPECIES[$SPECIES]}"
+OPT_n="${OPT_n_BY_SPECIES[$SPECIES]}"
+
+VCF_PATH="$BASE_DIR/m${OPT_m}_M${OPT_M}/${SPECIES}/n${OPT_n}/filtered_n${OPT_n}.snps.vcf.gz"
+POPMAP_PATH="$BASE_DIR/m${OPT_m}_M${OPT_M}/${SPECIES}/${SPECIES}_popmap.txt"
+PCA_PLOT="$OUT_DIR/PCA_${SPECIES}.pdf"
+PCA_CSV="$OUT_DIR/PCA_${SPECIES}.csv"
+
+export SPECIES VCF_PATH POPMAP_PATH PCA_PLOT PCA_CSV
+
+if [[ ! -f "$VCF_PATH" ]]; then
+  echo "ERROR: VCF not found at $VCF_PATH" >&2
+  exit 1
+fi
+
+Rscript --vanilla - <<'RSCRIPT'
+suppressPackageStartupMessages({
+  library(vcfR)
+  library(adegenet)  # loads ade4
+  library(ggplot2)
+})
+
+species     <- Sys.getenv("SPECIES")
+vcf_file    <- Sys.getenv("VCF_PATH")
+popmap_file <- Sys.getenv("POPMAP_PATH")
+pdf_out     <- Sys.getenv("PCA_PLOT")
+csv_out     <- Sys.getenv("PCA_CSV")
+
+cat("=== Running PCA for species:", species, "===\n")
+cat("VCF:", vcf_file, "\n")
+cat("Popmap:", popmap_file, "\n")
+cat("Outputs:", pdf_out, "and", csv_out, "\n\n")
+
+# ---- Load data ----
+vcf <- read.vcfR(vcf_file, verbose = FALSE)
+vcf_samples <- colnames(vcf@gt)[-1]
+cat("VCF samples (", length(vcf_samples), "): ", paste(vcf_samples, collapse=", "), "\n\n", sep="")
+
+# Popmap
+popmap <- tryCatch({
+  read.table(popmap_file, sep = "\t", header = FALSE,
+             col.names = c("id","pop"), stringsAsFactors = FALSE)
+}, error = function(e) NULL)
+
+if (!is.null(popmap)) {
+  pop_aligned <- popmap[popmap$id %in% vcf_samples, , drop = FALSE]
+  pop_aligned <- pop_aligned[match(vcf_samples, pop_aligned$id), , drop = FALSE]
+  miss <- is.na(pop_aligned$id)
+  if (any(miss)) {
+    pop_aligned$id[miss]  <- vcf_samples[miss]
+    pop_aligned$pop[miss] <- "UNK"
+    message(" Missing in popmap — UNK: ", paste(vcf_samples[miss], collapse=", "))
+  }
+} else {
+  pop_aligned <- data.frame(id = vcf_samples, pop = "UNK", stringsAsFactors = FALSE)
+  message(" No popmap found; setting all populations to 'UNK'.")
+}
+
+# ---- Convert to genlight ----
+gl <- vcfR2genlight(vcf)
+gl_names <- adegenet::indNames(gl)
+cat("genlight nInd: ", nInd(gl), " | nLoc: ", nLoc(gl), "\n", sep="")
+cat("genlight sample names (", length(gl_names), "): ", paste(gl_names, collapse=", "), "\n\n", sep="")
+
+# ---- Robust PCA: mean-impute + drop zero-variance loci + prcomp ----
+# allele frequencies with mean imputation of missing
+X <- adegenet::tab(gl, freq = TRUE, NA.method = "mean")
+
+# If nothing left, bail out gracefully
+if (is.null(X) || ncol(X) == 0L || nrow(X) == 0L) {
+  stop("No loci or individuals available for PCA after conversion.")
+}
+
+# Compute per-locus variance; replace NA with 0
+vars <- apply(X, 2, function(col) {
+  v <- suppressWarnings(stats::var(col))
+  if (is.na(v)) 0 else v
+})
+
+keep <- vars > 0
+dropped <- sum(!keep, na.rm = TRUE)
+if (!is.na(dropped) && dropped > 0) {
+  message("Dropped ", dropped, " zero-variance loci before PCA.")
+}
+# If all loci dropped, stop with a clear message
+if (all(!keep)) {
+  stop("All loci are zero-variance after filtering; cannot run PCA.")
+}
+
+X <- X[, keep, drop = FALSE]
+
+# Run PCA
+set.seed(1)
+pca <- stats::prcomp(X, center = TRUE, scale. = TRUE)
+
+# Prepare outputs
+scores <- as.data.frame(pca$x[, 1:3, drop = FALSE])
+colnames(scores) <- c("PC1","PC2","PC3")
+scores$sample <- gl_names
+scores$pop <- if (!is.null(adegenet::pop(gl))) as.character(pop_aligned$pop) else "UNK"
+
+var_expl <- round(100 * (pca$sdev^2 / sum(pca$sdev^2)), 1)
+
+# Plot
+p <- ggplot(scores, aes(x = PC1, y = PC2, color = pop)) +
+  geom_point(size = 3, alpha = 0.9) +
+  theme_minimal(base_size = 14) +
+  labs(
+    title = paste0("PCA — ", species),
+    x = paste0("PC1 (", var_expl[1], "%)"),
+    y = paste0("PC2 (", var_expl[2], "%)")
+  )
+
+ggsave(pdf_out, plot = p, width = 7, height = 5)
+
+# Save scores
+utils::write.csv(scores[, c("sample","pop","PC1","PC2","PC3")],
+                 file = csv_out, row.names = FALSE)
+
+cat("✓ PCA saved to:\n - ", pdf_out, "\n - ", csv_out, "\n", sep = "")
+RSCRIPT
+```
+
+# 7 Coverage Analysis
+
+## Overview
+
+Comprehensive coverage analysis ensures data quality and informs interpretation of genetic analyses by quantifying sequencing depth across samples.
+
+## Key Metrics and Interpretation
+
+### **Coverage Metrics**
+
+1.  **Raw reads**: Total sequencing output per sample
+
+2.  **Mapped reads**: Proportion aligning to identified loci
+
+3.  **Mean depth**: Average coverage per locus
+
+4.  **Depth distribution**: Uniformity of coverage across loci
+
+### **Quality Thresholds**
+
+-   **Minimum depth**: ≥10× for reliable genotype calling
+
+-   **Uniformity**: ≤50% CV in depth across loci
+
+-   **Mapping rate**: ≥70% for RADseq data
+
+## Implementation
+
+``` r
+{r}
+# ============================
+# CONFIG
+# ============================
+BASE <- "/Users/tali/RAMSES/out_NGS"
+
+FASTQ_BASE <- file.path(BASE, "samples_demulti", "samples_by_pop")
+BAM_BASE   <- file.path(BASE, "samples_demulti", "samples_by_pop", "ustacks_by_species_M")
+
+species <- c("AS","GV","PV","HM","CJ","SG")
+
+# per-species optimal m/M/n (from you)
+OPT_m_BY_SPECIES <- c(AS=3, GV=3, PV=4, HM=5, CJ=3, SG=3)
+OPT_M_BY_SPECIES <- c(AS=1, GV=1, PV=2, HM=2, CJ=1, SG=2)
+OPT_n_BY_SPECIES <- c(AS=2, GV=2, PV=3, HM=3, CJ=2, SG=3)
+
+OUT_CSV <- file.path(BASE, "coverage_summary_per_sample.csv")
+
+`%||%` <- function(x, y) if (!is.null(x) && length(x) > 0) x else y
+
+# ============================
+# Helpers
+# ============================
+
+# 1) Pure R: count lines in gzipped FASTQ, then /4
+count_fastq_reads <- function(fq) {
+  if (!file.exists(fq)) return(0)
+
+  # If R.utils is available, use its fast line counter
+  if (requireNamespace("R.utils", quietly = TRUE)) {
+    n_lines <- R.utils::countLines(fq)
+    return(n_lines / 4)
+  }
+
+  # Fallback: stream through the file
+  con <- gzfile(fq, open = "rt")
+  on.exit(close(con))
+  n <- 0L
+  repeat {
+    lines <- readLines(con, n = 1e6)
+    if (length(lines) == 0L) break
+    n <- n + length(lines)
+  }
+  n / 4
+}
+
+# 2) BAM stats via samtools (optional, may stay NA on Mac)
+has_samtools <- (Sys.which("samtools") != "")
+
+bam_stats <- function(bam) {
+  if (!file.exists(bam) || !has_samtools) {
+    return(list(mapped_reads = NA_real_, mean_depth = NA_real_))
+  }
+
+  # index if needed
+  bai1 <- paste0(bam, ".bai")
+  bai2 <- sub("\\.bam$", ".bai", bam)
+  if (!file.exists(bai1) && !file.exists(bai2)) {
+    system2("samtools", c("index", bam), stdout = FALSE, stderr = FALSE)
+  }
+
+  # mapped reads
+  idx <- tryCatch(
+    system2("samtools", c("idxstats", bam), stdout = TRUE, stderr = FALSE),
+    error = function(e) character(0)
+  )
+
+  mapped_reads <- 0
+  if (length(idx) > 0) {
+    tab <- read.table(text = idx, header = FALSE, stringsAsFactors = FALSE)
+    mapped_reads <- sum(tab[tab$V1 != "*", 3], na.rm = TRUE)
+  }
+
+  # mean depth
+  depth_lines <- tryCatch(
+    system2("samtools", c("depth", "-a", bam), stdout = TRUE, stderr = FALSE),
+    error = function(e) character(0)
+  )
+  mean_depth <- NA_real_
+  if (length(depth_lines) > 0) {
+    depth_tab <- read.table(text = depth_lines, header = FALSE)
+    if (nrow(depth_tab) > 0) {
+      mean_depth <- mean(depth_tab$V3, na.rm = TRUE)
+    }
+  }
+
+  list(mapped_reads = mapped_reads, mean_depth = mean_depth)
+}
+
+# 3) find BAM file for a given sample & species
+find_bam_for_sample <- function(sp, sample_id) {
+  m  <- OPT_m_BY_SPECIES[[sp]]
+  M  <- OPT_M_BY_SPECIES[[sp]]
+  n  <- OPT_n_BY_SPECIES[[sp]]
+
+  bam_dir <- file.path(BAM_BASE,
+                       sprintf("m%d_M%d", m, M),
+                       sp,
+                       sprintf("n%d", n))
+  if (!dir.exists(bam_dir)) return(NA_character_)
+
+  cand <- c(
+    file.path(bam_dir, paste0(sample_id, ".bam")),
+    file.path(bam_dir, paste0(sub("\\.1$", "", sample_id), ".bam")),
+    file.path(bam_dir, paste0(sample_id, ".matches.bam"))
+  )
+  cand[file.exists(cand)][1] %||% NA_character_
+}
+
+# ============================
+# MAIN LOOP
+# ============================
+
+all_rows <- list()
+
+for (sp in species) {
+  message("=== Species: ", sp, " ===")
+  fastq_dir <- file.path(FASTQ_BASE, sp)
+
+  if (!dir.exists(fastq_dir)) {
+    message("  ! FASTQ dir not found: ", fastq_dir)
+    next
+  }
+
+  fq_R1 <- list.files(fastq_dir, pattern = "\\.1\\.fq\\.gz$", full.names = TRUE)
+  if (length(fq_R1) == 0) {
+    message("  ! No *.1.fq.gz in ", fastq_dir)
+    next
+  }
+
+  for (f1 in fq_R1) {
+    baseR1    <- basename(f1)                      # "3564_AS_7.1.fq.gz"
+    sample_id <- sub("\\.fq\\.gz$", "", baseR1)    # "3564_AS_7.1"
+
+    # matching R2
+    baseR2 <- sub("\\.1\\.fq\\.gz$", ".2.fq.gz", baseR1)
+    f2     <- file.path(fastq_dir, baseR2)
+    if (!file.exists(f2)) f2 <- NA_character_
+
+    # raw reads
+    raw_R1 <- count_fastq_reads(f1)
+    raw_R2 <- if (!is.na(f2)) count_fastq_reads(f2) else 0
+    raw_total <- raw_R1 + raw_R2
+
+    # BAM (optional)
+    bam_path <- find_bam_for_sample(sp, sample_id)
+
+    if (!is.na(bam_path)) {
+      bs <- bam_stats(bam_path)
+      mapped_reads <- bs$mapped_reads
+      mean_depth   <- bs$mean_depth
+    } else {
+      mapped_reads <- NA_real_
+      mean_depth   <- NA_real_
+    }
+
+    all_rows[[length(all_rows) + 1]] <- data.frame(
+      species         = sp,
+      sample_id       = sample_id,
+      fastq_R1        = f1,
+      fastq_R2        = ifelse(is.na(f2), "", f2),
+      raw_reads_R1    = raw_R1,
+      raw_reads_R2    = raw_R2,
+      raw_reads_total = raw_total,
+      bam_path        = ifelse(is.na(bam_path), "", bam_path),
+      mapped_reads    = mapped_reads,
+      mean_depth      = mean_depth,
+      stringsAsFactors = FALSE
+    )
+  }
+}
+
+coverage_df <- if (length(all_rows)) do.call(rbind, all_rows) else data.frame()
+
+write.csv(coverage_df, OUT_CSV, row.names = FALSE)
+message("Wrote coverage summary to: ", OUT_CSV)
+
+# Quick peek
+head(coverage_df)
+```
+
+# Conclusion
+
+## Summary of Workflow
+
+This comprehensive RADseq analysis pipeline provides:
+
+1.  **Robust demultiplexing and quality control**
+
+2.  **Systematic optimization of STACKS parameters (m, M, n)**
+
+3.  **Stringent variant filtering using SNPfiltR**
+
+4.  **Quality assessment through PCA and coverage analysis**
+
+## Key Considerations for Non-Model Species
+
+1.  **Parameter optimization is critical**: Default parameters rarely optimal
+
+2.  **Trade-offs exist**: Balance between marker number and data quality
+
+3.  **Biological validation**: Always correlate genetic patterns with known biology
+
+4.  **Reproducibility**: Document all parameters and filtering decisions
+
+## Expected Outcomes
+
+-   **High-quality SNP dataset**: Suitable for population genetic analyses
+
+-   **Parameter documentation**: Essential for reproducibility
+
+-   **Quality metrics**: Enable assessment of data suitability for downstream analyses
+
+## Next Steps
+
+1.  **Population genetic analyses**: F_ST, admixture, selection scans
+
+2.  **Environmental association studies**: Landscape genomics
+
+3.  **Phylogenetic inference**: If multiple species analyzed
+
+4.  **Data deposition**: Public repositories for reproducibility
+
+------------------------------------------------------------------------
+
+*This workflow represents best practices for de novo RADseq analysis and should be adapted based on specific study requirements and biological considerations.*

@@ -1,0 +1,18 @@
+---
+title: "Companion Exercises"
+description: "Lecture-aligned exercises in quantitative biology and population genetics."
+page-layout: full
+format:
+  html:
+    toc: false
+---
+
+::: {.page-intro}
+Focused exercises for consolidating calculations, model assumptions and scientific interpretation. This section will expand as individual exercise sets are prepared for public use.
+:::
+
+::: {.notice}
+The public exercise collection is in preparation. In the meantime, explore the [interactive apps](../apps/interactive.html), [course companions](../course-companions/interactive-course-companions.html) or [genomics tutorials](../tutorials/Hands-on%20Genomics%20Tutorials.html).
+:::
+
+[← Back to Teaching](../teaching.html)

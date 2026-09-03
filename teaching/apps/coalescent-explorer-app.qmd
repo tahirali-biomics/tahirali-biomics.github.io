@@ -1,0 +1,44 @@
+---
+title: "🌿 Coalescent Explorer Interactive App"
+format:
+  html:
+    toc: false
+---
+
+_Dive into the fascinating world of evolutionary history, one simulation at a time!_ 
+
+---
+
+###  **What is the Coalescent Explorer?**
+
+The **Coalescent Explorer** is an interactive app that brings **population genetics** to life.  
+Simulate **site frequency spectra (SFS)** and **genealogical trees**, and explore how key demographic forces—  
+like **population growth**, **bottlenecks**, **migration**, **admixture**, and **population splits**—  
+shape patterns of **genetic diversity** across generations.
+
+You’ll gain intuition on how demographic and evolutionary processes leave their signatures in genetic data.
+
+### 🌟 **App Features**
+
+| Feature | Description |
+|:--|:--|
+| 🎨 **Dynamic SFS visualization** | Watch how demographic changes reshape allele frequency distributions |
+| 🌲 **Genealogy simulator** | See how trees stretch or contract with population bottlenecks or expansion |
+| ⚖ **Model comparison** | Compare observed SFS with neutral or demographic expectations |
+
+--- 
+
+👉 Launch the app and begin your journey into **genetic time travel**:  
+
+[Open in a new tab](https://tahirali-biomics2.shinyapps.io/coalescent-explorer-app/)
+
+[← Back to Interactive Apps](interactive.html)
+
+
+<div class="app-container" style="position:relative;padding-bottom:100%;height:0;overflow:hidden;">
+  <iframe src="https://tahirali-biomics2.shinyapps.io/coalescent-explorer-app/"
+          style="position:absolute;top:0;left:0;width:100%;height:100%;"
+          frameborder="0"
+          sandbox="allow-scripts allow-same-origin allow-forms"
+          title="Het-FST Shiny app"></iframe>
+</div>

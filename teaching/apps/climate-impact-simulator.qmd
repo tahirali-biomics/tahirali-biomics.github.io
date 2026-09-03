@@ -1,0 +1,120 @@
+---
+title: "🌍 Climate Impact Simulator"
+format:
+  html:
+    toc: false
+---
+
+_Explore how climate, land use, and policy choices interact to shape environmental resilience._  
+*Educational tool using approximate climate and environmental data — **not for policy or operational decisions***.
+
+---
+
+### **What is the Climate Impact Simulator?**
+
+The **Climate Impact Simulator** is an interactive **Shiny app** designed for **teaching and exploratory learning** in:
+
+- Climate science and geography  
+- Environmental sustainability and policy  
+- Systems thinking and scenario analysis
+
+Users select a city (or custom coordinates) and explore how **climate patterns**, **environmental pressures**, and **policy levers** combine to shape an overall **Climate Resilience Index (0–10)**.
+
+---
+
+### **Core Features**
+
+- 🗺 **Interactive map** to select cities or custom locations  
+- 📈 **Walter–Lieth climate diagram** showing monthly temperature, precipitation, dry months, and frost months  
+- 🌡 **Climate Resilience Index (0–10)** summarizing multiple environmental dimensions  
+- 🎚 **Adjustable environmental levers** (deforestation, renewables, emissions, water use, transport, agriculture)  
+- 🔄 **Scenario presets**: *Current*, *Optimistic*, and *Pessimistic*  
+-  **Radar and bar plots** highlighting component contributions and sensitivities  
+- 📥 **HTML report export** for labs, assignments, and reflection
+
+---
+
+### **Launch the App**
+
+👉 [Open the Climate Impact Simulator](https://tahirali-biomics2.shinyapps.io/Climate-impact-simulator-app/)
+
+[← Back to Interactive Apps](interactive.html)
+
+<div class="app-container" style="position:relative;padding-bottom:100%;height:0;overflow:hidden;">
+  <iframe src="https://tahirali-biomics2.shinyapps.io/Climate-impact-simulator-app/"
+          style="position:absolute;top:0;left:0;width:100%;height:100%;"
+          frameborder="0"
+          sandbox="allow-scripts allow-same-origin allow-forms"
+          title="Climate Impact Simulator Shiny app"></iframe>
+</div>
+
+---
+
+###  **Data and Assumptions**
+
+This app is built for **conceptual understanding**, not quantitative decision-making.
+
+#### Climate data
+
+- Uses **approximate monthly climate normals** for a limited set of major cities.
+- Other locations rely on **latitude-based climate archetypes** (tropical, temperate, subarctic).
+- Climate diagrams are derived from:
+  - Monthly mean temperature
+  - Approximate minimum and maximum temperature
+  - Monthly precipitation
+- **Dry months** (P < 2 × Tmean) and **frost months** (Tmin < 0 °C) are flagged for teaching climate classification and water balance.
+
+> Climate values are **synthetic but realistic** and are **not drawn from live APIs or gridded datasets**.
+
+#### Environmental indicators
+
+Indicators such as deforestation, AQI, renewables, emissions, water use, and transport share are:
+
+- **Plausible, region-informed starting values**  
+- **Scenario-friendly and user-adjustable**  
+- **Not real-time or officially sourced statistics**
+
+They are intended to support **comparative reasoning and intuition-building**, not city-level assessment.
+
+---
+
+### 🧮 **Climate Resilience Index (Conceptual Design)**
+
+The **0–10 index** combines weighted sub-scores from:
+
+- Forests and land use  
+- Air quality and emissions  
+- Energy systems  
+- Urban planning and transport  
+- Water use and agriculture
+
+Each component is scaled to a **0–10 score** and combined using transparent weights. This design supports classroom discussion on:
+
+- Indicator selection and weighting  
+- Trade-offs and value judgments  
+- How index construction influences rankings
+
+---
+
+### 🎓 **Teaching Applications**
+
+- **Climate & geography**: interpret Walter–Lieth diagrams, dry months, and latitudinal patterns  
+- **Sustainability & policy**: test how renewables, reforestation, or transport investment affect resilience  
+- **Systems thinking**: compare scenarios and identify high-impact levers  
+- **Assignments**: generate reports and focus on interpretation rather than data collection
+
+---
+
+### 🚦 **Scope and Limitations**
+
+**Suitable for:**
+- Teaching climate patterns and environmental interactions  
+- Scenario exploration and discussion  
+- Building intuition about policy trade-offs
+
+**Not suitable for:**
+- Official reporting or planning  
+- Fine-scale risk assessment  
+- Real-time monitoring
+
+**All values are illustrative and pedagogical.**

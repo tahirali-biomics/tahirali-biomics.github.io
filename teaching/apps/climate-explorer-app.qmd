@@ -1,0 +1,32 @@
+---
+title: "Climate Explorer: Bioclimatic Data App"
+format:
+  html:
+    toc: false
+---
+
+**Climate Explorer: Bioclimatic Data App**
+
+This interactive app lets you extract and visualize WorldClim bioclimatic variables for any set of sample coordinates.  
+You can upload your own CSV file or use the provided example data (Arabidopsis thaliana accessions from Spain and Sweden).  
+Plot your samples on a map, color them by any climate variable, and explore correlations among all extracted variables.  
+
+
+[Open in a new tab](https://tahirali-biomics2.shinyapps.io/climate-explorer-app/)
+
+[← Back to Interactive Apps](interactive.html)
+
+> **Features:**
+> - Upload a CSV of sample coordinates or use example data.
+> - Extract 19 WorldClim bioclimatic variables for each sample.
+> - Visualize samples on a map, colored by any selected climate variable.
+> - Explore a correlation heatmap of all climate variables, with full variable names.
+> - Download the full data table as a CSV.
+
+<div class="app-container" style="position:relative;padding-bottom:95%;height:0;overflow:hidden;">
+  <iframe src="https://tahirali-biomics2.shinyapps.io/climate-explorer-app/"
+          style="position:absolute;top:0;left:0;width:100%;height:100%;"
+          frameborder="0"
+          sandbox="allow-scripts allow-same-origin allow-forms"
+          title="Climate Explorer Shiny app"></iframe>
+</div>

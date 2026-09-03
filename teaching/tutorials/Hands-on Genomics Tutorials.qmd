@@ -1,0 +1,91 @@
+---
+title: "Hands-on Genomics Tutorials"
+description: "Practical, reproducible exercises for genomic data analysis."
+page-layout: full
+body-classes: tutorial-index-page
+format:
+  html:
+    toc: false
+---
+
+::: {.page-intro}
+Welcome to a collection of hands-on bioinformatics exercises designed to build practical skills in genomics, data analysis, and computational biology. The sequence moves from raw sequencing reads to filtered variants and population-genomic interpretation, using realistic workflows and modern tools.
+
+Each tutorial is written for guided or independent use. Commands can be inspected and copied directly, but the emphasis remains on understanding the biological purpose of each step, checking quality, and interpreting the output responsibly.
+:::
+
+::: {.tutorial-grid}
+::: {.tutorial-card}
+<span class="eyebrow">Pipeline · Part 1</span>
+
+### FASTQ to VCF
+
+Access an HPC system, inspect FASTQ files, run quality control, trim reads and map them to a reference genome.
+
+[Start Practical 1](practical_day1.html){.card-link}
+:::
+
+::: {.tutorial-card}
+<span class="eyebrow">Pipeline · Part 2</span>
+
+### BAM to filtered variants
+
+Filter alignments, call and assess variants, explore VCF files and perform an initial PCA.
+
+[Start Practical 2](practical_day2.html){.card-link}
+:::
+
+::: {.tutorial-card}
+<span class="eyebrow">Population genomics</span>
+
+### Population differentiation and functional insights
+
+Move from SNP-level differentiation to biological interpretation: estimate $F_{ST}$, identify high-differentiation regions, connect candidates with functional evidence, and integrate climate data.
+
+[Start Practical 3](practical_day3.html){.card-link}
+:::
+
+::: {.tutorial-card}
+<span class="eyebrow">Research project · Part 1</span>
+
+### Candidate-gene discovery
+
+Compare nucleotide diversity ($\pi$), Tajima's D and $F_{ST}$ between defence and background genomic regions. Detect differentiation outliers, map them to annotated genes, and interpret evolutionary signals using public *Arabidopsis thaliana* data from the 1001 Genomes Project.
+
+[Start Research Project 1](practical_day4.html){.card-link}
+:::
+
+::: {.tutorial-card}
+<span class="eyebrow">Research project · Part 2</span>
+
+### GO enrichment of high-$F_{ST}$ genes
+
+Summarise SNP-level $F_{ST}$ at gene level, test Gene Ontology enrichment with topGO's Fisher and KS statistics, and interpret enriched biological processes in the context of defence-related selection.
+
+[Start Research Project 2](Practical_Day_6.html){.card-link}
+:::
+
+::: {.tutorial-card}
+<span class="eyebrow">RADseq workflow</span>
+
+### De novo RADseq workflow
+
+Integrate Stacks, RADstackshelpR and SNPfiltR for parameter optimisation, de novo SNP discovery, systematic filtering, and quality validation in non-model species.
+
+[Open workflow](stacks_tutorial.html){.card-link}
+:::
+
+::: {.tutorial-card}
+<span class="eyebrow">Command line</span>
+
+### AWK + SED quick reference
+
+Consult the AWK and SED commands used throughout the pipeline, organised by biological purpose with reusable syntax, explanatory notes, and common pitfalls.
+
+[Open reference](awk_sed_reference.html){.card-link}
+:::
+:::
+
+::: {.section-note}
+These materials support teaching and self-study. Computational tutorial pages with pre-rendered figures are preserved as static HTML, so publishing the website does not require access to the original HPC directories or course datasets. The [interactive learning tools](../apps/interactive.html) and [course companions](../course-companions/interactive-course-companions.html) are maintained separately.
+:::

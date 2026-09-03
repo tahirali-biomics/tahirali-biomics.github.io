@@ -1,0 +1,174 @@
+---
+title: "Publications"
+description: "Peer-reviewed research spanning evolutionary genomics, phylogeography, systematics, microbiomes and plant adaptation."
+page-layout: full
+format:
+  html:
+    toc: false
+---
+
+::: {.page-intro}
+Research across evolutionary genomics, phylogeography, systematics, plant–microbe interactions and climate adaptation. Use the search field to filter by author, topic, journal or year.
+:::
+
+<div class="pub-toolbar">
+  <label for="pub-filter">Search publications</label>
+  <input id="pub-filter" type="search" placeholder="Try “genomics”, “2026” or a journal name" autocomplete="off">
+</div>
+
+<div id="publications-list">
+
+<!-- 2026 -->
+<h2 class="pub-year">2026</h2>
+
+<div class="publication">
+  <p><strong>Ali, T., Schmitz, G., Portalier, S., Büdenbender, S., Schäfer, Y., Otto, M., Fulgione, A., Novikova, P., Wiehe, T., and de Meaux, J.</strong> Disentangling Drift and Selection in Local Endangered Plant Populations Using Temporal Genomics and Language Models. <em>(in preparation)</em>.</p>
+</div>
+
+<div class="publication">
+  <p><strong>Floret, J., Linstädter, A., Zhang, H., Hesen, V., Portalier, S., Weinand, L., Bustarret, G., Bell, K., Roux, F., Leroy, T., Ali, T., Takou, M., Schmitz, G., Kopriva, S., and de Meaux, J.</strong> (2026) Dozens of genetic variants sustain adaptation to urban spatial heterogeneity in <em>Arabidopsis thaliana</em>. <em>(bioRxiv)</em>, <a href="https://www.biorxiv.org/content/10.64898/2026.06.27.734931v1" target="_blank" rel="noopener noreferrer">https://www.biorxiv.org/content/10.64898/2026.06.27.734931v1</a></p>
+</div>
+
+<div class="publication">
+  <p><strong>	Abdelwahed, L., Favre-Bac, L., Rahnamae, N., Way, F., Poulain, N., Ali, T., Eskelinen, A., Till-Bottraud, I., and de Meaux, J.</strong> (2026) Species-specific drivers of genetic diversity are decoupled from plant community diversity. <em>bioRxiv</em>, <a href="https://www.biorxiv.org/content/10.64898/2026.06.25.734591v1" target="_blank" rel="noopener noreferrer">https://www.biorxiv.org/content/10.64898/2026.06.25.734591v1</a></p>
+</div>
+
+<div class="publication">
+  <p><strong>Rahnamae, N., L. Metzger, L. Hördemann, K. Korfmann, A. K. Khan, C. I. Dent, S. Amar, R. Y. Wijfjes, T. Ali, G. Schmitz, B. Stich, A. Tellier, and de Meaux, J.</strong> (2026) Contemporary hybridization among <em>Arabis</em> floodplain species creates opportunities for adaptation . <em>New Phytologist</em>, <a href="https://doi.org/10.1111/nph.70779" target="_blank" rel="noopener noreferrer">https://doi.org/10.1111/nph.70779</a></p>
+</div>
+
+<!-- 2025 -->
+<h2 class="pub-year">2025</h2>
+
+<div class="publication">
+  <p><strong>Khan, A. S., S. M. Zumkeller, G. Schmitz, I. Calic, T. Ali, N. Rahnamae, L. Hoerdemann, L. Abdelwahed, J. J. Szymanski, and de Meaux, J.</strong> (2025) The complex molecular basis of enhanced stress resilience in extreme drought-tolerant <em>Arabis</em> grassland species. <a href="https://doi.org/10.1101/2025.10.02.680103" target="_blank" rel="noopener noreferrer">https://doi.org/10.1101/2025.10.02.680103</a></p>
+</div>
+
+<div class="publication">
+  <p><strong>Tran, N. L. T., T. Ali, G. Schmitz, and J. de Meaux.</strong> (2025) Heat-Induced Secondary Dormancy Contributes to Local Adaptation in <em>Arabidopsis thaliana</em>. <em>Molecular Ecology</em>, e70086. <a href="https://doi.org/10.1111/mec.70086" target="_blank" rel="noopener noreferrer">https://doi.org/10.1111/mec.70086</a></p>
+</div>
+
+<!-- 2023 -->
+<h2 class="pub-year">2023</h2>
+
+<div class="publication">
+  <p><strong>Schmey, T., Small, C., Hoyoz, L. M., Ali, T., Gamboa, S., Mamami, B., Sepulveda, G. C., Thines, M., Stam, R.</strong> (2023) Small-spored <em>Alternaria</em> spp. (section Alternaria) are common pathogens on wild tomato species. <em>Environmental Microbiology</em>, 25(10), 1830–1846. <a href="https://doi.org/10.1111/1462-2920.16394" target="_blank" rel="noopener noreferrer">https://doi.org/10.1111/1462-2920.16394</a></p>
+</div>
+
+<!-- 2022 -->
+<h2 class="pub-year">2022</h2>
+
+<div class="publication">
+  <p><strong>Kitner, M., Thines, M., Sedlářová, M., Vaculná, L., Bán, R., Körösi, K., Iwebor, M., Antonova, T., Ali, T., Nádvorník, P., Lebeda, A., Spring, O.</strong> (2022) Genetic structure of <em>Plasmopara halstedii</em> populations across Europe and South Russia. <em>Plant Pathology</em>, 72, 361–375. <a href="https://doi.org/10.1111/ppa.13666" target="_blank" rel="noopener noreferrer">https://doi.org/10.1111/ppa.13666</a></p>
+</div>
+
+<!-- 2021 -->
+<h2 class="pub-year">2021</h2>
+
+<div class="publication">
+  <p><strong>Vaculná, L., Majeský, Ľ., Ali, T., Seregin, P. A., Prausová, R., Kapler, A., Iakushenko, D., Thines, M., Kitner, M.</strong> (2021) Phylogeography and population genetic diversity of endangered species <em>Adenophora liliifolia</em> (Campanulaceae). <em>Conservation Genetics</em>. <a href="https://doi.org/10.1007/s10592-021-01396-5" target="_blank" rel="noopener noreferrer">https://doi.org/10.1007/s10592-021-01396-5</a></p>
+</div>
+
+<!-- 2020 -->
+<h2 class="pub-year">2020</h2>
+
+<div class="publication">
+  <p><strong>Ali, T.</strong> (2020) A conceptual framework and toolkit for phylogeography and landscape genomics. <em>Critical Reviews in Plant Sciences</em>. <a href="https://doi.org/10.1080/07352689.2020.1830232" target="_blank" rel="noopener noreferrer">https://doi.org/10.1080/07352689.2020.1830232</a></p>
+</div>
+
+<div class="publication">
+  <p><strong>Thines, M., Buaya, A., Ali, T., Brand, T.</strong> (2020) Peronospora aquilegiicola made its way to Germany: the start of a new pandemic? <em>Mycological Progress</em>, 19, 791-798. <a href="https://doi.org/10.1007/s11557-020-01596-2" target="_blank" rel="noopener noreferrer">https://doi.org/10.1007/s11557-020-01596-2</a></p>
+</div>
+
+<!-- 2019 -->
+<h2 class="pub-year">2019</h2>
+
+<div class="publication">
+  <p><strong>Ali, T., Muñoz-Fuentes, V., Çelik, A., Schmuker, A., Buch, A., Dutbayev, A., Runge, F., Khaliq, I., Solovyeva, I., Gabrielyan, I., Maciá-Vicente, J. G., Glynou, K., Nigrelli, L., Vakhrusheva, L., Kitner, M., Ploch, S., Xia, X., Nowak, C., Thines, M.</strong> (2019) Out of Transcaucasia: Origin of Western and Central Palearctic populations of <em>Microthlaspi perfoliatum</em>. <em>Flora</em>, 253, 127-141. <a href="https://doi.org/10.1016/j.flora.2019.02.012" target="_blank" rel="noopener noreferrer">https://doi.org/10.1016/j.flora.2019.02.012</a></p>
+</div>
+
+<!-- 2018 -->
+<h2 class="pub-year">2018</h2>
+
+<div class="publication">
+  <p><strong>Brandrud, T. E., Schmidt-Stohn, G., Liimatainen, K., Niskanen, T., Frøslev, T. G., Soop, K., Bojantchev, D., Kytövuori, I., Jeppesen, T. S., Bellù, F., Saar, G., Oertel, B., Ali, T., Thines, M., Dima, B.</strong> (2018) <em>Cortinarius</em> sect. <em>Riederi</em>: taxonomy and phylogeny of the new section with European and North American distribution. <em>Mycological Progress</em>, 17, 1323-1354. <a href="https://doi.org/10.1007/s11557-018-1443-0" target="_blank" rel="noopener noreferrer">https://doi.org/10.1007/s11557-018-1443-0</a></p>
+</div>
+
+<div class="publication">
+  <p><strong>Bandini, D., Oertel, B., Ploch, S., Ali, T., Vauras, J., Schneider, A., Scholler, M., Eberhardt, U., Thines, M.</strong> (2018) Revision of some central European species of <em>Inocybe</em> (Fr.: Fr.) Fr. subgenus <em>Inocybe</em>, with the description of five new species. <em>Mycological Progress</em>, 1-48. <a href="https://doi.org/10.1007/s11557-018-1439-9" target="_blank" rel="noopener noreferrer">https://doi.org/10.1007/s11557-018-1439-9</a></p>
+</div>
+
+<!-- 2017 -->
+<h2 class="pub-year">2017</h2>
+
+<div class="publication">
+  <p><strong>Ali, T., Muñoz-Fuentes, V., Çelik, A., Schmuker, A., Buch, A., Dutbayev, A., Runge, F., Khaliq, I., Solovyeva, I., Gabrielyan, I., Maciá-Vicente, J. G., Glynou, K., Nigrelli, L., Vakhrusheva, L., Kitner, M., Ploch, S., Xia, X., Nowak, C., Thines, M.</strong> (2017) Genetic patterns reflecting Pleistocene range dynamics in the annual calcicole plant <em>Microthlaspi erraticum</em> across its Eurasian range. <em>Flora</em>, 236-237, 132-142. <a href="https://doi.org/10.1016/j.flora.2017.09.014" target="_blank" rel="noopener noreferrer">https://doi.org/10.1016/j.flora.2017.09.014</a></p>
+</div>
+
+<div class="publication">
+  <p><strong>Glynou, K., Ali, T., Haghi Kia, S., Thines, M., Maciá-Vicente, J. G.</strong> (2017) Intraspecific genetic diversity in root-endophytic fungi reflects efficient dispersal and environmental adaptation. <em>Molecular Ecology</em>. <a href="https://doi.org/10.1111/mec.14231" target="_blank" rel="noopener noreferrer">https://doi.org/10.1111/mec.14231</a></p>
+</div>
+
+<!-- 2016 -->
+<h2 class="pub-year">2016</h2>
+
+<div class="publication">
+  <p><strong>Ali, T., Runge, F., Ayan, D., Schmuker, A., Solovyeva, I., Nigrelli, L., Buch, A., Xia, X., Ploch, S., Orren, O., Kummer, V., Ҫelik, A., Vakhrusheva, L., Gabrielyan, I., Thines, M.</strong> (2016b) Range-wide complete taxon sampling of <em>Microthlaspi</em> reveals that <em>Microthlaspi erraticum</em> is widespread and ranges from the Alps to the Tien Shan. <em>Flora</em>, 225, 76-81. <a href="https://doi.org/10.1016/j.flora.2016.09.008" target="_blank" rel="noopener noreferrer">https://doi.org/10.1016/j.flora.2016.09.008</a></p>
+</div>
+
+<div class="publication">
+  <p><strong>Ali, T., Schmuker, A., Runge, F., Solovyeva, I., Nigrelli, L., J, P., Buch, A., Xia, X., Ploch, S., Orren, O., Kummer, V., Linde-Laursen, I., Ørgaard, M., Hauser, T. P., Ҫelik, A., Thines, M.</strong> (2016a) Morphology, phylogeny, and taxonomy of <em>Microthlaspi</em> (Brassicaceae, Coluteocarpeae) and related genera. <em>Taxon</em>, 65(1), 79-98. <a href="https://doi.org/10.12705/651.6" target="_blank" rel="noopener noreferrer">https://doi.org/10.12705/651.6</a></p>
+</div>
+
+<div class="publication">
+  <p><strong>Glynou, K., Ali, T., Buch, A., Haghi Kia, S., Ploch, S., Xia, X., Çelik, A., Thines, M., Maciá-Vicente, J. G.</strong> (2016) The local environment determines the assembly of root endophytic fungi at a continental scale. <em>Environmental Microbiology</em>. <a href="https://doi.org/10.1111/1462-2920.13112" target="_blank" rel="noopener noreferrer">https://doi.org/10.1111/1462-2920.13112</a></p>
+</div>
+
+<!-- 2015 -->
+<h2 class="pub-year">2015</h2>
+
+<div class="publication">
+  <p><strong>Cheikh-Ali, Z., Glynou, K., Ali, T., Ploch, S., Kaiser, M., Thines, M., Bode, H. B., Maciá-Vicente, J. G.</strong> (2015) Diversity of exophillic acid derivatives in strains of an endophytic <em>Exophiala</em> sp. <em>Phytochemistry</em>, 118, 83–93. <a href="https://doi.org/10.1016/j.phytochem.2015.08.006" target="_blank" rel="noopener noreferrer">https://doi.org/10.1016/j.phytochem.2015.08.006</a></p>
+</div>
+
+<div class="publication">
+  <p><strong>Kitner, M., Lebeda, A., Sharma, R., Runge, F., Dvorák, P., Ali, T., Choi, Y.-J., Sedláková, B., Thines, M.</strong> (2015) Coincidence of virulence shifts and population genetic changes of <em>Pseudoperonospora cubensis</em> in the Czech Republic. <em>Plant Pathology</em>, 64, 1461–1470. <a href="https://doi.org/10.1111/ppa.12370" target="_blank" rel="noopener noreferrer">https://doi.org/10.1111/ppa.12370</a></p>
+</div>
+
+<!-- 2014 -->
+<h2 class="pub-year">2014</h2>
+
+<div class="publication">
+  <p><strong>Schneider, J. V., Bissiengou, P., Amaral Mdo, C., Ali, T., Fay, M. F., Thines, M., Sosef, M. S., Zizka, G., Chatrou, L. W.</strong> (2014) Phylogenetics, ancestral state reconstruction, and a new infrafamilial classification of the pantropical Ochnaceae (Medusagynaceae, Ochnaceae s.str., Quiinaceae) based on five DNA regions. <em>Molecular Phylogenetics and Evolution</em>, 78, 199–214. <a href="https://doi.org/10.1016/j.ympev.2014.05.018" target="_blank" rel="noopener noreferrer">https://doi.org/10.1016/j.ympev.2014.05.018</a></p>
+</div>
+
+</div>  <!-- Close publications-list div -->
+
+<script>
+  const filterInput = document.getElementById('pub-filter');
+  const publications = document.querySelectorAll('#publications-list .publication');
+  const years = document.querySelectorAll('#publications-list .pub-year');
+
+  function updateYearVisibility() {
+    years.forEach(year => {
+      let item = year.nextElementSibling;
+      let hasVisiblePublication = false;
+      while (item && !item.classList.contains('pub-year')) {
+        if (item.classList.contains('publication') && item.style.display !== 'none') {
+          hasVisiblePublication = true;
+        }
+        item = item.nextElementSibling;
+      }
+      year.style.display = hasVisiblePublication ? '' : 'none';
+    });
+  }
+
+  filterInput.addEventListener('input', () => {
+    const filter = filterInput.value.trim().toLowerCase();
+    publications.forEach(pub => {
+      const text = pub.textContent.toLowerCase();
+      pub.style.display = text.includes(filter) ? '' : 'none';
+    });
+    updateYearVisibility();
+  });
+</script>

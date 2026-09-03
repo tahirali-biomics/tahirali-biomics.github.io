@@ -1,0 +1,436 @@
+---
+title: "Practical Day 2: FASTQ to VCF - Part 2"
+author: "Dr Tahir Ali | AG de Meaux"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    code-copy: true
+    code-fold: true
+    code-summary: "Code"
+    code-overflow: wrap
+---
+
+# Learning Objectives
+
+-   Filtering BAM files
+-   Variant calling
+-   Format conversion: bcf to vcf
+-   Variant filtering
+-   Shorten sample names in vcf file
+-   Count number of variants
+-   Understanding the VCF Format: Extracting and Visualizing Information from VCF Files
+-   First Peek into Your Dataset - Dimensionality Reduction (Principal Component Analysis)
+
+------------------------------------------------------------------------
+
+## Tools to be Used
+
+-   **SAMTOOLS:** Used for processing and filtering alignment files in BAM format
+-   **BCFTOOLS:** Used for variant calling, manipulating BCF/VCF files, and applying filters
+-   **VCFTOOLS:** Used for analyzing, filtering, and summarizing data within VCF files
+-   **R/RSTUDIO** (R-packages: vcfR, tidyverse, adegenet, etc )
+
+------------------------------------------------------------------------
+
+# Connecting to HPC (RAMSES) and Organizing the Workspace
+
+**Connect to the HPC**
+
+For Windows users: Use MobaXterm. For Mac/Linux users: Use the Terminal application.\
+Log in to the HPC cluster using your login credentials.
+
+``` bash
+ssh -Y qbius030@@ramses1.itcc.uni-koeln.de
+# Replace 'qbius030' with your specific username.
+# Enter passphrase for key '/Users/tahirali/.ssh/ramses_key', if prompted:
+# Duo two-factor login for qbius030
+```
+
+**Check Your Current Directory**
+
+``` bash
+pwd
+```
+
+-   If you are not in your home directory, navigate to it:
+
+``` bash
+cd /home/group.kurse/qbius030/
+# Replace 'qbius030' with your specific username.
+```
+
+**Copy Raw Data to Your Home Directory**
+
+``` bash
+cp -r /scratch/tali/Practical_Day_1/sample_project_data .
+```
+
+**Create a Directory for Analysis**
+
+``` bash
+mkdir -p Practical_Day_2/{filtered_bam,variant_calling,variant_filtering}
+```
+
+-   **fastqc**: for storing quality control results of fastq files.
+-   **trimming**: for storing trimmed read files.
+-   **mapping**: for storing read mapping outputs.
+-   **bamqc**: for storing quality control results of bam files.
+
+# Instructions for Running Bioinformatics Jobs on the HPC (RAMSES)
+
+For quality control and downstream processing of FASTQ files,\
+we will execute various tasks on the HPC using Bash scripts with for loops.
+
+**Steps:**
+
+1.  Prepare your script using a text editor and save it as `your_bash_script.sh`.
+
+2.  Submit your job in the terminal using:
+
+``` bash
+sbatch your_bash_script.sh
+```
+
+3.  For more details, consult the [RAMSES Brief Instructions](https://gitlab.git.nrw/uzk-itcc-hpc/itcc-hpc-ramses/-/wikis/Documentation).
+
+# BAM Filtering, Variant Calling, and Filtering
+
+**Create and Submit a SLURM Script for BAM to VCF Analysis**
+
+**Check if required module is installed:**
+
+``` bash
+module avail
+```
+
+**Example SLURM Script** (bam_bcf_vcf.sh)
+
+``` bash
+#!/bin/bash -l
+
+#SBATCH --job-name=bam2vcf
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=8
+#SBATCH --mem=10gb
+#SBATCH --time=01:00:00
+#SBATCH --account=UniKoeln
+#SBATCH --output=/home/group.kurse/qbius030/Practical_Day_2/bam_bcf_vcf.out
+#SBATCH --error=/home/group.kurse/qbius030/Practical_Day_2/bam_bcf_vcf.err
+
+# Define paths
+input_bam_dir="/home/group.kurse/qbius030/Practical_Day_1/mapping"
+output_filtered_bam_dir="/home/group.kurse/qbius030/Practical_Day_2/filtered_bam"
+output_variant_calling_dir="/home/group.kurse/qbius030/Practical_Day_2/variant_calling"
+output_variant_filtering_dir="/home/group.kurse/qbius030/Practical_Day_2/variant_filtering"
+reference_fasta="/home/group.kurse/qbius030/sample_project_data/reference_data/Arabidopsis_thaliana.TAIR10.dna.chromosome.4_98K.fasta"
+
+# Create output directories if they do not exist
+mkdir -p "$output_filtered_bam_dir" "$output_variant_calling_dir" "$output_variant_filtering_dir"
+
+# Load required modules
+module load bio/SAMtools/1.18-GCC-12.3.0
+module load bio/BCFtools/1.18-GCC-12.3.0
+
+# List BAM file prefixes
+samples=$(ls "${input_bam_dir}"/*Chr4_repair.sorted.bam | xargs -n 1 basename | sed 's/\.Chr4_repair.sorted.bam//')
+echo "Samples: $samples"
+
+##### Process each BAM file
+# Quality filtering and removing PCR duplicates with Samtools 
+# keep only properly aligned paired-end reads (-f 3)
+# Mapping quality (-q 30)
+# Exclude secondary alignments and reads failing quality checks (-F 264)
+# Remove duplicates (samtools rmdup)
+
+for sample in $samples; do
+    echo "Processing $sample..."
+
+    # Filter and remove PCR duplicates
+    samtools view -b -o "${output_filtered_bam_dir}/${sample}.Chr4_BamQualFilt-f3Q30F264.bam" \
+        -f 3 -q 30 -F 264 "${input_bam_dir}/${sample}.Chr4_repair.sorted.bam"
+
+    samtools rmdup -s "${output_filtered_bam_dir}/${sample}.Chr4_BamQualFilt-f3Q30F264.bam" \
+        "${output_filtered_bam_dir}/${sample}.Chr4_BamQualFilt-f3Q30F264_nodup.bam"
+
+    # Index filtered BAM file
+    samtools index "${output_filtered_bam_dir}/${sample}.Chr4_BamQualFilt-f3Q30F264_nodup.bam"
+done
+
+## Variant calling with bcftools
+
+# Call variants using bcftools mpileup (15 min) and call (3-5 minutes)commands
+# Activate Base Alignment Quality computation (-E)
+# Minimum base quality (-q 30)
+# Minimum calling threshold for variant alleles (-p 0.01) Variants with an allele frequency of at least 1% will be called.
+
+echo "Starting variant calling..."
+bcftools mpileup -E -q 30 --threads 8 -o "${output_variant_calling_dir}/SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP.bcf" \
+    --annotate FORMAT/AD,FORMAT/DP -f "$reference_fasta" -b <(ls "${output_filtered_bam_dir}"/*nodup.bam)
+
+bcftools call -c -p 0.01 -O z --threads 8 -o "${output_variant_calling_dir}/SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_raw.vcf.gz" \
+    "${output_variant_calling_dir}/SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP.bcf"
+
+# Filter monomorphic sites
+echo "Filtering monomorphic variants..."
+bcftools view -i 'AC>0' "${output_variant_calling_dir}/SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_raw.vcf.gz" \
+    -o "${output_variant_calling_dir}/SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_OnlyPolymorphic.vcf.gz"
+
+# Simplify sample names
+echo "Simplifying sample names..."
+zcat "${output_variant_calling_dir}/SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_OnlyPolymorphic.vcf.gz" | \
+awk -F '\t' 'BEGIN {OFS="\t"} {if ($1 ~ /^#CHROM/) {for (i=10; i<=NF; i++) {sub(".*/", "", $i); sub("\\.Chr4_BamQualFilt-f3Q30F264_nodup\\.bam", "", $i)}} print}' | \
+gzip -c > "${output_variant_calling_dir}/SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_OnlyPolymorphic_shortNam.vcf.gz"
+
+# Load vcftools and perform additional filtering
+module load bio/VCFtools/0.1.16-GCC-12.3.0
+
+echo "Applying additional filters..."
+vcftools --gzvcf "${output_variant_calling_dir}/SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_OnlyPolymorphic_shortNam.vcf.gz" \
+    --minDP 10 --minGQ 20 --minQ 30 --max-missing 0.80 --remove-indels --max-alleles 2 --recode --recode-INFO-all --stdout | \
+gzip -c > "${output_variant_filtering_dir}/SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_OnlyPolymorphic_shortNam_DP10GQ20Q30_Mis80NoIndel.vcf.gz"
+
+echo "Pipeline completed."
+```
+
+**Fixing the “DOS Line Breaks” Error on a HPC Cluster**
+
+-   If you see:
+
+``` bash
+sbatch: error: Batch script contains DOS line breaks (\r\n)
+```
+
+**Fix with:**
+
+``` bash
+dos2unix fastqc.sh
+cat -v fastqc.sh  # Check for ^M characters
+```
+
+**Check job status:**
+
+``` bash
+squeue -u qbius030
+```
+
+# Understanding the VCF Format
+
+**Extracting Information from VCF Files**
+
+``` bash
+# List samples
+bcftools query -l SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_OnlyPolymorphic_shortNam_DP10GQ20Q30_Mis80NoIndel.vcf.gz
+
+# Count number of samples
+bcftools query -l SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_OnlyPolymorphic_shortNam_DP10GQ20Q30_Mis80NoIndel.vcf.gz | wc -l
+
+# List of positions
+bcftools query -f '%POS\n' SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_OnlyPolymorphic_shortNam_DP10GQ20Q30_Mis80NoIndel.vcf.gz | head -n 10
+
+# List of positions and alleles
+bcftools query -f '%CHROM %POS %REF %ALT\n' SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_OnlyPolymorphic_shortNam_DP10GQ20Q30_Mis80NoIndel.vcf.gz | head -n 10
+
+# Extracting per-sample tags
+bcftools query -f '%CHROM %POS[\t%GT\t%PL]\n' SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_OnlyPolymorphic_shortNam_DP10GQ20Q30_Mis80NoIndel.vcf.gz | head -n 10
+```
+
+# Dimentionality Reduction
+
+You need to perform this part in R, download required files to your local system and copy these to newly created direcory named "VCF2PCA"
+
+-   Accesions.csv
+
+-   SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_OnlyPolymorphic_shortNam_DP10GQ20Q30_Mis80NoIndel.vcf.gz
+
+-   At_Chr4.fasta
+
+-   At_Chr4.gff
+
+```{.r}
+### Step 1: Load necessary libraries ----
+# These libraries help in handling VCF data, visualizing results, and performing PCA.
+library(vcfR)          # To work with VCF (Variant Call Format) files
+library(tidyverse)     # For data manipulation and visualization
+library(adegenet)      # For genetic data analysis
+library(factoextra)    # For enhanced PCA visualizations
+library(FactoMineR)    # For multivariate analysis (e.g., PCA)
+library(RColorBrewer)  # For beautiful color palettes
+library(ggrepel)       # For better label placement in ggplot
+library(htmlwidgets)   # For interactive widgets
+
+### Step 2: Set working directory ----
+# Set the directory where your data files are stored
+setwd("/home/tahirali/RAMSES_mount/tali/qbio/Practical_Day_2/VCF2PCA") # Adjust path as needed
+getwd()  # Confirm the directory
+
+### Step 3: Input data ----
+# Import metadata, VCF file, reference genome, and annotation file
+
+accessions <- read.csv("Accesions.csv") # Metadata linking samples to populations
+vcf <- read.vcfR("SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_OnlyPolymorphic_shortNam_DP10GQ20Q30_Mis80NoIndel.vcf.gz", verbose = FALSE) # VCF file containing variants
+dna <- ape::read.dna("At_Chr4.fasta", format = "fasta") # Reference genome sequence
+gff <- read.table("At_Chr4.gff", sep="\t", quote="") # Genome annotation file
+
+### Step 4: Perform PCA (Principal Component Analysis) ----
+# PCA simplifies high-dimensional genetic data to a few informative axes.
+
+# Convert VCF to a genind object (compatible with genetic data analysis tools)
+genind_vcf <- vcfR2genind(vcf)
+
+# Scale the data (normalize allele counts for PCA)
+genind_vcf_scaled = scaleGen(genind_vcf, NA.method = "mean")
+
+# Perform PCA with 10 axes retained
+pca <- dudi.pca(genind_vcf_scaled, cent = TRUE, scale = FALSE, scannf = FALSE, nf = 10)
+
+# Visualize eigenvalues (variance explained by each axis)
+axis_all = pca$eig / sum(pca$eig)
+barplot(axis_all[1:10], main = "PCA eigenvalues") # Barplot of variance explained
+
+### Step 5: Associate PCA results with metadata ----
+# Map sample names and populations to PCA results
+pca_axis <- pca$li
+pca_eigenval <- pca$eig[1:10]
+str(pca_axis)
+
+# set names
+ind_names<- rownames(genind_vcf_scaled)
+pca_axis$ind <- ind_names
+ind_names
+
+# Add a new column named "Population" to your data frame
+head(accessions)
+population_labels <- accessions[match(ind_names, accessions$SRR_No), "pop"]
+
+pca_axis$Population <- population_labels # Add population info
+pop <- population_labels
+
+# remake data.frame
+pca_2 <- as_tibble(data.frame(pca_axis, population_labels))
+
+n <- length(pca_eigenval)
+n # use this number PC=1:n
+
+### Step 6: Plot PCA results ----
+# first convert to percentage variance explained
+pve <- data.frame(PC = 1:n, pve = pca_eigenval/sum(pca_eigenval)*100)
+
+# make plot
+a <- ggplot(pve, aes(PC, pve)) + geom_bar(stat = "identity")
+a + ylab("Percentage variance explained") + theme_light()
+
+# calculate the cumulative sum of the percentage variance explained
+cumsum(pve$pve)
+
+# Plot PC1 vs PC2 with population colors
+PC1_2 <- ggplot(pca_2, aes(Axis1, Axis2, col = pop)) + 
+  geom_point(size = 3) + 
+  scale_colour_manual(values = c("red", "blue")) +
+  coord_equal() + 
+  theme_light() +
+  xlab(paste0("PC1 (", signif(pve$pve[1], 3), "%)")) + ylab(paste0("PC2 (", signif(pve$pve[2], 3), "%)"))
+PC1_2
+
+# Plot PC1 vs PC3 with population colors
+PC1_3 <- ggplot(pca_2, aes(Axis1, Axis3, col = pop)) + 
+  geom_point(size = 3) + 
+  scale_colour_manual(values = c("red", "blue")) +
+  coord_equal() + 
+  theme_light() +
+  xlab(paste0("PC1 (", signif(pve$pve[1], 3), "%)")) + ylab(paste0("PC3 (", signif(pve$pve[3], 3), "%)"))
+PC1_3
+
+# Plot PC2 vs PC3 with population colors
+PC2_3 <- ggplot(pca_2, aes(Axis2, Axis3, col = pop)) + 
+  geom_point(size = 3) + 
+  scale_colour_manual(values = c("red", "blue")) +
+  coord_equal() + 
+  theme_light() +
+  xlab(paste0("PC2 (", signif(pve$pve[2], 3), "%)")) + ylab(paste0("PC3 (", signif(pve$pve[3], 3), "%)"))
+PC2_3 
+
+# Save plots to your working directory
+ggsave("PCA12.png", PC1_2, width = 1800, height = 1200, units = "px")
+ggsave("PCA13.png", PC1_3, width = 1800, height = 1200, units = "px")
+ggsave("PCA23.png", PC2_3, width = 1800, height = 1200, units = "px")
+
+# Create a labeled plot
+pca_label <- ggplot(pca_2, aes(Axis1, Axis2, col = pop, label = ind)) + 
+  geom_point(size = 2) + # size of points
+  geom_text_repel(show.legend = FALSE, size=2) +  # Use geom_text_repel() for label repulsion
+  scale_colour_manual(values = c("red", "blue")) + 
+  coord_equal() +
+  theme_light() +
+  xlab(paste0("PC1 (", signif(pve$pve[1], 2), "%)")) +
+  ylab(paste0("PC2 (", signif(pve$pve[2], 2), "%)"))
+pca_label
+
+### Step 7: Interactive 3D Visualization ----
+# Use plotly to create an interactive 3D plot of PCA results
+library(plotly)
+#3D plots
+pca_3d <- plot_ly(pca_2, x = ~Axis1, y = ~Axis2, z = ~Axis3, color =pop, colors = c("red", "blue") ) %>%
+  add_markers(size = 12)
+
+pca_3d <- pca_3d %>%
+  layout(
+    title = "Arabidopsis thaliana Accessions (Sweden & Spain)",
+    scene = list(bgcolor = "#e5ecf6")
+  )
+pca_3d
+saveWidget(pca_3d, "3D_PCA.html")
+
+### Step 8: Multidimensional Splom Visualization ----
+# Explore relationships between multiple principal components simultaneously
+
+cumsum(pve$pve)
+
+tit = 'Total Explained Variance = 59.98 %'
+
+axis = list(showline=FALSE,
+            zeroline=FALSE,
+            gridcolor='#ffff',
+            ticklen=4)
+
+fig <- pca_2 %>%
+  plot_ly() %>%
+  add_trace(
+    type = 'splom',
+    dimensions = list(
+      list(label='PC1 (28.6%)', values=~Axis1),
+      list(label='PC2 (11.9%)', values=~Axis2),
+      list(label='PC3 (10.8%)', values=~Axis3),
+      list(label='PC4 (8.7%)', values=~Axis4)
+    ),
+    color = ~pop, colors = c("red", "blue", "green"),
+    marker = list(
+      size = 7
+    )
+  ) %>% style(diagonal = list(visible = F)) %>%
+  layout(
+    title= tit,
+    hovermode='closest',
+    dragmode= 'select',
+    plot_bgcolor='rgba(240,240,240, 0.95)',
+    xaxis=list(domain=NULL, showline=F, zeroline=F, gridcolor='#ffff', ticklen=4),
+    yaxis=list(domain=NULL, showline=F, zeroline=F, gridcolor='#ffff', ticklen=4),
+    xaxis2=axis,
+    xaxis3=axis,
+    xaxis4=axis,
+    yaxis2=axis,
+    yaxis3=axis,
+    yaxis4=axis
+  )
+options(warn=-1)
+fig
+```
+
+------------------------------------------------------------------------
+**Wrapping Up Practical Day Two**
+
+You’ve made great progress today and demonstrated excellent teamwork and dedication. It’s inspiring to see your enthusiasm as you dive deeper into these concepts.
+
+Remember, every step you take brings you closer to mastering these skills. Keep up the curiosity and effort, and don’t hesitate to explore further on your own!
+
+Looking forward to seeing you next time for more exciting challenges and discoveries. Have a great evening! 🌱

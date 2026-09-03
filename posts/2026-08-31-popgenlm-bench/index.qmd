@@ -1,0 +1,55 @@
+---
+title: "Why I am building PopGenLM Bench"
+description: "The first public step toward a population-genetic evaluation layer for genomic language models."
+date: 2026-08-31
+categories:
+  - Genomic language models
+  - Population genomics
+  - Open source
+  - Build note
+image: ../../assets/popgenlm/benchmark-overview.png
+---
+
+Genomic language models can score millions of variants, but a completed model run does not by itself establish biological validity. Before interpreting a score, I want to know whether the alleles matched the intended reference, whether model and software versions were recorded, whether sequence orientation was treated consistently, and whether the output behaves sensibly against independent evolutionary evidence.
+
+That is the reason for **PopGenLM Bench**, my first open-source scientific AI engineering project.
+
+## Information about what?
+
+Reading Chapter 2 of Christoph Adami's *The Evolution of Biological Information* sharpened the question behind this project. In information theory, a sequence or score is not informative in isolation. Information is a relationship: knowing one variable must reduce uncertainty about a specified target across an appropriate ensemble.
+
+For a genomic language-model score, I therefore need to ask: information about what? A score may reflect sequence plausibility, evolutionary conservation, regulatory context, population frequency or a technical property of the training data. These possibilities are related, but they are not equivalent. Producing a confident number does not establish which relationship has been learned.
+
+This is why PopGenLM Bench is designed as an evaluation layer rather than a score viewer. Its task is to state the target, define the comparison set, measure whether the model adds predictive value beyond simpler baselines, and expose where that relationship fails.
+
+## The first deliberately small milestone
+
+Version 0.1 does one thing carefully: it scores exactly 100 deterministic SNVs with the published GPN Brassicales model. The variants occupy a safe internal section of the public *Arabidopsis thaliana* region used in GPN's official example, ensuring complete sequence context for every site.
+
+The run uses pinned upstream code and model revisions, validates every REF allele against the FASTA, invokes GPN's maintained variant-effect command, and records input and output hashes, package versions, device, runtime, and the exact command.
+
+```bash
+uv python install 3.13
+uv sync --extra gpn --group dev
+uv run popgenlm demo --project-root .
+```
+
+## Verified result
+
+The model returned all **100 expected scores**. The median alternate-minus-reference score was **−1.0309**, with **77%** of the deterministic alternate alleles scoring below their reference allele. The complete CPU run took **80.7 seconds**.
+
+![Verified PopGenLM benchmark overview](../../assets/popgenlm/benchmark-overview.png){fig-alt="Four-panel summary of GPN scores showing the score distribution, positional profile, ranked profile, and bootstrap interval for the median."}
+
+## What this result does not mean
+
+The distribution cannot be used to infer natural selection or biological information content. These variants were generated deterministically from one public sequence region; they were not sampled from a natural population and do not form an evolutionary ensemble suitable for that claim.
+
+This distinction is central to the project. A technically successful run demonstrates that the inference and validation machinery works. Biological support requires an independent benchmark with observed population variants, allele-frequency information, uncertainty estimates, and appropriate null comparisons.
+
+## What comes next
+
+The next milestone will use a documented public *A. thaliana* population dataset. It will test whether GPN scores reduce uncertainty about allele-frequency classes beyond appropriate sequence baselines, using effect sizes, block-bootstrap confidence intervals, permutation tests and sensitivity analyses. Later milestones will incorporate conservation scores, genomic annotation classes and controls for genomic and phylogenetic dependence.
+
+The guiding principle is now clearer to me: a model output becomes scientific evidence only when its predictive relationship to biology is explicit, reproducible and tested outside the model that produced it.
+
+The evolving project overview, verified outputs, and roadmap are available on the [PopGenLM Bench page](../../popgenlm.html). The complete statistical workflow can also be rerun in the [verified Colab notebook](https://colab.research.google.com/github/tahirali-biomics/tahirali-biomics.github.io/blob/main/notebooks/popgenlm-bench-demo.ipynb). The public package repository will become active with the first reviewed release.

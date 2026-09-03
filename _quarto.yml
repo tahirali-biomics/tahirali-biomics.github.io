@@ -1,25 +1,70 @@
 project:
   type: website
+  output-dir: _site
+  render:
+    - "*.qmd"
+    - "posts/**/*.qmd"
+    - "teaching/teaching.qmd"
+    - "teaching/course-companions/interactive-course-companions.qmd"
+    - "teaching/exercises/exercises.qmd"
+    - "teaching/apps/interactive.qmd"
+    - "teaching/tutorials/Hands-on Genomics Tutorials.qmd"
+    - "workshops/workshops.qmd"
+  resources:
+    - "profile.webp"
+    - "project*.webp"
+    - "assets/**"
+    - "teaching/apps/*.html"
+    - "teaching/apps/**/*_files/**"
+    - "teaching/tutorials/*.html"
+    - "teaching/tutorials/*.png"
+    - "teaching/tutorials/*.webp"
+    - "teaching/tutorials/*.txt"
+    - "teaching/tutorials/**/*_files/**"
+    - "workshops/*.html"
+    - "workshops/figs/**"
+    - "workshops/**/*_files/**"
+    - "notebooks/**"
+
+lang: en
 
 website:
   title: "Dr. Tahir Ali"
   site-url: "https://tahirali-biomics.github.io"
-  favicon: profile.jpg
-  navbar:
-    pinned: true
-    left:
-      - text: "Home"
+  description: "Computational biologist building trustworthy scientific AI for genomics, research, and education."
+  favicon: profile.webp
+  google-analytics: "G-0LPGXESG7T"
+  open-graph: true
+  twitter-card: true
+  page-navigation: true
+  back-to-top-navigation: true
+  sidebar:
+    style: docked
+    search: false
+    collapse-level: 1
+    contents:
+      - text: Home
         file: index.qmd
-      - text: "CV"
-        file: cv.qmd
-      - text: "Projects"
+      - text: PopGenLM
+        file: popgenlm.qmd
+      - text: Genomes to AI
+        file: genomes-to-ai.qmd
+      - text: Projects
         file: projects.qmd
-      - text: "Publications"
+      - text: Publications
         file: publications.qmd
-      - text: "Workshops"
-        file: workshops.qmd
+      - text: Résumé
+        file: cv.qmd
+      - text: Teaching
+        file: teaching/teaching.qmd
+      - text: Workshops
+        file: workshops/workshops.qmd
+      - text: GitHub
+        href: "https://github.com/tahirali-biomics"
+        target: "_blank"
   page-footer:
-    left: "© 2024 Dr. Tahir Ali"
+    left: "© 2026 Dr. Tahir Ali"
+    center: "Computational biology · Scientific AI · Education"
     right: "Built with [Quarto](https://quarto.org/)"
 
 format:
@@ -27,3 +72,11 @@ format:
     theme: cosmo
     css: styles.css
     toc: false
+    smooth-scroll: true
+    anchor-sections: true
+    link-external-newwindow: true
+    code-copy: true
+    code-overflow: wrap
+
+execute:
+  enabled: false

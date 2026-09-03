@@ -1,0 +1,19 @@
+---
+title: "FST Interactive App"
+format:
+  html:
+    toc: false
+---
+
+Explore population‐genetic differentiation through real or simulated data.  
+[Open in a new tab](https://tahirali-biomics.shinyapps.io/drift-fst-app/)
+
+[← Back to Interactive Apps](interactive.html)
+
+<div class="app-container" style="position:relative;padding-bottom:100%;height:0;overflow:hidden;">
+  <iframe src="https://tahirali-biomics.shinyapps.io/drift-fst-app/"
+          style="position:absolute;top:0;left:0;width:100%;height:100%;"
+          frameborder="0"
+          sandbox="allow-scripts allow-same-origin allow-forms"
+          title="FST Shiny app"></iframe>
+</div>

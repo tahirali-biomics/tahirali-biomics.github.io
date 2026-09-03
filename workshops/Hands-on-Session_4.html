@@ -1,0 +1,1941 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dr Tahir Ali | AG de Meaux | TRR341 Ecological Genomics | University of Cologne">
+
+<title>Session 4: Multivariate &amp; Dimensionality Reduction – Dr. Tahir Ali</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../profile.webp" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-fdaeddbba6fa95a0f13bcc20c9a3fb04.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-0LPGXESG7T"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
+</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="content-dense docked nav-sidebar quarto-light technical-page">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Session 4: Multivariate &amp; Dimensionality Reduction</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item"><div class="sidebar-item-container"><a href="../index.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Home</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../popgenlm.html" class="sidebar-item-text sidebar-link"><span class="menu-text">PopGenLM</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../genomes-to-ai.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Genomes to AI</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../projects.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Projects</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../publications.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Publications</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../cv.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Résumé</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../teaching/teaching.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Teaching</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="workshops.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">Workshops</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank"><span class="menu-text">GitHub</span></a></div></li></ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul class="technical-toc-list"><li><a href="#1-load-and-prepare-data-same-pipeline-as-session-3">1. LOAD AND PREPARE DATA (Same Pipeline as Session 3)</a></li><li><a href="#2-pca-ecological-gradients-from-correlated-predictors">2. PCA: Ecological Gradients from Correlated Predictors</a></li><li><a href="#3-loadings-what-does-each-pc-mean-biologically">3. Loadings — “What Does Each PC Mean Biologically?”</a></li><li><a href="#4-climate-niche-space-where-presences-sit-in-pca-space">4. Climate Niche Space — Where Presences Sit in PCA Space</a></li><li><a href="#5-umap-nonlinear-visualization-of-environmental-space">5. UMAP — Nonlinear Visualization of Environmental Space</a></li><li><a href="#6-pca-vs-umap-when-to-use-each">6. PCA vs UMAP — When to Use Each</a></li><li><a href="#7-complete-practical-workflow">7. Complete Practical Workflow</a></li><li><a href="#8-reasoning-prompts">8. Reasoning Prompts</a></li><li><a href="#9-session-summary">9. Session Summary</a></li></ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Session 4: Multivariate &amp; Dimensionality Reduction</h1>
+<p class="subtitle lead">Advanced Spatial Ecology &amp; Species Distribution Modeling</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dr Tahir Ali | AG de Meaux | TRR341 Ecological Genomics | University of Cologne </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cell">
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup chunk - runs before everything else</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>, <span class="at">message =</span> <span class="cn">FALSE</span>, <span class="at">warning =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create output directory if it doesn't exist</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>output_dir <span class="ot">&lt;-</span> <span class="st">"/run/media/tahirali/Expansion/github/spatial-ecology-workshop/output/Session_4"</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(output_dir, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="session-overview" class="level2">
+<h2 class="anchored" data-anchor-id="session-overview"><strong>Session Overview</strong></h2>
+<p><strong>Learning Outcomes:</strong></p>
+<ul>
+<li><p>Interpret PCA axes as <strong>ecological gradients</strong></p></li>
+<li><p>Read <strong>loadings</strong> (what “defines” each gradient)</p></li>
+<li><p>Use UMAP/t-SNE for visualization (not inference)</p></li>
+<li><p>Build <strong>climate niche space</strong> plots</p></li>
+</ul>
+<p> <strong>Connection to Session 3:</strong> In Session 3 we diagnosed collinearity (VIF &gt; 10 for several temperature variables) and used regularization to handle it. Here we take a different approach — instead of selecting or dropping variables, PCA <strong>creates new uncorrelated axes</strong> that capture the major environmental gradients. We then visualize the species’ climate niche in this reduced space.</p>
+<div class="cell">
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 1: LOAD REQUIRED PACKAGES</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Packages carried over from Session 3 + new ones for dimensionality reduction</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)      <span class="co"># Professional-looking plots</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)        <span class="co"># Data manipulation</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)        <span class="co"># Reshaping data (long vs wide formats)</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)        <span class="co"># Working with raster data (climate TIFFs)</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)           <span class="co"># Working with spatial vector data (shapefiles)</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis)      <span class="co"># Color-blind friendly color schemes</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)    <span class="co"># Combining multiple plots into one</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)         <span class="co"># For 2D kernel density estimation (kde2d)</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(uwot)         <span class="co"># For UMAP (Uniform Manifold Approximation and Projection)</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Set seed for reproducibility</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="load-and-prepare-data-same-pipeline-as-session-3" class="level3">
+<h3 class="anchored" data-anchor-id="load-and-prepare-data-same-pipeline-as-session-3" id="1-load-and-prepare-data-same-pipeline-as-session-3"><strong>1. LOAD AND PREPARE DATA (Same Pipeline as Session 3)</strong></h3>
+<div class="cell">
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 2: DEFINE FILE PATHS</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Same paths as Session 3 — all data files are shared across sessions</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Base path to your workshop folder</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>base_path <span class="ot">&lt;-</span> <span class="st">"/run/media/tahirali/Expansion/github/spatial-ecology-workshop"</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Input data paths</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>spider_coords_path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(base_path, <span class="st">"data/presence/spider_coords.csv"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>climate_folder <span class="ot">&lt;-</span> <span class="fu">file.path</span>(base_path, <span class="st">"data/climate"</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>boundary_path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(base_path, <span class="st">"data/boundaries/pakistan_admin.shp"</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Output path (Session 4 specific)</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>output_path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(base_path, <span class="st">"output/Session_4"</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(output_path, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"✓ File paths defined</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"  Input data: "</span>, base_path, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"  Output directory: "</span>, output_path, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>✓ File paths defined
+  Input data:  /run/media/tahirali/Expansion/github/spatial-ecology-workshop 
+  Output directory:  /run/media/tahirali/Expansion/github/spatial-ecology-workshop/output/Session_4 </code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 3: LOAD AND CLEAN SPIDER PRESENCE DATA</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Identical to Session 3 — ensures consistency across sessions</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>spiders <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(spider_coords_path, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"✓ Raw spider data loaded</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"  Number of records:"</span>, <span class="fu">nrow</span>(spiders), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert comma-separated decimals to dots (European format → R format)</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>spiders<span class="sc">$</span>X <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">","</span>, <span class="st">"."</span>, spiders<span class="sc">$</span>X))</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>spiders<span class="sc">$</span>Y <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">","</span>, <span class="st">"."</span>, spiders<span class="sc">$</span>Y))</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove duplicate records</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>spiders <span class="ot">&lt;-</span> <span class="fu">distinct</span>(spiders)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"  Unique locations after removing duplicates:"</span>, <span class="fu">nrow</span>(spiders), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>✓ Raw spider data loaded
+  Number of records: 129 
+  Unique locations after removing duplicates: 93 </code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 4: LOAD CLIMATE RASTER FILES</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># WorldClim bioclimatic variables — same as Session 3</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>bio_files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(climate_folder, <span class="at">pattern =</span> <span class="st">".tif$"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"✓ Found"</span>, <span class="fu">length</span>(bio_files), <span class="st">"climate raster files</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Load all rasters as a single stack</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>climate_stack <span class="ot">&lt;-</span> <span class="fu">rast</span>(bio_files)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign meaningful names (same order as Session 3)</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>meaningful_names <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bio1_annual_mean_temp"</span>,</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bio10_mean_temp_warmest_quarter"</span>,</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bio11_mean_temp_coldest_quarter"</span>,</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bio12_annual_precip"</span>,</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bio13_precip_wettest_month"</span>,</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bio14_precip_driest_month"</span>,</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bio15_precip_seasonality"</span>,</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bio16_precip_wettest_quarter"</span>,</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bio17_precip_driest_quarter"</span>,</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bio18_precip_warmest_quarter"</span>,</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bio19_precip_coldest_quarter"</span>,</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bio2_mean_diurnal_range"</span>,</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bio3_isothermality"</span>,</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bio4_temp_seasonality"</span>,</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bio5_max_temp_warmest_month"</span>,</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bio6_min_temp_coldest_month"</span>,</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bio7_temp_annual_range"</span>,</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bio8_mean_temp_wettest_quarter"</span>,</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bio9_mean_temp_driest_quarter"</span>,</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>  <span class="st">"elevation"</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(climate_stack) <span class="ot">&lt;-</span> meaningful_names</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"✓ Climate layers renamed with meaningful names</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>✓ Found 20 climate raster files
+✓ Climate layers renamed with meaningful names</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 5: EXTRACT CLIMATE DATA AND PREPARE ANALYSIS DATASET</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract climate values at spider locations + generate background points</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 5a: Extract at spider presence locations ---</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>spider_climate <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">extract</span>(climate_stack, spiders[, <span class="fu">c</span>(<span class="st">"X"</span>, <span class="st">"Y"</span>)])</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>spider_climate <span class="ot">&lt;-</span> spider_climate[, <span class="sc">-</span><span class="dv">1</span>]  <span class="co"># Remove ID column</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>spider_data <span class="ot">&lt;-</span> <span class="fu">cbind</span>(spiders, spider_climate)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"✓ Climate data extracted for"</span>, <span class="fu">nrow</span>(spider_data), <span class="st">"spider presence points</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 5b: Generate background (pseudo-absence) points ---</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>bg_points <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">spatSample</span>(climate_stack[[<span class="dv">1</span>]], <span class="at">size =</span> <span class="dv">3000</span>, <span class="at">method =</span> <span class="st">"random"</span>,</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>                                <span class="at">xy =</span> <span class="cn">TRUE</span>, <span class="at">as.df =</span> <span class="cn">TRUE</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>bg_climate <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">extract</span>(climate_stack, bg_points[, <span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>)])</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>bg_climate <span class="ot">&lt;-</span> bg_climate[, <span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>bg_data <span class="ot">&lt;-</span> <span class="fu">cbind</span>(bg_points, bg_climate)</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"✓ Background points generated:"</span>, <span class="fu">nrow</span>(bg_data), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 5c: Select key variables for PCA ---</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="co"># We use a representative set covering temperature, precipitation, and topography</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="co"># This is the SAME variable set we diagnosed for collinearity in Session 3</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"bio1_annual_mean_temp"</span>,</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>          <span class="st">"bio5_max_temp_warmest_month"</span>,</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>          <span class="st">"bio6_min_temp_coldest_month"</span>,</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>          <span class="st">"bio4_temp_seasonality"</span>,</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>          <span class="st">"bio12_annual_precip"</span>,</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>          <span class="st">"bio15_precip_seasonality"</span>,</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>          <span class="st">"elevation"</span>)</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Short names for plotting</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>short_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"temp"</span>, <span class="st">"tmax"</span>, <span class="st">"tmin"</span>, <span class="st">"temp_seas"</span>, <span class="st">"precip"</span>, <span class="st">"precip_seas"</span>, <span class="st">"elev"</span>)</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare presence matrix</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>pres_env <span class="ot">&lt;-</span> spider_data[, vars] <span class="sc">%&gt;%</span> tidyr<span class="sc">::</span><span class="fu">drop_na</span>()</span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(pres_env) <span class="ot">&lt;-</span> short_names</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare background (available environment) matrix</span></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>avail_env <span class="ot">&lt;-</span> bg_data[, vars] <span class="sc">%&gt;%</span> tidyr<span class="sc">::</span><span class="fu">drop_na</span>()</span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(avail_env) <span class="ot">&lt;-</span> short_names</span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"✓ Presence points with complete climate data:"</span>, <span class="fu">nrow</span>(pres_env), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"✓ Background points with complete climate data:"</span>, <span class="fu">nrow</span>(avail_env), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"✓ Variables selected for PCA:"</span>, <span class="fu">paste</span>(short_names, <span class="at">collapse =</span> <span class="st">", "</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>✓ Climate data extracted for 93 spider presence points
+✓ Background points generated: 3000 
+✓ Presence points with complete climate data: 93 
+✓ Background points with complete climate data: 3000 
+✓ Variables selected for PCA: temp, tmax, tmin, temp_seas, precip, precip_seas, elev </code></pre>
+</div>
+</div>
+</section>
+<section id="pca-ecological-gradients-from-correlated-predictors" class="level3">
+<h3 class="anchored" data-anchor-id="pca-ecological-gradients-from-correlated-predictors" id="2-pca-ecological-gradients-from-correlated-predictors"><strong>2. PCA: Ecological Gradients from Correlated Predictors</strong></h3>
+<p><strong>Key Points:</strong></p>
+<ul>
+<li><p>PCA finds orthogonal (uncorrelated) axes that explain maximum variance in the environment</p></li>
+<li><p>In ecology, axes often correspond to energy/water/topography gradients</p></li>
+<li><p>This directly addresses the collinearity problem from Session 3: instead of dropping variables, we <strong>combine</strong> them into independent axes</p></li>
+</ul>
+<div class="cell">
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 6: PERFORM PCA ON AVAILABLE ENVIRONMENT</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># We run PCA on the background (available) environment because:</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   1. It represents the FULL range of conditions in the study area</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   2. Presences are then PROJECTED into this space</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   3. This allows us to see WHERE presences sit relative to availability</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Scale variables to zero mean, unit variance (essential for PCA)</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Different units (°C, mm, m) would otherwise dominate based on magnitude</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>avail_scaled <span class="ot">&lt;-</span> <span class="fu">scale</span>(avail_env)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Store scaling parameters — we'll need these to project presences</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>scale_center <span class="ot">&lt;-</span> <span class="fu">attr</span>(avail_scaled, <span class="st">"scaled:center"</span>)</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>scale_sd <span class="ot">&lt;-</span> <span class="fu">attr</span>(avail_scaled, <span class="st">"scaled:scale"</span>)</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform PCA</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(avail_scaled)</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate variance explained by each PC</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>var_exp <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">summary</span>(pca)<span class="sc">$</span>importance[<span class="dv">2</span>, ] <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>)</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>cum_var <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">summary</span>(pca)<span class="sc">$</span>importance[<span class="dv">3</span>, ] <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>)</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="fu">paste</span>(<span class="fu">rep</span>(<span class="st">"="</span>, <span class="dv">60</span>), <span class="at">collapse =</span> <span class="st">""</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"PCA VARIANCE EXPLAINED</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste</span>(<span class="fu">rep</span>(<span class="st">"="</span>, <span class="dv">60</span>), <span class="at">collapse =</span> <span class="st">""</span>), <span class="st">"</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Individual variance explained:</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(var_exp)) {</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"  PC%d: %5.1f%% (cumulative: %5.1f%%)</span><span class="sc">\n</span><span class="st">"</span>, i, var_exp[i], cum_var[i]))</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">First 2 PCs explain: %.1f%% of total variance</span><span class="sc">\n</span><span class="st">"</span>, cum_var[<span class="dv">2</span>]))</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"First 3 PCs explain: %.1f%% of total variance</span><span class="sc">\n</span><span class="st">"</span>, cum_var[<span class="dv">3</span>]))</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Create PCA Biplot ---</span></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract scores (point positions in PC space) and loadings (variable arrows)</span></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>scores <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pca<span class="sc">$</span>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>load <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pca<span class="sc">$</span>rotation[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>load<span class="sc">$</span>var <span class="ot">&lt;-</span> <span class="fu">rownames</span>(load)</span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Determine scaling factor for arrows (so they're visible relative to points)</span></span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>scale_factor <span class="ot">&lt;-</span> <span class="fu">min</span>(</span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>  (<span class="fu">max</span>(scores<span class="sc">$</span>PC1) <span class="sc">-</span> <span class="fu">min</span>(scores<span class="sc">$</span>PC1)) <span class="sc">/</span> (<span class="fu">max</span>(load<span class="sc">$</span>PC1) <span class="sc">-</span> <span class="fu">min</span>(load<span class="sc">$</span>PC1)),</span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>  (<span class="fu">max</span>(scores<span class="sc">$</span>PC2) <span class="sc">-</span> <span class="fu">min</span>(scores<span class="sc">$</span>PC2)) <span class="sc">/</span> (<span class="fu">max</span>(load<span class="sc">$</span>PC2) <span class="sc">-</span> <span class="fu">min</span>(load<span class="sc">$</span>PC2))</span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>) <span class="sc">*</span> <span class="fl">0.8</span></span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Build biplot</span></span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>p_biplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Background points (available environment)</span></span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> scores, <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2),</span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a>             <span class="at">alpha =</span> <span class="fl">0.15</span>, <span class="at">size =</span> <span class="fl">0.8</span>, <span class="at">color =</span> <span class="st">"gray30"</span>) <span class="sc">+</span></span>
+<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Origin marker</span></span>
+<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Variable loading arrows</span></span>
+<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data =</span> load,</span>
+<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a>               <span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="dv">0</span>,</span>
+<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a>                   <span class="at">xend =</span> PC1 <span class="sc">*</span> scale_factor,</span>
+<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a>                   <span class="at">yend =</span> PC2 <span class="sc">*</span> scale_factor),</span>
+<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a>               <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">"cm"</span>)),</span>
+<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Variable labels</span></span>
+<span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> load,</span>
+<span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x =</span> PC1 <span class="sc">*</span> scale_factor <span class="sc">*</span> <span class="fl">1.12</span>,</span>
+<span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> PC2 <span class="sc">*</span> scale_factor <span class="sc">*</span> <span class="fl">1.12</span>,</span>
+<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a>                <span class="at">label =</span> var),</span>
+<span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">"darkred"</span>, <span class="at">size =</span> <span class="dv">4</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
+<span id="cb11-69"><a href="#cb11-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-70"><a href="#cb11-70" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Axis labels with variance explained</span></span>
+<span id="cb11-71"><a href="#cb11-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb11-72"><a href="#cb11-72" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"PCA Biplot: Environmental Gradients Across Pakistan"</span>,</span>
+<span id="cb11-73"><a href="#cb11-73" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="fu">paste0</span>(<span class="st">"PC1: "</span>, var_exp[<span class="dv">1</span>], <span class="st">"% variance | PC2: "</span>,</span>
+<span id="cb11-74"><a href="#cb11-74" aria-hidden="true" tabindex="-1"></a>                     var_exp[<span class="dv">2</span>], <span class="st">"% variance | Combined: "</span>,</span>
+<span id="cb11-75"><a href="#cb11-75" aria-hidden="true" tabindex="-1"></a>                     cum_var[<span class="dv">2</span>], <span class="st">"%"</span>),</span>
+<span id="cb11-76"><a href="#cb11-76" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">paste0</span>(<span class="st">"PC1 ("</span>, var_exp[<span class="dv">1</span>], <span class="st">"%)"</span>),</span>
+<span id="cb11-77"><a href="#cb11-77" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">paste0</span>(<span class="st">"PC2 ("</span>, var_exp[<span class="dv">2</span>], <span class="st">"%)"</span>),</span>
+<span id="cb11-78"><a href="#cb11-78" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Grey = available environment | Red arrows = variable contributions (loadings)"</span></span>
+<span id="cb11-79"><a href="#cb11-79" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb11-80"><a href="#cb11-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-81"><a href="#cb11-81" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Equal aspect ratio is essential for interpreting angles between arrows</span></span>
+<span id="cb11-82"><a href="#cb11-82" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
+<span id="cb11-83"><a href="#cb11-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-84"><a href="#cb11-84" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb11-85"><a href="#cb11-85" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb11-86"><a href="#cb11-86" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb11-87"><a href="#cb11-87" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">"darkred"</span>, <span class="at">size =</span> <span class="dv">11</span>),</span>
+<span id="cb11-88"><a href="#cb11-88" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">face =</span> <span class="st">"italic"</span>),</span>
+<span id="cb11-89"><a href="#cb11-89" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb11-90"><a href="#cb11-90" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb11-91"><a href="#cb11-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-92"><a href="#cb11-92" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_biplot)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-on-Session_4_files/figure-html/pca-1.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
+</figure>
+</div>
+</div>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">file.path</span>(output_path, <span class="st">"s4_pca_biplot.png"</span>),</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>       p_biplot, <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">8</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"✓ PCA biplot saved</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ ============================================================ 
+PCA VARIANCE EXPLAINED
+============================================================ 
+
+Individual variance explained:
+  PC1:  61.3% (cumulative:  61.3%)
+  PC2:  18.4% (cumulative:  79.7%)
+  PC3:  11.3% (cumulative:  91.0%)
+  PC4:   5.3% (cumulative:  96.3%)
+  PC5:   3.7% (cumulative:  99.9%)
+  PC6:   0.1% (cumulative: 100.0%)
+  PC7:   0.0% (cumulative: 100.0%)
+
+First 2 PCs explain: 79.7% of total variance
+First 3 PCs explain: 91.0% of total variance
+✓ PCA biplot saved</code></pre>
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 31%">
+<col style="width: 41%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>What to Look For</th>
+<th>What It Means</th>
+<th>Ecological Implication</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Arrows pointing same direction</td>
+<td>Positively correlated variables</td>
+<td>Measuring the same gradient (e.g., temp + tmax)</td>
+</tr>
+<tr class="even">
+<td>Arrows pointing opposite directions</td>
+<td>Negatively correlated</td>
+<td>Inverse relationship (e.g., temp vs elevation)</td>
+</tr>
+<tr class="odd">
+<td>Arrows at 90°</td>
+<td>Uncorrelated variables</td>
+<td>Independent ecological information</td>
+</tr>
+<tr class="even">
+<td>Long arrows</td>
+<td>High loading on that PC</td>
+<td>Variable strongly contributes to that axis</td>
+</tr>
+<tr class="odd">
+<td>Short arrows</td>
+<td>Low loading</td>
+<td>Variable poorly represented by first 2 PCs</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Insight:</strong> PCA converts our 7 correlated climate variables (which caused VIF &gt; 10 in Session 3) into uncorrelated axes. The biplot arrows show which original variables “define” each axis — temperature-related arrows are generally cluster together, confirming the collinearity we diagnosed earlier.</p>
+</section>
+<section id="loadings-what-does-each-pc-mean-biologically" class="level3">
+<h3 class="anchored" data-anchor-id="loadings-what-does-each-pc-mean-biologically" id="3-loadings-what-does-each-pc-mean-biologically"><strong>3. Loadings — “What Does Each PC Mean Biologically?”</strong></h3>
+<p><strong>Key Points:</strong></p>
+<ul>
+<li><p>High absolute loading = strong contribution to that PC</p></li>
+<li><p>The sign indicates direction along the gradient (e.g., positive = warmer end)</p></li>
+<li><p>Don’t over-interpret PCs with small variance explained (&lt; 10%)</p></li>
+</ul>
+<div class="cell">
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 7: INTERPRET PCA LOADINGS</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Loadings tell us the "recipe" for each PC:</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   PC1 = 0.45 × temp + 0.42 × tmax + ... (a weighted combination)</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Variables with large absolute loadings define that axis</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract loadings for first 3 PCs</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>L <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pca<span class="sc">$</span>rotation[, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>L<span class="sc">$</span>var <span class="ot">&lt;-</span> <span class="fu">rownames</span>(L)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename columns to include variance explained</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(L)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"PC"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="st">" ("</span>, var_exp[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="st">"%)"</span>)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Reshape to long format for plotting</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>Llong <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(L, <span class="sc">-</span>var, <span class="at">names_to =</span> <span class="st">"PC"</span>, <span class="at">values_to =</span> <span class="st">"loading"</span>)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Create loading barplot</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>p_loadings <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(Llong, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(var, loading), <span class="at">y =</span> loading, <span class="at">fill =</span> loading)) <span class="sc">+</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>PC, <span class="at">ncol =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient2</span>(</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">low =</span> <span class="st">"darkred"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"darkblue"</span>,</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">midpoint =</span> <span class="dv">0</span>, <span class="at">name =</span> <span class="st">"Loading"</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"PCA Loadings: Interpreting Ecological Gradients"</span>,</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"High absolute values indicate strong contribution to that PC axis"</span>,</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Loading value"</span></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">"darkred"</span>, <span class="at">size =</span> <span class="dv">11</span>),</span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_loadings)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-on-Session_4_files/figure-html/interpret-1.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
+</figure>
+</div>
+</div>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">file.path</span>(output_path, <span class="st">"s4_pca_loadings.png"</span>),</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>       p_loadings, <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">7</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"✓ Loadings barplot saved</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Print detailed interpretation ---</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="fu">paste</span>(<span class="fu">rep</span>(<span class="st">"="</span>, <span class="dv">70</span>), <span class="at">collapse =</span> <span class="st">""</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"INTERPRETATION OF PCA LOADINGS</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste</span>(<span class="fu">rep</span>(<span class="st">"="</span>, <span class="dv">70</span>), <span class="at">collapse =</span> <span class="st">""</span>), <span class="st">"</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>loadings_mat <span class="ot">&lt;-</span> pca<span class="sc">$</span>rotation[, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(pc_idx <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  pc_name <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"PC"</span>, pc_idx)</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  pc_var <span class="ot">&lt;-</span> var_exp[pc_idx]</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Sort by absolute loading</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  sorted_vars <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">sort</span>(<span class="fu">abs</span>(loadings_mat[, pc_idx]), <span class="at">decreasing =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"%s (%.1f%% of variance):</span><span class="sc">\n</span><span class="st">"</span>, pc_name, pc_var))</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(v <span class="cf">in</span> sorted_vars) {</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    val <span class="ot">&lt;-</span> loadings_mat[v, pc_idx]</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>    bar <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="fu">rep</span>(<span class="fu">ifelse</span>(val <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">"+"</span>, <span class="st">"-"</span>), <span class="fu">round</span>(<span class="fu">abs</span>(val) <span class="sc">*</span> <span class="dv">20</span>)), <span class="at">collapse =</span> <span class="st">""</span>)</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"  %-12s: %+.3f  %s</span><span class="sc">\n</span><span class="st">"</span>, v, val, bar))</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Suggest ecological interpretation</span></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>  top_vars <span class="ot">&lt;-</span> sorted_vars[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">any</span>(<span class="fu">grepl</span>(<span class="st">"temp|tmax|tmin"</span>, <span class="fu">paste</span>(top_vars, <span class="at">collapse =</span> <span class="st">"|"</span>)))) {</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">"  → Likely represents: ENERGY / TEMPERATURE gradient</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span>(<span class="fu">any</span>(<span class="fu">grepl</span>(<span class="st">"precip|prec"</span>, <span class="fu">paste</span>(top_vars, <span class="at">collapse =</span> <span class="st">"|"</span>)))) {</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">"  → Likely represents: MOISTURE / PRECIPITATION gradient</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span>(<span class="fu">any</span>(<span class="fu">grepl</span>(<span class="st">"elev"</span>, <span class="fu">paste</span>(top_vars, <span class="at">collapse =</span> <span class="st">"|"</span>)))) {</span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">"  → Likely represents: TOPOGRAPHIC / ELEVATIONAL gradient</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">"  → Interpretation requires domain knowledge</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>✓ Loadings barplot saved
+
+ ====================================================================== 
+INTERPRETATION OF PCA LOADINGS
+====================================================================== 
+
+PC1 (61.3% of variance):
+  tmin        : -0.467  ---------
+  temp        : -0.465  ---------
+  tmax        : -0.435  ---------
+  elev        : +0.356  +++++++
+  precip      : -0.326  -------
+  temp_seas   : +0.294  ++++++
+  precip_seas : +0.238  +++++
+  → Likely represents: ENERGY / TEMPERATURE gradient
+
+PC2 (18.4% of variance):
+  temp_seas   : +0.623  ++++++++++++
+  precip_seas : -0.530  -----------
+  elev        : -0.459  ---------
+  precip      : -0.263  -----
+  tmin        : -0.168  ---
+  tmax        : +0.154  +++
+  temp        : -0.020  
+  → Likely represents: ENERGY / TEMPERATURE gradient
+
+PC3 (11.3% of variance):
+  precip      : -0.608  ------------
+  precip_seas : +0.602  ++++++++++++
+  tmax        : +0.379  ++++++++
+  temp        : +0.266  +++++
+  temp_seas   : +0.154  +++
+  tmin        : +0.151  +++
+  elev        : -0.078  --
+  → Likely represents: ENERGY / TEMPERATURE gradient</code></pre>
+</div>
+</div>
+<p><strong>Interpretation Guide</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Loading Value</strong></th>
+<th><strong>Meaning</strong></th>
+<th><strong>Example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>+0.40 to +0.50</strong></td>
+<td>Strong positive contribution</td>
+<td>Variable increases along positive end of that PC</td>
+</tr>
+<tr class="even">
+<td><strong>-0.40 to -0.50</strong></td>
+<td>Strong negative contribution</td>
+<td>Variable increases along negative end of that PC</td>
+</tr>
+<tr class="odd">
+<td><strong>-0.10 to +0.10</strong></td>
+<td>Weak contribution</td>
+<td>Variable is not well-represented by this PC</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Insight:</strong> PC1 typically captures the strongest environmental gradient in the data. In Pakistan, this is usually a temperature–elevation gradient (hot lowlands ↔︎ cold mountains). PC2 often captures moisture variation. The loadings let you translate abstract “PC axes” into meaningful ecological language.</p>
+</section>
+<section id="climate-niche-space-where-presences-sit-in-pca-space" class="level3">
+<h3 class="anchored" data-anchor-id="climate-niche-space-where-presences-sit-in-pca-space" id="4-climate-niche-space-where-presences-sit-in-pca-space"><strong>4. Climate Niche Space — Where Presences Sit in PCA Space</strong></h3>
+<p><strong>Key Points:</strong></p>
+<ul>
+<li><p>Compare <strong>available environment</strong> (what’s out there) vs <strong>used environment</strong> (where the species occurs)</p></li>
+<li><p>Sampling bias can distort niche inference — presence in a region of PCA space could reflect sampling effort, not preference</p></li>
+<li><p>Useful for diagnosing <strong>extrapolation risk</strong>: if presences cluster tightly, predictions outside that region are unreliable</p></li>
+</ul>
+<div class="cell">
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 8: PROJECT PRESENCES INTO PCA SPACE</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># IMPORTANT: We scale presences using the SAME parameters as the background</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># (same center, same standard deviation). This ensures they're in the same space.</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Scale presences using background scaling parameters</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>pres_scaled <span class="ot">&lt;-</span> <span class="fu">scale</span>(pres_env,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>                     <span class="at">center =</span> scale_center,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>                     <span class="at">scale =</span> scale_sd)</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Project presences into PCA space using background rotation matrix</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>pres_scores <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pres_scaled <span class="sc">%*%</span> pca<span class="sc">$</span>rotation[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(pres_scores) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"PC1"</span>, <span class="st">"PC2"</span>)</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>pres_scores<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="st">"Presence"</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Get background scores</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>avail_scores <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pca<span class="sc">$</span>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>avail_scores<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="st">"Available"</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 2D kernel density for available environment ---</span></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>kde <span class="ot">&lt;-</span> <span class="fu">kde2d</span>(avail_scores<span class="sc">$</span>PC1, avail_scores<span class="sc">$</span>PC2, <span class="at">n =</span> <span class="dv">100</span>)</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>kde_df <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">PC1 =</span> kde<span class="sc">$</span>x, <span class="at">PC2 =</span> kde<span class="sc">$</span>y)</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>kde_df<span class="sc">$</span>density <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(kde<span class="sc">$</span>z)</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Create niche plot ---</span></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>p_niche <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Density contours for available environment</span></span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_contour</span>(<span class="at">data =</span> kde_df,</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>               <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">z =</span> density, <span class="at">color =</span> <span class="fu">after_stat</span>(level)),</span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>               <span class="at">bins =</span> <span class="dv">10</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Available environment points (grey)</span></span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> avail_scores,</span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2),</span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>             <span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">size =</span> <span class="fl">0.7</span>, <span class="at">color =</span> <span class="st">"gray30"</span>) <span class="sc">+</span></span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Presence points (red)</span></span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> pres_scores,</span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2),</span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Density polygons for presences</span></span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_density2d</span>(<span class="at">data =</span> pres_scores,</span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">fill =</span> <span class="fu">after_stat</span>(level)),</span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>                 <span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">geom =</span> <span class="st">"polygon"</span>, <span class="at">bins =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"plasma"</span>, <span class="at">name =</span> <span class="st">"Presence</span><span class="sc">\n</span><span class="st">density"</span>) <span class="sc">+</span></span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_c</span>(<span class="at">option =</span> <span class="st">"viridis"</span>, <span class="at">name =</span> <span class="st">"Available</span><span class="sc">\n</span><span class="st">density"</span>) <span class="sc">+</span></span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Climate Niche Space — Spider Presences vs Available Environment"</span>,</span>
+<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="fu">paste0</span>(<span class="st">"Red = Presences (n="</span>, <span class="fu">nrow</span>(pres_scores), <span class="st">") | "</span>,</span>
+<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"Grey = Available (n="</span>, <span class="fu">nrow</span>(avail_scores), <span class="st">") | "</span>,</span>
+<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"Contours show density"</span>),</span>
+<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">paste0</span>(<span class="st">"PC1 ("</span>, var_exp[<span class="dv">1</span>], <span class="st">"%)"</span>),</span>
+<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">paste0</span>(<span class="st">"PC2 ("</span>, var_exp[<span class="dv">2</span>], <span class="st">"%)"</span>),</span>
+<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Presences occupying a subset of available space suggests niche specialization or sampling bias"</span></span>
+<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
+<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">face =</span> <span class="st">"italic"</span>),</span>
+<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"right"</span></span>
+<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-70"><a href="#cb17-70" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_niche)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-on-Session_4_files/figure-html/proj_presence-1.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
+</figure>
+</div>
+</div>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">file.path</span>(output_path, <span class="st">"s4_niche_pca.png"</span>),</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>       p_niche, <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">8</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"✓ Climate niche space plot saved</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>✓ Climate niche space plot saved</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 9: CALCULATE NICHE METRICS</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Quantify how the species' niche relates to available climate space</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="fu">paste</span>(<span class="fu">rep</span>(<span class="st">"="</span>, <span class="dv">60</span>), <span class="at">collapse =</span> <span class="st">""</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"NICHE METRICS IN PCA SPACE</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste</span>(<span class="fu">rep</span>(<span class="st">"="</span>, <span class="dv">60</span>), <span class="at">collapse =</span> <span class="st">""</span>), <span class="st">"</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 9a: Proportion of presences within available range ---</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>range_PC1 <span class="ot">&lt;-</span> <span class="fu">range</span>(avail_scores<span class="sc">$</span>PC1)</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>range_PC2 <span class="ot">&lt;-</span> <span class="fu">range</span>(avail_scores<span class="sc">$</span>PC2)</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>pres_in_range <span class="ot">&lt;-</span> <span class="fu">sum</span>(</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  pres_scores<span class="sc">$</span>PC1 <span class="sc">&gt;=</span> range_PC1[<span class="dv">1</span>] <span class="sc">&amp;</span> pres_scores<span class="sc">$</span>PC1 <span class="sc">&lt;=</span> range_PC1[<span class="dv">2</span>] <span class="sc">&amp;</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>  pres_scores<span class="sc">$</span>PC2 <span class="sc">&gt;=</span> range_PC2[<span class="dv">1</span>] <span class="sc">&amp;</span> pres_scores<span class="sc">$</span>PC2 <span class="sc">&lt;=</span> range_PC2[<span class="dv">2</span>]</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"1. CONTAINMENT:</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"   Presences within available climate range: %d/%d (%.1f%%)</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>            pres_in_range, <span class="fu">nrow</span>(pres_scores),</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>            <span class="dv">100</span> <span class="sc">*</span> pres_in_range <span class="sc">/</span> <span class="fu">nrow</span>(pres_scores)))</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   → Values &lt; 100% indicate potential extrapolation risk</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 9b: Centroid shift ---</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>centroid_avail <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(avail_scores[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>centroid_pres <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(pres_scores[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>shift_dist <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>((centroid_pres <span class="sc">-</span> centroid_avail)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"2. CENTROID SHIFT (available → presence):</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"   Available centroid: PC1 = %.2f, PC2 = %.2f</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>            centroid_avail[<span class="dv">1</span>], centroid_avail[<span class="dv">2</span>]))</span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"   Presence centroid:  PC1 = %.2f, PC2 = %.2f</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>            centroid_pres[<span class="dv">1</span>], centroid_pres[<span class="dv">2</span>]))</span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"   Euclidean shift: %.2f PC units</span><span class="sc">\n</span><span class="st">"</span>, shift_dist))</span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   → Large shift = species occupies non-average climate</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 9c: Niche breadth (spread in PC space) ---</span></span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>avail_spread <span class="ot">&lt;-</span> <span class="fu">apply</span>(avail_scores[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="dv">2</span>, sd)</span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>pres_spread <span class="ot">&lt;-</span> <span class="fu">apply</span>(pres_scores[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="dv">2</span>, sd)</span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"3. NICHE BREADTH (standard deviation in PC space):</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"   Available SD:  PC1 = %.2f, PC2 = %.2f</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>            avail_spread[<span class="dv">1</span>], avail_spread[<span class="dv">2</span>]))</span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"   Presence SD:   PC1 = %.2f, PC2 = %.2f</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a>            pres_spread[<span class="dv">1</span>], pres_spread[<span class="dv">2</span>]))</span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"   Breadth ratio: PC1 = %.1f%%, PC2 = %.1f%%</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a>            <span class="dv">100</span> <span class="sc">*</span> pres_spread[<span class="dv">1</span>] <span class="sc">/</span> avail_spread[<span class="dv">1</span>],</span>
+<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a>            <span class="dv">100</span> <span class="sc">*</span> pres_spread[<span class="dv">2</span>] <span class="sc">/</span> avail_spread[<span class="dv">2</span>]))</span>
+<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   → Ratio &lt; 50% suggests narrow niche or biased sampling</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ ============================================================ 
+NICHE METRICS IN PCA SPACE
+============================================================ 
+
+1. CONTAINMENT:
+   Presences within available climate range: 93/93 (100.0%)
+   → Values &lt; 100% indicate potential extrapolation risk
+
+2. CENTROID SHIFT (available → presence):
+   Available centroid: PC1 = 0.00, PC2 = 0.00
+   Presence centroid:  PC1 = -1.49, PC2 = -0.10
+   Euclidean shift: 1.50 PC units
+   → Large shift = species occupies non-average climate
+
+3. NICHE BREADTH (standard deviation in PC space):
+   Available SD:  PC1 = 2.07, PC2 = 1.13
+   Presence SD:   PC1 = 0.05, PC2 = 0.12
+   Breadth ratio: PC1 = 2.3%, PC2 = 10.4%
+   → Ratio &lt; 50% suggests narrow niche or biased sampling</code></pre>
+</div>
+</div>
+<p><strong>Interpretation Guide</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Niche Metric</strong></th>
+<th><strong>What It Tells You</strong></th>
+<th><strong>What to Watch For</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Containment (&lt; 100%)</strong></td>
+<td>Presences outside available range</td>
+<td>Extrapolation risk: model predicts beyond training data</td>
+</tr>
+<tr class="even">
+<td><strong>Centroid shift (large)</strong></td>
+<td>Species occupies non-average climate</td>
+<td>Could indicate true preference OR sampling bias</td>
+</tr>
+<tr class="odd">
+<td><strong>Breadth ratio (&lt; 50%)</strong></td>
+<td>Species uses narrow subset of available climate</td>
+<td>Specialization, or sampling restricted to certain areas</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Insight:</strong> If presences cluster tightly in one corner of PCA space, it could mean the species is a specialist — <em>or</em> that sampling was concentrated in certain climate zones (e.g., near roads in lowlands). Session 3’s sampling bias analysis helps distinguish these explanations.</p>
+</section>
+<section id="umap-nonlinear-visualization-of-environmental-space" class="level3">
+<h3 class="anchored" data-anchor-id="umap-nonlinear-visualization-of-environmental-space" id="5-umap-nonlinear-visualization-of-environmental-space"><strong>5. UMAP — Nonlinear Visualization of Environmental Space</strong></h3>
+<p><strong>Key Points:</strong></p>
+<ul>
+<li><p>UMAP (Uniform Manifold Approximation and Projection) captures <strong>nonlinear</strong> relationships that PCA misses</p></li>
+<li><p>Great for revealing clusters, gradients, and non-obvious structure</p></li>
+<li><p><strong>NOT</strong> for inference: axes have no inherent meaning, results depend on tuning parameters</p></li>
+<li><p>Use as a complement to PCA, not a replacement</p></li>
+</ul>
+<div class="cell">
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 10: UMAP VISUALIZATION</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># We run UMAP on the same scaled background data used for PCA</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Two parameter sets show how tuning affects the visualization</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Running UMAP embeddings (this may take a few seconds)...</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 10a: UMAP with local structure emphasis ---</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>emb_local <span class="ot">&lt;-</span> <span class="fu">umap</span>(avail_scaled,</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>                   <span class="at">n_neighbors =</span> <span class="dv">15</span>,   <span class="co"># Fewer neighbors = focus on local structure</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>                   <span class="at">min_dist =</span> <span class="fl">0.1</span>,     <span class="co"># Small = tighter clusters</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>                   <span class="at">metric =</span> <span class="st">"euclidean"</span>)</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 10b: UMAP with global structure emphasis ---</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>emb_global <span class="ot">&lt;-</span> <span class="fu">umap</span>(avail_scaled,</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>                    <span class="at">n_neighbors =</span> <span class="dv">50</span>,   <span class="co"># More neighbors = focus on global structure</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>                    <span class="at">min_dist =</span> <span class="fl">0.5</span>,     <span class="co"># Larger = more spread out</span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>                    <span class="at">metric =</span> <span class="st">"euclidean"</span>)</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"✓ Both UMAP embeddings computed</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Create data frames for plotting ---</span></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>df_local <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">UMAP1 =</span> emb_local[, <span class="dv">1</span>],</span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">UMAP2 =</span> emb_local[, <span class="dv">2</span>],</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">temp =</span> avail_env<span class="sc">$</span>temp,</span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">precip =</span> avail_env<span class="sc">$</span>precip,</span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">elev =</span> avail_env<span class="sc">$</span>elev</span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>df_global <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">UMAP1 =</span> emb_global[, <span class="dv">1</span>],</span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">UMAP2 =</span> emb_global[, <span class="dv">2</span>],</span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">temp =</span> avail_env<span class="sc">$</span>temp,</span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">precip =</span> avail_env<span class="sc">$</span>precip,</span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">elev =</span> avail_env<span class="sc">$</span>elev</span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Plot 1: Local structure, colored by temperature ---</span></span>
+<span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a>p_umap_local <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_local, <span class="fu">aes</span>(<span class="at">x =</span> UMAP1, <span class="at">y =</span> UMAP2, <span class="at">color =</span> temp)) <span class="sc">+</span></span>
+<span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_c</span>(<span class="at">option =</span> <span class="st">"plasma"</span>, <span class="at">name =</span> <span class="st">"Temp (°C)"</span>) <span class="sc">+</span></span>
+<span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"UMAP — Local Structure"</span>,</span>
+<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"n_neighbors = 15, min_dist = 0.1"</span>,</span>
+<span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"UMAP1"</span>, <span class="at">y =</span> <span class="st">"UMAP2"</span></span>
+<span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"right"</span></span>
+<span id="cb22-56"><a href="#cb22-56" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb22-57"><a href="#cb22-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-58"><a href="#cb22-58" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Plot 2: Global structure, colored by temperature ---</span></span>
+<span id="cb22-59"><a href="#cb22-59" aria-hidden="true" tabindex="-1"></a>p_umap_global <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_global, <span class="fu">aes</span>(<span class="at">x =</span> UMAP1, <span class="at">y =</span> UMAP2, <span class="at">color =</span> temp)) <span class="sc">+</span></span>
+<span id="cb22-60"><a href="#cb22-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb22-61"><a href="#cb22-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_c</span>(<span class="at">option =</span> <span class="st">"plasma"</span>, <span class="at">name =</span> <span class="st">"Temp (°C)"</span>) <span class="sc">+</span></span>
+<span id="cb22-62"><a href="#cb22-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb22-63"><a href="#cb22-63" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"UMAP — Global Structure"</span>,</span>
+<span id="cb22-64"><a href="#cb22-64" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"n_neighbors = 50, min_dist = 0.5"</span>,</span>
+<span id="cb22-65"><a href="#cb22-65" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"UMAP1"</span>, <span class="at">y =</span> <span class="st">"UMAP2"</span></span>
+<span id="cb22-66"><a href="#cb22-66" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-67"><a href="#cb22-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb22-68"><a href="#cb22-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb22-69"><a href="#cb22-69" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb22-70"><a href="#cb22-70" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb22-71"><a href="#cb22-71" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"right"</span></span>
+<span id="cb22-72"><a href="#cb22-72" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb22-73"><a href="#cb22-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-74"><a href="#cb22-74" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Combine ---</span></span>
+<span id="cb22-75"><a href="#cb22-75" aria-hidden="true" tabindex="-1"></a>p_umap_combined <span class="ot">&lt;-</span> p_umap_local <span class="sc">+</span> p_umap_global <span class="sc">+</span></span>
+<span id="cb22-76"><a href="#cb22-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(</span>
+<span id="cb22-77"><a href="#cb22-77" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"UMAP: Nonlinear Visualization of Pakistan's Environmental Space"</span>,</span>
+<span id="cb22-78"><a href="#cb22-78" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Parameter tuning affects whether local clusters or global gradients are emphasized"</span>,</span>
+<span id="cb22-79"><a href="#cb22-79" aria-hidden="true" tabindex="-1"></a>    <span class="at">theme =</span> <span class="fu">theme</span>(</span>
+<span id="cb22-80"><a href="#cb22-80" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb22-81"><a href="#cb22-81" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">11</span>)</span>
+<span id="cb22-82"><a href="#cb22-82" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb22-83"><a href="#cb22-83" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb22-84"><a href="#cb22-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-85"><a href="#cb22-85" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_umap_combined)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-on-Session_4_files/figure-html/umap-1.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
+</figure>
+</div>
+</div>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">file.path</span>(output_path, <span class="st">"s4_umap_comparison.png"</span>),</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>       p_umap_combined, <span class="at">width =</span> <span class="dv">14</span>, <span class="at">height =</span> <span class="dv">6</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"✓ UMAP comparison plot saved</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Running UMAP embeddings (this may take a few seconds)...
+✓ Both UMAP embeddings computed
+✓ UMAP comparison plot saved</code></pre>
+</div>
+</div>
+<p><strong>Interpretation Guide</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>UMAP Feature</strong></th>
+<th><strong>What It Means</strong></th>
+<th><strong>Caution</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Distinct clusters</strong></td>
+<td>Groups of similar environments</td>
+<td>Could be artifact of parameter choice</td>
+</tr>
+<tr class="even">
+<td><strong>Smooth color gradient</strong></td>
+<td>UMAP preserves that environmental gradient</td>
+<td>Good — validates ecological structure</td>
+</tr>
+<tr class="odd">
+<td><strong>Fragmented colors</strong></td>
+<td>That variable is not well-captured by UMAP</td>
+<td>May need different parameters or more dimensions</td>
+</tr>
+<tr class="even">
+<td><strong>Different results with different parameters</strong></td>
+<td>UMAP is sensitive to tuning</td>
+<td>Always try multiple settings; never rely on a single run</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Insight:</strong> UMAP is a powerful visualization tool, but it is <strong>not a statistical model</strong>. The axes (UMAP1, UMAP2) have no units and no inherent meaning. Use UMAP to <em>explore</em> and <em>discover</em> patterns, then use PCA or formal models to <em>test</em> them.</p>
+<hr>
+</section>
+<section id="pca-vs-umap-when-to-use-each" class="level3">
+<h3 class="anchored" data-anchor-id="pca-vs-umap-when-to-use-each" id="6-pca-vs-umap-when-to-use-each"><strong>6. PCA vs UMAP — When to Use Each</strong></h3>
+<div class="cell">
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 12: PRINT COMPARISON TABLE</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="fu">paste</span>(<span class="fu">rep</span>(<span class="st">"="</span>, <span class="dv">80</span>), <span class="at">collapse =</span> <span class="st">""</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"PCA vs UMAP: WHEN TO USE EACH</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste</span>(<span class="fu">rep</span>(<span class="st">"="</span>, <span class="dv">80</span>), <span class="at">collapse =</span> <span class="st">""</span>), <span class="st">"</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">Feature =</span> <span class="fu">c</span>(<span class="st">"Type"</span>, <span class="st">"Axes meaning"</span>, <span class="st">"Reproducible?"</span>,</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Handles nonlinear?"</span>, <span class="st">"Good for inference?"</span>,</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Good for visualization?"</span>, <span class="st">"Tuning needed?"</span>,</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Best for SDMs?"</span>),</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">PCA =</span> <span class="fu">c</span>(<span class="st">"Linear"</span>, <span class="st">"Interpretable (loadings)"</span>, <span class="st">"Yes (deterministic)"</span>,</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>          <span class="st">"No"</span>, <span class="st">"Yes (with caution)"</span>, <span class="st">"Yes (first 2-3 PCs)"</span>,</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>          <span class="st">"No (just choose # of PCs)"</span>, <span class="st">"Yes — uncorrelated predictors"</span>),</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">UMAP =</span> <span class="fu">c</span>(<span class="st">"Nonlinear"</span>, <span class="st">"No inherent meaning"</span>, <span class="st">"No (depends on seed + params)"</span>,</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>           <span class="st">"Yes"</span>, <span class="st">"No"</span>, <span class="st">"Yes (excellent)"</span>,</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>           <span class="st">"Yes (n_neighbors, min_dist)"</span>, <span class="st">"No — use for exploration only"</span>),</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(comparison, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="fu">paste</span>(<span class="fu">rep</span>(<span class="st">"-"</span>, <span class="dv">80</span>), <span class="at">collapse =</span> <span class="st">""</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"PRACTICAL RECOMMENDATIONS:</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste</span>(<span class="fu">rep</span>(<span class="st">"-"</span>, <span class="dv">80</span>), <span class="at">collapse =</span> <span class="st">""</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"• For SDM predictor preparation → PCA (creates uncorrelated axes)</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"• For niche analysis → PCA (interpretable, comparable across studies)</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"• For exploring high-dimensional structure → UMAP (reveals clusters)</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"• For publication figures → Both (PCA for rigor, UMAP for visual appeal)</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"• NEVER use UMAP axes as model predictors</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ ================================================================================ 
+PCA vs UMAP: WHEN TO USE EACH
+================================================================================ 
+
+                 Feature                           PCA
+                    Type                        Linear
+            Axes meaning      Interpretable (loadings)
+           Reproducible?           Yes (deterministic)
+      Handles nonlinear?                            No
+     Good for inference?            Yes (with caution)
+ Good for visualization?           Yes (first 2-3 PCs)
+          Tuning needed?     No (just choose # of PCs)
+          Best for SDMs? Yes — uncorrelated predictors
+                          UMAP
+                     Nonlinear
+           No inherent meaning
+ No (depends on seed + params)
+                           Yes
+                            No
+               Yes (excellent)
+   Yes (n_neighbors, min_dist)
+ No — use for exploration only
+
+ -------------------------------------------------------------------------------- 
+PRACTICAL RECOMMENDATIONS:
+-------------------------------------------------------------------------------- 
+• For SDM predictor preparation → PCA (creates uncorrelated axes)
+• For niche analysis → PCA (interpretable, comparable across studies)
+• For exploring high-dimensional structure → UMAP (reveals clusters)
+• For publication figures → Both (PCA for rigor, UMAP for visual appeal)
+• NEVER use UMAP axes as model predictors</code></pre>
+</div>
+</div>
+</section>
+<section id="complete-practical-workflow" class="level3">
+<h3 class="anchored" data-anchor-id="complete-practical-workflow" id="7-complete-practical-workflow"><strong>7. Complete Practical Workflow</strong></h3>
+<div class="cell">
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 13: COMPLETE SESSION 4 WORKFLOW SUMMARY</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="fu">paste</span>(<span class="fu">rep</span>(<span class="st">"="</span>, <span class="dv">70</span>), <span class="at">collapse =</span> <span class="st">""</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"SESSION 4: MULTIVARIATE &amp; DIMENSIONALITY REDUCTION — COMPLETE WORKFLOW</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste</span>(<span class="fu">rep</span>(<span class="st">"="</span>, <span class="dv">70</span>), <span class="at">collapse =</span> <span class="st">""</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) PCA Summary</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">1. PCA SUMMARY</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste</span>(<span class="fu">rep</span>(<span class="st">"-"</span>, <span class="dv">40</span>), <span class="at">collapse =</span> <span class="st">""</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"   Variables used: %s</span><span class="sc">\n</span><span class="st">"</span>, <span class="fu">paste</span>(short_names, <span class="at">collapse =</span> <span class="st">", "</span>)))</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"   PC1 explains: %.1f%% of variance</span><span class="sc">\n</span><span class="st">"</span>, var_exp[<span class="dv">1</span>]))</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"   PC2 explains: %.1f%% of variance</span><span class="sc">\n</span><span class="st">"</span>, var_exp[<span class="dv">2</span>]))</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"   First 2 PCs combined: %.1f%%</span><span class="sc">\n</span><span class="st">"</span>, cum_var[<span class="dv">2</span>]))</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"   First 3 PCs combined: %.1f%%</span><span class="sc">\n\n</span><span class="st">"</span>, cum_var[<span class="dv">3</span>]))</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 2) Loadings Summary</span></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"2. DOMINANT LOADINGS</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste</span>(<span class="fu">rep</span>(<span class="st">"-"</span>, <span class="dv">40</span>), <span class="at">collapse =</span> <span class="st">""</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(pc_idx <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) {</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>  top_var <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">which.max</span>(<span class="fu">abs</span>(pca<span class="sc">$</span>rotation[, pc_idx])))</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>  top_val <span class="ot">&lt;-</span> pca<span class="sc">$</span>rotation[top_var, pc_idx]</span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"   PC%d top loading: %s (%.3f)</span><span class="sc">\n</span><span class="st">"</span>, pc_idx, top_var, top_val))</span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a><span class="co"># 3) Niche Position</span></span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">3. NICHE POSITION</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste</span>(<span class="fu">rep</span>(<span class="st">"-"</span>, <span class="dv">40</span>), <span class="at">collapse =</span> <span class="st">""</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"   Centroid shift: %.2f PC units</span><span class="sc">\n</span><span class="st">"</span>, shift_dist))</span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"   Niche breadth (PC1): %.1f%% of available</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>            <span class="dv">100</span> <span class="sc">*</span> pres_spread[<span class="dv">1</span>] <span class="sc">/</span> avail_spread[<span class="dv">1</span>]))</span>
+<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"   Niche breadth (PC2): %.1f%% of available</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a>            <span class="dv">100</span> <span class="sc">*</span> pres_spread[<span class="dv">2</span>] <span class="sc">/</span> avail_spread[<span class="dv">2</span>]))</span>
+<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a><span class="co"># 4) Files saved</span></span>
+<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">4. OUTPUT FILES</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste</span>(<span class="fu">rep</span>(<span class="st">"-"</span>, <span class="dv">40</span>), <span class="at">collapse =</span> <span class="st">""</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   "</span>, <span class="fu">file.path</span>(output_path, <span class="st">"s4_pca_biplot.png"</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   "</span>, <span class="fu">file.path</span>(output_path, <span class="st">"s4_pca_loadings.png"</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb27-41"><a href="#cb27-41" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   "</span>, <span class="fu">file.path</span>(output_path, <span class="st">"s4_niche_pca.png"</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb27-42"><a href="#cb27-42" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   "</span>, <span class="fu">file.path</span>(output_path, <span class="st">"s4_umap_comparison.png"</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb27-43"><a href="#cb27-43" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   "</span>, <span class="fu">file.path</span>(output_path, <span class="st">"s4_umap_multi_variable.png"</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb27-44"><a href="#cb27-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-45"><a href="#cb27-45" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="fu">paste</span>(<span class="fu">rep</span>(<span class="st">"="</span>, <span class="dv">70</span>), <span class="at">collapse =</span> <span class="st">""</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb27-46"><a href="#cb27-46" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Session 4 complete!</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb27-47"><a href="#cb27-47" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste</span>(<span class="fu">rep</span>(<span class="st">"="</span>, <span class="dv">70</span>), <span class="at">collapse =</span> <span class="st">""</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ ====================================================================== 
+SESSION 4: MULTIVARIATE &amp; DIMENSIONALITY REDUCTION — COMPLETE WORKFLOW
+====================================================================== 
+
+1. PCA SUMMARY
+---------------------------------------- 
+   Variables used: temp, tmax, tmin, temp_seas, precip, precip_seas, elev
+   PC1 explains: 61.3% of variance
+   PC2 explains: 18.4% of variance
+   First 2 PCs combined: 79.7%
+   First 3 PCs combined: 91.0%
+
+2. DOMINANT LOADINGS
+---------------------------------------- 
+   PC1 top loading: tmin (-0.467)
+   PC2 top loading: temp_seas (0.623)
+
+3. NICHE POSITION
+---------------------------------------- 
+   Centroid shift: 1.50 PC units
+   Niche breadth (PC1): 2.3% of available
+   Niche breadth (PC2): 10.4% of available
+
+4. OUTPUT FILES
+---------------------------------------- 
+    /run/media/tahirali/Expansion/github/spatial-ecology-workshop/output/Session_4/s4_pca_biplot.png 
+    /run/media/tahirali/Expansion/github/spatial-ecology-workshop/output/Session_4/s4_pca_loadings.png 
+    /run/media/tahirali/Expansion/github/spatial-ecology-workshop/output/Session_4/s4_niche_pca.png 
+    /run/media/tahirali/Expansion/github/spatial-ecology-workshop/output/Session_4/s4_umap_comparison.png 
+    /run/media/tahirali/Expansion/github/spatial-ecology-workshop/output/Session_4/s4_umap_multi_variable.png 
+
+ ====================================================================== 
+Session 4 complete!
+====================================================================== </code></pre>
+</div>
+</div>
+</section>
+<section id="reasoning-prompts" class="level3">
+<h3 class="anchored" data-anchor-id="reasoning-prompts" id="8-reasoning-prompts"><strong>8. Reasoning Prompts</strong></h3>
+<div class="cell">
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 14: ECOLOGICAL REASONING PROMPTS</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="fu">paste</span>(<span class="fu">rep</span>(<span class="st">"="</span>, <span class="dv">70</span>), <span class="at">collapse =</span> <span class="st">""</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"REASONING PROMPTS FOR DISCUSSION</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste</span>(<span class="fu">rep</span>(<span class="st">"="</span>, <span class="dv">70</span>), <span class="at">collapse =</span> <span class="st">""</span>), <span class="st">"</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"1. If PC1 is mostly temperature variables, what ecological gradient is that?</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   → Energy/temperature gradient (affects metabolic rates, growing season,</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"     physiological limits). In Pakistan, this tracks the Himalayan</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"     elevation gradient: hot plains → cold mountains.</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"2. If presences occupy only a small region of available PCA space,</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   does that mean specialization, sampling bias, or dispersal limitation?</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • Specialization: Narrow fundamental niche (species can only tolerate</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"     specific conditions)</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • Sampling bias: Only surveyed accessible areas (roads, lowlands)</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • Dispersal limitation: Species hasn't reached all suitable areas</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   → Need independent data to distinguish (e.g., experimental tolerances,</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"     surveys in remote areas, SDMs with bias correction)</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"3. Why should we NOT use UMAP axes as predictors in an SDM?</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • UMAP axes have no consistent meaning across runs</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • The mapping is non-invertible (can't project new data reliably)</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • Results depend on arbitrary parameter choices</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   → Use PCA for creating model inputs; use UMAP for exploration only</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"4. How does PCA relate to the VIF analysis from Session 3?</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • VIF measured how correlated each variable was with ALL others</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • PCA solves the same problem by creating NEW uncorrelated variables</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • PC scores can be used as predictors in SDMs without collinearity</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • Trade-off: PCA axes are harder to interpret ecologically</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-35"><a href="#cb29-35" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"5. When would you choose PCA + SDM over Elastic Net + original variables?</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb29-36"><a href="#cb29-36" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • When you have MANY (&gt;15) correlated predictors</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb29-37"><a href="#cb29-37" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • When ecological interpretation of individual variables is less important</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb29-38"><a href="#cb29-38" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • When you want to visualize the niche in reduced space</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb29-39"><a href="#cb29-39" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • Elastic Net is better when you want to know WHICH variables matter</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ ====================================================================== 
+REASONING PROMPTS FOR DISCUSSION
+====================================================================== 
+
+1. If PC1 is mostly temperature variables, what ecological gradient is that?
+   → Energy/temperature gradient (affects metabolic rates, growing season,
+     physiological limits). In Pakistan, this tracks the Himalayan
+     elevation gradient: hot plains → cold mountains.
+
+2. If presences occupy only a small region of available PCA space,
+   does that mean specialization, sampling bias, or dispersal limitation?
+   • Specialization: Narrow fundamental niche (species can only tolerate
+     specific conditions)
+   • Sampling bias: Only surveyed accessible areas (roads, lowlands)
+   • Dispersal limitation: Species hasn't reached all suitable areas
+   → Need independent data to distinguish (e.g., experimental tolerances,
+     surveys in remote areas, SDMs with bias correction)
+
+3. Why should we NOT use UMAP axes as predictors in an SDM?
+   • UMAP axes have no consistent meaning across runs
+   • The mapping is non-invertible (can't project new data reliably)
+   • Results depend on arbitrary parameter choices
+   → Use PCA for creating model inputs; use UMAP for exploration only
+
+4. How does PCA relate to the VIF analysis from Session 3?
+   • VIF measured how correlated each variable was with ALL others
+   • PCA solves the same problem by creating NEW uncorrelated variables
+   • PC scores can be used as predictors in SDMs without collinearity
+   • Trade-off: PCA axes are harder to interpret ecologically
+
+5. When would you choose PCA + SDM over Elastic Net + original variables?
+   • When you have MANY (&gt;15) correlated predictors
+   • When ecological interpretation of individual variables is less important
+   • When you want to visualize the niche in reduced space
+   • Elastic Net is better when you want to know WHICH variables matter</code></pre>
+</div>
+</div>
+</section>
+<section id="session-summary" class="level3">
+<h3 class="anchored" data-anchor-id="session-summary" id="9-session-summary"><strong>9. Session Summary</strong></h3>
+<div class="cell">
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># SESSION 4 SUMMARY</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="fu">paste</span>(<span class="fu">rep</span>(<span class="st">"="</span>, <span class="dv">70</span>), <span class="at">collapse =</span> <span class="st">""</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"SESSION 4 SUMMARY: KEY TAKEAWAYS</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste</span>(<span class="fu">rep</span>(<span class="st">"="</span>, <span class="dv">70</span>), <span class="at">collapse =</span> <span class="st">""</span>), <span class="st">"</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"1. PCA AS GRADIENT ANALYSIS:</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • PCA converts correlated climate variables into uncorrelated axes</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • Each axis represents an ecological gradient (energy, moisture, etc.)</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • First 2-3 PCs typically capture &gt;80% of environmental variation</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"2. LOADINGS = ECOLOGICAL MEANING:</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • Loadings tell you which variables define each PC</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • Temperature variables cluster → temperature gradient</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • Precipitation variables cluster → moisture gradient</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • Essential for translating statistical axes into biology</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"3. CLIMATE NICHE SPACE:</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • Presences vs available environment reveals niche position</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • Centroid shift = non-random habitat use</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • Narrow niche breadth = specialization OR sampling bias</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • Always consider bias before interpreting as preference</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"4. UMAP FOR EXPLORATION:</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • Captures nonlinear structure PCA misses</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • Excellent for visualization and pattern discovery</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • Parameter-dependent and non-reproducible → not for inference</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • Use alongside PCA, never as a replacement</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"5. CONNECTION TO PREVIOUS SESSIONS:</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • Session 3 VIF &gt; 10 → PCA creates uncorrelated alternatives</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • Session 3 Elastic Net selects variables → PCA combines them</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"   • Both approaches handle collinearity; choice depends on goals</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="fu">paste</span>(<span class="fu">rep</span>(<span class="st">"="</span>, <span class="dv">70</span>), <span class="at">collapse =</span> <span class="st">""</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ ====================================================================== 
+SESSION 4 SUMMARY: KEY TAKEAWAYS
+====================================================================== 
+
+1. PCA AS GRADIENT ANALYSIS:
+   • PCA converts correlated climate variables into uncorrelated axes
+   • Each axis represents an ecological gradient (energy, moisture, etc.)
+   • First 2-3 PCs typically capture &gt;80% of environmental variation
+
+2. LOADINGS = ECOLOGICAL MEANING:
+   • Loadings tell you which variables define each PC
+   • Temperature variables cluster → temperature gradient
+   • Precipitation variables cluster → moisture gradient
+   • Essential for translating statistical axes into biology
+
+3. CLIMATE NICHE SPACE:
+   • Presences vs available environment reveals niche position
+   • Centroid shift = non-random habitat use
+   • Narrow niche breadth = specialization OR sampling bias
+   • Always consider bias before interpreting as preference
+
+4. UMAP FOR EXPLORATION:
+   • Captures nonlinear structure PCA misses
+   • Excellent for visualization and pattern discovery
+   • Parameter-dependent and non-reproducible → not for inference
+   • Use alongside PCA, never as a replacement
+
+5. CONNECTION TO PREVIOUS SESSIONS:
+   • Session 3 VIF &gt; 10 → PCA creates uncorrelated alternatives
+   • Session 3 Elastic Net selects variables → PCA combines them
+   • Both approaches handle collinearity; choice depends on goals
+
+ ====================================================================== </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="bridge-to-session-5-species-distribution-modeling" class="level2">
+<h2 class="anchored" data-anchor-id="bridge-to-session-5-species-distribution-modeling"><strong>Bridge to Session 5: Species Distribution Modeling</strong></h2>
+<p><strong>What We Learned in Session 4:</strong></p>
+<ul>
+<li><p><strong>PCA axes</strong> are uncorrelated summaries of environmental gradients</p></li>
+<li><p><strong>Loadings</strong> let us interpret what each axis means ecologically</p></li>
+<li><p><strong>Climate niche space</strong> shows where presences sit relative to available conditions</p></li>
+<li><p><strong>UMAP</strong> reveals nonlinear structure but is not suitable for modeling</p></li>
+</ul>
+<p><strong>How This Connects to Session 5:</strong></p>
+<p><strong>1. PCA scores as SDM predictors</strong></p>
+<ul>
+<li><p>Use PC1, PC2, (PC3) as uncorrelated inputs to SDMs</p></li>
+<li><p>Eliminates the collinearity problem diagnosed in Session 3</p></li>
+<li><p>Trade-off: harder to interpret response curves</p></li>
+</ul>
+<p><strong>2. Niche space informs model evaluation</strong></p>
+<ul>
+<li><p>If presences cluster in PCA space → model should predict high suitability there</p></li>
+<li><p>If available environment extends far beyond presences → check for extrapolation</p></li>
+<li><p>Niche breadth metrics help set expectations for model performance</p></li>
+</ul>
+<p><strong>3. Comparing approaches</strong></p>
+<ul>
+<li><p>Session 3 approach: Elastic Net with original variables (interpretable but collinear)</p></li>
+<li><p>Session 4 approach: PCA scores as predictors (uncorrelated but abstract)</p></li>
+<li><p>Session 5 will use both and compare model performance</p></li>
+</ul>
+</section>
+<section id="session-info-for-reproducibility" class="level2">
+<h2 class="anchored" data-anchor-id="session-info-for-reproducibility"><strong>Session Info for Reproducibility</strong></h2>
+<div class="cell">
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For reproducibility</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">=== SESSION INFO ===</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">sessionInfo</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+=== SESSION INFO ===
+R version 4.4.3 (2025-02-28)
+Platform: x86_64-conda-linux-gnu
+Running under: Fedora Linux 39 (Workstation Edition)
+
+Matrix products: default
+BLAS/LAPACK: /run/media/tahirali/2a4efc98-aaa3-4a01-a063-37db1463f3a8/tools/anaconda/envs/quarto-env/lib/libopenblasp-r0.3.30.so;  LAPACK version 3.12.0
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+time zone: Europe/Berlin
+tzcode source: system (glibc)
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] uwot_0.2.4        Matrix_1.7-4      MASS_7.3-65       patchwork_1.3.2  
+ [5] viridis_0.6.5     viridisLite_0.4.2 sf_1.1-0          terra_1.8-70     
+ [9] tidyr_1.3.1       dplyr_1.1.4       ggplot2_4.0.0    
+
+loaded via a namespace (and not attached):
+ [1] generics_0.1.4     class_7.3-23       KernSmooth_2.23-26 lattice_0.22-7    
+ [5] digest_0.6.37      magrittr_2.0.4     evaluate_1.0.5     grid_4.4.3        
+ [9] RColorBrewer_1.1-3 fastmap_1.2.0      jsonlite_2.0.0     RSpectra_0.16-2   
+[13] e1071_1.7-16       DBI_1.2.3          gridExtra_2.3      purrr_1.1.0       
+[17] scales_1.4.0       isoband_0.2.7      textshaping_1.0.3  codetools_0.2-20  
+[21] cli_3.6.5          rlang_1.1.6        units_0.8-7        withr_3.0.2       
+[25] yaml_2.3.10        FNN_1.1.4.1        tools_4.4.3        vctrs_0.6.5       
+[29] R6_2.6.1           proxy_0.4-27       lifecycle_1.0.4    classInt_0.4-11   
+[33] htmlwidgets_1.6.4  ragg_1.5.0         pkgconfig_2.0.3    pillar_1.11.1     
+[37] gtable_0.3.6       glue_1.8.0         Rcpp_1.1.0         systemfonts_1.3.1 
+[41] xfun_0.53          tibble_3.3.0       tidyselect_1.2.1   knitr_1.50        
+[45] farver_2.1.2       htmltools_0.5.8.1  rmarkdown_2.30     labeling_0.4.3    
+[49] compiler_4.4.3     S7_0.2.0          </code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/tahirali-biomics\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2024 Dr. Tahir Ali</p>
+</div>   
+    <div class="nav-footer-center">
+       
+    </div>
+    <div class="nav-footer-right">
+<p>Built with <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script id="technical-code-copy">(() => { document.addEventListener('click', async (event) => { const button=event.target.closest('.technical-copy-button'); if(!button)return; event.preventDefault(); event.stopPropagation(); const details=button.closest('details'); const code=details?.querySelector('pre code, pre'); if(!code)return; const text=code.innerText; try { await navigator.clipboard.writeText(text); } catch (_) { const area=document.createElement('textarea'); area.value=text; area.style.position='fixed'; area.style.opacity='0'; document.body.appendChild(area); area.select(); document.execCommand('copy'); area.remove(); } const old=button.textContent; button.textContent='Copied'; setTimeout(()=>{button.textContent=old;},1400); }); })();</script></body></html>

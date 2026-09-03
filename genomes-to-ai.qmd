@@ -1,0 +1,108 @@
+---
+pagetitle: "Genomes to AI | Tahir Ali"
+description: "Genomes to AI - Dr Tahir Ali's working journal of becoming a scientific AI engineer."
+page-layout: full
+body-classes: genomes-ai-page
+listing:
+  contents: posts
+  sort: "date desc"
+  type: grid
+  grid-columns: 2
+  categories: false
+  feed: true
+---
+
+```{=html}
+<section class="page-hero journal-hero" aria-labelledby="journal-title">
+  <div class="eyebrow">A scientific AI engineering journal</div>
+  <h1 id="journal-title">Genomes to AI</h1>
+  <p class="lead">An authentic record of learning to build scientific AI - grounded in evolutionary biology, shaped by the history of biological data, and tested through open, reproducible work.</p>
+  <p class="hero-support">This is not a collection of polished conclusions. It is a record of questions, design choices, failures, revisions, and evidence.</p>
+  <div class="tag-row">
+    <span class="tag">Biological data</span><span class="tag">Machine learning</span><span class="tag">Scientific software</span><span class="tag">Validation</span><span class="tag">Open source</span>
+  </div>
+</section>
+```
+
+## Why this journey begins with data
+
+Biology has always been an information science. Taxonomists organised visible diversity; geneticists inferred inheritance from crosses; population geneticists turned allele frequencies into models of drift, selection, migration, and demography. The computational scale changed gradually and then dramatically. Handwritten observations became databases. Individual loci became whole genomes. Sanger sequencing gave way to high-throughput short reads, long reads, chromosome-scale assemblies, population resequencing, metagenomes, single-cell measurements, spatial assays, and continuous environmental data.
+
+The bottleneck therefore moved. Generating data remains demanding, but modern biology is increasingly constrained by our ability to organise, integrate, evaluate, and interpret information that is too large and interconnected for manual reasoning alone. Bioinformatics emerged to manage sequence and annotation; data science added scalable statistics, visualisation, and reproducible computation; big-data infrastructure made distributed storage and processing routine. Scientific AI now adds another layer: models that can learn representations from sequence, structure, images, text, and multimodal evidence.
+
+```{=html}
+<div class="data-arc" aria-label="From biological observation to scientific AI">
+  <article><span>Observe</span><strong>Traits, specimens, experiments</strong><small>Biological description and comparison</small></article>
+  <article><span>Measure</span><strong>Loci, genomes, environments</strong><small>Digital data at expanding scale</small></article>
+  <article><span>Integrate</span><strong>Populations, multi-omics, time</strong><small>Statistics, pipelines, and data science</small></article>
+  <article class="active"><span>Learn + test</span><strong>Foundation models and scientific AI</strong><small>Representations evaluated against evidence</small></article>
+</div>
+```
+
+This progression does not make biological knowledge less important. It makes domain knowledge more consequential. A model can identify statistical regularities at a scale no individual can inspect, but it cannot by itself guarantee the correct genome build, distinguish demographic history from selection, define a meaningful negative control, or decide whether a result supports a biological claim. Those responsibilities remain scientific.
+
+## Why I am building PopGenLM Bench
+
+Genomic language models are a natural meeting point between my past work and the engineering skills I am developing. They treat DNA as structured information and learn context-dependent sequence patterns that can be used to score variants. Their promise is substantial: prioritising candidate variants, identifying disrupted regulatory grammar, comparing constraint across sequence contexts, and extending annotation beyond a list of previously characterised genes.
+
+But the scale and apparent precision of model output can create false confidence. Millions of scores can be produced before anyone notices an allele mismatch, reference incompatibility, hidden version change, unexamined calibration problem, or unsupported evolutionary interpretation. My aim with [PopGenLM Bench](popgenlm.html) is to make that transition from score to evidence explicit. The project connects model engineering with the population-genetic questions that determine whether a prediction is scientifically coherent.
+
+```{=html}
+<section class="journal-thesis">
+  <div>
+    <div class="card-kicker">The central question</div>
+    <h3>What would convince us that a genomic AI score carries biological information?</h3>
+    <p>Not a smooth software demo alone. We need reference-safe inputs, reproducible inference, independent evidence, uncertainty estimates, negative controls, sensitivity analysis, and language that does not outrun the data.</p>
+  </div>
+  <blockquote>Scientific AI becomes useful when model capability and scientific validation develop together.</blockquote>
+</section>
+```
+
+## What this journal will document
+
+<div class="principle-grid journal-principles">
+  <article class="principle-card"><div class="card-kicker">Learning</div><h3>Concepts used in practice</h3><p>PyTorch, model inference, packaging, testing, APIs, deployment, and engineering patterns explained through the biological problems that required them.</p></article>
+  <article class="principle-card"><div class="card-kicker">Building</div><h3>Artifacts, not declarations</h3><p>Each substantial entry should connect a scientific question to code, a reproducible result, a benchmark, or a concrete software decision.</p></article>
+  <article class="principle-card"><div class="card-kicker">Validation</div><h3>Evidence before interpretation</h3><p>What was checked, what could fail, what the result supports, which alternatives remain, and where confidence should stop.</p></article>
+  <article class="principle-card"><div class="card-kicker">Reflection</div><h3>An honest technical transition</h3><p>How an experienced computational biologist develops the engineering depth needed to design, release, and maintain reliable AI for life sciences.</p></article>
+</div>
+
+## Where scientific AI could lead
+
+The most valuable applications will not be defined by novelty alone. They will emerge where AI helps researchers interrogate complex biological systems while preserving provenance, uncertainty, and experimental accountability.
+
+```{=html}
+<div class="future-grid">
+  <article><h3>Variant interpretation</h3><p>Combine sequence representations with population frequency, conservation, regulatory context, phenotype, and experimental evidence to prioritise variants transparently.</p></article>
+  <article><h3>Evolutionary monitoring</h3><p>Analyse genomic change through time in natural populations, pathogens, crops, and conservation programmes while separating signal from drift and sampling noise.</p></article>
+  <article><h3>Adaptive breeding and conservation</h3><p>Connect genomic variation with climate, traits, and demographic vulnerability to support testable decisions rather than opaque predictions.</p></article>
+  <article><h3>Multimodal biological models</h3><p>Link sequence, structure, expression, environment, images, and literature into representations that can be evaluated across scales.</p></article>
+  <article><h3>Scientific workflow agents</h3><p>Assist with quality control, provenance, documentation, and reproducible analysis while keeping researchers responsible for assumptions and conclusions.</p></article>
+  <article><h3>Evidence-grounded learning</h3><p>Build teaching systems that adapt practice and feedback to the learner without replacing approved sources, instructor judgement, or intellectual effort.</p></article>
+</div>
+```
+
+## Commitments for the journey
+
+<div class="commitment-list">
+  <div><strong>Build in public</strong><span>Share code, benchmarks, release notes, and the reasoning behind important changes.</span></div>
+  <div><strong>Keep biology central</strong><span>Start with a scientific question and define what evidence would support or challenge the result.</span></div>
+  <div><strong>Report failure honestly</strong><span>Document broken assumptions, implementation errors, negative results, and what changed afterwards.</span></div>
+  <div><strong>Separate capability from validity</strong><span>A model's ability to produce an output is not proof that the output is scientifically meaningful.</span></div>
+  <div><strong>Protect sensitive work</strong><span>Use public demonstration data and keep unpublished research, restricted teaching material, and private information outside public repositories.</span></div>
+</div>
+
+## Latest field notes
+
+```{=html}
+<section class="journal-thesis reading-series-intro" aria-labelledby="reading-series-title">
+  <div>
+    <div class="card-kicker">Reading notebook · Chapter 2</div>
+    <h3 id="reading-series-title">Learning to ask what biological information is about</h3>
+    <p>Five fortnightly notes follow my reading of Christoph Adami's <em>The Evolution of Biological Information</em>. They move from the history of genetic information to probability, relationships between sites, entropy, and the difficult question of what a gene can tell us about its biological context.</p>
+  </div>
+  <blockquote>These are not substitutes for the chapter. They are a personal record of what I understood, where I remain cautious, and which questions I want to pursue next.</blockquote>
+</section>
+```
+
+<p class="section-intro">Reading notes, technical articles, build decisions, failures, and release retrospectives appear below. The newest entry is shown first.</p>

@@ -1,0 +1,25 @@
+---
+title: "Interactive Apps"
+description: "Interactive simulations for population genetics, ecological genomics, and climate-related processes."
+page-layout: full
+format:
+  html:
+    toc: false
+---
+
+<p class="lead">Explore evolutionary and ecological processes by changing parameters, comparing replicate outcomes, and connecting equations to biological behaviour.</p>
+
+<div class="app-list">
+  <article class="app-item"><h3><a href="hwe_app.html">Hardy–Weinberg Simulator</a></h3><p>Explore allele and genotype frequencies, sampling variation, and deviations from expected equilibrium.</p></article>
+  <article class="app-item"><h3><a href="drift-app.html">Genetic Drift Simulator</a></h3><p>Examine how population size, starting frequency, and time alter fixation, loss, and replicate variability.</p></article>
+  <article class="app-item"><h3><a href="AF_dandelion.html">Dandelion Allele Frequencies</a></h3><p>Connect dominance, Hardy–Weinberg expectations, phenotype sampling, and the genetics of bitterness.</p></article>
+  <article class="app-item"><h3><a href="fst_app.html">F<sub>ST</sub> Simulator</a></h3><p>Visualise the emergence of genetic differentiation between populations under drift and selection.</p></article>
+  <article class="app-item"><h3><a href="het_fst_app.html">Heterozygosity and F<sub>ST</sub></a></h3><p>Investigate how population divergence changes within-population diversity and between-population differentiation.</p></article>
+  <article class="app-item"><h3><a href="coalescent-explorer-app.html">Coalescent Explorer</a></h3><p>Explore genealogies and site-frequency spectra under growth, bottlenecks, migration, admixture, and population splits.</p></article>
+  <article class="app-item"><h3><a href="climate-explorer-app.html">Climate Explorer</a></h3><p>Interact with bioclimatic data across <em>Arabidopsis</em> populations and user-selected locations.</p></article>
+  <article class="app-item"><h3><a href="climate-impact-simulator.html">Climate Impact Simulator</a></h3><p>Examine how land use, emissions, energy, water, and transport choices influence a composite resilience index.</p></article>
+</div>
+
+<div class="notice">These applications are conceptual and teaching tools. Their outputs should be interpreted in relation to model assumptions rather than treated as predictions for unmanaged natural populations.</div>
+
+[← Back to Teaching](../teaching.html)

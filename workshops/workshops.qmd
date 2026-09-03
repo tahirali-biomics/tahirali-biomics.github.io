@@ -1,0 +1,95 @@
+---
+pagetitle: "Workshops | Tahir Ali"
+description: "Hands-on computational workshops in genomics, statistics, spatial ecology, and reproducible research."
+page-layout: full
+body-classes: workshops-page
+format:
+  html:
+    toc: false
+---
+
+<section class="page-hero workshops-hero" aria-labelledby="workshops-title">
+  <div class="eyebrow">Hands-on scientific training</div>
+  <h1 id="workshops-title">Workshops</h1>
+  <p class="lead">Practical training that connects biological questions with reproducible workflows in R, Python, Bash, genomics, statistics, and spatial ecology.</p>
+  <div class="tag-row"><span class="tag">Genomics</span><span class="tag">R</span><span class="tag">Python</span><span class="tag">Bash + HPC</span><span class="tag">Spatial ecology</span><span class="tag">Reproducibility</span></div>
+</section>
+
+## About these workshops
+
+These interactive computational workshops are designed to turn theoretical concepts into practical skills. Through Python and JupyterLab, R, and Bash/Linux, participants gain direct experience in analysing genomic and ecological data - from allele-frequency dynamics and population structure to environmental modelling and species distributions.
+
+Each session combines conceptual introductions, guided coding, data exploration, visualisation, and discussion of analytical choices. The emphasis is on learning by doing: understanding why a method is appropriate, checking its assumptions, reading its output critically, and adapting the workflow to a new biological problem.
+
+<div class="workshop-quote">Learn by doing - explore evolution, adaptation, and biodiversity through data, code, and discovery.</div>
+
+## Featured workshop material
+
+<p class="section-intro">Open workshop notes and practical sessions for researchers, students, and instructors who want to work through real analytical decisions.</p>
+
+<div class="workshop-grid">
+  <article class="workshop-card workshop-card--featured">
+    <div class="card-kicker">Python · JupyterLab</div>
+    <h3>Temporal genomics</h3>
+    <p>Explore allele-frequency change through time, compare observed shifts with neutral expectations, and move from data preparation to evolutionary interpretation.</p>
+    <div class="card-actions"><a class="button-primary" href="Temporal_Genomics_Workshop_TemporalGenomics.html">Open workshop</a></div>
+  </article>
+
+  <article class="workshop-card">
+    <div class="card-kicker">Population genomics</div>
+    <h3>Integrative landscape genomics</h3>
+    <p>Connect genetic variation with geography and environmental heterogeneity through an integrated analytical workflow.</p>
+    <div class="card-actions"><a class="button-secondary" href="Integrative_Landscape_Genomics.html">Open workshop</a></div>
+  </article>
+
+  <article class="workshop-card">
+    <div class="card-kicker">R · Multivariate methods</div>
+    <h3>Population structure and environment</h3>
+    <p>Use PCA, PCoA, DAPC, and RDA to examine high-dimensional biological data and distinguish exploration, discrimination, and constrained inference.</p>
+    <div class="card-actions"><a class="button-secondary" href="multivariate_workshop_2.html">Open workshop</a></div>
+  </article>
+
+  <article class="workshop-card">
+    <div class="card-kicker">Species distribution modelling</div>
+    <h3>Ecological modelling with biomod2</h3>
+    <p>Develop and compare species-distribution models while considering predictors, evaluation, uncertainty, and ecological interpretation.</p>
+    <div class="card-actions"><a class="button-secondary" href="sdm_biomode2_v2.html">Open workshop</a></div>
+  </article>
+
+  <article class="workshop-card">
+    <div class="card-kicker">Conservation · Spatial analysis</div>
+    <h3>Advanced spatial ecology</h3>
+    <p>Work with environmental statistics, spatial data, and modelling approaches used in ecological and conservation research.</p>
+    <div class="card-actions"><a class="button-secondary" href="advanced_spatial_ecology_sdm.html">Open workshop</a></div>
+  </article>
+</div>
+
+## Workshop themes
+
+<div class="table-responsive workshop-table">
+
+| Topic | Core tools | Scientific focus |
+|:--|:--|:--|
+| Linux and Bash for bioinformatics | `bash`, `awk`, `sed`, Slurm, HPC | Automate genomic workflows and manage high-performance computing tasks |
+| R for biological data | R, RStudio, tidyverse, tidymodels, ggplot2 | Data organisation, visualisation, statistical reasoning, and reproducible reports |
+| Spatial ecology and modelling | sf, terra, spatstat, spdep, tmap, blockCV | Spatial sampling, point patterns, climate predictors, and spatial validation |
+| Species distribution models | biomod2, MaxEnt, random forests, scikit-learn | Predict species ranges and responses to environmental change |
+| Temporal genomics | dadi, SFS, snpEff, GERP, phyloP, GPN | Track allele-frequency shifts and evaluate drift, selection, and genomic constraint |
+| Hybridisation genomics | ANGSD, GATK, bcftools, vcftools, PLINK | Quantify introgression, ancestry, and genomic differentiation in hybrid systems |
+| Population structure | PCA, DAPC, ADMIXTURE, poppr, PCAngsd | Infer connectivity, clustering, admixture, and differentiation |
+| Functional genomics | PLINK, GEMMA, GAPIT, topGO, clusterProfiler | Connect genomic signals with traits, pathways, and biological function |
+
+</div>
+
+## Training approach
+
+<div class="principle-grid">
+  <article class="principle-card"><h3>Biological question first</h3><p>Methods are introduced in relation to a research question, assumptions, and the evidence required for an answer.</p></article>
+  <article class="principle-card"><h3>Code that can be inspected</h3><p>Commands and analytical choices remain visible so participants can reproduce, adapt, and critique the workflow.</p></article>
+  <article class="principle-card"><h3>Interpretation with limits</h3><p>Outputs are connected to uncertainty, model scope, and realistic alternatives - not reduced to button-driven conclusions.</p></article>
+  <article class="principle-card"><h3>Transferable practice</h3><p>Exercises emphasise analytical patterns that can be reused across datasets, organisms, and research settings.</p></article>
+</div>
+
+## Aim
+
+The workshops are intended to help students, researchers, and educators bridge evolutionary theory, genomic data, spatial ecology, modelling, and computational methods - building the practical judgement needed to analyse, visualise, and interpret complex biological data responsibly.

@@ -1,0 +1,80 @@
+---
+pagetitle: "Teaching and Student Mentoring | Tahir Ali"
+description: "Interactive teaching resources, course companions, simulations, and genomics tutorials by Dr Tahir Ali."
+page-layout: full
+body-classes: teaching-page
+format:
+  html:
+    toc: false
+---
+
+<section class="page-hero teaching-hero" aria-labelledby="teaching-title">
+  <div class="eyebrow">Teaching · Mentoring · Scientific learning</div>
+  <h1 id="teaching-title">Learning biology by doing biology</h1>
+  <p class="lead">Interactive, lecture-grounded resources that help students move from biological concepts to quantitative reasoning, data analysis, and defensible scientific interpretation.</p>
+</section>
+
+<nav class="page-section-nav" aria-label="Teaching page sections">
+  <a href="#how-i-teach-biology">How I teach biology</a>
+  <a href="#interactive-learning-tools">Interactive learning tools</a>
+  <a href="#principles-behind-the-tools">Principles behind the tools</a>
+  <a href="#from-concept-to-independent-analysis">From concepts to independent analysis</a>
+</nav>
+
+## How I teach biology {#how-i-teach-biology}
+
+I design and lead practical exercises in **population genetics**, **quantitative biology**, and **population and ecological genomics** for university students. These courses combine short conceptual lectures, guided tutorials, hands-on data analysis, and interactive apps to help students investigate processes such as **Hardy-Weinberg equilibrium**, **$F_{ST}$ and genetic drift**, **natural selection**, **population structure**, and the interpretation of genomic data.
+
+My teaching is organised around authentic scientific decisions. Students are asked not only to run an analysis, but to identify the biological question, examine assumptions, evaluate uncertainty, and explain what the result does - and does not - support. Reproducible code, clear figures, and scientific language are treated as part of the analysis rather than as final decoration.
+
+Beyond formal coursework, I supervise **Bachelor's and Master's theses** and mentor students individually. This includes support with research design, data management, statistical analysis, reproducible workflows, biological interpretation, scientific writing, and oral presentation, with the aim of developing independent and creative scientific thinking.
+
+## Interactive learning tools {#interactive-learning-tools}
+
+<div class="resource-grid">
+  <article class="resource-card teal">
+    <div class="card-kicker">Structured learning environments</div>
+    <h3>Interactive Course Companions</h3>
+    <p>Lecture-grounded learning paths for ecology and population genetics, with guided practice, progress tracking, and optional AI-supported feedback.</p>
+    <div class="card-actions"><a class="button-primary" href="course-companions/interactive-course-companions.html">Explore companions</a></div>
+  </article>
+
+  <article class="resource-card">
+    <div class="card-kicker">Explore processes dynamically</div>
+    <h3>Interactive Apps</h3>
+    <p>Browser-based simulations for Hardy-Weinberg equilibrium, genetic drift, population differentiation, coalescence, and climate-related processes.</p>
+    <div class="card-actions"><a class="button-primary" href="apps/interactive.html">Open app collection</a></div>
+  </article>
+
+  <article class="resource-card">
+    <div class="card-kicker">Reproducible practical work</div>
+    <h3>Hands-on Genomics Tutorials</h3>
+    <p>Stepwise practical material covering sequence quality control, mapping, variant workflows, command-line tools, population-genomic analysis, and interpretation.</p>
+    <div class="card-actions"><a class="button-primary" href="tutorials/Hands-on%20Genomics%20Tutorials.html">Browse tutorials</a></div>
+  </article>
+
+  <article class="resource-card">
+    <div class="card-kicker">Lecture-aligned practice</div>
+    <h3>Companion Exercises</h3>
+    <p>Focused exercises designed to consolidate lecture concepts, calculations, model interpretation, and biological reasoning.</p>
+    <div class="card-actions"><a class="button-primary" href="exercises/exercises.html">View exercises</a></div>
+  </article>
+</div>
+
+## Principles behind the tools {#principles-behind-the-tools}
+
+<div class="principle-grid">
+  <article class="principle-card"><h3>Concept before calculation</h3><p>Students first identify the biological question, assumptions, and expected evidence, then apply equations or software.</p></article>
+  <article class="principle-card"><h3>Interaction before memorisation</h3><p>Simulations make stochastic and multivariable processes visible, testable, and open to experimentation.</p></article>
+  <article class="principle-card"><h3>Evidence before conclusion</h3><p>Analytical output is interpreted with uncertainty, alternative explanations, and appropriate scientific restraint.</p></article>
+  <article class="principle-card"><h3>Feedback that preserves agency</h3><p>AI can support practice and explanation, while approved course sources and instructor decisions remain authoritative.</p></article>
+</div>
+
+## From concepts to independent analysis {#from-concept-to-independent-analysis}
+
+<div class="teaching-pathway">
+  <div><span>1</span><strong>Understand</strong><small>Concepts, assumptions, and biological questions</small></div>
+  <div><span>2</span><strong>Explore</strong><small>Simulations, examples, and guided calculations</small></div>
+  <div><span>3</span><strong>Analyse</strong><small>Realistic data, reproducible code, and diagnostics</small></div>
+  <div><span>4</span><strong>Interpret</strong><small>Uncertainty, alternatives, and scientific communication</small></div>
+</div>

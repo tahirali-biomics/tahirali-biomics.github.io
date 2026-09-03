@@ -1,0 +1,76 @@
+---
+title: "Interactive Course Companions"
+subtitle: "Lecture-grounded learning environments for ecology, population genetics, and ecological genomics"
+author: "Dr Tahir Ali · University of Cologne"
+description: "Interactive course companions built from authentic university teaching material."
+page-layout: full
+body-classes: course-companions-page content-dense
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    toc-title: "On this page"
+---
+
+<p class="lead">Structured learning environments that connect approved course material with guided practice, quantitative reasoning, scientific communication, and optional AI-supported feedback.</p>
+
+|  |  |
+|:--|:--|
+| **Audience** | University students, instructors, researchers, and independent learners |
+| **Learning mode** | Progressive lessons, guided exercises, formative assessment, feedback, and progress tracking |
+| **Access** | Browser-based and designed for desktop, tablet, and smartphone use |
+
+## Educational foundation
+
+Each companion reorganises authentic lecture slides, practical-course material, instructor-approved explanations, assessment criteria, and course-specific learning objectives into a coherent learning path.
+
+AI is used only where it adds clear educational value—for example, feedback on written reasoning or supplementary practice. It does not replace the lecture material, instructor-defined curriculum, approved answer keys, or formal assessment decisions.
+
+## Learning coach portfolio
+
+<div class="card-grid">
+  <article class="content-card course-card teal">
+    <div class="card-kicker">Available in German</div>
+    <h3>Ecology Coach</h3>
+    <p><strong>Learn ecology through scientific questions, experimental design, field interpretation, statistics, and ecological communication.</strong></p>
+    <p>Twelve modules and 24 in-depth lessons guide learners from hypotheses and experimental design to field ecology, indicator values, statistical interpretation, scientific writing, and presentation.</p>
+    <div class="tag-row"><span class="tag">Experimental design</span><span class="tag">Field ecology</span><span class="tag">Statistics</span><span class="tag">Communication</span></div>
+    <div class="card-actions"><a class="button-primary" href="https://tahirali-biomics.github.io/ecology-coach-v2.5-de/">Open Ecology Coach</a></div>
+  </article>
+
+  <article class="content-card course-card">
+    <div class="card-kicker">Available in beta</div>
+    <h3>Population Genetics Coach</h3>
+    <p><strong>Build population-genetic understanding from allele frequencies and stochastic models to genomic inference.</strong></p>
+    <p>Lecture-grounded modules connect Hardy–Weinberg expectations, drift, migration, coalescence, selection, demographic inference, genomic scans, and population structure with worked calculations and empirical interpretation.</p>
+    <div class="tag-row"><span class="tag">Drift</span><span class="tag">F<sub>ST</sub></span><span class="tag">Coalescence</span><span class="tag">Selection</span><span class="tag">Genomics</span></div>
+    <div class="card-actions"><a class="button-primary" href="https://tahirali-biomics.github.io/Population-Genetics-Coach/">Open Population Genetics Coach</a></div>
+  </article>
+
+  <article class="content-card course-card planned">
+    <div class="card-kicker">In development</div>
+    <h3>Ecological Genomics Coach</h3>
+    <p><strong>Connect genomic variation with ecological processes, environmental change, and adaptation in natural populations.</strong></p>
+    <p>The planned companion will cover study design, sequencing and filtering, neutral expectations, temporal change, selection scans, functional annotation, genomic constraint, runs of homozygosity, and reproducible interpretation.</p>
+    <div class="tag-row"><span class="tag">Temporal genomics</span><span class="tag">Adaptation</span><span class="tag">Annotation</span><span class="tag">Reproducibility</span></div>
+  </article>
+</div>
+
+## Shared design principles
+
+<div class="principle-grid">
+  <article class="principle-card"><h3>Authentic course foundation</h3><p>Approved lectures, practical material, and instructor-defined explanations remain the primary knowledge source.</p></article>
+  <article class="principle-card"><h3>Progressive learning paths</h3><p>Complex topics are divided into focused lessons that build conceptual and quantitative independence.</p></article>
+  <article class="principle-card"><h3>Transfer, not recall alone</h3><p>Students apply concepts to calculations, figures, realistic biological problems, and written scientific arguments.</p></article>
+  <article class="principle-card"><h3>Optional AI support</h3><p>Individualised feedback supports learning without replacing authoritative content or instructor judgement.</p></article>
+  <article class="principle-card"><h3>Technical vocabulary</h3><p>Subject-specific language is introduced progressively and reinforced through active use.</p></article>
+  <article class="principle-card"><h3>Visible progress</h3><p>Lesson completion, attempts, workspaces, and assessment activity support self-regulation and course coordination.</p></article>
+</div>
+
+## Use in university teaching
+
+The companions can support preparation before class, guided work during practical sessions, formative assessment between meetings, examination revision, scientific writing, oral explanation, and course-level progress monitoring.
+
+Their modular architecture also allows additional companions to be developed from approved lecture series, practical modules, and instructor-defined learning outcomes.
+
+[← Back to Teaching](../teaching.html)

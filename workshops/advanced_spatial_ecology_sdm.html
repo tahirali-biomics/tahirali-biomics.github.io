@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dr Tahir Ali | AG de Meaux | TRR341 Ecological Genomics | University of Cologne">
+
+<title>Environmental Statistics and Spatial Modeling for Conservation – Dr. Tahir Ali</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../profile.webp" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-fdaeddbba6fa95a0f13bcc20c9a3fb04.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-0LPGXESG7T"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
+</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="content-dense docked nav-sidebar quarto-light technical-page">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Environmental Statistics and Spatial Modeling for Conservation</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item"><div class="sidebar-item-container"><a href="../index.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Home</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../popgenlm.html" class="sidebar-item-text sidebar-link"><span class="menu-text">PopGenLM</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../genomes-to-ai.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Genomes to AI</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../projects.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Projects</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../publications.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Publications</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../cv.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Résumé</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../teaching/teaching.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Teaching</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="workshops.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">Workshops</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank"><span class="menu-text">GitHub</span></a></div></li></ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul class="technical-toc-list"><li><a href="#course-overview-2">Course Overview</a></li><li><a href="#spatial-ecology-ecological-modeling-framework-2">Spatial Ecology &amp; Ecological Modeling Framework</a></li><li><a href="#schedule-sessions-2">Schedule &amp; Sessions</a></li><li><a href="#software-requirements-2">Software Requirements</a></li><li><a href="#workshop-format-materials-2">Workshop Format &amp; Materials</a></li><li><a href="#learning-objectives-2">Learning Objectives</a></li><li><a href="#recommended-reading-2">Recommended Reading</a></li><li><a href="#license-2">License</a></li></ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Environmental Statistics and Spatial Modeling for Conservation</h1>
+<p class="subtitle lead">Statistical Biostatistics + Machine Learning for Ecological Modeling</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dr Tahir Ali | AG de Meaux | TRR341 Ecological Genomics | University of Cologne </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Audience</strong></th>
+<th style="text-align: left;">Researchers in Ecology, Environmental Science, Conservation Biology</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Prerequisites</strong></td>
+<td style="text-align: left;">Introductory Statistics, Ecological Foundations, Basic R (helpful but not required)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Format</strong></td>
+<td style="text-align: left;">5 sessions x 90 minutes (30 min theory + 60 min hands-on R practice)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<section id="course-overview" class="level2">
+<h2 class="anchored" data-anchor-id="course-overview" id="course-overview-2">Course Overview</h2>
+<p>This advanced course integrates key concepts from <strong>spatial ecology, biostatistics, and machine learning</strong> to build statistically rigorous ecological models.</p>
+<p>The workshop combines ecological theory with practical <strong>R-based spatial modeling workflows</strong>, enabling participants to design robust sampling strategies and build reproducible <strong>species distribution models (SDMs)</strong>.</p>
+<p>Core topics include:</p>
+<ul>
+<li><strong>Spatial sampling theory</strong></li>
+<li><strong>Biostatistical diagnostics</strong></li>
+<li><strong>BioClim climate predictors</strong></li>
+<li><strong>Multivariate ecological analysis</strong></li>
+<li><strong>Machine learning for SDM</strong></li>
+<li><strong>Spatial cross-validation</strong></li>
+</ul>
+<p>Participants will learn to interpret models using <strong>biological reasoning and statistical rigor</strong>.</p>
+<hr>
+<ul>
+<li>Data used in this workshop can be downloaded from: <a href="https://github.com/tahirali-biomics/spatial-ecology-workshop/" target="_blank"> Download dataset from GitHub </a></li>
+</ul>
+<hr>
+</section>
+<section id="spatial-ecology-ecological-modeling-framework" class="level2">
+<h2 class="anchored" data-anchor-id="spatial-ecology-ecological-modeling-framework" id="spatial-ecology-ecological-modeling-framework-2">Spatial Ecology &amp; Ecological Modeling Framework</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Topic</th>
+<th>Tools</th>
+<th>Focus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Spatial Ecology &amp; Ecological Modeling</strong></td>
+<td><code>sf</code>, <code>terra</code>, <code>ggplot2</code>, <code>dplyr</code>, <code>spatstat</code>, <code>spdep</code>, <code>tmap</code>, <code>dismo</code>, <code>randomForest</code>, <code>blockCV</code>, <code>mlr3</code></td>
+<td>Spatial sampling theory, spatial point-pattern analysis, BioClim climate predictors, multivariate analysis, and machine learning for species distribution modeling with spatial cross-validation</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="schedule-sessions" class="level2">
+<h2 class="anchored" data-anchor-id="schedule-sessions" id="schedule-sessions-2">Schedule &amp; Sessions</h2>
+<div class="session-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin:2rem 0;">
+<section id="session-1---spatial-sampling-ecological-inference" class="level3" style="border:1px solid #2c7fb8;border-radius:12px;padding:1.5rem;background:#f9fcff;">
+<h3 class="anchored" data-anchor-id="session-1---spatial-sampling-ecological-inference"><a href="Hands-on-Session_1.html">Session 1 - Spatial Sampling &amp; Ecological Inference</a></h3>
+<ul>
+<li>Random, systematic, stratified, transect sampling designs<br>
+</li>
+<li>Road and river sampling bias<br>
+</li>
+<li>Dendritic network dependence<br>
+</li>
+<li>Moran’s I and spatial autocorrelation<br>
+</li>
+<li>Effective sample size</li>
+</ul>
+</section>
+<section id="session-2---data-exploration-normalization" class="level3" style="border:1px solid #2c7fb8;border-radius:12px;padding:1.5rem;background:#f9fcff;">
+<h3 class="anchored" data-anchor-id="session-2---data-exploration-normalization"><a href="Hands-on-Session_2.html">Session 2 - Data Exploration &amp; Normalization</a></h3>
+<ul>
+<li>Distribution diagnostics (histograms, QQ plots, density plots)<br>
+</li>
+<li>Transformations: log, Box-Cox, scaling<br>
+</li>
+<li>Outlier detection (Isolation Forest)<br>
+</li>
+<li>Ecological interpretation of transformations</li>
+</ul>
+</section>
+<section id="session-3---collinearity-regularization" class="level3" style="border:1px solid #2c7fb8;border-radius:12px;padding:1.5rem;background:#f9fcff;">
+<h3 class="anchored" data-anchor-id="session-3---collinearity-regularization"><a href="Hands-on-Session_3.html">Session 3 - Collinearity &amp; Regularization</a></h3>
+<ul>
+<li>Correlation matrices<br>
+</li>
+<li>Variance Inflation Factor (VIF)<br>
+</li>
+<li>Ecological trade-offs in variable selection<br>
+</li>
+<li>Ridge regression, LASSO, Elastic Net</li>
+</ul>
+</section>
+<section id="session-4---multivariate-dimensionality-reduction" class="level3" style="border:1px solid #2c7fb8;border-radius:12px;padding:1.5rem;background:#f9fcff;">
+<h3 class="anchored" data-anchor-id="session-4---multivariate-dimensionality-reduction"><a href="Hands-on-Session_4.html">Session 4 - Multivariate &amp; Dimensionality Reduction</a></h3>
+<ul>
+<li>PCA interpretation in ecological space<br>
+</li>
+<li>Loadings and gradient interpretation<br>
+</li>
+<li>UMAP / t-SNE visualization<br>
+</li>
+<li>Climate niche space analysis</li>
+</ul>
+</section>
+<section id="session-5---habitat-suitability-species-distribution-modeling-sdm" class="level3" style="border:1px solid #2c7fb8;border-radius:12px;padding:1.5rem;background:#f9fcff;">
+<h3 class="anchored" data-anchor-id="session-5---habitat-suitability-species-distribution-modeling-sdm"><a href="Hands-on-Session_5.html">Session 5 - Habitat Suitability / Species Distribution Modeling (SDM)</a></h3>
+<ul>
+<li>GLM and GAM foundations<br>
+</li>
+<li>Random Forest and Boosted Trees<br>
+</li>
+<li>Regularized MaxEnt modeling<br>
+</li>
+<li>Variable importance and interpretation<br>
+</li>
+<li>Spatial cross-validation</li>
+</ul>
+</section>
+</div>
+<hr>
+</section>
+<section id="software-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="software-requirements" id="software-requirements-2">Software Requirements</h2>
+<p>Please install <strong>R &gt;= 4.2</strong> and <strong>RStudio</strong> before Session 1.</p>
+<section id="install-required-r-packages" class="level3">
+<h3 class="anchored" data-anchor-id="install-required-r-packages">Install Required R Packages</h3>
+<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data manipulation and visualization</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"tidyverse"</span>,<span class="st">"dplyr"</span>,<span class="st">"tidyr"</span>,<span class="st">"ggplot2"</span>))</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Spatial data</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"sf"</span>,<span class="st">"terra"</span>,<span class="st">"spdep"</span>,<span class="st">"tmap"</span>))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Statistical modeling</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"MASS"</span>,<span class="st">"car"</span>,<span class="st">"glmnet"</span>,<span class="st">"mgcv"</span>))</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Machine learning</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"caret"</span>,<span class="st">"randomForest"</span>,<span class="st">"gbm"</span>,<span class="st">"dismo"</span>))</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Multivariate analysis</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"vegan"</span>,<span class="st">"FactoMineR"</span>,<span class="st">"factoextra"</span>))</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Outlier detection</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"isolationForest"</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Spatial cross-validation</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"blockCV"</span>,<span class="st">"spatialsample"</span>))</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Advanced machine learning workflow</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"mlr3"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></details><hr>
+</section>
+</section>
+<section id="workshop-format-materials" class="level2">
+<h2 class="anchored" data-anchor-id="workshop-format-materials" id="workshop-format-materials-2">Workshop Format &amp; Materials</h2>
+<p>Each session includes:</p>
+<ul>
+<li><strong>30 minutes theoretical concepts</strong></li>
+<li><strong>60 minutes hands-on R analysis</strong></li>
+<li>datasets and scripts provided beforehand</li>
+<li>reproducible ecological modeling workflows</li>
+</ul>
+<p>Sessions build progressively:</p>
+<ol type="1">
+<li>Spatial sampling<br>
+</li>
+<li>Data diagnostics<br>
+</li>
+<li>Collinearity and regularization<br>
+</li>
+<li>Multivariate ecological space<br>
+</li>
+<li>Species distribution modeling</li>
+</ol>
+<p>Final session includes <strong>model comparison and spatial cross-validation</strong>.</p>
+<p>Session links will be activated one week before each workshop.</p>
+<hr>
+</section>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives" id="learning-objectives-2">Learning Objectives</h2>
+<p>By the end of this workshop participants will be able to:</p>
+<ul>
+<li>Design <strong>ecologically meaningful spatial sampling strategies</strong></li>
+<li>Diagnose <strong>statistical distributions and transformations</strong></li>
+<li>Detect <strong>multicollinearity in environmental predictors</strong></li>
+<li>Apply <strong>dimensionality reduction to ecological datasets</strong></li>
+<li>Build <strong>species distribution models using multiple algorithms</strong></li>
+<li>Interpret model predictions in <strong>ecological context</strong></li>
+<li>Apply <strong>spatial cross-validation to avoid overfitting</strong></li>
+</ul>
+<hr>
+</section>
+<section id="recommended-reading" class="level2">
+<h2 class="anchored" data-anchor-id="recommended-reading" id="recommended-reading-2">Recommended Reading</h2>
+<section id="core-books" class="level3">
+<h3 class="anchored" data-anchor-id="core-books">Core Books</h3>
+<ul>
+<li>Zuur et al. (2009) <em>Mixed Effects Models and Extensions in Ecology with R</em><br>
+</li>
+<li>James et al. (2021) <em>An Introduction to Statistical Learning</em><br>
+</li>
+<li>Franklin (2010) <em>Mapping Species Distributions</em></li>
+</ul>
+</section>
+<section id="key-papers" class="level3">
+<h3 class="anchored" data-anchor-id="key-papers">Key Papers</h3>
+<ul>
+<li>Dormann et al. (2007) Methods to account for spatial autocorrelation<br>
+</li>
+<li>Elith et al. (2006) Novel methods for predicting species distributions<br>
+</li>
+<li>Valavi et al. (2019) blockCV for spatial cross-validation</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="license" class="level2">
+<h2 class="anchored" data-anchor-id="license" id="license-2">License</h2>
+<p>These workshop materials are shared under <strong>CC BY-SA 4.0</strong>.</p>
+<hr>
+<p><a href="workshops.html">Back to Workshops Home</a></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/tahirali-biomics\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2024 Dr. Tahir Ali</p>
+</div>   
+    <div class="nav-footer-center">
+       
+    </div>
+    <div class="nav-footer-right">
+<p>Built with <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script id="technical-code-copy">(() => { document.addEventListener('click', async (event) => { const button=event.target.closest('.technical-copy-button'); if(!button)return; event.preventDefault(); event.stopPropagation(); const details=button.closest('details'); const code=details?.querySelector('pre code, pre'); if(!code)return; const text=code.innerText; try { await navigator.clipboard.writeText(text); } catch (_) { const area=document.createElement('textarea'); area.value=text; area.style.position='fixed'; area.style.opacity='0'; document.body.appendChild(area); area.select(); document.execCommand('copy'); area.remove(); } const old=button.textContent; button.textContent='Copied'; setTimeout(()=>{button.textContent=old;},1400); }); })();</script></body></html>
