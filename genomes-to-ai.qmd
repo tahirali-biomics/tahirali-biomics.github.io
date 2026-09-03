@@ -1,6 +1,7 @@
 ---
 pagetitle: "Genomes to AI | Tahir Ali"
 description: "Genomes to AI - Dr Tahir Ali's working journal of becoming a scientific AI engineer."
+image: assets/writings/genomes-to-ai-journey.webp
 page-layout: full
 body-classes: genomes-ai-page
 listing:
