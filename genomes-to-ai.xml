@@ -9,6 +9,13 @@
 <link>https://tahirali-biomics.github.io/genomes-to-ai.html</link>
 <atom:link href="https://tahirali-biomics.github.io/genomes-to-ai.xml" rel="self" type="application/rss+xml"/>
 <description>Genomes to AI - Dr Tahir Ali&#39;s working journal of becoming a scientific AI engineer.</description>
+<image>
+<url>https://tahirali-biomics.github.io/assets/writings/genomes-to-ai-journey.png</url>
+<title>Dr. Tahir Ali</title>
+<link>https://tahirali-biomics.github.io/genomes-to-ai.html</link>
+<height>75</height>
+<width>144</width>
+</image>
 <generator>quarto-1.8.24</generator>
 <lastBuildDate>Sun, 30 Aug 2026 22:00:00 GMT</lastBuildDate>
 <item>
@@ -18,21 +25,16 @@
   <description><![CDATA[ 
 
 
-
-
 <p>Genomic language models can score millions of variants, but a completed model run does not by itself establish biological validity. Before interpreting a score, I want to know whether the alleles matched the intended reference, whether model and software versions were recorded, whether sequence orientation was treated consistently, and whether the output behaves sensibly against independent evolutionary evidence.</p>
 <p>That is the reason for <strong>PopGenLM Bench</strong>, my first open-source scientific AI engineering project.</p>
-<section id="information-about-what" class="level2">
-<h2 class="anchored" data-anchor-id="information-about-what">Information about what?</h2>
+<h2 id="information-about-what">Information about what?</h2>
 <p>Reading Chapter 2 of Christoph Adami’s <em>The Evolution of Biological Information</em> sharpened the question behind this project. In information theory, a sequence or score is not informative in isolation. Information is a relationship: knowing one variable must reduce uncertainty about a specified target across an appropriate ensemble.</p>
 <p>For a genomic language-model score, I therefore need to ask: information about what? A score may reflect sequence plausibility, evolutionary conservation, regulatory context, population frequency or a technical property of the training data. These possibilities are related, but they are not equivalent. Producing a confident number does not establish which relationship has been learned.</p>
 <p>This is why PopGenLM Bench is designed as an evaluation layer rather than a score viewer. Its task is to state the target, define the comparison set, measure whether the model adds predictive value beyond simpler baselines, and expose where that relationship fails.</p>
-</section>
-<section id="the-first-deliberately-small-milestone" class="level2">
-<h2 class="anchored" data-anchor-id="the-first-deliberately-small-milestone">The first deliberately small milestone</h2>
+<h2 id="the-first-deliberately-small-milestone">The first deliberately small milestone</h2>
 <p>Version 0.1 does one thing carefully: it scores exactly 100 deterministic SNVs with the published GPN Brassicales model. The variants occupy a safe internal section of the public <em>Arabidopsis thaliana</em> region used in GPN’s official example, ensuring complete sequence context for every site.</p>
 <p>The run uses pinned upstream code and model revisions, validates every REF allele against the FASTA, invokes GPN’s maintained variant-effect command, and records input and output hashes, package versions, device, runtime, and the exact command.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="ex" style="color: null;
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">uv</span> python install 3.13</span>
 <span id="cb1-2"><span class="ex" style="color: null;
@@ -46,33 +48,21 @@ font-style: inherit;">--group</span> dev</span>
 background-color: null;
 font-style: inherit;">uv</span> run popgenlm demo <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">--project-root</span> .</span></code></pre></div></div>
-</section>
-<section id="verified-result" class="level2">
-<h2 class="anchored" data-anchor-id="verified-result">Verified result</h2>
+font-style: inherit;">--project-root</span> .</span></code></pre></div>
+<h2 id="verified-result">Verified result</h2>
 <p>The model returned all <strong>100 expected scores</strong>. The median alternate-minus-reference score was <strong>−1.0309</strong>, with <strong>77%</strong> of the deterministic alternate alleles scoring below their reference allele. The complete CPU run took <strong>80.7 seconds</strong>.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://tahirali-biomics.github.io/assets/popgenlm/benchmark-overview.png" class="img-fluid figure-img" alt="Four-panel summary of GPN scores showing the score distribution, positional profile, ranked profile, and bootstrap interval for the median."></p>
-<figcaption>Verified PopGenLM benchmark overview</figcaption>
+<figure>
+<img src="https://tahirali-biomics.github.io/assets/popgenlm/benchmark-overview.png" data-fig-alt="Four-panel summary of GPN scores showing the score distribution, positional profile, ranked profile, and bootstrap interval for the median." alt="Four-panel PopGenLM Bench validation overview" loading="lazy" decoding="async">
+
 </figure>
-</div>
-</section>
-<section id="what-this-result-does-not-mean" class="level2">
-<h2 class="anchored" data-anchor-id="what-this-result-does-not-mean">What this result does not mean</h2>
+<h2 id="what-this-result-does-not-mean">What this result does not mean</h2>
 <p>The distribution cannot be used to infer natural selection or biological information content. These variants were generated deterministically from one public sequence region; they were not sampled from a natural population and do not form an evolutionary ensemble suitable for that claim.</p>
 <p>This distinction is central to the project. A technically successful run demonstrates that the inference and validation machinery works. Biological support requires an independent benchmark with observed population variants, allele-frequency information, uncertainty estimates, and appropriate null comparisons.</p>
-</section>
-<section id="what-comes-next" class="level2">
-<h2 class="anchored" data-anchor-id="what-comes-next">What comes next</h2>
+<h2 id="what-comes-next">What comes next</h2>
 <p>The next milestone will use a documented public <em>A. thaliana</em> population dataset. It will test whether GPN scores reduce uncertainty about allele-frequency classes beyond appropriate sequence baselines, using effect sizes, block-bootstrap confidence intervals, permutation tests and sensitivity analyses. Later milestones will incorporate conservation scores, genomic annotation classes and controls for genomic and phylogenetic dependence.</p>
 <p>The guiding principle is now clearer to me: a model output becomes scientific evidence only when its predictive relationship to biology is explicit, reproducible and tested outside the model that produced it.</p>
 <p>The evolving project overview, verified outputs, and roadmap are available on the <a href="../../popgenlm.html">PopGenLM Bench page</a>. The complete statistical workflow can also be rerun in the <a href="https://colab.research.google.com/github/tahirali-biomics/tahirali-biomics.github.io/blob/main/notebooks/popgenlm-bench-demo.ipynb">verified Colab notebook</a>. The public package repository will become active with the first reviewed release.</p>
-
-
-</section>
-
-<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
+ ]]></description>
   <category>Genomic language models</category>
   <category>Population genomics</category>
   <category>Open source</category>
@@ -88,43 +78,32 @@ font-style: inherit;">--project-root</span> .</span></code></pre></div></div>
   <description><![CDATA[ 
 
 
+<figure>
+<img src="https://tahirali-biomics.github.io/assets/writings/05-what-does-a-gene-know.webp" class="reading-sketch" data-fig-alt="Handwritten pencil notes ask what information is about, emphasise ensembles and testing predictions against biology." alt="A simple pencil notebook page linking a sequence ensemble to a folded protein and a leaf in its environment." loading="lazy" decoding="async">
 
-
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://tahirali-biomics.github.io/assets/writings/05-what-does-a-gene-know.webp" class="reading-sketch img-fluid figure-img" alt="Handwritten pencil notes ask what information is about, emphasise ensembles and testing predictions against biology."></p>
-<figcaption>A simple pencil notebook page linking a sequence ensemble to a folded protein and a leaf in its environment.</figcaption>
 </figure>
-</div>
 <p>The final part of the supplied excerpt asks a question that sounds almost poetic: what does a gene know? The chapter uses “know” in a precise, non-mental sense. A biological molecule has information about its world when its state supports successful predictions or interactions in that world.</p>
 <p>This question brought the whole reading series together for me.</p>
-<section id="information-is-always-about-something" class="level2">
-<h2 class="anchored" data-anchor-id="information-is-always-about-something">Information is always about something</h2>
+<h2 id="information-is-always-about-something">Information is always about something</h2>
 <p>Section 2.3 turns from relationships within sequences to the information content of genes. A molecule such as haemoglobin is adapted to a world containing oxygen, particular chemical structures, cellular partners and physiological demands. Its sequence and folded form embody relationships accumulated through evolution.</p>
 <p>Calling this “knowledge” is useful only if we remain precise. The molecule does not think. Its structure carries predictive relationships to an environment: what to bind, where to function, and which interactions to avoid.</p>
 <p>This gives biological information a direction. A sequence is not simply full of information in the abstract. It may carry information about a molecular partner, an environment, a developmental state or a functional requirement.</p>
-</section>
-<section id="why-one-sequence-is-not-enough" class="level2">
-<h2 class="anchored" data-anchor-id="why-one-sequence-is-not-enough">Why one sequence is not enough</h2>
+<h2 id="why-one-sequence-is-not-enough">Why one sequence is not enough</h2>
 <p>Box 2.2 addresses a common difficulty. Shannon information is a correlational property of ensembles, so it cannot normally be measured by inspecting a single sequence. One observed string does not reveal which of its patterns are reliably connected to a target and which occurred by chance.</p>
 <p>The distinction between a message and an ensemble is crucial. A particular clue may happen to predict correctly once, but its information can be assessed only across repeated possibilities. For molecular sequences, evolution helps generate the ensemble: mutation explores alternatives and selection changes which alternatives persist.</p>
 <p>This is why conservation and covariation become informative. Across many sequences, the evolutionary process reveals which changes are tolerated and which relationships are maintained. The information is not printed visibly inside one string; it appears through structured variation across possible strings and worlds.</p>
-</section>
-<section id="information-content-and-biological-complexity" class="level2">
-<h2 class="anchored" data-anchor-id="information-content-and-biological-complexity">Information content and biological complexity</h2>
+<h2 id="information-content-and-biological-complexity">Information content and biological complexity</h2>
 <p>The chapter suggests that information content may be a useful proxy for complexity, while acknowledging how difficult it is to estimate. Genes do not act alone. Regulatory systems store substantial context about when, where and how gene products are used. Protein-coding sequence is therefore only part of an organism’s informational architecture.</p>
 <p>The excerpt begins the discussion of proteins as amino-acid sequences translated from codons. Even at this early stage, the challenge is clear: counting possible symbols is not the same as measuring functional information. Function depends on folding, interactions, cellular context, environment and the ensemble of viable alternatives.</p>
-<section id="notes-from-my-margin" class="level3 pencil-margin-note">
-<h3 class="anchored" data-anchor-id="notes-from-my-margin">Notes from my margin</h3>
+<section id="notes-from-my-margin" class="pencil-margin-note">
+<h3>Notes from my margin</h3>
 <ul>
 <li>Information must have a target: information <em>about what</em>?</li>
 <li>A single sequence can be examined, but an ensemble is needed to measure a reliable relationship.</li>
 <li>Evolutionary history is part of the evidence, not background noise.</li>
 </ul>
 </section>
-</section>
-<section id="my-interpretation-for-popgenlm-bench" class="level2">
-<h2 class="anchored" data-anchor-id="my-interpretation-for-popgenlm-bench">My interpretation for PopGenLM Bench</h2>
+<h2 id="my-interpretation-for-popgenlm-bench">My interpretation for PopGenLM Bench</h2>
 <p>This reading changes the language I want to use around genomic AI. A model score is not “biological information” simply because it was produced from DNA. It becomes useful evidence only if it improves prediction of a clearly defined biological target in an appropriate ensemble.</p>
 <p>For variant-effect models, possible targets include population frequency, evolutionary constraint, molecular function, expression, phenotype or experimental effect. These are related but not interchangeable. A score that predicts conservation may not predict present-day fitness in a particular population. A score calibrated in one species may not transfer to another. A correlation learned from sequence may reflect shared history rather than a causal mechanism.</p>
 <p>PopGenLM Bench should therefore make four questions explicit:</p>
@@ -135,25 +114,17 @@ font-style: inherit;">--project-root</span> .</span></code></pre></div></div>
 <li>Under which changes of reference, lineage, annotation and sampling does that relationship remain stable?</li>
 </ol>
 <p>This is a stronger foundation than asking whether the software ran or whether the plot looks convincing.</p>
-</section>
-<section id="my-commentary-on-chapter-2" class="level2">
-<h2 class="anchored" data-anchor-id="my-commentary-on-chapter-2">My commentary on Chapter 2</h2>
+<h2 id="my-commentary-on-chapter-2">My commentary on Chapter 2</h2>
 <p>The chapter’s most important contribution, for me, is discipline of language. It moves from the history of genetic information to random variables, probability, entropy, conditional dependence and gene information without allowing “information” to remain a loose synonym for sequence.</p>
 <p>I also appreciate that the biological examples expose the limits of the mathematics. An entropy profile depends on sampling. Mutual information detects dependence, not cause. A single sequence does not establish what it predicts. Recent ancestry can resemble constraint. These are not reasons to reject the framework; they are reasons to use it scientifically.</p>
 <p>The reading has made my AI journey feel more grounded. The question is not whether AI can process more genomic data. It can. The harder question is whether its outputs carry stable, testable information about the biological world.</p>
-</section>
-<section id="where-i-want-to-learn-next" class="level2">
-<h2 class="anchored" data-anchor-id="where-i-want-to-learn-next">Where I want to learn next</h2>
+<h2 id="where-i-want-to-learn-next">Where I want to learn next</h2>
 <p>My next commentary series will return to the chapter topic by topic, with simple comparisons and small reproducible examples: entropy versus conservation, mutual information versus correlation, single sequences versus ensembles, and model likelihood versus biological effect.</p>
 <p>I also want to extend the reading into information content in regulatory DNA, phylogeny-aware sequence models, calibration and the design of benchmarks that separate technical capability from biological support.</p>
 <div class="reading-source">
 <p><strong>Reading for this note:</strong> Christoph Adami, <em>The Evolution of Biological Information</em>, Chapter 2, Section 2.3, Section 2.3.1 as included in the supplied excerpt, and Box 2.2, “Information in Single Sequences?”</p>
 </div>
-
-
-</section>
-
-<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
+ ]]></description>
   <category>Biological information</category>
   <category>Genes and environment</category>
   <category>Learning note</category>
@@ -168,66 +139,47 @@ font-style: inherit;">--project-root</span> .</span></code></pre></div></div>
   <description><![CDATA[ 
 
 
+<figure>
+<img src="https://tahirali-biomics.github.io/assets/writings/04-when-uncertainty-reveals-structure.webp" class="reading-sketch" data-fig-alt="Handwritten pencil notes say that uncertainty can be measured, shared variation can reveal structure and recent ancestry can mislead." alt="A simple pencil notebook page showing uncertain dots, a small correlation grid and a rough RNA cloverleaf." loading="lazy" decoding="async">
 
-
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://tahirali-biomics.github.io/assets/writings/04-when-uncertainty-reveals-structure.webp" class="reading-sketch img-fluid figure-img" alt="Handwritten pencil notes say that uncertainty can be measured, shared variation can reveal structure and recent ancestry can mislead."></p>
-<figcaption>A simple pencil notebook page showing uncertain dots, a small correlation grid and a rough RNA cloverleaf.</figcaption>
 </figure>
-</div>
 <p>For the last two weeks I have been thinking about a counter-intuitive idea: uncertainty is not merely a defect in data. When it is measured carefully, its pattern can reveal biological organisation.</p>
 <p>Sections 2.2 and 2.2.1 introduce entropy and information. The formulas matter, but the conceptual sequence matters more: first measure how uncertain a variable is; then ask how much that uncertainty decreases when another variable becomes known.</p>
-<section id="entropy-measuring-what-remains-unpredictable" class="level2">
-<h2 class="anchored" data-anchor-id="entropy-measuring-what-remains-unpredictable">Entropy: measuring what remains unpredictable</h2>
+<h2 id="entropy-measuring-what-remains-unpredictable">Entropy: measuring what remains unpredictable</h2>
 <p>Shannon entropy is calculated from the probability distribution of a variable. If all states are equally likely, uncertainty is maximal. If one state occurs with certainty, entropy is zero. The base of the logarithm determines the unit: base two gives bits; other alphabets can use units scaled to their number of possible states.</p>
 <p>I find it helpful to think of entropy as <em>potential information</em>. A variable with several plausible states has something left to reveal. A variable already known with certainty does not.</p>
 <p>Applied to a sequence alignment, entropy can be measured at each site. Conserved positions have low entropy; highly variable positions have high entropy. In the tRNA alignment, this produces a landscape of constraint and variability across the molecule.</p>
 <p>But low entropy is not automatically the same as biological importance. A site can appear conserved because the sampled sequences share a recent ancestor and have not had time to diverge. Sample composition and evolutionary history therefore shape the apparent signal.</p>
-</section>
-<section id="information-uncertainty-reduced-by-knowledge" class="level2">
-<h2 class="anchored" data-anchor-id="information-uncertainty-reduced-by-knowledge">Information: uncertainty reduced by knowledge</h2>
+<h2 id="information-uncertainty-reduced-by-knowledge">Information: uncertainty reduced by knowledge</h2>
 <p>The chapter defines mutual information as the reduction in uncertainty about one variable after another variable is known. This is a much stricter idea than calling a sequence “informative” because it looks complex.</p>
 <p>The measure is symmetric: the shared dependence between two sites is the same whichever direction we describe it. Conditional entropy captures what remains unknown; mutual information captures what is shared.</p>
 <p>In the tRNA example, calculating mutual information across every pair of sites creates a matrix. Strong off-diagonal patterns correspond to coordinated substitutions produced by base pairing. From sequence variation alone, the analysis begins to reveal RNA secondary structure.</p>
 <p>This is beautiful because variability is doing the explanatory work. If paired sites never changed, there would be no covariation to detect. Structure becomes visible because evolution explores alternatives while selection preserves compatible combinations.</p>
-</section>
-<section id="the-limitation-that-matters" class="level2">
-<h2 class="anchored" data-anchor-id="the-limitation-that-matters">The limitation that matters</h2>
+<h2 id="the-limitation-that-matters">The limitation that matters</h2>
 <p>The same example contains its own warning. The method needs a sufficiently diverse ensemble. If sequences are too closely related, most sites may look invariant whether or not they are functionally constrained. If the alignment contains uneven phylogenetic representation, shared ancestry can generate correlations that resemble functional coupling.</p>
 <p>Information theory measures dependence in the supplied distribution. Biology must still explain how that distribution arose.</p>
-<section id="notes-from-my-margin" class="level3 pencil-margin-note">
-<h3 class="anchored" data-anchor-id="notes-from-my-margin">Notes from my margin</h3>
+<section id="notes-from-my-margin" class="pencil-margin-note">
+<h3>Notes from my margin</h3>
 <ul>
 <li>Entropy is not disorder in a vague sense; it is uncertainty under a stated model.</li>
 <li>Variation can reveal constraint when changes are coordinated.</li>
 <li>A clean pattern can still reflect sampling history rather than mechanism.</li>
 </ul>
 </section>
-</section>
-<section id="my-interpretation-for-scientific-ai" class="level2">
-<h2 class="anchored" data-anchor-id="my-interpretation-for-scientific-ai">My interpretation for scientific AI</h2>
+<h2 id="my-interpretation-for-scientific-ai">My interpretation for scientific AI</h2>
 <p>This reading helps me distinguish three quantities that are often blurred together: model confidence, statistical dependence and biological validity.</p>
 <p>A language model can assign a sharp probability distribution, but calibration determines whether that confidence is trustworthy. A model score can correlate with an annotation, but dependence alone does not show causation. A benchmark can report strong discrimination, but biological validity depends on the target, controls, sampling and domain of use.</p>
 <p>For PopGenLM Bench, entropy and information suggest useful evaluation questions. Does adding a model score reduce uncertainty about an independently measured outcome beyond simpler features such as conservation or GC content? Is that reduction stable across chromosomes, annotation classes and species? Does it remain after controlling for relatedness and genomic structure?</p>
 <p>These questions are more demanding than plotting a score distribution. They are also more scientifically meaningful.</p>
-</section>
-<section id="additional-learning-directions" class="level2">
-<h2 class="anchored" data-anchor-id="additional-learning-directions">Additional learning directions</h2>
+<h2 id="additional-learning-directions">Additional learning directions</h2>
 <p>I want to study finite-sample bias in entropy estimates, sequence reweighting, permutation-based null models and methods for higher-order interactions. Pairwise mutual information can detect relationships, but biological systems often involve networks of sites rather than isolated pairs.</p>
 <p>I also want to compare mutual information with attention maps and learned representations from genomic foundation models. Similar-looking heat maps can arise from very different mathematical objects; comparison requires precise definitions and tests.</p>
-</section>
-<section id="my-commentary" class="level2">
-<h2 class="anchored" data-anchor-id="my-commentary">My commentary</h2>
+<h2 id="my-commentary">My commentary</h2>
 <p>This was the section where information theory stopped feeling like an imported engineering language and began to feel biologically native. Evolution generates distributions. Selection, mutation and history shape their uncertainty. Relationships within those distributions can reveal organisation—but only when the ensemble and its history are taken seriously.</p>
 <div class="reading-source">
 <p><strong>Reading for this note:</strong> Christoph Adami, <em>The Evolution of Biological Information</em>, Chapter 2, Sections 2.2 and 2.2.1 on entropy, conditional entropy, mutual information and the inference of tRNA structure from sequence covariation.</p>
 </div>
-
-
-</section>
-
-<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
+ ]]></description>
   <category>Biological information</category>
   <category>Entropy</category>
   <category>Learning note</category>
@@ -242,51 +194,38 @@ font-style: inherit;">--project-root</span> .</span></code></pre></div></div>
   <description><![CDATA[ 
 
 
+<figure>
+<img src="https://tahirali-biomics.github.io/assets/writings/03-meaning-lives-in-relationships.webp" class="reading-sketch" data-fig-alt="Handwritten pencil notes emphasise relationships between sites, context-dependent probability and the difference between prediction and cause." alt="A simple pencil notebook page connecting two sites in short DNA sequences, with a rough base-pair sketch." loading="lazy" decoding="async">
 
-
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://tahirali-biomics.github.io/assets/writings/03-meaning-lives-in-relationships.webp" class="reading-sketch img-fluid figure-img" alt="Handwritten pencil notes emphasise relationships between sites, context-dependent probability and the difference between prediction and cause."></p>
-<figcaption>A simple pencil notebook page connecting two sites in short DNA sequences, with a rough base-pair sketch.</figcaption>
 </figure>
-</div>
 <p>This fortnight the chapter moved from individual variables to relationships. That shift felt important. A nucleotide can be common, rare, conserved or variable on its own, but biological structure often appears only when I ask how one position changes with another.</p>
 <p>The central idea is simple: context changes probability.</p>
-<section id="joint-probability-seeing-states-together" class="level2">
-<h2 class="anchored" data-anchor-id="joint-probability-seeing-states-together">Joint probability: seeing states together</h2>
+<h2 id="joint-probability-seeing-states-together">Joint probability: seeing states together</h2>
 <p>Two variables can be combined into a joint variable. For nucleotide sites, this means counting pairs such as AA, AC or GT across an alignment. The joint distribution records how often two states occur together. By summing over one variable, we recover the marginal distribution of the other.</p>
 <p>The language can sound abstract, but the biological question is direct: do two positions vary independently, or are some combinations favoured and others avoided?</p>
 <p>If two coins are independent, learning the outcome of one does not change what I expect from the other. If their outcomes are linked, that knowledge changes the probability. The same logic applies to two sites in a molecule.</p>
-</section>
-<section id="conditional-probability-what-changes-after-i-know-more" class="level2">
-<h2 class="anchored" data-anchor-id="conditional-probability-what-changes-after-i-know-more">Conditional probability: what changes after I know more?</h2>
+<h2 id="conditional-probability-what-changes-after-i-know-more">Conditional probability: what changes after I know more?</h2>
 <p>Conditional probability asks for the distribution of one variable after the state of another is known. It is the formal version of an “if-then” question. Bayes’ theorem relates alternative directions of that conditioning.</p>
 <p>What I found especially useful is the chapter’s caution that conditional dependence does not by itself establish causation. A site can predict another because of physical pairing, shared ancestry, selection, population structure or an unmeasured third factor. Prediction is scientifically valuable, but explanation requires more evidence.</p>
 <p>In the tRNA alignment, knowing the nucleotide at one site changes the expected distribution at another. For one pair the prediction is partial. For another pair, the relationship is almost deterministic and reflects complementary base pairing. Sequence statistics therefore reveal something not obvious from either site considered alone: a structural relationship in the molecule.</p>
-</section>
-<section id="from-letters-to-organisation" class="level2">
-<h2 class="anchored" data-anchor-id="from-letters-to-organisation">From letters to organisation</h2>
+<h2 id="from-letters-to-organisation">From letters to organisation</h2>
 <p>This example changed the way I read an alignment. I usually see rows of characters, conserved columns and substitutions. Conditional probability asks me to look across columns for coordinated change. Two positions may each appear variable, yet their variation together can be tightly constrained.</p>
 <p>That is a powerful idea. Biological function does not require every component to remain unchanged. Sometimes function is preserved because components change together.</p>
 <p>It also clarifies why simple conservation scores are incomplete. A position may tolerate several states, but only in combination with compatible states elsewhere. The information is relational.</p>
-<section id="notes-from-my-margin" class="level3 pencil-margin-note">
-<h3 class="anchored" data-anchor-id="notes-from-my-margin">Notes from my margin</h3>
+<section id="notes-from-my-margin" class="pencil-margin-note">
+<h3>Notes from my margin</h3>
 <ul>
 <li>An isolated value may look noisy; a relationship can reveal a rule.</li>
 <li>Conditional probability improves prediction, not automatically explanation.</li>
 <li>Co-variation can preserve structure while individual sites change.</li>
 </ul>
 </section>
-</section>
-<section id="my-interpretation-for-language-models" class="level2">
-<h2 class="anchored" data-anchor-id="my-interpretation-for-language-models">My interpretation for language models</h2>
+<h2 id="my-interpretation-for-language-models">My interpretation for language models</h2>
 <p>DNA language models are built around context. They estimate how plausible a nucleotide or sequence is given surrounding sequence. In that sense, their power comes from learning many conditional relationships.</p>
 <p>But a learned relationship is not automatically a biological mechanism. A model may capture motif grammar, compositional bias, phylogenetic history, annotation patterns or technical artefacts. A strong score tells me that a substitution changes what the model expects. It does not yet tell me why, whether the change affects fitness, or whether the relationship transfers to another lineage.</p>
 <p>This gives me a sharper question for PopGenLM Bench: when a model says that one allele is less compatible with its context, does that score improve prediction of independent biological evidence? For example, is it related to allele frequency, conservation, functional annotation or experimentally observed effect after accounting for confounders?</p>
 <p>The benchmark should therefore compare conditional predictions with external outcomes, not merely display model confidence.</p>
-</section>
-<section id="additional-learning-directions" class="level2">
-<h2 class="anchored" data-anchor-id="additional-learning-directions">Additional learning directions</h2>
+<h2 id="additional-learning-directions">Additional learning directions</h2>
 <p>My next steps are to explore:</p>
 <ol type="1">
 <li>mutual information as a quantitative measure of shared dependence;</li>
@@ -295,18 +234,12 @@ font-style: inherit;">--project-root</span> .</span></code></pre></div></div>
 <li>causal diagrams for separating prediction from mechanism; and</li>
 <li>negative controls that reveal whether a model is using biologically meaningful context or simpler background patterns.</li>
 </ol>
-</section>
-<section id="my-commentary" class="level2">
-<h2 class="anchored" data-anchor-id="my-commentary">My commentary</h2>
+<h2 id="my-commentary">My commentary</h2>
 <p>The phrase I wrote in my notes was “meaning lives between things.” It is not a definition from the chapter; it is my own interpretation. A base, a gene or a model score becomes informative through a relationship to something else. The lesson is both technical and philosophical: connection can carry structure that isolated objects do not show.</p>
 <div class="reading-source">
 <p><strong>Reading for this note:</strong> Christoph Adami, <em>The Evolution of Biological Information</em>, Chapter 2, the later part of Section 2.1 on joint, marginal and conditional probabilities, Bayes’ theorem, independence and conditional relationships between tRNA sites.</p>
 </div>
-
-
-</section>
-
-<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
+ ]]></description>
   <category>Biological information</category>
   <category>Conditional probability</category>
   <category>Learning note</category>
@@ -321,52 +254,39 @@ font-style: inherit;">--project-root</span> .</span></code></pre></div></div>
   <description><![CDATA[ 
 
 
+<figure>
+<img src="https://tahirali-biomics.github.io/assets/writings/02-the-model-is-a-choice.webp" class="reading-sketch" data-fig-alt="Handwritten pencil notes say that a model is not the world, states are chosen and an ensemble gives context." alt="A simple pencil notebook page with a coin, four nucleotide states and a small sequence ensemble." loading="lazy" decoding="async">
 
-
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://tahirali-biomics.github.io/assets/writings/02-the-model-is-a-choice.webp" class="reading-sketch img-fluid figure-img" alt="Handwritten pencil notes say that a model is not the world, states are chosen and an ensemble gives context."></p>
-<figcaption>A simple pencil notebook page with a coin, four nucleotide states and a small sequence ensemble.</figcaption>
 </figure>
-</div>
 <p>During the last two weeks I worked through Section 2.1 on random variables and probabilities. The mathematics begins with familiar objects—a coin, possible outcomes and their frequencies—but the biological lesson is deeper: before measuring uncertainty, I must decide what counts as a possible state.</p>
 <p>That decision is part of the model. It is not given automatically by nature.</p>
-<section id="random-variables-are-descriptions" class="level2">
-<h2 class="anchored" data-anchor-id="random-variables-are-descriptions">Random variables are descriptions</h2>
+<h2 id="random-variables-are-descriptions">Random variables are descriptions</h2>
 <p>A discrete random variable has a finite set of states, often called an alphabet, and a probability for each state. A coin can be represented by two states; a nucleotide site by A, C, G and T; an amino-acid site by twenty possibilities.</p>
 <p>The chapter insists on a distinction I find extremely useful: the random variable is not the physical object. A real coin has material, orientation, wear and many possible behaviours. The two-state model keeps only the distinction needed for a particular question. Even “heads” and “tails” are choices made by an observer using a particular measurement.</p>
 <p>The same is true in genomics. A site may be represented as four nucleotides, but an analysis may also need a gap, an unresolved base, methylation state, genotype uncertainty or structural context. The alphabet depends on the biological question and the measurement system. If I change that representation, I may change the probabilities and therefore the information I calculate.</p>
 <p>This is not a weakness of modelling. It is why transparent modelling matters.</p>
-</section>
-<section id="probabilities-come-from-finite-observations" class="level2">
-<h2 class="anchored" data-anchor-id="probabilities-come-from-finite-observations">Probabilities come from finite observations</h2>
+<h2 id="probabilities-come-from-finite-observations">Probabilities come from finite observations</h2>
 <p>For a physical system, probabilities are usually estimated from repeated observations. With a finite sample, frequency is only an approximation to the underlying probability. This obvious fact becomes easy to forget when software prints many decimal places.</p>
 <p>The chapter illustrates several ways to treat a DNA sequence. A complete sequence of length (L) can be one state among (4^L) possibilities. Alternatively, its (L) positions can be treated as repeated observations of one nucleotide variable, allowing an estimate of overall base composition. A third approach treats each position as its own variable and uses an alignment of related sequences to estimate site-specific probabilities.</p>
 <p>These views use the same letters but answer different questions.</p>
 <p>Overall nucleotide frequencies can reveal GC or AT bias. Such bias may have biochemical consequences, but it does not have a single guaranteed evolutionary cause. A site-wise ensemble adds another layer: strongly conserved positions may indicate functional constraint, whereas variable positions may tolerate change. Yet this interpretation depends on alignment quality, sampling and evolutionary history.</p>
-</section>
-<section id="why-the-ensemble-matters" class="level2">
-<h2 class="anchored" data-anchor-id="why-the-ensemble-matters">Why the ensemble matters</h2>
+<h2 id="why-the-ensemble-matters">Why the ensemble matters</h2>
 <p>An ensemble is the collection from which observations are drawn. For a genomic site, an alignment of homologous sequences can provide that collection. Across the alignment, each position becomes a distribution rather than a single letter.</p>
 <p>The tRNA example in the chapter makes this concrete. Some positions vary, while others are nearly or completely conserved because the molecule’s structure and function constrain acceptable changes. Gaps and unresolved characters must also be treated explicitly; ignoring how they enter the alphabet can alter the analysis.</p>
 <p>For me, this is the bridge from a sequence as an object to a sequence as evidence. One string shows what occurred once. An ensemble begins to show what could vary, what repeatedly remains, and how uncertain those conclusions are.</p>
-<section id="notes-from-my-margin" class="level3 pencil-margin-note">
-<h3 class="anchored" data-anchor-id="notes-from-my-margin">Notes from my margin</h3>
+<section id="notes-from-my-margin" class="pencil-margin-note">
+<h3>Notes from my margin</h3>
 <ul>
 <li>Every dataset has an alphabet, even when it is not written down.</li>
 <li>More decimal places do not create more observations.</li>
 <li>A single sequence is a record; an ensemble makes variation measurable.</li>
 </ul>
 </section>
-</section>
-<section id="my-interpretation-for-genomic-ai" class="level2">
-<h2 class="anchored" data-anchor-id="my-interpretation-for-genomic-ai">My interpretation for genomic AI</h2>
+<h2 id="my-interpretation-for-genomic-ai">My interpretation for genomic AI</h2>
 <p>This section immediately changes how I think about model inputs. Tokenisation, genome build, strand orientation, reference allele, treatment of missing bases and sampling population are not preliminary details. They define the states the system is allowed to see.</p>
 <p>A DNA language model also learns from an ensemble—its training data. If that ensemble represents some species, regions or sequence contexts much better than others, the model’s apparent confidence may exceed the evidence available for a new organism. Before evaluating a score, I therefore need to ask: what alphabet did the model use, what ensemble shaped its probabilities, and how closely does my new dataset match that world?</p>
 <p>This is one reason PopGenLM Bench must begin with reference validation and provenance rather than a plot. A biologically incorrect representation can pass through perfectly functioning code.</p>
-</section>
-<section id="where-i-want-to-learn-next" class="level2">
-<h2 class="anchored" data-anchor-id="where-i-want-to-learn-next">Where I want to learn next</h2>
+<h2 id="where-i-want-to-learn-next">Where I want to learn next</h2>
 <p>I want to connect this section to practical methods for:</p>
 <ul>
 <li>quantifying finite-sample uncertainty in nucleotide frequencies;</li>
@@ -375,18 +295,12 @@ font-style: inherit;">--project-root</span> .</span></code></pre></div></div>
 <li>comparing frequentist estimates with Bayesian probability models; and</li>
 <li>measuring how training-set composition affects transfer across species.</li>
 </ul>
-</section>
-<section id="my-commentary" class="level2">
-<h2 class="anchored" data-anchor-id="my-commentary">My commentary</h2>
+<h2 id="my-commentary">My commentary</h2>
 <p>The most thought-provoking lesson was not a formula. It was the reminder that measurement begins with an agreement about distinctions. Biology is richer than any alphabet we impose on it. Good science does not pretend otherwise; it states the simplification, tests its consequences and changes it when the question demands more.</p>
 <div class="reading-source">
 <p><strong>Reading for this note:</strong> Christoph Adami, <em>The Evolution of Biological Information</em>, Chapter 2, Section 2.1, from random variables and finite probability estimates through nucleotide composition, site-specific variables and the tRNA alignment.</p>
 </div>
-
-
-</section>
-
-<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
+ ]]></description>
   <category>Biological information</category>
   <category>Probability</category>
   <category>Learning note</category>
@@ -401,45 +315,34 @@ font-style: inherit;">--project-root</span> .</span></code></pre></div></div>
   <description><![CDATA[ 
 
 
+<figure>
+<img src="https://tahirali-biomics.github.io/assets/writings/01-inheritance-becomes-information.webp" class="reading-sketch" data-fig-alt="Handwritten pencil notes connect inheritance, copying and new scientific questions." alt="A simple pencil notebook sketch linking a pea pod, chromosome and DNA, with notes about inheritance and information." loading="lazy" decoding="async">
 
-
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://tahirali-biomics.github.io/assets/writings/01-inheritance-becomes-information.webp" class="reading-sketch img-fluid figure-img" alt="Handwritten pencil notes connect inheritance, copying and new scientific questions."></p>
-<figcaption>A simple pencil notebook sketch linking a pea pod, chromosome and DNA, with notes about inheritance and information.</figcaption>
 </figure>
-</div>
 <p>This fortnight I began Chapter 2, “Information Theory in Biology,” from Christoph Adami’s <em>The Evolution of Biological Information</em>. I expected a mathematical introduction. What surprised me first was the history. Before information could be measured, biologists had to learn how to see heredity as something separable, locatable, copyable and changeable.</p>
 <p>That history made the chapter feel immediately connected to my own journey. Genomics can appear to begin with sequencing machines and large files, but its deeper foundations were built through a sequence of conceptual steps. Each step changed not only what scientists knew, but what they believed could be asked.</p>
-<section id="what-i-learned-from-the-opening-section" class="level2">
-<h2 class="anchored" data-anchor-id="what-i-learned-from-the-opening-section">What I learned from the opening section</h2>
+<h2 id="what-i-learned-from-the-opening-section">What I learned from the opening section</h2>
 <p>The chapter begins with a strong reductionist claim: life on Earth is organised through information. This is not simply the familiar metaphor of DNA as a “book.” The important point is operational. DNA can be copied, altered and inherited. Its molecular structure links continuity with variation, so the same mechanism that preserves biological organisation also makes evolution possible.</p>
 <p>This changed how I thought about the word <em>information</em>. In ordinary conversation, information is often treated as meaningful content. In this chapter, the more useful starting point is prediction. A biological pattern carries information when knowing it improves what we can predict about another state: a nucleotide, a structure, a function or an environment.</p>
 <p>The chapter then asks deceptively simple questions. How much information is present in a genome? How much is shared by two organisms? How much is gained through adaptation, transmitted between generations or lost through extinction? These questions are easy to state and very difficult to answer because they require an explicit comparison, a defined set of possible states and enough observations to estimate probabilities.</p>
-</section>
-<section id="the-historical-path-from-character-to-code" class="level2">
-<h2 class="anchored" data-anchor-id="the-historical-path-from-character-to-code">The historical path: from character to code</h2>
+<h2 id="the-historical-path-from-character-to-code">The historical path: from character to code</h2>
 <p>Box 2.1 traces the emergence of genetic information through several distinct advances.</p>
 <p>Mendel showed that inherited characters behave as if discrete factors pass between generations. Bateson and Saunders helped establish that these units can occupy alternative states—what we now call alleles. Johannsen separated the inherited unit from its visible expression and gave us the term <em>gene</em>. Morgan, Sturtevant and Bridges then placed genes in a linear order on chromosomes, turning heredity into something that could be mapped.</p>
 <p>The next steps connected location with mechanism. Mutations showed that changing a chromosomal position could alter or destroy function. Work on gene action linked hereditary material to protein production. The genetic code then made the relationship between nucleotide sequence and amino-acid sequence experimentally legible. By this point, biological molecules could be treated as messages drawn from a space of possible messages—a perspective that made Shannon’s mathematical theory relevant to biology.</p>
 <p>What I find most important is that no single discovery created “biological information.” The idea became possible only after inheritance, physical location, copying, mutation, expression and coding had been separated and then reconnected.</p>
-<section id="notes-from-my-margin" class="level3 pencil-margin-note">
-<h3 class="anchored" data-anchor-id="notes-from-my-margin">Notes from my margin</h3>
+<section id="notes-from-my-margin" class="pencil-margin-note">
+<h3>Notes from my margin</h3>
 <ul>
 <li>A new instrument is valuable when it opens a better question.</li>
 <li>Copying explains continuity; mutation makes history possible.</li>
 <li>“Information” becomes scientific only after I say what it predicts.</li>
 </ul>
 </section>
-</section>
-<section id="my-interpretation" class="level2">
-<h2 class="anchored" data-anchor-id="my-interpretation">My interpretation</h2>
+<h2 id="my-interpretation">My interpretation</h2>
 <p>The history in this section is a warning against treating scientific AI as a sudden replacement for earlier biology. AI belongs to the same longer progression. Natural history organised variation; genetics formalised inheritance; molecular biology identified a physical code; sequencing made that code observable at scale; bioinformatics made large collections analysable. AI may help us detect structure across those collections, but it does not remove the need to define the biological states, comparisons and evidence.</p>
 <p>This matters because an impressive prediction can still be scientifically empty. If I cannot say what a model output is information <em>about</em>, which observations support it, or under what conditions it fails, then I have a number rather than knowledge.</p>
 <p>I also see a connection with temporal genomics. A genome sampled at one date is a record, but a series of genomes sampled through time lets us ask what was retained, altered or lost. The value lies not in the sequence alone; it lies in the comparison that makes change visible.</p>
-</section>
-<section id="where-i-want-to-learn-next" class="level2">
-<h2 class="anchored" data-anchor-id="where-i-want-to-learn-next">Where I want to learn next</h2>
+<h2 id="where-i-want-to-learn-next">Where I want to learn next</h2>
 <p>My next steps are to understand three transitions more deeply:</p>
 <ol type="1">
 <li>How probability turns biological variation into a measurable ensemble.</li>
@@ -447,19 +350,13 @@ font-style: inherit;">--project-root</span> .</span></code></pre></div></div>
 <li>How evolutionary processes create the correlations that allow genomes to carry evidence about environments.</li>
 </ol>
 <p>I also want to revisit the history of the genetic code and chromosome mapping—not as a list of discoveries, but as examples of how measurement changes explanation.</p>
-</section>
-<section id="a-simple-commentary-on-the-chapter-so-far" class="level2">
-<h2 class="anchored" data-anchor-id="a-simple-commentary-on-the-chapter-so-far">A simple commentary on the chapter so far</h2>
+<h2 id="a-simple-commentary-on-the-chapter-so-far">A simple commentary on the chapter so far</h2>
 <p>Adami’s presentation is mathematical, but the opening argument is philosophical in the best scientific sense. It asks what we mean when we say that life contains information, and then refuses to leave the term vague. My main lesson is that biological information is not a substance hidden inside DNA. It is a measurable relationship made visible by a carefully defined question.</p>
 <p>That is a demanding standard. It is also a useful one for the AI systems I want to build.</p>
 <div class="reading-source">
 <p><strong>Reading for this note:</strong> Christoph Adami, <em>The Evolution of Biological Information</em>, Chapter 2, opening discussion and Box 2.1, “The Emergence of the Concept of Genetic Information.” This article is my own synthesis and commentary on the supplied chapter excerpt.</p>
 </div>
-
-
-</section>
-
-<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
+ ]]></description>
   <category>Biological information</category>
   <category>History of genetics</category>
   <category>Learning note</category>
