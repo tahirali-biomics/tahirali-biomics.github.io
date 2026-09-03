@@ -8,7 +8,7 @@
 
 <meta name="author" content="Dr Tahir Ali | AG de Meaux | TRR341 Ecological Genomics | University of Cologne">
 
-<title>Spatial Sampling and Ecological Inference: A Hands-On Spatial Point Pattern Analysis – Dr.&nbsp;Tahir Ali</title>
+<title>Spatial Sampling and Ecological Inference: A Hands-On Spatial Point Pattern Analysis – Dr. Tahir Ali</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -69,7 +69,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../profile.webp" rel="icon">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
@@ -77,7 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-da71b349b2a5b190adc08b2de5cfba23.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-fdaeddbba6fa95a0f13bcc20c9a3fb04.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -119,7 +118,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar docked quarto-light">
+<body class="content-dense docked nav-sidebar quarto-light technical-page">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -144,73 +143,16 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Home</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../projects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Projects</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../publications.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Publications</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../cv.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Résumé</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../teaching/teaching.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Teaching</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../workshops/workshops.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Workshops</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank">
- <span class="menu-text">Codes</span></a>
-  </div>
-</li>
-    </ul>
+        <li class="sidebar-item"><div class="sidebar-item-container"><a href="../index.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Home</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../popgenlm.html" class="sidebar-item-text sidebar-link"><span class="menu-text">PopGenLM</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../genomes-to-ai.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Genomes to AI</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../projects.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Projects</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../publications.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Publications</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../cv.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Résumé</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../teaching/teaching.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Teaching</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="workshops.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">Workshops</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank"><span class="menu-text">GitHub</span></a></div></li></ul>
     </div>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+    <h2 id="toc-title">Contents</h2>
    
-  <ul class="collapse">
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#load-data" id="toc-load-data" class="nav-link" data-scroll-target="#load-data"><strong>1. Load data</strong></a></li>
-  <li><a href="#create-pakistan-wide-map" id="toc-create-pakistan-wide-map" class="nav-link" data-scroll-target="#create-pakistan-wide-map">2. Create Pakistan Wide Map</a></li>
-  <li><a href="#create-punjab-zoom-view" id="toc-create-punjab-zoom-view" class="nav-link" data-scroll-target="#create-punjab-zoom-view">3. Create Punjab Zoom View</a></li>
-  <li><a href="#create-density-plot-for-punjab" id="toc-create-density-plot-for-punjab" class="nav-link" data-scroll-target="#create-density-plot-for-punjab">4. Create Density Plot For Punjab</a></li>
-  <li><a href="#create-simplified-pakistan-wide-view" id="toc-create-simplified-pakistan-wide-view" class="nav-link" data-scroll-target="#create-simplified-pakistan-wide-view">5. Create Simplified Pakistan Wide View</a></li>
-  <li><a href="#create-clean-density-plot" id="toc-create-clean-density-plot" class="nav-link" data-scroll-target="#create-clean-density-plot">6. Create Clean Density Plot</a></li>
-  <li><a href="#enhance-map-clarity-10-sample-transparent-low-density" id="toc-enhance-map-clarity-10-sample-transparent-low-density" class="nav-link" data-scroll-target="#enhance-map-clarity-10-sample-transparent-low-density">7. Enhance Map Clarity: 10% Sample + Transparent Low Density</a></li>
-  <li><a href="#spatial-point-pattern-analysis" id="toc-spatial-point-pattern-analysis" class="nav-link" data-scroll-target="#spatial-point-pattern-analysis">8. Spatial Point Pattern Analysis</a></li>
-  <li><a href="#morans-index" id="toc-morans-index" class="nav-link" data-scroll-target="#morans-index">9. Moran’s Index</a></li>
-  <li><a href="#morans-i-and-effective-sample-size-plot" id="toc-morans-i-and-effective-sample-size-plot" class="nav-link" data-scroll-target="#morans-i-and-effective-sample-size-plot">10. Moran’s I and Effective Sample Size Plot</a></li>
-  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><strong>11. Key Takeaways</strong></a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><strong>12. Conclusion:</strong></a></li>
-  </ul>
-</nav>
+  <ul class="technical-toc-list"><li><a href="#introduction-2">Introduction</a></li><li><a href="#1-load-data">1. Load data</a></li><li><a href="#2-create-pakistan-wide-map">2. Create Pakistan Wide Map</a></li><li><a href="#3-create-punjab-zoom-view">3. Create Punjab Zoom View</a></li><li><a href="#4-create-density-plot-for-punjab">4. Create Density Plot For Punjab</a></li><li><a href="#5-create-simplified-pakistan-wide-view">5. Create Simplified Pakistan Wide View</a></li><li><a href="#6-create-clean-density-plot">6. Create Clean Density Plot</a></li><li><a href="#7-enhance-map-clarity-10-sample-transparent-low-density">7. Enhance Map Clarity: 10% Sample + Transparent Low Density</a></li><li><a href="#8-spatial-point-pattern-analysis">8. Spatial Point Pattern Analysis</a></li><li><a href="#9-moran-s-index">9. Moran’s Index</a></li><li><a href="#11-key-takeaways">11. Key Takeaways</a></li><li><a href="#12-conclusion">12. Conclusion:</a></li></ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -242,13 +184,13 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 
 
 <section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<h2 class="anchored" data-anchor-id="introduction" id="introduction-2">Introduction</h2>
 <p>This session introduces the fundamentals of <strong>spatial sampling and ecological inference</strong> using a case study of spider web observations from Pakistan. Participants learn how to load, clean, and project spatial datasets (species occurrences, boundaries, roads, and waterways), and create maps to visualize sampling patterns at national and regional scales.</p>
 <p>Using <strong>kernel density estimation and spatial point-pattern analysis</strong>, the tutorial explores whether spider observations are randomly distributed or clustered. Statistical methods—including the <strong>Clark–Evans test, Ripley’s K function, pair correlation function, and Moran’s I</strong>—are applied to detect clustering, identify its spatial scale, and quantify spatial autocorrelation.</p>
-<p>The exercise also demonstrates how <strong>sampling bias related to accessibility (e.g., proximity to roads or rivers)</strong> can influence ecological data and how such biases can be diagnosed and considered in ecological interpretation. 🌍🕷️📊</p>
+<p>The exercise also demonstrates how <strong>sampling bias related to accessibility (e.g., proximity to roads or rivers)</strong> can influence ecological data and how such biases can be diagnosed and considered in ecological interpretation. </p>
 </section>
 <section id="load-data" class="level2">
-<h2 class="anchored" data-anchor-id="load-data"><strong>1. Load data</strong></h2>
+<h2 class="anchored" data-anchor-id="load-data" id="1-load-data"><strong>1. Load data</strong></h2>
 <p>Data used in this workshop can be downloaded from: <strong>https://github.com/tahirali-biomics/spatial-ecology-workshop/</strong></p>
 <ul>
 <li><p>Load necessary libraries for spatial analysis (<code>sf</code>, <code>ggplot2</code>, <code>spatstat</code>, etc.)</p></li>
@@ -258,9 +200,8 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <li><p>Transform all data to UTM zone 43N (meters) for accurate distance calculations</p></li>
 </ul>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">=== LOADING SPIDER DATA ===</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">=== LOADING SPIDER DATA ===</span><span class="sc">\n</span><span class="st">"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -503,7 +444,7 @@ Study area extent:
 <p><strong>Interpretation:</strong> All spatial data now in consistent coordinate system for distance calculations.</p>
 </section>
 <section id="create-pakistan-wide-map" class="level2">
-<h2 class="anchored" data-anchor-id="create-pakistan-wide-map">2. Create Pakistan Wide Map</h2>
+<h2 class="anchored" data-anchor-id="create-pakistan-wide-map" id="2-create-pakistan-wide-map">2. Create Pakistan Wide Map</h2>
 <ul>
 <li><p>Create three map views:</p>
 <ol type="1">
@@ -513,9 +454,8 @@ Study area extent:
 </ol></li>
 </ul>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">=== CREATING PAKISTAN WIDE MAP ===</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">=== CREATING PAKISTAN WIDE MAP ===</span><span class="sc">\n</span><span class="st">"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>p_pakistan <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  </span>
@@ -576,7 +516,7 @@ Study area extent:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
@@ -587,11 +527,10 @@ Study area extent:
 </div>
 </section>
 <section id="create-punjab-zoom-view" class="level2">
-<h2 class="anchored" data-anchor-id="create-punjab-zoom-view">3. Create Punjab Zoom View</h2>
+<h2 class="anchored" data-anchor-id="create-punjab-zoom-view" id="3-create-punjab-zoom-view">3. Create Punjab Zoom View</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># CROP FEATURES TO STUDY AREA (Punjab)</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">=== CROPPING TO PUNJAB STUDY AREA ===</span><span class="sc">\n</span><span class="st">"</span>)</span>
@@ -698,7 +637,7 @@ Study area extent:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
@@ -714,16 +653,15 @@ Study area extent:
 </div>
 </section>
 <section id="create-density-plot-for-punjab" class="level2">
-<h2 class="anchored" data-anchor-id="create-density-plot-for-punjab">4. Create Density Plot For Punjab</h2>
+<h2 class="anchored" data-anchor-id="create-density-plot-for-punjab" id="4-create-density-plot-for-punjab">4. Create Density Plot For Punjab</h2>
 <ul>
 <li><p>Calculate 2D kernel density of spider points</p></li>
 <li><p>Create contour plots showing sampling intensity</p></li>
 <li><p>Enhanced version makes low-density areas transparent</p></li>
 </ul>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">=== CREATING DENSITY PLOT ===</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">=== CREATING DENSITY PLOT ===</span><span class="sc">\n</span><span class="st">"</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate 2D kernel density for spider points</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>kde <span class="ot">&lt;-</span> <span class="fu">kde2d</span>(spiders<span class="sc">$</span>x, spiders<span class="sc">$</span>y, <span class="at">n =</span> <span class="dv">100</span>,</span>
@@ -785,7 +723,7 @@ Study area extent:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
@@ -803,11 +741,10 @@ Study area extent:
 <p><strong>Interpretation:</strong> Identifies areas of intensive vs limited sampling.</p>
 </section>
 <section id="create-simplified-pakistan-wide-view" class="level2">
-<h2 class="anchored" data-anchor-id="create-simplified-pakistan-wide-view">5. Create Simplified Pakistan Wide View</h2>
+<h2 class="anchored" data-anchor-id="create-simplified-pakistan-wide-view" id="5-create-simplified-pakistan-wide-view">5. Create Simplified Pakistan Wide View</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># CREATE SIMPLIFIED VIEW WITH MAJOR FEATURES</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">=== CREATING SIMPLIFIED VIEW ===</span><span class="sc">\n</span><span class="st">"</span>)</span>
@@ -872,7 +809,7 @@ Study area extent:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
@@ -882,9 +819,8 @@ Study area extent:
 </div>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># SAVE MAPS</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">=== SAVING MAPS ===</span><span class="sc">\n</span><span class="st">"</span>)</span>
@@ -941,11 +877,10 @@ Punjab study area:
 </div>
 </section>
 <section id="create-clean-density-plot" class="level2">
-<h2 class="anchored" data-anchor-id="create-clean-density-plot">6. Create Clean Density Plot</h2>
+<h2 class="anchored" data-anchor-id="create-clean-density-plot" id="6-create-clean-density-plot">6. Create Clean Density Plot</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">=== CREATING CLEAN DENSITY PLOT (10% sampled features) ===</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">=== CREATING CLEAN DENSITY PLOT (10% sampled features) ===</span><span class="sc">\n</span><span class="st">"</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Subsample roads (10%)</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(roads_utm) <span class="sc">&amp;&amp;</span> <span class="fu">nrow</span>(roads_utm) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
@@ -1015,13 +950,12 @@ Punjab study area:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># CREATE DENSITY-ONLY PLOT</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">=== CREATING DENSITY-ONLY PLOT ===</span><span class="sc">\n</span><span class="st">"</span>)</span>
@@ -1057,13 +991,12 @@ Punjab study area:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># CREATE TRANSPARENT CONTOUR PLOT (FIXED VERSION)</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">=== CREATING TRANSPARENT CONTOUR PLOT ===</span><span class="sc">\n</span><span class="st">"</span>)</span>
@@ -1113,13 +1046,12 @@ Punjab study area:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-7-3.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-7-3.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># VERSION B: Create a heatmap-style plot</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">=== CREATING HEATMAP-STYLE DENSITY PLOT ===</span><span class="sc">\n</span><span class="st">"</span>)</span>
@@ -1164,13 +1096,12 @@ Punjab study area:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-7-4.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-7-4.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># SAVE NEW DENSITY PLOTS</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">=== SAVING NEW DENSITY PLOTS ===</span><span class="sc">\n</span><span class="st">"</span>)</span>
@@ -1198,11 +1129,10 @@ Punjab study area:
 <p>Enhance Map Clarity: 10% Sample + Transparent Low Density</p>
 </section>
 <section id="enhance-map-clarity-10-sample-transparent-low-density" class="level2">
-<h2 class="anchored" data-anchor-id="enhance-map-clarity-10-sample-transparent-low-density">7. Enhance Map Clarity: 10% Sample + Transparent Low Density</h2>
+<h2 class="anchored" data-anchor-id="enhance-map-clarity-10-sample-transparent-low-density" id="7-enhance-map-clarity-10-sample-transparent-low-density">7. Enhance Map Clarity: 10% Sample + Transparent Low Density</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># CREATE CLEAN DENSITY PLOT (10% sampled features)</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ENHANCE VISUALIZATION: TRANSPARENT LOW-DENSITY AREAS</span></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
@@ -1286,13 +1216,12 @@ Punjab study area:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># CREATE DENSITY-ONLY PLOT</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">=== CREATING DENSITY-ONLY PLOT ===</span><span class="sc">\n</span><span class="st">"</span>)</span>
@@ -1334,13 +1263,12 @@ Punjab study area:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># CREATE TRANSPARENT CONTOUR PLOT</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">=== CREATING TRANSPARENT CONTOUR PLOT ===</span><span class="sc">\n</span><span class="st">"</span>)</span>
@@ -1393,13 +1321,12 @@ Punjab study area:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-8-3.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-8-3.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># CREATE HEATMAP-STYLE DENSITY PLOT</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">=== CREATING HEATMAP-STYLE DENSITY PLOT ===</span><span class="sc">\n</span><span class="st">"</span>)</span>
@@ -1454,13 +1381,12 @@ Punjab study area:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-8-4.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-8-4.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># SAVE NEW DENSITY PLOTS</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">=== SAVING NEW DENSITY PLOTS ===</span><span class="sc">\n</span><span class="st">"</span>)</span>
@@ -1487,7 +1413,7 @@ Punjab study area:
 </div>
 </section>
 <section id="spatial-point-pattern-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="spatial-point-pattern-analysis">8. Spatial Point Pattern Analysis</h2>
+<h2 class="anchored" data-anchor-id="spatial-point-pattern-analysis" id="8-spatial-point-pattern-analysis">8. Spatial Point Pattern Analysis</h2>
 <ul>
 <li><p>Distribution mapping &amp; projection</p></li>
 <li><p>Global clustering (Clark-Evans)</p></li>
@@ -1513,9 +1439,8 @@ Punjab study area:
 <li><p>Peak shows most intense clustering scale</p></li>
 </ul>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># COMPLETE OPTIMIZED CODE WITH STUDY REGION-LIMITED BIAS DETECTION</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># COMPLETE OPTIMIZED CODE WITH STUDY REGION-LIMITED BIAS DETECTION</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># SESSION 1: SPATIAL ECOLOGY OF SPIDER WEBS IN PAKISTAN</span></span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Complete workflow: Data → Visualization → Point Pattern → Bias → Interpretation</span></span>
@@ -1613,13 +1538,12 @@ Punjab study area:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># C2: DECLUTTERED VIEW (10% sample for clarity)</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># C2: DECLUTTERED VIEW (10% sample for clarity)</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>roads_sample <span class="ot">&lt;-</span> roads_utm[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(roads_utm), <span class="at">size =</span> <span class="fu">floor</span>(<span class="fu">nrow</span>(roads_utm) <span class="sc">*</span> <span class="fl">0.1</span>)), ]</span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>rivers_sample <span class="ot">&lt;-</span> rivers_utm[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(rivers_utm), <span class="at">size =</span> <span class="fu">floor</span>(<span class="fu">nrow</span>(rivers_utm) <span class="sc">*</span> <span class="fl">0.1</span>)), ]</span>
@@ -1639,13 +1563,12 @@ Punjab study area:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># C3: Punjab region zoom</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># C3: Punjab region zoom</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>p_punjab <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_sf</span>(<span class="at">data =</span> pakistan_utm, <span class="at">fill =</span> <span class="st">"gray90"</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_sf</span>(<span class="at">data =</span> roads_utm, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="fl">0.3</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
@@ -1663,13 +1586,12 @@ Punjab study area:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-9-3.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-9-3.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># SECTION D: OPTIMIZED SAMPLING BIAS ANALYSIS (STUDY REGION LIMITED)</span></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="fu">paste</span>(<span class="fu">rep</span>(<span class="st">"="</span>, <span class="dv">70</span>), <span class="at">collapse =</span> <span class="st">""</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
@@ -1830,13 +1752,12 @@ Punjab study area:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-9-4.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-9-4.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>p_bias_box <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(bias_df, <span class="fu">aes</span>(<span class="at">x =</span> feature, <span class="at">y =</span> dist, <span class="at">fill =</span> type)) <span class="sc">+</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>p_bias_box <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(bias_df, <span class="fu">aes</span>(<span class="at">x =</span> feature, <span class="at">y =</span> dist, <span class="at">fill =</span> type)) <span class="sc">+</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"observed"</span> <span class="ot">=</span> <span class="st">"#E69F00"</span>, <span class="st">"random"</span> <span class="ot">=</span> <span class="st">"#56B4E9"</span>)) <span class="sc">+</span></span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distance Distribution Comparison"</span>,</span>
@@ -1849,13 +1770,12 @@ Punjab study area:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-9-5.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-9-5.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># SECTION E: DENSITY ANALYSIS &amp; VISUALIZATION</span></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="fu">paste</span>(<span class="fu">rep</span>(<span class="st">"="</span>, <span class="dv">70</span>), <span class="at">collapse =</span> <span class="st">""</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
@@ -1888,13 +1808,12 @@ Punjab study area:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-9-6.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-9-6.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># E2: Enhanced density with transparent low values</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># E2: Enhanced density with transparent low values</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">--- ENHANCING VISUALIZATION: 10% FEATURE SAMPLE + TRANSPARENT LOW DENSITY ---</span><span class="sc">\n</span><span class="st">"</span>)</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>breaks <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(kde_df<span class="sc">$</span>z), <span class="fu">max</span>(kde_df<span class="sc">$</span>z), <span class="at">length.out =</span> <span class="dv">11</span>)</span>
@@ -1920,13 +1839,12 @@ Punjab study area:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-9-7.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-9-7.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co"># SECTION F: POINT PATTERN ANALYSIS</span></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="fu">paste</span>(<span class="fu">rep</span>(<span class="st">"="</span>, <span class="dv">70</span>), <span class="at">collapse =</span> <span class="st">""</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
@@ -1964,13 +1882,12 @@ Punjab study area:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-9-8.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-9-8.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pair correlation function</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pair correlation function</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>pcf_env <span class="ot">&lt;-</span> <span class="fu">envelope</span>(pp, pcf, <span class="at">nsim =</span> <span class="dv">199</span>, <span class="at">r =</span> <span class="fu">seq</span>(<span class="dv">0</span>, max_r, <span class="at">length.out =</span> <span class="dv">50</span>))</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>pcf_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">r =</span> pcf_env<span class="sc">$</span>r<span class="sc">/</span><span class="dv">1000</span>, <span class="at">obs =</span> pcf_env<span class="sc">$</span>obs, <span class="at">lo =</span> pcf_env<span class="sc">$</span>lo, <span class="at">hi =</span> pcf_env<span class="sc">$</span>hi)</span>
 <span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1995,13 +1912,12 @@ Punjab study area:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-9-9.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-9-9.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"># SECTION G: COMPREHENSIVE DASHBOARD &amp; INTERPRETATION</span></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="fu">paste</span>(<span class="fu">rep</span>(<span class="st">"="</span>, <span class="dv">70</span>), <span class="at">collapse =</span> <span class="st">""</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
@@ -2019,13 +1935,12 @@ Punjab study area:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-9-10.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-9-10.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># FINAL INTERPRETATION</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># FINAL INTERPRETATION</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="fu">paste</span>(<span class="fu">rep</span>(<span class="st">"="</span>, <span class="dv">70</span>), <span class="at">collapse =</span> <span class="st">""</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">" ECOLOGICAL INTERPRETATION</span><span class="sc">\n</span><span class="st">"</span>)</span>
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste</span>(<span class="fu">rep</span>(<span class="st">"="</span>, <span class="dv">70</span>), <span class="at">collapse =</span> <span class="st">""</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
@@ -2285,9 +2200,8 @@ Fine-scale clustering: g(r) starts at ~68 → very strong aggregation</code></pr
 <li><p>Account for spatial autocorrelation in statistical tests</p></li>
 </ul>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="co"># SECTION H: SAVE ALL PLOTS WITH CUSTOM SETTINGS</span></span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -2333,7 +2247,7 @@ Saving plots...
 </div>
 </section>
 <section id="morans-index" class="level2">
-<h2 class="anchored" data-anchor-id="morans-index">9. Moran’s Index</h2>
+<h2 class="anchored" data-anchor-id="morans-index" id="9-moran-s-index">9. Moran’s Index</h2>
 <ul>
 <li><p>Spatial autocorrelation (Moran’s I on quadrat counts)</p></li>
 <li><p>Moran’s I measures spatial autocorrelation</p></li>
@@ -2341,9 +2255,8 @@ Saving plots...
 <li><p>Effective sample size accounts for spatial redundancy</p></li>
 </ul>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create grid and count points per cell</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create grid and count points per cell</span></span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spdep)</span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">st_make_grid</span>(spiders_utm, <span class="at">cellsize =</span> <span class="dv">5000</span>)</span>
 <span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>grid_counts <span class="ot">&lt;-</span> <span class="fu">st_intersects</span>(grid, spiders_utm)</span>
@@ -2408,9 +2321,8 @@ Moran I statistic       Expectation          Variance
 </tbody>
 </table>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="co"># SECTION I: MORAN'S I &amp; EFFECTIVE SAMPLE SIZE VISUALIZATION</span></span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="fu">paste</span>(<span class="fu">rep</span>(<span class="st">"="</span>, <span class="dv">70</span>), <span class="at">collapse =</span> <span class="st">""</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
@@ -2506,13 +2418,12 @@ Moran I statistic       Expectation          Variance
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------------------------</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------------------------</span></span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create combined plot with your existing Moran's I visualization</span></span>
 <span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------------------------</span></span>
 <span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -2559,13 +2470,12 @@ Moran I statistic       Expectation          Variance
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------------------------</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------------------------</span></span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine with your existing plots or create a new dashboard</span></span>
 <span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------------------------</span></span>
 <span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -2586,13 +2496,12 @@ Moran I statistic       Expectation          Variance
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-12-3.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-12-3.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 2: Create standalone effective sample size + Moran's I plot</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 2: Create standalone effective sample size + Moran's I plot</span></span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>moran_summary <span class="ot">&lt;-</span> (p_eff_n <span class="sc">|</span> p_moran_viz) <span class="sc">+</span></span>
 <span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(<span class="at">title =</span> <span class="st">"Quantifying Spatial Structure"</span>,</span>
 <span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">subtitle =</span> <span class="fu">sprintf</span>(<span class="st">"Moran's I = %.3f | Effective n = %.0f from %d observations"</span>,</span>
@@ -2605,13 +2514,12 @@ Moran I statistic       Expectation          Variance
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-12-4.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_1_files/figure-html/unnamed-chunk-12-4.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">file.path</span>(output_dir, <span class="st">"12_moran_effective_n.png"</span>), </span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">file.path</span>(output_dir, <span class="st">"12_moran_effective_n.png"</span>), </span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>       moran_summary, <span class="at">width =</span> <span class="dv">14</span>, <span class="at">height =</span> <span class="dv">6</span>, <span class="at">dpi =</span> <span class="dv">300</span>, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
 <span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------------------------</span></span>
@@ -2646,7 +2554,7 @@ Information loss: 42.7 %
 Interpretation: Your 93 observations contain only 53 independent spatial units</code></pre>
 </div>
 </div>
-<p><strong>🔍 Interpreting Your Results:</strong></p>
+<p><strong> Interpreting Your Results:</strong></p>
 <p>From your Moran’s I output:</p>
 <ul>
 <li><p><strong>Moran’s I = 0.081</strong> (weak but significant positive autocorrelation)</p></li>
@@ -2654,7 +2562,7 @@ Interpretation: Your 93 observations contain only 53 independent spatial units</
 <li><p>With n ≈ 1,000 observations, your effective sample size might be <strong>~600-700</strong> independent units</p></li>
 </ul>
 <p>This means about <strong>43% (correct?) information loss</strong> due to spatial clustering!</p>
-<p><strong>✅ Summary</strong></p>
+<p><strong> Summary</strong></p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -2701,7 +2609,7 @@ Information loss = [value]%</code></pre>
 <hr>
 </section>
 <section id="key-takeaways" class="level2">
-<h2 class="anchored" data-anchor-id="key-takeaways"><strong>11. Key Takeaways</strong></h2>
+<h2 class="anchored" data-anchor-id="key-takeaways" id="11-key-takeaways"><strong>11. Key Takeaways</strong></h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -2745,7 +2653,7 @@ Information loss = [value]%</code></pre>
 </table>
 </section>
 <section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion"><strong>12. Conclusion:</strong></h2>
+<h2 class="anchored" data-anchor-id="conclusion" id="12-conclusion"><strong>12. Conclusion:</strong></h2>
 <p>The spider distribution shows <strong>genuine ecological clustering</strong> beyond sampling bias, operating at ~68 km scale. However, sampling is biased toward roads, so future models should include distance to infrastructure as covariates. Spatial autocorrelation reduces independent information by ~43%, requiring appropriate statistical corrections.</p>
 
 
@@ -3156,10 +3064,10 @@ Information loss = [value]%</code></pre>
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>© 2024 Dr.&nbsp;Tahir Ali</p>
+<p>© 2024 Dr. Tahir Ali</p>
 </div>   
     <div class="nav-footer-center">
-      &nbsp;
+       
     </div>
     <div class="nav-footer-right">
 <p>Built with <a href="https://quarto.org/">Quarto</a></p>
@@ -3170,4 +3078,4 @@ Information loss = [value]%</code></pre>
 
 
 
-</body></html>
+<script id="technical-code-copy">(() => { document.addEventListener('click', async (event) => { const button=event.target.closest('.technical-copy-button'); if(!button)return; event.preventDefault(); event.stopPropagation(); const details=button.closest('details'); const code=details?.querySelector('pre code, pre'); if(!code)return; const text=code.innerText; try { await navigator.clipboard.writeText(text); } catch (_) { const area=document.createElement('textarea'); area.value=text; area.style.position='fixed'; area.style.opacity='0'; document.body.appendChild(area); area.select(); document.execCommand('copy'); area.remove(); } const old=button.textContent; button.textContent='Copied'; setTimeout(()=>{button.textContent=old;},1400); }); })();</script></body></html>

@@ -8,7 +8,7 @@
 
 <meta name="author" content="Dr Tahir Ali | Miss Ainaz Mostafanejad | AG demeaux">
 
-<title>Building a De Novo RADseq Analysis Workflow with STACKS for Non-Model Species – Dr.&nbsp;Tahir Ali</title>
+<title>Building a De Novo RADseq Analysis Workflow with STACKS for Non-Model Species – Dr. Tahir Ali</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -69,7 +69,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../profile.webp" rel="icon">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
@@ -77,7 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-da71b349b2a5b190adc08b2de5cfba23.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-fdaeddbba6fa95a0f13bcc20c9a3fb04.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -114,12 +113,17 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </script>
+<style>html{ scroll-behavior: smooth; }</style>
 
 
 <link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Building a De Novo RADseq Analysis Workflow with STACKS for Non-Model Species – Dr. Tahir Ali">
+<meta property="og:site_name" content="Dr. Tahir Ali">
+<meta name="twitter:title" content="Building a De Novo RADseq Analysis Workflow with STACKS for Non-Model Species – Dr. Tahir Ali">
+<meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-sidebar docked quarto-light">
+<body class="content-dense docked nav-sidebar quarto-light technical-page">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -144,123 +148,16 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Home</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../projects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Projects</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../publications.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Publications</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../cv.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Résumé</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../teaching/teaching.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Teaching</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../workshops/workshops.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Workshops</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank">
- <span class="menu-text">Codes</span></a>
-  </div>
-</li>
-    </ul>
+        <li class="sidebar-item"><div class="sidebar-item-container"><a href="../../index.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Home</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../popgenlm.html" class="sidebar-item-text sidebar-link"><span class="menu-text">PopGenLM</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../genomes-to-ai.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Genomes to AI</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../projects.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Projects</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../publications.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Publications</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../cv.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Résumé</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../teaching.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">Teaching</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../workshops/workshops.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Workshops</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank"><span class="menu-text">GitHub</span></a></div></li></ul>
     </div>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+    <h2 id="toc-title">Contents</h2>
    
-  <ul class="collapse">
-  <li><a href="#de-novo-radseq-analysis-pipeline-for-non-model-species" id="toc-de-novo-radseq-analysis-pipeline-for-non-model-species" class="nav-link active" data-scroll-target="#de-novo-radseq-analysis-pipeline-for-non-model-species">De Novo RADseq Analysis Pipeline for Non-Model Species</a>
-  <ul class="collapse">
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
-  <li><a href="#key-resources" id="toc-key-resources" class="nav-link" data-scroll-target="#key-resources">Key Resources</a></li>
-  </ul></li>
-  <li><a href="#demultiplexing-and-cleaning" id="toc-demultiplexing-and-cleaning" class="nav-link" data-scroll-target="#demultiplexing-and-cleaning">1 Demultiplexing and Cleaning</a>
-  <ul class="collapse">
-  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#key-steps-and-interpretations" id="toc-key-steps-and-interpretations" class="nav-link" data-scroll-target="#key-steps-and-interpretations">Key Steps and Interpretations</a></li>
-  <li><a href="#implementation-script" id="toc-implementation-script" class="nav-link" data-scroll-target="#implementation-script">Implementation Script</a></li>
-  <li><a href="#quality-control-checks" id="toc-quality-control-checks" class="nav-link" data-scroll-target="#quality-control-checks">Quality Control Checks</a></li>
-  </ul></li>
-  <li><a href="#quality-control-and-read-distribution-analysis" id="toc-quality-control-and-read-distribution-analysis" class="nav-link" data-scroll-target="#quality-control-and-read-distribution-analysis">2 Quality Control and Read Distribution Analysis</a>
-  <ul class="collapse">
-  <li><a href="#overview-1" id="toc-overview-1" class="nav-link" data-scroll-target="#overview-1">Overview</a></li>
-  <li><a href="#per-sample-read-distribution-analysis" id="toc-per-sample-read-distribution-analysis" class="nav-link" data-scroll-target="#per-sample-read-distribution-analysis">Per-Sample Read Distribution Analysis</a></li>
-  <li><a href="#implementation-script-1" id="toc-implementation-script-1" class="nav-link" data-scroll-target="#implementation-script-1">Implementation Script</a></li>
-  <li><a href="#fastqc-analysis-for-sequence-quality" id="toc-fastqc-analysis-for-sequence-quality" class="nav-link" data-scroll-target="#fastqc-analysis-for-sequence-quality">FASTQC Analysis for Sequence Quality</a></li>
-  <li><a href="#fastqc-implementation" id="toc-fastqc-implementation" class="nav-link" data-scroll-target="#fastqc-implementation">FastQC Implementation</a></li>
-  </ul></li>
-  <li><a href="#sample-organization-and-population-mapping" id="toc-sample-organization-and-population-mapping" class="nav-link" data-scroll-target="#sample-organization-and-population-mapping">3 Sample Organization and Population Mapping</a>
-  <ul class="collapse">
-  <li><a href="#overview-2" id="toc-overview-2" class="nav-link" data-scroll-target="#overview-2">Overview</a></li>
-  <li><a href="#file-organization-strategy" id="toc-file-organization-strategy" class="nav-link" data-scroll-target="#file-organization-strategy">File Organization Strategy</a></li>
-  <li><a href="#implementation-script-2" id="toc-implementation-script-2" class="nav-link" data-scroll-target="#implementation-script-2">Implementation Script</a></li>
-  <li><a href="#population-map-generation" id="toc-population-map-generation" class="nav-link" data-scroll-target="#population-map-generation">Population Map Generation</a></li>
-  </ul></li>
-  <li><a href="#stacks-pipeline-parameter-optimization" id="toc-stacks-pipeline-parameter-optimization" class="nav-link" data-scroll-target="#stacks-pipeline-parameter-optimization">4 STACKS Pipeline: Parameter Optimization</a>
-  <ul class="collapse">
-  <li><a href="#overview-3" id="toc-overview-3" class="nav-link" data-scroll-target="#overview-3">Overview</a></li>
-  <li><a href="#understanding-stacks-parameters" id="toc-understanding-stacks-parameters" class="nav-link" data-scroll-target="#understanding-stacks-parameters">Understanding STACKS Parameters</a></li>
-  <li><a href="#optimizing-parameter-m" id="toc-optimizing-parameter-m" class="nav-link" data-scroll-target="#optimizing-parameter-m">4.1 Optimizing Parameter m</a></li>
-  <li><a href="#complete-stacks-pipeline-execution" id="toc-complete-stacks-pipeline-execution" class="nav-link" data-scroll-target="#complete-stacks-pipeline-execution">Complete STACKS Pipeline Execution</a></li>
-  <li><a href="#radstackshelpr-for-parameter-optimization" id="toc-radstackshelpr-for-parameter-optimization" class="nav-link" data-scroll-target="#radstackshelpr-for-parameter-optimization">RADstackshelpR for Parameter Optimization</a></li>
-  <li><a href="#optimizing-parameter-m-1" id="toc-optimizing-parameter-m-1" class="nav-link" data-scroll-target="#optimizing-parameter-m-1">4.2 Optimizing Parameter M</a></li>
-  <li><a href="#optimizing-parameter-n" id="toc-optimizing-parameter-n" class="nav-link" data-scroll-target="#optimizing-parameter-n">4.3 Optimizing Parameter n</a></li>
-  <li><a href="#comprehensive-optimization-visualization" id="toc-comprehensive-optimization-visualization" class="nav-link" data-scroll-target="#comprehensive-optimization-visualization">Comprehensive Optimization Visualization</a></li>
-  </ul></li>
-  <li><a href="#variant-filtering-with-snpfiltr" id="toc-variant-filtering-with-snpfiltr" class="nav-link" data-scroll-target="#variant-filtering-with-snpfiltr">5 Variant Filtering with SNPfiltR</a>
-  <ul class="collapse">
-  <li><a href="#overview-4" id="toc-overview-4" class="nav-link" data-scroll-target="#overview-4">Overview</a></li>
-  <li><a href="#filtering-strategy-and-rationale" id="toc-filtering-strategy-and-rationale" class="nav-link" data-scroll-target="#filtering-strategy-and-rationale">Filtering Strategy and Rationale</a></li>
-  <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation">Implementation</a></li>
-  </ul></li>
-  <li><a href="#quality-assessment-with-pca" id="toc-quality-assessment-with-pca" class="nav-link" data-scroll-target="#quality-assessment-with-pca">6 Quality Assessment with PCA</a>
-  <ul class="collapse">
-  <li><a href="#overview-5" id="toc-overview-5" class="nav-link" data-scroll-target="#overview-5">Overview</a></li>
-  <li><a href="#interpretation-guidelines-1" id="toc-interpretation-guidelines-1" class="nav-link" data-scroll-target="#interpretation-guidelines-1">Interpretation Guidelines</a></li>
-  <li><a href="#implementation-1" id="toc-implementation-1" class="nav-link" data-scroll-target="#implementation-1">Implementation</a></li>
-  </ul></li>
-  <li><a href="#coverage-analysis" id="toc-coverage-analysis" class="nav-link" data-scroll-target="#coverage-analysis">7 Coverage Analysis</a>
-  <ul class="collapse">
-  <li><a href="#overview-6" id="toc-overview-6" class="nav-link" data-scroll-target="#overview-6">Overview</a></li>
-  <li><a href="#key-metrics-and-interpretation" id="toc-key-metrics-and-interpretation" class="nav-link" data-scroll-target="#key-metrics-and-interpretation">Key Metrics and Interpretation</a></li>
-  <li><a href="#implementation-2" id="toc-implementation-2" class="nav-link" data-scroll-target="#implementation-2">Implementation</a></li>
-  </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a>
-  <ul class="collapse">
-  <li><a href="#summary-of-workflow" id="toc-summary-of-workflow" class="nav-link" data-scroll-target="#summary-of-workflow">Summary of Workflow</a></li>
-  <li><a href="#key-considerations-for-non-model-species" id="toc-key-considerations-for-non-model-species" class="nav-link" data-scroll-target="#key-considerations-for-non-model-species">Key Considerations for Non-Model Species</a></li>
-  <li><a href="#expected-outcomes" id="toc-expected-outcomes" class="nav-link" data-scroll-target="#expected-outcomes">Expected Outcomes</a></li>
-  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a></li>
-  </ul></li>
-  </ul>
-</nav>
+  <ul class="technical-toc-list"><li><a href="#de-novo-radseq-analysis-pipeline-for-non-model-species-2">De Novo RADseq Analysis Pipeline for Non-Model Species</a></li><li><a href="#1-demultiplexing-and-cleaning">1 Demultiplexing and Cleaning</a></li><li><a href="#2-quality-control-and-read-distribution-analysis">2 Quality Control and Read Distribution Analysis</a></li><li><a href="#3-sample-organization-and-population-mapping">3 Sample Organization and Population Mapping</a></li><li><a href="#4-stacks-pipeline-parameter-optimization">4 STACKS Pipeline: Parameter Optimization</a></li><li><a href="#5-variant-filtering-with-snpfiltr">5 Variant Filtering with SNPfiltR</a></li><li><a href="#6-quality-assessment-with-pca">6 Quality Assessment with PCA</a></li><li><a href="#7-coverage-analysis">7 Coverage Analysis</a></li><li><a href="#conclusion-2">Conclusion</a></li></ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -291,7 +188,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 
 
 <section id="de-novo-radseq-analysis-pipeline-for-non-model-species" class="level1">
-<h1>De Novo RADseq Analysis Pipeline for Non-Model Species</h1>
+<h1 id="de-novo-radseq-analysis-pipeline-for-non-model-species-2">De Novo RADseq Analysis Pipeline for Non-Model Species</h1>
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
 <p>This document presents a comprehensive, reproducible workflow for analyzing RADseq (Restriction-site Associated DNA sequencing) data from non-model organisms using the STACKS pipeline. The protocol covers demultiplexing, quality control, parameter optimization, variant calling, and filtering to generate high-quality SNP datasets suitable for population genetic analyses. The workflow is optimized for de novo studies where reference genomes are unavailable.</p>
@@ -299,7 +196,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <section id="key-resources" class="level2">
 <h2 class="anchored" data-anchor-id="key-resources">Key Resources</h2>
 <ul>
-<li>Catchen et al.&nbsp;(2013): <em>STACKS: An analysis tool set for population genomics</em> : <a href="https://pubmed.ncbi.nlm.nih.gov/23701397/" class="uri">https://pubmed.ncbi.nlm.nih.gov/23701397/</a></li>
+<li>Catchen et al. (2013): <em>STACKS: An analysis tool set for population genomics</em> : <a href="https://pubmed.ncbi.nlm.nih.gov/23701397/" class="uri">https://pubmed.ncbi.nlm.nih.gov/23701397/</a></li>
 <li>DeRaad (2021): <em>RADstackshelpR: An R package for STACKS optimization</em> : <a href="https://devonderaad.github.io/RADstackshelpR" class="uri">https://devonderaad.github.io/RADstackshelpR</a></li>
 <li>SNPfiltR: <em>R package to streamline and automate the process of choosing appropriate filtering parameters for next-gen SNP datasets</em> : <a href="https://devonderaad.github.io/SNPfiltR/" class="uri">https://devonderaad.github.io/SNPfiltR/</a></li>
 <li>Rochette et al (2019): <em>STACKS 2: Analytical methods for paired-end sequencing improve RADseq-based population genomics</em> : <a href="https://pubmed.ncbi.nlm.nih.gov/31550391/" class="uri">https://pubmed.ncbi.nlm.nih.gov/31550391/</a></li>
@@ -307,7 +204,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </section>
 </section>
 <section id="demultiplexing-and-cleaning" class="level1">
-<h1>1 Demultiplexing and Cleaning</h1>
+<h1 id="1-demultiplexing-and-cleaning">1 Demultiplexing and Cleaning</h1>
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <p>The initial processing of RADseq data involves demultiplexing pooled sequencing reads and removing PCR duplicates. This critical first step separates samples by their unique barcodes while maintaining data integrity through quality filtering and duplicate removal.</p>
@@ -344,7 +241,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </section>
 <section id="implementation-script" class="level2">
 <h2 class="anchored" data-anchor-id="implementation-script">Implementation Script</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
+<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env bash</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=demux_24D324</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=48:00:00</span></span>
@@ -452,7 +349,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
 <span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"All pools processed successfully."</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
+</div></details></section>
 <section id="quality-control-checks" class="level2">
 <h2 class="anchored" data-anchor-id="quality-control-checks">Quality Control Checks</h2>
 <p>After demultiplexing:</p>
@@ -464,7 +361,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </section>
 </section>
 <section id="quality-control-and-read-distribution-analysis" class="level1">
-<h1>2 Quality Control and Read Distribution Analysis</h1>
+<h1 id="2-quality-control-and-read-distribution-analysis">2 Quality Control and Read Distribution Analysis</h1>
 <section id="overview-1" class="level2">
 <h2 class="anchored" data-anchor-id="overview-1">Overview</h2>
 <p>Post-demultiplexing QC ensures data quality and identifies samples that may need exclusion due to low coverage or technical issues. This step is critical for downstream analysis success.</p>
@@ -494,7 +391,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </section>
 <section id="implementation-script-1" class="level2">
 <h2 class="anchored" data-anchor-id="implementation-script-1">Implementation Script</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>{r}</span>
+<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>{r}</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env Rscript</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -617,7 +514,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a><span class="do">### Close PDF</span></span>
 <span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
+</div></details></section>
 <section id="fastqc-analysis-for-sequence-quality" class="level2">
 <h2 class="anchored" data-anchor-id="fastqc-analysis-for-sequence-quality">FASTQC Analysis for Sequence Quality</h2>
 <section id="critical-qc-metrics" class="level3">
@@ -640,7 +537,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </section>
 <section id="fastqc-implementation" class="level2">
 <h2 class="anchored" data-anchor-id="fastqc-implementation">FastQC Implementation</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>{r}</span>
+<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>{r}</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -729,10 +626,10 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Median sample contains"</span>, <span class="fu">median</span>(stats.info<span class="sc">$</span>tot.seq), <span class="st">"reads. The following samples contain less than"</span>, <span class="fu">median</span>(stats.info<span class="sc">$</span>tot.seq)<span class="sc">*</span>.<span class="dv">1</span>, <span class="st">"reads (10% of the median), and should likely be dropped"</span>))</span>
 <span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(stats.info[stats.info<span class="sc">$</span>tot.seq <span class="sc">&lt;</span> <span class="fu">median</span>(stats.info<span class="sc">$</span>tot.seq)<span class="sc">*</span>.<span class="dv">1</span>,])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
+</div></details></section>
 </section>
 <section id="sample-organization-and-population-mapping" class="level1">
-<h1>3 Sample Organization and Population Mapping</h1>
+<h1 id="3-sample-organization-and-population-mapping">3 Sample Organization and Population Mapping</h1>
 <section id="overview-2" class="level2">
 <h2 class="anchored" data-anchor-id="overview-2">Overview</h2>
 <p>Organizing demultiplexed files by population facilitates downstream analysis and ensures proper population assignments for genetic analyses.</p>
@@ -758,7 +655,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </section>
 <section id="implementation-script-2" class="level2">
 <h2 class="anchored" data-anchor-id="implementation-script-2">Implementation Script</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
+<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=sort_by_pop</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=48:00:00</span></span>
@@ -818,7 +715,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"------------------------------------"</span></span>
 <span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Sorting complete."</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
+</div></details></section>
 <section id="population-map-generation" class="level2">
 <h2 class="anchored" data-anchor-id="population-map-generation">Population Map Generation</h2>
 <section id="purpose" class="level3">
@@ -832,7 +729,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <li><p>Consistent with STACKS requirements</p></li>
 <li><p>Used for population-aware analyses</p></li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
+<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=make_popmaps</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=02:00:00</span></span>
@@ -864,11 +761,11 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>  <span class="cf">fi</span></span>
 <span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span></span>
 <span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
+</div></details></section>
 </section>
 </section>
 <section id="stacks-pipeline-parameter-optimization" class="level1">
-<h1>4 STACKS Pipeline: Parameter Optimization</h1>
+<h1 id="4-stacks-pipeline-parameter-optimization">4 STACKS Pipeline: Parameter Optimization</h1>
 <section id="overview-3" class="level2">
 <h2 class="anchored" data-anchor-id="overview-3">Overview</h2>
 <p>The STACKS pipeline for de novo RADseq analysis requires optimization of three key parameters (m, M, n) that control locus formation, allele merging, and catalog building. Systematic optimization ensures balance between data retention and quality.</p>
@@ -907,7 +804,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <td style="text-align: left;">Mismatches allowed within individuals</td>
 <td style="text-align: left;">Allele merging tolerance</td>
 <td style="text-align: left;">1-8</td>
-<td style="text-align: left;">Balances allelic variation vs.&nbsp;paralog merging</td>
+<td style="text-align: left;">Balances allelic variation vs. paralog merging</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><strong>n</strong></td>
@@ -923,7 +820,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <h3 class="anchored" data-anchor-id="optimization-strategy"><strong>Optimization Strategy</strong></h3>
 <ol type="1">
 <li><p><strong>Sequential optimization</strong>: m → M → n</p></li>
-<li><p><strong>Trade-off consideration</strong>: Locus number vs.&nbsp;data quality</p></li>
+<li><p><strong>Trade-off consideration</strong>: Locus number vs. data quality</p></li>
 <li><p><strong>R80 criterion</strong>: 80% sample completeness threshold</p></li>
 </ol>
 </section>
@@ -946,7 +843,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <li><p>Use RADstackshelpR for evaluation</p></li>
 <li><p>Select m maximizing R80 loci</p></li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
+<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=ustacks_by_species_m</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=48:00:00</span></span>
@@ -990,7 +887,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="va">files</span><span class="op">=</span><span class="va">($(</span><span class="fu">find</span> <span class="st">"</span><span class="va">$SAMPLES_DIR</span><span class="st">"</span> <span class="at">-type</span> f <span class="at">-name</span> <span class="st">"*.1.fq.gz"</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-v</span> <span class="st">'\.rem\.'</span> <span class="kw">|</span> <span class="fu">sort</span><span class="va">))</span></span>
 <span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="va">NFILES</span><span class="op">=</span><span class="va">${</span><span class="op">#</span><span class="va">files</span><span class="op">[@]</span><span class="va">}</span></span>
 <span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">((</span> <span class="va">NFILES</span> <span class="op">==</span> <span class="dv">0</span> <span class="kw">));</span> <span class="cf">then</span></span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"⚠️  No valid fastq files found for </span><span class="va">$SPECIES</span><span class="st"> — skipping."</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"  No valid fastq files found for </span><span class="va">$SPECIES</span><span class="st"> — skipping."</span></span>
 <span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>  <span class="bu">exit</span> 0</span>
 <span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
 <span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a></span>
@@ -1019,11 +916,11 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Finished ustacks for </span><span class="va">$sample</span><span class="st"> (species=</span><span class="va">$SPECIES</span><span class="st">, m=</span><span class="va">$M</span><span class="st">). Log: </span><span class="va">$LOG_FILE</span><span class="st">"</span></span>
 <span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
+</div></details></section>
 </section>
 <section id="complete-stacks-pipeline-execution" class="level2">
 <h2 class="anchored" data-anchor-id="complete-stacks-pipeline-execution">Complete STACKS Pipeline Execution</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
+<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=NGS_stacks_post_ustacks</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=48:00:00</span></span>
@@ -1071,7 +968,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>        <span class="va">STACKS_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">$M_DIR</span><span class="st">/</span><span class="va">$sp</span><span class="st">"</span></span>
 <span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">[[</span> <span class="ot">!</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$STACKS_DIR</span><span class="st">"</span> <span class="kw">]];</span> <span class="cf">then</span></span>
-<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>            <span class="bu">echo</span> <span class="st">"⚠️ No ustacks results for species '</span><span class="va">$sp</span><span class="st">' in </span><span class="va">$mval</span><span class="st"> — skipping."</span></span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>            <span class="bu">echo</span> <span class="st">" No ustacks results for species '</span><span class="va">$sp</span><span class="st">' in </span><span class="va">$mval</span><span class="st"> — skipping."</span></span>
 <span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
 <span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">fi</span></span>
 <span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>        </span>
@@ -1083,14 +980,14 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ls</span> <span class="pp">*</span>.tags.tsv<span class="pp">*</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">'s/.tags.tsv.gz\?$//'</span> <span class="kw">|</span> <span class="fu">awk</span> <span class="at">-v</span> pop=<span class="st">"</span><span class="va">$sp</span><span class="st">"</span> <span class="st">'{print $0 "\t" pop}'</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">$POPMAP</span><span class="st">"</span></span>
 <span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">[[</span> <span class="ot">!</span> <span class="ot">-s</span> <span class="st">"</span><span class="va">$POPMAP</span><span class="st">"</span> <span class="kw">]];</span> <span class="cf">then</span></span>
-<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>            <span class="bu">echo</span> <span class="st">"⚠️ No valid samples for </span><span class="va">$sp</span><span class="st"> in </span><span class="va">$mval</span><span class="st"> — skipping."</span></span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>            <span class="bu">echo</span> <span class="st">" No valid samples for </span><span class="va">$sp</span><span class="st"> in </span><span class="va">$mval</span><span class="st"> — skipping."</span></span>
 <span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
 <span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a>        <span class="cf">fi</span></span>
 <span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">"Popmap contains </span><span class="va">$(</span><span class="fu">wc</span> <span class="at">-l</span> <span class="op">&lt;</span> <span class="st">"</span><span class="va">$POPMAP</span><span class="st">"</span><span class="va">)</span><span class="st"> entries"</span></span>
 <span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>        </span>
 <span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Verify ustacks outputs</span></span>
 <span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="ot">! </span><span class="fu">ls</span> <span class="pp">*</span>.tags.tsv<span class="pp">*</span> <span class="op">&gt;</span>/dev/null <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a>            <span class="bu">echo</span> <span class="st">"⚠️ No .tags.tsv files for </span><span class="va">$sp</span><span class="st"> in </span><span class="va">$mval</span><span class="st"> — skipping."</span></span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a>            <span class="bu">echo</span> <span class="st">" No .tags.tsv files for </span><span class="va">$sp</span><span class="st"> in </span><span class="va">$mval</span><span class="st"> — skipping."</span></span>
 <span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
 <span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a>        <span class="cf">fi</span></span>
 <span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a></span>
@@ -1116,7 +1013,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
 <span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"All m directories processed successfully (missing species skipped automatically)"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
+</div></details></section>
 <section id="radstackshelpr-for-parameter-optimization" class="level2">
 <h2 class="anchored" data-anchor-id="radstackshelpr-for-parameter-optimization">RADstackshelpR for Parameter Optimization</h2>
 <section id="r80-criterion-interpretation" class="level3">
@@ -1126,7 +1023,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <li><p><strong>Higher R80</strong>: More complete dataset for population analyses</p></li>
 <li><p><strong>Trade-off</strong>: Increasing stringency reduces total markers but improves data completeness</p></li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
+<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=radstacks_opt_m</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=04:00:00</span></span>
@@ -1209,14 +1106,14 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a><span class="st">cat("</span><span class="dt">\n</span><span class="st">All plots saved in:", out_dir, "</span><span class="dt">\n</span><span class="st">")</span></span>
 <span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a><span class="op">RSCRIPT</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
+</div></details></section>
 </section>
 <section id="optimizing-parameter-m-1" class="level2">
 <h2 class="anchored" data-anchor-id="optimizing-parameter-m-1">4.2 Optimizing Parameter M</h2>
 <section id="biological-significance-1" class="level3">
 <h3 class="anchored" data-anchor-id="biological-significance-1"><strong>Biological Significance</strong></h3>
 <ul>
-<li><p><strong>M = within-individual mismatch tolerance</strong>: Controls allele vs.&nbsp;paralog discrimination</p></li>
+<li><p><strong>M = within-individual mismatch tolerance</strong>: Controls allele vs. paralog discrimination</p></li>
 <li><p><strong>Too low</strong>: Splits true alleles into separate loci (fragmentation)</p></li>
 <li><p><strong>Too high</strong>: Merges paralogs into single loci (collapsing)</p></li>
 <li><p><strong>Optimal</strong>: Maximizes true allele detection while minimizing paralog merging</p></li>
@@ -1229,7 +1126,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <li><p><strong>Plateau in R80</strong>: Indicates optimal stringency reached</p></li>
 <li><p><strong>Sudden drop in R80</strong>: May indicate excessive paralog merging</p></li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
+<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=ustacks_specxM</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=48:00:00</span></span>
@@ -1308,7 +1205,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
 <span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Done SPECIES=</span><span class="va">${SPECIES}</span><span class="st">, m=</span><span class="va">${OPT_M}</span><span class="st">, M=</span><span class="va">${M}</span><span class="st">"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
+</div></details></section>
 </section>
 <section id="optimizing-parameter-n" class="level2">
 <h2 class="anchored" data-anchor-id="optimizing-parameter-n">4.3 Optimizing Parameter n</h2>
@@ -1328,7 +1225,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <li><p>Select n maximizing shared loci without excessive merging</p></li>
 <li><p>Consider biological expectations for population divergence</p></li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
+<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=stacks_post_n</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=48:00:00</span></span>
@@ -1445,11 +1342,11 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <span id="cb10-115"><a href="#cb10-115" aria-hidden="true" tabindex="-1"></a><span class="ex">populations</span> <span class="at">-P</span> . <span class="at">-M</span> <span class="st">"</span><span class="va">$POPMAP</span><span class="st">"</span> <span class="at">--vcf</span> <span class="at">-t</span> <span class="st">"</span><span class="va">$THREADS</span><span class="st">"</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">tee</span> <span class="st">"</span><span class="va">$LOG_DIR</span><span class="st">/populations.log"</span></span>
 <span id="cb10-116"><a href="#cb10-116" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-117"><a href="#cb10-117" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"✓ Finished species=</span><span class="va">$SPECIES</span><span class="st"> n=</span><span class="va">${n}</span><span class="st"> — Output: </span><span class="va">$WORK_DIR</span><span class="st">/populations.snps.vcf"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
+</div></details></section>
 </section>
 <section id="comprehensive-optimization-visualization" class="level2">
 <h2 class="anchored" data-anchor-id="comprehensive-optimization-visualization">Comprehensive Optimization Visualization</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>{r}</span>
+<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>{r}</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env Rscript</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
@@ -1495,10 +1392,10 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a><span class="co"># (uncomment one of these)</span></span>
 <span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="st">"stacks_parameter_optimization_grid.pdf"</span>, combined, <span class="at">width =</span> <span class="dv">14</span>, <span class="at">height =</span> <span class="dv">10</span>)</span>
 <span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot2::ggsave("stacks_parameter_optimization_grid.png", combined, width = 14, height = 10, dpi = 300)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
+</div></details></section>
 </section>
 <section id="variant-filtering-with-snpfiltr" class="level1">
-<h1>5 Variant Filtering with SNPfiltR</h1>
+<h1 id="5-variant-filtering-with-snpfiltr">5 Variant Filtering with SNPfiltR</h1>
 <section id="overview-4" class="level2">
 <h2 class="anchored" data-anchor-id="overview-4">Overview</h2>
 <p>After parameter optimization, the raw VCF contains numerous artifacts requiring filtering. SNPfiltR provides a systematic approach to remove low-quality variants while retaining biologically meaningful polymorphisms.</p>
@@ -1579,7 +1476,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </section>
 <section id="implementation" class="level2">
 <h2 class="anchored" data-anchor-id="implementation">Implementation</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
+<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=snpsfiltR_filter</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=06:00:00</span></span>
@@ -1685,10 +1582,10 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <span id="cb12-104"><a href="#cb12-104" aria-hidden="true" tabindex="-1"></a><span class="st">vcfR::write.vcf(x = vcf, file = OUT_VCF)</span></span>
 <span id="cb12-105"><a href="#cb12-105" aria-hidden="true" tabindex="-1"></a><span class="st">cat("✓ Done. Wrote:", OUT_VCF, "</span><span class="dt">\n</span><span class="st">")</span></span>
 <span id="cb12-106"><a href="#cb12-106" aria-hidden="true" tabindex="-1"></a><span class="op">RSCRIPT</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
+</div></details></section>
 </section>
 <section id="quality-assessment-with-pca" class="level1">
-<h1>6 Quality Assessment with PCA</h1>
+<h1 id="6-quality-assessment-with-pca">6 Quality Assessment with PCA</h1>
 <section id="overview-5" class="level2">
 <h2 class="anchored" data-anchor-id="overview-5">Overview</h2>
 <p>Principal Component Analysis (PCA) provides a rapid assessment of filtered SNP data quality, revealing population structure, outliers, and potential batch effects.</p>
@@ -1715,7 +1612,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </section>
 <section id="implementation-1" class="level2">
 <h2 class="anchored" data-anchor-id="implementation-1">Implementation</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
+<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">{bash}</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=pca_filtered</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=04:00:00</span></span>
@@ -1792,11 +1689,11 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <span id="cb13-75"><a href="#cb13-75" aria-hidden="true" tabindex="-1"></a><span class="st">  if (any(miss)) {</span></span>
 <span id="cb13-76"><a href="#cb13-76" aria-hidden="true" tabindex="-1"></a><span class="st">    pop_aligned$id[miss]  &lt;- vcf_samples[miss]</span></span>
 <span id="cb13-77"><a href="#cb13-77" aria-hidden="true" tabindex="-1"></a><span class="st">    pop_aligned$pop[miss] &lt;- "UNK"</span></span>
-<span id="cb13-78"><a href="#cb13-78" aria-hidden="true" tabindex="-1"></a><span class="st">    message("⚠️ Missing in popmap — UNK: ", paste(vcf_samples[miss], collapse=", "))</span></span>
+<span id="cb13-78"><a href="#cb13-78" aria-hidden="true" tabindex="-1"></a><span class="st">    message(" Missing in popmap — UNK: ", paste(vcf_samples[miss], collapse=", "))</span></span>
 <span id="cb13-79"><a href="#cb13-79" aria-hidden="true" tabindex="-1"></a><span class="st">  }</span></span>
 <span id="cb13-80"><a href="#cb13-80" aria-hidden="true" tabindex="-1"></a><span class="st">} else {</span></span>
 <span id="cb13-81"><a href="#cb13-81" aria-hidden="true" tabindex="-1"></a><span class="st">  pop_aligned &lt;- data.frame(id = vcf_samples, pop = "UNK", stringsAsFactors = FALSE)</span></span>
-<span id="cb13-82"><a href="#cb13-82" aria-hidden="true" tabindex="-1"></a><span class="st">  message("⚠️ No popmap found; setting all populations to 'UNK'.")</span></span>
+<span id="cb13-82"><a href="#cb13-82" aria-hidden="true" tabindex="-1"></a><span class="st">  message(" No popmap found; setting all populations to 'UNK'.")</span></span>
 <span id="cb13-83"><a href="#cb13-83" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
 <span id="cb13-84"><a href="#cb13-84" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-85"><a href="#cb13-85" aria-hidden="true" tabindex="-1"></a><span class="st"># ---- Convert to genlight ----</span></span>
@@ -1862,10 +1759,10 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <span id="cb13-145"><a href="#cb13-145" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-146"><a href="#cb13-146" aria-hidden="true" tabindex="-1"></a><span class="st">cat("✓ PCA saved to:\n - ", pdf_out, "\n - ", csv_out, "\n", sep = "")</span></span>
 <span id="cb13-147"><a href="#cb13-147" aria-hidden="true" tabindex="-1"></a><span class="op">RSCRIPT</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
+</div></details></section>
 </section>
 <section id="coverage-analysis" class="level1">
-<h1>7 Coverage Analysis</h1>
+<h1 id="7-coverage-analysis">7 Coverage Analysis</h1>
 <section id="overview-6" class="level2">
 <h2 class="anchored" data-anchor-id="overview-6">Overview</h2>
 <p>Comprehensive coverage analysis ensures data quality and informs interpretation of genetic analyses by quantifying sequencing depth across samples.</p>
@@ -1892,7 +1789,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </section>
 <section id="implementation-2" class="level2">
 <h2 class="anchored" data-anchor-id="implementation-2">Implementation</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>{r}</span>
+<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>{r}</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># CONFIG</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================</span></span>
@@ -2071,10 +1968,10 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <span id="cb14-177"><a href="#cb14-177" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-178"><a href="#cb14-178" aria-hidden="true" tabindex="-1"></a><span class="co"># Quick peek</span></span>
 <span id="cb14-179"><a href="#cb14-179" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(coverage_df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
+</div></details></section>
 </section>
 <section id="conclusion" class="level1">
-<h1>Conclusion</h1>
+<h1 id="conclusion-2">Conclusion</h1>
 <section id="summary-of-workflow" class="level2">
 <h2 class="anchored" data-anchor-id="summary-of-workflow">Summary of Workflow</h2>
 <p>This comprehensive RADseq analysis pipeline provides:</p>
@@ -2117,7 +2014,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </section>
 </section>
 
-</main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -2205,6 +2102,11 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
         }
       }
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
@@ -2522,11 +2424,11 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>© 2024 Dr.&nbsp;Tahir Ali</p>
+<p>© 2026 Dr. Tahir Ali</p>
 </div>   
     <div class="nav-footer-center">
-      &nbsp;
-    </div>
+<p>Computational biology · Scientific AI · Education</p>
+</div>
     <div class="nav-footer-right">
 <p>Built with <a href="https://quarto.org/">Quarto</a></p>
 </div>
@@ -2536,4 +2438,5 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 
 
 
-</body></html>
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+<script id="technical-code-copy">(() => { document.addEventListener('click', async (event) => { const button=event.target.closest('.technical-copy-button'); if(!button)return; event.preventDefault(); event.stopPropagation(); const details=button.closest('details'); const code=details?.querySelector('pre code, pre'); if(!code)return; const text=code.innerText; try { await navigator.clipboard.writeText(text); } catch (_) { const area=document.createElement('textarea'); area.value=text; area.style.position='fixed'; area.style.opacity='0'; document.body.appendChild(area); area.select(); document.execCommand('copy'); area.remove(); } const old=button.textContent; button.textContent='Copied'; setTimeout(()=>{button.textContent=old;},1400); }); })();</script></body></html>

@@ -8,7 +8,7 @@
 
 <meta name="author" content="Dr Tahir Ali | AG de Meaux | TRR341 Ecological Genomics | University of Cologne">
 
-<title>Session 4: Multivariate &amp; Dimensionality Reduction – Dr.&nbsp;Tahir Ali</title>
+<title>Session 4: Multivariate &amp; Dimensionality Reduction – Dr. Tahir Ali</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -69,7 +69,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../profile.webp" rel="icon">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
@@ -77,7 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-da71b349b2a5b190adc08b2de5cfba23.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-fdaeddbba6fa95a0f13bcc20c9a3fb04.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -119,7 +118,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar docked quarto-light">
+<body class="content-dense docked nav-sidebar quarto-light technical-page">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -144,74 +143,16 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Home</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../projects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Projects</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../publications.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Publications</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../cv.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Résumé</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../teaching/teaching.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Teaching</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../workshops/workshops.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Workshops</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank">
- <span class="menu-text">Codes</span></a>
-  </div>
-</li>
-    </ul>
+        <li class="sidebar-item"><div class="sidebar-item-container"><a href="../index.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Home</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../popgenlm.html" class="sidebar-item-text sidebar-link"><span class="menu-text">PopGenLM</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../genomes-to-ai.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Genomes to AI</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../projects.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Projects</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../publications.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Publications</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../cv.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Résumé</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../teaching/teaching.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Teaching</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="workshops.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">Workshops</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank"><span class="menu-text">GitHub</span></a></div></li></ul>
     </div>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+    <h2 id="toc-title">Contents</h2>
    
-  <ul>
-  <li><a href="#session-overview" id="toc-session-overview" class="nav-link active" data-scroll-target="#session-overview"><strong>Session Overview</strong></a>
-  <ul class="collapse">
-  <li><a href="#load-and-prepare-data-same-pipeline-as-session-3" id="toc-load-and-prepare-data-same-pipeline-as-session-3" class="nav-link" data-scroll-target="#load-and-prepare-data-same-pipeline-as-session-3"><strong>1. LOAD AND PREPARE DATA (Same Pipeline as Session 3)</strong></a></li>
-  <li><a href="#pca-ecological-gradients-from-correlated-predictors" id="toc-pca-ecological-gradients-from-correlated-predictors" class="nav-link" data-scroll-target="#pca-ecological-gradients-from-correlated-predictors"><strong>2. PCA: Ecological Gradients from Correlated Predictors</strong></a></li>
-  <li><a href="#loadings-what-does-each-pc-mean-biologically" id="toc-loadings-what-does-each-pc-mean-biologically" class="nav-link" data-scroll-target="#loadings-what-does-each-pc-mean-biologically"><strong>3. Loadings — “What Does Each PC Mean Biologically?”</strong></a></li>
-  <li><a href="#climate-niche-space-where-presences-sit-in-pca-space" id="toc-climate-niche-space-where-presences-sit-in-pca-space" class="nav-link" data-scroll-target="#climate-niche-space-where-presences-sit-in-pca-space"><strong>4. Climate Niche Space — Where Presences Sit in PCA Space</strong></a></li>
-  <li><a href="#umap-nonlinear-visualization-of-environmental-space" id="toc-umap-nonlinear-visualization-of-environmental-space" class="nav-link" data-scroll-target="#umap-nonlinear-visualization-of-environmental-space"><strong>5. UMAP — Nonlinear Visualization of Environmental Space</strong></a></li>
-  <li><a href="#pca-vs-umap-when-to-use-each" id="toc-pca-vs-umap-when-to-use-each" class="nav-link" data-scroll-target="#pca-vs-umap-when-to-use-each"><strong>6. PCA vs UMAP — When to Use Each</strong></a></li>
-  <li><a href="#complete-practical-workflow" id="toc-complete-practical-workflow" class="nav-link" data-scroll-target="#complete-practical-workflow"><strong>7. Complete Practical Workflow</strong></a></li>
-  <li><a href="#reasoning-prompts" id="toc-reasoning-prompts" class="nav-link" data-scroll-target="#reasoning-prompts"><strong>8. Reasoning Prompts</strong></a></li>
-  <li><a href="#session-summary" id="toc-session-summary" class="nav-link" data-scroll-target="#session-summary"><strong>9. Session Summary</strong></a></li>
-  </ul></li>
-  <li><a href="#bridge-to-session-5-species-distribution-modeling" id="toc-bridge-to-session-5-species-distribution-modeling" class="nav-link" data-scroll-target="#bridge-to-session-5-species-distribution-modeling"><strong>Bridge to Session 5: Species Distribution Modeling</strong></a></li>
-  <li><a href="#session-info-for-reproducibility" id="toc-session-info-for-reproducibility" class="nav-link" data-scroll-target="#session-info-for-reproducibility"><strong>Session Info for Reproducibility</strong></a></li>
-  </ul>
-</nav>
+  <ul class="technical-toc-list"><li><a href="#1-load-and-prepare-data-same-pipeline-as-session-3">1. LOAD AND PREPARE DATA (Same Pipeline as Session 3)</a></li><li><a href="#2-pca-ecological-gradients-from-correlated-predictors">2. PCA: Ecological Gradients from Correlated Predictors</a></li><li><a href="#3-loadings-what-does-each-pc-mean-biologically">3. Loadings — “What Does Each PC Mean Biologically?”</a></li><li><a href="#4-climate-niche-space-where-presences-sit-in-pca-space">4. Climate Niche Space — Where Presences Sit in PCA Space</a></li><li><a href="#5-umap-nonlinear-visualization-of-environmental-space">5. UMAP — Nonlinear Visualization of Environmental Space</a></li><li><a href="#6-pca-vs-umap-when-to-use-each">6. PCA vs UMAP — When to Use Each</a></li><li><a href="#7-complete-practical-workflow">7. Complete Practical Workflow</a></li><li><a href="#8-reasoning-prompts">8. Reasoning Prompts</a></li><li><a href="#9-session-summary">9. Session Summary</a></li></ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -243,9 +184,8 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 
 
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup chunk - runs before everything else</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup chunk - runs before everything else</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>, <span class="at">message =</span> <span class="cn">FALSE</span>, <span class="at">warning =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create output directory if it doesn't exist</span></span>
@@ -262,11 +202,10 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <li><p>Use UMAP/t-SNE for visualization (not inference)</p></li>
 <li><p>Build <strong>climate niche space</strong> plots</p></li>
 </ul>
-<p>🔗 <strong>Connection to Session 3:</strong> In Session 3 we diagnosed collinearity (VIF &gt; 10 for several temperature variables) and used regularization to handle it. Here we take a different approach — instead of selecting or dropping variables, PCA <strong>creates new uncorrelated axes</strong> that capture the major environmental gradients. We then visualize the species’ climate niche in this reduced space.</p>
+<p> <strong>Connection to Session 3:</strong> In Session 3 we diagnosed collinearity (VIF &gt; 10 for several temperature variables) and used regularization to handle it. Here we take a different approach — instead of selecting or dropping variables, PCA <strong>creates new uncorrelated axes</strong> that capture the major environmental gradients. We then visualize the species’ climate niche in this reduced space.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 1: LOAD REQUIRED PACKAGES</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Packages carried over from Session 3 + new ones for dimensionality reduction</span></span>
@@ -286,11 +225,10 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </details>
 </div>
 <section id="load-and-prepare-data-same-pipeline-as-session-3" class="level3">
-<h3 class="anchored" data-anchor-id="load-and-prepare-data-same-pipeline-as-session-3"><strong>1. LOAD AND PREPARE DATA (Same Pipeline as Session 3)</strong></h3>
+<h3 class="anchored" data-anchor-id="load-and-prepare-data-same-pipeline-as-session-3" id="1-load-and-prepare-data-same-pipeline-as-session-3"><strong>1. LOAD AND PREPARE DATA (Same Pipeline as Session 3)</strong></h3>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 2: DEFINE FILE PATHS</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Same paths as Session 3 — all data files are shared across sessions</span></span>
@@ -318,9 +256,8 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </div>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 3: LOAD AND CLEAN SPIDER PRESENCE DATA</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Identical to Session 3 — ensures consistency across sessions</span></span>
@@ -346,9 +283,8 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </div>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 4: LOAD CLIMATE RASTER FILES</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># WorldClim bioclimatic variables — same as Session 3</span></span>
@@ -393,9 +329,8 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </div>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 5: EXTRACT CLIMATE DATA AND PREPARE ANALYSIS DATASET</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract climate values at spider locations + generate background points</span></span>
@@ -455,7 +390,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </div>
 </section>
 <section id="pca-ecological-gradients-from-correlated-predictors" class="level3">
-<h3 class="anchored" data-anchor-id="pca-ecological-gradients-from-correlated-predictors"><strong>2. PCA: Ecological Gradients from Correlated Predictors</strong></h3>
+<h3 class="anchored" data-anchor-id="pca-ecological-gradients-from-correlated-predictors" id="2-pca-ecological-gradients-from-correlated-predictors"><strong>2. PCA: Ecological Gradients from Correlated Predictors</strong></h3>
 <p><strong>Key Points:</strong></p>
 <ul>
 <li><p>PCA finds orthogonal (uncorrelated) axes that explain maximum variance in the environment</p></li>
@@ -463,9 +398,8 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <li><p>This directly addresses the collinearity problem from Session 3: instead of dropping variables, we <strong>combine</strong> them into independent axes</p></li>
 </ul>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 6: PERFORM PCA ON AVAILABLE ENVIRONMENT</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># We run PCA on the background (available) environment because:</span></span>
@@ -561,13 +495,12 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_4_files/figure-html/pca-1.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_4_files/figure-html/pca-1.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">file.path</span>(output_path, <span class="st">"s4_pca_biplot.png"</span>),</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>       p_biplot, <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">8</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"✓ PCA biplot saved</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -636,7 +569,7 @@ First 3 PCs explain: 91.0% of total variance
 <p><strong>Key Insight:</strong> PCA converts our 7 correlated climate variables (which caused VIF &gt; 10 in Session 3) into uncorrelated axes. The biplot arrows show which original variables “define” each axis — temperature-related arrows are generally cluster together, confirming the collinearity we diagnosed earlier.</p>
 </section>
 <section id="loadings-what-does-each-pc-mean-biologically" class="level3">
-<h3 class="anchored" data-anchor-id="loadings-what-does-each-pc-mean-biologically"><strong>3. Loadings — “What Does Each PC Mean Biologically?”</strong></h3>
+<h3 class="anchored" data-anchor-id="loadings-what-does-each-pc-mean-biologically" id="3-loadings-what-does-each-pc-mean-biologically"><strong>3. Loadings — “What Does Each PC Mean Biologically?”</strong></h3>
 <p><strong>Key Points:</strong></p>
 <ul>
 <li><p>High absolute loading = strong contribution to that PC</p></li>
@@ -644,9 +577,8 @@ First 3 PCs explain: 91.0% of total variance
 <li><p>Don’t over-interpret PCs with small variance explained (&lt; 10%)</p></li>
 </ul>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 7: INTERPRET PCA LOADINGS</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Loadings tell us the "recipe" for each PC:</span></span>
@@ -692,13 +624,12 @@ First 3 PCs explain: 91.0% of total variance
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_4_files/figure-html/interpret-1.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_4_files/figure-html/interpret-1.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">file.path</span>(output_path, <span class="st">"s4_pca_loadings.png"</span>),</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>       p_loadings, <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">7</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"✓ Loadings barplot saved</span><span class="sc">\n</span><span class="st">"</span>)</span>
@@ -810,7 +741,7 @@ PC3 (11.3% of variance):
 <p><strong>Key Insight:</strong> PC1 typically captures the strongest environmental gradient in the data. In Pakistan, this is usually a temperature–elevation gradient (hot lowlands ↔︎ cold mountains). PC2 often captures moisture variation. The loadings let you translate abstract “PC axes” into meaningful ecological language.</p>
 </section>
 <section id="climate-niche-space-where-presences-sit-in-pca-space" class="level3">
-<h3 class="anchored" data-anchor-id="climate-niche-space-where-presences-sit-in-pca-space"><strong>4. Climate Niche Space — Where Presences Sit in PCA Space</strong></h3>
+<h3 class="anchored" data-anchor-id="climate-niche-space-where-presences-sit-in-pca-space" id="4-climate-niche-space-where-presences-sit-in-pca-space"><strong>4. Climate Niche Space — Where Presences Sit in PCA Space</strong></h3>
 <p><strong>Key Points:</strong></p>
 <ul>
 <li><p>Compare <strong>available environment</strong> (what’s out there) vs <strong>used environment</strong> (where the species occurs)</p></li>
@@ -818,9 +749,8 @@ PC3 (11.3% of variance):
 <li><p>Useful for diagnosing <strong>extrapolation risk</strong>: if presences cluster tightly, predictions outside that region are unreliable</p></li>
 </ul>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 8: PROJECT PRESENCES INTO PCA SPACE</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># IMPORTANT: We scale presences using the SAME parameters as the background</span></span>
@@ -894,13 +824,12 @@ PC3 (11.3% of variance):
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_4_files/figure-html/proj_presence-1.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_4_files/figure-html/proj_presence-1.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">file.path</span>(output_path, <span class="st">"s4_niche_pca.png"</span>),</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>       p_niche, <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">8</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"✓ Climate niche space plot saved</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -910,9 +839,8 @@ PC3 (11.3% of variance):
 </div>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 9: CALCULATE NICHE METRICS</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Quantify how the species' niche relates to available climate space</span></span>
@@ -1021,7 +949,7 @@ NICHE METRICS IN PCA SPACE
 <p><strong>Key Insight:</strong> If presences cluster tightly in one corner of PCA space, it could mean the species is a specialist — <em>or</em> that sampling was concentrated in certain climate zones (e.g., near roads in lowlands). Session 3’s sampling bias analysis helps distinguish these explanations.</p>
 </section>
 <section id="umap-nonlinear-visualization-of-environmental-space" class="level3">
-<h3 class="anchored" data-anchor-id="umap-nonlinear-visualization-of-environmental-space"><strong>5. UMAP — Nonlinear Visualization of Environmental Space</strong></h3>
+<h3 class="anchored" data-anchor-id="umap-nonlinear-visualization-of-environmental-space" id="5-umap-nonlinear-visualization-of-environmental-space"><strong>5. UMAP — Nonlinear Visualization of Environmental Space</strong></h3>
 <p><strong>Key Points:</strong></p>
 <ul>
 <li><p>UMAP (Uniform Manifold Approximation and Projection) captures <strong>nonlinear</strong> relationships that PCA misses</p></li>
@@ -1030,9 +958,8 @@ NICHE METRICS IN PCA SPACE
 <li><p>Use as a complement to PCA, not a replacement</p></li>
 </ul>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 10: UMAP VISUALIZATION</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># We run UMAP on the same scaled background data used for PCA</span></span>
@@ -1121,13 +1048,12 @@ NICHE METRICS IN PCA SPACE
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_4_files/figure-html/umap-1.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_4_files/figure-html/umap-1.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">file.path</span>(output_path, <span class="st">"s4_umap_comparison.png"</span>),</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>       p_umap_combined, <span class="at">width =</span> <span class="dv">14</span>, <span class="at">height =</span> <span class="dv">6</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"✓ UMAP comparison plot saved</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1179,11 +1105,10 @@ NICHE METRICS IN PCA SPACE
 <hr>
 </section>
 <section id="pca-vs-umap-when-to-use-each" class="level3">
-<h3 class="anchored" data-anchor-id="pca-vs-umap-when-to-use-each"><strong>6. PCA vs UMAP — When to Use Each</strong></h3>
+<h3 class="anchored" data-anchor-id="pca-vs-umap-when-to-use-each" id="6-pca-vs-umap-when-to-use-each"><strong>6. PCA vs UMAP — When to Use Each</strong></h3>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 12: PRINT COMPARISON TABLE</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1253,11 +1178,10 @@ PRACTICAL RECOMMENDATIONS:
 </div>
 </section>
 <section id="complete-practical-workflow" class="level3">
-<h3 class="anchored" data-anchor-id="complete-practical-workflow"><strong>7. Complete Practical Workflow</strong></h3>
+<h3 class="anchored" data-anchor-id="complete-practical-workflow" id="7-complete-practical-workflow"><strong>7. Complete Practical Workflow</strong></h3>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 13: COMPLETE SESSION 4 WORKFLOW SUMMARY</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1345,11 +1269,10 @@ Session 4 complete!
 </div>
 </section>
 <section id="reasoning-prompts" class="level3">
-<h3 class="anchored" data-anchor-id="reasoning-prompts"><strong>8. Reasoning Prompts</strong></h3>
+<h3 class="anchored" data-anchor-id="reasoning-prompts" id="8-reasoning-prompts"><strong>8. Reasoning Prompts</strong></h3>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 14: ECOLOGICAL REASONING PROMPTS</span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1430,11 +1353,10 @@ REASONING PROMPTS FOR DISCUSSION
 </div>
 </section>
 <section id="session-summary" class="level3">
-<h3 class="anchored" data-anchor-id="session-summary"><strong>9. Session Summary</strong></h3>
+<h3 class="anchored" data-anchor-id="session-summary" id="9-session-summary"><strong>9. Session Summary</strong></h3>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># SESSION 4 SUMMARY</span></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1543,9 +1465,8 @@ SESSION 4 SUMMARY: KEY TAKEAWAYS
 <section id="session-info-for-reproducibility" class="level2">
 <h2 class="anchored" data-anchor-id="session-info-for-reproducibility"><strong>Session Info for Reproducibility</strong></h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For reproducibility</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For reproducibility</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">=== SESSION INFO ===</span><span class="sc">\n</span><span class="st">"</span>)</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">sessionInfo</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
@@ -2003,10 +1924,10 @@ loaded via a namespace (and not attached):
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>© 2024 Dr.&nbsp;Tahir Ali</p>
+<p>© 2024 Dr. Tahir Ali</p>
 </div>   
     <div class="nav-footer-center">
-      &nbsp;
+       
     </div>
     <div class="nav-footer-right">
 <p>Built with <a href="https://quarto.org/">Quarto</a></p>
@@ -2017,4 +1938,4 @@ loaded via a namespace (and not attached):
 
 
 
-</body></html>
+<script id="technical-code-copy">(() => { document.addEventListener('click', async (event) => { const button=event.target.closest('.technical-copy-button'); if(!button)return; event.preventDefault(); event.stopPropagation(); const details=button.closest('details'); const code=details?.querySelector('pre code, pre'); if(!code)return; const text=code.innerText; try { await navigator.clipboard.writeText(text); } catch (_) { const area=document.createElement('textarea'); area.value=text; area.style.position='fixed'; area.style.opacity='0'; document.body.appendChild(area); area.select(); document.execCommand('copy'); area.remove(); } const old=button.textContent; button.textContent='Copied'; setTimeout(()=>{button.textContent=old;},1400); }); })();</script></body></html>

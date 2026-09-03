@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Interactive teaching resources, course companions, simulations, and genomics tutorials by Dr Tahir Ali.">
 
-<title>Teaching and Student Mentoring – Dr.&nbsp;Tahir Ali</title>
+<title>Teaching and Student Mentoring | Tahir Ali – Dr. Tahir Ali</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,10 +31,11 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../workshops/workshops.html" rel="next">
+<link href="../cv.html" rel="prev">
 <link href="../profile.webp" rel="icon">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
@@ -41,7 +43,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-d06107c61514b348b5496435b78bae49.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-fdaeddbba6fa95a0f13bcc20c9a3fb04.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -78,12 +80,48 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </script>
+<style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
+<meta property="og:title" content="Teaching and Student Mentoring | Tahir Ali">
+<meta property="og:description" content="Interactive teaching resources, course companions, simulations, and genomics tutorials by Dr Tahir Ali.">
+<meta property="og:site_name" content="Dr. Tahir Ali">
+<meta name="twitter:title" content="Teaching and Student Mentoring | Tahir Ali">
+<meta name="twitter:description" content="Interactive teaching resources, course companions, simulations, and genomics tutorials by Dr Tahir Ali.">
+<meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-sidebar docked fullcontent quarto-light">
+<body class="docked nav-sidebar quarto-light teaching-page">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -99,7 +137,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
@@ -108,90 +146,140 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Home</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../projects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Projects</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../publications.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Publications</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../cv.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Résumé</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../teaching/teaching.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Teaching</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../workshops/workshops.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Workshops</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank">
- <span class="menu-text">Codes</span></a>
-  </div>
-</li>
-    </ul>
+        <li class="sidebar-item"><div class="sidebar-item-container"><a href="../index.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Home</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../popgenlm.html" class="sidebar-item-text sidebar-link"><span class="menu-text">PopGenLM</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../genomes-to-ai.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Genomes to AI</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../projects.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Projects</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../publications.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Publications</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../cv.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Résumé</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="teaching.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">Teaching</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../workshops/workshops.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Workshops</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank"><span class="menu-text">GitHub</span></a></div></li></ul>
     </div>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Teaching and Student Mentoring</h1>
+<main class="content column-page-right" id="quarto-document-content"><section class="page-hero teaching-hero" aria-labelledby="teaching-title">
+<div class="eyebrow">
+Teaching · Mentoring · Scientific learning
 </div>
-
-
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<p>I design and lead practical exercises in <strong>population genetics</strong> and <strong>population &amp; ecological genomics</strong> for bachelor students. These courses combine short lectures, guided tutorials, hands-on data analysis, and interactive apps to help students investigate key evolutionary processes such as <strong>Hardy–Weinberg equilibrium</strong>, <strong>F<sub>ST</sub> and genetic drift</strong>, <strong>natural selection</strong>, and <strong>population structure</strong>. Beyond formal coursework, I supervise <strong>Bachelor’s and Master’s theses</strong> and mentor students individually, supporting them in research design, data analysis, and scientific communication to foster independent and creative thinking.</p>
-<hr>
-<section id="teaching-resources" class="level2">
-<h2 class="anchored" data-anchor-id="teaching-resources">Teaching Resources</h2>
-<div class="tab-links" style="margin-top: 1em; margin-bottom: 2em;">
-<p><a href="apps/interactive.html" class="tab-link" target="_self" style="margin-right: 1em; padding: 0.4em 0.9em; border: 1.5px solid #0072B2; border-radius: 8px; background: #f5f5f5; color: #0072B2; font-weight: 600; text-decoration: none;">Interactive Apps</a></p>
-<p><a href="course-companions/interactive-course-companions.html" class="tab-link" target="_self" style="margin-right: 1em; padding: 0.4em 0.9em; border: 1.5px solid #13875b; border-radius: 8px; background: #edf7f2; color: #0e6d49; font-weight: 700; text-decoration: none;">Interactive Course Companions</a></p>
-<p><a href="tutorials/Hands-on Genomics Tutorials.html" class="tab-link" target="_self" style="padding: 0.4em 0.9em; border: 1.5px solid #0072B2; border-radius: 8px; background: #f5f5f5; color: #0072B2; font-weight: 600; text-decoration: none;">Hands-on Genomics Tutorials</a></p>
-<p><a href="exercises/exercises.html" class="tab-link" target="_self" style="margin-right: 1em; padding: 0.4em 0.9em; border: 1.5px solid #0072B2; border-radius: 8px; background: #f5f5f5; color: #0072B2; font-weight: 600; text-decoration: none;">Lecture Companion Exercises</a></p>
-</div>
-
-
+<h1 id="teaching-title">
+Learning biology by doing biology
+</h1>
+<p class="lead">
+Interactive, lecture-grounded resources that help students move from biological concepts to quantitative reasoning, data analysis, and defensible scientific interpretation.
+</p>
 </section>
-
+<nav class="page-section-nav" aria-label="Teaching page sections">
+<a href="#how-i-teach-biology">How I teach biology</a> <a href="#interactive-learning-tools">Interactive learning tools</a> <a href="#principles-behind-the-tools">Principles behind the tools</a> <a href="#from-concept-to-independent-analysis">From concepts to independent analysis</a>
+</nav>
+<h2 id="how-i-teach-biology">How I teach biology</h2>
+<p>I design and lead practical exercises in <strong>population genetics</strong>, <strong>quantitative biology</strong>, and <strong>population and ecological genomics</strong> for university students. These courses combine short conceptual lectures, guided tutorials, hands-on data analysis, and interactive apps to help students investigate processes such as <strong>Hardy-Weinberg equilibrium</strong>, <strong><span class="math inline"><em>F</em><sub><em>S</em><em>T</em></sub></span> and genetic drift</strong>, <strong>natural selection</strong>, <strong>population structure</strong>, and the interpretation of genomic data.</p>
+<p>My teaching is organised around authentic scientific decisions. Students are asked not only to run an analysis, but to identify the biological question, examine assumptions, evaluate uncertainty, and explain what the result does - and does not - support. Reproducible code, clear figures, and scientific language are treated as part of the analysis rather than as final decoration.</p>
+<p>Beyond formal coursework, I supervise <strong>Bachelor’s and Master’s theses</strong> and mentor students individually. This includes support with research design, data management, statistical analysis, reproducible workflows, biological interpretation, scientific writing, and oral presentation, with the aim of developing independent and creative scientific thinking.</p>
+<h2 id="interactive-learning-tools">Interactive learning tools</h2>
+<div class="resource-grid">
+<article class="resource-card teal">
+<div class="card-kicker">
+Structured learning environments
+</div>
+<h3>
+Interactive Course Companions
+</h3>
+<p>
+Lecture-grounded learning paths for ecology and population genetics, with guided practice, progress tracking, and optional AI-supported feedback.
+</p>
+<div class="card-actions">
+<a class="button-primary" href="course-companions/interactive-course-companions.html">Explore companions</a>
+</div>
+</article>
+<article class="resource-card">
+<div class="card-kicker">
+Explore processes dynamically
+</div>
+<h3>
+Interactive Apps
+</h3>
+<p>
+Browser-based simulations for Hardy-Weinberg equilibrium, genetic drift, population differentiation, coalescence, and climate-related processes.
+</p>
+<div class="card-actions">
+<a class="button-primary" href="apps/interactive.html">Open app collection</a>
+</div>
+</article>
+<article class="resource-card">
+<div class="card-kicker">
+Reproducible practical work
+</div>
+<h3>
+Hands-on Genomics Tutorials
+</h3>
+<p>
+Stepwise practical material covering sequence quality control, mapping, variant workflows, command-line tools, population-genomic analysis, and interpretation.
+</p>
+<div class="card-actions">
+<a class="button-primary" href="tutorials/Hands-on%20Genomics%20Tutorials.html">Browse tutorials</a>
+</div>
+</article>
+<article class="resource-card">
+<div class="card-kicker">
+Lecture-aligned practice
+</div>
+<h3>
+Companion Exercises
+</h3>
+<p>
+Focused exercises designed to consolidate lecture concepts, calculations, model interpretation, and biological reasoning.
+</p>
+<div class="card-actions">
+<a class="button-primary" href="exercises/exercises.html">View exercises</a>
+</div>
+</article>
+</div>
+<h2 id="principles-behind-the-tools">Principles behind the tools</h2>
+<div class="principle-grid">
+<article class="principle-card">
+<h3>
+Concept before calculation
+</h3>
+<p>
+Students first identify the biological question, assumptions, and expected evidence, then apply equations or software.
+</p>
+</article>
+<article class="principle-card">
+<h3>
+Interaction before memorisation
+</h3>
+<p>
+Simulations make stochastic and multivariable processes visible, testable, and open to experimentation.
+</p>
+</article>
+<article class="principle-card">
+<h3>
+Evidence before conclusion
+</h3>
+<p>
+Analytical output is interpreted with uncertainty, alternative explanations, and appropriate scientific restraint.
+</p>
+</article>
+<article class="principle-card">
+<h3>
+Feedback that preserves agency
+</h3>
+<p>
+AI can support practice and explanation, while approved course sources and instructor decisions remain authoritative.
+</p>
+</article>
+</div>
+<h2 id="from-concept-to-independent-analysis">From concepts to independent analysis</h2>
+<div class="teaching-pathway">
+<div>
+<span>1</span><strong>Understand</strong><small>Concepts, assumptions, and biological questions</small>
+</div>
+<div>
+<span>2</span><strong>Explore</strong><small>Simulations, examples, and guided calculations</small>
+</div>
+<div>
+<span>3</span><strong>Analyse</strong><small>Realistic data, reproducible code, and diagnostics</small>
+</div>
+<div>
+<span>4</span><strong>Interpret</strong><small>Uncertainty, alternatives, and scientific communication</small>
+</div>
+</div>
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -280,6 +368,11 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
         }
       }
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
@@ -593,15 +686,27 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
     }
   });
   </script>
+<nav class="page-navigation column-page-right">
+  <div class="nav-page nav-page-previous">
+      <a href="../cv.html" class="pagination-link" aria-label="Résumé">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Résumé</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../workshops/workshops.html" class="pagination-link" aria-label="Workshops">
+        <span class="nav-page-text">Workshops</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>© 2024 Dr.&nbsp;Tahir Ali</p>
+<p>© 2026 Dr. Tahir Ali</p>
 </div>   
     <div class="nav-footer-center">
-      &nbsp;
-    </div>
+<p>Computational biology · Scientific AI · Education</p>
+</div>
     <div class="nav-footer-right">
 <p>Built with <a href="https://quarto.org/">Quarto</a></p>
 </div>
@@ -611,4 +716,5 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 
 
 
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

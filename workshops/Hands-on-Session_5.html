@@ -8,7 +8,7 @@
 
 <meta name="author" content="Dr Tahir Ali | AG de Meaux | TRR341 Ecological Genomics | University of Cologne">
 
-<title>Session 5: Species Distribution Modeling — GLM/GAM + ML + Spatial CV – Dr.&nbsp;Tahir Ali</title>
+<title>Session 5: Species Distribution Modeling — GLM/GAM + ML + Spatial CV – Dr.Tahir Ali</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -69,7 +69,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../profile.webp" rel="icon">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
@@ -77,7 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-da71b349b2a5b190adc08b2de5cfba23.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-fdaeddbba6fa95a0f13bcc20c9a3fb04.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -119,7 +118,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar docked quarto-light">
+<body class="content-dense docked nav-sidebar quarto-light technical-page">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -144,72 +143,16 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Home</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../projects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Projects</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../publications.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Publications</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../cv.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Résumé</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../teaching/teaching.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Teaching</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../workshops/workshops.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Workshops</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank">
- <span class="menu-text">Codes</span></a>
-  </div>
-</li>
-    </ul>
+        <li class="sidebar-item"><div class="sidebar-item-container"><a href="../index.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Home</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../popgenlm.html" class="sidebar-item-text sidebar-link"><span class="menu-text">PopGenLM</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../genomes-to-ai.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Genomes to AI</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../projects.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Projects</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../publications.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Publications</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../cv.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Résumé</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../teaching/teaching.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Teaching</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="workshops.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">Workshops</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank"><span class="menu-text">GitHub</span></a></div></li></ul>
     </div>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+    <h2 id="toc-title">Contents</h2>
    
-  <ul>
-  <li><a href="#session-overview" id="toc-session-overview" class="nav-link active" data-scroll-target="#session-overview"><strong>Session Overview</strong></a></li>
-  <li><a href="#part-1-load-and-prepare-data-limited-to-pakistan" id="toc-part-1-load-and-prepare-data-limited-to-pakistan" class="nav-link" data-scroll-target="#part-1-load-and-prepare-data-limited-to-pakistan"><strong>PART 1: LOAD AND PREPARE DATA (Limited to Pakistan)</strong></a></li>
-  <li><a href="#part-2-variable-selection-integrating-session-3-4" id="toc-part-2-variable-selection-integrating-session-3-4" class="nav-link" data-scroll-target="#part-2-variable-selection-integrating-session-3-4"><strong>PART 2: VARIABLE SELECTION (Integrating Session 3 &amp; 4)</strong></a></li>
-  <li><a href="#sdm-workflow-question-data-model-validation-map" id="toc-sdm-workflow-question-data-model-validation-map" class="nav-link" data-scroll-target="#sdm-workflow-question-data-model-validation-map"><strong>1. SDM Workflow: Question → Data → Model → Validation → Map</strong></a></li>
-  <li><a href="#glm-vs-gam-interpretability-vs-flexibility" id="toc-glm-vs-gam-interpretability-vs-flexibility" class="nav-link" data-scroll-target="#glm-vs-gam-interpretability-vs-flexibility"><strong>2. GLM vs GAM: Interpretability vs Flexibility</strong></a></li>
-  <li><a href="#random-forest-strong-prediction-careful-interpretation" id="toc-random-forest-strong-prediction-careful-interpretation" class="nav-link" data-scroll-target="#random-forest-strong-prediction-careful-interpretation"><strong>3. Random Forest: Strong Prediction, Careful Interpretation</strong></a></li>
-  <li><a href="#maxent-like-modeling-with-maxnet" id="toc-maxent-like-modeling-with-maxnet" class="nav-link" data-scroll-target="#maxent-like-modeling-with-maxnet"><strong>4. MaxEnt-like Modeling with maxnet</strong></a></li>
-  <li><a href="#spatial-cross-validation-the-essential-diagnostic" id="toc-spatial-cross-validation-the-essential-diagnostic" class="nav-link" data-scroll-target="#spatial-cross-validation-the-essential-diagnostic"><strong>5. Spatial Cross-Validation: The Essential Diagnostic</strong></a></li>
-  <li><a href="#prediction-maps-with-ecological-sanity-checks" id="toc-prediction-maps-with-ecological-sanity-checks" class="nav-link" data-scroll-target="#prediction-maps-with-ecological-sanity-checks"><strong>6. Prediction Maps with Ecological Sanity Checks</strong></a></li>
-  <li><a href="#complete-session-summary" id="toc-complete-session-summary" class="nav-link" data-scroll-target="#complete-session-summary"><strong>Complete Session Summary</strong></a></li>
-  <li><a href="#reasoning-prompts" id="toc-reasoning-prompts" class="nav-link" data-scroll-target="#reasoning-prompts"><strong>Reasoning Prompts</strong></a></li>
-  <li><a href="#session-info-for-reproducibility" id="toc-session-info-for-reproducibility" class="nav-link" data-scroll-target="#session-info-for-reproducibility"><strong>Session Info for Reproducibility</strong></a></li>
-  </ul>
-</nav>
+  <ul class="technical-toc-list"><li><a href="#session-overview-2">Session Overview</a></li><li><a href="#part-1-load-and-prepare-data-limited-to-pakistan-2">PART 1: LOAD AND PREPARE DATA (Limited to Pakistan)</a></li><li><a href="#part-2-variable-selection-integrating-session-3-4-2">PART 2: VARIABLE SELECTION (Integrating Session 3 &amp; 4)</a></li><li><a href="#1-sdm-workflow-question-data-model-validation-map">1. SDM Workflow: Question → Data → Model → Validation → Map</a></li><li><a href="#2-glm-vs-gam-interpretability-vs-flexibility">2. GLM vs GAM: Interpretability vs Flexibility</a></li><li><a href="#3-random-forest-strong-prediction-careful-interpretation">3. Random Forest: Strong Prediction, Careful Interpretation</a></li><li><a href="#4-maxent-like-modeling-with-maxnet">4. MaxEnt-like Modeling with maxnet</a></li><li><a href="#5-spatial-cross-validation-the-essential-diagnostic">5. Spatial Cross-Validation: The Essential Diagnostic</a></li><li><a href="#6-prediction-maps-with-ecological-sanity-checks">6. Prediction Maps with Ecological Sanity Checks</a></li><li><a href="#complete-session-summary-2">Complete Session Summary</a></li><li><a href="#reasoning-prompts-2">Reasoning Prompts</a></li><li><a href="#session-info-for-reproducibility-2">Session Info for Reproducibility</a></li></ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -241,9 +184,8 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 
 
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup chunk - runs before everything else</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup chunk - runs before everything else</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>, <span class="at">message =</span> <span class="cn">FALSE</span>, <span class="at">warning =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create output directory if it doesn't exist</span></span>
@@ -253,7 +195,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </div>
 <hr>
 <section id="session-overview" class="level2">
-<h2 class="anchored" data-anchor-id="session-overview"><strong>Session Overview</strong></h2>
+<h2 class="anchored" data-anchor-id="session-overview" id="session-overview-2"><strong>Session Overview</strong></h2>
 <p><strong>Learning Outcomes:</strong></p>
 <ul>
 <li><p>Fit SDMs using <strong>GLM</strong>, <strong>GAM</strong>, <strong>Random Forest</strong>, and <strong>MaxEnt-like (maxnet)</strong></p></li>
@@ -261,16 +203,15 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <li><p>Interpret variable importance and biological plausibility</p></li>
 <li><p>Produce prediction maps with uncertainty-aware thinking</p></li>
 </ul>
-<p>🔗 <strong>Connection to Sessions 3 &amp; 4:</strong></p>
+<p> <strong>Connection to Sessions 3 &amp; 4:</strong></p>
 <ul>
 <li><p><strong>Session 3</strong> taught us to diagnose collinearity (VIF) and use regularization (Elastic Net) to select variables → we apply those methods here to choose SDM predictors</p></li>
 <li><p><strong>Session 4</strong> showed us how PCA creates uncorrelated environmental axes → we compare SDMs built with original variables vs PCA scores</p></li>
 <li><p>This session brings everything together: <strong>selected variables</strong> + <strong>appropriate models</strong> + <strong>honest evaluation</strong></p></li>
 </ul>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 1: LOAD REQUIRED PACKAGES</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># All packages from Sessions 3 &amp; 4 plus SDM-specific tools</span></span>
@@ -300,12 +241,11 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </div>
 </section>
 <section id="part-1-load-and-prepare-data-limited-to-pakistan" class="level2">
-<h2 class="anchored" data-anchor-id="part-1-load-and-prepare-data-limited-to-pakistan"><strong>PART 1: LOAD AND PREPARE DATA (Limited to Pakistan)</strong></h2>
+<h2 class="anchored" data-anchor-id="part-1-load-and-prepare-data-limited-to-pakistan" id="part-1-load-and-prepare-data-limited-to-pakistan-2"><strong>PART 1: LOAD AND PREPARE DATA (Limited to Pakistan)</strong></h2>
 <p><strong>(Same Pipeline as Sessions 3 &amp; 4)</strong></p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 2: DEFINE FILE PATHS</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Same paths as Sessions 3 &amp; 4</span></span>
@@ -330,9 +270,8 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </div>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 3: LOAD SPIDER DATA + CLIMATE RASTERS</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Identical pipeline to Sessions 3 &amp; 4</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
@@ -380,9 +319,8 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </div>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 4: EXTRACT CLIMATE AT PRESENCE + GENERATE BACKGROUND POINTS</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -425,7 +363,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </div>
 </section>
 <section id="part-2-variable-selection-integrating-session-3-4" class="level2">
-<h2 class="anchored" data-anchor-id="part-2-variable-selection-integrating-session-3-4"><strong>PART 2: VARIABLE SELECTION (Integrating Session 3 &amp; 4)</strong></h2>
+<h2 class="anchored" data-anchor-id="part-2-variable-selection-integrating-session-3-4" id="part-2-variable-selection-integrating-session-3-4-2"><strong>PART 2: VARIABLE SELECTION (Integrating Session 3 &amp; 4)</strong></h2>
 <p><strong>Key Points:</strong></p>
 <ul>
 <li><p>We have 19 bioclimatic variables + elevation = 20 predictors → too many, too correlated</p></li>
@@ -434,9 +372,8 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <li><p>We compare both approaches in our SDMs</p></li>
 </ul>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 5: VARIABLE SELECTION USING SESSION 3 METHODS</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the collinearity diagnostics we learned in Session 3</span></span>
@@ -524,7 +461,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a>  selected_vars <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(selected_vars, worst)</span>
 <span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">length</span>(selected_vars) <span class="sc">&lt;</span> <span class="dv">3</span>) {</span>
-<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">"   ⚠️ Too few variables remaining, stopping</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">"    Too few variables remaining, stopping</span><span class="sc">\n</span><span class="st">"</span>)</span>
 <span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span></span>
 <span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a>}</span>
@@ -596,9 +533,8 @@ VARIABLE SELECTION — SESSION 3 METHODS
 </div>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 6: VISUALISE VIF RESULTS</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -627,19 +563,17 @@ VARIABLE SELECTION — SESSION 3 METHODS
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_5_files/figure-html/visualise_vif-1.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_5_files/figure-html/visualise_vif-1.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">file.path</span>(output_path, <span class="st">"s5_vif_selection.png"</span>), p_vif, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">5</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">file.path</span>(output_path, <span class="st">"s5_vif_selection.png"</span>), p_vif, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">5</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 7: PREPARE FINAL MODELING DATASET</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a clean dataset with selected variables + coordinates</span></span>
@@ -679,7 +613,7 @@ Coordinate range:
 <hr>
 </section>
 <section id="sdm-workflow-question-data-model-validation-map" class="level2">
-<h2 class="anchored" data-anchor-id="sdm-workflow-question-data-model-validation-map"><strong>1. SDM Workflow: Question → Data → Model → Validation → Map</strong></h2>
+<h2 class="anchored" data-anchor-id="sdm-workflow-question-data-model-validation-map" id="1-sdm-workflow-question-data-model-validation-map"><strong>1. SDM Workflow: Question → Data → Model → Validation → Map</strong></h2>
 <p><strong>Key Points:</strong></p>
 <ul>
 <li><p>Match model to data type: presence-absence vs presence-background</p></li>
@@ -687,9 +621,8 @@ Coordinate range:
 <li><p>Validation must reflect intended transfer (space/time)</p></li>
 </ul>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 8: SDM WORKFLOW DIAGRAM</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -729,18 +662,17 @@ Coordinate range:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_5_files/figure-html/sdm_workflow-1.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_5_files/figure-html/sdm_workflow-1.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">file.path</span>(output_path, <span class="st">"s5_workflow.png"</span>), p_workflow, <span class="at">width =</span> <span class="dv">12</span>, <span class="at">height =</span> <span class="dv">3</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">file.path</span>(output_path, <span class="st">"s5_workflow.png"</span>), p_workflow, <span class="at">width =</span> <span class="dv">12</span>, <span class="at">height =</span> <span class="dv">3</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
 <section id="glm-vs-gam-interpretability-vs-flexibility" class="level2">
-<h2 class="anchored" data-anchor-id="glm-vs-gam-interpretability-vs-flexibility"><strong>2. GLM vs GAM: Interpretability vs Flexibility</strong></h2>
+<h2 class="anchored" data-anchor-id="glm-vs-gam-interpretability-vs-flexibility" id="2-glm-vs-gam-interpretability-vs-flexibility"><strong>2. GLM vs GAM: Interpretability vs Flexibility</strong></h2>
 <p><strong>Key Points:</strong></p>
 <ul>
 <li><p><strong>GLM</strong>: Parametric, interpretable; can miss nonlinear ecology</p></li>
@@ -748,9 +680,8 @@ Coordinate range:
 <li><p>Use splines when ecology suggests thresholds or unimodal responses (which is almost always the case for species-environment relationships)</p></li>
 </ul>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 9: FIT GLM AND GAM</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># We fit both a simple GLM (linear effects) and a GAM (smooth effects)</span></span>
@@ -830,13 +761,12 @@ Coordinate range:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_5_files/figure-html/fit_glm_gam-1.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_5_files/figure-html/fit_glm_gam-1.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">file.path</span>(output_path, <span class="st">"s5_glm_vs_gam_response.png"</span>),</span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">file.path</span>(output_path, <span class="st">"s5_glm_vs_gam_response.png"</span>),</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>       p_response, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">6</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
@@ -856,9 +786,8 @@ GAM deviance explained: 57.3 %</code></pre>
 </div>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 10: GAM PARTIAL EFFECT PLOTS</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># These show the smooth effect of each variable, holding others constant</span></span>
@@ -881,13 +810,12 @@ GAM deviance explained: 57.3 %</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_5_files/figure-html/gam_partial_effects-1.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_5_files/figure-html/gam_partial_effects-1.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">✓ GAM smooth terms plotted</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">✓ GAM smooth terms plotted</span><span class="sc">\n</span><span class="st">"</span>)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"  Each panel shows the partial effect of one variable</span><span class="sc">\n</span><span class="st">"</span>)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"  Shaded area = 95% confidence interval</span><span class="sc">\n</span><span class="st">"</span>)</span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"  Rug marks (bottom) = data density</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -941,7 +869,7 @@ GAM deviance explained: 57.3 %</code></pre>
 </table>
 </section>
 <section id="random-forest-strong-prediction-careful-interpretation" class="level2">
-<h2 class="anchored" data-anchor-id="random-forest-strong-prediction-careful-interpretation"><strong>3. Random Forest: Strong Prediction, Careful Interpretation</strong></h2>
+<h2 class="anchored" data-anchor-id="random-forest-strong-prediction-careful-interpretation" id="3-random-forest-strong-prediction-careful-interpretation"><strong>3. Random Forest: Strong Prediction, Careful Interpretation</strong></h2>
 <p><strong>Key Points:</strong></p>
 <ul>
 <li><p>Handles nonlinearities + interactions automatically</p></li>
@@ -949,9 +877,8 @@ GAM deviance explained: 57.3 %</code></pre>
 <li><p>Variable importance can be misleading with correlated predictors (Session 3!)</p></li>
 </ul>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 11: FIT RANDOM FOREST</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1012,13 +939,12 @@ GAM deviance explained: 57.3 %</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_5_files/figure-html/rf-1.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_5_files/figure-html/rf-1.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">file.path</span>(output_path, <span class="st">"s5_rf_importance.png"</span>), p_imp, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">5</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">file.path</span>(output_path, <span class="st">"s5_rf_importance.png"</span>), p_imp, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">5</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1038,7 +964,7 @@ Permutation Importance:
 </div>
 </section>
 <section id="maxent-like-modeling-with-maxnet" class="level2">
-<h2 class="anchored" data-anchor-id="maxent-like-modeling-with-maxnet"><strong>4. MaxEnt-like Modeling with maxnet</strong></h2>
+<h2 class="anchored" data-anchor-id="maxent-like-modeling-with-maxnet" id="4-maxent-like-modeling-with-maxnet"><strong>4. MaxEnt-like Modeling with maxnet</strong></h2>
 <p><strong>Key Points:</strong></p>
 <ul>
 <li><p>MaxEnt estimates <strong>relative suitability</strong> from presence vs background</p></li>
@@ -1046,9 +972,8 @@ Permutation Importance:
 <li><p>Interpret output as <em>relative occurrence rate</em>, not true probability</p></li>
 </ul>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 12: FIT MAXNET (MaxEnt-like model in R)</span></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># maxnet uses the same statistical framework as the MaxEnt Java software</span></span>
@@ -1109,13 +1034,12 @@ Permutation Importance:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_5_files/figure-html/maxent-1.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_5_files/figure-html/maxent-1.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">file.path</span>(output_path, <span class="st">"s5_maxnet_response.png"</span>),</span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">file.path</span>(output_path, <span class="st">"s5_maxnet_response.png"</span>),</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>       p_mx_response, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">5</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
@@ -1130,7 +1054,7 @@ Number of features: 12 </code></pre>
 </div>
 </section>
 <section id="spatial-cross-validation-the-essential-diagnostic" class="level2">
-<h2 class="anchored" data-anchor-id="spatial-cross-validation-the-essential-diagnostic"><strong>5. Spatial Cross-Validation: The Essential Diagnostic</strong></h2>
+<h2 class="anchored" data-anchor-id="spatial-cross-validation-the-essential-diagnostic" id="5-spatial-cross-validation-the-essential-diagnostic"><strong>5. Spatial Cross-Validation: The Essential Diagnostic</strong></h2>
 <p><strong>Key Points:</strong></p>
 <ul>
 <li><p><strong>Random CV leaks spatial information</strong> → inflated AUC (over-optimistic)</p></li>
@@ -1138,9 +1062,8 @@ Number of features: 12 </code></pre>
 <li><p>Choose block size ~ autocorrelation range or species dispersal scale</p></li>
 </ul>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 13: CREATE SPATIAL FOLDS</span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co"># We use k-means clustering on coordinates to create spatial blocks</span></span>
@@ -1197,13 +1120,12 @@ Number of features: 12 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_5_files/figure-html/spatial_folds -1.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_5_files/figure-html/spatial_folds%20-1.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">file.path</span>(output_path, <span class="st">"s5_spatial_folds.png"</span>), p_folds, <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">7</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">file.path</span>(output_path, <span class="st">"s5_spatial_folds.png"</span>), p_folds, <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">7</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1224,9 +1146,8 @@ Number of folds: 5
 </div>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 14: RUN SPATIAL CROSS-VALIDATION ACROSS ALL MODELS</span></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1380,9 +1301,8 @@ SPATIAL CV RESULTS — MODEL COMPARISON
 </div>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 15A: VISUALISE SPATIAL CROSS-VALIDATION RESULTS</span></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1420,13 +1340,12 @@ SPATIAL CV RESULTS — MODEL COMPARISON
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_5_files/figure-html/visualise_cv -1.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_5_files/figure-html/visualise_cv%20-1.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">file.path</span>(output_path, <span class="st">"s5_spatial_cv_comparison.png"</span>),</span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">file.path</span>(output_path, <span class="st">"s5_spatial_cv_comparison.png"</span>),</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>       p_auc, <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">6</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"✓ Step 15A complete: spatial CV plot saved.</span><span class="sc">\n</span><span class="st">"</span>)</span>
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1570,7 +1489,7 @@ Predicting: Maxnet ...
 <p><strong>Key Insight:</strong> If a model scores AUC = 0.95 with random CV but only 0.70 with spatial CV, the difference is <strong>spatial autocorrelation inflation</strong>. The spatial CV result is the honest estimate of how well the model transfers to new areas.</p>
 </section>
 <section id="prediction-maps-with-ecological-sanity-checks" class="level2">
-<h2 class="anchored" data-anchor-id="prediction-maps-with-ecological-sanity-checks"><strong>6. Prediction Maps with Ecological Sanity Checks</strong></h2>
+<h2 class="anchored" data-anchor-id="prediction-maps-with-ecological-sanity-checks" id="6-prediction-maps-with-ecological-sanity-checks"><strong>6. Prediction Maps with Ecological Sanity Checks</strong></h2>
 <p><strong>Key Points:</strong></p>
 <ul>
 <li><p>Map predictions, then ask: Are hotspots plausible? Is the model extrapolating?</p></li>
@@ -1578,9 +1497,8 @@ Predicting: Maxnet ...
 <li><p>Use extrapolation risk assessment to flag unreliable predictions</p></li>
 </ul>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 16: GENERATE PREDICTION MAPS</span></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit final models on ALL data, then predict across the landscape</span></span>
@@ -1669,13 +1587,12 @@ Predicting: Maxnet ...
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_5_files/figure-html/pred_maps-1.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_5_files/figure-html/pred_maps-1.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">file.path</span>(output_path, <span class="st">"s5_model_comparison_maps.png"</span>),</span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">file.path</span>(output_path, <span class="st">"s5_model_comparison_maps.png"</span>),</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>       p_comparison, <span class="at">width =</span> <span class="dv">14</span>, <span class="at">height =</span> <span class="dv">10</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
@@ -1684,9 +1601,8 @@ Predicting: Maxnet ...
 </div>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 17: EXTRAPOLATION RISK ASSESSMENT</span></span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Use Mahalanobis distance to identify areas outside the training niche</span></span>
@@ -1753,13 +1669,12 @@ Predicting: Maxnet ...
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hands-on-Session_5_files/figure-html/risk_assessment-1.png" class="img-fluid figure-img" width="3600"></p>
+<p><img src="Hands-on-Session_5_files/figure-html/risk_assessment-1.png" class="img-fluid figure-img" width="3600" loading="lazy" decoding="async"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">file.path</span>(output_path, <span class="st">"s5_extrapolation_risk.png"</span>),</span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">file.path</span>(output_path, <span class="st">"s5_extrapolation_risk.png"</span>),</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>       p_sanity, <span class="at">width =</span> <span class="dv">12</span>, <span class="at">height =</span> <span class="dv">5</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
@@ -1774,11 +1689,10 @@ the multivariate training envelope (Mahalanobis p &lt; 0.05)</code></pre>
 </div>
 </section>
 <section id="complete-session-summary" class="level2">
-<h2 class="anchored" data-anchor-id="complete-session-summary"><strong>Complete Session Summary</strong></h2>
+<h2 class="anchored" data-anchor-id="complete-session-summary" id="complete-session-summary-2"><strong>Complete Session Summary</strong></h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 18: SESSION 5 SUMMARY</span></span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1862,11 +1776,10 @@ SESSION 5 SUMMARY: SPECIES DISTRIBUTION MODELING
 </div>
 </section>
 <section id="reasoning-prompts" class="level2">
-<h2 class="anchored" data-anchor-id="reasoning-prompts"><strong>Reasoning Prompts</strong></h2>
+<h2 class="anchored" data-anchor-id="reasoning-prompts" id="reasoning-prompts-2"><strong>Reasoning Prompts</strong></h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 19: ECOLOGICAL REASONING PROMPTS</span></span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
 <span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1938,11 +1851,10 @@ REASONING PROMPTS FOR DISCUSSION
 <hr>
 </section>
 <section id="session-info-for-reproducibility" class="level2">
-<h2 class="anchored" data-anchor-id="session-info-for-reproducibility"><strong>Session Info for Reproducibility</strong></h2>
+<h2 class="anchored" data-anchor-id="session-info-for-reproducibility" id="session-info-for-reproducibility-2"><strong>Session Info for Reproducibility</strong></h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">=== SESSION INFO ===</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<details class="code-details code-fold">
+<summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">=== SESSION INFO ===</span><span class="sc">\n</span><span class="st">"</span>)</span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">sessionInfo</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
@@ -2402,10 +2314,10 @@ loaded via a namespace (and not attached):
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>© 2024 Dr.&nbsp;Tahir Ali</p>
+<p>© 2024 Dr.Tahir Ali</p>
 </div>   
     <div class="nav-footer-center">
-      &nbsp;
+      
     </div>
     <div class="nav-footer-right">
 <p>Built with <a href="https://quarto.org/">Quarto</a></p>
@@ -2416,4 +2328,4 @@ loaded via a namespace (and not attached):
 
 
 
-</body></html>
+<script id="technical-code-copy">(() => { document.addEventListener('click', async (event) => { const button=event.target.closest('.technical-copy-button'); if(!button)return; event.preventDefault(); event.stopPropagation(); const details=button.closest('details'); const code=details?.querySelector('pre code, pre'); if(!code)return; const text=code.innerText; try { await navigator.clipboard.writeText(text); } catch (_) { const area=document.createElement('textarea'); area.value=text; area.style.position='fixed'; area.style.opacity='0'; document.body.appendChild(area); area.select(); document.execCommand('copy'); area.remove(); } const old=button.textContent; button.textContent='Copied'; setTimeout(()=>{button.textContent=old;},1400); }); })();</script></body></html>
