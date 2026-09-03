@@ -2257,6 +2257,7 @@ body.technical-page main.content figure img {
   position: fixed;
   z-index: 1100;
   inset: 0 auto 0 0;
+  box-sizing: border-box;
   width: 252px;
   padding: 1rem 0.9rem;
   overflow-y: auto;
@@ -2305,7 +2306,14 @@ body.legacy-notebook-page {
   background: var(--ta-canvas) !important;
 }
 
-body.legacy-notebook-page > .jp-Cell {
+body.legacy-notebook-page > main {
+  width: min(100%, 1120px);
+  min-width: 0;
+  margin-inline: auto;
+}
+
+body.legacy-notebook-page > main > .jp-Cell {
+  min-width: 0;
   max-width: 1120px;
   margin-inline: auto;
 }
@@ -2314,6 +2322,7 @@ body.legacy-notebook-page > .jp-Cell {
   position: fixed;
   z-index: 900;
   inset: 0 0 0 auto;
+  box-sizing: border-box;
   width: 270px;
   padding: 1.4rem 1rem;
   overflow-y: auto;
@@ -2352,6 +2361,73 @@ body.legacy-notebook-page > .jp-Cell {
 
 .legacy-toc-nav a:hover {
   color: var(--ta-blue-700) !important;
+}
+
+.legacy-inline-toc {
+  display: none;
+  width: min(100%, 1120px);
+  margin: 0 auto 1.25rem;
+  padding: 0.75rem 1rem 0.9rem;
+  border: 1px solid var(--ta-slate-200);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: var(--ta-shadow-sm);
+  font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.legacy-inline-toc summary {
+  color: var(--ta-navy-900);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 760;
+}
+
+.legacy-inline-toc .technical-toc-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.35rem 1.25rem;
+  margin: 0.8rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.legacy-inline-toc a {
+  display: block;
+  padding: 0.22rem 0;
+  color: var(--ta-slate-700) !important;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  text-decoration: none !important;
+}
+
+.legacy-inline-toc a:hover {
+  color: var(--ta-blue-700) !important;
+}
+
+body.legacy-notebook-page .jp-OutputArea-output,
+body.legacy-notebook-page .jp-RenderedHTMLCommon {
+  min-width: 0;
+  max-width: 100%;
+}
+
+body.legacy-notebook-page .jp-OutputArea-output {
+  overflow-x: auto;
+}
+
+body.legacy-notebook-page table.dataframe {
+  width: max-content;
+  min-width: 100%;
+  table-layout: auto;
+}
+
+body.legacy-notebook-page table.dataframe th,
+body.legacy-notebook-page table.dataframe td {
+  padding: 0.56rem 0.64rem !important;
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-break: normal;
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
 }
 
 .legacy-tutorial-page .main-container,
@@ -2394,6 +2470,20 @@ body.legacy-notebook-page > .jp-Cell {
   overflow-x: auto;
 }
 
+@media (max-width: 1599.98px) {
+  body.wide-output-page .legacy-toc-nav {
+    display: none;
+  }
+
+  body.wide-output-page.legacy-notebook-page {
+    padding-right: 0 !important;
+  }
+
+  body.wide-output-page .legacy-inline-toc {
+    display: block;
+  }
+}
+
 @media (max-width: 1199.98px) {
   .legacy-toc-nav {
     display: none;
@@ -2401,6 +2491,10 @@ body.legacy-notebook-page > .jp-Cell {
 
   body.legacy-notebook-page {
     padding-right: 0 !important;
+  }
+
+  .legacy-inline-toc {
+    display: block;
   }
 }
 
@@ -2495,6 +2589,10 @@ body.legacy-notebook-page > .jp-Cell {
 
   .social-directory {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .legacy-inline-toc .technical-toc-list {
+    grid-template-columns: 1fr;
   }
 
   .data-arc article,

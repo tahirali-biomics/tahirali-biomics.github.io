@@ -7508,15 +7508,15 @@ a.anchor-link {
   }
 </style>
 <!-- End of mermaid configuration --><link rel="stylesheet" href="../styles.css"></head>
-<body class="content-dense jp-Notebook legacy-notebook-page technical-page" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<button class="legacy-menu-toggle" type="button" aria-controls="legacy-site-nav" aria-expanded="false">Menu</button><nav id="legacy-site-nav" class="legacy-site-nav" aria-label="Primary navigation"><a href="../index.html" class="legacy-site-brand">Dr. Tahir Ali</a><a href="../index.html" class="">Home</a><a href="../popgenlm.html" class="">PopGenLM</a><a href="../genomes-to-ai.html" class="">Genomes to AI</a><a href="../projects.html" class="">Projects</a><a href="../publications.html" class="">Publications</a><a href="../cv.html" class="">Résumé</a><a href="../teaching/teaching.html" class="">Teaching</a><a href="workshops.html" class="active">Workshops</a><a href="https://github.com/tahirali-biomics" target="_blank">GitHub</a></nav><aside class="legacy-toc-nav" aria-label="Contents"><div class="legacy-toc-title">Contents</div><ul class="technical-toc-list"><li><a href="#1-Workshop-Overview:">1 Workshop Overview:</a></li><li><a href="#2-Load-Required-Libraries">2 Load Required Libraries</a></li><li><a href="#3-Load-temporal-genomic-data-(dadi-data-dictionaries)">3 Load temporal genomic data (dadi data dictionaries)</a></li><li><a href="#4-Build-2D-Site-Frequency-Spectra-(2dSFS)-for-Has02-%E2%86%92-Has23">4 Build 2D Site Frequency Spectra (2dSFS) for Has02 → Has23</a></li><li><a href="#5-Visualize-the-2dSFS-(all-effect-classes)">5 Visualize the 2dSFS (all effect classes)</a></li><li><a href="#6-Compare-Allele-Frequency-Categories-(Rare-vs-Moderate-bins-from-a-sdSFS)">6 Compare Allele Frequency Categories (Rare vs Moderate bins from a sdSFS)</a></li><li><a href="#7-Statistical-Metrics-per-Row-of-the-2dSFS">7 Statistical Metrics per Row of the 2dSFS</a></li><li><a href="#8-Bootstrapped-Confidence-Intervals">8 Bootstrapped Confidence Intervals</a></li><li><a href="#9-Fit-a-simple-neutral-model-(split-with-symmetric-migration)-to-the-low-effect-2dSFS">9 Fit a simple neutral model (split with symmetric migration) to the low-effect 2dSFS</a></li><li><a href="#-Subsampling-Low-Effect-Mutations-for-Comparison">Subsampling Low-Effect Mutations for Comparison</a></li><li><a href="#11-Discussion,-interpretation-&amp;-exercises">11 Discussion, interpretation &amp; exercises</a></li></ul></aside><main>
+<body class="content-dense jp-Notebook legacy-notebook-page technical-page wide-output-page" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
+<button class="legacy-menu-toggle" type="button" aria-controls="legacy-site-nav" aria-expanded="false">Menu</button><nav id="legacy-site-nav" class="legacy-site-nav" aria-label="Primary navigation"><a href="../index.html" class="legacy-site-brand">Dr. Tahir Ali</a><a href="../index.html" class="">Home</a><a href="../popgenlm.html" class="">PopGenLM</a><a href="../genomes-to-ai.html" class="">Genomes to AI</a><a href="../projects.html" class="">Projects</a><a href="../publications.html" class="">Publications</a><a href="../cv.html" class="">Résumé</a><a href="../teaching/teaching.html" class="">Teaching</a><a href="workshops.html" class="active">Workshops</a><a href="https://github.com/tahirali-biomics" target="_blank">GitHub</a></nav><aside class="legacy-toc-nav" aria-label="Contents"><div class="legacy-toc-title">Contents</div><ul class="technical-toc-list"><li><a href="#1-workshop-overview">1 Workshop Overview:</a></li><li><a href="#2-load-required-libraries">2 Load Required Libraries</a></li><li><a href="#3-load-temporal-genomic-data-dadi-data-dictionaries">3 Load temporal genomic data (dadi data dictionaries)</a></li><li><a href="#4-build-2d-site-frequency-spectra-2dsfs-for-has02-has23">4 Build 2D Site Frequency Spectra (2dSFS) for Has02 → Has23</a></li><li><a href="#5-visualize-the-2dsfs-all-effect-classes">5 Visualize the 2dSFS (all effect classes)</a></li><li><a href="#6-compare-allele-frequency-categories-rare-vs-moderate-bins-from-a-sdsfs">6 Compare Allele Frequency Categories (Rare vs Moderate bins from a sdSFS)</a></li><li><a href="#7-statistical-metrics-per-row-of-the-2dsfs">7 Statistical Metrics per Row of the 2dSFS</a></li><li><a href="#8-bootstrapped-confidence-intervals">8 Bootstrapped Confidence Intervals</a></li><li><a href="#9-fit-a-simple-neutral-model-split-with-symmetric-migration-to-the-low-effect-2dsfs">9 Fit a simple neutral model (split with symmetric migration) to the low-effect 2dSFS</a></li><li><a href="#subsampling-low-effect-mutations-for-comparison">Subsampling Low-Effect Mutations for Comparison</a></li><li><a href="#11-discussion-interpretation-exercises">11 Discussion, interpretation &amp; exercises</a></li></ul></aside><details class="legacy-inline-toc" open="open"><summary>Contents</summary><ul class="technical-toc-list"><li><a href="#1-workshop-overview">1 Workshop Overview:</a></li><li><a href="#2-load-required-libraries">2 Load Required Libraries</a></li><li><a href="#3-load-temporal-genomic-data-dadi-data-dictionaries">3 Load temporal genomic data (dadi data dictionaries)</a></li><li><a href="#4-build-2d-site-frequency-spectra-2dsfs-for-has02-has23">4 Build 2D Site Frequency Spectra (2dSFS) for Has02 → Has23</a></li><li><a href="#5-visualize-the-2dsfs-all-effect-classes">5 Visualize the 2dSFS (all effect classes)</a></li><li><a href="#6-compare-allele-frequency-categories-rare-vs-moderate-bins-from-a-sdsfs">6 Compare Allele Frequency Categories (Rare vs Moderate bins from a sdSFS)</a></li><li><a href="#7-statistical-metrics-per-row-of-the-2dsfs">7 Statistical Metrics per Row of the 2dSFS</a></li><li><a href="#8-bootstrapped-confidence-intervals">8 Bootstrapped Confidence Intervals</a></li><li><a href="#9-fit-a-simple-neutral-model-split-with-symmetric-migration-to-the-low-effect-2dsfs">9 Fit a simple neutral model (split with symmetric migration) to the low-effect 2dSFS</a></li><li><a href="#subsampling-low-effect-mutations-for-comparison">Subsampling Low-Effect Mutations for Comparison</a></li><li><a href="#11-discussion-interpretation-exercises">11 Discussion, interpretation &amp; exercises</a></li></ul></details><main>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bf9f466e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="-Temporal-Genomics-—-Hands-on-Workshop-(Python-/-Jupyter)"> Temporal Genomics — Hands-on Workshop (Python / Jupyter)<a class="anchor-link" href="#-Temporal-Genomics-%E2%80%94-Hands-on-Workshop-(Python-/-Jupyter)">¶</a></h1><h2 id="1-Workshop-Overview:">1 Workshop Overview:<a class="anchor-link" href="#1-Workshop-Overview:">¶</a></h2><p>In this workshop, you will learn to analyse <strong>temporal genomic data</strong> — data from the same population sampled at two different time points.</p>
+<h1 id="temporal-genomics-hands-on-workshop-python-jupyter"> Temporal Genomics — Hands-on Workshop (Python / Jupyter)<a class="anchor-link" href="#temporal-genomics-hands-on-workshop-python-jupyter">¶</a></h1><h2 id="1-workshop-overview">1 Workshop Overview:<a class="anchor-link" href="#1-workshop-overview">¶</a></h2><p>In this workshop, you will learn to analyse <strong>temporal genomic data</strong> — data from the same population sampled at two different time points.</p>
 <p><strong>Explore allele frequency changes over time (one population: Has02 → Has23)</strong></p>
 <p><strong>What you'll learn</strong></p>
 <ul>
@@ -7542,7 +7542,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="2-Load-Required-Libraries">2 Load Required Libraries<a class="anchor-link" href="#2-Load-Required-Libraries">¶</a></h2><p>Load essential Python packages for numerical analysis, statistics, and plotting.</p>
+<h2 id="2-load-required-libraries">2 Load Required Libraries<a class="anchor-link" href="#2-load-required-libraries">¶</a></h2><p>Load essential Python packages for numerical analysis, statistics, and plotting.</p>
 </div>
 </div>
 </div>
@@ -7575,7 +7575,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="3-Load-temporal-genomic-data-(dadi-data-dictionaries)">3 Load temporal genomic data (dadi data dictionaries)<a class="anchor-link" href="#3-Load-temporal-genomic-data-(dadi-data-dictionaries)">¶</a></h2><ul>
+<h2 id="3-load-temporal-genomic-data-dadi-data-dictionaries">3 Load temporal genomic data (dadi data dictionaries)<a class="anchor-link" href="#3-load-temporal-genomic-data-dadi-data-dictionaries">¶</a></h2><ul>
 <li>We’ll use <strong>pre-annotated SNPs</strong> separated by <strong>functional effect</strong> (from snpEff).</li>
 <li>Replace the file paths below with your own <code>dadi</code>-formatted <code>.vcf.data</code> files exported from your pipeline (these are simple text-based dictionaries expected by <code>dadi.Misc.make_data_dict</code>).</li>
 </ul>
@@ -7636,7 +7636,7 @@ Mutation effect classes (example file naming convention used here):</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="4-Build-2D-Site-Frequency-Spectra-(2dSFS)-for-Has02-→-Has23">4 Build 2D Site Frequency Spectra (2dSFS) for Has02 → Has23<a class="anchor-link" href="#4-Build-2D-Site-Frequency-Spectra-(2dSFS)-for-Has02-%E2%86%92-Has23">¶</a></h2><ul>
+<h2 id="4-build-2d-site-frequency-spectra-2dsfs-for-has02-has23">4 Build 2D Site Frequency Spectra (2dSFS) for Has02 → Has23<a class="anchor-link" href="#4-build-2d-site-frequency-spectra-2dsfs-for-has02-has23">¶</a></h2><ul>
 <li>We generate polarized (ancestral/derived known) 2dSFS objects using <code>dadi.Spectrum.from_data_dict</code>.</li>
 <li>Set <code>projections</code> to sensible integer projections for each time point (number of chromosomes retained after down-projection).</li>
 <li>The 2dSFS shows the joint distribution of derived allele frequencies in Has02 vs Has23.</li>
@@ -7694,7 +7694,7 @@ Has_syn  (25, 41) total sites = 185316.0
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="5-Visualize-the-2dSFS-(all-effect-classes)">5 Visualize the 2dSFS (all effect classes)<a class="anchor-link" href="#5-Visualize-the-2dSFS-(all-effect-classes)">¶</a></h2><ul>
+<h2 id="5-visualize-the-2dsfs-all-effect-classes">5 Visualize the 2dSFS (all effect classes)<a class="anchor-link" href="#5-visualize-the-2dsfs-all-effect-classes">¶</a></h2><ul>
 <li><p>We use <code>dadi.Plotting.plot_single_2d_sfs</code>. The <code>vmin</code>/<code>vmax</code> are chosen robustly to avoid invalid colorbar errors.</p>
 </li>
 <li><p>Each pixel represents the number of SNPs with a given derived allele count (i, j) in Has02 and Has23.</p>
@@ -7761,7 +7761,7 @@ Has_syn  (25, 41) total sites = 185316.0
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="6-Compare-Allele-Frequency-Categories-(Rare-vs-Moderate-bins-from-a-sdSFS)">6 Compare Allele Frequency Categories (Rare vs Moderate bins from a sdSFS)<a class="anchor-link" href="#6-Compare-Allele-Frequency-Categories-(Rare-vs-Moderate-bins-from-a-sdSFS)">¶</a></h2><ul>
+<h2 id="6-compare-allele-frequency-categories-rare-vs-moderate-bins-from-a-sdsfs">6 Compare Allele Frequency Categories (Rare vs Moderate bins from a sdSFS)<a class="anchor-link" href="#6-compare-allele-frequency-categories-rare-vs-moderate-bins-from-a-sdsfs">¶</a></h2><ul>
 <li>We can compare bins of rare vs moderate frequency alleles to detect potential selection effects.</li>
 <li>We'll define a helper to extract counts in rare and moderate bins (you can adjust thresholds).</li>
 </ul>
@@ -7823,7 +7823,7 @@ Has_syn  (25, 41) total sites = 185316.0
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="6.1.-Boxplots-of-rare/moderate-bin-distributions">6.1. Boxplots of rare/moderate bin distributions<a class="anchor-link" href="#6.1.-Boxplots-of-rare/moderate-bin-distributions">¶</a></h3>
+<h3 id="6-1-boxplots-of-rare-moderate-bin-distributions">6.1. Boxplots of rare/moderate bin distributions<a class="anchor-link" href="#6-1-boxplots-of-rare-moderate-bin-distributions">¶</a></h3>
 </div>
 </div>
 </div>
@@ -7871,7 +7871,7 @@ Has_syn  (25, 41) total sites = 185316.0
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="6.2.-Density-overlays-(rare-bins):-High-vs-Low-effect">6.2. Density overlays (rare bins): High vs Low effect<a class="anchor-link" href="#6.2.-Density-overlays-(rare-bins):-High-vs-Low-effect">¶</a></h3><p>We can visualise the shape of these distributions using Kernel Density Estimates (KDE).</p>
+<h3 id="6-2-density-overlays-rare-bins-high-vs-low-effect">6.2. Density overlays (rare bins): High vs Low effect<a class="anchor-link" href="#6-2-density-overlays-rare-bins-high-vs-low-effect">¶</a></h3><p>We can visualise the shape of these distributions using Kernel Density Estimates (KDE).</p>
 </div>
 </div>
 </div>
@@ -7919,7 +7919,7 @@ Has_syn  (25, 41) total sites = 185316.0
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="7-Statistical-Metrics-per-Row-of-the-2dSFS">7 Statistical Metrics per Row of the 2dSFS<a class="anchor-link" href="#7-Statistical-Metrics-per-Row-of-the-2dSFS">¶</a></h2><ul>
+<h2 id="7-statistical-metrics-per-row-of-the-2dsfs">7 Statistical Metrics per Row of the 2dSFS<a class="anchor-link" href="#7-statistical-metrics-per-row-of-the-2dsfs">¶</a></h2><ul>
 <li>We now compare rows (fixed Has02 frequency, varying Has23) between mutation classes - per-row normalized conditional distributions (p(j \mid i))</li>
 </ul>
 <p>We compute row-wise normalized probabilities and show panel plots for rows with sufficient data. This helps visualize how distribution of derived allele counts in Has23 shifts relative to Has02 for each starting i.</p>
@@ -7929,7 +7929,7 @@ Has_syn  (25, 41) total sites = 185316.0
 <li>Jensen–Shannon divergence (JSD)</li>
 <li>Mean shifts and fraction of mass left of the diagonal</li>
 </ul>
-<h3 id="7.1.-Helper-functions-for-statistics-and-normalisation:">7.1. Helper functions for statistics and normalisation:<a class="anchor-link" href="#7.1.-Helper-functions-for-statistics-and-normalisation:">¶</a></h3>
+<h3 id="7-1-helper-functions-for-statistics-and-normalisation">7.1. Helper functions for statistics and normalisation:<a class="anchor-link" href="#7-1-helper-functions-for-statistics-and-normalisation">¶</a></h3>
 </div>
 </div>
 </div>
@@ -8170,7 +8170,7 @@ Has_syn  (25, 41) total sites = 185316.0
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="7.2.-Row-Wise-Normalized-p(j|i)-Plots">7.2. Row-Wise Normalized p(j|i) Plots<a class="anchor-link" href="#7.2.-Row-Wise-Normalized-p(j%7Ci)-Plots">¶</a></h3><p>These plots show how the allele frequency in Has23 depends on the starting frequency in Has02.</p>
+<h3 id="7-2-row-wise-normalized-p-j-i-plots">7.2. Row-Wise Normalized p(j|i) Plots<a class="anchor-link" href="#7-2-row-wise-normalized-p-j-i-plots">¶</a></h3><p>These plots show how the allele frequency in Has23 depends on the starting frequency in Has02.</p>
 </div>
 </div>
 </div>
@@ -8348,7 +8348,7 @@ Has_syn  (25, 41) total sites = 185316.0
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="8-Bootstrapped-Confidence-Intervals">8 Bootstrapped Confidence Intervals<a class="anchor-link" href="#8-Bootstrapped-Confidence-Intervals">¶</a></h2><p><strong>Summary plots with bootstrap confidence intervals:</strong> estimate uncertainty in per-row frequency shifts using Poisson bootstrapping.</p>
+<h2 id="8-bootstrapped-confidence-intervals">8 Bootstrapped Confidence Intervals<a class="anchor-link" href="#8-bootstrapped-confidence-intervals">¶</a></h2><p><strong>Summary plots with bootstrap confidence intervals:</strong> estimate uncertainty in per-row frequency shifts using Poisson bootstrapping.</p>
 <ul>
 <li>We compute differences between low- and high-effect classes per-row (mean shifts) with bootstrap CI via Poisson resampling.</li>
 <li>This gives a compact summary and uncertainty.</li>
@@ -8546,7 +8546,7 @@ Has_syn  (25, 41) total sites = 185316.0
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="9-Fit-a-simple-neutral-model-(split-with-symmetric-migration)-to-the-low-effect-2dSFS">9 Fit a simple neutral model (split with symmetric migration) to the low-effect 2dSFS<a class="anchor-link" href="#9-Fit-a-simple-neutral-model-(split-with-symmetric-migration)-to-the-low-effect-2dSFS">¶</a></h2><p>This step fits a pragmatic 4-parameter model using <code>dadi.Inference.optimize_log</code> to the low-effect class (used as a neutral baseline), then computes Anscombe residuals to compare observed vs model expectations.</p>
+<h2 id="9-fit-a-simple-neutral-model-split-with-symmetric-migration-to-the-low-effect-2dsfs">9 Fit a simple neutral model (split with symmetric migration) to the low-effect 2dSFS<a class="anchor-link" href="#9-fit-a-simple-neutral-model-split-with-symmetric-migration-to-the-low-effect-2dsfs">¶</a></h2><p>This step fits a pragmatic 4-parameter model using <code>dadi.Inference.optimize_log</code> to the low-effect class (used as a neutral baseline), then computes Anscombe residuals to compare observed vs model expectations.</p>
 </div>
 </div>
 </div>
@@ -8613,7 +8613,7 @@ Has_syn  (25, 41) total sites = 185316.0
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="9.1.-Compute-Anscombe-&amp;-residual-heatmaps-(observed-vs-model)">9.1. Compute Anscombe &amp; residual heatmaps (observed vs model)<a class="anchor-link" href="#9.1.-Compute-Anscombe-&amp;-residual-heatmaps-(observed-vs-model)">¶</a></h3>
+<h3 id="9-1-compute-anscombe-residual-heatmaps-observed-vs-model">9.1. Compute Anscombe &amp; residual heatmaps (observed vs model)<a class="anchor-link" href="#9-1-compute-anscombe-residual-heatmaps-observed-vs-model">¶</a></h3>
 </div>
 </div>
 </div>
@@ -8762,7 +8762,7 @@ Has_syn  (25, 41) total sites = 185316.0
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="9.2.-Call-the-neutral-fits-and-residual-diagnostics:">9.2. Call the neutral fits and residual diagnostics:<a class="anchor-link" href="#9.2.-Call-the-neutral-fits-and-residual-diagnostics:">¶</a></h3>
+<h3 id="9-2-call-the-neutral-fits-and-residual-diagnostics">9.2. Call the neutral fits and residual diagnostics:<a class="anchor-link" href="#9-2-call-the-neutral-fits-and-residual-diagnostics">¶</a></h3>
 </div>
 </div>
 </div>
@@ -8814,7 +8814,7 @@ Has best params [nu1, nu2, T, m]: [1.3810e-01 6.9900e-02 6.4000e-03 4.9897e+01],
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="-Subsampling-Low-Effect-Mutations-for-Comparison"> Subsampling Low-Effect Mutations for Comparison<a class="anchor-link" href="#-Subsampling-Low-Effect-Mutations-for-Comparison">¶</a></h2><p>To assess whether high-effect mutations differ significantly from low-effect ones, we:</p>
+<h2 id="subsampling-low-effect-mutations-for-comparison"> Subsampling Low-Effect Mutations for Comparison<a class="anchor-link" href="#subsampling-low-effect-mutations-for-comparison">¶</a></h2><p>To assess whether high-effect mutations differ significantly from low-effect ones, we:</p>
 <ol>
 <li><strong>Subsampled</strong> the low-effect mutations to match the number of high-effect mutations.</li>
 <li><strong>Calculated</strong> the mean effect size for each subsample.</li>
@@ -9067,7 +9067,7 @@ Run the comparison for two timepoints (Has02 → Has23) of the population .</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="10.1.-Comparison:-High-vs.-Low-Effect-Mutations">10.1. Comparison: High vs. Low Effect Mutations<a class="anchor-link" href="#10.1.-Comparison:-High-vs.-Low-Effect-Mutations">¶</a></h3><p>compares site frequency spectra (SFS) between high- and low-effect mutations<br>
+<h3 id="10-1-comparison-high-vs-low-effect-mutations">10.1. Comparison: High vs. Low Effect Mutations<a class="anchor-link" href="#10-1-comparison-high-vs-low-effect-mutations">¶</a></h3><p>compares site frequency spectra (SFS) between high- and low-effect mutations<br>
 using <strong>subsampling, permutation tests, Jensen–Shannon divergence, and χ² statistics</strong>.</p>
 </div>
 </div>
@@ -9259,7 +9259,7 @@ Convert a row of allele counts into probabilities that sum to 1.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="10.2.-Example-usage">10.2. Example usage<a class="anchor-link" href="#10.2.-Example-usage">¶</a></h3>
+<h3 id="10-2-example-usage">10.2. Example usage<a class="anchor-link" href="#10-2-example-usage">¶</a></h3>
 </div>
 </div>
 </div>
@@ -9297,7 +9297,7 @@ Convert a row of allele counts into probabilities that sum to 1.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="11-Discussion,-interpretation-&amp;-exercises">11 Discussion, interpretation &amp; exercises<a class="anchor-link" href="#11-Discussion,-interpretation-&amp;-exercises">¶</a></h2><p><strong>Questions to think about</strong></p>
+<h2 id="11-discussion-interpretation-exercises">11 Discussion, interpretation &amp; exercises<a class="anchor-link" href="#11-discussion-interpretation-exercises">¶</a></h2><p><strong>Questions to think about</strong></p>
 <ul>
 <li>Which effect classes show an excess of rare derived alleles in the recent timepoint (Has23)?</li>
 <li>Where do model residuals show strong deviations from the neutral expectation?</li>

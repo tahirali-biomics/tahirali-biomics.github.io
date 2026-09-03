@@ -22,6 +22,7 @@ READING_POSTS = {
 }
 PRACTICAL_IMAGE_MINIMUMS = {"practical_day1.html": 6, "practical_day2.html": 6, "practical_day3.html": 29}
 LEGACY_TUTORIAL_IMAGE_COUNTS = {"practical_day4.html": 17, "Practical_Day_6.html": 7}
+LEGACY_TUTORIALS = set(LEGACY_TUTORIAL_IMAGE_COUNTS)
 PRACTICAL_OUTPUT_GROUPS = {
     "practical_day1.html": [2],
     "practical_day2.html": [6],
@@ -54,6 +55,9 @@ def main() -> None:
         relative = page.relative_to(SITE).as_posix()
         document = html.document_fromstring(page.read_text(encoding="utf-8", errors="replace"))
         ids = {element.get("id") for element in document.xpath('//*[@id]')}
+        titles = document.xpath("//head/title")
+        if titles and EMOJI_RE.search(titles[0].text_content()):
+            problems.append(f"{relative}: decorative emoji remains in the browser title")
         for element in document.xpath('//*[@href] | //*[@src]'):
             reference = element.get("href") or element.get("src") or ""
             target = local_target(page, reference)
@@ -102,6 +106,16 @@ def main() -> None:
                 if EMOJI_RE.search(heading.text_content()):
                     problems.append(f"{relative}: decorative emoji remains in a heading")
                     break
+            if "legacy-notebook-page" in classes(document.xpath("//body")[0]):
+                if not document.xpath('//details[contains(concat(" ", normalize-space(@class), " "), " legacy-inline-toc ")]//a[starts-with(@href,"#")]'):
+                    problems.append(f"{relative}: responsive inline Contents list missing")
+            if page.name in LEGACY_TUTORIALS:
+                for link in document.xpath('//aside[contains(@class,"legacy-toc-nav")]//a[starts-with(@href,"#")]'):
+                    fragment = unquote((link.get("href") or "")[1:])
+                    targets = document.xpath('//*[@id=$fragment]', fragment=fragment)
+                    if not targets or targets[0].tag in {"h1", "h2", "h3", "h4", "h5", "h6"}:
+                        problems.append(f"{relative}: Contents target #{fragment} is not a stable section container")
+                        break
 
     home = html.document_fromstring((SITE / "index.html").read_text(encoding="utf-8"))
     if len(home.xpath('//*[contains(concat(" ", normalize-space(@class), " "), " story-section ")]')) != 1:
@@ -145,6 +159,13 @@ def main() -> None:
             problems.append(f"{filename}: expected {expected} embedded figures")
         if len(document.xpath('//aside[contains(@class,"legacy-toc-nav")]//a')) < 10:
             problems.append(f"{filename}: legacy linked Contents list is incomplete")
+
+    temporal = html.document_fromstring((SITE / "workshops/Temporal_Genomics_Workshop_TemporalGenomics.html").read_text(encoding="utf-8"))
+    temporal_body = temporal.xpath("//body")[0]
+    if "wide-output-page" not in classes(temporal_body):
+        problems.append("Temporal Genomics workshop: wide-output responsive layout class missing")
+    if not temporal.xpath('//details[contains(@class,"legacy-inline-toc")]//a'):
+        problems.append("Temporal Genomics workshop: responsive Contents list missing")
 
     journal = html.document_fromstring((SITE / "genomes-to-ai.html").read_text(encoding="utf-8"))
     cards = journal.xpath('//*[contains(concat(" ", normalize-space(@class), " "), " quarto-grid-item ")]')

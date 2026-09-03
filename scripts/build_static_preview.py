@@ -380,6 +380,12 @@ def strip_decorative_marks(document: etree._Element) -> None:
         node.text = remove_decorative_text(node.text)
         for child in node:
             child.tail = remove_decorative_text(child.tail)
+    for title in document.xpath("//head/title"):
+        title.text = remove_decorative_text(title.text)
+    for metadata in document.xpath('//head/meta[@content]'):
+        key = (metadata.get("property") or metadata.get("name") or "").lower()
+        if key in {"title", "description", "og:title", "og:description", "twitter:title", "twitter:description"}:
+            metadata.set("content", remove_decorative_text(metadata.get("content")) or "")
 
 
 def toc_label(heading: etree._Element) -> str:
@@ -444,18 +450,47 @@ def meaningful_headings(document: etree._Element, page: Path) -> list[etree._Ele
     return selected
 
 
-def ensure_heading_ids(document: etree._Element, headings: list[etree._Element]) -> None:
+def heading_container_id(heading: etree._Element) -> str | None:
+    """Return the stable section wrapper used by legacy Quarto exports."""
+    for ancestor in heading.iterancestors():
+        if ancestor.tag in {"main", "body"}:
+            break
+        if ancestor.tag in {"section", "div"} and ancestor.get("id"):
+            return ancestor.get("id")
+    return None
+
+
+def heading_target_id(heading: etree._Element, prefer_container: bool = False) -> str | None:
+    if prefer_container:
+        container_id = heading_container_id(heading)
+        if container_id:
+            return container_id
+    return heading.get("id")
+
+
+def ensure_heading_ids(
+    document: etree._Element,
+    headings: list[etree._Element],
+    prefer_container: bool = False,
+) -> None:
     used = {node.get("id") for node in document.xpath('//*[@id]') if node.get("id")}
     for heading in headings:
-        if not heading.get("id"):
+        if not heading_target_id(heading, prefer_container):
             heading.set("id", slugify(toc_label(heading), used))
 
 
-def append_flat_toc(container: etree._Element, headings: list[etree._Element]) -> None:
+def append_flat_toc(
+    container: etree._Element,
+    headings: list[etree._Element],
+    prefer_container: bool = False,
+) -> None:
     toc_list = html.Element("ul", {"class": "technical-toc-list"})
     for heading in headings:
+        target_id = heading_target_id(heading, prefer_container)
+        if not target_id:
+            continue
         item = html.Element("li")
-        anchor = html.Element("a", {"href": f"#{heading.get('id')}"})
+        anchor = html.Element("a", {"href": f"#{target_id}"})
         anchor.text = toc_label(heading)
         item.append(anchor)
         toc_list.append(item)
@@ -463,7 +498,7 @@ def append_flat_toc(container: etree._Element, headings: list[etree._Element]) -
 
 
 def remove_legacy_chrome(document: etree._Element) -> None:
-    selector = '//*[@id="legacy-site-nav"] | //*[contains(concat(" ", normalize-space(@class), " "), " legacy-menu-toggle ")] | //*[contains(concat(" ", normalize-space(@class), " "), " legacy-toc-nav ")]'
+    selector = '//*[@id="legacy-site-nav"] | //*[contains(concat(" ", normalize-space(@class), " "), " legacy-menu-toggle ")] | //*[contains(concat(" ", normalize-space(@class), " "), " legacy-toc-nav ")] | //*[contains(concat(" ", normalize-space(@class), " "), " legacy-inline-toc ")]'
     for node in list(document.xpath(selector)):
         if node.getparent() is not None:
             node.getparent().remove(node)
@@ -478,6 +513,8 @@ def inject_notebook_navigation(document: etree._Element, page: Path, site_root: 
     add_classes(body, "legacy-notebook-page technical-page content-dense")
     if tutorial:
         add_classes(body, "legacy-tutorial-page")
+    if page.name == "Temporal_Genomics_Workshop_TemporalGenomics.html":
+        add_classes(body, "wide-output-page")
     button = html.Element("button", {"class": "legacy-menu-toggle", "type": "button", "aria-controls": "legacy-site-nav", "aria-expanded": "false"})
     button.text = "Menu"
     nav = html.Element("nav", {"id": "legacy-site-nav", "class": "legacy-site-nav", "aria-label": "Primary navigation"})
@@ -497,13 +534,23 @@ def inject_notebook_navigation(document: etree._Element, page: Path, site_root: 
     title.text = "Contents"
     toc.append(title)
     headings = meaningful_headings(document, page)
-    ensure_heading_ids(document, headings)
-    append_flat_toc(toc, headings)
+    ensure_heading_ids(document, headings, prefer_container=tutorial)
+    append_flat_toc(toc, headings, prefer_container=tutorial)
+    inline_toc = html.Element("details", {"class": "legacy-inline-toc", "open": "open"})
+    inline_title = html.Element("summary")
+    inline_title.text = "Contents"
+    inline_toc.append(inline_title)
+    append_flat_toc(inline_toc, headings, prefer_container=tutorial)
     script = html.Element("script")
     script.text = """(() => { const b=document.querySelector('.legacy-menu-toggle'); if(!b)return; b.addEventListener('click',()=>{const o=document.body.classList.toggle('legacy-menu-open'); b.setAttribute('aria-expanded',String(o));}); })();"""
     body.insert(0, toc)
     body.insert(0, nav)
     body.insert(0, button)
+    main = body.xpath("./main")
+    if main:
+        main[0].addprevious(inline_toc)
+    else:
+        body.insert(3, inline_toc)
     body.append(script)
 
 
@@ -716,13 +763,23 @@ def normalise_legacy_dependencies(document: etree._Element, page: Path, site_roo
 
 def normalise_notebook_anchors(document: etree._Element, page: Path) -> None:
     if page.name == "Temporal_Genomics_Workshop_TemporalGenomics.html":
-        def clean_fragment(value: str) -> str:
-            return EMOJI_RE.sub("", unquote(value).translate(DECORATIVE_MARKS))
-
-        for element in document.xpath('//*[@id]'):
-            element.set("id", clean_fragment(element.get("id") or ""))
+        headings = document.xpath("//h1[@id] | //h2[@id] | //h3[@id]")
+        heading_ids = {heading.get("id") for heading in headings if heading.get("id")}
+        used = {
+            element.get("id")
+            for element in document.xpath('//*[@id]')
+            if element.get("id") and element.get("id") not in heading_ids
+        }
+        mapping: dict[str, str] = {}
+        for heading in headings:
+            old_id = heading.get("id") or ""
+            new_id = slugify(toc_label(heading), used)
+            heading.set("id", new_id)
+            mapping[old_id] = new_id
         for anchor in document.xpath('//a[starts-with(@href,"#")]'):
-            anchor.set("href", f"#{clean_fragment((anchor.get('href') or '')[1:])}")
+            old_fragment = unquote((anchor.get("href") or "")[1:])
+            if old_fragment in mapping:
+                anchor.set("href", f"#{mapping[old_fragment]}")
 
 
 def patch_html_tree(site_root: Path, pages: list[Path]) -> int:
