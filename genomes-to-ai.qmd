@@ -23,6 +23,12 @@ listing:
     <span class="tag">Biological data</span><span class="tag">Machine learning</span><span class="tag">Scientific software</span><span class="tag">Validation</span><span class="tag">Open source</span>
   </div>
 </section>
+<figure class="journey-cover">
+  <img
+    src="assets/writings/genomes-to-ai-journey.webp"
+    alt="A hand-drawn notebook sketch tracing a journey from genomes and biological data through models to scientific evidence."
+    loading="eager">
+</figure>
 ```
 
 ## Why this journey begins with data

@@ -2687,3 +2687,27 @@ body.legacy-notebook-page table.dataframe td {
     max-width: none;
   }
 }
+
+/* Genomes to AI journal illustration */
+.genomes-ai-page .journey-cover {
+  max-width: 1120px;
+  margin: 1.35rem auto 2.5rem;
+  overflow: hidden;
+  background: #faf9f4;
+  border: 1px solid rgba(20, 54, 72, 0.14);
+  border-radius: 18px;
+  box-shadow: 0 16px 40px rgba(20, 54, 72, 0.08);
+}
+
+.genomes-ai-page .journey-cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .genomes-ai-page .journey-cover {
+    margin: 1rem auto 1.8rem;
+    border-radius: 12px;
+  }
+}
