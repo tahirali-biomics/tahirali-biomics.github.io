@@ -1,6 +1,8 @@
 ---
 pagetitle: "PopGenLM Bench | Tahir Ali"
 description: "PopGenLM Bench — reproducible evaluation of genomic language-model variant scores with population-genetic and evolutionary evidence."
+image: assets/popgenlm/v02_population_gpn_overview.png
+image-alt: "PopGenLM Bench v0.2.0 four-panel population-aware GPN benchmark overview."
 page-layout: full
 body-classes: popgenlm-page
 ---
@@ -57,7 +59,7 @@ Population and evolutionary genomics provide evidence against which model scores
     <div class="stat-card"><span class="stat-value">−0.132</span><span class="stat-label">rare-vs-common rank-biserial effect</span></div>
   </div>
   <figure class="benchmark-figure">
-    <img src="https://raw.githubusercontent.com/tahirali-biomics/popgenlm-bench/v0.2.0/reports/v0.2/figures/v02_population_gpn_overview.png" alt="Four-panel PopGenLM Bench v0.2.0 overview showing the minor-allele-frequency spectrum, GPN score versus MAF, score distributions across frequency classes, and population-oriented score transformation">
+    <img src="assets/popgenlm/v02_population_gpn_overview.png" alt="Four-panel PopGenLM Bench v0.2.0 overview showing the minor-allele-frequency spectrum, GPN score versus MAF, score distributions across frequency classes, and population-oriented score transformation">
     <figcaption>PopGenLM Bench v0.2.0. Rare variants dominate the benchmark, the MAF–score association is weak, frequency classes overlap substantially, and 246 ALT-major variants require a sign reversal when the raw REF-to-ALT GPN score is oriented as minor versus major.</figcaption>
   </figure>
 </section>
