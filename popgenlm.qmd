@@ -1,8 +1,8 @@
 ---
 pagetitle: "PopGenLM Bench | Tahir Ali"
 description: "PopGenLM Bench — reproducible evaluation of genomic language-model variant scores with population-genetic and evolutionary evidence."
-image: assets/popgenlm/v02_population_gpn_overview.png
-image-alt: "PopGenLM Bench v0.2.0 four-panel population-aware GPN benchmark overview."
+image: assets/popgenlm/v0.3/model_evidence.png
+image-alt: "PopGenLM Bench v0.3.0 model-evidence figure showing population-oriented concordance, genomic-context concordance, and LD sensitivity."
 page-layout: full
 body-classes: popgenlm-page
 ---
@@ -12,16 +12,17 @@ body-classes: popgenlm-page
   <div class="eyebrow">Open-source scientific AI</div>
   <h1 id="popgenlm-title">PopGenLM Bench</h1>
   <p class="lead">A reproducible framework for testing what genomic language-model variant scores mean when they are compared with population-genetic and evolutionary evidence.</p>
+  <p class="hero-support">PopGenLM Bench has developed from reproducible score validation in v0.1, through population-aware evaluation in v0.2, into v0.3 integration of multiple genomic-language-model scores with evolutionary, genomic-context, LD, genotype-quality, and population-structure evidence.</p>
   <p class="hero-support">Every model score is treated as a testable hypothesis — not as a biological conclusion.</p>
   <div class="tag-row">
-    <span class="status-badge blue">v0.2.0 released</span>
-    <span class="tag">Python</span><span class="tag">GPN Brassicales</span><span class="tag">Population genomics</span><span class="tag">Reproducible AI</span><span class="tag">Apache-2.0</span>
+    <span class="status-badge blue">v0.3.0 · latest release</span>
+    <span class="tag">Python</span><span class="tag">GPN + PlantCAD</span><span class="tag">Population genomics</span><span class="tag">Reproducible AI</span><span class="tag">Apache-2.0</span>
   </div>
   <div class="hero-actions">
-    <a class="button-primary" href="https://colab.research.google.com/github/tahirali-biomics/popgenlm-bench/blob/v0.2.0/notebooks/popgenlm-bench-v0.2.ipynb">Run v0.2.0 in Colab</a>
-    <a class="button-secondary" href="https://github.com/tahirali-biomics/popgenlm-bench/releases/tag/v0.2.0">View v0.2.0 release</a>
+    <a class="button-primary" href="https://colab.research.google.com/github/tahirali-biomics/popgenlm-bench/blob/v0.3.0/notebooks/popgenlm-bench-v0.3.ipynb">Run v0.3 in Colab</a>
+    <a class="button-secondary" href="https://github.com/tahirali-biomics/popgenlm-bench/releases/tag/v0.3.0">View v0.3 release</a>
     <a class="button-secondary" href="https://github.com/tahirali-biomics/popgenlm-bench">View repository</a>
-    <a class="button-secondary" href="posts/2026-08-31-popgenlm-bench/index.html">Read the build note</a>
+    <a class="button-secondary" href="https://github.com/tahirali-biomics/popgenlm-bench/blob/v0.3.0/docs/v0.3_release.md">Read release documentation</a>
   </div>
 </section>
 ```
@@ -39,8 +40,52 @@ Population and evolutionary genomics provide evidence against which model scores
   <article><span>01</span><div><h3>Input integrity</h3><p>Genome build, chromosome mapping, coordinates, REF/ALT alleles, duplicates, missingness, and sequence context.</p></div></article>
   <article><span>02</span><div><h3>Inference provenance</h3><p>Model revision, upstream code, packages, parameters, device, inputs, outputs, runtime, and hashes.</p></div></article>
   <article><span>03</span><div><h3>Population orientation</h3><p>Separate raw REF-to-ALT model scores from population minor-vs-major scores so the biological comparison is explicit.</p></div></article>
-  <article><span>04</span><div><h3>Biological concordance</h3><p>Test relationships with allele frequency and, in later releases, conservation and genomic context — with effect sizes and interpretation limits.</p></div></article>
+  <article><span>04</span><div><h3>Biological concordance</h3><p>Evaluate model concordance with allele frequency, conservation, and genomic context, while testing LD sensitivity and summarizing population structure.</p></div></article>
 </div>
+```
+
+## v0.3.0 — Evolutionary evidence
+
+v0.3.0 is the latest active release. It integrates population-oriented GPN and PlantCAD scores with evolutionary and genomic evidence for **10,000 real *Arabidopsis thaliana* population variants selected using a deterministic procedure.** The release is organized around a frozen **10,000 × 39 annotated master table**, with exclusive genomic-context annotations, signed site-oriented PhyloP conservation, fixed physical-bin and LD-sensitivity analyses, genotype-quality summaries, and UMAP population-structure summaries.
+
+The v0.3 release assets are frozen and hash-verified. Its primary population score is `log P(minor allele) − log P(major allele)`. Raw model scores retain `log P(ALT) − log P(REF)`. PhyloP is **site-oriented, not allele-oriented**, so its sign is not treated as an allele preference.
+
+### Validated descriptive results
+
+- GPN–PlantCAD: Spearman ρ = **0.6525**, Pearson r = **0.6331**, *n* = **10,000**.
+- GPN–PhyloP: Spearman ρ = **−0.1876**, *n* = **9,453**.
+- GPN–PlantCAD remains approximately **0.6523–0.6534** across released LD profiles.
+- Context-stratified GPN–PlantCAD Spearman correlations range from **0.5171** in coding CDS to **0.7349** in intergenic variants.
+
+The sample-quality summaries contain **1,135 samples** in the sample-quality table, **1,093 samples** in the primary call-rate set, **996 samples** in the strict set, and geographic metadata for **1,131 samples**.
+
+These are descriptive associations. They do not show that either model directly measures fitness, selection, causality, or pathogenicity. v0.3.0 claims no hypothesis-test *p*-values.
+
+```{=html}
+<figure class="benchmark-figure popgenlm-release-figure">
+  <img src="assets/popgenlm/v0.3/model_evidence.svg" alt="Four-panel v0.3.0 model-evidence figure: A GPN–PlantCAD population-oriented concordance; B physical-bin bootstrap intervals; C concordance across genomic contexts; D LD-thinning sensitivity.">
+  <figcaption><strong>v0.3.0 model evidence.</strong> A: GPN–PlantCAD population-oriented concordance. B: physical-bin bootstrap intervals. C: concordance across genomic contexts. D: LD-thinning sensitivity. <a href="assets/popgenlm/v0.3/model_evidence.svg">Open SVG</a> · <a href="assets/popgenlm/v0.3/model_evidence.png">Download PNG</a></figcaption>
+</figure>
+<figure class="benchmark-figure popgenlm-release-figure">
+  <img src="assets/popgenlm/v0.3/genotype_umap_geography.svg" alt="Four-panel v0.3.0 genotype UMAP and geography figure: A full UMAP coloured by longitude; B full UMAP coloured by genotype call rate; C connected main cloud enlarged and coloured by longitude; D connected main cloud enlarged and coloured by latitude.">
+  <figcaption><strong>v0.3.0 genotype structure and geography.</strong> A: full UMAP coloured by longitude. B: full UMAP coloured by genotype call rate. C: connected main cloud enlarged and coloured by longitude. D: connected main cloud enlarged and coloured by latitude. <a href="assets/popgenlm/v0.3/genotype_umap_geography.svg">Open SVG</a> · <a href="assets/popgenlm/v0.3/genotype_umap_geography.png">Download PNG</a></figcaption>
+</figure>
+```
+
+```{=html}
+<div class="link-row">
+  <a class="button-primary" href="https://colab.research.google.com/github/tahirali-biomics/popgenlm-bench/blob/v0.3.0/notebooks/popgenlm-bench-v0.3.ipynb">Open v0.3.0 in Colab</a>
+  <a class="button-secondary" href="https://github.com/tahirali-biomics/popgenlm-bench/blob/v0.3.0/docs/v0.3_release.md">Read full v0.3.0 documentation</a>
+  <a class="button-secondary" href="https://github.com/tahirali-biomics/popgenlm-bench/releases/tag/v0.3.0">Release notes</a>
+</div>
+```
+
+## v0.3.0 Colab — inspect the frozen release
+
+The public notebook loads, verifies, summarizes, and displays the frozen v0.3.0 assets. It does not rerun PlantCAD/GPN inference, VCF processing, UMAP fitting, or bootstrap production analysis.
+
+```{=html}
+<div class="colab-panel"><div><div class="card-kicker">Latest reproducible notebook</div><h3>Frozen assets with transparent validation</h3><p>The notebook is pinned to v0.3.0 and checks the released files before loading the descriptive summaries and displaying the frozen figures.</p></div><a class="button-colab" href="https://colab.research.google.com/github/tahirali-biomics/popgenlm-bench/blob/v0.3.0/notebooks/popgenlm-bench-v0.3.ipynb">Open v0.3.0 in Google Colab</a></div>
 ```
 
 ## v0.2.0 — population-aware GPN benchmark
@@ -48,7 +93,7 @@ Population and evolutionary genomics provide evidence against which model scores
 ```{=html}
 <section class="benchmark-summary" aria-label="PopGenLM Bench v0.2.0 summary">
   <div class="benchmark-copy">
-    <div class="card-kicker">Current release · September 2026</div>
+    <div class="card-kicker">Active release · population-aware benchmark</div>
     <h3>10,000 real <em>Arabidopsis thaliana</em> variants</h3>
     <p>v0.2.0 moves PopGenLM Bench from an engineering fixture to a population-aware benchmark. It uses deterministically selected biallelic SNPs from the 1001 Genomes Project, validates every REF allele against TAIR10.1, combines population summaries with reproducible GPN Brassicales scores, and evaluates the relationship between minor-allele frequency and model score.</p>
   </div>
@@ -65,23 +110,9 @@ Population and evolutionary genomics provide evidence against which model scores
 </section>
 ```
 
-The primary population-oriented score is
+The primary population-oriented score is `log P(minor) − log P(major)`. Negative values mean that GPN assigns lower sequence likelihood to the population minor allele than to the major allele.
 
-\[
-\mathrm{GPN}_{\text{minor vs major}}
-=
-\log P(\text{minor})-\log P(\text{major}).
-\]
-
-Negative values mean that GPN assigns lower sequence likelihood to the population minor allele than to the major allele.
-
-For variants in which ALT is the minor allele, the raw score
-
-\[
-\log P(\mathrm{ALT})-\log P(\mathrm{REF})
-\]
-
-already has the required orientation. For the **246 ALT-major variants**, the sign is reversed. This transformation makes the population comparison explicit; it does not create the observed genome-wide association.
+For variants in which ALT is the minor allele, the raw score `log P(ALT) − log P(REF)` already has the required orientation. For the **246 ALT-major variants**, the sign is reversed. This transformation makes the population comparison explicit; it does not create the observed genome-wide association.
 
 ### Main result
 
@@ -138,7 +169,7 @@ It:
 ```{=html}
 <div class="colab-panel">
   <div>
-    <div class="card-kicker">Current reproducible notebook</div>
+    <div class="card-kicker">ACTIVE v0.2 REPRODUCIBLE NOTEBOOK</div>
     <h3>Population-aware validation without rerunning model inference</h3>
     <p>The notebook is pinned to the v0.2.0 release and can be run directly in Google Colab. It verifies the released artifacts before reproducing the main analysis.</p>
   </div>
@@ -148,14 +179,14 @@ It:
 
 ## v0.1.0 — reproducible analysis foundation
 
-v0.1.0 remains available as the first frozen PopGenLM Bench analysis fixture. It contains **100 deterministic SNVs with verified GPN scores**, together with the score table, metadata, schema checks, descriptive statistics, bootstrap uncertainty, figures, and a CPU-compatible Colab notebook.
+v0.1.0 remains an active, frozen PopGenLM Bench analysis fixture. It contains **100 deterministic SNVs with verified GPN scores**, together with the score table, metadata, schema checks, descriptive statistics, bootstrap uncertainty, figures, and a CPU-compatible Colab notebook.
 
 The important distinction is that v0.1.0 is an **engineering and analysis fixture**, not a sampled population benchmark. It established a reproducible analysis path before population-aware evaluation was added in v0.2.0.
 
 ```{=html}
 <section class="benchmark-summary" aria-label="PopGenLM Bench v0.1.0 summary">
   <div class="benchmark-copy">
-    <div class="card-kicker">Archived reproducible foundation</div>
+    <div class="card-kicker">Active release · reproducible analysis foundation</div>
     <h3>100 deterministic variants with verified GPN scores</h3>
     <p>v0.1.0 validates score-table structure, metadata, descriptive analysis, bootstrap uncertainty, and figure generation. It does not by itself support population-genetic or evolutionary claims.</p>
   </div>
@@ -203,12 +234,24 @@ The central design principle is separation of concerns. Model scoring, reference
 ## Version history and roadmap
 
 <div class="roadmap">
-  <div class="roadmap-item"><h3>v0.1.0 · Reproducible analysis foundation · released</h3><p>Frozen 100-variant GPN score fixture, schema and metadata checks, descriptive statistics, bootstrap uncertainty, figures, and CPU-compatible Colab analysis.</p></div>
-  <div class="roadmap-item"><h3>v0.2.0 · Population-aware benchmark · released</h3><p>10,000 real 1001 Genomes SNPs, exact TAIR10.1 REF validation, reproducible GPN scores, minor-vs-major orientation, population-frequency evaluation, effect sizes, chromosome-stratified permutation, robustness analyses, figures, tests, CI, and release-pinned Colab.</p></div>
-  <div class="roadmap-item"><h3>v0.3 · Evolutionary evidence</h3><p>Add conservation tracks and test model–conservation concordance across genomic contexts, with explicit attention to dependence among nearby variants.</p></div>
-  <div class="roadmap-item"><h3>v0.4–0.5 · Extensible researcher beta</h3><p>Stabilize model adapters, support additional model or precomputed-score inputs, expand reporting, add containerized workflows, and test with external users.</p></div>
+  <div class="roadmap-item"><h3>v0.1.0 · Reproducible analysis foundation · released and active</h3><p>Frozen 100-variant GPN score fixture, schema and metadata checks, descriptive statistics, bootstrap uncertainty, figures, and CPU-compatible Colab analysis.</p></div>
+  <div class="roadmap-item"><h3>v0.2.0 · Population-aware benchmark · released and active</h3><p>10,000 real 1001 Genomes SNPs, exact TAIR10.1 REF validation, reproducible GPN scores, minor-vs-major orientation, population-frequency evaluation, effect sizes, chromosome-stratified permutation, robustness analyses, figures, tests, CI, and release-pinned Colab.</p></div>
+  <div class="roadmap-item"><h3>v0.3.0 · Evolutionary evidence · released and active</h3><p>Integrated GPN and PlantCAD scores, PhyloP, genomic contexts, physical-bin and LD sensitivity, genotype quality, UMAP population structure, frozen assets, and release-pinned documentation.</p></div>
+  <div class="roadmap-item"><h3>v0.4–0.5 · Extensible researcher beta · future development</h3><p>Stabilize model adapters, support additional model or precomputed-score inputs, expand reporting, add containerized workflows, and test with external users.</p></div>
   <div class="roadmap-item"><h3>v1.0 · Citable release</h3><p>Freeze public schemas, incorporate beta feedback, add end-to-end release checks and case studies, and mint a software DOI.</p></div>
 </div>
+
+## Reproduce v0.3.0 locally
+
+```bash
+git checkout v0.3.0
+pip install -e ".[dev,v03]"
+pytest -q
+ruff check src tests scripts
+sha256sum -c data/benchmarks/v0.3/SHA256SUMS.txt
+```
+
+The public notebook loads, verifies, summarizes, and displays frozen assets; it does not rerun PlantCAD/GPN inference, VCF processing, UMAP fitting, or bootstrap production analysis.
 
 ## Reproduce v0.2.0 locally
 
