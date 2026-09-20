@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2026-03-07">
 <meta name="description" content="My commentary on gene information, sequence ensembles and why a prediction needs an explicit biological target.">
 
-<title>What Does a Gene Know? – Dr. Tahir Ali</title>
+<title>What Does a Gene Know? – Dr.&nbsp;Tahir Ali</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -36,6 +36,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../profile.webp" rel="icon">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
@@ -43,7 +44,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-fdaeddbba6fa95a0f13bcc20c9a3fb04.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-46631ef7d5207a1ec5e6e4a429f0476e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -84,17 +85,17 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="What Does a Gene Know? – Dr. Tahir Ali">
+<meta property="og:title" content="What Does a Gene Know? – Dr.&nbsp;Tahir Ali">
 <meta property="og:description" content="My commentary on gene information, sequence ensembles and why a prediction needs an explicit biological target.">
 <meta property="og:image" content="https://tahirali-biomics.github.io/assets/writings/05-what-does-a-gene-know.webp">
 <meta property="og:site_name" content="Dr. Tahir Ali">
-<meta name="twitter:title" content="What Does a Gene Know? – Dr. Tahir Ali">
+<meta name="twitter:title" content="What Does a Gene Know? – Dr.&nbsp;Tahir Ali">
 <meta name="twitter:description" content="My commentary on gene information, sequence ensembles and why a prediction needs an explicit biological target.">
 <meta name="twitter:image" content="https://tahirali-biomics.github.io/assets/writings/05-what-does-a-gene-know.webp">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="article-page content-dense docked fullcontent nav-sidebar quarto-light reading-note-page">
+<body class="nav-sidebar docked fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -119,21 +120,83 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item"><div class="sidebar-item-container"><a href="../../index.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Home</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../popgenlm.html" class="sidebar-item-text sidebar-link"><span class="menu-text">PopGenLM</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../genomes-to-ai.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">Genomes to AI</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../projects.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Projects</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../publications.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Publications</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../cv.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Résumé</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../teaching/teaching.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Teaching</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../workshops/workshops.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Workshops</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank"><span class="menu-text">GitHub</span></a></div></li></ul>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../popgenlm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PopGenLM</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../genomes-to-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Genomes to AI</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projects</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../publications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Publications</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../cv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Résumé</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../teaching/teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../workshops/workshops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Workshops</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">GitHub</span></a>
+  </div>
+</li>
+    </ul>
     </div>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">What Does a Gene Know?</h1>
-  <div class="quarto-categories"><div class="quarto-category">Biological information</div><div class="quarto-category">Genes and environment</div><div class="quarto-category">Learning note</div></div>
+  <div class="quarto-categories">
+    <div class="quarto-category">Biological information</div>
+    <div class="quarto-category">Genes and environment</div>
+    <div class="quarto-category">Learning note</div>
+  </div>
   </div>
 
 <div>
-  <div class="description">My commentary on gene information, sequence ensembles and why a prediction needs an explicit biological target.</div>
+  <div class="description">
+    My commentary on gene information, sequence ensembles and why a prediction needs an explicit biological target.
+  </div>
 </div>
 
 
@@ -161,32 +224,41 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </header>
 
 
-<figure>
-<img src="../../assets/writings/05-what-does-a-gene-know.webp" class="reading-sketch" data-fig-alt="Handwritten pencil notes ask what information is about, emphasise ensembles and testing predictions against biology." alt="A simple pencil notebook page linking a sequence ensemble to a folded protein and a leaf in its environment." loading="lazy" decoding="async">
-<figcaption aria-hidden="true">A simple pencil notebook page linking a sequence ensemble to a folded protein and a leaf in its environment.</figcaption>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/writings/05-what-does-a-gene-know.webp" class="reading-sketch img-fluid figure-img" alt="Handwritten pencil notes ask what information is about, emphasise ensembles and testing predictions against biology."></p>
+<figcaption>A simple pencil notebook page linking a sequence ensemble to a folded protein and a leaf in its environment.</figcaption>
 </figure>
+</div>
 <p>The final part of the supplied excerpt asks a question that sounds almost poetic: what does a gene know? The chapter uses “know” in a precise, non-mental sense. A biological molecule has information about its world when its state supports successful predictions or interactions in that world.</p>
 <p>This question brought the whole reading series together for me.</p>
-<h2 id="information-is-always-about-something">Information is always about something</h2>
+<section id="information-is-always-about-something" class="level2">
+<h2 class="anchored" data-anchor-id="information-is-always-about-something">Information is always about something</h2>
 <p>Section 2.3 turns from relationships within sequences to the information content of genes. A molecule such as haemoglobin is adapted to a world containing oxygen, particular chemical structures, cellular partners and physiological demands. Its sequence and folded form embody relationships accumulated through evolution.</p>
 <p>Calling this “knowledge” is useful only if we remain precise. The molecule does not think. Its structure carries predictive relationships to an environment: what to bind, where to function, and which interactions to avoid.</p>
 <p>This gives biological information a direction. A sequence is not simply full of information in the abstract. It may carry information about a molecular partner, an environment, a developmental state or a functional requirement.</p>
-<h2 id="why-one-sequence-is-not-enough">Why one sequence is not enough</h2>
+</section>
+<section id="why-one-sequence-is-not-enough" class="level2">
+<h2 class="anchored" data-anchor-id="why-one-sequence-is-not-enough">Why one sequence is not enough</h2>
 <p>Box 2.2 addresses a common difficulty. Shannon information is a correlational property of ensembles, so it cannot normally be measured by inspecting a single sequence. One observed string does not reveal which of its patterns are reliably connected to a target and which occurred by chance.</p>
 <p>The distinction between a message and an ensemble is crucial. A particular clue may happen to predict correctly once, but its information can be assessed only across repeated possibilities. For molecular sequences, evolution helps generate the ensemble: mutation explores alternatives and selection changes which alternatives persist.</p>
 <p>This is why conservation and covariation become informative. Across many sequences, the evolutionary process reveals which changes are tolerated and which relationships are maintained. The information is not printed visibly inside one string; it appears through structured variation across possible strings and worlds.</p>
-<h2 id="information-content-and-biological-complexity">Information content and biological complexity</h2>
+</section>
+<section id="information-content-and-biological-complexity" class="level2">
+<h2 class="anchored" data-anchor-id="information-content-and-biological-complexity">Information content and biological complexity</h2>
 <p>The chapter suggests that information content may be a useful proxy for complexity, while acknowledging how difficult it is to estimate. Genes do not act alone. Regulatory systems store substantial context about when, where and how gene products are used. Protein-coding sequence is therefore only part of an organism’s informational architecture.</p>
 <p>The excerpt begins the discussion of proteins as amino-acid sequences translated from codons. Even at this early stage, the challenge is clear: counting possible symbols is not the same as measuring functional information. Function depends on folding, interactions, cellular context, environment and the ensemble of viable alternatives.</p>
-<section id="notes-from-my-margin" class="pencil-margin-note">
-<h3>Notes from my margin</h3>
+<section id="notes-from-my-margin" class="level3 pencil-margin-note">
+<h3 class="anchored" data-anchor-id="notes-from-my-margin">Notes from my margin</h3>
 <ul>
 <li>Information must have a target: information <em>about what</em>?</li>
 <li>A single sequence can be examined, but an ensemble is needed to measure a reliable relationship.</li>
 <li>Evolutionary history is part of the evidence, not background noise.</li>
 </ul>
 </section>
-<h2 id="my-interpretation-for-popgenlm-bench">My interpretation for PopGenLM Bench</h2>
+</section>
+<section id="my-interpretation-for-popgenlm-bench" class="level2">
+<h2 class="anchored" data-anchor-id="my-interpretation-for-popgenlm-bench">My interpretation for PopGenLM Bench</h2>
 <p>This reading changes the language I want to use around genomic AI. A model score is not “biological information” simply because it was produced from DNA. It becomes useful evidence only if it improves prediction of a clearly defined biological target in an appropriate ensemble.</p>
 <p>For variant-effect models, possible targets include population frequency, evolutionary constraint, molecular function, expression, phenotype or experimental effect. These are related but not interchangeable. A score that predicts conservation may not predict present-day fitness in a particular population. A score calibrated in one species may not transfer to another. A correlation learned from sequence may reflect shared history rather than a causal mechanism.</p>
 <p>PopGenLM Bench should therefore make four questions explicit:</p>
@@ -197,17 +269,25 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <li>Under which changes of reference, lineage, annotation and sampling does that relationship remain stable?</li>
 </ol>
 <p>This is a stronger foundation than asking whether the software ran or whether the plot looks convincing.</p>
-<h2 id="my-commentary-on-chapter-2">My commentary on Chapter 2</h2>
+</section>
+<section id="my-commentary-on-chapter-2" class="level2">
+<h2 class="anchored" data-anchor-id="my-commentary-on-chapter-2">My commentary on Chapter 2</h2>
 <p>The chapter’s most important contribution, for me, is discipline of language. It moves from the history of genetic information to random variables, probability, entropy, conditional dependence and gene information without allowing “information” to remain a loose synonym for sequence.</p>
 <p>I also appreciate that the biological examples expose the limits of the mathematics. An entropy profile depends on sampling. Mutual information detects dependence, not cause. A single sequence does not establish what it predicts. Recent ancestry can resemble constraint. These are not reasons to reject the framework; they are reasons to use it scientifically.</p>
 <p>The reading has made my AI journey feel more grounded. The question is not whether AI can process more genomic data. It can. The harder question is whether its outputs carry stable, testable information about the biological world.</p>
-<h2 id="where-i-want-to-learn-next">Where I want to learn next</h2>
+</section>
+<section id="where-i-want-to-learn-next" class="level2">
+<h2 class="anchored" data-anchor-id="where-i-want-to-learn-next">Where I want to learn next</h2>
 <p>My next commentary series will return to the chapter topic by topic, with simple comparisons and small reproducible examples: entropy versus conservation, mutual information versus correlation, single sequences versus ensembles, and model likelihood versus biological effect.</p>
 <p>I also want to extend the reading into information content in regulatory DNA, phylogeny-aware sequence models, calibration and the design of benchmarks that separate technical capability from biological support.</p>
 <div class="reading-source">
 <p><strong>Reading for this note:</strong> Christoph Adami, <em>The Evolution of Biological Information</em>, Chapter 2, Section 2.3, Section 2.3.1 as included in the supplied excerpt, and Box 2.2, “Information in Single Sequences?”</p>
 </div>
-</main> <!-- /main -->
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -617,7 +697,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>© 2026 Dr. Tahir Ali</p>
+<p>© 2026 Dr.&nbsp;Tahir Ali</p>
 </div>   
     <div class="nav-footer-center">
 <p>Computational biology · Scientific AI · Education</p>

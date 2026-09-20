@@ -1600,6 +1600,16 @@ iframe {
 .benchmark-figure img {
   display: block;
   width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+.popgenlm-page .popgenlm-release-figure {
+  overflow: visible;
+}
+
+.popgenlm-page .popgenlm-release-figure img {
+  object-fit: contain;
 }
 
 .benchmark-figure figcaption {
@@ -1608,39 +1618,39 @@ iframe {
   background: #fff;
 }
 
-.evidence-pipeline {
+.popgenlm-page .evidence-pipeline {
   display: grid;
-  grid-template-columns: repeat(7, auto);
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
   gap: 0.55rem;
   align-items: center;
   margin: 1.8rem 0 2.2rem;
   padding: 1.25rem;
-  overflow-x: auto;
+  overflow: hidden;
   border: 1px solid var(--ta-slate-200);
   border-radius: var(--ta-radius);
   background: var(--ta-surface);
 }
 
-.evidence-node {
-  min-width: 180px;
+.popgenlm-page .evidence-node {
+  min-width: 0;
   padding: 1rem;
   border: 1px solid var(--ta-slate-200);
   border-radius: 12px;
   background: var(--ta-slate-100);
 }
 
-.evidence-node.accent {
+.popgenlm-page .evidence-node.accent {
   border-color: #a9d8d2;
   background: var(--ta-teal-100);
 }
 
-.evidence-node span,
-.evidence-node strong,
-.evidence-node small {
+.popgenlm-page .evidence-node span,
+.popgenlm-page .evidence-node strong,
+.popgenlm-page .evidence-node small {
   display: block;
 }
 
-.evidence-node span {
+.popgenlm-page .evidence-node span {
   color: var(--ta-teal-700);
   font-size: 0.68rem;
   font-weight: 760;
@@ -1648,22 +1658,34 @@ iframe {
   text-transform: uppercase;
 }
 
-.evidence-node strong {
+.popgenlm-page .evidence-node strong {
   margin-top: 0.28rem;
   color: var(--ta-navy-900);
   font-size: 0.9rem;
 }
 
-.evidence-node small {
+.popgenlm-page .evidence-node small {
   margin-top: 0.25rem;
   color: var(--ta-slate-600);
   font-size: 0.76rem;
 }
 
-.evidence-arrow {
+.popgenlm-page .evidence-arrow {
   color: var(--ta-slate-400);
   font-size: 1.35rem;
   font-weight: 700;
+}
+
+@media (max-width: 720px) {
+  .popgenlm-page .evidence-pipeline {
+    grid-template-columns: 1fr;
+    overflow: visible;
+  }
+
+  .popgenlm-page .evidence-arrow {
+    justify-self: center;
+    transform: rotate(90deg);
+  }
 }
 
 .colab-panel {
@@ -2668,6 +2690,10 @@ body.legacy-notebook-page table.dataframe td {
 }
 
 @media print {
+  .popgenlm-page #quarto-back-to-top {
+    display: none !important;
+  }
+
   #quarto-sidebar,
   .quarto-secondary-nav,
   .hero-actions,
@@ -2685,6 +2711,10 @@ body.legacy-notebook-page table.dataframe td {
   main.content {
     width: 100%;
     max-width: none;
+  }
+
+  .popgenlm-page .evidence-pipeline {
+    overflow: visible;
   }
 }
 

@@ -8,7 +8,7 @@
 
 <meta name="description" content="Practical, reproducible exercises for genomic data analysis.">
 
-<title>Hands-on Genomics Tutorials – Dr. Tahir Ali</title>
+<title>Hands-on Genomics Tutorials – Dr.&nbsp;Tahir Ali</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -34,6 +34,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../profile.webp" rel="icon">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
@@ -41,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-fdaeddbba6fa95a0f13bcc20c9a3fb04.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-46631ef7d5207a1ec5e6e4a429f0476e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -111,15 +112,15 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="Hands-on Genomics Tutorials – Dr. Tahir Ali">
+<meta property="og:title" content="Hands-on Genomics Tutorials – Dr.&nbsp;Tahir Ali">
 <meta property="og:description" content="Practical, reproducible exercises for genomic data analysis.">
 <meta property="og:site_name" content="Dr. Tahir Ali">
-<meta name="twitter:title" content="Hands-on Genomics Tutorials – Dr. Tahir Ali">
+<meta name="twitter:title" content="Hands-on Genomics Tutorials – Dr.&nbsp;Tahir Ali">
 <meta name="twitter:description" content="Practical, reproducible exercises for genomic data analysis.">
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="docked nav-sidebar quarto-light tutorial-index-page">
+<body class="nav-sidebar docked tutorial-index-page quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -144,20 +145,78 @@ window.Quarto = {
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item"><div class="sidebar-item-container"><a href="../../index.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Home</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../popgenlm.html" class="sidebar-item-text sidebar-link"><span class="menu-text">PopGenLM</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../genomes-to-ai.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Genomes to AI</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../projects.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Projects</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../publications.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Publications</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../cv.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Résumé</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../teaching.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">Teaching</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../workshops/workshops.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Workshops</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank"><span class="menu-text">GitHub</span></a></div></li></ul>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../popgenlm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PopGenLM</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../genomes-to-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Genomes to AI</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projects</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../publications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Publications</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../cv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Résumé</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../teaching/teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../workshops/workshops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Workshops</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">GitHub</span></a>
+  </div>
+</li>
+    </ul>
     </div>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content column-page-right" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default">
+<main class="content column-page-right" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Hands-on Genomics Tutorials</h1>
 </div>
 
 <div>
-  <div class="description">Practical, reproducible exercises for genomic data analysis.</div>
+  <div class="description">
+    Practical, reproducible exercises for genomic data analysis.
+  </div>
 </div>
 
 
@@ -180,51 +239,68 @@ window.Quarto = {
 <div class="tutorial-grid">
 <div class="tutorial-card">
 <p><span class="eyebrow">Pipeline · Part 1</span></p>
-<h3 id="fastq-to-vcf">FASTQ to VCF</h3>
+<section id="fastq-to-vcf" class="level3">
+<h3 class="anchored" data-anchor-id="fastq-to-vcf">FASTQ to VCF</h3>
 <p>Access an HPC system, inspect FASTQ files, run quality control, trim reads and map them to a reference genome.</p>
 <p><a href="practical_day1.html" class="card-link">Start Practical 1</a></p>
+</section>
 </div>
 <div class="tutorial-card">
 <p><span class="eyebrow">Pipeline · Part 2</span></p>
-<h3 id="bam-to-filtered-variants">BAM to filtered variants</h3>
+<section id="bam-to-filtered-variants" class="level3">
+<h3 class="anchored" data-anchor-id="bam-to-filtered-variants">BAM to filtered variants</h3>
 <p>Filter alignments, call and assess variants, explore VCF files and perform an initial PCA.</p>
 <p><a href="practical_day2.html" class="card-link">Start Practical 2</a></p>
+</section>
 </div>
 <div class="tutorial-card">
 <p><span class="eyebrow">Population genomics</span></p>
-<h3 id="population-differentiation-and-functional-insights">Population differentiation and functional insights</h3>
-<p>Move from SNP-level differentiation to biological interpretation: estimate <span class="math inline"><em>F</em><sub><em>S</em><em>T</em></sub></span>, identify high-differentiation regions, connect candidates with functional evidence, and integrate climate data.</p>
+<section id="population-differentiation-and-functional-insights" class="level3">
+<h3 class="anchored" data-anchor-id="population-differentiation-and-functional-insights">Population differentiation and functional insights</h3>
+<p>Move from SNP-level differentiation to biological interpretation: estimate <span class="math inline">\(F_{ST}\)</span>, identify high-differentiation regions, connect candidates with functional evidence, and integrate climate data.</p>
 <p><a href="practical_day3.html" class="card-link">Start Practical 3</a></p>
+</section>
 </div>
 <div class="tutorial-card">
 <p><span class="eyebrow">Research project · Part 1</span></p>
-<h3 id="candidate-gene-discovery">Candidate-gene discovery</h3>
-<p>Compare nucleotide diversity (<span class="math inline"><em>π</em></span>), Tajima’s D and <span class="math inline"><em>F</em><sub><em>S</em><em>T</em></sub></span> between defence and background genomic regions. Detect differentiation outliers, map them to annotated genes, and interpret evolutionary signals using public <em>Arabidopsis thaliana</em> data from the 1001 Genomes Project.</p>
+<section id="candidate-gene-discovery" class="level3">
+<h3 class="anchored" data-anchor-id="candidate-gene-discovery">Candidate-gene discovery</h3>
+<p>Compare nucleotide diversity (<span class="math inline">\(\pi\)</span>), Tajima’s D and <span class="math inline">\(F_{ST}\)</span> between defence and background genomic regions. Detect differentiation outliers, map them to annotated genes, and interpret evolutionary signals using public <em>Arabidopsis thaliana</em> data from the 1001 Genomes Project.</p>
 <p><a href="practical_day4.html" class="card-link">Start Research Project 1</a></p>
+</section>
 </div>
 <div class="tutorial-card">
 <p><span class="eyebrow">Research project · Part 2</span></p>
-<h3 id="go-enrichment-of-high-f_st-genes">GO enrichment of high-<span class="math inline"><em>F</em><sub><em>S</em><em>T</em></sub></span> genes</h3>
-<p>Summarise SNP-level <span class="math inline"><em>F</em><sub><em>S</em><em>T</em></sub></span> at gene level, test Gene Ontology enrichment with topGO’s Fisher and KS statistics, and interpret enriched biological processes in the context of defence-related selection.</p>
+<section id="go-enrichment-of-high-f_st-genes" class="level3">
+<h3 class="anchored" data-anchor-id="go-enrichment-of-high-f_st-genes">GO enrichment of high-<span class="math inline">\(F_{ST}\)</span> genes</h3>
+<p>Summarise SNP-level <span class="math inline">\(F_{ST}\)</span> at gene level, test Gene Ontology enrichment with topGO’s Fisher and KS statistics, and interpret enriched biological processes in the context of defence-related selection.</p>
 <p><a href="Practical_Day_6.html" class="card-link">Start Research Project 2</a></p>
+</section>
 </div>
 <div class="tutorial-card">
 <p><span class="eyebrow">RADseq workflow</span></p>
-<h3 id="de-novo-radseq-workflow">De novo RADseq workflow</h3>
+<section id="de-novo-radseq-workflow" class="level3">
+<h3 class="anchored" data-anchor-id="de-novo-radseq-workflow">De novo RADseq workflow</h3>
 <p>Integrate Stacks, RADstackshelpR and SNPfiltR for parameter optimisation, de novo SNP discovery, systematic filtering, and quality validation in non-model species.</p>
 <p><a href="stacks_tutorial.html" class="card-link">Open workflow</a></p>
+</section>
 </div>
 <div class="tutorial-card">
 <p><span class="eyebrow">Command line</span></p>
-<h3 id="awk-sed-quick-reference">AWK + SED quick reference</h3>
+<section id="awk-sed-quick-reference" class="level3">
+<h3 class="anchored" data-anchor-id="awk-sed-quick-reference">AWK + SED quick reference</h3>
 <p>Consult the AWK and SED commands used throughout the pipeline, organised by biological purpose with reusable syntax, explanatory notes, and common pitfalls.</p>
 <p><a href="awk_sed_reference.html" class="card-link">Open reference</a></p>
+</section>
 </div>
 </div>
 <div class="section-note">
 <p>These materials support teaching and self-study. Computational tutorial pages with pre-rendered figures are preserved as static HTML, so publishing the website does not require access to the original HPC directories or course datasets. The <a href="../apps/interactive.html">interactive learning tools</a> and <a href="../course-companions/interactive-course-companions.html">course companions</a> are maintained separately.</p>
 </div>
-</main> <!-- /main -->
+
+
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -634,7 +710,7 @@ window.Quarto = {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>© 2026 Dr. Tahir Ali</p>
+<p>© 2026 Dr.&nbsp;Tahir Ali</p>
 </div>   
     <div class="nav-footer-center">
 <p>Computational biology · Scientific AI · Education</p>

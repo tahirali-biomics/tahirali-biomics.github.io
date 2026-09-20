@@ -71,6 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="./profile.webp" rel="icon">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
@@ -78,7 +79,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-da71b349b2a5b190adc08b2de5cfba23.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-46631ef7d5207a1ec5e6e4a429f0476e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -121,21 +122,21 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="PopGenLM Bench | Tahir Ali">
 <meta property="og:description" content="PopGenLM Bench — reproducible evaluation of genomic language-model variant scores with population-genetic and evolutionary evidence.">
-<meta property="og:image" content="https://tahirali-biomics.github.io/assets/popgenlm/v02_population_gpn_overview.png">
+<meta property="og:image" content="https://tahirali-biomics.github.io/assets/popgenlm/v0.3/model_evidence.png">
 <meta property="og:site_name" content="Dr. Tahir Ali">
-<meta property="og:image:height" content="2794">
-<meta property="og:image:width" content="3634">
-<meta property="og:image:alt" content="PopGenLM Bench v0.2.0 four-panel population-aware GPN benchmark overview.">
+<meta property="og:image:height" content="2584">
+<meta property="og:image:width" content="3486">
+<meta property="og:image:alt" content="PopGenLM Bench v0.3.0 model-evidence figure showing population-oriented concordance, genomic-context concordance, and LD sensitivity.">
 <meta name="twitter:title" content="PopGenLM Bench | Tahir Ali">
 <meta name="twitter:description" content="PopGenLM Bench — reproducible evaluation of genomic language-model variant scores with population-genetic and evolutionary evidence.">
-<meta name="twitter:image" content="https://tahirali-biomics.github.io/assets/popgenlm/v02_population_gpn_overview.png">
-<meta name="twitter:image-height" content="2794">
-<meta name="twitter:image-width" content="3634">
-<meta name="twitter:image:alt" content="PopGenLM Bench v0.2.0 four-panel population-aware GPN benchmark overview.">
+<meta name="twitter:image" content="https://tahirali-biomics.github.io/assets/popgenlm/v0.3/model_evidence.png">
+<meta name="twitter:image-height" content="2584">
+<meta name="twitter:image-width" content="3486">
+<meta name="twitter:image:alt" content="PopGenLM Bench v0.3.0 model-evidence figure showing population-oriented concordance, genomic-context concordance, and LD sensitivity.">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="docked nav-sidebar popgenlm-page quarto-light">
+<body class="nav-sidebar docked popgenlm-page quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -160,46 +161,143 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item"><div class="sidebar-item-container"><a href="index.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Home</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="popgenlm.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">PopGenLM</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="genomes-to-ai.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Genomes to AI</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="projects.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Projects</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="publications.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Publications</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="cv.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Résumé</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="teaching/teaching.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Teaching</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="workshops/workshops.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Workshops</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank"><span class="menu-text">GitHub</span></a></div></li></ul>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./popgenlm.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">PopGenLM</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./genomes-to-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Genomes to AI</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projects</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./publications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Publications</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Résumé</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./teaching/teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./workshops/workshops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Workshops</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">GitHub</span></a>
+  </div>
+</li>
+    </ul>
     </div>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content column-page-right" id="quarto-document-content"><section class="page-hero popgenlm-hero" aria-labelledby="popgenlm-title">
+<main class="content column-page-right" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<section class="page-hero popgenlm-hero" aria-labelledby="popgenlm-title">
   <div class="eyebrow">Open-source scientific AI</div>
   <h1 id="popgenlm-title">PopGenLM Bench</h1>
   <p class="lead">A reproducible framework for testing what genomic language-model variant scores mean when they are compared with population-genetic and evolutionary evidence.</p>
+  <p class="hero-support">PopGenLM Bench has developed from reproducible score validation in v0.1, through population-aware evaluation in v0.2, into v0.3 integration of multiple genomic-language-model scores with evolutionary, genomic-context, LD, genotype-quality, and population-structure evidence.</p>
   <p class="hero-support">Every model score is treated as a testable hypothesis — not as a biological conclusion.</p>
   <div class="tag-row">
-    <span class="status-badge blue">v0.2.0 released</span>
-    <span class="tag">Python</span><span class="tag">GPN Brassicales</span><span class="tag">Population genomics</span><span class="tag">Reproducible AI</span><span class="tag">Apache-2.0</span>
+    <span class="status-badge blue">v0.3.0 · latest release</span>
+    <span class="tag">Python</span><span class="tag">GPN + PlantCAD</span><span class="tag">Population genomics</span><span class="tag">Reproducible AI</span><span class="tag">Apache-2.0</span>
   </div>
   <div class="hero-actions">
-    <a class="button-primary" href="https://colab.research.google.com/github/tahirali-biomics/popgenlm-bench/blob/v0.2.0/notebooks/popgenlm-bench-v0.2.ipynb">Run v0.2.0 in Colab</a>
-    <a class="button-secondary" href="https://github.com/tahirali-biomics/popgenlm-bench/releases/tag/v0.2.0">View v0.2.0 release</a>
+    <a class="button-primary" href="https://colab.research.google.com/github/tahirali-biomics/popgenlm-bench/blob/v0.3.0/notebooks/popgenlm-bench-v0.3.ipynb">Run v0.3 in Colab</a>
+    <a class="button-secondary" href="https://github.com/tahirali-biomics/popgenlm-bench/releases/tag/v0.3.0">View v0.3 release</a>
     <a class="button-secondary" href="https://github.com/tahirali-biomics/popgenlm-bench">View repository</a>
-    <a class="button-secondary" href="posts/2026-08-31-popgenlm-bench/index.html">Read the build note</a>
+    <a class="button-secondary" href="https://github.com/tahirali-biomics/popgenlm-bench/blob/v0.3.0/docs/v0.3_release.md">Read release documentation</a>
   </div>
 </section>
-<h2 id="why-popgenlm-bench-is-needed">Why PopGenLM Bench is needed</h2>
+<section id="why-popgenlm-bench-is-needed" class="level2">
+<h2 class="anchored" data-anchor-id="why-popgenlm-bench-is-needed">Why PopGenLM Bench is needed</h2>
 <p class="lead">
 Producing a score is an inference step. Establishing what that score means is an evaluation problem.
 </p>
 <p>DNA language models learn statistical regularities from sequence context and can assign scores to large numbers of candidate variants. But a technically valid score is not automatically biological evidence. Before a score is interpreted, its coordinate system, alleles, reference sequence, model revision, orientation, provenance, statistical behaviour, and relationship to independent biological observations need to be checked.</p>
 <p>Population and evolutionary genomics provide evidence against which model scores can be evaluated. PopGenLM Bench is designed as the reproducible layer between <strong>model output</strong> and <strong>biological claim</strong>: validate the inputs, preserve inference provenance, orient scores explicitly, quantify associations and uncertainty, and state what the result does — and does not — support.</p>
 <div class="validation-stack" aria-label="Validation layers">
-  <article><span>01</span><div><h3>Input integrity</h3><p>Genome build, chromosome mapping, coordinates, REF/ALT alleles, duplicates, missingness, and sequence context.</p></div></article>
-  <article><span>02</span><div><h3>Inference provenance</h3><p>Model revision, upstream code, packages, parameters, device, inputs, outputs, runtime, and hashes.</p></div></article>
-  <article><span>03</span><div><h3>Population orientation</h3><p>Separate raw REF-to-ALT model scores from population minor-vs-major scores so the biological comparison is explicit.</p></div></article>
-  <article><span>04</span><div><h3>Biological concordance</h3><p>Test relationships with allele frequency and, in later releases, conservation and genomic context — with effect sizes and interpretation limits.</p></div></article>
+  <article><span>01</span><div><h3 class="anchored">Input integrity</h3><p>Genome build, chromosome mapping, coordinates, REF/ALT alleles, duplicates, missingness, and sequence context.</p></div></article>
+  <article><span>02</span><div><h3 class="anchored">Inference provenance</h3><p>Model revision, upstream code, packages, parameters, device, inputs, outputs, runtime, and hashes.</p></div></article>
+  <article><span>03</span><div><h3 class="anchored">Population orientation</h3><p>Separate raw REF-to-ALT model scores from population minor-vs-major scores so the biological comparison is explicit.</p></div></article>
+  <article><span>04</span><div><h3 class="anchored">Biological concordance</h3><p>Evaluate model concordance with allele frequency, conservation, and genomic context, while testing LD sensitivity and summarizing population structure.</p></div></article>
 </div>
-<h2 id="v0.2.0-population-aware-gpn-benchmark">v0.2.0 — population-aware GPN benchmark</h2>
+</section>
+<section id="v0.3.0-evolutionary-evidence" class="level2">
+<h2 class="anchored" data-anchor-id="v0.3.0-evolutionary-evidence">v0.3.0 — Evolutionary evidence</h2>
+<p>v0.3.0 is the latest active release. It integrates population-oriented GPN and PlantCAD scores with evolutionary and genomic evidence for <strong>10,000 real <em>Arabidopsis thaliana</em> population variants selected using a deterministic procedure.</strong> The release is organized around a frozen <strong>10,000 × 39 annotated master table</strong>, with exclusive genomic-context annotations, signed site-oriented PhyloP conservation, fixed physical-bin and LD-sensitivity analyses, genotype-quality summaries, and UMAP population-structure summaries.</p>
+<p>The v0.3 release assets are frozen and hash-verified. Its primary population score is <code>log P(minor allele) − log P(major allele)</code>. Raw model scores retain <code>log P(ALT) − log P(REF)</code>. PhyloP is <strong>site-oriented, not allele-oriented</strong>, so its sign is not treated as an allele preference.</p>
+<section id="validated-descriptive-results" class="level3">
+<h3 class="anchored" data-anchor-id="validated-descriptive-results">Validated descriptive results</h3>
+<ul>
+<li>GPN–PlantCAD: Spearman ρ = <strong>0.6525</strong>, Pearson r = <strong>0.6331</strong>, <em>n</em> = <strong>10,000</strong>.</li>
+<li>GPN–PhyloP: Spearman ρ = <strong>−0.1876</strong>, <em>n</em> = <strong>9,453</strong>.</li>
+<li>GPN–PlantCAD remains approximately <strong>0.6523–0.6534</strong> across released LD profiles.</li>
+<li>Context-stratified GPN–PlantCAD Spearman correlations range from <strong>0.5171</strong> in coding CDS to <strong>0.7349</strong> in intergenic variants.</li>
+</ul>
+<p>The sample-quality summaries contain <strong>1,135 samples</strong> in the sample-quality table, <strong>1,093 samples</strong> in the primary call-rate set, <strong>996 samples</strong> in the strict set, and geographic metadata for <strong>1,131 samples</strong>.</p>
+<p>These are descriptive associations. They do not show that either model directly measures fitness, selection, causality, or pathogenicity. v0.3.0 claims no hypothesis-test <em>p</em>-values.</p>
+<figure class="benchmark-figure popgenlm-release-figure figure">
+  <img src="assets/popgenlm/v0.3/model_evidence.svg" alt="Four-panel v0.3.0 model-evidence figure: A GPN–PlantCAD population-oriented concordance; B physical-bin bootstrap intervals; C concordance across genomic contexts; D LD-thinning sensitivity." class="figure-img">
+  <figcaption><strong>v0.3.0 model evidence.</strong> A: GPN–PlantCAD population-oriented concordance. B: physical-bin bootstrap intervals. C: concordance across genomic contexts. D: LD-thinning sensitivity. <a href="assets/popgenlm/v0.3/model_evidence.svg">Open SVG</a> · <a href="assets/popgenlm/v0.3/model_evidence.png">Download PNG</a></figcaption>
+</figure>
+<figure class="benchmark-figure popgenlm-release-figure figure">
+  <img src="assets/popgenlm/v0.3/genotype_umap_geography.svg" alt="Four-panel v0.3.0 genotype UMAP and geography figure: A full UMAP coloured by longitude; B full UMAP coloured by genotype call rate; C connected main cloud enlarged and coloured by longitude; D connected main cloud enlarged and coloured by latitude." class="figure-img">
+  <figcaption><strong>v0.3.0 genotype structure and geography.</strong> A: full UMAP coloured by longitude. B: full UMAP coloured by genotype call rate. C: connected main cloud enlarged and coloured by longitude. D: connected main cloud enlarged and coloured by latitude. <a href="assets/popgenlm/v0.3/genotype_umap_geography.svg">Open SVG</a> · <a href="assets/popgenlm/v0.3/genotype_umap_geography.png">Download PNG</a></figcaption>
+</figure>
+<div class="link-row">
+  <a class="button-primary" href="https://colab.research.google.com/github/tahirali-biomics/popgenlm-bench/blob/v0.3.0/notebooks/popgenlm-bench-v0.3.ipynb">Open v0.3.0 in Colab</a>
+  <a class="button-secondary" href="https://github.com/tahirali-biomics/popgenlm-bench/blob/v0.3.0/docs/v0.3_release.md">Read full v0.3.0 documentation</a>
+  <a class="button-secondary" href="https://github.com/tahirali-biomics/popgenlm-bench/releases/tag/v0.3.0">Release notes</a>
+</div>
+</section>
+</section>
+<section id="v0.3.0-colab-inspect-the-frozen-release" class="level2">
+<h2 class="anchored" data-anchor-id="v0.3.0-colab-inspect-the-frozen-release">v0.3.0 Colab — inspect the frozen release</h2>
+<p>The public notebook loads, verifies, summarizes, and displays the frozen v0.3.0 assets. It does not rerun PlantCAD/GPN inference, VCF processing, UMAP fitting, or bootstrap production analysis.</p>
+<div class="colab-panel"><div><div class="card-kicker">Latest reproducible notebook</div><h3 class="anchored">Frozen assets with transparent validation</h3><p>The notebook is pinned to v0.3.0 and checks the released files before loading the descriptive summaries and displaying the frozen figures.</p></div><a class="button-colab" href="https://colab.research.google.com/github/tahirali-biomics/popgenlm-bench/blob/v0.3.0/notebooks/popgenlm-bench-v0.3.ipynb">Open v0.3.0 in Google Colab</a></div>
+</section>
+<section id="v0.2.0-population-aware-gpn-benchmark" class="level2">
+<h2 class="anchored" data-anchor-id="v0.2.0-population-aware-gpn-benchmark">v0.2.0 — population-aware GPN benchmark</h2>
 <section class="benchmark-summary" aria-label="PopGenLM Bench v0.2.0 summary">
   <div class="benchmark-copy">
-    <div class="card-kicker">Current release · September 2026</div>
-    <h3>10,000 real <em>Arabidopsis thaliana</em> variants</h3>
+    <div class="card-kicker">Active release · population-aware benchmark</div>
+    <h3 class="anchored">10,000 real <em>Arabidopsis thaliana</em> variants</h3>
     <p>v0.2.0 moves PopGenLM Bench from an engineering fixture to a population-aware benchmark. It uses deterministically selected biallelic SNPs from the 1001 Genomes Project, validates every REF allele against TAIR10.1, combines population summaries with reproducible GPN Brassicales scores, and evaluates the relationship between minor-allele frequency and model score.</p>
   </div>
   <div class="stats-grid benchmark-stats">
@@ -208,18 +306,15 @@ Producing a score is an inference step. Establishing what that score means is an
     <div class="stat-card"><span class="stat-value">ρ = 0.061</span><span class="stat-label">MAF × GPN association</span></div>
     <div class="stat-card"><span class="stat-value">−0.132</span><span class="stat-label">rare-vs-common rank-biserial effect</span></div>
   </div>
-  <figure class="benchmark-figure">
-    <img src="assets/popgenlm/v02_population_gpn_overview.png" alt="Four-panel PopGenLM Bench v0.2.0 overview showing the minor-allele-frequency spectrum, GPN score versus MAF, score distributions across frequency classes, and population-oriented score transformation" loading="lazy" decoding="async">
+  <figure class="benchmark-figure figure">
+    <img src="assets/popgenlm/v02_population_gpn_overview.png" alt="Four-panel PopGenLM Bench v0.2.0 overview showing the minor-allele-frequency spectrum, GPN score versus MAF, score distributions across frequency classes, and population-oriented score transformation" class="figure-img">
     <figcaption>PopGenLM Bench v0.2.0. Rare variants dominate the benchmark, the MAF–score association is weak, frequency classes overlap substantially, and 246 ALT-major variants require a sign reversal when the raw REF-to-ALT GPN score is oriented as minor versus major.</figcaption>
   </figure>
 </section>
-<p>The primary population-oriented score is</p>
-<p>[ _{} = P()-P(). ]</p>
-<p>Negative values mean that GPN assigns lower sequence likelihood to the population minor allele than to the major allele.</p>
-<p>For variants in which ALT is the minor allele, the raw score</p>
-<p>[ P()-P() ]</p>
-<p>already has the required orientation. For the <strong>246 ALT-major variants</strong>, the sign is reversed. This transformation makes the population comparison explicit; it does not create the observed genome-wide association.</p>
-<h3 id="main-result">Main result</h3>
+<p>The primary population-oriented score is <code>log P(minor) − log P(major)</code>. Negative values mean that GPN assigns lower sequence likelihood to the population minor allele than to the major allele.</p>
+<p>For variants in which ALT is the minor allele, the raw score <code>log P(ALT) − log P(REF)</code> already has the required orientation. For the <strong>246 ALT-major variants</strong>, the sign is reversed. This transformation makes the population comparison explicit; it does not create the observed genome-wide association.</p>
+<section id="main-result" class="level3">
+<h3 class="anchored" data-anchor-id="main-result">Main result</h3>
 <p>Across the 10,000-variant benchmark:</p>
 <ul>
 <li><strong>Spearman ρ = 0.0611</strong> between MAF and the GPN minor-vs-major score;</li>
@@ -233,33 +328,35 @@ Producing a score is an inference step. Establishing what that score means is an
 <div class="interpretation-note">
 <strong>Interpretation boundary:</strong> this result is not evidence that GPN directly predicts natural selection. Population demography, structure, linkage disequilibrium, ascertainment, allele age, and other evolutionary processes may contribute. The chromosome-stratified permutation preserves chromosome membership but does not explicitly model local LD.
 </div>
-<h3 id="robustness">Robustness</h3>
+</section>
+<section id="robustness" class="level3">
+<h3 class="anchored" data-anchor-id="robustness">Robustness</h3>
 <p>The positive association remains under stricter data filters:</p>
-<table>
+<table class="caption-top table">
 <thead>
-<tr>
+<tr class="header">
 <th>Analysis</th>
 <th style="text-align: right;">n</th>
 <th style="text-align: right;">Spearman ρ</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>All variants</td>
 <td style="text-align: right;">10,000</td>
 <td style="text-align: right;">0.0611</td>
 </tr>
-<tr>
+<tr class="even">
 <td>Call rate ≥ 0.95</td>
 <td style="text-align: right;">6,761</td>
 <td style="text-align: right;">0.0581</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>MAC ≥ 5</td>
 <td style="text-align: right;">5,057</td>
 <td style="text-align: right;">0.0876</td>
 </tr>
-<tr>
+<tr class="even">
 <td>Call rate ≥ 0.95 and MAC ≥ 5</td>
 <td style="text-align: right;">3,279</td>
 <td style="text-align: right;">0.1002</td>
@@ -273,7 +370,10 @@ Producing a score is an inference step. Establishing what that score means is an
   <a class="button-secondary" href="https://github.com/tahirali-biomics/popgenlm-bench/releases/tag/v0.2.0">Release notes</a>
   <a class="button-secondary" href="https://github.com/tahirali-biomics/popgenlm-bench/tree/v0.2.0">Browse v0.2.0 source</a>
 </div>
-<h2 id="v0.2.0-colab-reproduce-the-public-result">v0.2.0 Colab — reproduce the public result</h2>
+</section>
+</section>
+<section id="v0.2.0-colab-reproduce-the-public-result" class="level2">
+<h2 class="anchored" data-anchor-id="v0.2.0-colab-reproduce-the-public-result">v0.2.0 Colab — reproduce the public result</h2>
 <p>The release notebook is intentionally lightweight. It starts from the frozen population + GPN benchmark rather than rerunning the expensive 10,000-variant GPN inference.</p>
 <p>It:</p>
 <ol type="1">
@@ -288,19 +388,21 @@ Producing a score is an inference step. Establishing what that score means is an
 </ol>
 <div class="colab-panel">
   <div>
-    <div class="card-kicker">Current reproducible notebook</div>
-    <h3>Population-aware validation without rerunning model inference</h3>
+    <div class="card-kicker">ACTIVE v0.2 REPRODUCIBLE NOTEBOOK</div>
+    <h3 class="anchored">Population-aware validation without rerunning model inference</h3>
     <p>The notebook is pinned to the v0.2.0 release and can be run directly in Google Colab. It verifies the released artifacts before reproducing the main analysis.</p>
   </div>
   <a class="button-colab" href="https://colab.research.google.com/github/tahirali-biomics/popgenlm-bench/blob/v0.2.0/notebooks/popgenlm-bench-v0.2.ipynb">Open v0.2.0 in Google Colab</a>
 </div>
-<h2 id="v0.1.0-reproducible-analysis-foundation">v0.1.0 — reproducible analysis foundation</h2>
-<p>v0.1.0 remains available as the first frozen PopGenLM Bench analysis fixture. It contains <strong>100 deterministic SNVs with verified GPN scores</strong>, together with the score table, metadata, schema checks, descriptive statistics, bootstrap uncertainty, figures, and a CPU-compatible Colab notebook.</p>
+</section>
+<section id="v0.1.0-reproducible-analysis-foundation" class="level2">
+<h2 class="anchored" data-anchor-id="v0.1.0-reproducible-analysis-foundation">v0.1.0 — reproducible analysis foundation</h2>
+<p>v0.1.0 remains an active, frozen PopGenLM Bench analysis fixture. It contains <strong>100 deterministic SNVs with verified GPN scores</strong>, together with the score table, metadata, schema checks, descriptive statistics, bootstrap uncertainty, figures, and a CPU-compatible Colab notebook.</p>
 <p>The important distinction is that v0.1.0 is an <strong>engineering and analysis fixture</strong>, not a sampled population benchmark. It established a reproducible analysis path before population-aware evaluation was added in v0.2.0.</p>
 <section class="benchmark-summary" aria-label="PopGenLM Bench v0.1.0 summary">
   <div class="benchmark-copy">
-    <div class="card-kicker">Archived reproducible foundation</div>
-    <h3>100 deterministic variants with verified GPN scores</h3>
+    <div class="card-kicker">Active release · reproducible analysis foundation</div>
+    <h3 class="anchored">100 deterministic variants with verified GPN scores</h3>
     <p>v0.1.0 validates score-table structure, metadata, descriptive analysis, bootstrap uncertainty, and figure generation. It does not by itself support population-genetic or evolutionary claims.</p>
   </div>
   <div class="stats-grid benchmark-stats">
@@ -309,8 +411,8 @@ Producing a score is an inference step. Establishing what that score means is an
     <div class="stat-card"><span class="stat-value">−1.031</span><span class="stat-label">median score</span></div>
     <div class="stat-card"><span class="stat-value">77%</span><span class="stat-label">scores below zero</span></div>
   </div>
-  <figure class="benchmark-figure">
-    <img src="assets/popgenlm/benchmark-overview.png" alt="Four-panel PopGenLM Bench validation overview" loading="lazy" decoding="async">
+  <figure class="benchmark-figure figure">
+    <img src="assets/popgenlm/benchmark-overview.png" alt="Four-panel summary of the PopGenLM Bench v0.1.0 100-variant analysis fixture" class="figure-img">
     <figcaption>v0.1.0 verified analysis fixture. These are model-score summaries for a deterministic engineering dataset, not population-frequency evidence.</figcaption>
   </figure>
 </section>
@@ -324,7 +426,9 @@ Producing a score is an inference step. Establishing what that score means is an
   <a class="button-secondary" href="assets/popgenlm/summary.json">View v0.1 summary</a>
   <a class="button-secondary" href="assets/popgenlm/run-metadata.json">Inspect v0.1 metadata</a>
 </div>
-<h2 id="from-model-score-to-biological-evidence">From model score to biological evidence</h2>
+</section>
+<section id="from-model-score-to-biological-evidence" class="level2">
+<h2 class="anchored" data-anchor-id="from-model-score-to-biological-evidence">From model score to biological evidence</h2>
 <div class="evidence-pipeline" role="img" aria-label="PopGenLM Bench evidence pipeline">
   <div class="evidence-node"><span>Input</span><strong>Variants + reference</strong><small>Coordinates, alleles, sequence</small></div>
   <div class="evidence-arrow" aria-hidden="true">→</div>
@@ -335,42 +439,44 @@ Producing a score is an inference step. Establishing what that score means is an
   <div class="evidence-node accent"><span>Evidence</span><strong>Effect + uncertainty</strong><small>Concordance and limits</small></div>
 </div>
 <p>The central design principle is separation of concerns. Model scoring, reference validation, population orientation, statistical evaluation, and biological interpretation remain distinct steps. This makes failure modes inspectable and helps prevent a model score from being promoted directly into a biological claim.</p>
-<h2 id="version-history-and-roadmap">Version history and roadmap</h2>
+</section>
+<section id="version-history-and-roadmap" class="level2">
+<h2 class="anchored" data-anchor-id="version-history-and-roadmap">Version history and roadmap</h2>
 <div class="roadmap">
 <div class="roadmap-item">
-<h3>
-v0.1.0 · Reproducible analysis foundation · released
+<h3 class="anchored">
+v0.1.0 · Reproducible analysis foundation · released and active
 </h3>
 <p>
 Frozen 100-variant GPN score fixture, schema and metadata checks, descriptive statistics, bootstrap uncertainty, figures, and CPU-compatible Colab analysis.
 </p>
 </div>
 <div class="roadmap-item">
-<h3>
-v0.2.0 · Population-aware benchmark · released
+<h3 class="anchored">
+v0.2.0 · Population-aware benchmark · released and active
 </h3>
 <p>
 10,000 real 1001 Genomes SNPs, exact TAIR10.1 REF validation, reproducible GPN scores, minor-vs-major orientation, population-frequency evaluation, effect sizes, chromosome-stratified permutation, robustness analyses, figures, tests, CI, and release-pinned Colab.
 </p>
 </div>
 <div class="roadmap-item">
-<h3>
-v0.3 · Evolutionary evidence
+<h3 class="anchored">
+v0.3.0 · Evolutionary evidence · released and active
 </h3>
 <p>
-Add conservation tracks and test model–conservation concordance across genomic contexts, with explicit attention to dependence among nearby variants.
+Integrated GPN and PlantCAD scores, PhyloP, genomic contexts, physical-bin and LD sensitivity, genotype quality, UMAP population structure, frozen assets, and release-pinned documentation.
 </p>
 </div>
 <div class="roadmap-item">
-<h3>
-v0.4–0.5 · Extensible researcher beta
+<h3 class="anchored">
+v0.4–0.5 · Extensible researcher beta · future development
 </h3>
 <p>
 Stabilize model adapters, support additional model or precomputed-score inputs, expand reporting, add containerized workflows, and test with external users.
 </p>
 </div>
 <div class="roadmap-item">
-<h3>
+<h3 class="anchored">
 v1.0 · Citable release
 </h3>
 <p>
@@ -378,26 +484,43 @@ Freeze public schemas, incorporate beta feedback, add end-to-end release checks 
 </p>
 </div>
 </div>
-<h2 id="reproduce-v0.2.0-locally">Reproduce v0.2.0 locally</h2>
+</section>
+<section id="reproduce-v0.3.0-locally" class="level2">
+<h2 class="anchored" data-anchor-id="reproduce-v0.3.0-locally">Reproduce v0.3.0 locally</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout v0.3.0</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-e</span> <span class="st">".[dev,v03]"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pytest</span> <span class="at">-q</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">ruff</span> check src tests scripts</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sha256sum</span> <span class="at">-c</span> data/benchmarks/v0.3/SHA256SUMS.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The public notebook loads, verifies, summarizes, and displays frozen assets; it does not rerun PlantCAD/GPN inference, VCF processing, UMAP fitting, or bootstrap production analysis.</p>
+</section>
+<section id="reproduce-v0.2.0-locally" class="level2">
+<h2 class="anchored" data-anchor-id="reproduce-v0.2.0-locally">Reproduce v0.2.0 locally</h2>
 <p>The released population analysis can be reproduced from the frozen artifacts without rerunning GPN inference:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/tahirali-biomics/popgenlm-bench.git</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> popgenlm-bench</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout v0.2.0</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> venv .venv</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">--upgrade</span> pip</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-e</span> <span class="st">".[dev,viz]"</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ex">pytest</span> <span class="at">-q</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ex">ruff</span> check src tests scripts</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/analyze_v02_population_gpn.py</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/plot_v02_population_gpn.py</span></code></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/tahirali-biomics/popgenlm-bench.git</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> popgenlm-bench</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout v0.2.0</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> venv .venv</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">--upgrade</span> pip</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-e</span> <span class="st">".[dev,viz]"</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="ex">pytest</span> <span class="at">-q</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="ex">ruff</span> check src tests scripts</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/analyze_v02_population_gpn.py</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/plot_v02_population_gpn.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The full v0.2.0 release is validated by <strong>58 automated tests</strong> and GitHub Actions on Python 3.11 and 3.12.</p>
-<h2 id="public-scope">Public scope</h2>
+</section>
+<section id="public-scope" class="level2">
+<h2 class="anchored" data-anchor-id="public-scope">Public scope</h2>
 <p>PopGenLM Bench uses public demonstration and benchmark data. It does not contain unpublished <em>Arabidopsis lyrata</em> results, restricted teaching sources, student work, private credentials, or institution-owned material without permission.</p>
-</main> <!-- /main -->
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -819,7 +942,7 @@ Freeze public schemas, incorporate beta feedback, add end-to-end release checks 
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>© 2026 Dr. Tahir Ali</p>
+<p>© 2026 Dr.&nbsp;Tahir Ali</p>
 </div>   
     <div class="nav-footer-center">
 <p>Computational biology · Scientific AI · Education</p>

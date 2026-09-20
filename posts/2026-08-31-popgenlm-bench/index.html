@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2026-08-31">
 <meta name="description" content="The first public step toward a population-genetic evaluation layer for genomic language models.">
 
-<title>Why I am building PopGenLM Bench – Dr. Tahir Ali</title>
+<title>Why I am building PopGenLM Bench – Dr.&nbsp;Tahir Ali</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -71,6 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../profile.webp" rel="icon">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
@@ -78,7 +79,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-fdaeddbba6fa95a0f13bcc20c9a3fb04.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-46631ef7d5207a1ec5e6e4a429f0476e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -119,13 +120,13 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="Why I am building PopGenLM Bench – Dr. Tahir Ali">
+<meta property="og:title" content="Why I am building PopGenLM Bench – Dr.&nbsp;Tahir Ali">
 <meta property="og:description" content="The first public step toward a population-genetic evaluation layer for genomic language models.">
 <meta property="og:image" content="https://tahirali-biomics.github.io/assets/popgenlm/benchmark-overview.png">
 <meta property="og:site_name" content="Dr. Tahir Ali">
 <meta property="og:image:height" content="1526">
 <meta property="og:image:width" content="2396">
-<meta name="twitter:title" content="Why I am building PopGenLM Bench – Dr. Tahir Ali">
+<meta name="twitter:title" content="Why I am building PopGenLM Bench – Dr.&nbsp;Tahir Ali">
 <meta name="twitter:description" content="The first public step toward a population-genetic evaluation layer for genomic language models.">
 <meta name="twitter:image" content="https://tahirali-biomics.github.io/assets/popgenlm/benchmark-overview.png">
 <meta name="twitter:image-height" content="1526">
@@ -133,7 +134,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="article-page content-dense docked fullcontent nav-sidebar quarto-light">
+<body class="nav-sidebar docked fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -158,21 +159,84 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item"><div class="sidebar-item-container"><a href="../../index.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Home</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../popgenlm.html" class="sidebar-item-text sidebar-link"><span class="menu-text">PopGenLM</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../genomes-to-ai.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">Genomes to AI</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../projects.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Projects</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../publications.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Publications</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../cv.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Résumé</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../teaching/teaching.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Teaching</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../workshops/workshops.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Workshops</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank"><span class="menu-text">GitHub</span></a></div></li></ul>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../popgenlm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PopGenLM</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../genomes-to-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Genomes to AI</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projects</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../publications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Publications</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../cv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Résumé</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../teaching/teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../workshops/workshops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Workshops</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">GitHub</span></a>
+  </div>
+</li>
+    </ul>
     </div>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Why I am building PopGenLM Bench</h1>
-  <div class="quarto-categories"><div class="quarto-category">Genomic language models</div><div class="quarto-category">Population genomics</div><div class="quarto-category">Open source</div><div class="quarto-category">Build note</div></div>
+  <div class="quarto-categories">
+    <div class="quarto-category">Genomic language models</div>
+    <div class="quarto-category">Population genomics</div>
+    <div class="quarto-category">Open source</div>
+    <div class="quarto-category">Build note</div>
+  </div>
   </div>
 
 <div>
-  <div class="description">The first public step toward a population-genetic evaluation layer for genomic language models.</div>
+  <div class="description">
+    The first public step toward a population-genetic evaluation layer for genomic language models.
+  </div>
 </div>
 
 
@@ -202,30 +266,45 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 
 <p>Genomic language models can score millions of variants, but a completed model run does not by itself establish biological validity. Before interpreting a score, I want to know whether the alleles matched the intended reference, whether model and software versions were recorded, whether sequence orientation was treated consistently, and whether the output behaves sensibly against independent evolutionary evidence.</p>
 <p>That is the reason for <strong>PopGenLM Bench</strong>, my first open-source scientific AI engineering project.</p>
-<h2 id="information-about-what">Information about what?</h2>
+<section id="information-about-what" class="level2">
+<h2 class="anchored" data-anchor-id="information-about-what">Information about what?</h2>
 <p>Reading Chapter 2 of Christoph Adami’s <em>The Evolution of Biological Information</em> sharpened the question behind this project. In information theory, a sequence or score is not informative in isolation. Information is a relationship: knowing one variable must reduce uncertainty about a specified target across an appropriate ensemble.</p>
 <p>For a genomic language-model score, I therefore need to ask: information about what? A score may reflect sequence plausibility, evolutionary conservation, regulatory context, population frequency or a technical property of the training data. These possibilities are related, but they are not equivalent. Producing a confident number does not establish which relationship has been learned.</p>
 <p>This is why PopGenLM Bench is designed as an evaluation layer rather than a score viewer. Its task is to state the target, define the comparison set, measure whether the model adds predictive value beyond simpler baselines, and expose where that relationship fails.</p>
-<h2 id="the-first-deliberately-small-milestone">The first deliberately small milestone</h2>
+</section>
+<section id="the-first-deliberately-small-milestone" class="level2">
+<h2 class="anchored" data-anchor-id="the-first-deliberately-small-milestone">The first deliberately small milestone</h2>
 <p>Version 0.1 does one thing carefully: it scores exactly 100 deterministic SNVs with the published GPN Brassicales model. The variants occupy a safe internal section of the public <em>Arabidopsis thaliana</em> region used in GPN’s official example, ensuring complete sequence context for every site.</p>
 <p>The run uses pinned upstream code and model revisions, validates every REF allele against the FASTA, invokes GPN’s maintained variant-effect command, and records input and output hashes, package versions, device, runtime, and the exact command.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> python install 3.13</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> python install 3.13</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync <span class="at">--extra</span> gpn <span class="at">--group</span> dev</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run popgenlm demo <span class="at">--project-root</span> .</span></code></pre></div>
-<h2 id="verified-result">Verified result</h2>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run popgenlm demo <span class="at">--project-root</span> .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="verified-result" class="level2">
+<h2 class="anchored" data-anchor-id="verified-result">Verified result</h2>
 <p>The model returned all <strong>100 expected scores</strong>. The median alternate-minus-reference score was <strong>−1.0309</strong>, with <strong>77%</strong> of the deterministic alternate alleles scoring below their reference allele. The complete CPU run took <strong>80.7 seconds</strong>.</p>
-<figure>
-<img src="../../assets/popgenlm/benchmark-overview.png" data-fig-alt="Four-panel summary of GPN scores showing the score distribution, positional profile, ranked profile, and bootstrap interval for the median." alt="Four-panel PopGenLM Bench validation overview" loading="lazy" decoding="async">
-<figcaption aria-hidden="true">Verified PopGenLM benchmark overview</figcaption>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/popgenlm/benchmark-overview.png" class="img-fluid figure-img" alt="Four-panel summary of GPN scores showing the score distribution, positional profile, ranked profile, and bootstrap interval for the median."></p>
+<figcaption>Verified PopGenLM benchmark overview</figcaption>
 </figure>
-<h2 id="what-this-result-does-not-mean">What this result does not mean</h2>
+</div>
+</section>
+<section id="what-this-result-does-not-mean" class="level2">
+<h2 class="anchored" data-anchor-id="what-this-result-does-not-mean">What this result does not mean</h2>
 <p>The distribution cannot be used to infer natural selection or biological information content. These variants were generated deterministically from one public sequence region; they were not sampled from a natural population and do not form an evolutionary ensemble suitable for that claim.</p>
 <p>This distinction is central to the project. A technically successful run demonstrates that the inference and validation machinery works. Biological support requires an independent benchmark with observed population variants, allele-frequency information, uncertainty estimates, and appropriate null comparisons.</p>
-<h2 id="what-comes-next">What comes next</h2>
+</section>
+<section id="what-comes-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-comes-next">What comes next</h2>
 <p>The next milestone will use a documented public <em>A. thaliana</em> population dataset. It will test whether GPN scores reduce uncertainty about allele-frequency classes beyond appropriate sequence baselines, using effect sizes, block-bootstrap confidence intervals, permutation tests and sensitivity analyses. Later milestones will incorporate conservation scores, genomic annotation classes and controls for genomic and phylogenetic dependence.</p>
 <p>The guiding principle is now clearer to me: a model output becomes scientific evidence only when its predictive relationship to biology is explicit, reproducible and tested outside the model that produced it.</p>
 <p>The evolving project overview, verified outputs, and roadmap are available on the <a href="../../popgenlm.html">PopGenLM Bench page</a>. The complete statistical workflow can also be rerun in the <a href="https://colab.research.google.com/github/tahirali-biomics/tahirali-biomics.github.io/blob/main/notebooks/popgenlm-bench-demo.ipynb">verified Colab notebook</a>. The public package repository will become active with the first reviewed release.</p>
-</main> <!-- /main -->
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -635,7 +714,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>© 2026 Dr. Tahir Ali</p>
+<p>© 2026 Dr.&nbsp;Tahir Ali</p>
 </div>   
     <div class="nav-footer-center">
 <p>Computational biology · Scientific AI · Education</p>

@@ -8,7 +8,7 @@
 
 <meta name="author" content="Dr Tahir Ali | AG de Meaux">
 
-<title>Practical Day 2: FASTQ to VCF - Part 2 – Dr. Tahir Ali</title>
+<title>Practical Day 2: FASTQ to VCF - Part 2 – Dr.&nbsp;Tahir Ali</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -69,6 +69,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../profile.webp" rel="icon">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
@@ -76,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-fdaeddbba6fa95a0f13bcc20c9a3fb04.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-46631ef7d5207a1ec5e6e4a429f0476e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -117,15 +118,15 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="Practical Day 2: FASTQ to VCF - Part 2 – Dr. Tahir Ali">
+<meta property="og:title" content="Practical Day 2: FASTQ to VCF - Part 2 – Dr.&nbsp;Tahir Ali">
 <meta property="og:description" content="Computational biologist building trustworthy scientific AI for genomics, research, and education.">
 <meta property="og:site_name" content="Dr. Tahir Ali">
-<meta name="twitter:title" content="Practical Day 2: FASTQ to VCF - Part 2 – Dr. Tahir Ali">
+<meta name="twitter:title" content="Practical Day 2: FASTQ to VCF - Part 2 – Dr.&nbsp;Tahir Ali">
 <meta name="twitter:description" content="Computational biologist building trustworthy scientific AI for genomics, research, and education.">
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="content-dense docked nav-sidebar quarto-light technical-page">
+<body class="nav-sidebar docked quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -150,16 +151,81 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item"><div class="sidebar-item-container"><a href="../../index.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Home</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../popgenlm.html" class="sidebar-item-text sidebar-link"><span class="menu-text">PopGenLM</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../genomes-to-ai.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Genomes to AI</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../projects.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Projects</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../publications.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Publications</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../cv.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Résumé</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../teaching.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">Teaching</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../workshops/workshops.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Workshops</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank"><span class="menu-text">GitHub</span></a></div></li></ul>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../popgenlm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PopGenLM</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../genomes-to-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Genomes to AI</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projects</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../publications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Publications</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../cv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Résumé</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../teaching/teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../workshops/workshops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Workshops</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">GitHub</span></a>
+  </div>
+</li>
+    </ul>
     </div>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Contents</h2>
+    <h2 id="toc-title">On this page</h2>
    
-  <ul class="technical-toc-list"><li><a href="#learning-objectives-2">Learning Objectives</a></li><li><a href="#connecting-to-hpc-ramses-and-organizing-the-workspace-2">Connecting to HPC (RAMSES) and Organizing the Workspace</a></li><li><a href="#instructions-for-running-bioinformatics-jobs-on-the-hpc-ramses-2">Instructions for Running Bioinformatics Jobs on the HPC (RAMSES)</a></li><li><a href="#bam-filtering-variant-calling-and-filtering-2">BAM Filtering, Variant Calling, and Filtering</a></li><li><a href="#understanding-the-vcf-format-2">Understanding the VCF Format</a></li><li><a href="#dimentionality-reduction-2">Dimentionality Reduction</a></li></ul></nav>
+  <ul class="collapse">
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a>
+  <ul class="collapse">
+  <li><a href="#tools-to-be-used" id="toc-tools-to-be-used" class="nav-link" data-scroll-target="#tools-to-be-used">Tools to be Used</a></li>
+  </ul></li>
+  <li><a href="#connecting-to-hpc-ramses-and-organizing-the-workspace" id="toc-connecting-to-hpc-ramses-and-organizing-the-workspace" class="nav-link" data-scroll-target="#connecting-to-hpc-ramses-and-organizing-the-workspace">Connecting to HPC (RAMSES) and Organizing the Workspace</a></li>
+  <li><a href="#instructions-for-running-bioinformatics-jobs-on-the-hpc-ramses" id="toc-instructions-for-running-bioinformatics-jobs-on-the-hpc-ramses" class="nav-link" data-scroll-target="#instructions-for-running-bioinformatics-jobs-on-the-hpc-ramses">Instructions for Running Bioinformatics Jobs on the HPC (RAMSES)</a></li>
+  <li><a href="#bam-filtering-variant-calling-and-filtering" id="toc-bam-filtering-variant-calling-and-filtering" class="nav-link" data-scroll-target="#bam-filtering-variant-calling-and-filtering">BAM Filtering, Variant Calling, and Filtering</a></li>
+  <li><a href="#understanding-the-vcf-format" id="toc-understanding-the-vcf-format" class="nav-link" data-scroll-target="#understanding-the-vcf-format">Understanding the VCF Format</a></li>
+  <li><a href="#dimentionality-reduction" id="toc-dimentionality-reduction" class="nav-link" data-scroll-target="#dimentionality-reduction">Dimentionality Reduction</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -190,7 +256,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 
 
 <section id="learning-objectives" class="level1">
-<h1 id="learning-objectives-2">Learning Objectives</h1>
+<h1>Learning Objectives</h1>
 <ul>
 <li>Filtering BAM files</li>
 <li>Variant calling</li>
@@ -214,26 +280,26 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </section>
 </section>
 <section id="connecting-to-hpc-ramses-and-organizing-the-workspace" class="level1">
-<h1 id="connecting-to-hpc-ramses-and-organizing-the-workspace-2">Connecting to HPC (RAMSES) and Organizing the Workspace</h1>
+<h1>Connecting to HPC (RAMSES) and Organizing the Workspace</h1>
 <p><strong>Connect to the HPC</strong></p>
 <p>For Windows users: Use MobaXterm. For Mac/Linux users: Use the Terminal application.<br>
 Log in to the HPC cluster using your login credentials.</p>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-Y</span> qbius030@@ramses1.itcc.uni-koeln.de</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-Y</span> qbius030@@ramses1.itcc.uni-koeln.de</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace 'qbius030' with your specific username.</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Enter passphrase for key '/Users/tahirali/.ssh/ramses_key', if prompted:</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Duo two-factor login for qbius030</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></details><p><strong>Check Your Current Directory</strong></p>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></details><ul>
+<p><strong>Check Your Current Directory</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
 <li>If you are not in your home directory, navigate to it:</li>
 </ul>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /home/group.kurse/qbius030/</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /home/group.kurse/qbius030/</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace 'qbius030' with your specific username.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></details><p><strong>Copy Raw Data to Your Home Directory</strong></p>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> /scratch/tali/Practical_Day_1/sample_project_data .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></details><p><strong>Create a Directory for Analysis</strong></p>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> Practical_Day_2/<span class="dt">{filtered_bam</span><span class="op">,</span><span class="dt">variant_calling</span><span class="op">,</span><span class="dt">variant_filtering}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></details><ul>
+<p><strong>Copy Raw Data to Your Home Directory</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> /scratch/tali/Practical_Day_1/sample_project_data .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Create a Directory for Analysis</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> Practical_Day_2/<span class="dt">{filtered_bam</span><span class="op">,</span><span class="dt">variant_calling</span><span class="op">,</span><span class="dt">variant_filtering}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
 <li><strong>fastqc</strong>: for storing quality control results of fastq files.</li>
 <li><strong>trimming</strong>: for storing trimmed read files.</li>
 <li><strong>mapping</strong>: for storing read mapping outputs.</li>
@@ -241,7 +307,7 @@ Log in to the HPC cluster using your login credentials.</p>
 </ul>
 </section>
 <section id="instructions-for-running-bioinformatics-jobs-on-the-hpc-ramses" class="level1">
-<h1 id="instructions-for-running-bioinformatics-jobs-on-the-hpc-ramses-2">Instructions for Running Bioinformatics Jobs on the HPC (RAMSES)</h1>
+<h1>Instructions for Running Bioinformatics Jobs on the HPC (RAMSES)</h1>
 <p>For quality control and downstream processing of FASTQ files,<br>
 we will execute various tasks on the HPC using Bash scripts with for loops.</p>
 <p><strong>Steps:</strong></p>
@@ -249,18 +315,18 @@ we will execute various tasks on the HPC using Bash scripts with for loops.</p>
 <li><p>Prepare your script using a text editor and save it as <code>your_bash_script.sh</code>.</p></li>
 <li><p>Submit your job in the terminal using:</p></li>
 </ol>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> your_bash_script.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></details><ol start="3" type="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> your_bash_script.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="3" type="1">
 <li>For more details, consult the <a href="https://gitlab.git.nrw/uzk-itcc-hpc/itcc-hpc-ramses/-/wikis/Documentation">RAMSES Brief Instructions</a>.</li>
 </ol>
 </section>
 <section id="bam-filtering-variant-calling-and-filtering" class="level1">
-<h1 id="bam-filtering-variant-calling-and-filtering-2">BAM Filtering, Variant Calling, and Filtering</h1>
+<h1>BAM Filtering, Variant Calling, and Filtering</h1>
 <p><strong>Create and Submit a SLURM Script for BAM to VCF Analysis</strong></p>
 <p><strong>Check if required module is installed:</strong></p>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> avail</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></details><p><strong>Example SLURM Script</strong> (bam_bcf_vcf.sh)</p>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> avail</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Example SLURM Script</strong> (bam_bcf_vcf.sh)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=bam2vcf</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
@@ -344,21 +410,21 @@ we will execute various tasks on the HPC using Bash scripts with for loops.</p>
 <span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a><span class="fu">gzip</span> <span class="at">-c</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">${output_variant_filtering_dir}</span><span class="st">/SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_OnlyPolymorphic_shortNam_DP10GQ20Q30_Mis80NoIndel.vcf.gz"</span></span>
 <span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Pipeline completed."</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></details><p><strong>Fixing the “DOS Line Breaks” Error on a HPC Cluster</strong></p>
+<p><strong>Fixing the “DOS Line Breaks” Error on a HPC Cluster</strong></p>
 <ul>
 <li>If you see:</li>
 </ul>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch:</span> error: Batch script contains DOS line breaks <span class="er">(</span><span class="ex">\r\n</span><span class="kw">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></details><p><strong>Fix with:</strong></p>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dos2unix</span> fastqc.sh</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch:</span> error: Batch script contains DOS line breaks <span class="er">(</span><span class="ex">\r\n</span><span class="kw">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Fix with:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dos2unix</span> fastqc.sh</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="at">-v</span> fastqc.sh  <span class="co"># Check for ^M characters</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></details><p><strong>Check job status:</strong></p>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> qbius030</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></details></section>
+<p><strong>Check job status:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> qbius030</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
 <section id="understanding-the-vcf-format" class="level1">
-<h1 id="understanding-the-vcf-format-2">Understanding the VCF Format</h1>
+<h1>Understanding the VCF Format</h1>
 <p><strong>Extracting Information from VCF Files</strong></p>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># List samples</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># List samples</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> query <span class="at">-l</span> SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_OnlyPolymorphic_shortNam_DP10GQ20Q30_Mis80NoIndel.vcf.gz</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Count number of samples</span></span>
@@ -372,9 +438,9 @@ we will execute various tasks on the HPC using Bash scripts with for loops.</p>
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracting per-sample tags</span></span>
 <span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> query <span class="at">-f</span> <span class="st">'%CHROM %POS[\t%GT\t%PL]\n'</span> SWE_ESP_At_Chr4_BamQualFilt-f3Q30F264_nodup_DP_OnlyPolymorphic_shortNam_DP10GQ20Q30_Mis80NoIndel.vcf.gz <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 10</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></details></section>
+</section>
 <section id="dimentionality-reduction" class="level1">
-<h1 id="dimentionality-reduction-2">Dimentionality Reduction</h1>
+<h1>Dimentionality Reduction</h1>
 <p>You need to perform this part in R, download required files to your local system and copy these to newly created direcory named “VCF2PCA”</p>
 <ul>
 <li><p>Accesions.csv</p></li>
@@ -382,7 +448,7 @@ we will execute various tasks on the HPC using Bash scripts with for loops.</p>
 <li><p>At_Chr4.fasta</p></li>
 <li><p>At_Chr4.gff</p></li>
 </ul>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Step 1: Load necessary libraries ----</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Step 1: Load necessary libraries ----</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># These libraries help in handling VCF data, visualizing results, and performing PCA.</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vcfR)          <span class="co"># To work with VCF (Variant Call Format) files</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)     <span class="co"># For data manipulation and visualization</span></span>
@@ -557,11 +623,12 @@ we will execute various tasks on the HPC using Bash scripts with for loops.</p>
 <span id="cb13-173"><a href="#cb13-173" aria-hidden="true" tabindex="-1"></a>    <span class="at">yaxis4=</span>axis</span>
 <span id="cb13-174"><a href="#cb13-174" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb13-175"><a href="#cb13-175" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">warn=</span><span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb13-176"><a href="#cb13-176" aria-hidden="true" tabindex="-1"></a>fig</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></div></details><div class="tutorial-output-grid preserved-output-group" data-output-group="1"><figure><img src="practical_day2_files/figure-html/unnamed-chunk-1-1.png" alt="PCA eigenvalues for the first ten components." loading="lazy" decoding="async"><figcaption>PCA eigenvalues for the first ten components.</figcaption></figure><figure><img src="practical_day2_files/figure-html/unnamed-chunk-1-2.png" alt="Percentage of genetic variance explained by each principal component." loading="lazy" decoding="async"><figcaption>Percentage of genetic variance explained by each principal component.</figcaption></figure><figure><img src="practical_day2_files/figure-html/unnamed-chunk-1-3.png" alt="Population structure on PC1 and PC2." loading="lazy" decoding="async"><figcaption>Population structure on PC1 and PC2.</figcaption></figure><figure><img src="practical_day2_files/figure-html/unnamed-chunk-1-4.png" alt="Population structure on PC1 and PC3." loading="lazy" decoding="async"><figcaption>Population structure on PC1 and PC3.</figcaption></figure><figure><img src="practical_day2_files/figure-html/unnamed-chunk-1-5.png" alt="Population structure on PC2 and PC3." loading="lazy" decoding="async"><figcaption>Population structure on PC2 and PC3.</figcaption></figure><figure><img src="practical_day2_files/figure-html/unnamed-chunk-1-6.png" alt="Sample-labelled PC1–PC2 ordination for diagnostic review." loading="lazy" decoding="async"><figcaption>Sample-labelled PC1–PC2 ordination for diagnostic review.</figcaption></figure></div><hr>
+<span id="cb13-176"><a href="#cb13-176" aria-hidden="true" tabindex="-1"></a>fig</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
 <p><strong>Wrapping Up Practical Day Two</strong></p>
 <p>You’ve made great progress today and demonstrated excellent teamwork and dedication. It’s inspiring to see your enthusiasm as you dive deeper into these concepts.</p>
 <p>Remember, every step you take brings you closer to mastering these skills. Keep up the curiosity and effort, and don’t hesitate to explore further on your own!</p>
-<p>Looking forward to seeing you next time for more exciting challenges and discoveries. Have a great evening! </p>
+<p>Looking forward to seeing you next time for more exciting challenges and discoveries. Have a great evening! 🌱</p>
 
 
 </section>
@@ -976,7 +1043,7 @@ we will execute various tasks on the HPC using Bash scripts with for loops.</p>
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>© 2026 Dr. Tahir Ali</p>
+<p>© 2026 Dr.&nbsp;Tahir Ali</p>
 </div>   
     <div class="nav-footer-center">
 <p>Computational biology · Scientific AI · Education</p>
@@ -991,4 +1058,4 @@ we will execute various tasks on the HPC using Bash scripts with for loops.</p>
 
 
 <script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
-<script id="technical-code-copy">(() => { document.addEventListener('click', async (event) => { const button=event.target.closest('.technical-copy-button'); if(!button)return; event.preventDefault(); event.stopPropagation(); const details=button.closest('details'); const code=details?.querySelector('pre code, pre'); if(!code)return; const text=code.innerText; try { await navigator.clipboard.writeText(text); } catch (_) { const area=document.createElement('textarea'); area.value=text; area.style.position='fixed'; area.style.opacity='0'; document.body.appendChild(area); area.select(); document.execCommand('copy'); area.remove(); } const old=button.textContent; button.textContent='Copied'; setTimeout(()=>{button.textContent=old;},1400); }); })();</script></body></html>
+</body></html>

@@ -69,6 +69,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../profile.webp" rel="icon">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
@@ -76,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-fdaeddbba6fa95a0f13bcc20c9a3fb04.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-46631ef7d5207a1ec5e6e4a429f0476e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -117,15 +118,15 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="Practical Day 3: Exploring GO-Term Enrichment, Diversity (Tajima’s D &amp; Pi), and Divergence (FST) Stats – Dr. Tahir Ali">
+<meta property="og:title" content="Practical Day 3: Exploring GO-Term Enrichment, Diversity (Tajima’s D &amp; Pi), and Divergence (FST) Stats – Dr.&nbsp;Tahir Ali">
 <meta property="og:description" content="Computational biologist building trustworthy scientific AI for genomics, research, and education.">
 <meta property="og:site_name" content="Dr. Tahir Ali">
-<meta name="twitter:title" content="Practical Day 3: Exploring GO-Term Enrichment, Diversity (Tajima’s D &amp; Pi), and Divergence (FST) Stats – Dr. Tahir Ali">
+<meta name="twitter:title" content="Practical Day 3: Exploring GO-Term Enrichment, Diversity (Tajima’s D &amp; Pi), and Divergence (FST) Stats – Dr.&nbsp;Tahir Ali">
 <meta name="twitter:description" content="Computational biologist building trustworthy scientific AI for genomics, research, and education.">
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="content-dense docked nav-sidebar quarto-light technical-page">
+<body class="nav-sidebar docked quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -150,16 +151,86 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item"><div class="sidebar-item-container"><a href="../../index.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Home</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../popgenlm.html" class="sidebar-item-text sidebar-link"><span class="menu-text">PopGenLM</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../genomes-to-ai.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Genomes to AI</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../projects.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Projects</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../publications.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Publications</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../cv.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Résumé</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../teaching.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">Teaching</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../workshops/workshops.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Workshops</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank"><span class="menu-text">GitHub</span></a></div></li></ul>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../popgenlm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PopGenLM</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../genomes-to-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Genomes to AI</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projects</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../publications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Publications</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../cv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Résumé</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../teaching/teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../workshops/workshops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Workshops</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">GitHub</span></a>
+  </div>
+</li>
+    </ul>
     </div>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Contents</h2>
+    <h2 id="toc-title">On this page</h2>
    
-  <ul class="technical-toc-list"><li><a href="#learning-objectives-2">Learning Objectives</a></li><li><a href="#connecting-to-hpc-ramses-and-organizing-the-workspace-2">Connecting to HPC (RAMSES) and Organizing the Workspace</a></li><li><a href="#instructions-for-running-bioinformatics-jobs-on-the-hpc-ramses-2">Instructions for Running Bioinformatics Jobs on the HPC (RAMSES)</a></li><li><a href="#go-gene-ontology-enrichment-analysis-2">GO (Gene Ontology) Enrichment Analysis</a></li><li><a href="#estimate-diversity-tajima-d-pi-and-diveregence-fst-measures">Estimate Diversity (Tajima’D &amp; Pi) and Diveregence (FST) measures</a></li><li><a href="#extracting-and-plotting-bioclimatic-variables-for-sample-coordinates-2">Extracting and Plotting Bioclimatic Variables for Sample Coordinates</a></li></ul></nav>
+  <ul class="collapse">
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a>
+  <ul class="collapse">
+  <li><a href="#tools-to-be-used" id="toc-tools-to-be-used" class="nav-link" data-scroll-target="#tools-to-be-used">Tools to be Used</a></li>
+  </ul></li>
+  <li><a href="#connecting-to-hpc-ramses-and-organizing-the-workspace" id="toc-connecting-to-hpc-ramses-and-organizing-the-workspace" class="nav-link" data-scroll-target="#connecting-to-hpc-ramses-and-organizing-the-workspace">Connecting to HPC (RAMSES) and Organizing the Workspace</a></li>
+  <li><a href="#instructions-for-running-bioinformatics-jobs-on-the-hpc-ramses" id="toc-instructions-for-running-bioinformatics-jobs-on-the-hpc-ramses" class="nav-link" data-scroll-target="#instructions-for-running-bioinformatics-jobs-on-the-hpc-ramses">Instructions for Running Bioinformatics Jobs on the HPC (RAMSES)</a></li>
+  <li><a href="#go-gene-ontology-enrichment-analysis" id="toc-go-gene-ontology-enrichment-analysis" class="nav-link" data-scroll-target="#go-gene-ontology-enrichment-analysis">GO (Gene Ontology) Enrichment Analysis</a>
+  <ul class="collapse">
+  <li><a href="#estimate-genome-wide-fst-values" id="toc-estimate-genome-wide-fst-values" class="nav-link" data-scroll-target="#estimate-genome-wide-fst-values">Estimate Genome-wide FST values</a></li>
+  <li><a href="#prepare-input-file-for-go-term-enrichment-analysis" id="toc-prepare-input-file-for-go-term-enrichment-analysis" class="nav-link" data-scroll-target="#prepare-input-file-for-go-term-enrichment-analysis">Prepare input file for GO Term Enrichment Analysis</a></li>
+  <li><a href="#perform-go-terms-enrichment-analysis" id="toc-perform-go-terms-enrichment-analysis" class="nav-link" data-scroll-target="#perform-go-terms-enrichment-analysis">Perform GO Terms Enrichment Analysis</a></li>
+  </ul></li>
+  <li><a href="#estimate-diversity-tajimad-pi-and-diveregence-fst-measures" id="toc-estimate-diversity-tajimad-pi-and-diveregence-fst-measures" class="nav-link" data-scroll-target="#estimate-diversity-tajimad-pi-and-diveregence-fst-measures">Estimate Diversity (Tajima’D &amp; Pi) and Diveregence (FST) measures</a></li>
+  <li><a href="#extracting-and-plotting-bioclimatic-variables-for-sample-coordinates" id="toc-extracting-and-plotting-bioclimatic-variables-for-sample-coordinates" class="nav-link" data-scroll-target="#extracting-and-plotting-bioclimatic-variables-for-sample-coordinates">Extracting and Plotting Bioclimatic Variables for Sample Coordinates</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -190,7 +261,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 
 
 <section id="learning-objectives" class="level1">
-<h1 id="learning-objectives-2">Learning Objectives</h1>
+<h1>Learning Objectives</h1>
 <ul>
 <li>GO (Gene Ontology) Enrichment Analysis</li>
 <li>Estimate and plot genome-wide FST, Tajima’s D, Pi</li>
@@ -207,26 +278,26 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </section>
 </section>
 <section id="connecting-to-hpc-ramses-and-organizing-the-workspace" class="level1">
-<h1 id="connecting-to-hpc-ramses-and-organizing-the-workspace-2">Connecting to HPC (RAMSES) and Organizing the Workspace</h1>
+<h1>Connecting to HPC (RAMSES) and Organizing the Workspace</h1>
 <p><strong>Connect to the HPC</strong></p>
 <p>For Windows users: Use MobaXterm. For Mac/Linux users: Use the Terminal application.<br>
 Log in to the HPC cluster using your login credentials.</p>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-Y</span> qbius030@@ramses1.itcc.uni-koeln.de</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-Y</span> qbius030@@ramses1.itcc.uni-koeln.de</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace 'qbius030' with your specific username.</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Enter passphrase for key '/Users/tahirali/.ssh/ramses_key', if prompted:</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Duo two-factor login for qbius030</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></details><p><strong>Check Your Current Directory</strong></p>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></details><ul>
+<p><strong>Check Your Current Directory</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
 <li>If you are not in your home directory, navigate to it:</li>
 </ul>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /home/group.kurse/qbius030/</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /home/group.kurse/qbius030/</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace 'qbius030' with your specific username.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></details><p><strong>Copy Raw Data to Your Home Directory</strong></p>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> /scratch/tali/Practical_Day_3 .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></details></section>
+<p><strong>Copy Raw Data to Your Home Directory</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> /scratch/tali/Practical_Day_3 .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
 <section id="instructions-for-running-bioinformatics-jobs-on-the-hpc-ramses" class="level1">
-<h1 id="instructions-for-running-bioinformatics-jobs-on-the-hpc-ramses-2">Instructions for Running Bioinformatics Jobs on the HPC (RAMSES)</h1>
+<h1>Instructions for Running Bioinformatics Jobs on the HPC (RAMSES)</h1>
 <p>For quality control and downstream processing of FASTQ files,<br>
 we will execute various tasks on the HPC using Bash scripts with for loops.</p>
 <p><strong>Steps:</strong></p>
@@ -234,21 +305,21 @@ we will execute various tasks on the HPC using Bash scripts with for loops.</p>
 <li><p>Prepare your script using a text editor and save it as <code>your_bash_script.sh</code>.</p></li>
 <li><p>Submit your job in the terminal using:</p></li>
 </ol>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> your_bash_script.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></details><ol start="3" type="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> your_bash_script.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="3" type="1">
 <li>For more details, consult the <a href="https://gitlab.git.nrw/uzk-itcc-hpc/itcc-hpc-ramses/-/wikis/Documentation">RAMSES Brief Instructions</a>.</li>
 </ol>
 </section>
 <section id="go-gene-ontology-enrichment-analysis" class="level1">
-<h1 id="go-gene-ontology-enrichment-analysis-2">GO (Gene Ontology) Enrichment Analysis</h1>
+<h1>GO (Gene Ontology) Enrichment Analysis</h1>
 <p>The enrichment analysis identifies which Gene Ontology (GO) terms are over-represented or under-represented within a given gene set, based on their annotations. To conduct this analysis, we require an estimate of genome-wide FST values to measure genetic differentiation between two groups (populations) of samples, using variants provided in a VCF file. For the estimation of genome-wide FST, we will use the software STACKS.</p>
 <section id="estimate-genome-wide-fst-values" class="level2">
 <h2 class="anchored" data-anchor-id="estimate-genome-wide-fst-values">Estimate Genome-wide FST values</h2>
 <p><strong>Create and Submit a SLURM Script for BAM to VCF Analysis</strong></p>
 <p><strong>Check if required module is installed:</strong></p>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> avail</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></details><p><strong>Example SLURM Script</strong> (stacks.sh)</p>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> avail</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Example SLURM Script</strong> (stacks.sh)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=stacks</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
@@ -269,17 +340,17 @@ we will execute various tasks on the HPC using Bash scripts with for loops.</p>
 <span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="va">output_dir</span><span class="op">=</span><span class="st">"/home/group.kurse/qbius030/Practical_Day_3/stacks"</span></span>
 <span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="ex">populations</span> <span class="at">-V</span> <span class="st">"</span><span class="va">${input_dir}</span><span class="st">/1001genomes_snp-short-indel_only_ACGTN_Dp10GQ20Q30_NoIndel_Bialleleic_80PcMissing_80SwEs_DefenseOnly.vcf.gz"</span> <span class="at">--popmap</span> <span class="st">"/home/group.kurse/qbius030/Practical_Day_3/stacks/pop.txt"</span> <span class="at">--fstats</span> <span class="at">-t</span> 10 <span class="at">--structure</span> <span class="at">-O</span> <span class="st">"</span><span class="va">${output_dir}</span><span class="st">"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></details><p><strong>Fixing the “DOS Line Breaks” Error on a HPC Cluster</strong></p>
+<p><strong>Fixing the “DOS Line Breaks” Error on a HPC Cluster</strong></p>
 <ul>
 <li>If you see:</li>
 </ul>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch:</span> error: Batch script contains DOS line breaks <span class="er">(</span><span class="ex">\r\n</span><span class="kw">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></details><p><strong>Fix with:</strong></p>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dos2unix</span> fastqc.sh</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch:</span> error: Batch script contains DOS line breaks <span class="er">(</span><span class="ex">\r\n</span><span class="kw">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Fix with:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dos2unix</span> fastqc.sh</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="at">-v</span> fastqc.sh  <span class="co"># Check for ^M characters</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></details><p><strong>Check job status:</strong></p>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> qbius030</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></details></section>
+<p><strong>Check job status:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> qbius030</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
 <section id="prepare-input-file-for-go-term-enrichment-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="prepare-input-file-for-go-term-enrichment-analysis">Prepare input file for GO Term Enrichment Analysis</h2>
 <p><strong>Process the STACKS output in R using the following script</strong></p>
@@ -288,9 +359,9 @@ we will execute various tasks on the HPC using Bash scripts with for loops.</p>
 <li><p>Download the file “1001genomes_snp-short-indel_only_ACGTN_Dp10GQ20Q30_NoIndel_Bialleleic_80PcMissing_80SwEs_DefenseOnly.p.fst_SWE-ESP.tsv” from Cheops and save it in the “GO_Enrichment_Analysis” directory.</p></li>
 <li><p>Use the following R script to process the STACKS output file.</p></li>
 <li><p>Make sure to replace the file name with the actual file name generated in your STACKS output directory:/home/group.kurse/qbius030/Practical_Day_3/stacks.</p></li>
-<li>
-</li></ul>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to check and install missing packages</span></span>
+<li></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to check and install missing packages</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># This function ensures that a required package is installed on the system.</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># If the package is not installed, it will automatically install it.</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>check_and_install <span class="ot">&lt;-</span> <span class="cf">function</span>(pkg) {</span>
@@ -420,16 +491,16 @@ we will execute various tasks on the HPC using Bash scripts with for loops.</p>
 <span id="cb11-128"><a href="#cb11-128" aria-hidden="true" tabindex="-1"></a><span class="co"># Write results to files</span></span>
 <span id="cb11-129"><a href="#cb11-129" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(overlapping_genes, <span class="st">"overlapping_genes_SWE_ESP.txt"</span>, <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">quote =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb11-130"><a href="#cb11-130" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(overlapping_fst, <span class="st">"overlapping_fst_SWE_ESP.txt"</span>, <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">quote =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></details><p><strong>Process the Rscript output file in RAMSES terminal using BEDTools</strong></p>
+<p><strong>Process the Rscript output file in RAMSES terminal using BEDTools</strong></p>
 <ul>
 <li>Copy these files (overlapping_genes_SWE_ESP.txt &amp; overlapping_fst_SWE_ESP.txt) to RAMSES to directory “/home/group.kurse/qbius030/Practical_Day_3/GO_Enrichment_Analysis” using MobaXterm (Windows)/Cyberduck(Mac)</li>
 <li>Use BEDTools to identify loci within genomic boundaries of defense-related genes</li>
 </ul>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Command to run in terminal:</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Command to run in terminal:</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load bio/BEDTools/2.31.1-GCC-13.2.0</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="ex">bedtools</span> intersect <span class="at">-wa</span> <span class="at">-wb</span> <span class="at">-a</span> overlapping_genes_SWE_ESP.txt <span class="at">-b</span> overlapping_fst_SWE_ESP.txt <span class="op">&gt;</span> overlapping_genes_fst_SWE_ESP.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></details><p><strong>Process BEDTools output in R using following RScript</strong> - Download the BEDTools output “overlapping_genes_fst_SWE_ESP.txt” to your local system and copy to “GO_Enrichment_Analysis” directory</p>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"/home/tahirali/RAMSES_mount/tali/qbio/Practical_Day_3/GO_Enrichment_Analysis"</span>)</span>
+<p><strong>Process BEDTools output in R using following RScript</strong> - Download the BEDTools output “overlapping_genes_fst_SWE_ESP.txt” to your local system and copy to “GO_Enrichment_Analysis” directory</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"/home/tahirali/RAMSES_mount/tali/qbio/Practical_Day_3/GO_Enrichment_Analysis"</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Read BEDTools output</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>ovl_genes_fst <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">"overlapping_genes_fst_SWE_ESP.txt"</span>, <span class="at">header =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -467,7 +538,7 @@ we will execute various tasks on the HPC using Bash scripts with for loops.</p>
 <span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Write final data to file for GO analysis</span></span>
 <span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(unique_data, <span class="st">"GO_input_SWE_ESP.txt"</span>, <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">quote =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></details></section>
+</section>
 <section id="perform-go-terms-enrichment-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="perform-go-terms-enrichment-analysis">Perform GO Terms Enrichment Analysis</h2>
 <ul>
@@ -476,7 +547,7 @@ we will execute various tasks on the HPC using Bash scripts with for loops.</p>
 <li>These genes may have accumulated genetic variations and diverged due to selective pressures associated with differing environmental conditions between the populations.</li>
 </ul>
 <p><strong>The analysis requires:</strong> - A list of genes of interest (e.g., genes with significant FST values). - A background list of all genes (representing the genomic baseline). The results help identify enriched GO terms, shedding light on biological processes potentially under selection in the population due to specific environmental pressures.</p>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define required packages</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define required packages</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>required_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"BiocManager"</span>, </span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"KEGGREST"</span>, </span>
@@ -629,29 +700,30 @@ we will execute various tasks on the HPC using Bash scripts with for loops.</p>
 <span id="cb14-151"><a href="#cb14-151" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 9: Display the plot</span></span>
 <span id="cb14-152"><a href="#cb14-152" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the plots for Fisher and KS tests</span></span>
 <span id="cb14-153"><a href="#cb14-153" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_fisher)  <span class="co"># Display Fisher plot</span></span>
-<span id="cb14-154"><a href="#cb14-154" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_ks)  <span class="co"># Display KS plot</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></div></details><div class="tutorial-output-grid preserved-output-group" data-output-group="1"><figure><img src="practical_day3_files/figure-html/unnamed-chunk-3-1.png" alt="GO enrichment ranked by Fisher-test significance." loading="lazy" decoding="async"><figcaption>GO enrichment ranked by Fisher-test significance.</figcaption></figure><figure><img src="practical_day3_files/figure-html/unnamed-chunk-3-2.png" alt="GO enrichment ranked by Kolmogorov–Smirnov significance." loading="lazy" decoding="async"><figcaption>GO enrichment ranked by Kolmogorov–Smirnov significance.</figcaption></figure></div></section>
+<span id="cb14-154"><a href="#cb14-154" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_ks)  <span class="co"># Display KS plot</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
 </section>
 <section id="estimate-diversity-tajimad-pi-and-diveregence-fst-measures" class="level1">
-<h1 id="estimate-diversity-tajima-d-pi-and-diveregence-fst-measures">Estimate Diversity (Tajima’D &amp; Pi) and Diveregence (FST) measures</h1>
+<h1>Estimate Diversity (Tajima’D &amp; Pi) and Diveregence (FST) measures</h1>
 <p><strong>Steps to Install Required R Packages and Resolve Issues with PopGenome Installation</strong> (Generally works for all types of systems) - Install the Latest Version of Rtools: Download the appropriate RtoolsXX installer based on your R version. Run the downloaded executable to complete the installation. - Install the devtools Package and then install PopGenome from Github</p>
 <p><strong>Uncomment the following lines if PopGenome and its dependencies are not already installed.</strong></p>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("devtools")</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("devtools")</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#library(devtools)</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># https://github.com/pievos101/PopGenome</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#devtools::install_github("pievos101/PopGenome")</span></span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#library(PopGenome)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></details><p><strong>Additional Steps to Resolve PopGenome Installation Issues</strong> (Windows Systems) If the above steps fail to install PopGenome, follow these instructions: - Install R version 4.3.2 . - Install Strawberry Perl, which includes g++ support. - Install the latest version of Rtools (if not already installed). - Set Windows Path Variables to include the installation directories for Rtools and Strawberry Perl. - Install the following dependencies in R:</p>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("ff")</span></span>
+<p><strong>Additional Steps to Resolve PopGenome Installation Issues</strong> (Windows Systems) If the above steps fail to install PopGenome, follow these instructions: - Install R version 4.3.2 . - Install Strawberry Perl, which includes g++ support. - Install the latest version of Rtools (if not already installed). - Set Windows Path Variables to include the installation directories for Rtools and Strawberry Perl. - Install the following dependencies in R:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("ff")</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("tidyverse")</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></details><ul>
+<ul>
 <li>Finally, install PopGenome using</li>
 </ul>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#devtools::install_github("pievos101/PopGenome")</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></details><ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#devtools::install_github("pievos101/PopGenome")</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
 <li>For additional help, consult the document “Installation_Steps_PopGenome_R_(Windows)” uploaded in Practical_Day_3. You can also use the “PopGenome_2.7.5.tar” file provided in the same folder.</li>
 </ul>
 <p><strong>Estimate and plot Fst and Tajima’D and Neutrality stats using PopGenome</strong></p>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to check and install missing packages</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to check and install missing packages</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>check_and_install <span class="ot">&lt;-</span> <span class="cf">function</span>(pkg, <span class="at">bioc =</span> <span class="cn">FALSE</span>) {</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(pkg, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (bioc) {</span>
@@ -1469,11 +1541,12 @@ we will execute various tasks on the HPC using Bash scripts with for loops.</p>
 <span id="cb18-816"><a href="#cb18-816" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">data =</span> sub1, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">3</span>)</span>
 <span id="cb18-817"><a href="#cb18-817" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-818"><a href="#cb18-818" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(sub2, <span class="fu">aes</span>(mid, ESP_td))</span>
-<span id="cb18-819"><a href="#cb18-819" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">data =</span> sub1, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></div></details><div class="tutorial-output-grid preserved-output-group" data-output-group="2"><figure><img src="practical_day3_files/figure-html/unnamed-chunk-7-1.png" alt="Population-genomic analysis output 1." loading="lazy" decoding="async"><figcaption>Population-genomic analysis output 1.</figcaption></figure><figure><img src="practical_day3_files/figure-html/unnamed-chunk-7-2.png" alt="Population-genomic analysis output 2." loading="lazy" decoding="async"><figcaption>Population-genomic analysis output 2.</figcaption></figure><figure><img src="practical_day3_files/figure-html/unnamed-chunk-7-3.png" alt="Population-genomic analysis output 3." loading="lazy" decoding="async"><figcaption>Population-genomic analysis output 3.</figcaption></figure><figure><img src="practical_day3_files/figure-html/unnamed-chunk-7-4.png" alt="Population-genomic analysis output 4." loading="lazy" decoding="async"><figcaption>Population-genomic analysis output 4.</figcaption></figure><figure><img src="practical_day3_files/figure-html/unnamed-chunk-7-5.png" alt="Population-genomic analysis output 5." loading="lazy" decoding="async"><figcaption>Population-genomic analysis output 5.</figcaption></figure><figure><img src="practical_day3_files/figure-html/unnamed-chunk-7-6.png" alt="Population-genomic analysis output 6." loading="lazy" decoding="async"><figcaption>Population-genomic analysis output 6.</figcaption></figure><figure><img src="practical_day3_files/figure-html/unnamed-chunk-7-7.png" alt="Population-genomic analysis output 7." loading="lazy" decoding="async"><figcaption>Population-genomic analysis output 7.</figcaption></figure><figure><img src="practical_day3_files/figure-html/unnamed-chunk-7-8.png" alt="Population-genomic analysis output 8." loading="lazy" decoding="async"><figcaption>Population-genomic analysis output 8.</figcaption></figure><figure><img src="practical_day3_files/figure-html/unnamed-chunk-7-9.png" alt="Population-genomic analysis output 9." loading="lazy" decoding="async"><figcaption>Population-genomic analysis output 9.</figcaption></figure><figure><img src="practical_day3_files/figure-html/unnamed-chunk-7-10.png" alt="Population-genomic analysis output 10." loading="lazy" decoding="async"><figcaption>Population-genomic analysis output 10.</figcaption></figure><figure><img src="practical_day3_files/figure-html/unnamed-chunk-7-11.png" alt="Population-genomic analysis output 11." loading="lazy" decoding="async"><figcaption>Population-genomic analysis output 11.</figcaption></figure><figure><img src="practical_day3_files/figure-html/unnamed-chunk-7-12.png" alt="Population-genomic analysis output 12." loading="lazy" decoding="async"><figcaption>Population-genomic analysis output 12.</figcaption></figure><figure><img src="practical_day3_files/figure-html/unnamed-chunk-7-13.png" alt="Population-genomic analysis output 13." loading="lazy" decoding="async"><figcaption>Population-genomic analysis output 13.</figcaption></figure><figure><img src="practical_day3_files/figure-html/unnamed-chunk-7-14.png" alt="Population-genomic analysis output 14." loading="lazy" decoding="async"><figcaption>Population-genomic analysis output 14.</figcaption></figure><figure><img src="practical_day3_files/figure-html/unnamed-chunk-7-15.png" alt="Population-genomic analysis output 15." loading="lazy" decoding="async"><figcaption>Population-genomic analysis output 15.</figcaption></figure><figure><img src="practical_day3_files/figure-html/unnamed-chunk-7-16.png" alt="Population-genomic analysis output 16." loading="lazy" decoding="async"><figcaption>Population-genomic analysis output 16.</figcaption></figure><figure><img src="practical_day3_files/figure-html/unnamed-chunk-7-17.png" alt="Population-genomic analysis output 17." loading="lazy" decoding="async"><figcaption>Population-genomic analysis output 17.</figcaption></figure><figure><img src="practical_day3_files/figure-html/unnamed-chunk-7-18.png" alt="Population-genomic analysis output 18." loading="lazy" decoding="async"><figcaption>Population-genomic analysis output 18.</figcaption></figure><figure><img src="practical_day3_files/figure-html/unnamed-chunk-7-19.png" alt="Population-genomic analysis output 19." loading="lazy" decoding="async"><figcaption>Population-genomic analysis output 19.</figcaption></figure><figure><img src="practical_day3_files/figure-html/unnamed-chunk-7-20.png" alt="Population-genomic analysis output 20." loading="lazy" decoding="async"><figcaption>Population-genomic analysis output 20.</figcaption></figure><figure><img src="practical_day3_files/figure-html/unnamed-chunk-7-21.png" alt="Population-genomic analysis output 21." loading="lazy" decoding="async"><figcaption>Population-genomic analysis output 21.</figcaption></figure><figure><img src="practical_day3_files/figure-html/unnamed-chunk-7-22.png" alt="Population-genomic analysis output 22." loading="lazy" decoding="async"><figcaption>Population-genomic analysis output 22.</figcaption></figure><figure><img src="practical_day3_files/figure-html/unnamed-chunk-7-23.png" alt="Population-genomic analysis output 23." loading="lazy" decoding="async"><figcaption>Population-genomic analysis output 23.</figcaption></figure><figure><img src="practical_day3_files/figure-html/unnamed-chunk-7-24.png" alt="Population-genomic analysis output 24." loading="lazy" decoding="async"><figcaption>Population-genomic analysis output 24.</figcaption></figure><figure><img src="practical_day3_files/figure-html/unnamed-chunk-7-25.png" alt="Population-genomic analysis output 25." loading="lazy" decoding="async"><figcaption>Population-genomic analysis output 25.</figcaption></figure></div></section>
+<span id="cb18-819"><a href="#cb18-819" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">data =</span> sub1, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
 <section id="extracting-and-plotting-bioclimatic-variables-for-sample-coordinates" class="level1">
-<h1 id="extracting-and-plotting-bioclimatic-variables-for-sample-coordinates-2">Extracting and Plotting Bioclimatic Variables for Sample Coordinates</h1>
+<h1>Extracting and Plotting Bioclimatic Variables for Sample Coordinates</h1>
 <p>Use the following R script to extract and plot climate variables for the sample coordinates. - Create a new folder/directory on your local system named “get_data_climate_variables”</p>
-<details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="do">##  R Script to Extract and Plot Bioclimatic Variables for Sample Coordinates</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="do">##  R Script to Extract and Plot Bioclimatic Variables for Sample Coordinates</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># List of required packages</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>required_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"sp"</span>, <span class="st">"raster"</span>, <span class="st">"geodata"</span>, <span class="st">"terra"</span>, <span class="st">"rnaturalearth"</span>, <span class="st">"rnaturalearthdata"</span>, <span class="st">"sf"</span>, <span class="st">"RColorBrewer"</span>)</span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1596,7 +1669,7 @@ we will execute various tasks on the HPC using Bash scripts with for loops.</p>
 <span id="cb19-121"><a href="#cb19-121" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-122"><a href="#cb19-122" aria-hidden="true" tabindex="-1"></a><span class="co"># Example plot (BIO12: Annual_Precipitation)</span></span>
 <span id="cb19-123"><a href="#cb19-123" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_layer</span>(<span class="dv">12</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></details><details class="code-details"><summary class="code-details-summary"><span class="code-toggle-label" aria-hidden="true"><span class="code-label-closed">Show code</span><span class="code-label-open">Hide code</span></span><span class="code-hint">Copyable source</span></summary><div class="code-panel-body"><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract bioclimatic variables for sampling coordinates</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract bioclimatic variables for sampling coordinates</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>xy_df <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">as.data.frame</span>(xy)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>biodata_extract <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">extract</span>(biodata[[<span class="dv">1</span><span class="sc">:</span><span class="dv">19</span>]], xy_df, <span class="at">df =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(biodata_extract)</span>
@@ -1635,11 +1708,12 @@ we will execute various tasks on the HPC using Bash scripts with for loops.</p>
 <span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a><span class="co">#   write.table(extracted_data, </span></span>
 <span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a><span class="co">#               file = paste0("bio_variable_", i, "_", layer_name, ".txt"),</span></span>
 <span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a><span class="co">#               row.names = FALSE, col.names = TRUE)</span></span>
-<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a><span class="co"># }</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></div></details><div class="tutorial-output-grid preserved-output-group" data-output-group="3"><figure><img src="practical_day3_files/figure-html/unnamed-chunk-8-1.png" alt="Annual mean temperature across the sampled European region." loading="lazy" decoding="async"><figcaption>Annual mean temperature across the sampled European region.</figcaption></figure><figure><img src="practical_day3_files/figure-html/unnamed-chunk-8-2.png" alt="Annual precipitation across the sampled European region." loading="lazy" decoding="async"><figcaption>Annual precipitation across the sampled European region.</figcaption></figure></div><hr>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a><span class="co"># }</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
 <p><strong>Wrapping Up Practical Day Three</strong></p>
-<p>Great job, everyone!   You’ve made incredible strides today, and your teamwork and dedication are truly impressive. It’s wonderful to see you embrace new challenges and continue to push forward with enthusiasm.</p>
+<p>Great job, everyone! 🌟 🌱 You’ve made incredible strides today, and your teamwork and dedication are truly impressive. It’s wonderful to see you embrace new challenges and continue to push forward with enthusiasm.</p>
 <p>As we head into the winter holidays, I want to wish you a very Happy Christmas and a joyful New Year!</p>
-<p>Looking forward to continuing this journey together after the break. Keep exploring, stay curious, and take this opportunity to enjoy your well-deserved rest! See you soon! ❄</p>
+<p>Looking forward to continuing this journey together after the break. Keep exploring, stay curious, and take this opportunity to enjoy your well-deserved rest! See you soon! 🎄❄</p>
 
 
 </section>
@@ -2054,7 +2128,7 @@ we will execute various tasks on the HPC using Bash scripts with for loops.</p>
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>© 2026 Dr. Tahir Ali</p>
+<p>© 2026 Dr.&nbsp;Tahir Ali</p>
 </div>   
     <div class="nav-footer-center">
 <p>Computational biology · Scientific AI · Education</p>
@@ -2069,4 +2143,4 @@ we will execute various tasks on the HPC using Bash scripts with for loops.</p>
 
 
 <script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
-<script id="technical-code-copy">(() => { document.addEventListener('click', async (event) => { const button=event.target.closest('.technical-copy-button'); if(!button)return; event.preventDefault(); event.stopPropagation(); const details=button.closest('details'); const code=details?.querySelector('pre code, pre'); if(!code)return; const text=code.innerText; try { await navigator.clipboard.writeText(text); } catch (_) { const area=document.createElement('textarea'); area.value=text; area.style.position='fixed'; area.style.opacity='0'; document.body.appendChild(area); area.select(); document.execCommand('copy'); area.remove(); } const old=button.textContent; button.textContent='Copied'; setTimeout(()=>{button.textContent=old;},1400); }); })();</script></body></html>
+</body></html>

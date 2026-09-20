@@ -38,6 +38,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
@@ -45,7 +46,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-fdaeddbba6fa95a0f13bcc20c9a3fb04.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-46631ef7d5207a1ec5e6e4a429f0476e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -158,7 +159,7 @@ window.Quarto = {
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="docked genomes-ai-page nav-sidebar quarto-light">
+<body class="nav-sidebar docked genomes-ai-page quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -183,14 +184,73 @@ window.Quarto = {
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item"><div class="sidebar-item-container"><a href="index.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Home</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="popgenlm.html" class="sidebar-item-text sidebar-link"><span class="menu-text">PopGenLM</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="genomes-to-ai.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">Genomes to AI</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="projects.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Projects</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="publications.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Publications</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="cv.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Résumé</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="teaching/teaching.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Teaching</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="workshops/workshops.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Workshops</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank"><span class="menu-text">GitHub</span></a></div></li></ul>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./popgenlm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PopGenLM</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./genomes-to-ai.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Genomes to AI</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projects</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./publications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Publications</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Résumé</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./teaching/teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./workshops/workshops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Workshops</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">GitHub</span></a>
+  </div>
+</li>
+    </ul>
     </div>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content column-page-right" id="quarto-document-content"><section class="page-hero journal-hero" aria-labelledby="journal-title">
+<main class="content column-page-right" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<section class="page-hero journal-hero" aria-labelledby="journal-title">
   <div class="eyebrow">A scientific AI engineering journal</div>
   <h1 id="journal-title">Genomes to AI</h1>
   <p class="lead">An authentic record of learning to build scientific AI - grounded in evolutionary biology, shaped by the history of biological data, and tested through open, reproducible work.</p>
@@ -199,10 +259,11 @@ window.Quarto = {
     <span class="tag">Biological data</span><span class="tag">Machine learning</span><span class="tag">Scientific software</span><span class="tag">Validation</span><span class="tag">Open source</span>
   </div>
 </section>
-<figure class="journey-cover">
-  <img src="assets/writings/genomes-to-ai-journey.webp" alt="A hand-drawn notebook sketch tracing a journey from genomes and biological data through models to scientific evidence." loading="lazy" decoding="async">
+<figure class="journey-cover figure">
+  <img src="assets/writings/genomes-to-ai-journey.webp" alt="A hand-drawn notebook sketch tracing a journey from genomes and biological data through models to scientific evidence." loading="eager" class="figure-img">
 </figure>
-<h2 id="why-this-journey-begins-with-data">Why this journey begins with data</h2>
+<section id="why-this-journey-begins-with-data" class="level2">
+<h2 class="anchored" data-anchor-id="why-this-journey-begins-with-data">Why this journey begins with data</h2>
 <p>Biology has always been an information science. Taxonomists organised visible diversity; geneticists inferred inheritance from crosses; population geneticists turned allele frequencies into models of drift, selection, migration, and demography. The computational scale changed gradually and then dramatically. Handwritten observations became databases. Individual loci became whole genomes. Sanger sequencing gave way to high-throughput short reads, long reads, chromosome-scale assemblies, population resequencing, metagenomes, single-cell measurements, spatial assays, and continuous environmental data.</p>
 <p>The bottleneck therefore moved. Generating data remains demanding, but modern biology is increasingly constrained by our ability to organise, integrate, evaluate, and interpret information that is too large and interconnected for manual reasoning alone. Bioinformatics emerged to manage sequence and annotation; data science added scalable statistics, visualisation, and reproducible computation; big-data infrastructure made distributed storage and processing routine. Scientific AI now adds another layer: models that can learn representations from sequence, structure, images, text, and multimodal evidence.</p>
 <div class="data-arc" aria-label="From biological observation to scientific AI">
@@ -212,24 +273,28 @@ window.Quarto = {
   <article class="active"><span>Learn + test</span><strong>Foundation models and scientific AI</strong><small>Representations evaluated against evidence</small></article>
 </div>
 <p>This progression does not make biological knowledge less important. It makes domain knowledge more consequential. A model can identify statistical regularities at a scale no individual can inspect, but it cannot by itself guarantee the correct genome build, distinguish demographic history from selection, define a meaningful negative control, or decide whether a result supports a biological claim. Those responsibilities remain scientific.</p>
-<h2 id="why-i-am-building-popgenlm-bench">Why I am building PopGenLM Bench</h2>
+</section>
+<section id="why-i-am-building-popgenlm-bench" class="level2">
+<h2 class="anchored" data-anchor-id="why-i-am-building-popgenlm-bench">Why I am building PopGenLM Bench</h2>
 <p>Genomic language models are a natural meeting point between my past work and the engineering skills I am developing. They treat DNA as structured information and learn context-dependent sequence patterns that can be used to score variants. Their promise is substantial: prioritising candidate variants, identifying disrupted regulatory grammar, comparing constraint across sequence contexts, and extending annotation beyond a list of previously characterised genes.</p>
 <p>But the scale and apparent precision of model output can create false confidence. Millions of scores can be produced before anyone notices an allele mismatch, reference incompatibility, hidden version change, unexamined calibration problem, or unsupported evolutionary interpretation. My aim with <a href="popgenlm.html">PopGenLM Bench</a> is to make that transition from score to evidence explicit. The project connects model engineering with the population-genetic questions that determine whether a prediction is scientifically coherent.</p>
 <section class="journal-thesis">
   <div>
     <div class="card-kicker">The central question</div>
-    <h3>What would convince us that a genomic AI score carries biological information?</h3>
+    <h3 class="anchored">What would convince us that a genomic AI score carries biological information?</h3>
     <p>Not a smooth software demo alone. We need reference-safe inputs, reproducible inference, independent evidence, uncertainty estimates, negative controls, sensitivity analysis, and language that does not outrun the data.</p>
   </div>
-  <blockquote>Scientific AI becomes useful when model capability and scientific validation develop together.</blockquote>
+  <blockquote class="blockquote">Scientific AI becomes useful when model capability and scientific validation develop together.</blockquote>
 </section>
-<h2 id="what-this-journal-will-document">What this journal will document</h2>
+</section>
+<section id="what-this-journal-will-document" class="level2">
+<h2 class="anchored" data-anchor-id="what-this-journal-will-document">What this journal will document</h2>
 <div class="principle-grid journal-principles">
 <article class="principle-card">
 <div class="card-kicker">
 Learning
 </div>
-<h3>
+<h3 class="anchored">
 Concepts used in practice
 </h3>
 <p>
@@ -240,7 +305,7 @@ PyTorch, model inference, packaging, testing, APIs, deployment, and engineering 
 <div class="card-kicker">
 Building
 </div>
-<h3>
+<h3 class="anchored">
 Artifacts, not declarations
 </h3>
 <p>
@@ -251,7 +316,7 @@ Each substantial entry should connect a scientific question to code, a reproduci
 <div class="card-kicker">
 Validation
 </div>
-<h3>
+<h3 class="anchored">
 Evidence before interpretation
 </h3>
 <p>
@@ -262,7 +327,7 @@ What was checked, what could fail, what the result supports, which alternatives 
 <div class="card-kicker">
 Reflection
 </div>
-<h3>
+<h3 class="anchored">
 An honest technical transition
 </h3>
 <p>
@@ -270,17 +335,21 @@ How an experienced computational biologist develops the engineering depth needed
 </p>
 </article>
 </div>
-<h2 id="where-scientific-ai-could-lead">Where scientific AI could lead</h2>
+</section>
+<section id="where-scientific-ai-could-lead" class="level2">
+<h2 class="anchored" data-anchor-id="where-scientific-ai-could-lead">Where scientific AI could lead</h2>
 <p>The most valuable applications will not be defined by novelty alone. They will emerge where AI helps researchers interrogate complex biological systems while preserving provenance, uncertainty, and experimental accountability.</p>
 <div class="future-grid">
-  <article><h3>Variant interpretation</h3><p>Combine sequence representations with population frequency, conservation, regulatory context, phenotype, and experimental evidence to prioritise variants transparently.</p></article>
-  <article><h3>Evolutionary monitoring</h3><p>Analyse genomic change through time in natural populations, pathogens, crops, and conservation programmes while separating signal from drift and sampling noise.</p></article>
-  <article><h3>Adaptive breeding and conservation</h3><p>Connect genomic variation with climate, traits, and demographic vulnerability to support testable decisions rather than opaque predictions.</p></article>
-  <article><h3>Multimodal biological models</h3><p>Link sequence, structure, expression, environment, images, and literature into representations that can be evaluated across scales.</p></article>
-  <article><h3>Scientific workflow agents</h3><p>Assist with quality control, provenance, documentation, and reproducible analysis while keeping researchers responsible for assumptions and conclusions.</p></article>
-  <article><h3>Evidence-grounded learning</h3><p>Build teaching systems that adapt practice and feedback to the learner without replacing approved sources, instructor judgement, or intellectual effort.</p></article>
+  <article><h3 class="anchored">Variant interpretation</h3><p>Combine sequence representations with population frequency, conservation, regulatory context, phenotype, and experimental evidence to prioritise variants transparently.</p></article>
+  <article><h3 class="anchored">Evolutionary monitoring</h3><p>Analyse genomic change through time in natural populations, pathogens, crops, and conservation programmes while separating signal from drift and sampling noise.</p></article>
+  <article><h3 class="anchored">Adaptive breeding and conservation</h3><p>Connect genomic variation with climate, traits, and demographic vulnerability to support testable decisions rather than opaque predictions.</p></article>
+  <article><h3 class="anchored">Multimodal biological models</h3><p>Link sequence, structure, expression, environment, images, and literature into representations that can be evaluated across scales.</p></article>
+  <article><h3 class="anchored">Scientific workflow agents</h3><p>Assist with quality control, provenance, documentation, and reproducible analysis while keeping researchers responsible for assumptions and conclusions.</p></article>
+  <article><h3 class="anchored">Evidence-grounded learning</h3><p>Build teaching systems that adapt practice and feedback to the learner without replacing approved sources, instructor judgement, or intellectual effort.</p></article>
 </div>
-<h2 id="commitments-for-the-journey">Commitments for the journey</h2>
+</section>
+<section id="commitments-for-the-journey" class="level2">
+<h2 class="anchored" data-anchor-id="commitments-for-the-journey">Commitments for the journey</h2>
 <div class="commitment-list">
 <div>
 <strong>Build in public</strong><span>Share code, benchmarks, release notes, and the reasoning behind important changes.</span>
@@ -298,20 +367,174 @@ How an experienced computational biologist develops the engineering depth needed
 <strong>Protect sensitive work</strong><span>Use public demonstration data and keep unpublished research, restricted teaching material, and private information outside public repositories.</span>
 </div>
 </div>
-<h2 id="latest-field-notes">Latest field notes</h2>
+</section>
+<section id="latest-field-notes" class="level2">
+<h2 class="anchored" data-anchor-id="latest-field-notes">Latest field notes</h2>
 <section class="journal-thesis reading-series-intro" aria-labelledby="reading-series-title">
   <div>
     <div class="card-kicker">Reading notebook · Chapter 2</div>
-    <h3 id="reading-series-title">Learning to ask what biological information is about</h3>
+    <h3 id="reading-series-title" class="anchored">Learning to ask what biological information is about</h3>
     <p>Five fortnightly notes follow my reading of Christoph Adami's <em>The Evolution of Biological Information</em>. They move from the history of genetic information to probability, relationships between sites, entropy, and the difficult question of what a gene can tell us about its biological context.</p>
   </div>
-  <blockquote>These are not substitutes for the chapter. They are a personal record of what I understood, where I remain cautious, and which questions I want to pursue next.</blockquote>
+  <blockquote class="blockquote">These are not substitutes for the chapter. They are a personal record of what I understood, where I remain cautious, and which questions I want to pursue next.</blockquote>
 </section>
 <p class="section-intro">
 Reading notes, technical articles, build decisions, failures, and release retrospectives appear below. The newest entry is shown first.
 </p>
+
+
+
+</section>
+
 <div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
-<div class="list grid quarto-listing-cols-2"><div class="g-col-1" data-index="0"><a href="./posts/2026-08-31-popgenlm-bench/index.html" class="quarto-grid-link"><article class="quarto-grid-item card h-100 card-left"><p class="card-img-top"><img src="assets/popgenlm/benchmark-overview.png" class="thumbnail-image card-img" alt="Four-panel PopGenLM Bench validation overview" loading="lazy" decoding="async"></p><div class="card-body post-contents"><h3 class="no-anchor card-title listing-title">Why I am building PopGenLM Bench</h3><div class="card-text listing-description delink"><p>The first public step toward a population-genetic evaluation layer for genomic language models.</p></div><div class="card-attribution card-text-small justify"><div class="listing-author">Dr Tahir Ali</div><time class="listing-date" datetime="2026-08-31">Aug 31, 2026</time></div></div></article></a></div><div class="g-col-1" data-index="1"><a href="./posts/2026-03-07-what-does-a-gene-know/index.html" class="quarto-grid-link"><article class="quarto-grid-item card h-100 card-left"><p class="card-img-top"><img src="./assets/writings/05-what-does-a-gene-know.webp" class="thumbnail-image card-img" alt="Concept sketch for What Does a Gene Know?" loading="lazy" decoding="async"></p><div class="card-body post-contents"><h3 class="no-anchor card-title listing-title">What Does a Gene Know?</h3><div class="card-text listing-description delink"><p>My commentary on gene information, sequence ensembles and why a prediction needs an explicit biological target.</p></div><div class="card-attribution card-text-small justify"><div class="listing-author">Dr Tahir Ali</div><time class="listing-date" datetime="2026-03-07">Mar 7, 2026</time></div></div></article></a></div><div class="g-col-1" data-index="2"><a href="./posts/2026-02-21-uncertainty-reveals-structure/index.html" class="quarto-grid-link"><article class="quarto-grid-item card h-100 card-left"><p class="card-img-top"><img src="./assets/writings/04-when-uncertainty-reveals-structure.webp" class="thumbnail-image card-img" alt="Concept sketch for When Uncertainty Reveals Structure" loading="lazy" decoding="async"></p><div class="card-body post-contents"><h3 class="no-anchor card-title listing-title">When Uncertainty Reveals Structure</h3><div class="card-text listing-description delink"><p>What entropy and mutual information taught me about conservation, covariation and the limits of sequence evidence.</p></div><div class="card-attribution card-text-small justify"><div class="listing-author">Dr Tahir Ali</div><time class="listing-date" datetime="2026-02-21">Feb 21, 2026</time></div></div></article></a></div><div class="g-col-1" data-index="3"><a href="./posts/2026-02-07-meaning-lives-in-relationships/index.html" class="quarto-grid-link"><article class="quarto-grid-item card h-100 card-left"><p class="card-img-top"><img src="./assets/writings/03-meaning-lives-in-relationships.webp" class="thumbnail-image card-img" alt="Concept sketch for Meaning Lives Between Things" loading="lazy" decoding="async"></p><div class="card-body post-contents"><h3 class="no-anchor card-title listing-title">Meaning Lives Between Things</h3><div class="card-text listing-description delink"><p>A personal reading note on joint and conditional probability, sequence context and predictive relationships in DNA.</p></div><div class="card-attribution card-text-small justify"><div class="listing-author">Dr Tahir Ali</div><time class="listing-date" datetime="2026-02-07">Feb 7, 2026</time></div></div></article></a></div><div class="g-col-1" data-index="4"><a href="./posts/2026-01-24-the-model-is-a-choice/index.html" class="quarto-grid-link"><article class="quarto-grid-item card h-100 card-left"><p class="card-img-top"><img src="./assets/writings/02-the-model-is-a-choice.webp" class="thumbnail-image card-img" alt="Concept sketch for The Model Is Not the World" loading="lazy" decoding="async"></p><div class="card-body post-contents"><h3 class="no-anchor card-title listing-title">The Model Is Not the World</h3><div class="card-text listing-description delink"><p>What random variables, alphabets and sequence ensembles taught me about the choices hidden inside biological models.</p></div><div class="card-attribution card-text-small justify"><div class="listing-author">Dr Tahir Ali</div><time class="listing-date" datetime="2026-01-24">Jan 24, 2026</time></div></div></article></a></div><div class="g-col-1" data-index="5"><a href="./posts/2026-01-10-inheritance-becomes-information/index.html" class="quarto-grid-link"><article class="quarto-grid-item card h-100 card-left"><p class="card-img-top"><img src="./assets/writings/01-inheritance-becomes-information.webp" class="thumbnail-image card-img" alt="Concept sketch for When Life Became Legible" loading="lazy" decoding="async"></p><div class="card-body post-contents"><h3 class="no-anchor card-title listing-title">When Life Became Legible</h3><div class="card-text listing-description delink"><p>My first reading note on how inheritance became a measurable problem of biological information.</p></div><div class="card-attribution card-text-small justify"><div class="listing-author">Dr Tahir Ali</div><time class="listing-date" datetime="2026-01-10">Jan 10, 2026</time></div></div></article></a></div></div><div class="listing-no-matching d-none">No matching items</div></div></main> <!-- /main -->
+<div class="list grid quarto-listing-cols-2">
+<div class="g-col-1" data-index="0" data-categories="R2Vub21pYyUyMGxhbmd1YWdlJTIwbW9kZWxzJTJDUG9wdWxhdGlvbiUyMGdlbm9taWNzJTJDT3BlbiUyMHNvdXJjZSUyQ0J1aWxkJTIwbm90ZQ==" data-listing-date-sort="1788127200000" data-listing-file-modified-sort="1789927313864" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="569">
+<a href="./posts/2026-08-31-popgenlm-bench/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./assets/popgenlm/benchmark-overview.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Why I am building PopGenLM Bench
+</h5>
+<div class="card-text listing-description delink">
+<p>The first public step toward a population-genetic evaluation layer for genomic language models.</p>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Dr Tahir Ali
+</div>
+<div class="listing-date">
+Aug 31, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="1" data-categories="QmlvbG9naWNhbCUyMGluZm9ybWF0aW9uJTJDR2VuZXMlMjBhbmQlMjBlbnZpcm9ubWVudCUyQ0xlYXJuaW5nJTIwbm90ZQ==" data-listing-date-sort="1772838000000" data-listing-file-modified-sort="1789927313864" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="882">
+<a href="./posts/2026-03-07-what-does-a-gene-know/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./assets/writings/05-what-does-a-gene-know.webp" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+What Does a Gene Know?
+</h5>
+<div class="card-text listing-description delink">
+<p>My commentary on gene information, sequence ensembles and why a prediction needs an explicit biological target.</p>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Dr Tahir Ali
+</div>
+<div class="listing-date">
+Mar 7, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="2" data-categories="QmlvbG9naWNhbCUyMGluZm9ybWF0aW9uJTJDRW50cm9weSUyQ0xlYXJuaW5nJTIwbm90ZQ==" data-listing-date-sort="1771628400000" data-listing-file-modified-sort="1789927313863" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="790">
+<a href="./posts/2026-02-21-uncertainty-reveals-structure/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./assets/writings/04-when-uncertainty-reveals-structure.webp" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+When Uncertainty Reveals Structure
+</h5>
+<div class="card-text listing-description delink">
+<p>What entropy and mutual information taught me about conservation, covariation and the limits of sequence evidence.</p>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Dr Tahir Ali
+</div>
+<div class="listing-date">
+Feb 21, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="3" data-categories="QmlvbG9naWNhbCUyMGluZm9ybWF0aW9uJTJDQ29uZGl0aW9uYWwlMjBwcm9iYWJpbGl0eSUyQ0xlYXJuaW5nJTIwbm90ZQ==" data-listing-date-sort="1770418800000" data-listing-file-modified-sort="1789927313863" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="761">
+<a href="./posts/2026-02-07-meaning-lives-in-relationships/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./assets/writings/03-meaning-lives-in-relationships.webp" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Meaning Lives Between Things
+</h5>
+<div class="card-text listing-description delink">
+<p>A personal reading note on joint and conditional probability, sequence context and predictive relationships in DNA.</p>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Dr Tahir Ali
+</div>
+<div class="listing-date">
+Feb 7, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="4" data-categories="QmlvbG9naWNhbCUyMGluZm9ybWF0aW9uJTJDUHJvYmFiaWxpdHklMkNMZWFybmluZyUyMG5vdGU=" data-listing-date-sort="1769209200000" data-listing-file-modified-sort="1789927313862" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="862">
+<a href="./posts/2026-01-24-the-model-is-a-choice/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./assets/writings/02-the-model-is-a-choice.webp" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+The Model Is Not the World
+</h5>
+<div class="card-text listing-description delink">
+<p>What random variables, alphabets and sequence ensembles taught me about the choices hidden inside biological models.</p>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Dr Tahir Ali
+</div>
+<div class="listing-date">
+Jan 24, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="5" data-categories="QmlvbG9naWNhbCUyMGluZm9ybWF0aW9uJTJDSGlzdG9yeSUyMG9mJTIwZ2VuZXRpY3MlMkNMZWFybmluZyUyMG5vdGU=" data-listing-date-sort="1767999600000" data-listing-file-modified-sort="1789927313862" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="876">
+<a href="./posts/2026-01-10-inheritance-becomes-information/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./assets/writings/01-inheritance-becomes-information.webp" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+When Life Became Legible
+</h5>
+<div class="card-text listing-description delink">
+<p>My first reading note on how inheritance became a measurable problem of biological information.</p>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Dr Tahir Ali
+</div>
+<div class="listing-date">
+Jan 10, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+</div>
+<div class="listing-no-matching d-none">No matching items</div>
+</div><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -733,7 +956,7 @@ Reading notes, technical articles, build decisions, failures, and release retros
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>© 2026 Dr. Tahir Ali</p>
+<p>© 2026 Dr.&nbsp;Tahir Ali</p>
 </div>   
     <div class="nav-footer-center">
 <p>Computational biology · Scientific AI · Education</p>

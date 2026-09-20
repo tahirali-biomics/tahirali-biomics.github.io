@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2026-02-21">
 <meta name="description" content="What entropy and mutual information taught me about conservation, covariation and the limits of sequence evidence.">
 
-<title>When Uncertainty Reveals Structure – Dr. Tahir Ali</title>
+<title>When Uncertainty Reveals Structure – Dr.&nbsp;Tahir Ali</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -36,6 +36,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../profile.webp" rel="icon">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
@@ -43,7 +44,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-fdaeddbba6fa95a0f13bcc20c9a3fb04.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-46631ef7d5207a1ec5e6e4a429f0476e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -84,17 +85,17 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="When Uncertainty Reveals Structure – Dr. Tahir Ali">
+<meta property="og:title" content="When Uncertainty Reveals Structure – Dr.&nbsp;Tahir Ali">
 <meta property="og:description" content="What entropy and mutual information taught me about conservation, covariation and the limits of sequence evidence.">
 <meta property="og:image" content="https://tahirali-biomics.github.io/assets/writings/04-when-uncertainty-reveals-structure.webp">
 <meta property="og:site_name" content="Dr. Tahir Ali">
-<meta name="twitter:title" content="When Uncertainty Reveals Structure – Dr. Tahir Ali">
+<meta name="twitter:title" content="When Uncertainty Reveals Structure – Dr.&nbsp;Tahir Ali">
 <meta name="twitter:description" content="What entropy and mutual information taught me about conservation, covariation and the limits of sequence evidence.">
 <meta name="twitter:image" content="https://tahirali-biomics.github.io/assets/writings/04-when-uncertainty-reveals-structure.webp">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="article-page content-dense docked fullcontent nav-sidebar quarto-light reading-note-page">
+<body class="nav-sidebar docked fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -119,21 +120,83 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item"><div class="sidebar-item-container"><a href="../../index.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Home</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../popgenlm.html" class="sidebar-item-text sidebar-link"><span class="menu-text">PopGenLM</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../genomes-to-ai.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">Genomes to AI</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../projects.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Projects</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../publications.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Publications</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../cv.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Résumé</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../teaching/teaching.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Teaching</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../../workshops/workshops.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Workshops</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank"><span class="menu-text">GitHub</span></a></div></li></ul>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../popgenlm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PopGenLM</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../genomes-to-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Genomes to AI</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projects</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../publications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Publications</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../cv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Résumé</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../teaching/teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../workshops/workshops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Workshops</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">GitHub</span></a>
+  </div>
+</li>
+    </ul>
     </div>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">When Uncertainty Reveals Structure</h1>
-  <div class="quarto-categories"><div class="quarto-category">Biological information</div><div class="quarto-category">Entropy</div><div class="quarto-category">Learning note</div></div>
+  <div class="quarto-categories">
+    <div class="quarto-category">Biological information</div>
+    <div class="quarto-category">Entropy</div>
+    <div class="quarto-category">Learning note</div>
+  </div>
   </div>
 
 <div>
-  <div class="description">What entropy and mutual information taught me about conservation, covariation and the limits of sequence evidence.</div>
+  <div class="description">
+    What entropy and mutual information taught me about conservation, covariation and the limits of sequence evidence.
+  </div>
 </div>
 
 
@@ -161,47 +224,64 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </header>
 
 
-<figure>
-<img src="../../assets/writings/04-when-uncertainty-reveals-structure.webp" class="reading-sketch" data-fig-alt="Handwritten pencil notes say that uncertainty can be measured, shared variation can reveal structure and recent ancestry can mislead." alt="A simple pencil notebook page showing uncertain dots, a small correlation grid and a rough RNA cloverleaf." loading="lazy" decoding="async">
-<figcaption aria-hidden="true">A simple pencil notebook page showing uncertain dots, a small correlation grid and a rough RNA cloverleaf.</figcaption>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/writings/04-when-uncertainty-reveals-structure.webp" class="reading-sketch img-fluid figure-img" alt="Handwritten pencil notes say that uncertainty can be measured, shared variation can reveal structure and recent ancestry can mislead."></p>
+<figcaption>A simple pencil notebook page showing uncertain dots, a small correlation grid and a rough RNA cloverleaf.</figcaption>
 </figure>
+</div>
 <p>For the last two weeks I have been thinking about a counter-intuitive idea: uncertainty is not merely a defect in data. When it is measured carefully, its pattern can reveal biological organisation.</p>
 <p>Sections 2.2 and 2.2.1 introduce entropy and information. The formulas matter, but the conceptual sequence matters more: first measure how uncertain a variable is; then ask how much that uncertainty decreases when another variable becomes known.</p>
-<h2 id="entropy-measuring-what-remains-unpredictable">Entropy: measuring what remains unpredictable</h2>
+<section id="entropy-measuring-what-remains-unpredictable" class="level2">
+<h2 class="anchored" data-anchor-id="entropy-measuring-what-remains-unpredictable">Entropy: measuring what remains unpredictable</h2>
 <p>Shannon entropy is calculated from the probability distribution of a variable. If all states are equally likely, uncertainty is maximal. If one state occurs with certainty, entropy is zero. The base of the logarithm determines the unit: base two gives bits; other alphabets can use units scaled to their number of possible states.</p>
 <p>I find it helpful to think of entropy as <em>potential information</em>. A variable with several plausible states has something left to reveal. A variable already known with certainty does not.</p>
 <p>Applied to a sequence alignment, entropy can be measured at each site. Conserved positions have low entropy; highly variable positions have high entropy. In the tRNA alignment, this produces a landscape of constraint and variability across the molecule.</p>
 <p>But low entropy is not automatically the same as biological importance. A site can appear conserved because the sampled sequences share a recent ancestor and have not had time to diverge. Sample composition and evolutionary history therefore shape the apparent signal.</p>
-<h2 id="information-uncertainty-reduced-by-knowledge">Information: uncertainty reduced by knowledge</h2>
+</section>
+<section id="information-uncertainty-reduced-by-knowledge" class="level2">
+<h2 class="anchored" data-anchor-id="information-uncertainty-reduced-by-knowledge">Information: uncertainty reduced by knowledge</h2>
 <p>The chapter defines mutual information as the reduction in uncertainty about one variable after another variable is known. This is a much stricter idea than calling a sequence “informative” because it looks complex.</p>
 <p>The measure is symmetric: the shared dependence between two sites is the same whichever direction we describe it. Conditional entropy captures what remains unknown; mutual information captures what is shared.</p>
 <p>In the tRNA example, calculating mutual information across every pair of sites creates a matrix. Strong off-diagonal patterns correspond to coordinated substitutions produced by base pairing. From sequence variation alone, the analysis begins to reveal RNA secondary structure.</p>
 <p>This is beautiful because variability is doing the explanatory work. If paired sites never changed, there would be no covariation to detect. Structure becomes visible because evolution explores alternatives while selection preserves compatible combinations.</p>
-<h2 id="the-limitation-that-matters">The limitation that matters</h2>
+</section>
+<section id="the-limitation-that-matters" class="level2">
+<h2 class="anchored" data-anchor-id="the-limitation-that-matters">The limitation that matters</h2>
 <p>The same example contains its own warning. The method needs a sufficiently diverse ensemble. If sequences are too closely related, most sites may look invariant whether or not they are functionally constrained. If the alignment contains uneven phylogenetic representation, shared ancestry can generate correlations that resemble functional coupling.</p>
 <p>Information theory measures dependence in the supplied distribution. Biology must still explain how that distribution arose.</p>
-<section id="notes-from-my-margin" class="pencil-margin-note">
-<h3>Notes from my margin</h3>
+<section id="notes-from-my-margin" class="level3 pencil-margin-note">
+<h3 class="anchored" data-anchor-id="notes-from-my-margin">Notes from my margin</h3>
 <ul>
 <li>Entropy is not disorder in a vague sense; it is uncertainty under a stated model.</li>
 <li>Variation can reveal constraint when changes are coordinated.</li>
 <li>A clean pattern can still reflect sampling history rather than mechanism.</li>
 </ul>
 </section>
-<h2 id="my-interpretation-for-scientific-ai">My interpretation for scientific AI</h2>
+</section>
+<section id="my-interpretation-for-scientific-ai" class="level2">
+<h2 class="anchored" data-anchor-id="my-interpretation-for-scientific-ai">My interpretation for scientific AI</h2>
 <p>This reading helps me distinguish three quantities that are often blurred together: model confidence, statistical dependence and biological validity.</p>
 <p>A language model can assign a sharp probability distribution, but calibration determines whether that confidence is trustworthy. A model score can correlate with an annotation, but dependence alone does not show causation. A benchmark can report strong discrimination, but biological validity depends on the target, controls, sampling and domain of use.</p>
 <p>For PopGenLM Bench, entropy and information suggest useful evaluation questions. Does adding a model score reduce uncertainty about an independently measured outcome beyond simpler features such as conservation or GC content? Is that reduction stable across chromosomes, annotation classes and species? Does it remain after controlling for relatedness and genomic structure?</p>
 <p>These questions are more demanding than plotting a score distribution. They are also more scientifically meaningful.</p>
-<h2 id="additional-learning-directions">Additional learning directions</h2>
+</section>
+<section id="additional-learning-directions" class="level2">
+<h2 class="anchored" data-anchor-id="additional-learning-directions">Additional learning directions</h2>
 <p>I want to study finite-sample bias in entropy estimates, sequence reweighting, permutation-based null models and methods for higher-order interactions. Pairwise mutual information can detect relationships, but biological systems often involve networks of sites rather than isolated pairs.</p>
 <p>I also want to compare mutual information with attention maps and learned representations from genomic foundation models. Similar-looking heat maps can arise from very different mathematical objects; comparison requires precise definitions and tests.</p>
-<h2 id="my-commentary">My commentary</h2>
+</section>
+<section id="my-commentary" class="level2">
+<h2 class="anchored" data-anchor-id="my-commentary">My commentary</h2>
 <p>This was the section where information theory stopped feeling like an imported engineering language and began to feel biologically native. Evolution generates distributions. Selection, mutation and history shape their uncertainty. Relationships within those distributions can reveal organisation—but only when the ensemble and its history are taken seriously.</p>
 <div class="reading-source">
 <p><strong>Reading for this note:</strong> Christoph Adami, <em>The Evolution of Biological Information</em>, Chapter 2, Sections 2.2 and 2.2.1 on entropy, conditional entropy, mutual information and the inference of tRNA structure from sequence covariation.</p>
 </div>
-</main> <!-- /main -->
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -611,7 +691,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>© 2026 Dr. Tahir Ali</p>
+<p>© 2026 Dr.&nbsp;Tahir Ali</p>
 </div>   
     <div class="nav-footer-center">
 <p>Computational biology · Scientific AI · Education</p>

@@ -35,6 +35,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../profile.webp" rel="icon">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
@@ -42,7 +43,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-fdaeddbba6fa95a0f13bcc20c9a3fb04.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-46631ef7d5207a1ec5e6e4a429f0476e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -91,7 +92,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="docked nav-sidebar quarto-light workshops-page">
+<body class="nav-sidebar docked workshops-page quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -116,14 +117,73 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item"><div class="sidebar-item-container"><a href="../index.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Home</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../popgenlm.html" class="sidebar-item-text sidebar-link"><span class="menu-text">PopGenLM</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../genomes-to-ai.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Genomes to AI</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../projects.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Projects</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../publications.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Publications</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../cv.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Résumé</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="../teaching/teaching.html" class="sidebar-item-text sidebar-link"><span class="menu-text">Teaching</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="workshops.html" class="sidebar-item-text sidebar-link active"><span class="menu-text">Workshops</span></a></div></li><li class="sidebar-item"><div class="sidebar-item-container"><a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank"><span class="menu-text">GitHub</span></a></div></li></ul>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../popgenlm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PopGenLM</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../genomes-to-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Genomes to AI</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projects</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../publications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Publications</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../cv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Résumé</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../teaching/teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../workshops/workshops.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Workshops</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">GitHub</span></a>
+  </div>
+</li>
+    </ul>
     </div>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content column-page-right" id="quarto-document-content"><section class="page-hero workshops-hero" aria-labelledby="workshops-title">
+<main class="content column-page-right" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<section class="page-hero workshops-hero" aria-labelledby="workshops-title">
 <div class="eyebrow">
 Hands-on scientific training
 </div>
@@ -137,13 +197,16 @@ Practical training that connects biological questions with reproducible workflow
 <span class="tag">Genomics</span><span class="tag">R</span><span class="tag">Python</span><span class="tag">Bash + HPC</span><span class="tag">Spatial ecology</span><span class="tag">Reproducibility</span>
 </div>
 </section>
-<h2 id="about-these-workshops">About these workshops</h2>
+<section id="about-these-workshops" class="level2">
+<h2 class="anchored" data-anchor-id="about-these-workshops">About these workshops</h2>
 <p>These interactive computational workshops are designed to turn theoretical concepts into practical skills. Through Python and JupyterLab, R, and Bash/Linux, participants gain direct experience in analysing genomic and ecological data - from allele-frequency dynamics and population structure to environmental modelling and species distributions.</p>
 <p>Each session combines conceptual introductions, guided coding, data exploration, visualisation, and discussion of analytical choices. The emphasis is on learning by doing: understanding why a method is appropriate, checking its assumptions, reading its output critically, and adapting the workflow to a new biological problem.</p>
 <div class="workshop-quote">
 Learn by doing - explore evolution, adaptation, and biodiversity through data, code, and discovery.
 </div>
-<h2 id="featured-workshop-material">Featured workshop material</h2>
+</section>
+<section id="featured-workshop-material" class="level2">
+<h2 class="anchored" data-anchor-id="featured-workshop-material">Featured workshop material</h2>
 <p class="section-intro">
 Open workshop notes and practical sessions for researchers, students, and instructors who want to work through real analytical decisions.
 </p>
@@ -152,7 +215,7 @@ Open workshop notes and practical sessions for researchers, students, and instru
 <div class="card-kicker">
 Python · JupyterLab
 </div>
-<h3>
+<h3 class="anchored">
 Temporal genomics
 </h3>
 <p>
@@ -166,7 +229,7 @@ Explore allele-frequency change through time, compare observed shifts with neutr
 <div class="card-kicker">
 Population genomics
 </div>
-<h3>
+<h3 class="anchored">
 Integrative landscape genomics
 </h3>
 <p>
@@ -180,7 +243,7 @@ Connect genetic variation with geography and environmental heterogeneity through
 <div class="card-kicker">
 R · Multivariate methods
 </div>
-<h3>
+<h3 class="anchored">
 Population structure and environment
 </h3>
 <p>
@@ -194,7 +257,7 @@ Use PCA, PCoA, DAPC, and RDA to examine high-dimensional biological data and dis
 <div class="card-kicker">
 Species distribution modelling
 </div>
-<h3>
+<h3 class="anchored">
 Ecological modelling with biomod2
 </h3>
 <p>
@@ -208,7 +271,7 @@ Develop and compare species-distribution models while considering predictors, ev
 <div class="card-kicker">
 Conservation · Spatial analysis
 </div>
-<h3>
+<h3 class="anchored">
 Advanced spatial ecology
 </h3>
 <p>
@@ -219,58 +282,60 @@ Work with environmental statistics, spatial data, and modelling approaches used 
 </div>
 </article>
 </div>
-<h2 id="workshop-themes">Workshop themes</h2>
+</section>
+<section id="workshop-themes" class="level2">
+<h2 class="anchored" data-anchor-id="workshop-themes">Workshop themes</h2>
 <div class="table-responsive workshop-table">
-<table>
+<table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
 <col style="width: 33%">
 <col style="width: 33%">
 </colgroup>
 <thead>
-<tr>
+<tr class="header">
 <th style="text-align: left;">Topic</th>
 <th style="text-align: left;">Core tools</th>
 <th style="text-align: left;">Scientific focus</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td style="text-align: left;">Linux and Bash for bioinformatics</td>
 <td style="text-align: left;"><code>bash</code>, <code>awk</code>, <code>sed</code>, Slurm, HPC</td>
 <td style="text-align: left;">Automate genomic workflows and manage high-performance computing tasks</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;">R for biological data</td>
 <td style="text-align: left;">R, RStudio, tidyverse, tidymodels, ggplot2</td>
 <td style="text-align: left;">Data organisation, visualisation, statistical reasoning, and reproducible reports</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;">Spatial ecology and modelling</td>
 <td style="text-align: left;">sf, terra, spatstat, spdep, tmap, blockCV</td>
 <td style="text-align: left;">Spatial sampling, point patterns, climate predictors, and spatial validation</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;">Species distribution models</td>
 <td style="text-align: left;">biomod2, MaxEnt, random forests, scikit-learn</td>
 <td style="text-align: left;">Predict species ranges and responses to environmental change</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;">Temporal genomics</td>
 <td style="text-align: left;">dadi, SFS, snpEff, GERP, phyloP, GPN</td>
 <td style="text-align: left;">Track allele-frequency shifts and evaluate drift, selection, and genomic constraint</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;">Hybridisation genomics</td>
 <td style="text-align: left;">ANGSD, GATK, bcftools, vcftools, PLINK</td>
 <td style="text-align: left;">Quantify introgression, ancestry, and genomic differentiation in hybrid systems</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;">Population structure</td>
 <td style="text-align: left;">PCA, DAPC, ADMIXTURE, poppr, PCAngsd</td>
 <td style="text-align: left;">Infer connectivity, clustering, admixture, and differentiation</td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;">Functional genomics</td>
 <td style="text-align: left;">PLINK, GEMMA, GAPIT, topGO, clusterProfiler</td>
 <td style="text-align: left;">Connect genomic signals with traits, pathways, and biological function</td>
@@ -278,10 +343,12 @@ Work with environmental statistics, spatial data, and modelling approaches used 
 </tbody>
 </table>
 </div>
-<h2 id="training-approach">Training approach</h2>
+</section>
+<section id="training-approach" class="level2">
+<h2 class="anchored" data-anchor-id="training-approach">Training approach</h2>
 <div class="principle-grid">
 <article class="principle-card">
-<h3>
+<h3 class="anchored">
 Biological question first
 </h3>
 <p>
@@ -289,7 +356,7 @@ Methods are introduced in relation to a research question, assumptions, and the 
 </p>
 </article>
 <article class="principle-card">
-<h3>
+<h3 class="anchored">
 Code that can be inspected
 </h3>
 <p>
@@ -297,7 +364,7 @@ Commands and analytical choices remain visible so participants can reproduce, ad
 </p>
 </article>
 <article class="principle-card">
-<h3>
+<h3 class="anchored">
 Interpretation with limits
 </h3>
 <p>
@@ -305,7 +372,7 @@ Outputs are connected to uncertainty, model scope, and realistic alternatives - 
 </p>
 </article>
 <article class="principle-card">
-<h3>
+<h3 class="anchored">
 Transferable practice
 </h3>
 <p>
@@ -313,9 +380,15 @@ Exercises emphasise analytical patterns that can be reused across datasets, orga
 </p>
 </article>
 </div>
-<h2 id="aim">Aim</h2>
+</section>
+<section id="aim" class="level2">
+<h2 class="anchored" data-anchor-id="aim">Aim</h2>
 <p>The workshops are intended to help students, researchers, and educators bridge evolutionary theory, genomic data, spatial ecology, modelling, and computational methods - building the practical judgement needed to analyse, visualise, and interpret complex biological data responsibly.</p>
-</main> <!-- /main -->
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -734,7 +807,7 @@ Exercises emphasise analytical patterns that can be reused across datasets, orga
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>© 2026 Dr. Tahir Ali</p>
+<p>© 2026 Dr.&nbsp;Tahir Ali</p>
 </div>   
     <div class="nav-footer-center">
 <p>Computational biology · Scientific AI · Education</p>
