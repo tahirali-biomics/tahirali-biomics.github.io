@@ -250,389 +250,186 @@
     ]
   },
   {
-    "objectID": "posts/2026-03-23-can-we-replay-evolution/index.html",
-    "href": "posts/2026-03-23-can-we-replay-evolution/index.html",
-    "title": "Can we replay evolution?",
+    "objectID": "posts/2026-04-04-when-does-more-become-complexity/index.html",
+    "href": "posts/2026-04-04-when-does-more-become-complexity/index.html",
+    "title": "When does more become complexity?",
     "section": "",
-    "text": "A Genomes to AI reading note on Chapter 4 of Christoph Adami’s The Evolution of Biological Information.\nIn my previous note, I came to think of a genome as a record of encounters with the world. But a record shows me what happened, not all the things that could have happened. If I could take an earlier population and let it evolve again, would it arrive at the same answer?\nAdami’s Chapter 4 moves that question from a thought experiment to the laboratory. The settings change from warm cultures to frozen bacteria to digital organisms, but one question follows me through them: What can an experiment tell me about the path, not just the outcome?"
+    "text": "A Genomes to AI reading note on Chapter 5 of Christoph Adami’s The Evolution of Biological Information.\nIn my previous note, the frozen ancestors in Lenski’s experiment made me ask whether a new evolutionary path could be replayed. Chapter 5 asks a harder question about the paths we see across life: if evolution produces complexity, what exactly is increasing?\nAdami begins with a tree of life. Its branches do not form a ladder. Bacteria and archaea have not been replaced by animals; they are still here, thriving in their own ways. A path from the root to a human can make it look as if evolution has been climbing toward us. Look at the whole tree, and the story changes. Before drawing an arrow marked more complex, I need to say what I counted and where I looked."
   },
   {
-    "objectID": "posts/2026-03-23-can-we-replay-evolution/index.html#how-slowly-can-a-world-change",
-    "href": "posts/2026-03-23-can-we-replay-evolution/index.html#how-slowly-can-a-world-change",
-    "title": "Can we replay evolution?",
-    "section": "How slowly can a world change?",
-    "text": "How slowly can a world change?\nWilliam Henry Dallinger cultivated microorganisms while raising the temperature of their environment over generations. The later populations tolerated heat that had harmed their predecessors. I underlined one word in my notes: gradually.\nWhat if Dallinger had raised the heat to the final level on the first day? The experiment does not answer that counterfactual, but it makes the question hard to ignore. A population must survive each step to encounter the next one. Dallinger could watch adaptation unfold without being able to read the mutations that enabled it. When I see an adapted population today, I too can be tempted to jump from its present state to a tidy story about how it got there. Was the route as important as the destination?"
+    "objectID": "posts/2026-04-04-when-does-more-become-complexity/index.html#could-i-count-the-parts",
+    "href": "posts/2026-04-04-when-does-more-become-complexity/index.html#could-i-count-the-parts",
+    "title": "When does more become complexity?",
+    "section": "Could I count the parts?",
+    "text": "Could I count the parts?\nDifferent cell types, tissues and levels of organization give us one way to describe structure. But what level do I choose? One cell can contain intricate molecular machinery; a multicellular body can be divided into parts in several ways. Count the parts alone, and I miss their connections. Add the connections, and I still do not know what they do.\nPerhaps genome length would give me a simpler answer. Every organism builds itself, in part, from genetic instructions. Yet the C-value paradox interrupts that thought: large genomes do not line up neatly with our sense of organismal complexity. Some organisms carry much more DNA than humans without fitting a simple ranking by structure or function. The extra sequence is still real; its length simply answers a different question.\nI tried another word in the margin: compressibility. A repetitive sequence can be described briefly, while a random one resists compression. Kolmogorov complexity formalizes that distinction through the length of the shortest program that could produce a string. It is an elegant idea, but a random string can score highly without doing anything for an organism. Also, finding the shortest possible program is not generally computable. Hard to compress is not the same as useful to a cell.\nAdami’s move is to make the world part of the question. How much of a sequence is informative given the environment in which it evolved? In his account, physical or informational complexity is tied to what a sequence records about that environment. This is not a property I can read from a solitary DNA string. I need an ensemble of sequences, a specified environment and a way to compare them. And even then, the link between the theoretical construction and a measurable quantity requires assumptions.\nThe RNA aptamer experiments give that abstract idea something to hold onto. In one set of laboratory-evolved GTP-binding RNAs, stronger binding was associated with greater sequence information and, in the studied structures, more elaborate folding. This is a relationship within a defined molecular task, not a conversion rule that lets me rank every organism on one scale. A different task, or an environment that varies across a life cycle, changes what information may be useful. Adami even sketches an extension to multiple environments, while admitting how difficult it would be to measure in practice.\nI wrote “what does it do here?” beside my first attempt at a universal ruler."
   },
   {
-    "objectID": "posts/2026-03-23-can-we-replay-evolution/index.html#what-does-a-frozen-ancestor-give-us",
-    "href": "posts/2026-03-23-can-we-replay-evolution/index.html#what-does-a-frozen-ancestor-give-us",
-    "title": "Can we replay evolution?",
-    "section": "What does a frozen ancestor give us?",
-    "text": "What does a frozen ancestor give us?\nRichard Lenski’s long-term E. coli experiment offers an unusual way to ask. Twelve populations began from a common ancestor and evolved separately in the same laboratory environment. Samples were frozen at intervals. Researchers could compare descendants with their predecessors—and later thaw an earlier sample to start a new run.\nCitrate was present in the medium throughout the experiment. Yet only one of the original populations evolved the ability to grow aerobically on it. That detail made me stop. If all twelve populations encountered the same resource, why this one? Had it simply been lucky, or had earlier changes opened a path that was less accessible to the others?\nThe freezer allowed researchers to test that question. They thawed clones from different points in the successful lineage’s past and ran evolution again. Citrate use arose in some replays started from later backgrounds, while replays from the original ancestor did not produce it. Earlier genetic changes had altered the chance of a later innovation: historical contingency made a difference. Subsequent genomic work described potentiation, actualization and refinement in the origin of citrate use. Those names help reconstruct what happened in this lineage; they do not mean the outcome was guaranteed.\nI wrote beside the freezer: Same environment, different histories. A replay is a test, not a rewind. It begins with a preserved clone, but new mutations and chance events follow. Even a genetic background that makes citrate use more accessible does not ensure that every replay will find it.\n\n\n\nA wide ruled notebook page drawn in uneven graphite. Dallinger’s rising-temperature cultures sit in one margin; Lenski’s replicate E. coli lineages lead to a frozen intermediate and several replay outcomes; a small Avida vignette asks whether the steps can be tested."
+    "objectID": "posts/2026-04-04-when-does-more-become-complexity/index.html#does-the-wiring-tell-me-what-the-system-does",
+    "href": "posts/2026-04-04-when-does-more-become-complexity/index.html#does-the-wiring-tell-me-what-the-system-does",
+    "title": "When does more become complexity?",
+    "section": "Does the wiring tell me what the system does?",
+    "text": "Does the wiring tell me what the system does?\nChapter 5 then moves from sequences to networks. Genes help specify proteins and regulation; proteins participate in metabolic systems; neurons connect into circuits. A graph can show which parts are connected, but two graphs with the same bare pattern may have different meanings if the parts have different roles.\nAdami uses an artificial cell model to make this testable. A small coded genome begins with a few metabolic functions and evolves larger networks. In the model, information measured in the genome grows alongside metabolic organization. The changing environment matters: a cell in a predictable world can rely on available precursors, whereas a cell facing fluctuating supplies may need machinery to make them. Bigger networks and higher information can emerge together in this model; it does not follow that every additional node in a living network improves function.\nThe worm C. elegans makes the limitation of a wiring diagram vivid. Count small patterns of connections between its neurons without identifying the neurons, and some patterns look unremarkable. Mark which nodes are sensory neurons, interneurons or motor neurons, and a sensory-to-interneuron-to-motor arrangement stands out against shuffled assignments. The connections stayed the same; the roles made a relationship visible. Adami also examines network modules and motif frequencies, while warning that neither modularity nor a motif count supplies a universal measure of complexity. How we label a node is itself a scientific choice.\nThat is what I wanted the two small networks in my notebook to remind me: same wires, different roles.\n\n\n\nA wide ruled notebook page in dark graphite. A branching tree keeps small and elaborate lineages together, while annotations distinguish passive spread from a driven trend and ask what genome length, network roles and paired variants can reveal."
   },
   {
-    "objectID": "posts/2026-03-23-can-we-replay-evolution/index.html#what-can-a-digital-organism-tell-me",
-    "href": "posts/2026-03-23-can-we-replay-evolution/index.html#what-can-a-digital-organism-tell-me",
-    "title": "Can we replay evolution?",
-    "section": "What can a digital organism tell me?",
-    "text": "What can a digital organism tell me?\nThen Adami takes the experiment into a computer. In Avida, self-replicating programs carry instructions that can mutate; their success depends on the rules of a digital environment. I paused over the word organism. These programs have no cells or bacterial metabolism. Why study them alongside Dallinger’s cultures and Lenski’s E. coli?\nBecause here, the lineage can be inspected instruction by instruction. In Avida experiments, complex logic functions evolved through histories that included simpler functions and other changes. The first program able to perform a complex task could be only a mutation or two from its parent, yet many consequential changes away from its ancestor. Seen only at the moment it appeared, the new function might look sudden. Seen along the lineage, it has a history.\nAvida lets us test evolutionary possibilities under explicit rules; the microbial experiments concern living populations with their own biology. I cannot use a digital lineage to explain a bacterium’s exact mutations. But I can use the comparison to ask a better question of both: Which steps can I actually recover, and which am I only inferring from the end?"
+    "objectID": "posts/2026-04-04-when-does-more-become-complexity/index.html#if-the-upper-branches-rise-is-evolution-pushing-them-upward",
+    "href": "posts/2026-04-04-when-does-more-become-complexity/index.html#if-the-upper-branches-rise-is-evolution-pushing-them-upward",
+    "title": "When does more become complexity?",
+    "section": "If the upper branches rise, is evolution pushing them upward?",
+    "text": "If the upper branches rise, is evolution pushing them upward?\nThe tree led me to Adami’s distinction between passive and driven trends. Imagine many lineages whose trait values wander up or down, but cannot go below a lower bound. As they branch and spread, the maximum can rise even when changes in either direction are equally likely. A driven trend requires evidence that increases are favored over decreases. An increasing maximum by itself cannot tell me which process produced it.\nThat distinction turns a vague claim about progress into a test. In fossil marine animals, body size has increased in ways that fit a size-biased model better than an unbiased one in the study Adami discusses. But body size is not complexity, and a result for one trait cannot be carried across the entire tree of life. He turns to proteins too: in a comparison grouped by inferred gene age, younger proteins tend to change faster, while older proteins are on average longer and more structurally ordered. Those are useful population-level patterns. They do not mean that every protein grows longer as it ages, or that any individual lineage must grow more complex.\nHere I noticed a trap in my own question. Does complexity increase? has been quietly shifting between at least three things: the maximum among branches, a mean across groups, and the path taken by one lineage. These can behave differently even when all the observations are correct."
   },
   {
-    "objectID": "posts/2026-03-23-can-we-replay-evolution/index.html#from-genomes-to-ai",
-    "href": "posts/2026-03-23-can-we-replay-evolution/index.html#from-genomes-to-ai",
-    "title": "Can we replay evolution?",
+    "objectID": "posts/2026-04-04-when-does-more-become-complexity/index.html#what-happens-along-one-lineage",
+    "href": "posts/2026-04-04-when-does-more-become-complexity/index.html#what-happens-along-one-lineage",
+    "title": "When does more become complexity?",
+    "section": "What happens along one lineage?",
+    "text": "What happens along one lineage?\nTo study shorter paths, Adami returns to fitness. In a deliberately restricted model with fixed fitness values, no mutation and selection acting on existing types, mean fitness rises as the fitter types spread. Fisher’s theorem makes that result precise. Let mutations enter, and the simple guarantee no longer follows; Price’s equation separates the part associated with selection from changes transmitted across generations. In a finite population, chance can also complicate the tidy upward path.\nLenski’s evolving E. coli populations give this section an experimental anchor. Fitness improved substantially over tens of thousands of generations, yet the gains slowed. Adami examines the fitted trajectory and asks whether diminishing returns mean that adaptation is approaching a final summit. They do not, by themselves, establish one. An apparent peak in a two-dimensional landscape may conceal other accessible routes when many genes interact.\nThe NK model makes those interactions adjustable. Change how many positions affect one another, and the landscape becomes more or less rugged. Evolutionary runs can then take different routes; with some settings, a lineage can even pass through a lower-fitness state on its way to another peak. The model is intentionally small and controlled. It helps isolate what genetic interaction can do, without being a literal map of an E. coli genome.\nThis is where my question changes again. If mutation A helps on one background, will it help after mutation B? Epistasis means that the combined effect need not equal the effects of A and B treated independently. Even diminishing returns requires care: a slowing fitness trajectory and a particular sign of pairwise epistasis are not interchangeable statements. The route through sequence space changes what a later step can mean."
+  },
+  {
+    "objectID": "posts/2026-04-04-when-does-more-become-complexity/index.html#from-genomes-to-ai",
+    "href": "posts/2026-04-04-when-does-more-become-complexity/index.html#from-genomes-to-ai",
+    "title": "When does more become complexity?",
     "section": "From genomes to AI",
-    "text": "From genomes to AI\nI often ask a genomic model to score one variant at a time. Chapter 4 makes me pause before treating that score as a property of the variant alone. Which sequence surrounds it? Which other mutations are already present? Which environment tests it? A change that matters in one background may have a different effect in another.\nThis gives me questions for PopGenLM Bench. Could a model’s prediction change across genetic backgrounds? If closely related sequences appear in both training and evaluation, what does good performance really show? Could experimental lineages provide independent evidence about which predictions hold? These are directions I want to test, not results I already have.\nSo, can we replay evolution? We can return to a preserved starting point and watch another history begin. We cannot demand the same ending. That is what makes the replay informative: when outcomes differ, or become possible only after certain earlier changes, the record of the past becomes something we can question experimentally.\n\nReading for this note: Christoph Adami, The Evolution of Biological Information (2024), Chapter 4, “Experiments in Evolution,” §§4.1–4.5. For the replay and digital-evolution details, see Blount, Borland and Lenski (2008), Blount and colleagues (2012) and Lenski and colleagues (2003). The notebook questions and the connection to genomic AI are my interpretations, not findings from PopGenLM Bench."
+    "text": "From genomes to AI\nI came to Chapter 5 with a genomic-model version of the same tempting shortcut: reduce a complex system to one number and compare the numbers. A language model can give each variant a precise score. But what would a score be a measure of? Sequence regularity, molecular function, long-term constraint, or a fitness effect in a particular environment? Those are distinct targets. A model trained to predict sequence can be excellent at that task without settling which variants matter for an organism.\nThis chapter suggests several questions for PopGenLM Bench. Does model performance depend on the genomic context or the functional class being tested? Would a prediction change when a variant is placed on another haplotype? Do paired variants behave as the sum of their individual scores suggests? Does agreement with conservation persist in different environments or lineages? I have not established those answers. The benchmark needs independent evidence, appropriate controls and explicit comparison units to test them.\nThe most honest answer I can take from this chapter is a method of asking. When does more become complexity? When I specify more of what, in which system, under which conditions, and show why that measure speaks to the function or evolutionary process I care about. Adami does not close the book on a universal upward trend; his own chapter ends with that larger question open. My sketch therefore leaves the branches unfinished. Before I extend an arrow, I want to know what it measures.\n\nReading for this note: Christoph Adami, The Evolution of Biological Information (2024), Chapter 5, “Evolution of Complexity,” §§5.1–5.5. The claims about RNA aptamers, artificial metabolic networks, colored neuronal motifs, fossil body size, protein age, the LTEE and NK landscapes follow examples discussed there. The notebook questions and the connection to genomic AI are my interpretations, not results from PopGenLM Bench."
   },
   {
-    "objectID": "posts/2026-03-07-what-does-a-gene-know/index.html",
-    "href": "posts/2026-03-07-what-does-a-gene-know/index.html",
-    "title": "What Does a Gene Know?",
+    "objectID": "posts/2026-03-15-what-can-a-genome-remember/index.html",
+    "href": "posts/2026-03-15-what-can-a-genome-remember/index.html",
+    "title": "What can a genome remember?",
     "section": "",
-    "text": "A simple pencil notebook page linking a sequence ensemble to a folded protein and a leaf in its environment.\nThe final part of the supplied excerpt asks a question that sounds almost poetic: what does a gene know? The chapter uses “know” in a precise, non-mental sense. A biological molecule has information about its world when its state supports successful predictions or interactions in that world.\nThis question brought the whole reading series together for me."
+    "text": "A Genomes to AI reading note on Chapter 3 of Christoph Adami’s The Evolution of Biological Information.\nI began this chapter expecting an account of how evolution adds information to DNA. Adami began with a ruler.\nAt first I wanted to hurry past it. What could the length of a stick have to do with the history of a genome? Then I realized that I had already made the assumption the example was meant to unsettle: that information simply sits in an object, waiting for us to read it out. A ruler tells me something about a stick because its markings respond to length. It may be precise and still tell me nothing about the stick’s colour. The property, the measuring device and the question have to meet.\nMy first question in the margin was: What is a genome measuring?\nAdami asks us to imagine a DNA sequence and the environment in which it evolves as two initially uncertain variables. Mutation offers possible changes; survival and reproduction test them in a particular world. If a variant repeatedly succeeds, inheritance can keep its sequence in a population. In the chapter’s idealized example, an adaptive fixation makes a sequence state more predictable given the environment. Mutation alone has not learned anything. The relationship comes from variation, differential success and inheritance.\nI had been picturing a genome as a store of answers. Now I pictured a record of encounters: a molecular possibility met a particular world, and descendants carried an outcome forward. “Memory” is a useful metaphor, provided I remember that there is no intention in the molecule and no foresight in selection."
   },
   {
-    "objectID": "posts/2026-03-07-what-does-a-gene-know/index.html#information-is-always-about-something",
-    "href": "posts/2026-03-07-what-does-a-gene-know/index.html#information-is-always-about-something",
-    "title": "What Does a Gene Know?",
-    "section": "Information is always about something",
-    "text": "Information is always about something\nSection 2.3 turns from relationships within sequences to the information content of genes. A molecule such as haemoglobin is adapted to a world containing oxygen, particular chemical structures, cellular partners and physiological demands. Its sequence and folded form embody relationships accumulated through evolution.\nCalling this “knowledge” is useful only if we remain precise. The molecule does not think. Its structure carries predictive relationships to an environment: what to bind, where to function, and which interactions to avoid.\nThis gives biological information a direction. A sequence is not simply full of information in the abstract. It may carry information about a molecular partner, an environment, a developmental state or a functional requirement."
+    "objectID": "posts/2026-03-15-what-can-a-genome-remember/index.html#why-does-the-record-last",
+    "href": "posts/2026-03-15-what-can-a-genome-remember/index.html#why-does-the-record-last",
+    "title": "What can a genome remember?",
+    "section": "Why does the record last?",
+    "text": "Why does the record last?\nIf molecules are physical, their records are vulnerable. Adami’s Maxwell demon makes that problem tangible. The imaginary demon measures the motion of molecules and sorts them through a door. Sorting seems to create order for free until we count the physical record of the measurements and the cost of erasing it. Information has a material history.\nSelection performs a different kind of sorting. A favourable change can spread; a damaging change may disappear with the lineages carrying it. Replication makes surviving arrangements available for another round. In Adami’s deliberately clean picture, this can preserve information acquired in an environment against the noise that would otherwise erode it.\nBut I paused over the word clean. I work with population data; I cannot read a fixed difference as proof that selection discovered a better answer. Drift can fix variants. Populations are finite. Recombination reshuffles combinations. Organisms occupy different niches, and their neighbours evolve too. Adami makes room for these complications in his “leaky natural demon.” The leak matters: it prevents the metaphor from becoming a claim that information must rise with every generation.\nIt also changes the question. Information about which world?"
   },
   {
-    "objectID": "posts/2026-03-07-what-does-a-gene-know/index.html#why-one-sequence-is-not-enough",
-    "href": "posts/2026-03-07-what-does-a-gene-know/index.html#why-one-sequence-is-not-enough",
-    "title": "What Does a Gene Know?",
-    "section": "Why one sequence is not enough",
-    "text": "Why one sequence is not enough\nBox 2.2 addresses a common difficulty. Shannon information is a correlational property of ensembles, so it cannot normally be measured by inspecting a single sequence. One observed string does not reveal which of its patterns are reliably connected to a target and which occurred by chance.\nThe distinction between a message and an ensemble is crucial. A particular clue may happen to predict correctly once, but its information can be assessed only across repeated possibilities. For molecular sequences, evolution helps generate the ensemble: mutation explores alternatives and selection changes which alternatives persist.\nThis is why conservation and covariation become informative. Across many sequences, the evolutionary process reveals which changes are tolerated and which relationships are maintained. The information is not printed visibly inside one string; it appears through structured variation across possible strings and worlds."
+    "objectID": "posts/2026-03-15-what-can-a-genome-remember/index.html#does-a-conserved-protein-carry-the-same-information-everywhere",
+    "href": "posts/2026-03-15-what-can-a-genome-remember/index.html#does-a-conserved-protein-carry-the-same-information-everywhere",
+    "title": "What can a genome remember?",
+    "section": "Does a conserved protein carry the same information everywhere?",
+    "text": "Does a conserved protein carry the same information everywhere?\nAdami compares information profiles of homeodomain and COX2 proteins across branches of life. Their patterns do not trace one tidy staircase toward more information; the lineages separate in different ways. I returned to the ruler. The meaning of sequence constraint depends on what the protein does, where it does it, and which sequences I put in the comparison. An alignment can show me a pattern; it cannot alone tell me what caused it.\nThe chapter’s ancestral protein example sharpens the distinction. Reconstructed fluorescent proteins from a coral lineage can be made and examined for their colours. Inferring a past sequence from a tree and testing a property of the resulting protein are different steps. A line on an entropy plot can start a question about a change in function; it cannot finish it."
   },
   {
-    "objectID": "posts/2026-03-07-what-does-a-gene-know/index.html#information-content-and-biological-complexity",
-    "href": "posts/2026-03-07-what-does-a-gene-know/index.html#information-content-and-biological-complexity",
-    "title": "What Does a Gene Know?",
-    "section": "Information content and biological complexity",
-    "text": "Information content and biological complexity\nThe chapter suggests that information content may be a useful proxy for complexity, while acknowledging how difficult it is to estimate. Genes do not act alone. Regulatory systems store substantial context about when, where and how gene products are used. Protein-coding sequence is therefore only part of an organism’s informational architecture.\nThe excerpt begins the discussion of proteins as amino-acid sequences translated from codons. Even at this early stage, the challenge is clear: counting possible symbols is not the same as measuring functional information. Function depends on folding, interactions, cellular context, environment and the ensemble of viable alternatives.\n\nNotes from my margin\n\nInformation must have a target: information about what?\nA single sequence can be examined, but an ensemble is needed to measure a reliable relationship.\nEvolutionary history is part of the evidence, not background noise."
+    "objectID": "posts/2026-03-15-what-can-a-genome-remember/index.html#can-a-good-answer-become-wrong",
+    "href": "posts/2026-03-15-what-can-a-genome-remember/index.html#can-a-good-answer-become-wrong",
+    "title": "What can a genome remember?",
+    "section": "Can a good answer become wrong?",
+    "text": "Can a good answer become wrong?\nThe lineage comparisons span deep time. Adami’s HIV protease example brings environmental change into sharper focus. A protease inhibitor alters the world in which a viral protein must function. Viral populations that survive encounter a new selective pressure and explore new sequence combinations.\nIn comparisons of patient sequences, drug exposed proteases become more variable at particular residues than proteases from untreated patients. Count each residue separately and it looks as though information has been lost. That is a striking possibility: a population adapting to treatment may look less ordered when inspected one position at a time.\nThen Adami asks where the information is being counted. In his time series, estimated single-site information falls in treated proteases while estimated dependencies between pairs of residues rise. Some associations join residues near the active site to others farther away. Adaptation may be distributed across combinations that a list of individual sites would miss.\nI kept returning to a different question: What if the unit I inspect is too small?\nThis needs care. A correlation between residues does not establish its mechanism, and the chapter could not reliably estimate all higher-order dependencies. A rising sequence statistic is not proof that a virus has solved every problem posed by treatment. Yet the change between the single-site and pairwise views stays with me. At individual positions I might tell a story of loss; in their relationships I can see part of a possible reconstruction.\n\n\n\nA ruled notebook page in thick graphite: a changing world cuts across a loop of variation, selection and inheritance; questions about measurement and memory surround it, while paired DNA marks prompt a second look between sites."
   },
   {
-    "objectID": "posts/2026-03-07-what-does-a-gene-know/index.html#my-interpretation-for-popgenlm-bench",
-    "href": "posts/2026-03-07-what-does-a-gene-know/index.html#my-interpretation-for-popgenlm-bench",
-    "title": "What Does a Gene Know?",
-    "section": "My interpretation for PopGenLM Bench",
-    "text": "My interpretation for PopGenLM Bench\nThis reading changes the language I want to use around genomic AI. A model score is not “biological information” simply because it was produced from DNA. It becomes useful evidence only if it improves prediction of a clearly defined biological target in an appropriate ensemble.\nFor variant-effect models, possible targets include population frequency, evolutionary constraint, molecular function, expression, phenotype or experimental effect. These are related but not interchangeable. A score that predicts conservation may not predict present-day fitness in a particular population. A score calibrated in one species may not transfer to another. A correlation learned from sequence may reflect shared history rather than a causal mechanism.\nPopGenLM Bench should therefore make four questions explicit:\n\nWhat biological quantity is the score expected to predict?\nWhich ensemble defines the test—sites, individuals, populations or species?\nHow much uncertainty does the model reduce beyond appropriate baselines?\nUnder which changes of reference, lineage, annotation and sampling does that relationship remain stable?\n\nThis is a stronger foundation than asking whether the software ran or whether the plot looks convincing."
+    "objectID": "posts/2026-03-15-what-can-a-genome-remember/index.html#what-if-the-interesting-message-lies-outside-the-gene",
+    "href": "posts/2026-03-15-what-can-a-genome-remember/index.html#what-if-the-interesting-message-lies-outside-the-gene",
+    "title": "What can a genome remember?",
+    "section": "What if the interesting message lies outside the gene?",
+    "text": "What if the interesting message lies outside the gene?\nAdami then moves into regulatory DNA. A transcription factor must find suitable binding sites in a very long sequence. A motif can provide some of the specificity for that search. The chapter links the frequencies of nucleotides in binding sites to binding energy under a model, and asks how much specificity is enough to find targets among many alternatives in a genome.\nWhy should the strongest possible binding site always be best? Binding has to work within a regulatory system. A consensus motif is not necessarily the sequence we find in an organism. A weight matrix learned from known CRP sites can rank candidates, but a strict threshold misses some known sites while a loose one admits many others. A precise motif score cannot by itself tell me what happens in a cell.\nThe last example returned me to a thought from my earlier reading note: meaning can live between things. Dorsal binding sites involved in fly development differ depending on whether a Twist site is nearby. Separate the sites by that context and part of their sequence pattern becomes visible; pool them and the distinction blurs. Adami measures a modest association between the Dorsal sequence and the proximity of a Twist motif. For me, the discovery is not that DNA literally “knows” its neighbour. It is that my choice of comparison can hide a relationship useful for prediction.\nThat is why the little paired marks sit apart from the main loop in my drawing. The loop asks how a record changes through time; the marks ask where I am looking for that record. The record can be revised, and some of it is in the connections."
   },
   {
-    "objectID": "posts/2026-03-07-what-does-a-gene-know/index.html#my-commentary-on-chapter-2",
-    "href": "posts/2026-03-07-what-does-a-gene-know/index.html#my-commentary-on-chapter-2",
-    "title": "What Does a Gene Know?",
-    "section": "My commentary on Chapter 2",
-    "text": "My commentary on Chapter 2\nThe chapter’s most important contribution, for me, is discipline of language. It moves from the history of genetic information to random variables, probability, entropy, conditional dependence and gene information without allowing “information” to remain a loose synonym for sequence.\nI also appreciate that the biological examples expose the limits of the mathematics. An entropy profile depends on sampling. Mutual information detects dependence, not cause. A single sequence does not establish what it predicts. Recent ancestry can resemble constraint. These are not reasons to reject the framework; they are reasons to use it scientifically.\nThe reading has made my AI journey feel more grounded. The question is not whether AI can process more genomic data. It can. The harder question is whether its outputs carry stable, testable information about the biological world."
+    "objectID": "posts/2026-03-15-what-can-a-genome-remember/index.html#from-genomes-to-ai",
+    "href": "posts/2026-03-15-what-can-a-genome-remember/index.html#from-genomes-to-ai",
+    "title": "What can a genome remember?",
+    "section": "From genomes to AI",
+    "text": "From genomes to AI\nThis chapter gives me a more demanding way to think about genomic language models. A model can produce a reproducible score for a variant. That score may help predict a measured outcome. But it is not the same quantity as Adami’s evolutionary information, and it cannot tell me on its own which aspect of biology the model has recovered. Does it track long-term constraint, a molecular assay, a change in binding, or fitness in a particular environment? These targets may disagree.\nThis is one reason I am building PopGenLM Bench. I want to put variant scores beside independent evolutionary and functional evidence, state the genomic context, and test where agreement holds or breaks. The chapter also makes me uneasy about treating every variant as an isolated question. If function sometimes depends on combinations, neighbouring binding sites or environmental change, how much can any one variant score tell me without that context? This is a question for the benchmark to test, not a conclusion it has already established.\nI closed the chapter with a changed version of my opening question. What can a genome remember? Relationships shaped by its history, to the extent that they persist and matter in a given context. What can an AI model learn from that record? Perhaps a great deal. But to find out what it has learned, I have to name a biological question and look for evidence beyond the score.\n\nReading for this note: Christoph Adami, The Evolution of Biological Information (2024), Chapter 3, “Evolution of Information,” §§3.1–3.5. The notebook questions and the connection to genomic AI are my interpretations of the chapter, not claims made by Adami or experimental findings from PopGenLM Bench."
   },
   {
-    "objectID": "posts/2026-03-07-what-does-a-gene-know/index.html#where-i-want-to-learn-next",
-    "href": "posts/2026-03-07-what-does-a-gene-know/index.html#where-i-want-to-learn-next",
-    "title": "What Does a Gene Know?",
-    "section": "Where I want to learn next",
-    "text": "Where I want to learn next\nMy next commentary series will return to the chapter topic by topic, with simple comparisons and small reproducible examples: entropy versus conservation, mutual information versus correlation, single sequences versus ensembles, and model likelihood versus biological effect.\nI also want to extend the reading into information content in regulatory DNA, phylogeny-aware sequence models, calibration and the design of benchmarks that separate technical capability from biological support.\n\nReading for this note: Christoph Adami, The Evolution of Biological Information, Chapter 2, Section 2.3, Section 2.3.1 as included in the supplied excerpt, and Box 2.2, “Information in Single Sequences?”"
-  },
-  {
-    "objectID": "posts/2026-02-07-meaning-lives-in-relationships/index.html",
-    "href": "posts/2026-02-07-meaning-lives-in-relationships/index.html",
-    "title": "Meaning Lives Between Things",
+    "objectID": "posts/2026-02-21-uncertainty-reveals-structure/index.html",
+    "href": "posts/2026-02-21-uncertainty-reveals-structure/index.html",
+    "title": "When Uncertainty Reveals Structure",
     "section": "",
-    "text": "A simple pencil notebook page connecting two sites in short DNA sequences, with a rough base-pair sketch.\nThis fortnight the chapter moved from individual variables to relationships. That shift felt important. A nucleotide can be common, rare, conserved or variable on its own, but biological structure often appears only when I ask how one position changes with another.\nThe central idea is simple: context changes probability."
+    "text": "A simple pencil notebook page showing uncertain dots, a small correlation grid and a rough RNA cloverleaf.\nFor the last two weeks I have been thinking about a counter-intuitive idea: uncertainty is not merely a defect in data. When it is measured carefully, its pattern can reveal biological organisation.\nSections 2.2 and 2.2.1 introduce entropy and information. The formulas matter, but the conceptual sequence matters more: first measure how uncertain a variable is; then ask how much that uncertainty decreases when another variable becomes known."
   },
   {
-    "objectID": "posts/2026-02-07-meaning-lives-in-relationships/index.html#joint-probability-seeing-states-together",
-    "href": "posts/2026-02-07-meaning-lives-in-relationships/index.html#joint-probability-seeing-states-together",
-    "title": "Meaning Lives Between Things",
-    "section": "Joint probability: seeing states together",
-    "text": "Joint probability: seeing states together\nTwo variables can be combined into a joint variable. For nucleotide sites, this means counting pairs such as AA, AC or GT across an alignment. The joint distribution records how often two states occur together. By summing over one variable, we recover the marginal distribution of the other.\nThe language can sound abstract, but the biological question is direct: do two positions vary independently, or are some combinations favoured and others avoided?\nIf two coins are independent, learning the outcome of one does not change what I expect from the other. If their outcomes are linked, that knowledge changes the probability. The same logic applies to two sites in a molecule."
+    "objectID": "posts/2026-02-21-uncertainty-reveals-structure/index.html#entropy-measuring-what-remains-unpredictable",
+    "href": "posts/2026-02-21-uncertainty-reveals-structure/index.html#entropy-measuring-what-remains-unpredictable",
+    "title": "When Uncertainty Reveals Structure",
+    "section": "Entropy: measuring what remains unpredictable",
+    "text": "Entropy: measuring what remains unpredictable\nShannon entropy is calculated from the probability distribution of a variable. If all states are equally likely, uncertainty is maximal. If one state occurs with certainty, entropy is zero. The base of the logarithm determines the unit: base two gives bits; other alphabets can use units scaled to their number of possible states.\nI find it helpful to think of entropy as potential information. A variable with several plausible states has something left to reveal. A variable already known with certainty does not.\nApplied to a sequence alignment, entropy can be measured at each site. Conserved positions have low entropy; highly variable positions have high entropy. In the tRNA alignment, this produces a landscape of constraint and variability across the molecule.\nBut low entropy is not automatically the same as biological importance. A site can appear conserved because the sampled sequences share a recent ancestor and have not had time to diverge. Sample composition and evolutionary history therefore shape the apparent signal."
   },
   {
-    "objectID": "posts/2026-02-07-meaning-lives-in-relationships/index.html#conditional-probability-what-changes-after-i-know-more",
-    "href": "posts/2026-02-07-meaning-lives-in-relationships/index.html#conditional-probability-what-changes-after-i-know-more",
-    "title": "Meaning Lives Between Things",
-    "section": "Conditional probability: what changes after I know more?",
-    "text": "Conditional probability: what changes after I know more?\nConditional probability asks for the distribution of one variable after the state of another is known. It is the formal version of an “if-then” question. Bayes’ theorem relates alternative directions of that conditioning.\nWhat I found especially useful is the chapter’s caution that conditional dependence does not by itself establish causation. A site can predict another because of physical pairing, shared ancestry, selection, population structure or an unmeasured third factor. Prediction is scientifically valuable, but explanation requires more evidence.\nIn the tRNA alignment, knowing the nucleotide at one site changes the expected distribution at another. For one pair the prediction is partial. For another pair, the relationship is almost deterministic and reflects complementary base pairing. Sequence statistics therefore reveal something not obvious from either site considered alone: a structural relationship in the molecule."
+    "objectID": "posts/2026-02-21-uncertainty-reveals-structure/index.html#information-uncertainty-reduced-by-knowledge",
+    "href": "posts/2026-02-21-uncertainty-reveals-structure/index.html#information-uncertainty-reduced-by-knowledge",
+    "title": "When Uncertainty Reveals Structure",
+    "section": "Information: uncertainty reduced by knowledge",
+    "text": "Information: uncertainty reduced by knowledge\nThe chapter defines mutual information as the reduction in uncertainty about one variable after another variable is known. This is a much stricter idea than calling a sequence “informative” because it looks complex.\nThe measure is symmetric: the shared dependence between two sites is the same whichever direction we describe it. Conditional entropy captures what remains unknown; mutual information captures what is shared.\nIn the tRNA example, calculating mutual information across every pair of sites creates a matrix. Strong off-diagonal patterns correspond to coordinated substitutions produced by base pairing. From sequence variation alone, the analysis begins to reveal RNA secondary structure.\nThis is beautiful because variability is doing the explanatory work. If paired sites never changed, there would be no covariation to detect. Structure becomes visible because evolution explores alternatives while selection preserves compatible combinations."
   },
   {
-    "objectID": "posts/2026-02-07-meaning-lives-in-relationships/index.html#from-letters-to-organisation",
-    "href": "posts/2026-02-07-meaning-lives-in-relationships/index.html#from-letters-to-organisation",
-    "title": "Meaning Lives Between Things",
-    "section": "From letters to organisation",
-    "text": "From letters to organisation\nThis example changed the way I read an alignment. I usually see rows of characters, conserved columns and substitutions. Conditional probability asks me to look across columns for coordinated change. Two positions may each appear variable, yet their variation together can be tightly constrained.\nThat is a powerful idea. Biological function does not require every component to remain unchanged. Sometimes function is preserved because components change together.\nIt also clarifies why simple conservation scores are incomplete. A position may tolerate several states, but only in combination with compatible states elsewhere. The information is relational.\n\nNotes from my margin\n\nAn isolated value may look noisy; a relationship can reveal a rule.\nConditional probability improves prediction, not automatically explanation.\nCo-variation can preserve structure while individual sites change."
+    "objectID": "posts/2026-02-21-uncertainty-reveals-structure/index.html#the-limitation-that-matters",
+    "href": "posts/2026-02-21-uncertainty-reveals-structure/index.html#the-limitation-that-matters",
+    "title": "When Uncertainty Reveals Structure",
+    "section": "The limitation that matters",
+    "text": "The limitation that matters\nThe same example contains its own warning. The method needs a sufficiently diverse ensemble. If sequences are too closely related, most sites may look invariant whether or not they are functionally constrained. If the alignment contains uneven phylogenetic representation, shared ancestry can generate correlations that resemble functional coupling.\nInformation theory measures dependence in the supplied distribution. Biology must still explain how that distribution arose.\n\nNotes from my margin\n\nEntropy is not disorder in a vague sense; it is uncertainty under a stated model.\nVariation can reveal constraint when changes are coordinated.\nA clean pattern can still reflect sampling history rather than mechanism."
   },
   {
-    "objectID": "posts/2026-02-07-meaning-lives-in-relationships/index.html#my-interpretation-for-language-models",
-    "href": "posts/2026-02-07-meaning-lives-in-relationships/index.html#my-interpretation-for-language-models",
-    "title": "Meaning Lives Between Things",
-    "section": "My interpretation for language models",
-    "text": "My interpretation for language models\nDNA language models are built around context. They estimate how plausible a nucleotide or sequence is given surrounding sequence. In that sense, their power comes from learning many conditional relationships.\nBut a learned relationship is not automatically a biological mechanism. A model may capture motif grammar, compositional bias, phylogenetic history, annotation patterns or technical artefacts. A strong score tells me that a substitution changes what the model expects. It does not yet tell me why, whether the change affects fitness, or whether the relationship transfers to another lineage.\nThis gives me a sharper question for PopGenLM Bench: when a model says that one allele is less compatible with its context, does that score improve prediction of independent biological evidence? For example, is it related to allele frequency, conservation, functional annotation or experimentally observed effect after accounting for confounders?\nThe benchmark should therefore compare conditional predictions with external outcomes, not merely display model confidence."
+    "objectID": "posts/2026-02-21-uncertainty-reveals-structure/index.html#my-interpretation-for-scientific-ai",
+    "href": "posts/2026-02-21-uncertainty-reveals-structure/index.html#my-interpretation-for-scientific-ai",
+    "title": "When Uncertainty Reveals Structure",
+    "section": "My interpretation for scientific AI",
+    "text": "My interpretation for scientific AI\nThis reading helps me distinguish three quantities that are often blurred together: model confidence, statistical dependence and biological validity.\nA language model can assign a sharp probability distribution, but calibration determines whether that confidence is trustworthy. A model score can correlate with an annotation, but dependence alone does not show causation. A benchmark can report strong discrimination, but biological validity depends on the target, controls, sampling and domain of use.\nFor PopGenLM Bench, entropy and information suggest useful evaluation questions. Does adding a model score reduce uncertainty about an independently measured outcome beyond simpler features such as conservation or GC content? Is that reduction stable across chromosomes, annotation classes and species? Does it remain after controlling for relatedness and genomic structure?\nThese questions are more demanding than plotting a score distribution. They are also more scientifically meaningful."
   },
   {
-    "objectID": "posts/2026-02-07-meaning-lives-in-relationships/index.html#additional-learning-directions",
-    "href": "posts/2026-02-07-meaning-lives-in-relationships/index.html#additional-learning-directions",
-    "title": "Meaning Lives Between Things",
+    "objectID": "posts/2026-02-21-uncertainty-reveals-structure/index.html#additional-learning-directions",
+    "href": "posts/2026-02-21-uncertainty-reveals-structure/index.html#additional-learning-directions",
+    "title": "When Uncertainty Reveals Structure",
     "section": "Additional learning directions",
-    "text": "Additional learning directions\nMy next steps are to explore:\n\nmutual information as a quantitative measure of shared dependence;\nphylogenetic correction, because related sequences are not independent samples;\ndirect-coupling methods that try to distinguish direct from indirect sequence relationships;\ncausal diagrams for separating prediction from mechanism; and\nnegative controls that reveal whether a model is using biologically meaningful context or simpler background patterns."
+    "text": "Additional learning directions\nI want to study finite-sample bias in entropy estimates, sequence reweighting, permutation-based null models and methods for higher-order interactions. Pairwise mutual information can detect relationships, but biological systems often involve networks of sites rather than isolated pairs.\nI also want to compare mutual information with attention maps and learned representations from genomic foundation models. Similar-looking heat maps can arise from very different mathematical objects; comparison requires precise definitions and tests."
   },
   {
-    "objectID": "posts/2026-02-07-meaning-lives-in-relationships/index.html#my-commentary",
-    "href": "posts/2026-02-07-meaning-lives-in-relationships/index.html#my-commentary",
-    "title": "Meaning Lives Between Things",
+    "objectID": "posts/2026-02-21-uncertainty-reveals-structure/index.html#my-commentary",
+    "href": "posts/2026-02-21-uncertainty-reveals-structure/index.html#my-commentary",
+    "title": "When Uncertainty Reveals Structure",
     "section": "My commentary",
-    "text": "My commentary\nThe phrase I wrote in my notes was “meaning lives between things.” It is not a definition from the chapter; it is my own interpretation. A base, a gene or a model score becomes informative through a relationship to something else. The lesson is both technical and philosophical: connection can carry structure that isolated objects do not show.\n\nReading for this note: Christoph Adami, The Evolution of Biological Information, Chapter 2, the later part of Section 2.1 on joint, marginal and conditional probabilities, Bayes’ theorem, independence and conditional relationships between tRNA sites."
+    "text": "My commentary\nThis was the section where information theory stopped feeling like an imported engineering language and began to feel biologically native. Evolution generates distributions. Selection, mutation and history shape their uncertainty. Relationships within those distributions can reveal organisation—but only when the ensemble and its history are taken seriously.\n\nReading for this note: Christoph Adami, The Evolution of Biological Information, Chapter 2, Sections 2.2 and 2.2.1 on entropy, conditional entropy, mutual information and the inference of tRNA structure from sequence covariation."
   },
   {
-    "objectID": "posts/2026-01-10-inheritance-becomes-information/index.html",
-    "href": "posts/2026-01-10-inheritance-becomes-information/index.html",
-    "title": "When Life Became Legible",
+    "objectID": "posts/2026-01-24-the-model-is-a-choice/index.html",
+    "href": "posts/2026-01-24-the-model-is-a-choice/index.html",
+    "title": "The Model Is Not the World",
     "section": "",
-    "text": "A simple pencil notebook sketch linking a pea pod, chromosome and DNA, with notes about inheritance and information.\nThis fortnight I began Chapter 2, “Information Theory in Biology,” from Christoph Adami’s The Evolution of Biological Information. I expected a mathematical introduction. What surprised me first was the history. Before information could be measured, biologists had to learn how to see heredity as something separable, locatable, copyable and changeable.\nThat history made the chapter feel immediately connected to my own journey. Genomics can appear to begin with sequencing machines and large files, but its deeper foundations were built through a sequence of conceptual steps. Each step changed not only what scientists knew, but what they believed could be asked."
+    "text": "A simple pencil notebook page with a coin, four nucleotide states and a small sequence ensemble.\nDuring the last two weeks I worked through Section 2.1 on random variables and probabilities. The mathematics begins with familiar objects—a coin, possible outcomes and their frequencies—but the biological lesson is deeper: before measuring uncertainty, I must decide what counts as a possible state.\nThat decision is part of the model. It is not given automatically by nature."
   },
   {
-    "objectID": "posts/2026-01-10-inheritance-becomes-information/index.html#what-i-learned-from-the-opening-section",
-    "href": "posts/2026-01-10-inheritance-becomes-information/index.html#what-i-learned-from-the-opening-section",
-    "title": "When Life Became Legible",
-    "section": "What I learned from the opening section",
-    "text": "What I learned from the opening section\nThe chapter begins with a strong reductionist claim: life on Earth is organised through information. This is not simply the familiar metaphor of DNA as a “book.” The important point is operational. DNA can be copied, altered and inherited. Its molecular structure links continuity with variation, so the same mechanism that preserves biological organisation also makes evolution possible.\nThis changed how I thought about the word information. In ordinary conversation, information is often treated as meaningful content. In this chapter, the more useful starting point is prediction. A biological pattern carries information when knowing it improves what we can predict about another state: a nucleotide, a structure, a function or an environment.\nThe chapter then asks deceptively simple questions. How much information is present in a genome? How much is shared by two organisms? How much is gained through adaptation, transmitted between generations or lost through extinction? These questions are easy to state and very difficult to answer because they require an explicit comparison, a defined set of possible states and enough observations to estimate probabilities."
+    "objectID": "posts/2026-01-24-the-model-is-a-choice/index.html#random-variables-are-descriptions",
+    "href": "posts/2026-01-24-the-model-is-a-choice/index.html#random-variables-are-descriptions",
+    "title": "The Model Is Not the World",
+    "section": "Random variables are descriptions",
+    "text": "Random variables are descriptions\nA discrete random variable has a finite set of states, often called an alphabet, and a probability for each state. A coin can be represented by two states; a nucleotide site by A, C, G and T; an amino-acid site by twenty possibilities.\nThe chapter insists on a distinction I find extremely useful: the random variable is not the physical object. A real coin has material, orientation, wear and many possible behaviours. The two-state model keeps only the distinction needed for a particular question. Even “heads” and “tails” are choices made by an observer using a particular measurement.\nThe same is true in genomics. A site may be represented as four nucleotides, but an analysis may also need a gap, an unresolved base, methylation state, genotype uncertainty or structural context. The alphabet depends on the biological question and the measurement system. If I change that representation, I may change the probabilities and therefore the information I calculate.\nThis is not a weakness of modelling. It is why transparent modelling matters."
   },
   {
-    "objectID": "posts/2026-01-10-inheritance-becomes-information/index.html#the-historical-path-from-character-to-code",
-    "href": "posts/2026-01-10-inheritance-becomes-information/index.html#the-historical-path-from-character-to-code",
-    "title": "When Life Became Legible",
-    "section": "The historical path: from character to code",
-    "text": "The historical path: from character to code\nBox 2.1 traces the emergence of genetic information through several distinct advances.\nMendel showed that inherited characters behave as if discrete factors pass between generations. Bateson and Saunders helped establish that these units can occupy alternative states—what we now call alleles. Johannsen separated the inherited unit from its visible expression and gave us the term gene. Morgan, Sturtevant and Bridges then placed genes in a linear order on chromosomes, turning heredity into something that could be mapped.\nThe next steps connected location with mechanism. Mutations showed that changing a chromosomal position could alter or destroy function. Work on gene action linked hereditary material to protein production. The genetic code then made the relationship between nucleotide sequence and amino-acid sequence experimentally legible. By this point, biological molecules could be treated as messages drawn from a space of possible messages—a perspective that made Shannon’s mathematical theory relevant to biology.\nWhat I find most important is that no single discovery created “biological information.” The idea became possible only after inheritance, physical location, copying, mutation, expression and coding had been separated and then reconnected.\n\nNotes from my margin\n\nA new instrument is valuable when it opens a better question.\nCopying explains continuity; mutation makes history possible.\n“Information” becomes scientific only after I say what it predicts."
+    "objectID": "posts/2026-01-24-the-model-is-a-choice/index.html#probabilities-come-from-finite-observations",
+    "href": "posts/2026-01-24-the-model-is-a-choice/index.html#probabilities-come-from-finite-observations",
+    "title": "The Model Is Not the World",
+    "section": "Probabilities come from finite observations",
+    "text": "Probabilities come from finite observations\nFor a physical system, probabilities are usually estimated from repeated observations. With a finite sample, frequency is only an approximation to the underlying probability. This obvious fact becomes easy to forget when software prints many decimal places.\nThe chapter illustrates several ways to treat a DNA sequence. A complete sequence of length (L) can be one state among (4^L) possibilities. Alternatively, its (L) positions can be treated as repeated observations of one nucleotide variable, allowing an estimate of overall base composition. A third approach treats each position as its own variable and uses an alignment of related sequences to estimate site-specific probabilities.\nThese views use the same letters but answer different questions.\nOverall nucleotide frequencies can reveal GC or AT bias. Such bias may have biochemical consequences, but it does not have a single guaranteed evolutionary cause. A site-wise ensemble adds another layer: strongly conserved positions may indicate functional constraint, whereas variable positions may tolerate change. Yet this interpretation depends on alignment quality, sampling and evolutionary history."
   },
   {
-    "objectID": "posts/2026-01-10-inheritance-becomes-information/index.html#my-interpretation",
-    "href": "posts/2026-01-10-inheritance-becomes-information/index.html#my-interpretation",
-    "title": "When Life Became Legible",
-    "section": "My interpretation",
-    "text": "My interpretation\nThe history in this section is a warning against treating scientific AI as a sudden replacement for earlier biology. AI belongs to the same longer progression. Natural history organised variation; genetics formalised inheritance; molecular biology identified a physical code; sequencing made that code observable at scale; bioinformatics made large collections analysable. AI may help us detect structure across those collections, but it does not remove the need to define the biological states, comparisons and evidence.\nThis matters because an impressive prediction can still be scientifically empty. If I cannot say what a model output is information about, which observations support it, or under what conditions it fails, then I have a number rather than knowledge.\nI also see a connection with temporal genomics. A genome sampled at one date is a record, but a series of genomes sampled through time lets us ask what was retained, altered or lost. The value lies not in the sequence alone; it lies in the comparison that makes change visible."
+    "objectID": "posts/2026-01-24-the-model-is-a-choice/index.html#why-the-ensemble-matters",
+    "href": "posts/2026-01-24-the-model-is-a-choice/index.html#why-the-ensemble-matters",
+    "title": "The Model Is Not the World",
+    "section": "Why the ensemble matters",
+    "text": "Why the ensemble matters\nAn ensemble is the collection from which observations are drawn. For a genomic site, an alignment of homologous sequences can provide that collection. Across the alignment, each position becomes a distribution rather than a single letter.\nThe tRNA example in the chapter makes this concrete. Some positions vary, while others are nearly or completely conserved because the molecule’s structure and function constrain acceptable changes. Gaps and unresolved characters must also be treated explicitly; ignoring how they enter the alphabet can alter the analysis.\nFor me, this is the bridge from a sequence as an object to a sequence as evidence. One string shows what occurred once. An ensemble begins to show what could vary, what repeatedly remains, and how uncertain those conclusions are.\n\nNotes from my margin\n\nEvery dataset has an alphabet, even when it is not written down.\nMore decimal places do not create more observations.\nA single sequence is a record; an ensemble makes variation measurable."
   },
   {
-    "objectID": "posts/2026-01-10-inheritance-becomes-information/index.html#where-i-want-to-learn-next",
-    "href": "posts/2026-01-10-inheritance-becomes-information/index.html#where-i-want-to-learn-next",
-    "title": "When Life Became Legible",
+    "objectID": "posts/2026-01-24-the-model-is-a-choice/index.html#my-interpretation-for-genomic-ai",
+    "href": "posts/2026-01-24-the-model-is-a-choice/index.html#my-interpretation-for-genomic-ai",
+    "title": "The Model Is Not the World",
+    "section": "My interpretation for genomic AI",
+    "text": "My interpretation for genomic AI\nThis section immediately changes how I think about model inputs. Tokenisation, genome build, strand orientation, reference allele, treatment of missing bases and sampling population are not preliminary details. They define the states the system is allowed to see.\nA DNA language model also learns from an ensemble—its training data. If that ensemble represents some species, regions or sequence contexts much better than others, the model’s apparent confidence may exceed the evidence available for a new organism. Before evaluating a score, I therefore need to ask: what alphabet did the model use, what ensemble shaped its probabilities, and how closely does my new dataset match that world?\nThis is one reason PopGenLM Bench must begin with reference validation and provenance rather than a plot. A biologically incorrect representation can pass through perfectly functioning code."
+  },
+  {
+    "objectID": "posts/2026-01-24-the-model-is-a-choice/index.html#where-i-want-to-learn-next",
+    "href": "posts/2026-01-24-the-model-is-a-choice/index.html#where-i-want-to-learn-next",
+    "title": "The Model Is Not the World",
     "section": "Where I want to learn next",
-    "text": "Where I want to learn next\nMy next steps are to understand three transitions more deeply:\n\nHow probability turns biological variation into a measurable ensemble.\nHow Shannon entropy separates uncertainty from information.\nHow evolutionary processes create the correlations that allow genomes to carry evidence about environments.\n\nI also want to revisit the history of the genetic code and chromosome mapping—not as a list of discoveries, but as examples of how measurement changes explanation."
+    "text": "Where I want to learn next\nI want to connect this section to practical methods for:\n\nquantifying finite-sample uncertainty in nucleotide frequencies;\nweighting related sequences so that a large clade is not mistaken for many independent observations;\nhandling gaps and ambiguous states in alignments;\ncomparing frequentist estimates with Bayesian probability models; and\nmeasuring how training-set composition affects transfer across species."
   },
   {
-    "objectID": "posts/2026-01-10-inheritance-becomes-information/index.html#a-simple-commentary-on-the-chapter-so-far",
-    "href": "posts/2026-01-10-inheritance-becomes-information/index.html#a-simple-commentary-on-the-chapter-so-far",
-    "title": "When Life Became Legible",
-    "section": "A simple commentary on the chapter so far",
-    "text": "A simple commentary on the chapter so far\nAdami’s presentation is mathematical, but the opening argument is philosophical in the best scientific sense. It asks what we mean when we say that life contains information, and then refuses to leave the term vague. My main lesson is that biological information is not a substance hidden inside DNA. It is a measurable relationship made visible by a carefully defined question.\nThat is a demanding standard. It is also a useful one for the AI systems I want to build.\n\nReading for this note: Christoph Adami, The Evolution of Biological Information, Chapter 2, opening discussion and Box 2.1, “The Emergence of the Concept of Genetic Information.” This article is my own synthesis and commentary on the supplied chapter excerpt."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Tahir Ali, PhD",
-    "section": "",
-    "text": "Computational biology · Scientific AI\n    \n    Evolutionary and computational biologist building trustworthy AI for genomics, research, and scientific learning.\n    I combine population-genomic research, biological domain expertise, and reproducible software engineering to turn complex data into defensible scientific insight.\n    \n      Explore PopGenLM Bench\n      Follow Genomes to AI\n      View research\n    \n    \n      Institute for Plant Sciences · University of Cologne\n      Zülpicher Str. 47b · 50674 Cologne · Germany\n      +49 (0)221 470 1139\n      tali@uni-koeln.de\n      ali_tahir99@hotmail.com",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#current-focus",
-    "href": "index.html#current-focus",
-    "title": "Tahir Ali, PhD",
-    "section": "Current focus",
-    "text": "Current focus\n\nTwo connected strands define my present work: building scientifically testable AI software and documenting the decisions, evidence, and learning behind it.\n\n\n  \n    Flagship open-source project\n    PopGenLM Bench\n    A reproducible framework for testing whether genomic language-model variant scores are technically sound and biologically consistent with population-genetic and evolutionary evidence.\n    \n      PythonGPNPyTorchPopulation genomics\n    \n    \n      Explore the project\n      View repository\n    \n  \n\n  \n    Engineering journal\n    Genomes to AI\n    An authentic account of becoming a scientific AI engineer - from biological questions and early prototypes to tested software, failed assumptions, and public releases.\n    \n      LearningBuildingValidationCareer transition\n    \n    \n      Read the journal",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#my-journey-in-science-exploring-data-and-complexity",
-    "href": "index.html#my-journey-in-science-exploring-data-and-complexity",
-    "title": "Tahir Ali, PhD",
-    "section": "My journey in science: exploring data and complexity",
-    "text": "My journey in science: exploring data and complexity\n\nTeacher & mentor · Exploring genomes, stories, and change\n\n\n  \n    I am an evolutionary and computational biologist, fascinated by the interplay of genes, environment, and time. My research in temporal genomics, adaptation, phylogeography, and selection seeks to understand how organisms respond to environmental change—how Darwin’s insight into “descent with modification” unfolds in real populations. Much of my work involves decoding genomes across time, tracing the signatures of survival and loss, and unravelling the mysteries of hybridisation genetics. Increasingly, this means integrating population-scale and multi-omic evidence with machine learning and developing reproducible, testable scientific-AI workflows: combining sequence, annotation, environment, phenotype, and evolutionary history to reveal patterns that might otherwise remain hidden. In practice, I write scripts, build pipelines, evaluate models, and shape raw data into defensible scientific insight—turning fragments of code into narratives about resilience, chance, and transformation while keeping every conclusion accountable to biological evidence.\n\n    Equally important to me is teaching and mentoring. My journey as an educator spans more than two decades, from teaching basic college biology to guiding students through the complexities of ecological and evolutionary genomics. Helping students see connections between data and life is one of the most rewarding parts of my career. I see teaching as a way of opening doors: to curiosity, to critical thinking, and to the joy of discovery.\n\n    Beyond science, I draw inspiration from literature, history, and the worlds we build. The psychological depth of Dostoevsky, the vast social panoramas of Tolstoy, the magical realism of Márquez and Grass, and the dramatic flair of Dumas all shape how I think about complexity, transformation, and endurance. Just as genomes are living archives of struggle and adaptation, so too are cities, landscapes, and stories—layered with memory, resilience, and change.\n\n    Outside of research and teaching, I find joy in travel, in wandering through ancient streets, hiking wild trails, or noticing the quiet poetry of everyday life. Whether I am analysing genetic data, guiding students, reading a novel, or exploring a place shaped by centuries, I am drawn to the same questions: how change is inscribed in structure, how diversity emerges, and how the stories—scientific and personal—that we tell shape who we are.\n  \n\n\n“The mystery of human existence lies not in just staying alive, but in finding something to live for.”Fyodor Dostoevsky",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#work-across-scales",
-    "href": "index.html#work-across-scales",
-    "title": "Tahir Ali, PhD",
-    "section": "Work across scales",
-    "text": "Work across scales\n\nMy work connects molecular variation, population processes, ecological change, and the software used to study them.\n\n\n  \n    Research\n    Evolution in natural populations\n    Temporal genomics, hybridisation, climate adaptation, phylogeography, population structure, and genome-scale evidence for drift and selection.\n    Explore research →\n  \n\n  \n    Scientific software\n    Reproducible genomic analysis\n    Versioned pipelines, quality-control systems, statistical evaluation, interpretable reports, and careful separation of technical success from biological support.\n    Browse GitHub →\n  \n\n  \n    Education\n    Interactive biological learning\n    Lecture-grounded course companions, simulations, practical genomics tutorials, and AI-supported feedback designed to preserve instructor control.\n    View teaching resources →\n  \n\n  \n    Translation\n    From evidence to explanation\n    Scientific communication and mentoring that make quantitative biological reasoning clearer without removing its uncertainty or complexity.\n    View professional profile →",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#connect-and-follow",
-    "href": "index.html#connect-and-follow",
-    "title": "Tahir Ali, PhD",
-    "section": "Connect and follow",
-    "text": "Connect and follow\n\nResearch outputs, open-source work, professional updates, and shorter reflections across my public profiles.\n\n\n  LinkedIn\n  Google Scholar\n  RGResearchGate\n  GitHub\n  Bluesky\n  X\n  Facebook",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "cv.html",
-    "href": "cv.html",
-    "title": "Résumé",
-    "section": "",
-    "text": "Evolutionary and computational biologist working at the intersection of population genomics, environmental change and scientific AI.",
-    "crumbs": [
-      "Résumé"
-    ]
-  },
-  {
-    "objectID": "cv.html#professional-profile",
-    "href": "cv.html#professional-profile",
-    "title": "Résumé",
-    "section": "Professional Profile",
-    "text": "Professional Profile\nEvolutionary and computational biologist specialising in population and landscape genomics, hybridisation genetics, phylogeography, systematics and plant climate adaptation. My research combines whole-genome sequencing with reproducible bioinformatics and emerging scientific-AI methods to quantify evolutionary responses to environmental change across spatial and temporal scales. This work has been recognised by the Erich Oberdorfer Foundation Research Award (2019) and published in New Phytologist, Molecular Ecology and Critical Reviews in Plant Sciences. I aim to build an independent research programme that connects evolutionary genomics, interdisciplinary collaboration and biodiversity-informed policy.",
-    "crumbs": [
-      "Résumé"
-    ]
-  },
-  {
-    "objectID": "cv.html#personal-information",
-    "href": "cv.html#personal-information",
-    "title": "Résumé",
-    "section": "Personal Information",
-    "text": "Personal Information\n\nNationality: German\n\nLanguages: English (Fluent); German (Proficient); Urdu (Native)",
-    "crumbs": [
-      "Résumé"
-    ]
-  },
-  {
-    "objectID": "cv.html#computational-and-technical-skills",
-    "href": "cv.html#computational-and-technical-skills",
-    "title": "Résumé",
-    "section": "Computational and Technical Skills",
-    "text": "Computational and Technical Skills\n\nComputational Methods, AI & Data Science\n\nArtificial Intelligence & Genomic Modelling: Application of AI-based Large Language Models (LLMs) for genome analysis, functional annotation, variant interpretation, and integrative bioinformatics workflows.\nMachine Learning: Deep learning (PyTorch, TensorFlow), model development and deployment; ensemble learning frameworks (Random Forest, BRT)\nStatistical Modelling: GLM/GAM, Bayesian inference, multivariate statistics; environmental association analyses (genome-environment relationships)\nHigh-Performance Computing & Workflow Management: HPC environments, Slurm job scheduling, parallel processing, Nextflow, Snakemake\nProgramming Languages: R (Bioconductor, tidyverse), Python, Bash, Perl\nData Analysis & Visualization: R (ggplot2, dplyr), Python (pandas, NumPy, matplotlib, seaborn), Jupyter Notebooks\n\n\n\nBioinformatics, Genomics and Population Genetics\n\nGenome Assembly & Annotation: De novo assembly using Illumina, ONT, PacBio HiFi and Hi-C (Flye, hifiasm, HiCanu, SPAdes, miniasm, Velvet)\nTemporal Population Genomics: Analysis of allele‑frequency change across time points to infer selection, simulation-based outlier detection using Wright–Fisher model and Moran model frameworks (ANGSD, GATK, BCF/SAMtools, BEAGLE, PLINK)\nHybridisation Genomics: Introgression and gene flow analysis using ABBA‑BABA, TreeMix, and STRUCTURE/ADMIXTURE\nPopulation Structure & Demographic Inference: fastsimcoal2, ∂a∂i, DIYABC, demografr; phylogenomics using RAxML, MrBayes, BEAST, SplitsTree\nFunctional & Evolutionary Genomics: Integration of conservation-based functional scores (phyloP score, GERP score, GPN) to prioritise candidate loci and link constraint with allele frequency dynamics\n\n\n\nLandscape Ecology and Geospatial Modelling\n\nLandscape Genomics: Spatial integration of genomic and environmental data; analysis of climate-driven allele frequency shifts and isolation-by-environment patterns using GIS tools (ArcGIS, QGIS) and R\nSpecies Distribution Modelling (SDM): Ecological niche modelling (MaxEnt, GLM, GAM, Random Forest, BRT) to contextualize genomic variation within environmental suitability landscapes\n\n\n\nWet-lab Skills\n\nMolecular Techniques: High-throughput DNA/RNA extraction, PCR, qPCR, gel electrophoresis, Sanger sequencing\nGenomic Library Preparation: ddRAD-seq, Oxford Nanopore (DNA/RNA), Illumina library preparation\nMicrobiology: Aseptic technique for the isolation, culturing, and maintenance of bacteria and fungi for plant microbiome analysis and pathogen assays.",
-    "crumbs": [
-      "Résumé"
-    ]
-  },
-  {
-    "objectID": "cv.html#professional-experience",
-    "href": "cv.html#professional-experience",
-    "title": "Résumé",
-    "section": "Professional Experience",
-    "text": "Professional Experience\n\nResearch Scientist & Teaching Associate\nUniversity of Cologne, Germany | 2022 – Present\n\nCoordinate theoretical modules and teach practical classes in Quantitative Biology and Population Genetics; mentor students in experimental design, phenotyping, whole‑genome sequencing (WGS) data analysis, and scientific interpretation; prepare and assess examinations.\nOrganize and lead field excursions, guiding students in designing and conducting plant ecology experiments in the Ecology and Applied Biology module.\nInvestigate plant evolutionary dynamics under climate change through temporal genomics, hybridisation genetics, and common garden experiments.\nAssemble and annotate plant genomes using HiFi long-read, Hi-C, and Illumina short-read sequencing technologies.\nAssociated Member, DFG TRR 341; mentor and guide MSc/PhD students within TRR‑affiliated projects.\n\n\n\nPostdoctoral Research Associate\nSenckenberg/LOEWE Center for Translational Biodiversity Genomics | 2019 – 2022\n\nCharacterized the impact of landscape heterogeneity on fine-scale genetic structure and gene flow in Microthlaspi erraticum using whole genome resequencing.\nDissected the effects of host genotype, microbiome, and abiotic factors on plant disease incidence.\nAssembled microbial genomes from Oxford Nanopore long-reads, polished with Illumina data.\nValidated functional roles of microbial taxa via synthetic microbiome inoculations in contrasting host genotypes\nGovernance and community roles: Member, Diversity & Inclusion Committee and TBG Steering Committee; part of the Young Scientists main speaker team (ECR network collaborating with the Board of Directors).\nOrganised institute-level events (annual retreats, Diversity Days, training workshops); participated in committee meetings on organisational issues and budgeting, gaining practical insight into decision-making processes.\n\n\n\nPhD Research Associate\nGoethe University & Senckenberg (SBiK-F), Frankfurt | 2011 – 2019\n\nClarified the systematics of Microthlaspi (Brassicaceae) by describing two new genera (Ihsanalshehbazia, Friedrichkarlmeyeria) and three new species.\nReconstructed Pleistocene range dynamics and post-glacial colonization routes of Palearctic plant populations using phylogeographic and demographic modelling.\nIntegrated ecological niche modelling with population genetics to explain spatial patterns of biodiversity.\nCoordinated international fieldwork across Europe, North Africa, and Asia (planning, permits, sampling logistics)\nDisseminated results through peer‑reviewed publications and conference presentations\n\n\n\nResearch Internship / MRes Project\nThe James Hutton Institute, UK | 2009 – 2010\n\nInvestigated alternative splicing in barley under cold/drought stress, identifying stress-responsive variants via RNA assays (RT-PCR/qPCR).\n\n\n\nLecturer in Botany/Biology\nKhawaja Fareed Govt. College, Pakistan | 2002 – 2008\n\nTaught undergraduate biology; designed curricula and assessments; supervised labs; advised students.\n\n\n\nGCE Advance Level Biology Teacher\nThe City School, Lahore/Vehari Branches, Pakistan | 1998 – 2002\n\nTaught A‑Level Biology; prepared students for examinations; coordinated practicals.\n\n\n\nResearch Internship / MSc Project\nUniversity of Agriculture, Faisalabad | 1997 – 1998\n\nEvaluated drought resistance in wheat germplasm from arid regions, using greenhouse/field screens and statistical analysis (ANOVA).",
-    "crumbs": [
-      "Résumé"
-    ]
-  },
-  {
-    "objectID": "cv.html#education-and-qualifications",
-    "href": "cv.html#education-and-qualifications",
-    "title": "Résumé",
-    "section": "Education and Qualifications",
-    "text": "Education and Qualifications\n\nDoctor of Philosophy (Dr. rer. nat.)\nGoethe University & Senckenberg (SBiK-F), Frankfurt, Germany | 2019\nDissertation: “Morphology, systematics and phylogeography of Microthlaspi (Brassicaceae, Coluteocarpeae)”\nMaster of Research (MRes), Crops for the Future\nUniversity of Dundee, UK | 2010\nDissertation: “The Role of Alternative Splicing in Barley in Response to Cold/Drought Stress”\nMaster of Science (MSc), Botany\nUniversity of Agriculture Faisalabad, Pakistan | 1998\nDissertation: “Drought Resistance of Wheat Germplasm Collected from some Arid Regions of Baluchistan and Punjab”\nBachelor of Science (BSc), Chemistry, Botany, Zoology\nB.Z. University Multan, Pakistan | 1995",
-    "crumbs": [
-      "Résumé"
-    ]
-  },
-  {
-    "objectID": "cv.html#collaboration-projects",
-    "href": "cv.html#collaboration-projects",
-    "title": "Résumé",
-    "section": "Collaboration Projects",
-    "text": "Collaboration Projects\n\nAssessed urbanization impacts on Solidago canadensis and Tanacetum vulgare via AFLP/MS-AFLP genotyping (University of Potsdam, Germany).\nConducted phylogenomics of fungal pathogens (Technical University of Munich, Germany).\nAnalyzed spatial diversity patterns and phylogeography of endangered plants (Palacký University Olomouc, Czech Republic)",
-    "crumbs": [
-      "Résumé"
-    ]
-  },
-  {
-    "objectID": "cv.html#awards--professional-service",
-    "href": "cv.html#awards--professional-service",
-    "title": "Résumé",
-    "section": "Awards & Professional Service",
-    "text": "Awards & Professional Service\n\nAssociate Editor & Science Mentor, Frontiers for Young Minds Journal\nMember, IUCN Commission on Ecosystem Management (CEM) & Education & Communication (CEC)\nServed on Senckenberg’s Diversity & Inclusion Committee, TBG Steering Committee, and as a Young Scientists speaker, contributing to retreat organisation, diversity initiatives, and early career development.\nErich Oberdorfer Foundation Research Award (2019), Karlsruhe, Germany\nGoethe Graduate Academy Fellowship (2011-2015), Frankfurt, Germany\nGlobal Excellence Postgraduate Scholarship (2009), University of Dundee, UK\nStudents’ Award for Outstanding Biology Teaching (2005, 2007), Higher Education Dept., Pakistan",
-    "crumbs": [
-      "Résumé"
-    ]
-  },
-  {
-    "objectID": "cv.html#conferences-workshops-and-invited-talks",
-    "href": "cv.html#conferences-workshops-and-invited-talks",
-    "title": "Résumé",
-    "section": "Selected Conferences, Workshops, and Invited Talks",
-    "text": "Selected Conferences, Workshops, and Invited Talks\n\nDisentangling Drift and Selection in Locally Endangered Plant Populations Using Temporal Genomics and Large Language Model-based AI approaches. Society for Molecular Biology and Evolution (SMBE), 2026, Copenhagen, Denmark.\nAI‑enhanced species distribution modeling, machine‑learning ecological workflows, and advanced spatial–climate analytics — a 5‑week national online training delivered at CEES, University of the Punjab (2026).\nThe Belt and Road Initiative and the Sustainable Development Goals. (2021) International Silk Road Conference.\nEcosystem Restoration: An overlooked opportunity for Economic growth (2021) Bahria University, Karachi, Pakistan.\nRole of Biodiversity and Ecosystem Restoration in Climate Change Mitigation (2020), International Conference on One Health, University of Veterinary and Animal Sciences, Lahore, Pakistan.\nMisconceptions about Evolution and the Mechanisms of Evolution (2020), University of Peshawar, Pakistan.\nFrom jargon to human: Translating Science to Kids (Workshop 2020), Friends For Future International Youth Conference.\nThe Talking Climate Workshop (2020), SDGs Academy, Pakistan.\nPleistocene Glaciation and Palearctic Phylogeography: Inferring Species Glacial Refugia and Recolonization Routes (2019), Monrepos Archaeological Research Center, Neuwied, Germany.\nModelling of Range-Wide Pathogen Pressure in an Annual Member of the Brassicaceae (2019), Wild Plant Pathosystems Conference, Frankfurt am Main, Germany.\nGenomics and Climate Adaptation (2018), Senckenberg Translational Biodiversity Genomics, Frankfurt am Main, Germany.\nDetermination of Genetic Diversity of Arabidopsis thaliana in the Italian Peninsula Using Next-Generation Genotyping (RAD-Seq) (Workshop, 2015), Botanikertag, Munich, Germany.\nInfluence of Climate and Geography on Occurrence of Infection in Microthlaspi perfoliatum (2014), German Mycological Society Congress, Mettlach-Orscholz, Germany.\nDiversity of Arabidopsis thaliana in Italy as Inferred from Next-Generation Genotyping in Relation to Biotic and Abiotic Factors (2013), Wild Plant Pathosystems Conference, Olomouc, Czech Republic.",
-    "crumbs": [
-      "Résumé"
-    ]
-  },
-  {
-    "objectID": "genomes-to-ai.html",
-    "href": "genomes-to-ai.html",
-    "title": "Genomes to AI",
-    "section": "",
-    "text": "A scientific AI engineering journal\n  \n  An authentic record of learning to build scientific AI - grounded in evolutionary biology, shaped by the history of biological data, and tested through open, reproducible work.\n  This is not a collection of polished conclusions. It is a record of questions, design choices, failures, revisions, and evidence.\n  \n    Biological dataMachine learningScientific softwareValidationOpen source",
-    "crumbs": [
-      "Genomes to AI"
-    ]
-  },
-  {
-    "objectID": "genomes-to-ai.html#why-this-journey-begins-with-data",
-    "href": "genomes-to-ai.html#why-this-journey-begins-with-data",
-    "title": "Genomes to AI",
-    "section": "Why this journey begins with data",
-    "text": "Why this journey begins with data\nBiology has always been an information science. Taxonomists organised visible diversity; geneticists inferred inheritance from crosses; population geneticists turned allele frequencies into models of drift, selection, migration, and demography. The computational scale changed gradually and then dramatically. Handwritten observations became databases. Individual loci became whole genomes. Sanger sequencing gave way to high-throughput short reads, long reads, chromosome-scale assemblies, population resequencing, metagenomes, single-cell measurements, spatial assays, and continuous environmental data.\nThe bottleneck therefore moved. Generating data remains demanding, but modern biology is increasingly constrained by our ability to organise, integrate, evaluate, and interpret information that is too large and interconnected for manual reasoning alone. Bioinformatics emerged to manage sequence and annotation; data science added scalable statistics, visualisation, and reproducible computation; big-data infrastructure made distributed storage and processing routine. Scientific AI now adds another layer: models that can learn representations from sequence, structure, images, text, and multimodal evidence.\n\n  ObserveTraits, specimens, experimentsBiological description and comparison\n  MeasureLoci, genomes, environmentsDigital data at expanding scale\n  IntegratePopulations, multi-omics, timeStatistics, pipelines, and data science\n  Learn + testFoundation models and scientific AIRepresentations evaluated against evidence\n\nThis progression does not make biological knowledge less important. It makes domain knowledge more consequential. A model can identify statistical regularities at a scale no individual can inspect, but it cannot by itself guarantee the correct genome build, distinguish demographic history from selection, define a meaningful negative control, or decide whether a result supports a biological claim. Those responsibilities remain scientific.\nFrom the reading notebook · Chapter 3: What can a genome remember? follows one question through measurement, evolutionary change, and relationships between sites—with a pencil sketch from the margins.\nFrom the reading notebook · Chapter 4: Can we replay evolution? follows Dallinger’s warming cultures, Lenski’s frozen E. coli and Avida to ask how selection, chance and earlier history shape what can happen next.",
-    "crumbs": [
-      "Genomes to AI"
-    ]
-  },
-  {
-    "objectID": "genomes-to-ai.html#why-i-am-building-popgenlm-bench",
-    "href": "genomes-to-ai.html#why-i-am-building-popgenlm-bench",
-    "title": "Genomes to AI",
-    "section": "Why I am building PopGenLM Bench",
-    "text": "Why I am building PopGenLM Bench\nGenomic language models are a natural meeting point between my past work and the engineering skills I am developing. They treat DNA as structured information and learn context-dependent sequence patterns that can be used to score variants. Their promise is substantial: prioritising candidate variants, identifying disrupted regulatory grammar, comparing constraint across sequence contexts, and extending annotation beyond a list of previously characterised genes.\nBut the scale and apparent precision of model output can create false confidence. Millions of scores can be produced before anyone notices an allele mismatch, reference incompatibility, hidden version change, unexamined calibration problem, or unsupported evolutionary interpretation. My aim with PopGenLM Bench is to make that transition from score to evidence explicit. The project connects model engineering with the population-genetic questions that determine whether a prediction is scientifically coherent.\n\n  \n    The central question\n    What would convince us that a genomic AI score carries biological information?\n    Not a smooth software demo alone. We need reference-safe inputs, reproducible inference, independent evidence, uncertainty estimates, negative controls, sensitivity analysis, and language that does not outrun the data.\n  \n  Scientific AI becomes useful when model capability and scientific validation develop together.",
-    "crumbs": [
-      "Genomes to AI"
-    ]
-  },
-  {
-    "objectID": "genomes-to-ai.html#what-this-journal-will-document",
-    "href": "genomes-to-ai.html#what-this-journal-will-document",
-    "title": "Genomes to AI",
-    "section": "What this journal will document",
-    "text": "What this journal will document\n\n\n\nLearning\n\n\nConcepts used in practice\n\n\nPyTorch, model inference, packaging, testing, APIs, deployment, and engineering patterns explained through the biological problems that required them.\n\n\n\n\nBuilding\n\n\nArtifacts, not declarations\n\n\nEach substantial entry should connect a scientific question to code, a reproducible result, a benchmark, or a concrete software decision.\n\n\n\n\nValidation\n\n\nEvidence before interpretation\n\n\nWhat was checked, what could fail, what the result supports, which alternatives remain, and where confidence should stop.\n\n\n\n\nReflection\n\n\nAn honest technical transition\n\n\nHow an experienced computational biologist develops the engineering depth needed to design, release, and maintain reliable AI for life sciences.",
-    "crumbs": [
-      "Genomes to AI"
-    ]
-  },
-  {
-    "objectID": "genomes-to-ai.html#where-scientific-ai-could-lead",
-    "href": "genomes-to-ai.html#where-scientific-ai-could-lead",
-    "title": "Genomes to AI",
-    "section": "Where scientific AI could lead",
-    "text": "Where scientific AI could lead\nThe most valuable applications will not be defined by novelty alone. They will emerge where AI helps researchers interrogate complex biological systems while preserving provenance, uncertainty, and experimental accountability.\n\n  Variant interpretationCombine sequence representations with population frequency, conservation, regulatory context, phenotype, and experimental evidence to prioritise variants transparently.\n  Evolutionary monitoringAnalyse genomic change through time in natural populations, pathogens, crops, and conservation programmes while separating signal from drift and sampling noise.\n  Adaptive breeding and conservationConnect genomic variation with climate, traits, and demographic vulnerability to support testable decisions rather than opaque predictions.\n  Multimodal biological modelsLink sequence, structure, expression, environment, images, and literature into representations that can be evaluated across scales.\n  Scientific workflow agentsAssist with quality control, provenance, documentation, and reproducible analysis while keeping researchers responsible for assumptions and conclusions.\n  Evidence-grounded learningBuild teaching systems that adapt practice and feedback to the learner without replacing approved sources, instructor judgement, or intellectual effort.",
-    "crumbs": [
-      "Genomes to AI"
-    ]
-  },
-  {
-    "objectID": "genomes-to-ai.html#commitments-for-the-journey",
-    "href": "genomes-to-ai.html#commitments-for-the-journey",
-    "title": "Genomes to AI",
-    "section": "Commitments for the journey",
-    "text": "Commitments for the journey\n\n\nBuild in publicShare code, benchmarks, release notes, and the reasoning behind important changes.\n\n\nKeep biology centralStart with a scientific question and define what evidence would support or challenge the result.\n\n\nReport failure honestlyDocument broken assumptions, implementation errors, negative results, and what changed afterwards.\n\n\nSeparate capability from validityA model’s ability to produce an output is not proof that the output is scientifically meaningful.\n\n\nProtect sensitive workUse public demonstration data and keep unpublished research, restricted teaching material, and private information outside public repositories.",
-    "crumbs": [
-      "Genomes to AI"
-    ]
-  },
-  {
-    "objectID": "genomes-to-ai.html#latest-field-notes",
-    "href": "genomes-to-ai.html#latest-field-notes",
-    "title": "Genomes to AI",
-    "section": "Latest field notes",
-    "text": "Latest field notes\n\n  \n    Reading notebook · Chapter 2\n    Learning to ask what biological information is about\n    Five fortnightly notes follow my reading of Christoph Adami's The Evolution of Biological Information. They move from the history of genetic information to probability, relationships between sites, entropy, and the difficult question of what a gene can tell us about its biological context.\n  \n  These are not substitutes for the chapter. They are a personal record of what I understood, where I remain cautious, and which questions I want to pursue next.\n\n\nReading notes, technical articles, build decisions, failures, and release retrospectives appear below. The newest entry is shown first.",
-    "crumbs": [
-      "Genomes to AI"
-    ]
+    "objectID": "posts/2026-01-24-the-model-is-a-choice/index.html#my-commentary",
+    "href": "posts/2026-01-24-the-model-is-a-choice/index.html#my-commentary",
+    "title": "The Model Is Not the World",
+    "section": "My commentary",
+    "text": "My commentary\nThe most thought-provoking lesson was not a formula. It was the reminder that measurement begins with an agreement about distinctions. Biology is richer than any alphabet we impose on it. Good science does not pretend otherwise; it states the simplification, tests its consequences and changes it when the question demands more.\n\nReading for this note: Christoph Adami, The Evolution of Biological Information, Chapter 2, Section 2.1, from random variables and finite probability estimates through nucleotide composition, site-specific variables and the tRNA alignment."
   },
   {
     "objectID": "popgenlm.html",
@@ -755,144 +552,389 @@
     ]
   },
   {
-    "objectID": "posts/2026-01-24-the-model-is-a-choice/index.html",
-    "href": "posts/2026-01-24-the-model-is-a-choice/index.html",
-    "title": "The Model Is Not the World",
+    "objectID": "genomes-to-ai.html",
+    "href": "genomes-to-ai.html",
+    "title": "Genomes to AI",
     "section": "",
-    "text": "A simple pencil notebook page with a coin, four nucleotide states and a small sequence ensemble.\nDuring the last two weeks I worked through Section 2.1 on random variables and probabilities. The mathematics begins with familiar objects—a coin, possible outcomes and their frequencies—but the biological lesson is deeper: before measuring uncertainty, I must decide what counts as a possible state.\nThat decision is part of the model. It is not given automatically by nature."
+    "text": "A scientific AI engineering journal\n  \n  An authentic record of learning to build scientific AI - grounded in evolutionary biology, shaped by the history of biological data, and tested through open, reproducible work.\n  This is not a collection of polished conclusions. It is a record of questions, design choices, failures, revisions, and evidence.\n  \n    Biological dataMachine learningScientific softwareValidationOpen source",
+    "crumbs": [
+      "Genomes to AI"
+    ]
   },
   {
-    "objectID": "posts/2026-01-24-the-model-is-a-choice/index.html#random-variables-are-descriptions",
-    "href": "posts/2026-01-24-the-model-is-a-choice/index.html#random-variables-are-descriptions",
-    "title": "The Model Is Not the World",
-    "section": "Random variables are descriptions",
-    "text": "Random variables are descriptions\nA discrete random variable has a finite set of states, often called an alphabet, and a probability for each state. A coin can be represented by two states; a nucleotide site by A, C, G and T; an amino-acid site by twenty possibilities.\nThe chapter insists on a distinction I find extremely useful: the random variable is not the physical object. A real coin has material, orientation, wear and many possible behaviours. The two-state model keeps only the distinction needed for a particular question. Even “heads” and “tails” are choices made by an observer using a particular measurement.\nThe same is true in genomics. A site may be represented as four nucleotides, but an analysis may also need a gap, an unresolved base, methylation state, genotype uncertainty or structural context. The alphabet depends on the biological question and the measurement system. If I change that representation, I may change the probabilities and therefore the information I calculate.\nThis is not a weakness of modelling. It is why transparent modelling matters."
+    "objectID": "genomes-to-ai.html#why-this-journey-begins-with-data",
+    "href": "genomes-to-ai.html#why-this-journey-begins-with-data",
+    "title": "Genomes to AI",
+    "section": "Why this journey begins with data",
+    "text": "Why this journey begins with data\nBiology has always been an information science. Taxonomists organised visible diversity; geneticists inferred inheritance from crosses; population geneticists turned allele frequencies into models of drift, selection, migration, and demography. The computational scale changed gradually and then dramatically. Handwritten observations became databases. Individual loci became whole genomes. Sanger sequencing gave way to high-throughput short reads, long reads, chromosome-scale assemblies, population resequencing, metagenomes, single-cell measurements, spatial assays, and continuous environmental data.\nThe bottleneck therefore moved. Generating data remains demanding, but modern biology is increasingly constrained by our ability to organise, integrate, evaluate, and interpret information that is too large and interconnected for manual reasoning alone. Bioinformatics emerged to manage sequence and annotation; data science added scalable statistics, visualisation, and reproducible computation; big-data infrastructure made distributed storage and processing routine. Scientific AI now adds another layer: models that can learn representations from sequence, structure, images, text, and multimodal evidence.\n\n  ObserveTraits, specimens, experimentsBiological description and comparison\n  MeasureLoci, genomes, environmentsDigital data at expanding scale\n  IntegratePopulations, multi-omics, timeStatistics, pipelines, and data science\n  Learn + testFoundation models and scientific AIRepresentations evaluated against evidence\n\nThis progression does not make biological knowledge less important. It makes domain knowledge more consequential. A model can identify statistical regularities at a scale no individual can inspect, but it cannot by itself guarantee the correct genome build, distinguish demographic history from selection, define a meaningful negative control, or decide whether a result supports a biological claim. Those responsibilities remain scientific.\nFrom the reading notebook · Chapter 3: What can a genome remember? follows one question through measurement, evolutionary change, and relationships between sites—with a pencil sketch from the margins.\nFrom the reading notebook · Chapter 4: Can we replay evolution? follows Dallinger’s warming cultures, Lenski’s frozen E. coli and Avida to ask how selection, chance and earlier history shape what can happen next.\nFrom the reading notebook · Chapter 5: When does more become complexity? asks what we measure when we call a genome, network or evolutionary path complex—and whether an apparent upward trend reflects selection, chance or the way we chose to measure it.",
+    "crumbs": [
+      "Genomes to AI"
+    ]
   },
   {
-    "objectID": "posts/2026-01-24-the-model-is-a-choice/index.html#probabilities-come-from-finite-observations",
-    "href": "posts/2026-01-24-the-model-is-a-choice/index.html#probabilities-come-from-finite-observations",
-    "title": "The Model Is Not the World",
-    "section": "Probabilities come from finite observations",
-    "text": "Probabilities come from finite observations\nFor a physical system, probabilities are usually estimated from repeated observations. With a finite sample, frequency is only an approximation to the underlying probability. This obvious fact becomes easy to forget when software prints many decimal places.\nThe chapter illustrates several ways to treat a DNA sequence. A complete sequence of length (L) can be one state among (4^L) possibilities. Alternatively, its (L) positions can be treated as repeated observations of one nucleotide variable, allowing an estimate of overall base composition. A third approach treats each position as its own variable and uses an alignment of related sequences to estimate site-specific probabilities.\nThese views use the same letters but answer different questions.\nOverall nucleotide frequencies can reveal GC or AT bias. Such bias may have biochemical consequences, but it does not have a single guaranteed evolutionary cause. A site-wise ensemble adds another layer: strongly conserved positions may indicate functional constraint, whereas variable positions may tolerate change. Yet this interpretation depends on alignment quality, sampling and evolutionary history."
+    "objectID": "genomes-to-ai.html#why-i-am-building-popgenlm-bench",
+    "href": "genomes-to-ai.html#why-i-am-building-popgenlm-bench",
+    "title": "Genomes to AI",
+    "section": "Why I am building PopGenLM Bench",
+    "text": "Why I am building PopGenLM Bench\nGenomic language models are a natural meeting point between my past work and the engineering skills I am developing. They treat DNA as structured information and learn context-dependent sequence patterns that can be used to score variants. Their promise is substantial: prioritising candidate variants, identifying disrupted regulatory grammar, comparing constraint across sequence contexts, and extending annotation beyond a list of previously characterised genes.\nBut the scale and apparent precision of model output can create false confidence. Millions of scores can be produced before anyone notices an allele mismatch, reference incompatibility, hidden version change, unexamined calibration problem, or unsupported evolutionary interpretation. My aim with PopGenLM Bench is to make that transition from score to evidence explicit. The project connects model engineering with the population-genetic questions that determine whether a prediction is scientifically coherent.\n\n  \n    The central question\n    What would convince us that a genomic AI score carries biological information?\n    Not a smooth software demo alone. We need reference-safe inputs, reproducible inference, independent evidence, uncertainty estimates, negative controls, sensitivity analysis, and language that does not outrun the data.\n  \n  Scientific AI becomes useful when model capability and scientific validation develop together.",
+    "crumbs": [
+      "Genomes to AI"
+    ]
   },
   {
-    "objectID": "posts/2026-01-24-the-model-is-a-choice/index.html#why-the-ensemble-matters",
-    "href": "posts/2026-01-24-the-model-is-a-choice/index.html#why-the-ensemble-matters",
-    "title": "The Model Is Not the World",
-    "section": "Why the ensemble matters",
-    "text": "Why the ensemble matters\nAn ensemble is the collection from which observations are drawn. For a genomic site, an alignment of homologous sequences can provide that collection. Across the alignment, each position becomes a distribution rather than a single letter.\nThe tRNA example in the chapter makes this concrete. Some positions vary, while others are nearly or completely conserved because the molecule’s structure and function constrain acceptable changes. Gaps and unresolved characters must also be treated explicitly; ignoring how they enter the alphabet can alter the analysis.\nFor me, this is the bridge from a sequence as an object to a sequence as evidence. One string shows what occurred once. An ensemble begins to show what could vary, what repeatedly remains, and how uncertain those conclusions are.\n\nNotes from my margin\n\nEvery dataset has an alphabet, even when it is not written down.\nMore decimal places do not create more observations.\nA single sequence is a record; an ensemble makes variation measurable."
+    "objectID": "genomes-to-ai.html#what-this-journal-will-document",
+    "href": "genomes-to-ai.html#what-this-journal-will-document",
+    "title": "Genomes to AI",
+    "section": "What this journal will document",
+    "text": "What this journal will document\n\n\n\nLearning\n\n\nConcepts used in practice\n\n\nPyTorch, model inference, packaging, testing, APIs, deployment, and engineering patterns explained through the biological problems that required them.\n\n\n\n\nBuilding\n\n\nArtifacts, not declarations\n\n\nEach substantial entry should connect a scientific question to code, a reproducible result, a benchmark, or a concrete software decision.\n\n\n\n\nValidation\n\n\nEvidence before interpretation\n\n\nWhat was checked, what could fail, what the result supports, which alternatives remain, and where confidence should stop.\n\n\n\n\nReflection\n\n\nAn honest technical transition\n\n\nHow an experienced computational biologist develops the engineering depth needed to design, release, and maintain reliable AI for life sciences.",
+    "crumbs": [
+      "Genomes to AI"
+    ]
   },
   {
-    "objectID": "posts/2026-01-24-the-model-is-a-choice/index.html#my-interpretation-for-genomic-ai",
-    "href": "posts/2026-01-24-the-model-is-a-choice/index.html#my-interpretation-for-genomic-ai",
-    "title": "The Model Is Not the World",
-    "section": "My interpretation for genomic AI",
-    "text": "My interpretation for genomic AI\nThis section immediately changes how I think about model inputs. Tokenisation, genome build, strand orientation, reference allele, treatment of missing bases and sampling population are not preliminary details. They define the states the system is allowed to see.\nA DNA language model also learns from an ensemble—its training data. If that ensemble represents some species, regions or sequence contexts much better than others, the model’s apparent confidence may exceed the evidence available for a new organism. Before evaluating a score, I therefore need to ask: what alphabet did the model use, what ensemble shaped its probabilities, and how closely does my new dataset match that world?\nThis is one reason PopGenLM Bench must begin with reference validation and provenance rather than a plot. A biologically incorrect representation can pass through perfectly functioning code."
+    "objectID": "genomes-to-ai.html#where-scientific-ai-could-lead",
+    "href": "genomes-to-ai.html#where-scientific-ai-could-lead",
+    "title": "Genomes to AI",
+    "section": "Where scientific AI could lead",
+    "text": "Where scientific AI could lead\nThe most valuable applications will not be defined by novelty alone. They will emerge where AI helps researchers interrogate complex biological systems while preserving provenance, uncertainty, and experimental accountability.\n\n  Variant interpretationCombine sequence representations with population frequency, conservation, regulatory context, phenotype, and experimental evidence to prioritise variants transparently.\n  Evolutionary monitoringAnalyse genomic change through time in natural populations, pathogens, crops, and conservation programmes while separating signal from drift and sampling noise.\n  Adaptive breeding and conservationConnect genomic variation with climate, traits, and demographic vulnerability to support testable decisions rather than opaque predictions.\n  Multimodal biological modelsLink sequence, structure, expression, environment, images, and literature into representations that can be evaluated across scales.\n  Scientific workflow agentsAssist with quality control, provenance, documentation, and reproducible analysis while keeping researchers responsible for assumptions and conclusions.\n  Evidence-grounded learningBuild teaching systems that adapt practice and feedback to the learner without replacing approved sources, instructor judgement, or intellectual effort.",
+    "crumbs": [
+      "Genomes to AI"
+    ]
   },
   {
-    "objectID": "posts/2026-01-24-the-model-is-a-choice/index.html#where-i-want-to-learn-next",
-    "href": "posts/2026-01-24-the-model-is-a-choice/index.html#where-i-want-to-learn-next",
-    "title": "The Model Is Not the World",
+    "objectID": "genomes-to-ai.html#commitments-for-the-journey",
+    "href": "genomes-to-ai.html#commitments-for-the-journey",
+    "title": "Genomes to AI",
+    "section": "Commitments for the journey",
+    "text": "Commitments for the journey\n\n\nBuild in publicShare code, benchmarks, release notes, and the reasoning behind important changes.\n\n\nKeep biology centralStart with a scientific question and define what evidence would support or challenge the result.\n\n\nReport failure honestlyDocument broken assumptions, implementation errors, negative results, and what changed afterwards.\n\n\nSeparate capability from validityA model’s ability to produce an output is not proof that the output is scientifically meaningful.\n\n\nProtect sensitive workUse public demonstration data and keep unpublished research, restricted teaching material, and private information outside public repositories.",
+    "crumbs": [
+      "Genomes to AI"
+    ]
+  },
+  {
+    "objectID": "genomes-to-ai.html#latest-field-notes",
+    "href": "genomes-to-ai.html#latest-field-notes",
+    "title": "Genomes to AI",
+    "section": "Latest field notes",
+    "text": "Latest field notes\n\n  \n    Reading notebook · Chapter 2\n    Learning to ask what biological information is about\n    Five fortnightly notes follow my reading of Christoph Adami's The Evolution of Biological Information. They move from the history of genetic information to probability, relationships between sites, entropy, and the difficult question of what a gene can tell us about its biological context.\n  \n  These are not substitutes for the chapter. They are a personal record of what I understood, where I remain cautious, and which questions I want to pursue next.\n\n\nReading notes, technical articles, build decisions, failures, and release retrospectives appear below. The newest entry is shown first.",
+    "crumbs": [
+      "Genomes to AI"
+    ]
+  },
+  {
+    "objectID": "cv.html",
+    "href": "cv.html",
+    "title": "Résumé",
+    "section": "",
+    "text": "Evolutionary and computational biologist working at the intersection of population genomics, environmental change and scientific AI.",
+    "crumbs": [
+      "Résumé"
+    ]
+  },
+  {
+    "objectID": "cv.html#professional-profile",
+    "href": "cv.html#professional-profile",
+    "title": "Résumé",
+    "section": "Professional Profile",
+    "text": "Professional Profile\nEvolutionary and computational biologist specialising in population and landscape genomics, hybridisation genetics, phylogeography, systematics and plant climate adaptation. My research combines whole-genome sequencing with reproducible bioinformatics and emerging scientific-AI methods to quantify evolutionary responses to environmental change across spatial and temporal scales. This work has been recognised by the Erich Oberdorfer Foundation Research Award (2019) and published in New Phytologist, Molecular Ecology and Critical Reviews in Plant Sciences. I aim to build an independent research programme that connects evolutionary genomics, interdisciplinary collaboration and biodiversity-informed policy.",
+    "crumbs": [
+      "Résumé"
+    ]
+  },
+  {
+    "objectID": "cv.html#personal-information",
+    "href": "cv.html#personal-information",
+    "title": "Résumé",
+    "section": "Personal Information",
+    "text": "Personal Information\n\nNationality: German\n\nLanguages: English (Fluent); German (Proficient); Urdu (Native)",
+    "crumbs": [
+      "Résumé"
+    ]
+  },
+  {
+    "objectID": "cv.html#computational-and-technical-skills",
+    "href": "cv.html#computational-and-technical-skills",
+    "title": "Résumé",
+    "section": "Computational and Technical Skills",
+    "text": "Computational and Technical Skills\n\nComputational Methods, AI & Data Science\n\nArtificial Intelligence & Genomic Modelling: Application of AI-based Large Language Models (LLMs) for genome analysis, functional annotation, variant interpretation, and integrative bioinformatics workflows.\nMachine Learning: Deep learning (PyTorch, TensorFlow), model development and deployment; ensemble learning frameworks (Random Forest, BRT)\nStatistical Modelling: GLM/GAM, Bayesian inference, multivariate statistics; environmental association analyses (genome-environment relationships)\nHigh-Performance Computing & Workflow Management: HPC environments, Slurm job scheduling, parallel processing, Nextflow, Snakemake\nProgramming Languages: R (Bioconductor, tidyverse), Python, Bash, Perl\nData Analysis & Visualization: R (ggplot2, dplyr), Python (pandas, NumPy, matplotlib, seaborn), Jupyter Notebooks\n\n\n\nBioinformatics, Genomics and Population Genetics\n\nGenome Assembly & Annotation: De novo assembly using Illumina, ONT, PacBio HiFi and Hi-C (Flye, hifiasm, HiCanu, SPAdes, miniasm, Velvet)\nTemporal Population Genomics: Analysis of allele‑frequency change across time points to infer selection, simulation-based outlier detection using Wright–Fisher model and Moran model frameworks (ANGSD, GATK, BCF/SAMtools, BEAGLE, PLINK)\nHybridisation Genomics: Introgression and gene flow analysis using ABBA‑BABA, TreeMix, and STRUCTURE/ADMIXTURE\nPopulation Structure & Demographic Inference: fastsimcoal2, ∂a∂i, DIYABC, demografr; phylogenomics using RAxML, MrBayes, BEAST, SplitsTree\nFunctional & Evolutionary Genomics: Integration of conservation-based functional scores (phyloP score, GERP score, GPN) to prioritise candidate loci and link constraint with allele frequency dynamics\n\n\n\nLandscape Ecology and Geospatial Modelling\n\nLandscape Genomics: Spatial integration of genomic and environmental data; analysis of climate-driven allele frequency shifts and isolation-by-environment patterns using GIS tools (ArcGIS, QGIS) and R\nSpecies Distribution Modelling (SDM): Ecological niche modelling (MaxEnt, GLM, GAM, Random Forest, BRT) to contextualize genomic variation within environmental suitability landscapes\n\n\n\nWet-lab Skills\n\nMolecular Techniques: High-throughput DNA/RNA extraction, PCR, qPCR, gel electrophoresis, Sanger sequencing\nGenomic Library Preparation: ddRAD-seq, Oxford Nanopore (DNA/RNA), Illumina library preparation\nMicrobiology: Aseptic technique for the isolation, culturing, and maintenance of bacteria and fungi for plant microbiome analysis and pathogen assays.",
+    "crumbs": [
+      "Résumé"
+    ]
+  },
+  {
+    "objectID": "cv.html#professional-experience",
+    "href": "cv.html#professional-experience",
+    "title": "Résumé",
+    "section": "Professional Experience",
+    "text": "Professional Experience\n\nResearch Scientist & Teaching Associate\nUniversity of Cologne, Germany | 2022 – Present\n\nCoordinate theoretical modules and teach practical classes in Quantitative Biology and Population Genetics; mentor students in experimental design, phenotyping, whole‑genome sequencing (WGS) data analysis, and scientific interpretation; prepare and assess examinations.\nOrganize and lead field excursions, guiding students in designing and conducting plant ecology experiments in the Ecology and Applied Biology module.\nInvestigate plant evolutionary dynamics under climate change through temporal genomics, hybridisation genetics, and common garden experiments.\nAssemble and annotate plant genomes using HiFi long-read, Hi-C, and Illumina short-read sequencing technologies.\nAssociated Member, DFG TRR 341; mentor and guide MSc/PhD students within TRR‑affiliated projects.\n\n\n\nPostdoctoral Research Associate\nSenckenberg/LOEWE Center for Translational Biodiversity Genomics | 2019 – 2022\n\nCharacterized the impact of landscape heterogeneity on fine-scale genetic structure and gene flow in Microthlaspi erraticum using whole genome resequencing.\nDissected the effects of host genotype, microbiome, and abiotic factors on plant disease incidence.\nAssembled microbial genomes from Oxford Nanopore long-reads, polished with Illumina data.\nValidated functional roles of microbial taxa via synthetic microbiome inoculations in contrasting host genotypes\nGovernance and community roles: Member, Diversity & Inclusion Committee and TBG Steering Committee; part of the Young Scientists main speaker team (ECR network collaborating with the Board of Directors).\nOrganised institute-level events (annual retreats, Diversity Days, training workshops); participated in committee meetings on organisational issues and budgeting, gaining practical insight into decision-making processes.\n\n\n\nPhD Research Associate\nGoethe University & Senckenberg (SBiK-F), Frankfurt | 2011 – 2019\n\nClarified the systematics of Microthlaspi (Brassicaceae) by describing two new genera (Ihsanalshehbazia, Friedrichkarlmeyeria) and three new species.\nReconstructed Pleistocene range dynamics and post-glacial colonization routes of Palearctic plant populations using phylogeographic and demographic modelling.\nIntegrated ecological niche modelling with population genetics to explain spatial patterns of biodiversity.\nCoordinated international fieldwork across Europe, North Africa, and Asia (planning, permits, sampling logistics)\nDisseminated results through peer‑reviewed publications and conference presentations\n\n\n\nResearch Internship / MRes Project\nThe James Hutton Institute, UK | 2009 – 2010\n\nInvestigated alternative splicing in barley under cold/drought stress, identifying stress-responsive variants via RNA assays (RT-PCR/qPCR).\n\n\n\nLecturer in Botany/Biology\nKhawaja Fareed Govt. College, Pakistan | 2002 – 2008\n\nTaught undergraduate biology; designed curricula and assessments; supervised labs; advised students.\n\n\n\nGCE Advance Level Biology Teacher\nThe City School, Lahore/Vehari Branches, Pakistan | 1998 – 2002\n\nTaught A‑Level Biology; prepared students for examinations; coordinated practicals.\n\n\n\nResearch Internship / MSc Project\nUniversity of Agriculture, Faisalabad | 1997 – 1998\n\nEvaluated drought resistance in wheat germplasm from arid regions, using greenhouse/field screens and statistical analysis (ANOVA).",
+    "crumbs": [
+      "Résumé"
+    ]
+  },
+  {
+    "objectID": "cv.html#education-and-qualifications",
+    "href": "cv.html#education-and-qualifications",
+    "title": "Résumé",
+    "section": "Education and Qualifications",
+    "text": "Education and Qualifications\n\nDoctor of Philosophy (Dr. rer. nat.)\nGoethe University & Senckenberg (SBiK-F), Frankfurt, Germany | 2019\nDissertation: “Morphology, systematics and phylogeography of Microthlaspi (Brassicaceae, Coluteocarpeae)”\nMaster of Research (MRes), Crops for the Future\nUniversity of Dundee, UK | 2010\nDissertation: “The Role of Alternative Splicing in Barley in Response to Cold/Drought Stress”\nMaster of Science (MSc), Botany\nUniversity of Agriculture Faisalabad, Pakistan | 1998\nDissertation: “Drought Resistance of Wheat Germplasm Collected from some Arid Regions of Baluchistan and Punjab”\nBachelor of Science (BSc), Chemistry, Botany, Zoology\nB.Z. University Multan, Pakistan | 1995",
+    "crumbs": [
+      "Résumé"
+    ]
+  },
+  {
+    "objectID": "cv.html#collaboration-projects",
+    "href": "cv.html#collaboration-projects",
+    "title": "Résumé",
+    "section": "Collaboration Projects",
+    "text": "Collaboration Projects\n\nAssessed urbanization impacts on Solidago canadensis and Tanacetum vulgare via AFLP/MS-AFLP genotyping (University of Potsdam, Germany).\nConducted phylogenomics of fungal pathogens (Technical University of Munich, Germany).\nAnalyzed spatial diversity patterns and phylogeography of endangered plants (Palacký University Olomouc, Czech Republic)",
+    "crumbs": [
+      "Résumé"
+    ]
+  },
+  {
+    "objectID": "cv.html#awards--professional-service",
+    "href": "cv.html#awards--professional-service",
+    "title": "Résumé",
+    "section": "Awards & Professional Service",
+    "text": "Awards & Professional Service\n\nAssociate Editor & Science Mentor, Frontiers for Young Minds Journal\nMember, IUCN Commission on Ecosystem Management (CEM) & Education & Communication (CEC)\nServed on Senckenberg’s Diversity & Inclusion Committee, TBG Steering Committee, and as a Young Scientists speaker, contributing to retreat organisation, diversity initiatives, and early career development.\nErich Oberdorfer Foundation Research Award (2019), Karlsruhe, Germany\nGoethe Graduate Academy Fellowship (2011-2015), Frankfurt, Germany\nGlobal Excellence Postgraduate Scholarship (2009), University of Dundee, UK\nStudents’ Award for Outstanding Biology Teaching (2005, 2007), Higher Education Dept., Pakistan",
+    "crumbs": [
+      "Résumé"
+    ]
+  },
+  {
+    "objectID": "cv.html#conferences-workshops-and-invited-talks",
+    "href": "cv.html#conferences-workshops-and-invited-talks",
+    "title": "Résumé",
+    "section": "Selected Conferences, Workshops, and Invited Talks",
+    "text": "Selected Conferences, Workshops, and Invited Talks\n\nDisentangling Drift and Selection in Locally Endangered Plant Populations Using Temporal Genomics and Large Language Model-based AI approaches. Society for Molecular Biology and Evolution (SMBE), 2026, Copenhagen, Denmark.\nAI‑enhanced species distribution modeling, machine‑learning ecological workflows, and advanced spatial–climate analytics — a 5‑week national online training delivered at CEES, University of the Punjab (2026).\nThe Belt and Road Initiative and the Sustainable Development Goals. (2021) International Silk Road Conference.\nEcosystem Restoration: An overlooked opportunity for Economic growth (2021) Bahria University, Karachi, Pakistan.\nRole of Biodiversity and Ecosystem Restoration in Climate Change Mitigation (2020), International Conference on One Health, University of Veterinary and Animal Sciences, Lahore, Pakistan.\nMisconceptions about Evolution and the Mechanisms of Evolution (2020), University of Peshawar, Pakistan.\nFrom jargon to human: Translating Science to Kids (Workshop 2020), Friends For Future International Youth Conference.\nThe Talking Climate Workshop (2020), SDGs Academy, Pakistan.\nPleistocene Glaciation and Palearctic Phylogeography: Inferring Species Glacial Refugia and Recolonization Routes (2019), Monrepos Archaeological Research Center, Neuwied, Germany.\nModelling of Range-Wide Pathogen Pressure in an Annual Member of the Brassicaceae (2019), Wild Plant Pathosystems Conference, Frankfurt am Main, Germany.\nGenomics and Climate Adaptation (2018), Senckenberg Translational Biodiversity Genomics, Frankfurt am Main, Germany.\nDetermination of Genetic Diversity of Arabidopsis thaliana in the Italian Peninsula Using Next-Generation Genotyping (RAD-Seq) (Workshop, 2015), Botanikertag, Munich, Germany.\nInfluence of Climate and Geography on Occurrence of Infection in Microthlaspi perfoliatum (2014), German Mycological Society Congress, Mettlach-Orscholz, Germany.\nDiversity of Arabidopsis thaliana in Italy as Inferred from Next-Generation Genotyping in Relation to Biotic and Abiotic Factors (2013), Wild Plant Pathosystems Conference, Olomouc, Czech Republic.",
+    "crumbs": [
+      "Résumé"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Tahir Ali, PhD",
+    "section": "",
+    "text": "Computational biology · Scientific AI\n    \n    Evolutionary and computational biologist building trustworthy AI for genomics, research, and scientific learning.\n    I combine population-genomic research, biological domain expertise, and reproducible software engineering to turn complex data into defensible scientific insight.\n    \n      Explore PopGenLM Bench\n      Follow Genomes to AI\n      View research\n    \n    \n      Institute for Plant Sciences · University of Cologne\n      Zülpicher Str. 47b · 50674 Cologne · Germany\n      +49 (0)221 470 1139\n      tali@uni-koeln.de\n      ali_tahir99@hotmail.com",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#current-focus",
+    "href": "index.html#current-focus",
+    "title": "Tahir Ali, PhD",
+    "section": "Current focus",
+    "text": "Current focus\n\nTwo connected strands define my present work: building scientifically testable AI software and documenting the decisions, evidence, and learning behind it.\n\n\n  \n    Flagship open-source project\n    PopGenLM Bench\n    A reproducible framework for testing whether genomic language-model variant scores are technically sound and biologically consistent with population-genetic and evolutionary evidence.\n    \n      PythonGPNPyTorchPopulation genomics\n    \n    \n      Explore the project\n      View repository\n    \n  \n\n  \n    Engineering journal\n    Genomes to AI\n    An authentic account of becoming a scientific AI engineer - from biological questions and early prototypes to tested software, failed assumptions, and public releases.\n    \n      LearningBuildingValidationCareer transition\n    \n    \n      Read the journal",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#my-journey-in-science-exploring-data-and-complexity",
+    "href": "index.html#my-journey-in-science-exploring-data-and-complexity",
+    "title": "Tahir Ali, PhD",
+    "section": "My journey in science: exploring data and complexity",
+    "text": "My journey in science: exploring data and complexity\n\nTeacher & mentor · Exploring genomes, stories, and change\n\n\n  \n    I am an evolutionary and computational biologist, fascinated by the interplay of genes, environment, and time. My research in temporal genomics, adaptation, phylogeography, and selection seeks to understand how organisms respond to environmental change—how Darwin’s insight into “descent with modification” unfolds in real populations. Much of my work involves decoding genomes across time, tracing the signatures of survival and loss, and unravelling the mysteries of hybridisation genetics. Increasingly, this means integrating population-scale and multi-omic evidence with machine learning and developing reproducible, testable scientific-AI workflows: combining sequence, annotation, environment, phenotype, and evolutionary history to reveal patterns that might otherwise remain hidden. In practice, I write scripts, build pipelines, evaluate models, and shape raw data into defensible scientific insight—turning fragments of code into narratives about resilience, chance, and transformation while keeping every conclusion accountable to biological evidence.\n\n    Equally important to me is teaching and mentoring. My journey as an educator spans more than two decades, from teaching basic college biology to guiding students through the complexities of ecological and evolutionary genomics. Helping students see connections between data and life is one of the most rewarding parts of my career. I see teaching as a way of opening doors: to curiosity, to critical thinking, and to the joy of discovery.\n\n    Beyond science, I draw inspiration from literature, history, and the worlds we build. The psychological depth of Dostoevsky, the vast social panoramas of Tolstoy, the magical realism of Márquez and Grass, and the dramatic flair of Dumas all shape how I think about complexity, transformation, and endurance. Just as genomes are living archives of struggle and adaptation, so too are cities, landscapes, and stories—layered with memory, resilience, and change.\n\n    Outside of research and teaching, I find joy in travel, in wandering through ancient streets, hiking wild trails, or noticing the quiet poetry of everyday life. Whether I am analysing genetic data, guiding students, reading a novel, or exploring a place shaped by centuries, I am drawn to the same questions: how change is inscribed in structure, how diversity emerges, and how the stories—scientific and personal—that we tell shape who we are.\n  \n\n\n“The mystery of human existence lies not in just staying alive, but in finding something to live for.”Fyodor Dostoevsky",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#work-across-scales",
+    "href": "index.html#work-across-scales",
+    "title": "Tahir Ali, PhD",
+    "section": "Work across scales",
+    "text": "Work across scales\n\nMy work connects molecular variation, population processes, ecological change, and the software used to study them.\n\n\n  \n    Research\n    Evolution in natural populations\n    Temporal genomics, hybridisation, climate adaptation, phylogeography, population structure, and genome-scale evidence for drift and selection.\n    Explore research →\n  \n\n  \n    Scientific software\n    Reproducible genomic analysis\n    Versioned pipelines, quality-control systems, statistical evaluation, interpretable reports, and careful separation of technical success from biological support.\n    Browse GitHub →\n  \n\n  \n    Education\n    Interactive biological learning\n    Lecture-grounded course companions, simulations, practical genomics tutorials, and AI-supported feedback designed to preserve instructor control.\n    View teaching resources →\n  \n\n  \n    Translation\n    From evidence to explanation\n    Scientific communication and mentoring that make quantitative biological reasoning clearer without removing its uncertainty or complexity.\n    View professional profile →",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#connect-and-follow",
+    "href": "index.html#connect-and-follow",
+    "title": "Tahir Ali, PhD",
+    "section": "Connect and follow",
+    "text": "Connect and follow\n\nResearch outputs, open-source work, professional updates, and shorter reflections across my public profiles.\n\n\n  LinkedIn\n  Google Scholar\n  RGResearchGate\n  GitHub\n  Bluesky\n  X\n  Facebook",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "posts/2026-01-10-inheritance-becomes-information/index.html",
+    "href": "posts/2026-01-10-inheritance-becomes-information/index.html",
+    "title": "When Life Became Legible",
+    "section": "",
+    "text": "A simple pencil notebook sketch linking a pea pod, chromosome and DNA, with notes about inheritance and information.\nThis fortnight I began Chapter 2, “Information Theory in Biology,” from Christoph Adami’s The Evolution of Biological Information. I expected a mathematical introduction. What surprised me first was the history. Before information could be measured, biologists had to learn how to see heredity as something separable, locatable, copyable and changeable.\nThat history made the chapter feel immediately connected to my own journey. Genomics can appear to begin with sequencing machines and large files, but its deeper foundations were built through a sequence of conceptual steps. Each step changed not only what scientists knew, but what they believed could be asked."
+  },
+  {
+    "objectID": "posts/2026-01-10-inheritance-becomes-information/index.html#what-i-learned-from-the-opening-section",
+    "href": "posts/2026-01-10-inheritance-becomes-information/index.html#what-i-learned-from-the-opening-section",
+    "title": "When Life Became Legible",
+    "section": "What I learned from the opening section",
+    "text": "What I learned from the opening section\nThe chapter begins with a strong reductionist claim: life on Earth is organised through information. This is not simply the familiar metaphor of DNA as a “book.” The important point is operational. DNA can be copied, altered and inherited. Its molecular structure links continuity with variation, so the same mechanism that preserves biological organisation also makes evolution possible.\nThis changed how I thought about the word information. In ordinary conversation, information is often treated as meaningful content. In this chapter, the more useful starting point is prediction. A biological pattern carries information when knowing it improves what we can predict about another state: a nucleotide, a structure, a function or an environment.\nThe chapter then asks deceptively simple questions. How much information is present in a genome? How much is shared by two organisms? How much is gained through adaptation, transmitted between generations or lost through extinction? These questions are easy to state and very difficult to answer because they require an explicit comparison, a defined set of possible states and enough observations to estimate probabilities."
+  },
+  {
+    "objectID": "posts/2026-01-10-inheritance-becomes-information/index.html#the-historical-path-from-character-to-code",
+    "href": "posts/2026-01-10-inheritance-becomes-information/index.html#the-historical-path-from-character-to-code",
+    "title": "When Life Became Legible",
+    "section": "The historical path: from character to code",
+    "text": "The historical path: from character to code\nBox 2.1 traces the emergence of genetic information through several distinct advances.\nMendel showed that inherited characters behave as if discrete factors pass between generations. Bateson and Saunders helped establish that these units can occupy alternative states—what we now call alleles. Johannsen separated the inherited unit from its visible expression and gave us the term gene. Morgan, Sturtevant and Bridges then placed genes in a linear order on chromosomes, turning heredity into something that could be mapped.\nThe next steps connected location with mechanism. Mutations showed that changing a chromosomal position could alter or destroy function. Work on gene action linked hereditary material to protein production. The genetic code then made the relationship between nucleotide sequence and amino-acid sequence experimentally legible. By this point, biological molecules could be treated as messages drawn from a space of possible messages—a perspective that made Shannon’s mathematical theory relevant to biology.\nWhat I find most important is that no single discovery created “biological information.” The idea became possible only after inheritance, physical location, copying, mutation, expression and coding had been separated and then reconnected.\n\nNotes from my margin\n\nA new instrument is valuable when it opens a better question.\nCopying explains continuity; mutation makes history possible.\n“Information” becomes scientific only after I say what it predicts."
+  },
+  {
+    "objectID": "posts/2026-01-10-inheritance-becomes-information/index.html#my-interpretation",
+    "href": "posts/2026-01-10-inheritance-becomes-information/index.html#my-interpretation",
+    "title": "When Life Became Legible",
+    "section": "My interpretation",
+    "text": "My interpretation\nThe history in this section is a warning against treating scientific AI as a sudden replacement for earlier biology. AI belongs to the same longer progression. Natural history organised variation; genetics formalised inheritance; molecular biology identified a physical code; sequencing made that code observable at scale; bioinformatics made large collections analysable. AI may help us detect structure across those collections, but it does not remove the need to define the biological states, comparisons and evidence.\nThis matters because an impressive prediction can still be scientifically empty. If I cannot say what a model output is information about, which observations support it, or under what conditions it fails, then I have a number rather than knowledge.\nI also see a connection with temporal genomics. A genome sampled at one date is a record, but a series of genomes sampled through time lets us ask what was retained, altered or lost. The value lies not in the sequence alone; it lies in the comparison that makes change visible."
+  },
+  {
+    "objectID": "posts/2026-01-10-inheritance-becomes-information/index.html#where-i-want-to-learn-next",
+    "href": "posts/2026-01-10-inheritance-becomes-information/index.html#where-i-want-to-learn-next",
+    "title": "When Life Became Legible",
     "section": "Where I want to learn next",
-    "text": "Where I want to learn next\nI want to connect this section to practical methods for:\n\nquantifying finite-sample uncertainty in nucleotide frequencies;\nweighting related sequences so that a large clade is not mistaken for many independent observations;\nhandling gaps and ambiguous states in alignments;\ncomparing frequentist estimates with Bayesian probability models; and\nmeasuring how training-set composition affects transfer across species."
+    "text": "Where I want to learn next\nMy next steps are to understand three transitions more deeply:\n\nHow probability turns biological variation into a measurable ensemble.\nHow Shannon entropy separates uncertainty from information.\nHow evolutionary processes create the correlations that allow genomes to carry evidence about environments.\n\nI also want to revisit the history of the genetic code and chromosome mapping—not as a list of discoveries, but as examples of how measurement changes explanation."
   },
   {
-    "objectID": "posts/2026-01-24-the-model-is-a-choice/index.html#my-commentary",
-    "href": "posts/2026-01-24-the-model-is-a-choice/index.html#my-commentary",
-    "title": "The Model Is Not the World",
-    "section": "My commentary",
-    "text": "My commentary\nThe most thought-provoking lesson was not a formula. It was the reminder that measurement begins with an agreement about distinctions. Biology is richer than any alphabet we impose on it. Good science does not pretend otherwise; it states the simplification, tests its consequences and changes it when the question demands more.\n\nReading for this note: Christoph Adami, The Evolution of Biological Information, Chapter 2, Section 2.1, from random variables and finite probability estimates through nucleotide composition, site-specific variables and the tRNA alignment."
+    "objectID": "posts/2026-01-10-inheritance-becomes-information/index.html#a-simple-commentary-on-the-chapter-so-far",
+    "href": "posts/2026-01-10-inheritance-becomes-information/index.html#a-simple-commentary-on-the-chapter-so-far",
+    "title": "When Life Became Legible",
+    "section": "A simple commentary on the chapter so far",
+    "text": "A simple commentary on the chapter so far\nAdami’s presentation is mathematical, but the opening argument is philosophical in the best scientific sense. It asks what we mean when we say that life contains information, and then refuses to leave the term vague. My main lesson is that biological information is not a substance hidden inside DNA. It is a measurable relationship made visible by a carefully defined question.\nThat is a demanding standard. It is also a useful one for the AI systems I want to build.\n\nReading for this note: Christoph Adami, The Evolution of Biological Information, Chapter 2, opening discussion and Box 2.1, “The Emergence of the Concept of Genetic Information.” This article is my own synthesis and commentary on the supplied chapter excerpt."
   },
   {
-    "objectID": "posts/2026-02-21-uncertainty-reveals-structure/index.html",
-    "href": "posts/2026-02-21-uncertainty-reveals-structure/index.html",
-    "title": "When Uncertainty Reveals Structure",
+    "objectID": "posts/2026-02-07-meaning-lives-in-relationships/index.html",
+    "href": "posts/2026-02-07-meaning-lives-in-relationships/index.html",
+    "title": "Meaning Lives Between Things",
     "section": "",
-    "text": "A simple pencil notebook page showing uncertain dots, a small correlation grid and a rough RNA cloverleaf.\nFor the last two weeks I have been thinking about a counter-intuitive idea: uncertainty is not merely a defect in data. When it is measured carefully, its pattern can reveal biological organisation.\nSections 2.2 and 2.2.1 introduce entropy and information. The formulas matter, but the conceptual sequence matters more: first measure how uncertain a variable is; then ask how much that uncertainty decreases when another variable becomes known."
+    "text": "A simple pencil notebook page connecting two sites in short DNA sequences, with a rough base-pair sketch.\nThis fortnight the chapter moved from individual variables to relationships. That shift felt important. A nucleotide can be common, rare, conserved or variable on its own, but biological structure often appears only when I ask how one position changes with another.\nThe central idea is simple: context changes probability."
   },
   {
-    "objectID": "posts/2026-02-21-uncertainty-reveals-structure/index.html#entropy-measuring-what-remains-unpredictable",
-    "href": "posts/2026-02-21-uncertainty-reveals-structure/index.html#entropy-measuring-what-remains-unpredictable",
-    "title": "When Uncertainty Reveals Structure",
-    "section": "Entropy: measuring what remains unpredictable",
-    "text": "Entropy: measuring what remains unpredictable\nShannon entropy is calculated from the probability distribution of a variable. If all states are equally likely, uncertainty is maximal. If one state occurs with certainty, entropy is zero. The base of the logarithm determines the unit: base two gives bits; other alphabets can use units scaled to their number of possible states.\nI find it helpful to think of entropy as potential information. A variable with several plausible states has something left to reveal. A variable already known with certainty does not.\nApplied to a sequence alignment, entropy can be measured at each site. Conserved positions have low entropy; highly variable positions have high entropy. In the tRNA alignment, this produces a landscape of constraint and variability across the molecule.\nBut low entropy is not automatically the same as biological importance. A site can appear conserved because the sampled sequences share a recent ancestor and have not had time to diverge. Sample composition and evolutionary history therefore shape the apparent signal."
+    "objectID": "posts/2026-02-07-meaning-lives-in-relationships/index.html#joint-probability-seeing-states-together",
+    "href": "posts/2026-02-07-meaning-lives-in-relationships/index.html#joint-probability-seeing-states-together",
+    "title": "Meaning Lives Between Things",
+    "section": "Joint probability: seeing states together",
+    "text": "Joint probability: seeing states together\nTwo variables can be combined into a joint variable. For nucleotide sites, this means counting pairs such as AA, AC or GT across an alignment. The joint distribution records how often two states occur together. By summing over one variable, we recover the marginal distribution of the other.\nThe language can sound abstract, but the biological question is direct: do two positions vary independently, or are some combinations favoured and others avoided?\nIf two coins are independent, learning the outcome of one does not change what I expect from the other. If their outcomes are linked, that knowledge changes the probability. The same logic applies to two sites in a molecule."
   },
   {
-    "objectID": "posts/2026-02-21-uncertainty-reveals-structure/index.html#information-uncertainty-reduced-by-knowledge",
-    "href": "posts/2026-02-21-uncertainty-reveals-structure/index.html#information-uncertainty-reduced-by-knowledge",
-    "title": "When Uncertainty Reveals Structure",
-    "section": "Information: uncertainty reduced by knowledge",
-    "text": "Information: uncertainty reduced by knowledge\nThe chapter defines mutual information as the reduction in uncertainty about one variable after another variable is known. This is a much stricter idea than calling a sequence “informative” because it looks complex.\nThe measure is symmetric: the shared dependence between two sites is the same whichever direction we describe it. Conditional entropy captures what remains unknown; mutual information captures what is shared.\nIn the tRNA example, calculating mutual information across every pair of sites creates a matrix. Strong off-diagonal patterns correspond to coordinated substitutions produced by base pairing. From sequence variation alone, the analysis begins to reveal RNA secondary structure.\nThis is beautiful because variability is doing the explanatory work. If paired sites never changed, there would be no covariation to detect. Structure becomes visible because evolution explores alternatives while selection preserves compatible combinations."
+    "objectID": "posts/2026-02-07-meaning-lives-in-relationships/index.html#conditional-probability-what-changes-after-i-know-more",
+    "href": "posts/2026-02-07-meaning-lives-in-relationships/index.html#conditional-probability-what-changes-after-i-know-more",
+    "title": "Meaning Lives Between Things",
+    "section": "Conditional probability: what changes after I know more?",
+    "text": "Conditional probability: what changes after I know more?\nConditional probability asks for the distribution of one variable after the state of another is known. It is the formal version of an “if-then” question. Bayes’ theorem relates alternative directions of that conditioning.\nWhat I found especially useful is the chapter’s caution that conditional dependence does not by itself establish causation. A site can predict another because of physical pairing, shared ancestry, selection, population structure or an unmeasured third factor. Prediction is scientifically valuable, but explanation requires more evidence.\nIn the tRNA alignment, knowing the nucleotide at one site changes the expected distribution at another. For one pair the prediction is partial. For another pair, the relationship is almost deterministic and reflects complementary base pairing. Sequence statistics therefore reveal something not obvious from either site considered alone: a structural relationship in the molecule."
   },
   {
-    "objectID": "posts/2026-02-21-uncertainty-reveals-structure/index.html#the-limitation-that-matters",
-    "href": "posts/2026-02-21-uncertainty-reveals-structure/index.html#the-limitation-that-matters",
-    "title": "When Uncertainty Reveals Structure",
-    "section": "The limitation that matters",
-    "text": "The limitation that matters\nThe same example contains its own warning. The method needs a sufficiently diverse ensemble. If sequences are too closely related, most sites may look invariant whether or not they are functionally constrained. If the alignment contains uneven phylogenetic representation, shared ancestry can generate correlations that resemble functional coupling.\nInformation theory measures dependence in the supplied distribution. Biology must still explain how that distribution arose.\n\nNotes from my margin\n\nEntropy is not disorder in a vague sense; it is uncertainty under a stated model.\nVariation can reveal constraint when changes are coordinated.\nA clean pattern can still reflect sampling history rather than mechanism."
+    "objectID": "posts/2026-02-07-meaning-lives-in-relationships/index.html#from-letters-to-organisation",
+    "href": "posts/2026-02-07-meaning-lives-in-relationships/index.html#from-letters-to-organisation",
+    "title": "Meaning Lives Between Things",
+    "section": "From letters to organisation",
+    "text": "From letters to organisation\nThis example changed the way I read an alignment. I usually see rows of characters, conserved columns and substitutions. Conditional probability asks me to look across columns for coordinated change. Two positions may each appear variable, yet their variation together can be tightly constrained.\nThat is a powerful idea. Biological function does not require every component to remain unchanged. Sometimes function is preserved because components change together.\nIt also clarifies why simple conservation scores are incomplete. A position may tolerate several states, but only in combination with compatible states elsewhere. The information is relational.\n\nNotes from my margin\n\nAn isolated value may look noisy; a relationship can reveal a rule.\nConditional probability improves prediction, not automatically explanation.\nCo-variation can preserve structure while individual sites change."
   },
   {
-    "objectID": "posts/2026-02-21-uncertainty-reveals-structure/index.html#my-interpretation-for-scientific-ai",
-    "href": "posts/2026-02-21-uncertainty-reveals-structure/index.html#my-interpretation-for-scientific-ai",
-    "title": "When Uncertainty Reveals Structure",
-    "section": "My interpretation for scientific AI",
-    "text": "My interpretation for scientific AI\nThis reading helps me distinguish three quantities that are often blurred together: model confidence, statistical dependence and biological validity.\nA language model can assign a sharp probability distribution, but calibration determines whether that confidence is trustworthy. A model score can correlate with an annotation, but dependence alone does not show causation. A benchmark can report strong discrimination, but biological validity depends on the target, controls, sampling and domain of use.\nFor PopGenLM Bench, entropy and information suggest useful evaluation questions. Does adding a model score reduce uncertainty about an independently measured outcome beyond simpler features such as conservation or GC content? Is that reduction stable across chromosomes, annotation classes and species? Does it remain after controlling for relatedness and genomic structure?\nThese questions are more demanding than plotting a score distribution. They are also more scientifically meaningful."
+    "objectID": "posts/2026-02-07-meaning-lives-in-relationships/index.html#my-interpretation-for-language-models",
+    "href": "posts/2026-02-07-meaning-lives-in-relationships/index.html#my-interpretation-for-language-models",
+    "title": "Meaning Lives Between Things",
+    "section": "My interpretation for language models",
+    "text": "My interpretation for language models\nDNA language models are built around context. They estimate how plausible a nucleotide or sequence is given surrounding sequence. In that sense, their power comes from learning many conditional relationships.\nBut a learned relationship is not automatically a biological mechanism. A model may capture motif grammar, compositional bias, phylogenetic history, annotation patterns or technical artefacts. A strong score tells me that a substitution changes what the model expects. It does not yet tell me why, whether the change affects fitness, or whether the relationship transfers to another lineage.\nThis gives me a sharper question for PopGenLM Bench: when a model says that one allele is less compatible with its context, does that score improve prediction of independent biological evidence? For example, is it related to allele frequency, conservation, functional annotation or experimentally observed effect after accounting for confounders?\nThe benchmark should therefore compare conditional predictions with external outcomes, not merely display model confidence."
   },
   {
-    "objectID": "posts/2026-02-21-uncertainty-reveals-structure/index.html#additional-learning-directions",
-    "href": "posts/2026-02-21-uncertainty-reveals-structure/index.html#additional-learning-directions",
-    "title": "When Uncertainty Reveals Structure",
+    "objectID": "posts/2026-02-07-meaning-lives-in-relationships/index.html#additional-learning-directions",
+    "href": "posts/2026-02-07-meaning-lives-in-relationships/index.html#additional-learning-directions",
+    "title": "Meaning Lives Between Things",
     "section": "Additional learning directions",
-    "text": "Additional learning directions\nI want to study finite-sample bias in entropy estimates, sequence reweighting, permutation-based null models and methods for higher-order interactions. Pairwise mutual information can detect relationships, but biological systems often involve networks of sites rather than isolated pairs.\nI also want to compare mutual information with attention maps and learned representations from genomic foundation models. Similar-looking heat maps can arise from very different mathematical objects; comparison requires precise definitions and tests."
+    "text": "Additional learning directions\nMy next steps are to explore:\n\nmutual information as a quantitative measure of shared dependence;\nphylogenetic correction, because related sequences are not independent samples;\ndirect-coupling methods that try to distinguish direct from indirect sequence relationships;\ncausal diagrams for separating prediction from mechanism; and\nnegative controls that reveal whether a model is using biologically meaningful context or simpler background patterns."
   },
   {
-    "objectID": "posts/2026-02-21-uncertainty-reveals-structure/index.html#my-commentary",
-    "href": "posts/2026-02-21-uncertainty-reveals-structure/index.html#my-commentary",
-    "title": "When Uncertainty Reveals Structure",
+    "objectID": "posts/2026-02-07-meaning-lives-in-relationships/index.html#my-commentary",
+    "href": "posts/2026-02-07-meaning-lives-in-relationships/index.html#my-commentary",
+    "title": "Meaning Lives Between Things",
     "section": "My commentary",
-    "text": "My commentary\nThis was the section where information theory stopped feeling like an imported engineering language and began to feel biologically native. Evolution generates distributions. Selection, mutation and history shape their uncertainty. Relationships within those distributions can reveal organisation—but only when the ensemble and its history are taken seriously.\n\nReading for this note: Christoph Adami, The Evolution of Biological Information, Chapter 2, Sections 2.2 and 2.2.1 on entropy, conditional entropy, mutual information and the inference of tRNA structure from sequence covariation."
+    "text": "My commentary\nThe phrase I wrote in my notes was “meaning lives between things.” It is not a definition from the chapter; it is my own interpretation. A base, a gene or a model score becomes informative through a relationship to something else. The lesson is both technical and philosophical: connection can carry structure that isolated objects do not show.\n\nReading for this note: Christoph Adami, The Evolution of Biological Information, Chapter 2, the later part of Section 2.1 on joint, marginal and conditional probabilities, Bayes’ theorem, independence and conditional relationships between tRNA sites."
   },
   {
-    "objectID": "posts/2026-03-15-what-can-a-genome-remember/index.html",
-    "href": "posts/2026-03-15-what-can-a-genome-remember/index.html",
-    "title": "What can a genome remember?",
+    "objectID": "posts/2026-03-07-what-does-a-gene-know/index.html",
+    "href": "posts/2026-03-07-what-does-a-gene-know/index.html",
+    "title": "What Does a Gene Know?",
     "section": "",
-    "text": "A Genomes to AI reading note on Chapter 3 of Christoph Adami’s The Evolution of Biological Information.\nI began this chapter expecting an account of how evolution adds information to DNA. Adami began with a ruler.\nAt first I wanted to hurry past it. What could the length of a stick have to do with the history of a genome? Then I realized that I had already made the assumption the example was meant to unsettle: that information simply sits in an object, waiting for us to read it out. A ruler tells me something about a stick because its markings respond to length. It may be precise and still tell me nothing about the stick’s colour. The property, the measuring device and the question have to meet.\nMy first question in the margin was: What is a genome measuring?\nAdami asks us to imagine a DNA sequence and the environment in which it evolves as two initially uncertain variables. Mutation offers possible changes; survival and reproduction test them in a particular world. If a variant repeatedly succeeds, inheritance can keep its sequence in a population. In the chapter’s idealized example, an adaptive fixation makes a sequence state more predictable given the environment. Mutation alone has not learned anything. The relationship comes from variation, differential success and inheritance.\nI had been picturing a genome as a store of answers. Now I pictured a record of encounters: a molecular possibility met a particular world, and descendants carried an outcome forward. “Memory” is a useful metaphor, provided I remember that there is no intention in the molecule and no foresight in selection."
+    "text": "A simple pencil notebook page linking a sequence ensemble to a folded protein and a leaf in its environment.\nThe final part of the supplied excerpt asks a question that sounds almost poetic: what does a gene know? The chapter uses “know” in a precise, non-mental sense. A biological molecule has information about its world when its state supports successful predictions or interactions in that world.\nThis question brought the whole reading series together for me."
   },
   {
-    "objectID": "posts/2026-03-15-what-can-a-genome-remember/index.html#why-does-the-record-last",
-    "href": "posts/2026-03-15-what-can-a-genome-remember/index.html#why-does-the-record-last",
-    "title": "What can a genome remember?",
-    "section": "Why does the record last?",
-    "text": "Why does the record last?\nIf molecules are physical, their records are vulnerable. Adami’s Maxwell demon makes that problem tangible. The imaginary demon measures the motion of molecules and sorts them through a door. Sorting seems to create order for free until we count the physical record of the measurements and the cost of erasing it. Information has a material history.\nSelection performs a different kind of sorting. A favourable change can spread; a damaging change may disappear with the lineages carrying it. Replication makes surviving arrangements available for another round. In Adami’s deliberately clean picture, this can preserve information acquired in an environment against the noise that would otherwise erode it.\nBut I paused over the word clean. I work with population data; I cannot read a fixed difference as proof that selection discovered a better answer. Drift can fix variants. Populations are finite. Recombination reshuffles combinations. Organisms occupy different niches, and their neighbours evolve too. Adami makes room for these complications in his “leaky natural demon.” The leak matters: it prevents the metaphor from becoming a claim that information must rise with every generation.\nIt also changes the question. Information about which world?"
+    "objectID": "posts/2026-03-07-what-does-a-gene-know/index.html#information-is-always-about-something",
+    "href": "posts/2026-03-07-what-does-a-gene-know/index.html#information-is-always-about-something",
+    "title": "What Does a Gene Know?",
+    "section": "Information is always about something",
+    "text": "Information is always about something\nSection 2.3 turns from relationships within sequences to the information content of genes. A molecule such as haemoglobin is adapted to a world containing oxygen, particular chemical structures, cellular partners and physiological demands. Its sequence and folded form embody relationships accumulated through evolution.\nCalling this “knowledge” is useful only if we remain precise. The molecule does not think. Its structure carries predictive relationships to an environment: what to bind, where to function, and which interactions to avoid.\nThis gives biological information a direction. A sequence is not simply full of information in the abstract. It may carry information about a molecular partner, an environment, a developmental state or a functional requirement."
   },
   {
-    "objectID": "posts/2026-03-15-what-can-a-genome-remember/index.html#does-a-conserved-protein-carry-the-same-information-everywhere",
-    "href": "posts/2026-03-15-what-can-a-genome-remember/index.html#does-a-conserved-protein-carry-the-same-information-everywhere",
-    "title": "What can a genome remember?",
-    "section": "Does a conserved protein carry the same information everywhere?",
-    "text": "Does a conserved protein carry the same information everywhere?\nAdami compares information profiles of homeodomain and COX2 proteins across branches of life. Their patterns do not trace one tidy staircase toward more information; the lineages separate in different ways. I returned to the ruler. The meaning of sequence constraint depends on what the protein does, where it does it, and which sequences I put in the comparison. An alignment can show me a pattern; it cannot alone tell me what caused it.\nThe chapter’s ancestral protein example sharpens the distinction. Reconstructed fluorescent proteins from a coral lineage can be made and examined for their colours. Inferring a past sequence from a tree and testing a property of the resulting protein are different steps. A line on an entropy plot can start a question about a change in function; it cannot finish it."
+    "objectID": "posts/2026-03-07-what-does-a-gene-know/index.html#why-one-sequence-is-not-enough",
+    "href": "posts/2026-03-07-what-does-a-gene-know/index.html#why-one-sequence-is-not-enough",
+    "title": "What Does a Gene Know?",
+    "section": "Why one sequence is not enough",
+    "text": "Why one sequence is not enough\nBox 2.2 addresses a common difficulty. Shannon information is a correlational property of ensembles, so it cannot normally be measured by inspecting a single sequence. One observed string does not reveal which of its patterns are reliably connected to a target and which occurred by chance.\nThe distinction between a message and an ensemble is crucial. A particular clue may happen to predict correctly once, but its information can be assessed only across repeated possibilities. For molecular sequences, evolution helps generate the ensemble: mutation explores alternatives and selection changes which alternatives persist.\nThis is why conservation and covariation become informative. Across many sequences, the evolutionary process reveals which changes are tolerated and which relationships are maintained. The information is not printed visibly inside one string; it appears through structured variation across possible strings and worlds."
   },
   {
-    "objectID": "posts/2026-03-15-what-can-a-genome-remember/index.html#can-a-good-answer-become-wrong",
-    "href": "posts/2026-03-15-what-can-a-genome-remember/index.html#can-a-good-answer-become-wrong",
-    "title": "What can a genome remember?",
-    "section": "Can a good answer become wrong?",
-    "text": "Can a good answer become wrong?\nThe lineage comparisons span deep time. Adami’s HIV protease example brings environmental change into sharper focus. A protease inhibitor alters the world in which a viral protein must function. Viral populations that survive encounter a new selective pressure and explore new sequence combinations.\nIn comparisons of patient sequences, drug exposed proteases become more variable at particular residues than proteases from untreated patients. Count each residue separately and it looks as though information has been lost. That is a striking possibility: a population adapting to treatment may look less ordered when inspected one position at a time.\nThen Adami asks where the information is being counted. In his time series, estimated single-site information falls in treated proteases while estimated dependencies between pairs of residues rise. Some associations join residues near the active site to others farther away. Adaptation may be distributed across combinations that a list of individual sites would miss.\nI kept returning to a different question: What if the unit I inspect is too small?\nThis needs care. A correlation between residues does not establish its mechanism, and the chapter could not reliably estimate all higher-order dependencies. A rising sequence statistic is not proof that a virus has solved every problem posed by treatment. Yet the change between the single-site and pairwise views stays with me. At individual positions I might tell a story of loss; in their relationships I can see part of a possible reconstruction.\n\n\n\nA ruled notebook page in thick graphite: a changing world cuts across a loop of variation, selection and inheritance; questions about measurement and memory surround it, while paired DNA marks prompt a second look between sites."
+    "objectID": "posts/2026-03-07-what-does-a-gene-know/index.html#information-content-and-biological-complexity",
+    "href": "posts/2026-03-07-what-does-a-gene-know/index.html#information-content-and-biological-complexity",
+    "title": "What Does a Gene Know?",
+    "section": "Information content and biological complexity",
+    "text": "Information content and biological complexity\nThe chapter suggests that information content may be a useful proxy for complexity, while acknowledging how difficult it is to estimate. Genes do not act alone. Regulatory systems store substantial context about when, where and how gene products are used. Protein-coding sequence is therefore only part of an organism’s informational architecture.\nThe excerpt begins the discussion of proteins as amino-acid sequences translated from codons. Even at this early stage, the challenge is clear: counting possible symbols is not the same as measuring functional information. Function depends on folding, interactions, cellular context, environment and the ensemble of viable alternatives.\n\nNotes from my margin\n\nInformation must have a target: information about what?\nA single sequence can be examined, but an ensemble is needed to measure a reliable relationship.\nEvolutionary history is part of the evidence, not background noise."
   },
   {
-    "objectID": "posts/2026-03-15-what-can-a-genome-remember/index.html#what-if-the-interesting-message-lies-outside-the-gene",
-    "href": "posts/2026-03-15-what-can-a-genome-remember/index.html#what-if-the-interesting-message-lies-outside-the-gene",
-    "title": "What can a genome remember?",
-    "section": "What if the interesting message lies outside the gene?",
-    "text": "What if the interesting message lies outside the gene?\nAdami then moves into regulatory DNA. A transcription factor must find suitable binding sites in a very long sequence. A motif can provide some of the specificity for that search. The chapter links the frequencies of nucleotides in binding sites to binding energy under a model, and asks how much specificity is enough to find targets among many alternatives in a genome.\nWhy should the strongest possible binding site always be best? Binding has to work within a regulatory system. A consensus motif is not necessarily the sequence we find in an organism. A weight matrix learned from known CRP sites can rank candidates, but a strict threshold misses some known sites while a loose one admits many others. A precise motif score cannot by itself tell me what happens in a cell.\nThe last example returned me to a thought from my earlier reading note: meaning can live between things. Dorsal binding sites involved in fly development differ depending on whether a Twist site is nearby. Separate the sites by that context and part of their sequence pattern becomes visible; pool them and the distinction blurs. Adami measures a modest association between the Dorsal sequence and the proximity of a Twist motif. For me, the discovery is not that DNA literally “knows” its neighbour. It is that my choice of comparison can hide a relationship useful for prediction.\nThat is why the little paired marks sit apart from the main loop in my drawing. The loop asks how a record changes through time; the marks ask where I am looking for that record. The record can be revised, and some of it is in the connections."
+    "objectID": "posts/2026-03-07-what-does-a-gene-know/index.html#my-interpretation-for-popgenlm-bench",
+    "href": "posts/2026-03-07-what-does-a-gene-know/index.html#my-interpretation-for-popgenlm-bench",
+    "title": "What Does a Gene Know?",
+    "section": "My interpretation for PopGenLM Bench",
+    "text": "My interpretation for PopGenLM Bench\nThis reading changes the language I want to use around genomic AI. A model score is not “biological information” simply because it was produced from DNA. It becomes useful evidence only if it improves prediction of a clearly defined biological target in an appropriate ensemble.\nFor variant-effect models, possible targets include population frequency, evolutionary constraint, molecular function, expression, phenotype or experimental effect. These are related but not interchangeable. A score that predicts conservation may not predict present-day fitness in a particular population. A score calibrated in one species may not transfer to another. A correlation learned from sequence may reflect shared history rather than a causal mechanism.\nPopGenLM Bench should therefore make four questions explicit:\n\nWhat biological quantity is the score expected to predict?\nWhich ensemble defines the test—sites, individuals, populations or species?\nHow much uncertainty does the model reduce beyond appropriate baselines?\nUnder which changes of reference, lineage, annotation and sampling does that relationship remain stable?\n\nThis is a stronger foundation than asking whether the software ran or whether the plot looks convincing."
   },
   {
-    "objectID": "posts/2026-03-15-what-can-a-genome-remember/index.html#from-genomes-to-ai",
-    "href": "posts/2026-03-15-what-can-a-genome-remember/index.html#from-genomes-to-ai",
-    "title": "What can a genome remember?",
+    "objectID": "posts/2026-03-07-what-does-a-gene-know/index.html#my-commentary-on-chapter-2",
+    "href": "posts/2026-03-07-what-does-a-gene-know/index.html#my-commentary-on-chapter-2",
+    "title": "What Does a Gene Know?",
+    "section": "My commentary on Chapter 2",
+    "text": "My commentary on Chapter 2\nThe chapter’s most important contribution, for me, is discipline of language. It moves from the history of genetic information to random variables, probability, entropy, conditional dependence and gene information without allowing “information” to remain a loose synonym for sequence.\nI also appreciate that the biological examples expose the limits of the mathematics. An entropy profile depends on sampling. Mutual information detects dependence, not cause. A single sequence does not establish what it predicts. Recent ancestry can resemble constraint. These are not reasons to reject the framework; they are reasons to use it scientifically.\nThe reading has made my AI journey feel more grounded. The question is not whether AI can process more genomic data. It can. The harder question is whether its outputs carry stable, testable information about the biological world."
+  },
+  {
+    "objectID": "posts/2026-03-07-what-does-a-gene-know/index.html#where-i-want-to-learn-next",
+    "href": "posts/2026-03-07-what-does-a-gene-know/index.html#where-i-want-to-learn-next",
+    "title": "What Does a Gene Know?",
+    "section": "Where I want to learn next",
+    "text": "Where I want to learn next\nMy next commentary series will return to the chapter topic by topic, with simple comparisons and small reproducible examples: entropy versus conservation, mutual information versus correlation, single sequences versus ensembles, and model likelihood versus biological effect.\nI also want to extend the reading into information content in regulatory DNA, phylogeny-aware sequence models, calibration and the design of benchmarks that separate technical capability from biological support.\n\nReading for this note: Christoph Adami, The Evolution of Biological Information, Chapter 2, Section 2.3, Section 2.3.1 as included in the supplied excerpt, and Box 2.2, “Information in Single Sequences?”"
+  },
+  {
+    "objectID": "posts/2026-03-23-can-we-replay-evolution/index.html",
+    "href": "posts/2026-03-23-can-we-replay-evolution/index.html",
+    "title": "Can we replay evolution?",
+    "section": "",
+    "text": "A Genomes to AI reading note on Chapter 4 of Christoph Adami’s The Evolution of Biological Information.\nIn my previous note, I came to think of a genome as a record of encounters with the world. But a record shows me what happened, not all the things that could have happened. If I could take an earlier population and let it evolve again, would it arrive at the same answer?\nAdami’s Chapter 4 moves that question from a thought experiment to the laboratory. The settings change from warm cultures to frozen bacteria to digital organisms, but one question follows me through them: What can an experiment tell me about the path, not just the outcome?"
+  },
+  {
+    "objectID": "posts/2026-03-23-can-we-replay-evolution/index.html#how-slowly-can-a-world-change",
+    "href": "posts/2026-03-23-can-we-replay-evolution/index.html#how-slowly-can-a-world-change",
+    "title": "Can we replay evolution?",
+    "section": "How slowly can a world change?",
+    "text": "How slowly can a world change?\nWilliam Henry Dallinger cultivated microorganisms while raising the temperature of their environment over generations. The later populations tolerated heat that had harmed their predecessors. I underlined one word in my notes: gradually.\nWhat if Dallinger had raised the heat to the final level on the first day? The experiment does not answer that counterfactual, but it makes the question hard to ignore. A population must survive each step to encounter the next one. Dallinger could watch adaptation unfold without being able to read the mutations that enabled it. When I see an adapted population today, I too can be tempted to jump from its present state to a tidy story about how it got there. Was the route as important as the destination?"
+  },
+  {
+    "objectID": "posts/2026-03-23-can-we-replay-evolution/index.html#what-does-a-frozen-ancestor-give-us",
+    "href": "posts/2026-03-23-can-we-replay-evolution/index.html#what-does-a-frozen-ancestor-give-us",
+    "title": "Can we replay evolution?",
+    "section": "What does a frozen ancestor give us?",
+    "text": "What does a frozen ancestor give us?\nRichard Lenski’s long-term E. coli experiment offers an unusual way to ask. Twelve populations began from a common ancestor and evolved separately in the same laboratory environment. Samples were frozen at intervals. Researchers could compare descendants with their predecessors—and later thaw an earlier sample to start a new run.\nCitrate was present in the medium throughout the experiment. Yet only one of the original populations evolved the ability to grow aerobically on it. That detail made me stop. If all twelve populations encountered the same resource, why this one? Had it simply been lucky, or had earlier changes opened a path that was less accessible to the others?\nThe freezer allowed researchers to test that question. They thawed clones from different points in the successful lineage’s past and ran evolution again. Citrate use arose in some replays started from later backgrounds, while replays from the original ancestor did not produce it. Earlier genetic changes had altered the chance of a later innovation: historical contingency made a difference. Subsequent genomic work described potentiation, actualization and refinement in the origin of citrate use. Those names help reconstruct what happened in this lineage; they do not mean the outcome was guaranteed.\nI wrote beside the freezer: Same environment, different histories. A replay is a test, not a rewind. It begins with a preserved clone, but new mutations and chance events follow. Even a genetic background that makes citrate use more accessible does not ensure that every replay will find it.\n\n\n\nA wide ruled notebook page drawn in uneven graphite. Dallinger’s rising-temperature cultures sit in one margin; Lenski’s replicate E. coli lineages lead to a frozen intermediate and several replay outcomes; a small Avida vignette asks whether the steps can be tested."
+  },
+  {
+    "objectID": "posts/2026-03-23-can-we-replay-evolution/index.html#what-can-a-digital-organism-tell-me",
+    "href": "posts/2026-03-23-can-we-replay-evolution/index.html#what-can-a-digital-organism-tell-me",
+    "title": "Can we replay evolution?",
+    "section": "What can a digital organism tell me?",
+    "text": "What can a digital organism tell me?\nThen Adami takes the experiment into a computer. In Avida, self-replicating programs carry instructions that can mutate; their success depends on the rules of a digital environment. I paused over the word organism. These programs have no cells or bacterial metabolism. Why study them alongside Dallinger’s cultures and Lenski’s E. coli?\nBecause here, the lineage can be inspected instruction by instruction. In Avida experiments, complex logic functions evolved through histories that included simpler functions and other changes. The first program able to perform a complex task could be only a mutation or two from its parent, yet many consequential changes away from its ancestor. Seen only at the moment it appeared, the new function might look sudden. Seen along the lineage, it has a history.\nAvida lets us test evolutionary possibilities under explicit rules; the microbial experiments concern living populations with their own biology. I cannot use a digital lineage to explain a bacterium’s exact mutations. But I can use the comparison to ask a better question of both: Which steps can I actually recover, and which am I only inferring from the end?"
+  },
+  {
+    "objectID": "posts/2026-03-23-can-we-replay-evolution/index.html#from-genomes-to-ai",
+    "href": "posts/2026-03-23-can-we-replay-evolution/index.html#from-genomes-to-ai",
+    "title": "Can we replay evolution?",
     "section": "From genomes to AI",
-    "text": "From genomes to AI\nThis chapter gives me a more demanding way to think about genomic language models. A model can produce a reproducible score for a variant. That score may help predict a measured outcome. But it is not the same quantity as Adami’s evolutionary information, and it cannot tell me on its own which aspect of biology the model has recovered. Does it track long-term constraint, a molecular assay, a change in binding, or fitness in a particular environment? These targets may disagree.\nThis is one reason I am building PopGenLM Bench. I want to put variant scores beside independent evolutionary and functional evidence, state the genomic context, and test where agreement holds or breaks. The chapter also makes me uneasy about treating every variant as an isolated question. If function sometimes depends on combinations, neighbouring binding sites or environmental change, how much can any one variant score tell me without that context? This is a question for the benchmark to test, not a conclusion it has already established.\nI closed the chapter with a changed version of my opening question. What can a genome remember? Relationships shaped by its history, to the extent that they persist and matter in a given context. What can an AI model learn from that record? Perhaps a great deal. But to find out what it has learned, I have to name a biological question and look for evidence beyond the score.\n\nReading for this note: Christoph Adami, The Evolution of Biological Information (2024), Chapter 3, “Evolution of Information,” §§3.1–3.5. The notebook questions and the connection to genomic AI are my interpretations of the chapter, not claims made by Adami or experimental findings from PopGenLM Bench."
+    "text": "From genomes to AI\nI often ask a genomic model to score one variant at a time. Chapter 4 makes me pause before treating that score as a property of the variant alone. Which sequence surrounds it? Which other mutations are already present? Which environment tests it? A change that matters in one background may have a different effect in another.\nThis gives me questions for PopGenLM Bench. Could a model’s prediction change across genetic backgrounds? If closely related sequences appear in both training and evaluation, what does good performance really show? Could experimental lineages provide independent evidence about which predictions hold? These are directions I want to test, not results I already have.\nSo, can we replay evolution? We can return to a preserved starting point and watch another history begin. We cannot demand the same ending. That is what makes the replay informative: when outcomes differ, or become possible only after certain earlier changes, the record of the past becomes something we can question experimentally.\n\nReading for this note: Christoph Adami, The Evolution of Biological Information (2024), Chapter 4, “Experiments in Evolution,” §§4.1–4.5. For the replay and digital-evolution details, see Blount, Borland and Lenski (2008), Blount and colleagues (2012) and Lenski and colleagues (2003). The notebook questions and the connection to genomic AI are my interpretations, not findings from PopGenLM Bench."
   },
   {
     "objectID": "posts/2026-08-31-popgenlm-bench/index.html",
