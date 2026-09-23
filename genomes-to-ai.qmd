@@ -48,6 +48,8 @@ The bottleneck therefore moved. Generating data remains demanding, but modern bi
 
 This progression does not make biological knowledge less important. It makes domain knowledge more consequential. A model can identify statistical regularities at a scale no individual can inspect, but it cannot by itself guarantee the correct genome build, distinguish demographic history from selection, define a meaningful negative control, or decide whether a result supports a biological claim. Those responsibilities remain scientific.
 
+**From the reading notebook · Chapter 3:** [What can a genome remember?](posts/2026-03-15-what-can-a-genome-remember/index.qmd) follows one question through measurement, evolutionary change, and relationships between sites—with a pencil sketch from the margins.
+
 ## Why I am building PopGenLM Bench
 
 Genomic language models are a natural meeting point between my past work and the engineering skills I am developing. They treat DNA as structured information and learn context-dependent sequence patterns that can be used to score variants. Their promise is substantial: prioritising candidate variants, identifying disrupted regulatory grammar, comparing constraint across sequence contexts, and extending annotation beyond a list of previously characterised genes.
