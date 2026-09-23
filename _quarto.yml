@@ -1,6 +1,7 @@
 project:
   type: website
   output-dir: _site
+  post-render: python3 scripts/repair_legacy_stylesheets.py
   render:
     - "*.qmd"
     - "posts/**/*.qmd"
