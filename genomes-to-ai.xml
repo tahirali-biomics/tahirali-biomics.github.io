@@ -89,6 +89,62 @@ font-style: inherit;">--project-root</span> .</span></code></pre></div></div>
   <media:content url="https://tahirali-biomics.github.io/assets/popgenlm/benchmark-overview.png" medium="image" type="image/png" height="92" width="144"/>
 </item>
 <item>
+  <title>Can we replay evolution?</title>
+  <dc:creator>Dr Tahir Ali</dc:creator>
+  <link>https://tahirali-biomics.github.io/posts/2026-03-23-can-we-replay-evolution/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p><em>A Genomes to AI reading note on Chapter 4 of Christoph Adami’s</em> The Evolution of Biological Information.</p>
+<p>In <a href="../../posts/2026-03-15-what-can-a-genome-remember/index.html">my previous note</a>, I came to think of a genome as a record of encounters with the world. But a record shows me what happened, not all the things that <em>could</em> have happened. If I could take an earlier population and let it evolve again, would it arrive at the same answer?</p>
+<p>Adami’s Chapter 4 moves that question from a thought experiment to the laboratory. The settings change from warm cultures to frozen bacteria to digital organisms, but one question follows me through them: <strong>What can an experiment tell me about the path, not just the outcome?</strong></p>
+<section id="how-slowly-can-a-world-change" class="level2">
+<h2 class="anchored" data-anchor-id="how-slowly-can-a-world-change">How slowly can a world change?</h2>
+<p>William Henry Dallinger cultivated microorganisms while raising the temperature of their environment over generations. The later populations tolerated heat that had harmed their predecessors. I underlined one word in my notes: <em>gradually</em>.</p>
+<p>What if Dallinger had raised the heat to the final level on the first day? The experiment does not answer that counterfactual, but it makes the question hard to ignore. A population must survive each step to encounter the next one. Dallinger could watch adaptation unfold without being able to read the mutations that enabled it. When I see an adapted population today, I too can be tempted to jump from its present state to a tidy story about how it got there. <strong>Was the route as important as the destination?</strong></p>
+</section>
+<section id="what-does-a-frozen-ancestor-give-us" class="level2">
+<h2 class="anchored" data-anchor-id="what-does-a-frozen-ancestor-give-us">What does a frozen ancestor give us?</h2>
+<p>Richard Lenski’s long-term <em>E. coli</em> experiment offers an unusual way to ask. Twelve populations began from a common ancestor and evolved separately in the same laboratory environment. Samples were frozen at intervals. Researchers could compare descendants with their predecessors—and later thaw an earlier sample to start a new run.</p>
+<p>Citrate was present in the medium throughout the experiment. Yet only one of the original populations evolved the ability to grow aerobically on it. That detail made me stop. If all twelve populations encountered the same resource, <strong>why this one?</strong> Had it simply been lucky, or had earlier changes opened a path that was less accessible to the others?</p>
+<p>The freezer allowed researchers to test that question. They thawed clones from different points in the successful lineage’s past and ran evolution again. Citrate use arose in some replays started from later backgrounds, while replays from the original ancestor did not produce it. Earlier genetic changes had altered the chance of a later innovation: <strong>historical contingency</strong> made a difference. Subsequent genomic work described <em>potentiation</em>, <em>actualization</em> and <em>refinement</em> in the origin of citrate use. Those names help reconstruct what happened in this lineage; they do not mean the outcome was guaranteed.</p>
+<p>I wrote beside the freezer: <strong>Same environment, different histories.</strong> A replay is a test, not a rewind. It begins with a preserved clone, but new mutations and chance events follow. Even a genetic background that makes citrate use more accessible does not ensure that every replay will find it.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://tahirali-biomics.github.io/assets/writings/07-can-we-replay-evolution.webp" class="reading-sketch img-fluid figure-img" alt="Graphite reading notebook on ruled paper. Dallinger's heat experiment, Lenski's common ancestor and archived E. coli lineage, replays from one thawed intermediate clone with differing outcomes including Cit+, and Avida digital replicators. Marginal questions concern selection, chance and history."></p>
+<figcaption>A wide ruled notebook page drawn in uneven graphite. Dallinger’s rising-temperature cultures sit in one margin; Lenski’s replicate E. coli lineages lead to a frozen intermediate and several replay outcomes; a small Avida vignette asks whether the steps can be tested.</figcaption>
+</figure>
+</div>
+</section>
+<section id="what-can-a-digital-organism-tell-me" class="level2">
+<h2 class="anchored" data-anchor-id="what-can-a-digital-organism-tell-me">What can a digital organism tell me?</h2>
+<p>Then Adami takes the experiment into a computer. In Avida, self-replicating programs carry instructions that can mutate; their success depends on the rules of a digital environment. I paused over the word <em>organism</em>. These programs have no cells or bacterial metabolism. Why study them alongside Dallinger’s cultures and Lenski’s <em>E. coli</em>?</p>
+<p>Because here, the lineage can be inspected instruction by instruction. In Avida experiments, complex logic functions evolved through histories that included simpler functions and other changes. The first program able to perform a complex task could be only a mutation or two from its parent, yet many consequential changes away from its ancestor. Seen only at the moment it appeared, the new function might look sudden. Seen along the lineage, it has a history.</p>
+<p>Avida lets us test evolutionary possibilities under explicit rules; the microbial experiments concern living populations with their own biology. I cannot use a digital lineage to explain a bacterium’s exact mutations. But I can use the comparison to ask a better question of both: <strong>Which steps can I actually recover, and which am I only inferring from the end?</strong></p>
+</section>
+<section id="from-genomes-to-ai" class="level2">
+<h2 class="anchored" data-anchor-id="from-genomes-to-ai">From genomes to AI</h2>
+<p>I often ask a genomic model to score one variant at a time. Chapter 4 makes me pause before treating that score as a property of the variant alone. Which sequence surrounds it? Which other mutations are already present? Which environment tests it? A change that matters in one background may have a different effect in another.</p>
+<p>This gives me questions for <a href="../../popgenlm.html">PopGenLM Bench</a>. Could a model’s prediction change across genetic backgrounds? If closely related sequences appear in both training and evaluation, what does good performance really show? Could experimental lineages provide independent evidence about which predictions hold? These are directions I want to test, not results I already have.</p>
+<p>So, <strong>can we replay evolution?</strong> We can return to a preserved starting point and watch another history begin. We cannot demand the same ending. That is what makes the replay informative: when outcomes differ, or become possible only after certain earlier changes, the record of the past becomes something we can question experimentally.</p>
+<div class="reading-source">
+<p><strong>Reading for this note:</strong> Christoph Adami, <em>The Evolution of Biological Information</em> (2024), Chapter 4, “Experiments in Evolution,” §§4.1–4.5. For the replay and digital-evolution details, see <a href="https://doi.org/10.1073/pnas.0803151105">Blount, Borland and Lenski (2008)</a>, <a href="https://doi.org/10.1038/nature11514">Blount and colleagues (2012)</a> and <a href="https://doi.org/10.1038/nature01568">Lenski and colleagues (2003)</a>. The notebook questions and the connection to genomic AI are my interpretations, not findings from PopGenLM Bench.</p>
+</div>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
+  <category>Biological information</category>
+  <category>Evolutionary genomics</category>
+  <category>Learning note</category>
+  <guid>https://tahirali-biomics.github.io/posts/2026-03-23-can-we-replay-evolution/</guid>
+  <pubDate>Sun, 22 Mar 2026 23:00:00 GMT</pubDate>
+  <media:content url="https://tahirali-biomics.github.io/assets/writings/07-can-we-replay-evolution.webp" medium="image" type="image/webp"/>
+</item>
+<item>
   <title>What can a genome remember?</title>
   <dc:creator>Dr Tahir Ali</dc:creator>
   <link>https://tahirali-biomics.github.io/posts/2026-03-15-what-can-a-genome-remember/</link>
