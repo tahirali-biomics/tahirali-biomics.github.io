@@ -50,6 +50,8 @@ This progression does not make biological knowledge less important. It makes dom
 
 **From the reading notebook · Chapter 3:** [What can a genome remember?](posts/2026-03-15-what-can-a-genome-remember/index.qmd) follows one question through measurement, evolutionary change, and relationships between sites—with a pencil sketch from the margins.
 
+**From the reading notebook · Chapter 4:** [Can we replay evolution?](posts/2026-03-23-can-we-replay-evolution/index.qmd) follows Dallinger's warming cultures, Lenski's frozen *E. coli* and Avida to ask how selection, chance and earlier history shape what can happen next.
+
 ## Why I am building PopGenLM Bench
 
 Genomic language models are a natural meeting point between my past work and the engineering skills I am developing. They treat DNA as structured information and learn context-dependent sequence patterns that can be used to score variants. Their promise is substantial: prioritising candidate variants, identifying disrupted regulatory grammar, comparing constraint across sequence contexts, and extending annotation beyond a list of previously characterised genes.

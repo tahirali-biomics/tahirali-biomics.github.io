@@ -1,0 +1,55 @@
+---
+title: "Can we replay evolution?"
+description: "A reading note on Dallinger's warming cultures, Lenski's frozen bacteria and Avida: can an evolutionary history be tested by starting again?"
+date: 2026-03-23
+author: "Dr Tahir Ali"
+categories:
+  - Biological information
+  - Evolutionary genomics
+  - Learning note
+image: ../../assets/writings/07-can-we-replay-evolution.webp
+---
+
+*A Genomes to AI reading note on Chapter 4 of Christoph Adami's* The Evolution of Biological Information.
+
+In [my previous note](../2026-03-15-what-can-a-genome-remember/index.qmd), I came to think of a genome as a record of encounters with the world. But a record shows me what happened, not all the things that *could* have happened. If I could take an earlier population and let it evolve again, would it arrive at the same answer?
+
+Adami's Chapter 4 moves that question from a thought experiment to the laboratory. The settings change from warm cultures to frozen bacteria to digital organisms, but one question follows me through them: **What can an experiment tell me about the path, not just the outcome?**
+
+## How slowly can a world change?
+
+William Henry Dallinger cultivated microorganisms while raising the temperature of their environment over generations. The later populations tolerated heat that had harmed their predecessors. I underlined one word in my notes: *gradually*.
+
+What if Dallinger had raised the heat to the final level on the first day? The experiment does not answer that counterfactual, but it makes the question hard to ignore. A population must survive each step to encounter the next one. Dallinger could watch adaptation unfold without being able to read the mutations that enabled it. When I see an adapted population today, I too can be tempted to jump from its present state to a tidy story about how it got there. **Was the route as important as the destination?**
+
+## What does a frozen ancestor give us?
+
+Richard Lenski's long-term *E. coli* experiment offers an unusual way to ask. Twelve populations began from a common ancestor and evolved separately in the same laboratory environment. Samples were frozen at intervals. Researchers could compare descendants with their predecessors—and later thaw an earlier sample to start a new run.
+
+Citrate was present in the medium throughout the experiment. Yet only one of the original populations evolved the ability to grow aerobically on it. That detail made me stop. If all twelve populations encountered the same resource, **why this one?** Had it simply been lucky, or had earlier changes opened a path that was less accessible to the others?
+
+The freezer allowed researchers to test that question. They thawed clones from different points in the successful lineage's past and ran evolution again. Citrate use arose in some replays started from later backgrounds, while replays from the original ancestor did not produce it. Earlier genetic changes had altered the chance of a later innovation: **historical contingency** made a difference. Subsequent genomic work described *potentiation*, *actualization* and *refinement* in the origin of citrate use. Those names help reconstruct what happened in this lineage; they do not mean the outcome was guaranteed.
+
+I wrote beside the freezer: **Same environment, different histories.** A replay is a test, not a rewind. It begins with a preserved clone, but new mutations and chance events follow. Even a genetic background that makes citrate use more accessible does not ensure that every replay will find it.
+
+![A wide ruled notebook page drawn in uneven graphite. Dallinger's rising-temperature cultures sit in one margin; Lenski's replicate E. coli lineages lead to a frozen intermediate and several replay outcomes; a small Avida vignette asks whether the steps can be tested.](../../assets/writings/07-can-we-replay-evolution.webp){.reading-sketch fig-alt="Graphite reading notebook on ruled paper. Dallinger's heat experiment, Lenski's common ancestor and archived E. coli lineage, replays from one thawed intermediate clone with differing outcomes including Cit+, and Avida digital replicators. Marginal questions concern selection, chance and history." fig-cap="My notebook after Chapter 4. The freezer belongs to one lineage in Lenski's experiment; the branches to its right are new runs from a thawed clone, not the original twelve populations. Dallinger's gradual temperature change and Avida's digital replicators sit at the edges as different ways to test evolution. The pencil star marks the thought I kept: the past can change what becomes possible, without fixing what happens next."}
+
+## What can a digital organism tell me?
+
+Then Adami takes the experiment into a computer. In Avida, self-replicating programs carry instructions that can mutate; their success depends on the rules of a digital environment. I paused over the word *organism*. These programs have no cells or bacterial metabolism. Why study them alongside Dallinger's cultures and Lenski's *E. coli*?
+
+Because here, the lineage can be inspected instruction by instruction. In Avida experiments, complex logic functions evolved through histories that included simpler functions and other changes. The first program able to perform a complex task could be only a mutation or two from its parent, yet many consequential changes away from its ancestor. Seen only at the moment it appeared, the new function might look sudden. Seen along the lineage, it has a history.
+
+Avida lets us test evolutionary possibilities under explicit rules; the microbial experiments concern living populations with their own biology. I cannot use a digital lineage to explain a bacterium's exact mutations. But I can use the comparison to ask a better question of both: **Which steps can I actually recover, and which am I only inferring from the end?**
+
+## From genomes to AI
+
+I often ask a genomic model to score one variant at a time. Chapter 4 makes me pause before treating that score as a property of the variant alone. Which sequence surrounds it? Which other mutations are already present? Which environment tests it? A change that matters in one background may have a different effect in another.
+
+This gives me questions for [PopGenLM Bench](../../popgenlm.qmd). Could a model's prediction change across genetic backgrounds? If closely related sequences appear in both training and evaluation, what does good performance really show? Could experimental lineages provide independent evidence about which predictions hold? These are directions I want to test, not results I already have.
+
+So, **can we replay evolution?** We can return to a preserved starting point and watch another history begin. We cannot demand the same ending. That is what makes the replay informative: when outcomes differ, or become possible only after certain earlier changes, the record of the past becomes something we can question experimentally.
+
+::: {.reading-source}
+**Reading for this note:** Christoph Adami, *The Evolution of Biological Information* (2024), Chapter 4, “Experiments in Evolution,” §§4.1–4.5. For the replay and digital-evolution details, see [Blount, Borland and Lenski (2008)](https://doi.org/10.1073/pnas.0803151105), [Blount and colleagues (2012)](https://doi.org/10.1038/nature11514) and [Lenski and colleagues (2003)](https://doi.org/10.1038/nature01568). The notebook questions and the connection to genomic AI are my interpretations, not findings from PopGenLM Bench.
+:::
