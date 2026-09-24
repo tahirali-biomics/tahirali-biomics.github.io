@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dr Tahir Ali">
+<meta name="dcterms.date" content="2026-04-18">
+<meta name="description" content="A reading note on neutrality, mutational neighbourhoods, drift and a question that followed me through the chapter: can evolution change not only a genotype, but what happens when that genotype is disturbed?">
+
+<title>Can evolution become robust to chance? – Dr.&nbsp;Tahir Ali</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../profile.webp" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-46631ef7d5207a1ec5e6e4a429f0476e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-0LPGXESG7T"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
+</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Can evolution become robust to chance? – Dr.&nbsp;Tahir Ali">
+<meta property="og:description" content="A reading note on neutrality, mutational neighbourhoods, drift and a question that followed me through the chapter: can evolution change not only a genotype, but what happens when that genotype is disturbed?">
+<meta property="og:image" content="https://tahirali-biomics.github.io/assets/writings/09-can-evolution-become-robust-to-chance.webp">
+<meta property="og:site_name" content="Dr. Tahir Ali">
+<meta name="twitter:title" content="Can evolution become robust to chance? – Dr.&nbsp;Tahir Ali">
+<meta name="twitter:description" content="A reading note on neutrality, mutational neighbourhoods, drift and a question that followed me through the chapter: can evolution change not only a genotype, but what happens when that genotype is disturbed?">
+<meta name="twitter:image" content="https://tahirali-biomics.github.io/assets/writings/09-can-evolution-become-robust-to-chance.webp">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar docked fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Can evolution become robust to chance?</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../popgenlm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PopGenLM</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../genomes-to-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Genomes to AI</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projects</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../publications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Publications</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../cv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Résumé</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../teaching/teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../workshops/workshops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Workshops</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">GitHub</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Can evolution become robust to chance?</h1>
+<p class="subtitle lead">Chapter 6 · Evolution of Robustness</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">Genomes to AI</div>
+    <div class="quarto-category">Evolution</div>
+    <div class="quarto-category">Population genetics</div>
+    <div class="quarto-category">Scientific AI</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    A reading note on neutrality, mutational neighbourhoods, drift and a question that followed me through the chapter: can evolution change not only a genotype, but what happens when that genotype is disturbed?
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dr Tahir Ali </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 18, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><em>Reading Christoph Adami, <strong>The Evolution of Biological Information</strong>, Chapter 6.</em></p>
+<p><img src="../../assets/writings/09-can-evolution-become-robust-to-chance.webp" class="img-fluid" alt="Graphite notebook sketch of neutral networks, fitness peaks, mutation, genetic drift and kinetoplast RNA editing, surrounded by handwritten questions."></p>
+<p>I thought I knew what <em>robustness</em> meant before starting this chapter.</p>
+<p>Something changes. The organism absorbs the disturbance. Life goes on.</p>
+<p>Simple enough.</p>
+<p>But fairly early in Chapter 6 I realised that Adami was asking something much stranger.</p>
+<p>What if evolution can change not only the organism, but also <strong>what happens when the organism is changed</strong>?</p>
+<p>I kept returning to that thought.</p>
+<p>A genome is constantly being copied. Mutations appear. Alleles are lost by chance. Population size changes how efficiently selection can distinguish one effect from another.</p>
+<p>So perhaps surviving well is not only about occupying a good genotype.</p>
+<p>Perhaps it is also about living in a <strong>good neighbourhood of possible genotypes</strong>.</p>
+<p>That was the point where this chapter opened up for me.</p>
+<section id="neutral-but-neutral-in-what-sense" class="level2">
+<h2 class="anchored" data-anchor-id="neutral-but-neutral-in-what-sense">Neutral — but neutral in what sense?</h2>
+<p>The chapter begins with Kimura and neutral evolution.</p>
+<p>The result itself is one I already knew from population genetics: a new neutral mutation has a fixation probability of roughly (1/N), while roughly (N) neutral mutations arise, so the population-level substitution rate becomes approximately ().</p>
+<p>Population size disappears from the final expression.</p>
+<p>Beautiful.</p>
+<p>But this time another question bothered me more:</p>
+<p><strong>If a mutation does not change fitness, does that really mean it does nothing?</strong></p>
+<p>My instinctive answer had always been: for selection, essentially yes.</p>
+<p>Then I realised how much is hidden inside the words <em>does not change fitness</em>.</p>
+<p>We have measured the organism carrying the mutation.</p>
+<p>We have not yet asked what happens to its descendants when <strong>another mutation</strong> occurs.</p>
+<p>That is a very different question.</p>
+<p>A change can therefore be neutral with respect to the organism standing in front of us and still alter the consequences of mutations that have not happened yet.</p>
+<p>I wrote beside this:</p>
+<blockquote class="blockquote">
+<p><strong>neutral now ≠ irrelevant later</strong></p>
+</blockquote>
+<p>And suddenly neutrality no longer looked like empty evolutionary space.</p>
+<p>It looked like hidden architecture.</p>
+</section>
+<section id="i-had-been-drawing-genomes-as-points" class="level2">
+<h2 class="anchored" data-anchor-id="i-had-been-drawing-genomes-as-points">I had been drawing genomes as points</h2>
+<p>This was probably my strongest shift while reading the chapter.</p>
+<p>We routinely draw fitness landscapes as peaks and valleys and place a genotype somewhere on them.</p>
+<p>One genotype. One point. One fitness.</p>
+<p>But a replicating genome never really exists as an isolated point.</p>
+<p>Every replication creates the possibility of moving somewhere nearby.</p>
+<p>One nucleotide away.</p>
+<p>One mutation away.</p>
+<p>Then another.</p>
+<p>So I started thinking less about the height of the point and more about the shape of the ground around it.</p>
+<p>Imagine two genotypes with almost the same present fitness.</p>
+<p>Around the first, most single mutations are damaging.</p>
+<p>Around the second, many mutations produce sequences that still work.</p>
+<p>If I only measure the two organisms today, they may appear equally successful.</p>
+<p>But their futures are not equivalent.</p>
+<p>One stands on brittle ground.</p>
+<p>The other stands on something more forgiving.</p>
+<p>That felt like an important change in perspective:</p>
+<p><strong>perhaps selection sometimes acts on the neighbourhood, not merely the point.</strong></p>
+</section>
+<section id="then-came-the-phrase-that-sounds-almost-wrong" class="level2">
+<h2 class="anchored" data-anchor-id="then-came-the-phrase-that-sounds-almost-wrong">Then came the phrase that sounds almost wrong</h2>
+<p><strong>Survival of the flattest.</strong></p>
+<p>The first time you encounter it, it almost feels like a contradiction inserted deliberately into evolutionary biology.</p>
+<p>Surely the highest fitness peak should win.</p>
+<p>That is practically the picture we teach.</p>
+<p>But now imagine that the peak is very narrow.</p>
+<p>Its summit is excellent, but almost every mutational step away from it is disastrous.</p>
+<p>Nearby is another peak.</p>
+<p>Lower.</p>
+<p>Less impressive.</p>
+<p>But broad.</p>
+<p>Mutations around it usually still leave functioning descendants.</p>
+<p>At a sufficiently high mutation rate, I can no longer judge these populations only by the fitness of their best genotype.</p>
+<p>The population constantly leaks into neighbouring sequence space.</p>
+<p>And once I saw it that way, the contradiction disappeared.</p>
+<p>The lower peak can win because evolution is not comparing two isolated sequences.</p>
+<p>It is comparing two <strong>mutating populations</strong>.</p>
+<p>That was one of those moments where a familiar diagram suddenly means something different.</p>
+<p>I could almost hear myself objecting:</p>
+<p><em>But the other genotype is fitter.</em></p>
+<p>And the answer coming back:</p>
+<p><strong>Fitter as what? A sequence—or as a lineage that must repeatedly reproduce under mutation?</strong></p>
+<p>That distinction stayed with me.</p>
+</section>
+<section id="robustness-does-not-even-mean-making-every-mutation-harmless" class="level2">
+<h2 class="anchored" data-anchor-id="robustness-does-not-even-mean-making-every-mutation-harmless">Robustness does not even mean making every mutation harmless</h2>
+<p>Then the chapter did something I did not expect.</p>
+<p>My intuition was that mutational robustness should always mean turning damaging mutations into milder ones.</p>
+<p>Bad mutation → less bad mutation → neutral mutation.</p>
+<p>That seems obvious.</p>
+<p>Except it is not the only possibility.</p>
+<p>A mildly deleterious mutation can survive.</p>
+<p>It can reproduce.</p>
+<p>It can become somebody else’s starting point.</p>
+<p>A lethal mutation cannot.</p>
+<p>So under some circumstances, if a deleterious change cannot be made harmless, making it <strong>lethal rather than weakly damaging</strong> can actually protect the lineage from carrying that damage forward.</p>
+<p>I stopped at this because it felt almost backwards.</p>
+<p>Robustness through lethality?</p>
+<p>Yet the logic is remarkably clean.</p>
+<p>The important question is not simply:</p>
+<p><strong>How severe is the mutation?</strong></p>
+<p>It is also:</p>
+<p><strong>Can its consequences propagate?</strong></p>
+<p>That changed what the word <em>robustness</em> meant for me.</p>
+<p>Robustness is not necessarily gentleness.</p>
+<p>Sometimes it is containment.</p>
+</section>
+<section id="and-then-population-size-changed-the-answer-again" class="level2">
+<h2 class="anchored" data-anchor-id="and-then-population-size-changed-the-answer-again">And then population size changed the answer again</h2>
+<p>At this point I thought I had the chapter’s logic.</p>
+<p>High mutation pressure can favour flatter regions of a fitness landscape.</p>
+<p>Good.</p>
+<p>Then came drift robustness.</p>
+<p>And my neat picture broke again.</p>
+<p>In a small population, selection loses resolution.</p>
+<p>A mutation with a tiny deleterious effect may technically reduce fitness, but if that effect is smaller than the noise created by genetic drift, selection may be unable to remove it reliably.</p>
+<p>Such mutations can become effectively neutral.</p>
+<p>One can fix.</p>
+<p>Then another.</p>
+<p>Then another.</p>
+<p>The problem is no longer simply mutation.</p>
+<p>It is the gradual, stochastic loss of information that selection is too weak to prevent.</p>
+<p>I found myself asking:</p>
+<p><strong>If flatness protects against mutation, shouldn’t flatness also protect a small population?</strong></p>
+<p>No.</p>
+<p>And this was probably my favourite conceptual reversal in the chapter.</p>
+<p>For drift, a shallow fitness effect can be precisely the problem.</p>
+<p>If a mutation is only slightly harmful, drift can carry it across the population.</p>
+<p>But if epistasis makes that mutation strongly deleterious, selection can suddenly see it again.</p>
+<p>So protection from drift can require something closer to a <strong>steeper</strong> local landscape.</p>
+<p>I drew the two possibilities beside each other:</p>
+<p><strong>high mutation rate → flatter can be safer</strong></p>
+<p><strong>small population → steeper can be safer</strong></p>
+<p>For a moment they look contradictory.</p>
+<p>Then the real question appears:</p>
+<p><strong>Robust to what?</strong></p>
+<p>That, for me, is the centre of Chapter 6.</p>
+<p>There is no universally robust genome.</p>
+<p>There is only robustness relative to a particular source of evolutionary danger.</p>
+</section>
+<section id="same-genome.-different-evolutionary-physics." class="level2">
+<h2 class="anchored" data-anchor-id="same-genome.-different-evolutionary-physics.">Same genome. Different evolutionary physics.</h2>
+<p>Mutation and drift are both sources of change.</p>
+<p>But they threaten populations differently.</p>
+<p>Mutation continually generates new variants.</p>
+<p>Drift determines which variants may survive or disappear simply because populations are finite.</p>
+<p>So the architecture that protects a lineage against one kind of uncertainty need not protect it against the other.</p>
+<p>That sounds obvious after saying it.</p>
+<p>It did not feel obvious before reaching this chapter.</p>
+<p>And it made me think again about something population geneticists routinely do: we talk about a variant’s effect as though that effect were a complete evolutionary description.</p>
+<p>But the fate of that effect depends on mutation rate, population size, genetic background, epistasis and the surrounding fitness landscape.</p>
+<p>A mutation does not arrive in a vacuum.</p>
+<p>Neither does selection.</p>
+</section>
+<section id="then-adami-takes-us-to-one-of-biologys-strangest-genomes" class="level2">
+<h2 class="anchored" data-anchor-id="then-adami-takes-us-to-one-of-biologys-strangest-genomes">Then Adami takes us to one of biology’s strangest genomes</h2>
+<p>The <em>Trypanosoma</em> section made the abstract argument feel much less abstract.</p>
+<p>Kinetoplastid mitochondria are extraordinary.</p>
+<p>Their mitochondrial DNA is divided between maxicircles and enormous numbers of minicircles. Many mitochondrial transcripts are not ready to translate directly from the encoded DNA. Guide RNAs direct extensive RNA editing before functional messages emerge.</p>
+<p>The system looks, at first sight, unnecessarily complicated.</p>
+<p>Why would evolution tolerate such machinery?</p>
+<p>This is precisely where the robustness perspective becomes provocative.</p>
+<p>If mutations in important mitochondrial sequences disrupt the editing cascade, many damaging changes can become effectively lethal rather than being allowed to accumulate gradually.</p>
+<p>Other sequences can gain protection through overlap or multifunctionality.</p>
+<p>And the guide-RNA population itself can maintain a relatively stable collective distribution even though individual sequence variants turn over.</p>
+<p>I found myself staring again at the same question:</p>
+<p><strong>Is this complexity merely something evolution became stuck with—or is part of it doing evolutionary work that is invisible if I inspect only present-day fitness?</strong></p>
+<p>Adami contrasts this interpretation with constructive neutral evolution.</p>
+<p>That distinction matters.</p>
+<p>One explanation asks how elaborate machinery can accumulate without being directly favoured.</p>
+<p>The robustness argument asks something different:</p>
+<p><strong>What does that machinery do to the future consequences of mutation and drift?</strong></p>
+<p>It may be almost invisible when nothing goes wrong.</p>
+<p>Its importance appears when perturbation arrives.</p>
+<p>And that thought immediately reminded me of engineering.</p>
+<p>The value of redundancy, error correction or a backup system is often invisible while everything is functioning normally.</p>
+<p>You discover what it was doing only when the system is challenged.</p>
+</section>
+<section id="this-is-where-i-suddenly-thought-about-genomic-ai" class="level2">
+<h2 class="anchored" data-anchor-id="this-is-where-i-suddenly-thought-about-genomic-ai">This is where I suddenly thought about genomic AI</h2>
+<p>Until this point I had been reading Chapter 6 as an evolutionary biologist.</p>
+<p>Then I started seeing language-model scores everywhere.</p>
+<p>A genomic language model gives us something very tempting:</p>
+<p>one sequence → one score.</p>
+<p>Change one nucleotide → another score.</p>
+<p>We can ask whether the alternative allele looks more or less plausible than the reference.</p>
+<p>Useful.</p>
+<p>But after this chapter, that feels incomplete.</p>
+<p>Suppose two sequences receive almost identical model scores.</p>
+<p>Now mutate every position around each sequence.</p>
+<p>For the first sequence, almost every neighbour receives a much worse score.</p>
+<p>For the second, dozens of neighbouring sequences remain perfectly plausible.</p>
+<p>Are those two sequences really equivalent?</p>
+<p>The original scores say yes.</p>
+<p>Their <strong>local landscapes</strong> say no.</p>
+<p>And suddenly the connection to robustness becomes hard to ignore.</p>
+<p>Perhaps genomic models should not only be evaluated by asking:</p>
+<p><strong>Did the model score this variant correctly?</strong></p>
+<p>Perhaps we should also ask:</p>
+<p><strong>What landscape has the model learned around this sequence?</strong></p>
+<p>Is it sharp?</p>
+<p>Flat?</p>
+<p>Asymmetric?</p>
+<p>Are there connected neutral-like regions?</p>
+<p>Do the model’s tolerated sequence neighbourhoods correspond to evolutionary conservation, allele frequencies or experimentally measured mutational tolerance?</p>
+<p>And perhaps most importantly:</p>
+<p><strong>does the biological meaning of that landscape change with population context?</strong></p>
+<p>A model may identify molecular constraint beautifully and still know nothing about effective population size.</p>
+<p>It may recognize a highly constrained nucleotide without knowing whether a weakly deleterious allele is visible to selection in the population where it occurs.</p>
+<p>That is not necessarily a failure of the model.</p>
+<p>But it is a limitation of what its score means.</p>
+<p>And distinguishing those two things matters.</p>
+</section>
+<section id="maybe-a-variant-is-the-wrong-unit-of-thought" class="level2">
+<h2 class="anchored" data-anchor-id="maybe-a-variant-is-the-wrong-unit-of-thought">Maybe a variant is the wrong unit of thought</h2>
+<p>This chapter left me wondering whether our obsession with individual variant scores is partly inherited from the structure of our datasets.</p>
+<p>Variant.</p>
+<p>Position.</p>
+<p>Reference.</p>
+<p>Alternative.</p>
+<p>Score.</p>
+<p>Next row.</p>
+<p>But evolution does not read a VCF one row at a time.</p>
+<p>A mutation appears inside a genome.</p>
+<p>That genome has neighbours.</p>
+<p>Those neighbours have neighbours.</p>
+<p>Their effects interact.</p>
+<p>And the whole system is filtered through mutation, selection, drift and population history.</p>
+<p>So perhaps a genuinely evolutionary genomic AI should eventually tell us something larger than:</p>
+<blockquote class="blockquote">
+<p>this mutation looks bad.</p>
+</blockquote>
+<p>I would want to know:</p>
+<blockquote class="blockquote">
+<p><strong>What kind of evolutionary neighbourhood am I standing in?</strong></p>
+</blockquote>
+<p>That feels like a much richer question.</p>
+<p>And perhaps a much harder benchmark.</p>
+</section>
+<section id="the-sentence-i-am-carrying-out-of-chapter-6" class="level2">
+<h2 class="anchored" data-anchor-id="the-sentence-i-am-carrying-out-of-chapter-6">The sentence I am carrying out of Chapter 6</h2>
+<p>If Chapter 5 made me suspicious of the word <em>complexity</em>, Chapter 6 has made me suspicious of the word <em>fitness</em> when it appears alone.</p>
+<p>A genotype can have high fitness and still be fragile.</p>
+<p>A genotype can sacrifice some immediate fitness and make its lineage safer under mutation.</p>
+<p>A mutation can be neutral now and profoundly alter the effects of mutations that come later.</p>
+<p>And a small population can favour a genetic architecture very different from the one favoured under high mutation pressure.</p>
+<p>So evolution is doing something subtler than climbing toward better sequences.</p>
+<p>It is also reshaping the consequences of where the next step might land.</p>
+<p>That is the idea I did not have when I began the chapter.</p>
+<p>And it may be the most useful one I am taking with me toward genomic AI:</p>
+<p><strong>a genome is not just a sequence. It occupies a neighbourhood of possibilities.</strong></p>
+<p>If our models truly understand something about biological sequence, perhaps we should eventually expect them to recover not only the score of the sequence in front of us—</p>
+<p>but the shape of that neighbourhood around it.</p>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/tahirali-biomics\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2026 Dr.&nbsp;Tahir Ali</p>
+</div>   
+    <div class="nav-footer-center">
+<p>Computational biology · Scientific AI · Education</p>
+</div>
+    <div class="nav-footer-right">
+<p>Built with <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
