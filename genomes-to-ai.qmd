@@ -54,6 +54,8 @@ This progression does not make biological knowledge less important. It makes dom
 
 **From the reading notebook · Chapter 5:** [When does more become complexity?](posts/2026-04-04-when-does-more-become-complexity/index.qmd) asks what we measure when we call a genome, network or evolutionary path complex—and whether an apparent upward trend reflects selection, chance or the way we chose to measure it.
 
+**From the reading notebook · Chapter 6:** [Can evolution become robust to chance?](posts/2026-04-18-can-evolution-become-robust-to-chance/index.qmd) asks how mutation rate, population size and epistasis can make very different genetic neighbourhoods evolutionarily robust—and why the highest-fitness genotype is not always the safest place to be.
+
 ## Why I am building PopGenLM Bench
 
 Genomic language models are a natural meeting point between my past work and the engineering skills I am developing. They treat DNA as structured information and learn context-dependent sequence patterns that can be used to score variants. Their promise is substantial: prioritising candidate variants, identifying disrupted regulatory grammar, comparing constraint across sequence contexts, and extending annotation beyond a list of previously characterised genes.
