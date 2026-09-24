@@ -1,6 +1,7 @@
 ---
 title: "Practical Day 3: Exploring GO-Term Enrichment, Diversity (Tajima's D & Pi), and Divergence (FST) Stats"
 author: "Dr Tahir Ali | AG de Meaux"
+body-classes: content-dense technical-page
 format:
   html:
     toc: true

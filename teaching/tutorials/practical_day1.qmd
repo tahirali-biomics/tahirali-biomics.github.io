@@ -1,6 +1,7 @@
 ---
 title: "Practical Day 1: FASTQ to VCF - Part 1"
 author: "Dr Tahir Ali | AG de Meaux"
+body-classes: content-dense technical-page
 format:
   html:
     toc: true

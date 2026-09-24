@@ -1,6 +1,7 @@
 ---
 title: "Building a De Novo RADseq Analysis Workflow with STACKS for Non-Model Species"
 author: "Dr Tahir Ali | Miss Ainaz Mostafanejad | AG demeaux"
+body-classes: content-dense technical-page
 format:
   html:
     toc: true

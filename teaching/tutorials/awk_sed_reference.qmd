@@ -2,6 +2,7 @@
 title: "AWK & SED Commands in the *Arabidopsis lyrata* Temporal Genomics Pipeline"
 subtitle: "Annotated reference for every text-processing command used from raw data to final analysis"
 author: "Dr Tahir Ali | AG de Meaux, University of Cologne"
+body-classes: content-dense technical-page
 date: today
 format:
   html:

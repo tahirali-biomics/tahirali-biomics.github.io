@@ -9,7 +9,7 @@ project:
     - "teaching/course-companions/interactive-course-companions.qmd"
     - "teaching/exercises/exercises.qmd"
     - "teaching/apps/interactive.qmd"
-    - "teaching/tutorials/Hands-on Genomics Tutorials.qmd"
+    - "teaching/tutorials/*.qmd"
     - "workshops/workshops.qmd"
   resources:
     - "profile.webp"
