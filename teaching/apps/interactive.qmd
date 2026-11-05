@@ -17,6 +17,7 @@ format:
   <article class="app-item"><h3><a href="het_fst_app.html">Heterozygosity and F<sub>ST</sub></a></h3><p>Investigate how population divergence changes within-population diversity and between-population differentiation.</p></article>
   <article class="app-item"><h3><a href="coalescent-explorer-app.html">Coalescent Explorer</a></h3><p>Explore genealogies and site-frequency spectra under growth, bottlenecks, migration, admixture, and population splits.</p></article>
   <article class="app-item"><h3><a href="climate-explorer-app.html">Climate Explorer</a></h3><p>Interact with bioclimatic data across <em>Arabidopsis</em> populations and user-selected locations.</p></article>
+  <article class="app-item"><h3><a href="arabidopsis-1001-climate.html">Arabidopsis 1001 Genomes · Climate Explorer</a></h3><p>Map <em>Arabidopsis thaliana</em> accessions and explore the environments where they were collected. Compare sites to select accessions from contrasting climates for a population genomics project.</p></article>
   <article class="app-item"><h3><a href="climate-impact-simulator.html">Climate Impact Simulator</a></h3><p>Examine how land use, emissions, energy, water, and transport choices influence a composite resilience index.</p></article>
 </div>
 
