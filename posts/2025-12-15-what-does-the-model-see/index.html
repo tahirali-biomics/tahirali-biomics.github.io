@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dr Tahir Ali">
+<meta name="dcterms.date" content="2025-12-15">
+<meta name="description" content="A practical guide to writing scientific ChatGPT prompts, interpreting DNA, expression and structure models, and deciding what evidence justifies giving AI more authority.">
+
+<title>What does the model see? – Dr.&nbsp;Tahir Ali</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../profile.webp" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-46631ef7d5207a1ec5e6e4a429f0476e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-0LPGXESG7T"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
+</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="What does the model see? – Dr.&nbsp;Tahir Ali">
+<meta property="og:description" content="A practical guide to writing scientific ChatGPT prompts, interpreting DNA, expression and structure models, and deciding what evidence justifies giving AI more authority.">
+<meta property="og:image" content="https://tahirali-biomics.github.io/assets/writings/what-does-the-model-see.webp">
+<meta property="og:site_name" content="Dr. Tahir Ali">
+<meta name="twitter:title" content="What does the model see? – Dr.&nbsp;Tahir Ali">
+<meta name="twitter:description" content="A practical guide to writing scientific ChatGPT prompts, interpreting DNA, expression and structure models, and deciding what evidence justifies giving AI more authority.">
+<meta name="twitter:image" content="https://tahirali-biomics.github.io/assets/writings/what-does-the-model-see.webp">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">What does the model see?</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../popgenlm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PopGenLM</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../genomes-to-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Genomes to AI</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projects</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../publications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Publications</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../cv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Résumé</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../teaching/teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../workshops/workshops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Workshops</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://github.com/tahirali-biomics" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">GitHub</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">In this field note</h2>
+   
+  <ul>
+  <li><a href="#begin-with-the-research-question" id="toc-begin-with-the-research-question" class="nav-link active" data-scroll-target="#begin-with-the-research-question">Begin with the research question</a></li>
+  <li><a href="#how-to-write-a-scientific-chatgpt-prompt" id="toc-how-to-write-a-scientific-chatgpt-prompt" class="nav-link" data-scroll-target="#how-to-write-a-scientific-chatgpt-prompt">How to write a scientific ChatGPT prompt</a>
+  <ul class="collapse">
+  <li><a href="#a-worked-prompt-from-a-plant-genomics-chat" id="toc-a-worked-prompt-from-a-plant-genomics-chat" class="nav-link" data-scroll-target="#a-worked-prompt-from-a-plant-genomics-chat">A worked prompt from a plant-genomics chat</a></li>
+  <li><a href="#a-prompt-i-would-use-for-a-github-script" id="toc-a-prompt-i-would-use-for-a-github-script" class="nav-link" data-scroll-target="#a-prompt-i-would-use-for-a-github-script">A prompt I would use for a GitHub script</a></li>
+  <li><a href="#a-prompt-for-literature-statistics-or-a-manuscript" id="toc-a-prompt-for-literature-statistics-or-a-manuscript" class="nav-link" data-scroll-target="#a-prompt-for-literature-statistics-or-a-manuscript">A prompt for literature, statistics or a manuscript</a></li>
+  </ul></li>
+  <li><a href="#take-the-script-from-chat-to-github" id="toc-take-the-script-from-chat-to-github" class="nav-link" data-scroll-target="#take-the-script-from-chat-to-github">Take the script from chat to GitHub</a></li>
+  <li><a href="#what-each-model-sees" id="toc-what-each-model-sees" class="nav-link" data-scroll-target="#what-each-model-sees">What each model sees</a>
+  <ul class="collapse">
+  <li><a href="#dna-gpn-and-plantcaduceus" id="toc-dna-gpn-and-plantcaduceus" class="nav-link" data-scroll-target="#dna-gpn-and-plantcaduceus">DNA · GPN and PlantCaduceus</a></li>
+  <li><a href="#rna-geneformer-and-scgpt" id="toc-rna-geneformer-and-scgpt" class="nav-link" data-scroll-target="#rna-geneformer-and-scgpt">RNA · Geneformer and scGPT</a></li>
+  <li><a href="#structure-alphafold-3" id="toc-structure-alphafold-3" class="nav-link" data-scroll-target="#structure-alphafold-3">Structure · AlphaFold 3</a></li>
+  </ul></li>
+  <li><a href="#afterword-what-would-count-as-medical-ai-superintelligence" id="toc-afterword-what-would-count-as-medical-ai-superintelligence" class="nav-link" data-scroll-target="#afterword-what-would-count-as-medical-ai-superintelligence">Afterword · What would count as medical AI superintelligence?</a>
+  <ul class="collapse">
+  <li><a href="#who-controls-superintelligent-systems" id="toc-who-controls-superintelligent-systems" class="nav-link" data-scroll-target="#who-controls-superintelligent-systems">Who controls superintelligent systems?</a></li>
+  </ul></li>
+  <li><a href="#what-would-change-my-mind" id="toc-what-would-change-my-mind" class="nav-link" data-scroll-target="#what-would-change-my-mind">What would change my mind?</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">What does the model see?</h1>
+<p class="subtitle lead">A field guide to ChatGPT, genomic language models and scientific AI</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">Genomes to AI</div>
+    <div class="quarto-category">Scientific AI</div>
+    <div class="quarto-category">Genomics</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    A practical guide to writing scientific ChatGPT prompts, interpreting DNA, expression and structure models, and deciding what evidence justifies giving AI more authority.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dr Tahir Ali </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">December 15, 2025</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">November 12, 2026</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><em>Genomes to AI · Methods notebook · December 2025</em></p>
+<p><em>Revised 12 November 2026 with a worked example from my plant-genomics workflow and an afterword on medical AI and governance.</em></p>
+<p>I can ask ChatGPT to write a script that joins genomic variants to model scores. The script might run on the first attempt. The scatterplot might even look convincing. Then comes the question I would ask of a student’s plot, or of my own. <strong>Are those actually the same alleles?</strong></p>
+<p>A join on chromosome and position can silently attach a score for C→G to a C→T variant. Every downstream calculation can be correct for the resulting table. The biological interpretation is already wrong.</p>
+<p>By “see” I mean <strong>the information the model actually receives for this prediction</strong>. Imagine one variant in an <em>Arabidopsis</em> gene. ChatGPT could read my question and the rows I paste. GPN could receive the DNA letters surrounding the site. A single-cell model could receive an expression profile from a root cell. AlphaFold 3 could receive the sequence of the encoded protein and its proposed partner. Even when the examples all concern the same gene, the models are working with different observations. If I want to know whether the variant affects how plants survive a dry summer, I still need a study that measures survival in the relevant environments.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/writings/what-does-the-model-see.webp" class="img-fluid figure-img" alt="Dark graphite sketch on warm ruled notebook paper. Handwritten notes link a text prompt, a DNA window and genes per cell, and a molecular pose to checks against independent data."></p>
+<figcaption>What does the model see? A methods-notebook sketch. The numbers in the margin are illustrative.</figcaption>
+</figure>
+</div>
+<section id="begin-with-the-research-question" class="level2">
+<h2 class="anchored" data-anchor-id="begin-with-the-research-question">Begin with the research question</h2>
+<p>Here is a question I can work with as a population geneticist. <em>Do plant variants with large allele-frequency changes tend to receive less favourable DNA model scores than comparable variants?</em> Before opening a chat window, I would write down the reference assembly, the definition of a frequency change, the comparison set and the outcome I would report. A workable comparison might use variants with similar starting allele frequency, coverage and annotation, and use genomic blocks to account for linkage. Which variants count as comparable depends on whether I am asking about predictability or about an evolutionary process.</p>
+<p>A sequence score and a frequency change answer different questions. Sequence context can inform a hypothesis about functional constraint. A temporal frequency shift also reflects sampling, drift, demography and selection. If the question is whether drift can explain an observed shift, the appropriate first comparison is a drift model with explicit sampling and demographic assumptions. The sequence score can then help ask whether departures from that model have a biological pattern.</p>
+<p>Lisa Messeri and M. J. Crockett describe how AI can give researchers a sense of understanding that exceeds the evidence available. A reliable prediction can feel like a causal explanation. Screening millions of variants can feel comprehensive even if all candidates are filtered through one model’s assumptions. A numerical score can look objective even when reference choices, training data and evaluation labels shape it. The authors connect those illusions to a broader concern about scientific monocultures. If many labs use the same model and proxy, agreement can reflect a common method. In my example, a drift simulation and an independent assay offer different checks from scoring the same sequence with a second model. <a href="https://doi.org/10.1038/s41586-024-07146-0">Messeri &amp; Crockett, <em>Nature</em> (2024)</a>.</p>
+</section>
+<section id="how-to-write-a-scientific-chatgpt-prompt" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-write-a-scientific-chatgpt-prompt">How to write a scientific ChatGPT prompt</h2>
+<p>I write a scientific prompt the way I would brief a colleague who is seeing the project for the first time. I start with a decision I can make after reading the answer. Then I supply the pieces of evidence and the conventions that a colleague would otherwise have to ask me about. A good test of the prompt is whether I can tell in advance what a wrong answer would look like.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>What to specify</th>
+<th>In the example below</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>1. State the decision</strong></td>
+<td>Give the research question and the next action the answer should inform.</td>
+<td>Decide whether two score–frequency summaries can be compared.</td>
+</tr>
+<tr class="even">
+<td><strong>2. Provide the evidence</strong></td>
+<td>Supply a small input, relevant code or passages, and the provenance of each.</td>
+<td>Provide a table with SNPs retained in each run.</td>
+</tr>
+<tr class="odd">
+<td><strong>3. Define the comparison</strong></td>
+<td>Set the unit of analysis, reference, allele orientation, score units, filters and statistic.</td>
+<td>One row per SNP, the same derived allele, and Pearson correlation on shared rows.</td>
+</tr>
+<tr class="even">
+<td><strong>4. Request an inspectable output</strong></td>
+<td>Ask for a table, script or patch with named fields and a clear scope.</td>
+<td>Request row counts, correlations and a runnable check.</td>
+</tr>
+<tr class="odd">
+<td><strong>5. Give a known answer</strong></td>
+<td>Include one expectation you can verify yourself and one failure case.</td>
+<td>A positive rescaling preserves Pearson correlation on the same rows. A one-row tail has no correlation.</td>
+</tr>
+<tr class="even">
+<td><strong>6. Specify how to handle missing evidence</strong></td>
+<td>Ask what was run, which assumptions remain open and which conclusions the result supports.</td>
+<td>Identify missing metadata and explain what the toy example can establish.</td>
+</tr>
+</tbody>
+</table>
+<section id="a-worked-prompt-from-a-plant-genomics-chat" class="level3">
+<h3 class="anchored" data-anchor-id="a-worked-prompt-from-a-plant-genomics-chat">A worked prompt from a plant-genomics chat</h3>
+<p>In a discussion about my <em>Arabidopsis lyrata</em> benchmark, I asked why an earlier plot of GPN scores against derived allele frequency looked stronger. There were several plausible explanations. The two runs could retain different SNPs, summarise single SNPs versus bins of frequency, or use different score conventions. “Explain the stronger relationship” invites a story before those possibilities have been checked. Here is how I would pose the same question with invented data and a known answer.</p>
+<pre class="text"><code>Decision
+I want to know whether two GPN–frequency summaries are directly comparable.
+Audit the data and statistic first. Use only the synthetic table below.
+
+Data and conventions
+One row is one already harmonised biallelic SNP on a single reference.
+DAF is derived allele frequency in the same sample in both runs.
+In this fixture the derived allele is ALT for every SNP. A score is the
+base-10 log likelihood ratio for ALT relative to REF. Run B represents
+the same scores in natural-log units, multiplying by ln(10).
+keep_A and keep_B indicate whether that SNP survived each run's filters.
+
+snp,score_log10,DAF,keep_A,keep_B
+s1,-1.0,0.02,1,1
+s2,-0.8,0.06,1,1
+s3,-0.5,0.10,1,1
+s4,-0.2,0.20,1,1
+s5,0.0,0.18,1,1
+s6,-1.4,0.01,1,0
+s7,-1.4,0.40,0,1
+
+Output
+Provide a short runnable R or Python script and a table of n and Pearson r.
+Calculate each run on its own SNPs, then repeat on the exact shared SNPs.
+On the shared set, count the negative scores and take the lowest 25% of
+those scores, rounding the count up. Include cutoff ties if there are any.
+Report when r is undefined. Keep zero in the full-set analysis.
+
+Checks and interpretation
+Expect six SNPs in each run and five shared. Verify that converting score
+units alone leaves r unchanged on the shared rows. Explain why a plot of
+bin means cannot be compared directly with a per-SNP r.
+For a real rerun, list the metadata and code needed to match the earlier
+analysis. State what you executed and what you verified by inspection.</code></pre>
+<p>On the five shared SNPs, both runs give the same Pearson correlation. Multiplying all scores by the same positive constant changes their units and leaves that correlation unchanged. Including the two different run-specific SNPs changes the result because the most negative score is paired with a rare allele in one run and a common allele in the other. The shared set has four negative scores, so the tail contains one SNP and its correlation is undefined.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 26%">
+<col style="width: 26%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Analysis</th>
+<th style="text-align: right;">SNPs</th>
+<th style="text-align: right;">Run A, Pearson <span class="math inline">\(r\)</span></th>
+<th style="text-align: right;">Run B, Pearson <span class="math inline">\(r\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Each run’s own SNPs</td>
+<td style="text-align: right;">6 per run</td>
+<td style="text-align: right;">0.948</td>
+<td style="text-align: right;">−0.265</td>
+</tr>
+<tr class="even">
+<td>Same shared SNPs</td>
+<td style="text-align: right;">5 per run</td>
+<td style="text-align: right;">0.961</td>
+<td style="text-align: right;">0.961</td>
+</tr>
+<tr class="odd">
+<td>Lowest quarter of shared negative scores</td>
+<td style="text-align: right;">1 per run</td>
+<td style="text-align: right;">Undefined</td>
+<td style="text-align: right;">Undefined</td>
+</tr>
+</tbody>
+</table>
+<details>
+<summary>
+Reproduce the toy results in Python
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> ceil, log</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statistics <span class="im">import</span> correlation</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Columns match the synthetic table in the prompt, in the same order.</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>snps <span class="op">=</span> [</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"s1"</span>, <span class="op">-</span><span class="fl">1.0</span>, <span class="fl">0.02</span>, <span class="va">True</span>, <span class="va">True</span>),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"s2"</span>, <span class="op">-</span><span class="fl">0.8</span>, <span class="fl">0.06</span>, <span class="va">True</span>, <span class="va">True</span>),</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"s3"</span>, <span class="op">-</span><span class="fl">0.5</span>, <span class="fl">0.10</span>, <span class="va">True</span>, <span class="va">True</span>),</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"s4"</span>, <span class="op">-</span><span class="fl">0.2</span>, <span class="fl">0.20</span>, <span class="va">True</span>, <span class="va">True</span>),</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"s5"</span>,  <span class="fl">0.0</span>, <span class="fl">0.18</span>, <span class="va">True</span>, <span class="va">True</span>),</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"s6"</span>, <span class="op">-</span><span class="fl">1.4</span>, <span class="fl">0.01</span>, <span class="va">True</span>, <span class="va">False</span>),</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"s7"</span>, <span class="op">-</span><span class="fl">1.4</span>, <span class="fl">0.40</span>, <span class="va">False</span>, <span class="va">True</span>),</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> summarize(rows, scale):</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    scores <span class="op">=</span> [row[<span class="dv">1</span>] <span class="op">*</span> scale <span class="cf">for</span> row <span class="kw">in</span> rows]</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    frequencies <span class="op">=</span> [row[<span class="dv">2</span>] <span class="cf">for</span> row <span class="kw">in</span> rows]</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(<span class="bu">set</span>(scores)) <span class="op">&lt;</span> <span class="dv">2</span> <span class="kw">or</span> <span class="bu">len</span>(<span class="bu">set</span>(frequencies)) <span class="op">&lt;</span> <span class="dv">2</span>:</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">len</span>(rows), <span class="st">"undefined"</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">len</span>(rows), <span class="ss">f"</span><span class="sc">{</span>correlation(scores, frequencies)<span class="sc">:.3f}</span><span class="ss">"</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>run_a <span class="op">=</span> [row <span class="cf">for</span> row <span class="kw">in</span> snps <span class="cf">if</span> row[<span class="dv">3</span>]]</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>run_b <span class="op">=</span> [row <span class="cf">for</span> row <span class="kw">in</span> snps <span class="cf">if</span> row[<span class="dv">4</span>]]</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>shared <span class="op">=</span> [row <span class="cf">for</span> row <span class="kw">in</span> snps <span class="cf">if</span> row[<span class="dv">3</span>] <span class="kw">and</span> row[<span class="dv">4</span>]]</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>negative_scores <span class="op">=</span> <span class="bu">sorted</span>(row[<span class="dv">1</span>] <span class="cf">for</span> row <span class="kw">in</span> shared <span class="cf">if</span> row[<span class="dv">1</span>] <span class="op">&lt;</span> <span class="dv">0</span>)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>cutoff <span class="op">=</span> negative_scores[ceil(<span class="bu">len</span>(negative_scores) <span class="op">/</span> <span class="dv">4</span>) <span class="op">-</span> <span class="dv">1</span>]</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>tail <span class="op">=</span> [row <span class="cf">for</span> row <span class="kw">in</span> shared <span class="cf">if</span> row[<span class="dv">1</span>] <span class="op">&lt;=</span> cutoff]</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"A only its retained SNPs"</span>, summarize(run_a, <span class="dv">1</span>))</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"B only its retained SNPs"</span>, summarize(run_b, log(<span class="dv">10</span>)))</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Shared SNPs, A and B"</span>, summarize(shared, <span class="dv">1</span>), summarize(shared, log(<span class="dv">10</span>)))</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Shared negative tail, A and B"</span>, summarize(tail, <span class="dv">1</span>), summarize(tail, log(<span class="dv">10</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<p>Binning answers a different question again. It averages over variation within each bin, and a correlation of bin means gives each bin one point regardless of how many SNPs it contains. For the real analysis I would freeze the SNP intersection, verify which allele the score describes, recover the old binning and tail rules, and use genomic blocks to account for linkage when estimating uncertainty.</p>
+</section>
+<section id="a-prompt-i-would-use-for-a-github-script" class="level3">
+<h3 class="anchored" data-anchor-id="a-prompt-i-would-use-for-a-github-script">A prompt I would use for a GitHub script</h3>
+<p>Give ChatGPT the relevant function, the README section that defines the inputs, and a small public or synthetic example. A repository link is useful for orientation. The exact revision and the relevant code are what make a proposed edit reviewable. If the chat has repository access, ask it to cite the files and lines it actually inspected.</p>
+<pre class="text"><code>Goal
+Review the join that attaches plant DNA-model scores to biallelic SNVs.
+
+Evidence
+Use the README, existing join function and synthetic input shown below.
+Repository revision: [commit SHA]. Reference assembly: [assembly accession].
+Both inputs use 1-based genomic positions and the forward reference strand.
+The join key is (chrom, pos, ref, alt). A second ALT can occur at the same site.
+
+Deliverable
+First describe the current behaviour with file and line references.
+Then propose a minimal patch, a runnable check and its expected output.
+Preserve input row order. Count unmatched rows and keep their scores missing.
+Fail on duplicate score keys. Keep a numerical zero as a valid score.
+
+Verification
+Show cases for two ALTs at one position, a REF mismatch, a duplicate key
+and a true zero. Explain which check verifies the FASTA reference base and
+which check only verifies the join. List any assumptions you could not verify.
+Report which commands you actually ran and their exit status.</code></pre>
+<p>A second prompt can be shorter. “Review the patch against the original contract. Identify the first fixture that would fail and explain why.” I run that fixture myself. A second chat can offer another reading, but two agreeing chat responses still leave the software untested.</p>
+</section>
+<section id="a-prompt-for-literature-statistics-or-a-manuscript" class="level3">
+<h3 class="anchored" data-anchor-id="a-prompt-for-literature-statistics-or-a-manuscript">A prompt for literature, statistics or a manuscript</h3>
+<pre class="text"><code>Using the papers and excerpts I provide, assess the claim:
+"Lower DNA-model scores explain the observed temporal allele-frequency shifts."
+
+Return a table with claim, source or result, evidence type, alternative
+explanation, and a sentence supported by the evidence. Separate published
+results, my observations and proposed hypotheses. For published results,
+identify the figure, table or passage supporting each claim. If a source
+does not establish the claim, show which part remains unresolved.
+For each suggested statistical check, state the unit of replication,
+the comparison group and one outcome that would weaken the claim.</code></pre>
+<p>For a methods edit, I supply the actual command, software version, settings and exclusions, then compare the edited paragraph with the run record. For debugging, I supply the smallest failing example and its expected behaviour. For literature discovery, I verify the DOI and the figure, table or passage behind each claim. Joe Slater, James Humphries and Michael Townsen Hicks argue in <em>Scientific American</em> that the word “hallucination” can obscure how fluent text gets mistaken for a truth-seeking account and who is responsible when that text is used. A real citation attached to a claim it never tested is a good example. The DOI can resolve perfectly while the sentence still needs correction. <a href="https://www.scientificamerican.com/article/chatgpt-isnt-hallucinating-its-bullshitting/">Slater, Humphries &amp; Hicks, <em>Scientific American</em> (2024), opinion</a>.</p>
+</section>
+</section>
+<section id="take-the-script-from-chat-to-github" class="level2">
+<h2 class="anchored" data-anchor-id="take-the-script-from-chat-to-github">Take the script from chat to GitHub</h2>
+<p>Here is a runnable, dependency-free fixture for the join. It uses invented contig names and precomputed scores. The input contains two different ALTs at position 42, a different REF at the same coordinate and a true zero. Copy it into a temporary Python file and run it with Python 3.10 or newer.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> isfinite</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>Variant <span class="op">=</span> <span class="bu">tuple</span>[<span class="bu">str</span>, <span class="bu">int</span>, <span class="bu">str</span>, <span class="bu">str</span>]</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> attach_scores(</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    variants: <span class="bu">list</span>[Variant],</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    score_rows: <span class="bu">list</span>[<span class="bu">tuple</span>[Variant, <span class="bu">float</span>]],</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">tuple</span>[Variant, <span class="bu">float</span> <span class="op">|</span> <span class="va">None</span>]]:</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    scores <span class="op">=</span> {}</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> key, score <span class="kw">in</span> score_rows:</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> key <span class="kw">in</span> scores:</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="ss">f"Duplicate score key: </span><span class="sc">{</span>key<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> isfinite(score):</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="ss">f"Non-finite score: </span><span class="sc">{</span>key<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        scores[key] <span class="op">=</span> score</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [(key, scores.get(key)) <span class="cf">for</span> key <span class="kw">in</span> variants]</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>variants <span class="op">=</span> [</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"toy1"</span>, <span class="dv">42</span>, <span class="st">"C"</span>, <span class="st">"T"</span>),</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"toy1"</span>, <span class="dv">42</span>, <span class="st">"C"</span>, <span class="st">"G"</span>),</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"toy1"</span>, <span class="dv">42</span>, <span class="st">"A"</span>, <span class="st">"T"</span>),</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"toy1"</span>, <span class="dv">77</span>, <span class="st">"G"</span>, <span class="st">"A"</span>),</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>score_rows <span class="op">=</span> [</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    ((<span class="st">"toy1"</span>, <span class="dv">42</span>, <span class="st">"C"</span>, <span class="st">"G"</span>), <span class="op">-</span><span class="fl">1.2</span>),</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    ((<span class="st">"toy1"</span>, <span class="dv">42</span>, <span class="st">"C"</span>, <span class="st">"T"</span>), <span class="fl">0.0</span>),</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    ((<span class="st">"toy1"</span>, <span class="dv">77</span>, <span class="st">"G"</span>, <span class="st">"A"</span>), <span class="fl">0.4</span>),</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> attach_scores(variants, score_rows)</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> [key <span class="cf">for</span> key, score <span class="kw">in</span> result] <span class="op">==</span> variants</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> [score <span class="cf">for</span> key, score <span class="kw">in</span> result] <span class="op">==</span> [<span class="fl">0.0</span>, <span class="op">-</span><span class="fl">1.2</span>, <span class="va">None</span>, <span class="fl">0.4</span>]</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">sum</span>(score <span class="kw">is</span> <span class="va">None</span> <span class="cf">for</span> key, score <span class="kw">in</span> result) <span class="op">==</span> <span class="dv">1</span></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>    attach_scores(variants, score_rows <span class="op">+</span> [score_rows[<span class="dv">0</span>]])</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ValueError</span> <span class="im">as</span> error:</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> <span class="st">"Duplicate score key"</span> <span class="kw">in</span> <span class="bu">str</span>(error)</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">AssertionError</span>(<span class="st">"Duplicate score key was accepted"</span>)</span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"4 variants, 3 matched, 1 unmatched; duplicate rejected."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The fixture isolates the join. In a real workflow I would check each REF against the exact indexed FASTA before scoring or merging, and log reference mismatches separately from valid variants with no score. Here, the row with REF A exercises the <strong>join</strong> behaviour. A production preflight on a FASTA with C at position 42 should reject it earlier. I would record assembly and annotation accessions and checksums, normalise variants where needed, define how multi-allelic sites are handled, and reconcile contig naming and coordinate conventions explicitly. A 1-based single-site coordinate <span class="math inline">\(p\)</span> becomes the BED interval <span class="math inline">\([p-1,p)\)</span>. Agreement between two tables can still be wrong if both are on the same wrong assembly.</p>
+<p>A GitHub pull request is where I want the scientific assumptions to become visible. Start from a named commit and create a branch. Read the diff, run the small check and the repository’s existing tests, and compare row counts before and after the change. In the pull request record the input contract, the edge cases exercised, the command and outcome, and any changes to the denominator. Keep the toy data and expected output alongside the code when they protect a specific regression. For a result others should reproduce, link to the commit or release, and record the software environment, model checkpoint or revision, reference checksums, parameters and seeds. For a Slurm or GPU run, capture the submitted script and logs. A 20-row smoke test can expose path, dependency and format problems before a full run. Use public or invented inputs for examples and keep restricted data and credentials out of prompts and public commits. <a href="https://docs.github.com/en/repositories/working-with-files/using-files/getting-permanent-links-to-files">GitHub documentation on permanent file links</a>.</p>
+</section>
+<section id="what-each-model-sees" class="level2">
+<h2 class="anchored" data-anchor-id="what-each-model-sees">What each model sees</h2>
+<p>A foundation model learns patterns during pretraining, then reuses them for downstream tasks. When I use a fixed DNA model to score a plant SNP without fitting it to labelled examples of that task, that is <strong>zero-shot</strong> use. When I update a model with labelled splice sites or cell types, I am <strong>fine-tuning</strong> it. I could also keep the model fixed and train a small classifier on its output. That classifier still uses labels. In each case, the test needs to match the claim. To claim that a classifier works in another experiment, I would reserve whole experiments for testing, so it cannot succeed by recognising a batch it saw during training.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>What I give it</th>
+<th>What it can return</th>
+<th>What I would check separately</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>ChatGPT · text and code</strong></td>
+<td>A prompt, the join function and two rows at position 42 with different ALT alleles.</td>
+<td>A patch and a test that should attach each score to the correct row.</td>
+<td>Run the fixture and inspect the full diff against the repository’s input contract.</td>
+</tr>
+<tr class="even">
+<td><strong>GPN / PlantCAD · genomic DNA</strong></td>
+<td>A DNA window around a C→T variant, with the focal base masked for masked-base scoring.</td>
+<td>A relative score for the two bases in that context. A separately fitted PlantCAD task head can score candidate splice sites.</td>
+<td>Ask whether low-scoring alleles are enriched among rare variants after accounting for annotation, population structure and sampling.</td>
+</tr>
+<tr class="odd">
+<td><strong>Geneformer / scGPT · single-cell expression</strong></td>
+<td>Genes and RNA abundance from one cell, encoded as ranks or expression values according to the model.</td>
+<td>A numerical summary of the cell, or a cell-type label from a model fitted for annotation.</td>
+<td>Check the label against markers and test it on cells from an independent sample.</td>
+</tr>
+<tr class="even">
+<td><strong>AlphaFold 3 · molecular structure</strong></td>
+<td>The amino-acid sequence of an <em>Arabidopsis</em> DNA-binding protein and a specified DNA sequence.</td>
+<td>A candidate arrangement of protein and DNA, with confidence estimates.</td>
+<td>Check the placement of the two chains and compare the proposed contact with independent binding or structural data.</td>
+</tr>
+</tbody>
+</table>
+<p>For <strong>ChatGPT</strong>, the two rows are data because I supplied them. If I provide only a screenshot of a scatterplot, the answer cannot determine which rows went into the calculation. I can make the answer checkable by supplying the underlying table or asking for a command I can run to recover it. For a model with tool access, I would still ask which file, revision and command it actually used.</p>
+<p>The <em>Science</em> paper on <strong>Evo</strong> makes a different point about what a model can see. Its long sequence context lets it consider DNA at scales ranging from parts of genes to much larger genomic regions. The authors report that the model learned signals related to how mutations affect function at several molecular scales. The original training data came primarily from prokaryotic and phage genomes. For an <em>Arabidopsis</em> SNP, I would test whether a longer window adds predictive value using a plant-relevant baseline and a plant test set. Context length and evidence of transfer are separate properties. <a href="https://doi.org/10.1126/science.ado9336">Nguyen et al., <em>Science</em> (2024)</a>.</p>
+<section id="dna-gpn-and-plantcaduceus" class="level3">
+<h3 class="anchored" data-anchor-id="dna-gpn-and-plantcaduceus">DNA · GPN and PlantCaduceus</h3>
+<p><strong>GPN</strong> learned from the unaligned reference genomes of <em>Arabidopsis thaliana</em> and seven other Brassicales species. It learns to predict a hidden DNA base from its neighbours. Benegas and colleagues evaluated the scores with population allele frequencies and trait-association data in <em>A. thaliana</em>. Those are two complementary checks. An allele-frequency pattern can be consistent with constraint, and a trait association can help prioritise a region. Establishing that the scored SNP is the causal variant takes additional evidence. <a href="https://doi.org/10.1073/pnas.2311219120">Benegas, Batra &amp; Song, <em>PNAS</em> (2023)</a>.</p>
+<p><strong>GPN-MSA</strong> adds aligned DNA from other species. Imagine that the neighbouring letters make both C and T plausible, while a well-aligned position carries C across several related genomes. The alignment gives the model comparative evidence about that position. The authors evaluated predictions for human variants in coding and noncoding regions. In a comparison with phyloP, I would check how much comparative information the methods share and whether both depend on the same uncertain alignment. <a href="https://doi.org/10.1038/s41587-024-02511-w">Benegas et al., <em>Nature Biotechnology</em> (2025)</a>.</p>
+<p><strong>PlantCaduceus</strong>, or <strong>PlantCAD</strong>, was pretrained on 16 flowering plant genomes. Zhai and colleagues showed that models fine-tuned on annotated <em>Arabidopsis</em> sites could transfer to maize for tasks such as identifying splice junctions and translation boundaries. The paper also evaluated zero-shot variant scores. Suppose a SNP sits beside a splice donor. I could use a sequence score to rank the candidate and a splice-site classifier to ask a more targeted question about the junction. To see whether the plant uses that junction differently, I would look for RNA reads spanning the relevant junctions. <a href="https://doi.org/10.1073/pnas.2421738122">Zhai et al., <em>PNAS</em> (2025)</a> · <a href="https://github.com/plantcad/plantcad">PlantCAD implementation</a>.</p>
+<p>For a masked-base model, one explicitly defined score is <span class="math inline">\(\log_{10}[P(\mathrm{ALT}\mid\mathrm{context})/P(\mathrm{REF}\mid\mathrm{context})]\)</span>. If <span class="math inline">\(P(\mathrm{ALT})=0.05\)</span> and <span class="math inline">\(P(\mathrm{REF})=0.50\)</span>, the score is <span class="math inline">\(-1\)</span>. The model assigns the alternate one tenth the probability of the reference in that window. The ratio tells me about sequence compatibility under that checkpoint. It has no units of fitness. REF and ALT describe the reference assembly and variant record. An evolutionary analysis that needs ancestral and derived states requires a separate polarisation step. I would also check the native scoring convention, context length, reverse-complement handling and treatment of ambiguous bases before comparing models.</p>
+<p>To ask whether the DNA model adds information, I would define a target first. With independently validated variants and credible controls, compare ranking performance with an annotation-only baseline and, when available for the species and build, phyloP or GERP. Examine the change in precision among the number of candidates the lab can follow up. Use held-out chromosomes or genomic blocks where nearby windows and linkage would otherwise cross splits, and group close homologues when testing transfer across genes or species. A block bootstrap can express uncertainty around the gain. If the only outcome is rare-allele enrichment, report it as a population-genetic proxy and consider demography, coverage and ascertainment. If a conservation baseline and a DNA model agree, they may be reading partly shared evolutionary information.</p>
+<p>For a public practice run, I would take a small set of biallelic SNVs from the <em>A. thaliana</em> 1001 Genomes release, verify the TAIR10 REF alleles, and compare score distributions across prespecified annotation and allele-frequency strata. The consortium sequenced 1,135 naturally inbred lines and found geographic structure consistent with a history of glacial refugia and later expansion. In a pooled sample, an allele common in a small regional group can look rare overall. I would therefore examine the pattern within well-sampled groups. GPN already used this panel for evaluation, making the exercise a check on reproducibility. <a href="https://doi.org/10.1016/j.cell.2016.05.063">1001 Genomes Consortium, <em>Cell</em> (2016)</a> · <a href="https://1001genomes.org/data/GMI-MPI/releases/v3.1/">Public variant release</a>.</p>
+</section>
+<section id="rna-geneformer-and-scgpt" class="level3">
+<h3 class="anchored" data-anchor-id="rna-geneformer-and-scgpt">RNA · Geneformer and scGPT</h3>
+<p>Take two cells from a single-cell RNA-seq experiment. One expresses several markers of a cell type, while the other expresses a mixture of those markers and a stress-response programme. What the model receives is a processed record of transcripts detected in each cell. The question of whether the second cell is stressed, belongs to another cell type, or reflects sample handling still depends on the experimental design.</p>
+<p><strong>Geneformer</strong> ranks genes within each cell after accounting for how commonly expressed those genes are in its reference corpus. The original model was pretrained on about 30 million human single-cell transcriptomes. Theodoris and colleagues used it to prioritise candidate regulators in cardiomyopathy and followed up selected predictions experimentally. That progression is worth paying attention to. A simulated change in the cell representation can help select a candidate, and a follow-up experiment can test whether manipulating the candidate affects the phenotype. <a href="https://doi.org/10.1038/s41586-023-06139-9">Theodoris et al., <em>Nature</em> (2023)</a>.</p>
+<p><strong>scGPT</strong> encodes gene identities alongside expression information. Cui and colleagues pretrained it on more than 33 million cells and evaluated downstream tasks such as cell-type annotation, batch integration and perturbation prediction. Those tasks can pull in different directions. For example, an embedding that aligns two batches may also blur a genuine biological difference if each batch corresponds to a different condition. I would check both batch mixing and preservation of cell-type or treatment signals. For either model, applying a human-trained checkpoint to plants would require a species and gene-vocabulary audit. If I map orthologues, I would report what was lost or duplicated and whether the marker genes I care about survived. <a href="https://doi.org/10.1038/s41592-024-02201-0">Cui et al., <em>Nature Methods</em> (2024)</a>.</p>
+<p>Suppose I want to annotate a plant root cell state across experiments. I would compare the embedding against PCA followed by a simple classifier or marker-based annotation. I would split by plant or experiment before fitting the preprocessing and classifier, keep rare states visible with per-class metrics or macro-F1, and examine whether errors cluster by batch or tissue. If asking whether a cell state changes with treatment, I would retain the biological replicate as the unit of inference, for example with replicate-level pseudobulk counts within cell types where appropriate. Cells from one plant are subsamples. A clean embedding cannot supply missing replication.</p>
+<p>For gene perturbation prediction, Ahlmann-Eltze and colleagues found that the tested deep-learning approaches did not outperform simple linear baselines in their comparisons. Consider predicting what happens when two genes are perturbed together. A natural baseline adds the changes observed for each gene on its own. To claim that a more complex model learns interactions, I would test it on held-out gene pairs and ask whether it predicts the departures from additivity. An embedding that organises known cell types has passed a different test. <a href="https://doi.org/10.1038/s41592-025-02772-6">Ahlmann-Eltze, Huber &amp; Anders, <em>Nature Methods</em> (2025)</a>.</p>
+</section>
+<section id="structure-alphafold-3" class="level3">
+<h3 class="anchored" data-anchor-id="structure-alphafold-3">Structure · AlphaFold 3</h3>
+<p>Josh Fischman’s account of the 2024 chemistry Nobel Prize distinguishes two achievements. Demis Hassabis and John Jumper were recognised for protein structure prediction, illustrated by AlphaFold 2. David Baker was recognised for computational protein design. One task starts with a sequence and asks how it might fold. The other can start with a desired structure or property and search for a sequence that can realise it. That distinction also helps when reading claims about newer systems. <a href="https://www.scientificamerican.com/article/chemistry-nobel-2024/">Fischman, <em>Scientific American</em> (2024), reporting</a>.</p>
+<p><strong>AlphaFold 3</strong> uses a diffusion-based architecture to predict a joint arrangement of supplied molecular components. Abramson and colleagues reported improvements over specialised tools on several classes of interactions, including protein–ligand and protein–nucleic acid complexes. Suppose I supply a plant transcription factor and a candidate DNA motif. The result proposes where the protein might sit on that piece of DNA. The inputs already specify which molecules to consider. Asking which motif the protein prefers, or whether it binds in a root cell, requires a comparison with other motifs or evidence from the cell. <a href="https://doi.org/10.1038/s41586-024-07487-w">Abramson et al., <em>Nature</em> (2024)</a> · <a href="https://github.com/google-deepmind/alphafold3/blob/main/docs/output.md">AlphaFold 3 output documentation</a>.</p>
+<figure class="figure">
+<svg viewbox="0 0 640 244" width="640" role="img" aria-labelledby="pose-title pose-desc" style="display:block;max-width:100%;height:auto;margin:auto;background:#fff">
+  <title id="pose-title">Three molecular components in one predicted complex</title>
+  <desc id="pose-desc">A wavy protein line, a two-stranded DNA ladder and a small molecule ring are shown together. Thin leader lines identify each component.</desc>
+  <g fill="none" stroke="#343434" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke-width="6" d="M223 150q-49-24-19-52t58 9q33 42 49 5t35-28q32 7 12 38t-31 41q-11 20 26 22"></path>
+    <path stroke-width="3" d="M262 57q35 11 62 2t62-7q39 2 60 10M262 77q34 8 63 0t60-7q37 2 61 11"></path>
+    <path stroke-width="2" d="M277 62v17m18-16v17m18-18v17m18-22v18m18-22v17m18-20v19m18-19v19m18-17v19m18-14v18"></path>
+    <path stroke-width="3" d="M375 105l15-8 14 8v17l-14 8-15-8z"></path>
+    <path stroke-width="1.5" d="M99 147l81-18m290-86-26 12m20 89-56-23"></path>
+  </g>
+  <g fill="#252525" font-size="19" font-family="system-ui, sans-serif">
+    <text x="27" y="153">Protein</text>
+    <text x="479" y="47">DNA</text>
+    <text x="472" y="152">Small molecule</text>
+  </g>
+</svg>
+<figcaption class="figure-caption">Three components in a predicted complex. Adapted from Fig. 1a of Abramson et al., <i>Nature</i> (2024). Redrawn as a simplified schematic with generic shapes. <a href="https://doi.org/10.1038/s41586-024-07487-w">Original article</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</figcaption>
+</figure>
+<p>For a plant protein complex, I would start with a known isoform and a specific structural question. For instance, where does a naturally occurring residue lie relative to a proposed interface? I would inspect local confidence (pLDDT), the predicted aligned error (PAE) across the relevant chains and, where appropriate, interface confidence (ipTM). Strong local confidence for two folded domains can coexist with uncertain placement between them. I would compare plausible alternatives, record the inputs and seeds, and check experimentally solved homologues when available. A pose can suggest a contact worth following up. Binding affinity, the direction of an allelic effect and interaction in a living cell require their own evidence.</p>
+</section>
+</section>
+<section id="afterword-what-would-count-as-medical-ai-superintelligence" class="level2">
+<h2 class="anchored" data-anchor-id="afterword-what-would-count-as-medical-ai-superintelligence">Afterword · What would count as medical AI superintelligence?</h2>
+<p><em>Added 12 November 2026.</em></p>
+<p>In <em>Toward a test of medical AI superintelligence</em>, Ethan Goh and colleagues propose a demanding comparator. A system would need to outperform teams of top specialists across clinically meaningful tasks. A curated exam question starts with a case someone has already assembled. In a clinic, relevant information can be missing, the record can change, and recognising when to ask for help can matter as much as naming a diagnosis. The accompanying Medical AI Superintelligence Test (MAST) evaluates capabilities such as diagnosis, management, imaging and safety, with held-out cases to protect the evaluation. I would read the results task by task. A system could perform strongly on imaging while missing dangerous management errors. To decide whether using it improves care, I would want evidence from the workflow in which it would be used, including how clinicians respond to its advice and what happens to patients. The paper proposes a way to measure progress towards a capability. <a href="https://www.nature.com/articles/s41591-026-04539-8">Goh et al., <em>Nature Medicine</em> (2026)</a> · <a href="https://www.arise-ai.org/blog/mast">ARISE, MAST framework</a>.</p>
+<section id="who-controls-superintelligent-systems" class="level3">
+<h3 class="anchored" data-anchor-id="who-controls-superintelligent-systems">Who controls superintelligent systems?</h3>
+<p>I would start with a more concrete question. <strong>Who can authorise the system to act, and who can stop it?</strong> Consider two uses of a medical AI system. In one, it drafts a note that a clinician reviews and signs. In the other, its output changes a patient’s place in a triage queue. The second use changes what happens to a patient before anyone reads the reasoning. It calls for its own evidence, clear limits on what the system may do, and a named person or team that can override it. A person asked to approve a long list of outputs needs enough time, access to the source information and the authority to disagree.</p>
+<p>Control is distributed. Developers control training and releases. Hospitals or other deploying institutions decide where the system runs, which tools and data it can access, and who can suspend it locally. Independent evaluators need enough access to reproduce relevant checks and report failures. Public authorities can set oversight requirements, and affected people need a way to challenge a decision. In a hospital, I would ask who can pause the triage system if staff identify a pattern of missed urgent cases, whether the previous workflow can be restored, and who reviews the incident before restart. At the frontier, the same questions apply to permissions, model updates and access to evaluations. The <em>International AI Safety Report</em> describes practices such as testing before release, conditional safeguards and incident reporting. It also notes how limited the evidence is on whether these practices reduce risk in real deployments. <a href="https://internationalaisafetyreport.org/publication/international-ai-safety-report-2026">International AI Safety Report (2026)</a>.</p>
+</section>
+</section>
+<section id="what-would-change-my-mind" class="level2">
+<h2 class="anchored" data-anchor-id="what-would-change-my-mind">What would change my mind?</h2>
+<p>Return to the plant variant at the beginning. The first check is mundane. Does the score belong to the right allele? Then I want to know whether it improves on a baseline on held-out data, and whether the result survives matching for starting frequency and annotation. Expression or structure might suggest a mechanism for a particular candidate. I would keep those lines of evidence separate and ask which observations are genuinely independent.</p>
+<p>For a first attempt, I would take one research script, write a small fixture with a deliberately wrong answer, and use ChatGPT to help make the failure visible. Then I would try one fixed scientific model on one public dataset, beside one simple baseline. Save both outcomes, including cases where the model adds little. That gives the next person something to rerun and something to disagree with.</p>
+<p>The margin of the sketch says “check the baseline”. If a model is only proposing a research candidate, I can test that candidate before I act on it. If its output is already changing a workflow, I also need to know who will notice a failure and who can reverse the decision. In either setting, I want to be able to answer one question before seeing the result. <strong>What evidence would make me change my mind?</strong></p>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/tahirali-biomics\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2026 Dr.&nbsp;Tahir Ali</p>
+</div>   
+    <div class="nav-footer-center">
+<p>Computational biology · Scientific AI · Education</p>
+</div>
+    <div class="nav-footer-right">
+<p>Built with <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

@@ -1333,5 +1333,940 @@ selection filters</strong></p>
   <pubDate>Wed, 31 Dec 2025 23:00:00 GMT</pubDate>
   <media:content url="https://tahirali-biomics.github.io/assets/writings/00-what-does-evolution-need-to-work.webp" medium="image" type="image/webp"/>
 </item>
+<item>
+  <title>What does the model see?</title>
+  <dc:creator>Dr Tahir Ali</dc:creator>
+  <link>https://tahirali-biomics.github.io/posts/2025-12-15-what-does-the-model-see/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p><em>Genomes to AI · Methods notebook · December 2025</em></p>
+<p><em>Revised 12 November 2026 with a worked example from my plant-genomics workflow and an afterword on medical AI and governance.</em></p>
+<p>I can ask ChatGPT to write a script that joins genomic variants to model scores. The script might run on the first attempt. The scatterplot might even look convincing. Then comes the question I would ask of a student’s plot, or of my own. <strong>Are those actually the same alleles?</strong></p>
+<p>A join on chromosome and position can silently attach a score for C→G to a C→T variant. Every downstream calculation can be correct for the resulting table. The biological interpretation is already wrong.</p>
+<p>By “see” I mean <strong>the information the model actually receives for this prediction</strong>. Imagine one variant in an <em>Arabidopsis</em> gene. ChatGPT could read my question and the rows I paste. GPN could receive the DNA letters surrounding the site. A single-cell model could receive an expression profile from a root cell. AlphaFold 3 could receive the sequence of the encoded protein and its proposed partner. Even when the examples all concern the same gene, the models are working with different observations. If I want to know whether the variant affects how plants survive a dry summer, I still need a study that measures survival in the relevant environments.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://tahirali-biomics.github.io/assets/writings/what-does-the-model-see.webp" class="img-fluid figure-img" alt="Dark graphite sketch on warm ruled notebook paper. Handwritten notes link a text prompt, a DNA window and genes per cell, and a molecular pose to checks against independent data."></p>
+<figcaption>What does the model see? A methods-notebook sketch. The numbers in the margin are illustrative.</figcaption>
+</figure>
+</div>
+<section id="begin-with-the-research-question" class="level2">
+<h2 class="anchored" data-anchor-id="begin-with-the-research-question">Begin with the research question</h2>
+<p>Here is a question I can work with as a population geneticist. <em>Do plant variants with large allele-frequency changes tend to receive less favourable DNA model scores than comparable variants?</em> Before opening a chat window, I would write down the reference assembly, the definition of a frequency change, the comparison set and the outcome I would report. A workable comparison might use variants with similar starting allele frequency, coverage and annotation, and use genomic blocks to account for linkage. Which variants count as comparable depends on whether I am asking about predictability or about an evolutionary process.</p>
+<p>A sequence score and a frequency change answer different questions. Sequence context can inform a hypothesis about functional constraint. A temporal frequency shift also reflects sampling, drift, demography and selection. If the question is whether drift can explain an observed shift, the appropriate first comparison is a drift model with explicit sampling and demographic assumptions. The sequence score can then help ask whether departures from that model have a biological pattern.</p>
+<p>Lisa Messeri and M. J. Crockett describe how AI can give researchers a sense of understanding that exceeds the evidence available. A reliable prediction can feel like a causal explanation. Screening millions of variants can feel comprehensive even if all candidates are filtered through one model’s assumptions. A numerical score can look objective even when reference choices, training data and evaluation labels shape it. The authors connect those illusions to a broader concern about scientific monocultures. If many labs use the same model and proxy, agreement can reflect a common method. In my example, a drift simulation and an independent assay offer different checks from scoring the same sequence with a second model. <a href="https://doi.org/10.1038/s41586-024-07146-0">Messeri &amp; Crockett, <em>Nature</em> (2024)</a>.</p>
+</section>
+<section id="how-to-write-a-scientific-chatgpt-prompt" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-write-a-scientific-chatgpt-prompt">How to write a scientific ChatGPT prompt</h2>
+<p>I write a scientific prompt the way I would brief a colleague who is seeing the project for the first time. I start with a decision I can make after reading the answer. Then I supply the pieces of evidence and the conventions that a colleague would otherwise have to ask me about. A good test of the prompt is whether I can tell in advance what a wrong answer would look like.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>What to specify</th>
+<th>In the example below</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>1. State the decision</strong></td>
+<td>Give the research question and the next action the answer should inform.</td>
+<td>Decide whether two score–frequency summaries can be compared.</td>
+</tr>
+<tr class="even">
+<td><strong>2. Provide the evidence</strong></td>
+<td>Supply a small input, relevant code or passages, and the provenance of each.</td>
+<td>Provide a table with SNPs retained in each run.</td>
+</tr>
+<tr class="odd">
+<td><strong>3. Define the comparison</strong></td>
+<td>Set the unit of analysis, reference, allele orientation, score units, filters and statistic.</td>
+<td>One row per SNP, the same derived allele, and Pearson correlation on shared rows.</td>
+</tr>
+<tr class="even">
+<td><strong>4. Request an inspectable output</strong></td>
+<td>Ask for a table, script or patch with named fields and a clear scope.</td>
+<td>Request row counts, correlations and a runnable check.</td>
+</tr>
+<tr class="odd">
+<td><strong>5. Give a known answer</strong></td>
+<td>Include one expectation you can verify yourself and one failure case.</td>
+<td>A positive rescaling preserves Pearson correlation on the same rows. A one-row tail has no correlation.</td>
+</tr>
+<tr class="even">
+<td><strong>6. Specify how to handle missing evidence</strong></td>
+<td>Ask what was run, which assumptions remain open and which conclusions the result supports.</td>
+<td>Identify missing metadata and explain what the toy example can establish.</td>
+</tr>
+</tbody>
+</table>
+<section id="a-worked-prompt-from-a-plant-genomics-chat" class="level3">
+<h3 class="anchored" data-anchor-id="a-worked-prompt-from-a-plant-genomics-chat">A worked prompt from a plant-genomics chat</h3>
+<p>In a discussion about my <em>Arabidopsis lyrata</em> benchmark, I asked why an earlier plot of GPN scores against derived allele frequency looked stronger. There were several plausible explanations. The two runs could retain different SNPs, summarise single SNPs versus bins of frequency, or use different score conventions. “Explain the stronger relationship” invites a story before those possibilities have been checked. Here is how I would pose the same question with invented data and a known answer.</p>
+<pre class="text"><code>Decision
+I want to know whether two GPN–frequency summaries are directly comparable.
+Audit the data and statistic first. Use only the synthetic table below.
+
+Data and conventions
+One row is one already harmonised biallelic SNP on a single reference.
+DAF is derived allele frequency in the same sample in both runs.
+In this fixture the derived allele is ALT for every SNP. A score is the
+base-10 log likelihood ratio for ALT relative to REF. Run B represents
+the same scores in natural-log units, multiplying by ln(10).
+keep_A and keep_B indicate whether that SNP survived each run's filters.
+
+snp,score_log10,DAF,keep_A,keep_B
+s1,-1.0,0.02,1,1
+s2,-0.8,0.06,1,1
+s3,-0.5,0.10,1,1
+s4,-0.2,0.20,1,1
+s5,0.0,0.18,1,1
+s6,-1.4,0.01,1,0
+s7,-1.4,0.40,0,1
+
+Output
+Provide a short runnable R or Python script and a table of n and Pearson r.
+Calculate each run on its own SNPs, then repeat on the exact shared SNPs.
+On the shared set, count the negative scores and take the lowest 25% of
+those scores, rounding the count up. Include cutoff ties if there are any.
+Report when r is undefined. Keep zero in the full-set analysis.
+
+Checks and interpretation
+Expect six SNPs in each run and five shared. Verify that converting score
+units alone leaves r unchanged on the shared rows. Explain why a plot of
+bin means cannot be compared directly with a per-SNP r.
+For a real rerun, list the metadata and code needed to match the earlier
+analysis. State what you executed and what you verified by inspection.</code></pre>
+<p>On the five shared SNPs, both runs give the same Pearson correlation. Multiplying all scores by the same positive constant changes their units and leaves that correlation unchanged. Including the two different run-specific SNPs changes the result because the most negative score is paired with a rare allele in one run and a common allele in the other. The shared set has four negative scores, so the tail contains one SNP and its correlation is undefined.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 26%">
+<col style="width: 26%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Analysis</th>
+<th style="text-align: right;">SNPs</th>
+<th style="text-align: right;">Run A, Pearson <img src="https://latex.codecogs.com/png.latex?r"></th>
+<th style="text-align: right;">Run B, Pearson <img src="https://latex.codecogs.com/png.latex?r"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Each run’s own SNPs</td>
+<td style="text-align: right;">6 per run</td>
+<td style="text-align: right;">0.948</td>
+<td style="text-align: right;">−0.265</td>
+</tr>
+<tr class="even">
+<td>Same shared SNPs</td>
+<td style="text-align: right;">5 per run</td>
+<td style="text-align: right;">0.961</td>
+<td style="text-align: right;">0.961</td>
+</tr>
+<tr class="odd">
+<td>Lowest quarter of shared negative scores</td>
+<td style="text-align: right;">1 per run</td>
+<td style="text-align: right;">Undefined</td>
+<td style="text-align: right;">Undefined</td>
+</tr>
+</tbody>
+</table>
+<details>
+<summary>
+Reproduce the toy results in Python
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> math <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> ceil, log</span>
+<span id="cb2-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> statistics <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> correlation</span>
+<span id="cb2-3"></span>
+<span id="cb2-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Columns match the synthetic table in the prompt, in the same order.</span></span>
+<span id="cb2-5">snps <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [</span>
+<span id="cb2-6">    (<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"s1"</span>, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.0</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.02</span>, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>),</span>
+<span id="cb2-7">    (<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"s2"</span>, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.8</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.06</span>, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>),</span>
+<span id="cb2-8">    (<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"s3"</span>, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.10</span>, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>),</span>
+<span id="cb2-9">    (<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"s4"</span>, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.2</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.20</span>, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>),</span>
+<span id="cb2-10">    (<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"s5"</span>,  <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.0</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.18</span>, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>),</span>
+<span id="cb2-11">    (<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"s6"</span>, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.4</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.01</span>, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">False</span>),</span>
+<span id="cb2-12">    (<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"s7"</span>, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.4</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.40</span>, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">False</span>, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>),</span>
+<span id="cb2-13">]</span>
+<span id="cb2-14"></span>
+<span id="cb2-15"></span>
+<span id="cb2-16"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> summarize(rows, scale):</span>
+<span id="cb2-17">    scores <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [row[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> scale <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> row <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> rows]</span>
+<span id="cb2-18">    frequencies <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [row[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>] <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> row <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> rows]</span>
+<span id="cb2-19">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">set</span>(scores)) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">or</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">set</span>(frequencies)) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>:</span>
+<span id="cb2-20">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(rows), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"undefined"</span></span>
+<span id="cb2-21">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(rows), <span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>correlation(scores, frequencies)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:.3f}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span></span>
+<span id="cb2-22"></span>
+<span id="cb2-23"></span>
+<span id="cb2-24">run_a <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [row <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> row <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> snps <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> row[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>]]</span>
+<span id="cb2-25">run_b <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [row <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> row <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> snps <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> row[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>]]</span>
+<span id="cb2-26">shared <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [row <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> row <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> snps <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> row[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>] <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">and</span> row[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>]]</span>
+<span id="cb2-27">negative_scores <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">sorted</span>(row[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> row <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> shared <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> row[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>)</span>
+<span id="cb2-28">cutoff <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> negative_scores[ceil(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(negative_scores) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>]</span>
+<span id="cb2-29">tail <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [row <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> row <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> shared <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> row[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;=</span> cutoff]</span>
+<span id="cb2-30"></span>
+<span id="cb2-31"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"A only its retained SNPs"</span>, summarize(run_a, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>))</span>
+<span id="cb2-32"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"B only its retained SNPs"</span>, summarize(run_b, log(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>)))</span>
+<span id="cb2-33"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Shared SNPs, A and B"</span>, summarize(shared, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>), summarize(shared, log(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>)))</span>
+<span id="cb2-34"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Shared negative tail, A and B"</span>, summarize(tail, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>), summarize(tail, log(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>)))</span></code></pre></div></div>
+</details>
+<p>Binning answers a different question again. It averages over variation within each bin, and a correlation of bin means gives each bin one point regardless of how many SNPs it contains. For the real analysis I would freeze the SNP intersection, verify which allele the score describes, recover the old binning and tail rules, and use genomic blocks to account for linkage when estimating uncertainty.</p>
+</section>
+<section id="a-prompt-i-would-use-for-a-github-script" class="level3">
+<h3 class="anchored" data-anchor-id="a-prompt-i-would-use-for-a-github-script">A prompt I would use for a GitHub script</h3>
+<p>Give ChatGPT the relevant function, the README section that defines the inputs, and a small public or synthetic example. A repository link is useful for orientation. The exact revision and the relevant code are what make a proposed edit reviewable. If the chat has repository access, ask it to cite the files and lines it actually inspected.</p>
+<pre class="text"><code>Goal
+Review the join that attaches plant DNA-model scores to biallelic SNVs.
+
+Evidence
+Use the README, existing join function and synthetic input shown below.
+Repository revision: [commit SHA]. Reference assembly: [assembly accession].
+Both inputs use 1-based genomic positions and the forward reference strand.
+The join key is (chrom, pos, ref, alt). A second ALT can occur at the same site.
+
+Deliverable
+First describe the current behaviour with file and line references.
+Then propose a minimal patch, a runnable check and its expected output.
+Preserve input row order. Count unmatched rows and keep their scores missing.
+Fail on duplicate score keys. Keep a numerical zero as a valid score.
+
+Verification
+Show cases for two ALTs at one position, a REF mismatch, a duplicate key
+and a true zero. Explain which check verifies the FASTA reference base and
+which check only verifies the join. List any assumptions you could not verify.
+Report which commands you actually ran and their exit status.</code></pre>
+<p>A second prompt can be shorter. “Review the patch against the original contract. Identify the first fixture that would fail and explain why.” I run that fixture myself. A second chat can offer another reading, but two agreeing chat responses still leave the software untested.</p>
+</section>
+<section id="a-prompt-for-literature-statistics-or-a-manuscript" class="level3">
+<h3 class="anchored" data-anchor-id="a-prompt-for-literature-statistics-or-a-manuscript">A prompt for literature, statistics or a manuscript</h3>
+<pre class="text"><code>Using the papers and excerpts I provide, assess the claim:
+"Lower DNA-model scores explain the observed temporal allele-frequency shifts."
+
+Return a table with claim, source or result, evidence type, alternative
+explanation, and a sentence supported by the evidence. Separate published
+results, my observations and proposed hypotheses. For published results,
+identify the figure, table or passage supporting each claim. If a source
+does not establish the claim, show which part remains unresolved.
+For each suggested statistical check, state the unit of replication,
+the comparison group and one outcome that would weaken the claim.</code></pre>
+<p>For a methods edit, I supply the actual command, software version, settings and exclusions, then compare the edited paragraph with the run record. For debugging, I supply the smallest failing example and its expected behaviour. For literature discovery, I verify the DOI and the figure, table or passage behind each claim. Joe Slater, James Humphries and Michael Townsen Hicks argue in <em>Scientific American</em> that the word “hallucination” can obscure how fluent text gets mistaken for a truth-seeking account and who is responsible when that text is used. A real citation attached to a claim it never tested is a good example. The DOI can resolve perfectly while the sentence still needs correction. <a href="https://www.scientificamerican.com/article/chatgpt-isnt-hallucinating-its-bullshitting/">Slater, Humphries &amp; Hicks, <em>Scientific American</em> (2024), opinion</a>.</p>
+</section>
+</section>
+<section id="take-the-script-from-chat-to-github" class="level2">
+<h2 class="anchored" data-anchor-id="take-the-script-from-chat-to-github">Take the script from chat to GitHub</h2>
+<p>Here is a runnable, dependency-free fixture for the join. It uses invented contig names and precomputed scores. The input contains two different ALTs at position 42, a different REF at the same coordinate and a true zero. Copy it into a temporary Python file and run it with Python 3.10 or newer.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> math <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> isfinite</span>
+<span id="cb5-2"></span>
+<span id="cb5-3">Variant <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">tuple</span>[<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span>, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>]</span>
+<span id="cb5-4"></span>
+<span id="cb5-5"></span>
+<span id="cb5-6"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> attach_scores(</span>
+<span id="cb5-7">    variants: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">list</span>[Variant],</span>
+<span id="cb5-8">    score_rows: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">list</span>[<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">tuple</span>[Variant, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span>]],</span>
+<span id="cb5-9">) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-&gt;</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">list</span>[<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">tuple</span>[Variant, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>]]:</span>
+<span id="cb5-10">    scores <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> {}</span>
+<span id="cb5-11">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> key, score <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> score_rows:</span>
+<span id="cb5-12">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> key <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> scores:</span>
+<span id="cb5-13">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">raise</span> <span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">ValueError</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"Duplicate score key: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>key<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb5-14">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">not</span> isfinite(score):</span>
+<span id="cb5-15">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">raise</span> <span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">ValueError</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"Non-finite score: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>key<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb5-16">        scores[key] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> score</span>
+<span id="cb5-17"></span>
+<span id="cb5-18">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> [(key, scores.get(key)) <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> key <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> variants]</span>
+<span id="cb5-19"></span>
+<span id="cb5-20"></span>
+<span id="cb5-21">variants <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [</span>
+<span id="cb5-22">    (<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"toy1"</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">42</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"C"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"T"</span>),</span>
+<span id="cb5-23">    (<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"toy1"</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">42</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"C"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"G"</span>),</span>
+<span id="cb5-24">    (<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"toy1"</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">42</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"A"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"T"</span>),</span>
+<span id="cb5-25">    (<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"toy1"</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">77</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"G"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"A"</span>),</span>
+<span id="cb5-26">]</span>
+<span id="cb5-27">score_rows <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [</span>
+<span id="cb5-28">    ((<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"toy1"</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">42</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"C"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"G"</span>), <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.2</span>),</span>
+<span id="cb5-29">    ((<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"toy1"</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">42</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"C"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"T"</span>), <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.0</span>),</span>
+<span id="cb5-30">    ((<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"toy1"</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">77</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"G"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"A"</span>), <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.4</span>),</span>
+<span id="cb5-31">]</span>
+<span id="cb5-32"></span>
+<span id="cb5-33">result <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> attach_scores(variants, score_rows)</span>
+<span id="cb5-34"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">assert</span> [key <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> key, score <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> result] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> variants</span>
+<span id="cb5-35"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">assert</span> [score <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> key, score <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> result] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> [<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.0</span>, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.2</span>, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.4</span>]</span>
+<span id="cb5-36"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">assert</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">sum</span>(score <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">is</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> key, score <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> result) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb5-37"></span>
+<span id="cb5-38"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">try</span>:</span>
+<span id="cb5-39">    attach_scores(variants, score_rows <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> [score_rows[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>]])</span>
+<span id="cb5-40"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">except</span> <span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">ValueError</span> <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> error:</span>
+<span id="cb5-41">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">assert</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Duplicate score key"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>(error)</span>
+<span id="cb5-42"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">else</span>:</span>
+<span id="cb5-43">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">raise</span> <span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">AssertionError</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Duplicate score key was accepted"</span>)</span>
+<span id="cb5-44"></span>
+<span id="cb5-45"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"4 variants, 3 matched, 1 unmatched; duplicate rejected."</span>)</span></code></pre></div></div>
+<p>The fixture isolates the join. In a real workflow I would check each REF against the exact indexed FASTA before scoring or merging, and log reference mismatches separately from valid variants with no score. Here, the row with REF A exercises the <strong>join</strong> behaviour. A production preflight on a FASTA with C at position 42 should reject it earlier. I would record assembly and annotation accessions and checksums, normalise variants where needed, define how multi-allelic sites are handled, and reconcile contig naming and coordinate conventions explicitly. A 1-based single-site coordinate <img src="https://latex.codecogs.com/png.latex?p"> becomes the BED interval <img src="https://latex.codecogs.com/png.latex?%5Bp-1,p)">. Agreement between two tables can still be wrong if both are on the same wrong assembly.</p>
+<p>A GitHub pull request is where I want the scientific assumptions to become visible. Start from a named commit and create a branch. Read the diff, run the small check and the repository’s existing tests, and compare row counts before and after the change. In the pull request record the input contract, the edge cases exercised, the command and outcome, and any changes to the denominator. Keep the toy data and expected output alongside the code when they protect a specific regression. For a result others should reproduce, link to the commit or release, and record the software environment, model checkpoint or revision, reference checksums, parameters and seeds. For a Slurm or GPU run, capture the submitted script and logs. A 20-row smoke test can expose path, dependency and format problems before a full run. Use public or invented inputs for examples and keep restricted data and credentials out of prompts and public commits. <a href="https://docs.github.com/en/repositories/working-with-files/using-files/getting-permanent-links-to-files">GitHub documentation on permanent file links</a>.</p>
+</section>
+<section id="what-each-model-sees" class="level2">
+<h2 class="anchored" data-anchor-id="what-each-model-sees">What each model sees</h2>
+<p>A foundation model learns patterns during pretraining, then reuses them for downstream tasks. When I use a fixed DNA model to score a plant SNP without fitting it to labelled examples of that task, that is <strong>zero-shot</strong> use. When I update a model with labelled splice sites or cell types, I am <strong>fine-tuning</strong> it. I could also keep the model fixed and train a small classifier on its output. That classifier still uses labels. In each case, the test needs to match the claim. To claim that a classifier works in another experiment, I would reserve whole experiments for testing, so it cannot succeed by recognising a batch it saw during training.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>What I give it</th>
+<th>What it can return</th>
+<th>What I would check separately</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>ChatGPT · text and code</strong></td>
+<td>A prompt, the join function and two rows at position 42 with different ALT alleles.</td>
+<td>A patch and a test that should attach each score to the correct row.</td>
+<td>Run the fixture and inspect the full diff against the repository’s input contract.</td>
+</tr>
+<tr class="even">
+<td><strong>GPN / PlantCAD · genomic DNA</strong></td>
+<td>A DNA window around a C→T variant, with the focal base masked for masked-base scoring.</td>
+<td>A relative score for the two bases in that context. A separately fitted PlantCAD task head can score candidate splice sites.</td>
+<td>Ask whether low-scoring alleles are enriched among rare variants after accounting for annotation, population structure and sampling.</td>
+</tr>
+<tr class="odd">
+<td><strong>Geneformer / scGPT · single-cell expression</strong></td>
+<td>Genes and RNA abundance from one cell, encoded as ranks or expression values according to the model.</td>
+<td>A numerical summary of the cell, or a cell-type label from a model fitted for annotation.</td>
+<td>Check the label against markers and test it on cells from an independent sample.</td>
+</tr>
+<tr class="even">
+<td><strong>AlphaFold 3 · molecular structure</strong></td>
+<td>The amino-acid sequence of an <em>Arabidopsis</em> DNA-binding protein and a specified DNA sequence.</td>
+<td>A candidate arrangement of protein and DNA, with confidence estimates.</td>
+<td>Check the placement of the two chains and compare the proposed contact with independent binding or structural data.</td>
+</tr>
+</tbody>
+</table>
+<p>For <strong>ChatGPT</strong>, the two rows are data because I supplied them. If I provide only a screenshot of a scatterplot, the answer cannot determine which rows went into the calculation. I can make the answer checkable by supplying the underlying table or asking for a command I can run to recover it. For a model with tool access, I would still ask which file, revision and command it actually used.</p>
+<p>The <em>Science</em> paper on <strong>Evo</strong> makes a different point about what a model can see. Its long sequence context lets it consider DNA at scales ranging from parts of genes to much larger genomic regions. The authors report that the model learned signals related to how mutations affect function at several molecular scales. The original training data came primarily from prokaryotic and phage genomes. For an <em>Arabidopsis</em> SNP, I would test whether a longer window adds predictive value using a plant-relevant baseline and a plant test set. Context length and evidence of transfer are separate properties. <a href="https://doi.org/10.1126/science.ado9336">Nguyen et al., <em>Science</em> (2024)</a>.</p>
+<section id="dna-gpn-and-plantcaduceus" class="level3">
+<h3 class="anchored" data-anchor-id="dna-gpn-and-plantcaduceus">DNA · GPN and PlantCaduceus</h3>
+<p><strong>GPN</strong> learned from the unaligned reference genomes of <em>Arabidopsis thaliana</em> and seven other Brassicales species. It learns to predict a hidden DNA base from its neighbours. Benegas and colleagues evaluated the scores with population allele frequencies and trait-association data in <em>A. thaliana</em>. Those are two complementary checks. An allele-frequency pattern can be consistent with constraint, and a trait association can help prioritise a region. Establishing that the scored SNP is the causal variant takes additional evidence. <a href="https://doi.org/10.1073/pnas.2311219120">Benegas, Batra &amp; Song, <em>PNAS</em> (2023)</a>.</p>
+<p><strong>GPN-MSA</strong> adds aligned DNA from other species. Imagine that the neighbouring letters make both C and T plausible, while a well-aligned position carries C across several related genomes. The alignment gives the model comparative evidence about that position. The authors evaluated predictions for human variants in coding and noncoding regions. In a comparison with phyloP, I would check how much comparative information the methods share and whether both depend on the same uncertain alignment. <a href="https://doi.org/10.1038/s41587-024-02511-w">Benegas et al., <em>Nature Biotechnology</em> (2025)</a>.</p>
+<p><strong>PlantCaduceus</strong>, or <strong>PlantCAD</strong>, was pretrained on 16 flowering plant genomes. Zhai and colleagues showed that models fine-tuned on annotated <em>Arabidopsis</em> sites could transfer to maize for tasks such as identifying splice junctions and translation boundaries. The paper also evaluated zero-shot variant scores. Suppose a SNP sits beside a splice donor. I could use a sequence score to rank the candidate and a splice-site classifier to ask a more targeted question about the junction. To see whether the plant uses that junction differently, I would look for RNA reads spanning the relevant junctions. <a href="https://doi.org/10.1073/pnas.2421738122">Zhai et al., <em>PNAS</em> (2025)</a> · <a href="https://github.com/plantcad/plantcad">PlantCAD implementation</a>.</p>
+<p>For a masked-base model, one explicitly defined score is <img src="https://latex.codecogs.com/png.latex?%5Clog_%7B10%7D%5BP(%5Cmathrm%7BALT%7D%5Cmid%5Cmathrm%7Bcontext%7D)/P(%5Cmathrm%7BREF%7D%5Cmid%5Cmathrm%7Bcontext%7D)%5D">. If <img src="https://latex.codecogs.com/png.latex?P(%5Cmathrm%7BALT%7D)=0.05"> and <img src="https://latex.codecogs.com/png.latex?P(%5Cmathrm%7BREF%7D)=0.50">, the score is <img src="https://latex.codecogs.com/png.latex?-1">. The model assigns the alternate one tenth the probability of the reference in that window. The ratio tells me about sequence compatibility under that checkpoint. It has no units of fitness. REF and ALT describe the reference assembly and variant record. An evolutionary analysis that needs ancestral and derived states requires a separate polarisation step. I would also check the native scoring convention, context length, reverse-complement handling and treatment of ambiguous bases before comparing models.</p>
+<p>To ask whether the DNA model adds information, I would define a target first. With independently validated variants and credible controls, compare ranking performance with an annotation-only baseline and, when available for the species and build, phyloP or GERP. Examine the change in precision among the number of candidates the lab can follow up. Use held-out chromosomes or genomic blocks where nearby windows and linkage would otherwise cross splits, and group close homologues when testing transfer across genes or species. A block bootstrap can express uncertainty around the gain. If the only outcome is rare-allele enrichment, report it as a population-genetic proxy and consider demography, coverage and ascertainment. If a conservation baseline and a DNA model agree, they may be reading partly shared evolutionary information.</p>
+<p>For a public practice run, I would take a small set of biallelic SNVs from the <em>A. thaliana</em> 1001 Genomes release, verify the TAIR10 REF alleles, and compare score distributions across prespecified annotation and allele-frequency strata. The consortium sequenced 1,135 naturally inbred lines and found geographic structure consistent with a history of glacial refugia and later expansion. In a pooled sample, an allele common in a small regional group can look rare overall. I would therefore examine the pattern within well-sampled groups. GPN already used this panel for evaluation, making the exercise a check on reproducibility. <a href="https://doi.org/10.1016/j.cell.2016.05.063">1001 Genomes Consortium, <em>Cell</em> (2016)</a> · <a href="https://1001genomes.org/data/GMI-MPI/releases/v3.1/">Public variant release</a>.</p>
+</section>
+<section id="rna-geneformer-and-scgpt" class="level3">
+<h3 class="anchored" data-anchor-id="rna-geneformer-and-scgpt">RNA · Geneformer and scGPT</h3>
+<p>Take two cells from a single-cell RNA-seq experiment. One expresses several markers of a cell type, while the other expresses a mixture of those markers and a stress-response programme. What the model receives is a processed record of transcripts detected in each cell. The question of whether the second cell is stressed, belongs to another cell type, or reflects sample handling still depends on the experimental design.</p>
+<p><strong>Geneformer</strong> ranks genes within each cell after accounting for how commonly expressed those genes are in its reference corpus. The original model was pretrained on about 30 million human single-cell transcriptomes. Theodoris and colleagues used it to prioritise candidate regulators in cardiomyopathy and followed up selected predictions experimentally. That progression is worth paying attention to. A simulated change in the cell representation can help select a candidate, and a follow-up experiment can test whether manipulating the candidate affects the phenotype. <a href="https://doi.org/10.1038/s41586-023-06139-9">Theodoris et al., <em>Nature</em> (2023)</a>.</p>
+<p><strong>scGPT</strong> encodes gene identities alongside expression information. Cui and colleagues pretrained it on more than 33 million cells and evaluated downstream tasks such as cell-type annotation, batch integration and perturbation prediction. Those tasks can pull in different directions. For example, an embedding that aligns two batches may also blur a genuine biological difference if each batch corresponds to a different condition. I would check both batch mixing and preservation of cell-type or treatment signals. For either model, applying a human-trained checkpoint to plants would require a species and gene-vocabulary audit. If I map orthologues, I would report what was lost or duplicated and whether the marker genes I care about survived. <a href="https://doi.org/10.1038/s41592-024-02201-0">Cui et al., <em>Nature Methods</em> (2024)</a>.</p>
+<p>Suppose I want to annotate a plant root cell state across experiments. I would compare the embedding against PCA followed by a simple classifier or marker-based annotation. I would split by plant or experiment before fitting the preprocessing and classifier, keep rare states visible with per-class metrics or macro-F1, and examine whether errors cluster by batch or tissue. If asking whether a cell state changes with treatment, I would retain the biological replicate as the unit of inference, for example with replicate-level pseudobulk counts within cell types where appropriate. Cells from one plant are subsamples. A clean embedding cannot supply missing replication.</p>
+<p>For gene perturbation prediction, Ahlmann-Eltze and colleagues found that the tested deep-learning approaches did not outperform simple linear baselines in their comparisons. Consider predicting what happens when two genes are perturbed together. A natural baseline adds the changes observed for each gene on its own. To claim that a more complex model learns interactions, I would test it on held-out gene pairs and ask whether it predicts the departures from additivity. An embedding that organises known cell types has passed a different test. <a href="https://doi.org/10.1038/s41592-025-02772-6">Ahlmann-Eltze, Huber &amp; Anders, <em>Nature Methods</em> (2025)</a>.</p>
+</section>
+<section id="structure-alphafold-3" class="level3">
+<h3 class="anchored" data-anchor-id="structure-alphafold-3">Structure · AlphaFold 3</h3>
+<p>Josh Fischman’s account of the 2024 chemistry Nobel Prize distinguishes two achievements. Demis Hassabis and John Jumper were recognised for protein structure prediction, illustrated by AlphaFold 2. David Baker was recognised for computational protein design. One task starts with a sequence and asks how it might fold. The other can start with a desired structure or property and search for a sequence that can realise it. That distinction also helps when reading claims about newer systems. <a href="https://www.scientificamerican.com/article/chemistry-nobel-2024/">Fischman, <em>Scientific American</em> (2024), reporting</a>.</p>
+<p><strong>AlphaFold 3</strong> uses a diffusion-based architecture to predict a joint arrangement of supplied molecular components. Abramson and colleagues reported improvements over specialised tools on several classes of interactions, including protein–ligand and protein–nucleic acid complexes. Suppose I supply a plant transcription factor and a candidate DNA motif. The result proposes where the protein might sit on that piece of DNA. The inputs already specify which molecules to consider. Asking which motif the protein prefers, or whether it binds in a root cell, requires a comparison with other motifs or evidence from the cell. <a href="https://doi.org/10.1038/s41586-024-07487-w">Abramson et al., <em>Nature</em> (2024)</a> · <a href="https://github.com/google-deepmind/alphafold3/blob/main/docs/output.md">AlphaFold 3 output documentation</a>.</p>
+<figure class="figure">
+<svg viewbox="0 0 640 244" width="640" aria-labelledby="pose-title pose-desc" style="display:block;max-width:100%;height:auto;margin:auto;background:#fff">
+  <title id="pose-title">Three molecular components in one predicted complex</title>
+  <desc id="pose-desc">A wavy protein line, a two-stranded DNA ladder and a small molecule ring are shown together. Thin leader lines identify each component.</desc>
+  <g fill="none" stroke="#343434" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke-width="6" d="M223 150q-49-24-19-52t58 9q33 42 49 5t35-28q32 7 12 38t-31 41q-11 20 26 22"></path>
+    <path stroke-width="3" d="M262 57q35 11 62 2t62-7q39 2 60 10M262 77q34 8 63 0t60-7q37 2 61 11"></path>
+    <path stroke-width="2" d="M277 62v17m18-16v17m18-18v17m18-22v18m18-22v17m18-20v19m18-19v19m18-17v19m18-14v18"></path>
+    <path stroke-width="3" d="M375 105l15-8 14 8v17l-14 8-15-8z"></path>
+    <path stroke-width="1.5" d="M99 147l81-18m290-86-26 12m20 89-56-23"></path>
+  </g>
+  <g fill="#252525" font-size="19" font-family="system-ui, sans-serif">
+    <text x="27" y="153">Protein</text>
+    <text x="479" y="47">DNA</text>
+    <text x="472" y="152">Small molecule</text>
+  </g>
+</svg>
+<figcaption class="figure-caption">Three components in a predicted complex. Adapted from Fig. 1a of Abramson et al., <i>Nature</i> (2024). Redrawn as a simplified schematic with generic shapes. <a href="https://doi.org/10.1038/s41586-024-07487-w">Original article</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</figcaption>
+</figure>
+<p>For a plant protein complex, I would start with a known isoform and a specific structural question. For instance, where does a naturally occurring residue lie relative to a proposed interface? I would inspect local confidence (pLDDT), the predicted aligned error (PAE) across the relevant chains and, where appropriate, interface confidence (ipTM). Strong local confidence for two folded domains can coexist with uncertain placement between them. I would compare plausible alternatives, record the inputs and seeds, and check experimentally solved homologues when available. A pose can suggest a contact worth following up. Binding affinity, the direction of an allelic effect and interaction in a living cell require their own evidence.</p>
+</section>
+</section>
+<section id="afterword-what-would-count-as-medical-ai-superintelligence" class="level2">
+<h2 class="anchored" data-anchor-id="afterword-what-would-count-as-medical-ai-superintelligence">Afterword · What would count as medical AI superintelligence?</h2>
+<p><em>Added 12 November 2026.</em></p>
+<p>In <em>Toward a test of medical AI superintelligence</em>, Ethan Goh and colleagues propose a demanding comparator. A system would need to outperform teams of top specialists across clinically meaningful tasks. A curated exam question starts with a case someone has already assembled. In a clinic, relevant information can be missing, the record can change, and recognising when to ask for help can matter as much as naming a diagnosis. The accompanying Medical AI Superintelligence Test (MAST) evaluates capabilities such as diagnosis, management, imaging and safety, with held-out cases to protect the evaluation. I would read the results task by task. A system could perform strongly on imaging while missing dangerous management errors. To decide whether using it improves care, I would want evidence from the workflow in which it would be used, including how clinicians respond to its advice and what happens to patients. The paper proposes a way to measure progress towards a capability. <a href="https://www.nature.com/articles/s41591-026-04539-8">Goh et al., <em>Nature Medicine</em> (2026)</a> · <a href="https://www.arise-ai.org/blog/mast">ARISE, MAST framework</a>.</p>
+<section id="who-controls-superintelligent-systems" class="level3">
+<h3 class="anchored" data-anchor-id="who-controls-superintelligent-systems">Who controls superintelligent systems?</h3>
+<p>I would start with a more concrete question. <strong>Who can authorise the system to act, and who can stop it?</strong> Consider two uses of a medical AI system. In one, it drafts a note that a clinician reviews and signs. In the other, its output changes a patient’s place in a triage queue. The second use changes what happens to a patient before anyone reads the reasoning. It calls for its own evidence, clear limits on what the system may do, and a named person or team that can override it. A person asked to approve a long list of outputs needs enough time, access to the source information and the authority to disagree.</p>
+<p>Control is distributed. Developers control training and releases. Hospitals or other deploying institutions decide where the system runs, which tools and data it can access, and who can suspend it locally. Independent evaluators need enough access to reproduce relevant checks and report failures. Public authorities can set oversight requirements, and affected people need a way to challenge a decision. In a hospital, I would ask who can pause the triage system if staff identify a pattern of missed urgent cases, whether the previous workflow can be restored, and who reviews the incident before restart. At the frontier, the same questions apply to permissions, model updates and access to evaluations. The <em>International AI Safety Report</em> describes practices such as testing before release, conditional safeguards and incident reporting. It also notes how limited the evidence is on whether these practices reduce risk in real deployments. <a href="https://internationalaisafetyreport.org/publication/international-ai-safety-report-2026">International AI Safety Report (2026)</a>.</p>
+</section>
+</section>
+<section id="what-would-change-my-mind" class="level2">
+<h2 class="anchored" data-anchor-id="what-would-change-my-mind">What would change my mind?</h2>
+<p>Return to the plant variant at the beginning. The first check is mundane. Does the score belong to the right allele? Then I want to know whether it improves on a baseline on held-out data, and whether the result survives matching for starting frequency and annotation. Expression or structure might suggest a mechanism for a particular candidate. I would keep those lines of evidence separate and ask which observations are genuinely independent.</p>
+<p>For a first attempt, I would take one research script, write a small fixture with a deliberately wrong answer, and use ChatGPT to help make the failure visible. Then I would try one fixed scientific model on one public dataset, beside one simple baseline. Save both outcomes, including cases where the model adds little. That gives the next person something to rerun and something to disagree with.</p>
+<p>The margin of the sketch says “check the baseline”. If a model is only proposing a research candidate, I can test that candidate before I act on it. If its output is already changing a workflow, I also need to know who will notice a failure and who can reverse the decision. In either setting, I want to be able to answer one question before seeing the result. <strong>What evidence would make me change my mind?</strong></p>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
+  <category>Genomes to AI</category>
+  <category>Scientific AI</category>
+  <category>Genomics</category>
+  <guid>https://tahirali-biomics.github.io/posts/2025-12-15-what-does-the-model-see/</guid>
+  <pubDate>Sun, 14 Dec 2025 23:00:00 GMT</pubDate>
+  <media:content url="https://tahirali-biomics.github.io/assets/writings/what-does-the-model-see.webp" medium="image" type="image/webp"/>
+</item>
 </channel>
 </rss>
