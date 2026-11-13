@@ -18,6 +18,7 @@ format:
   <article class="app-item"><h3><a href="coalescent-explorer-app.html">Coalescent Explorer</a></h3><p>Explore genealogies and site-frequency spectra under growth, bottlenecks, migration, admixture, and population splits.</p></article>
   <article class="app-item"><h3><a href="climate-explorer-app.html">Climate Explorer</a></h3><p>Interact with bioclimatic data across <em>Arabidopsis</em> populations and user-selected locations.</p></article>
   <article class="app-item"><h3><a href="arabidopsis-1001-climate.html">Arabidopsis 1001 Genomes · Climate Explorer</a></h3><p>Map <em>Arabidopsis thaliana</em> accessions and explore the environments where they were collected. Compare sites to select accessions from contrasting climates for a population genomics project.</p></article>
+  <article class="app-item"><h3><a href="arabis-climate.html">Arabis · Climate Explorer</a></h3><p>Map <em>Arabis</em> collection sites and compare temperature, precipitation, and elevation across taxa and populations.</p></article>
   <article class="app-item"><h3><a href="climate-impact-simulator.html">Climate Impact Simulator</a></h3><p>Examine how land use, emissions, energy, water, and transport choices influence a composite resilience index.</p></article>
 </div>
 

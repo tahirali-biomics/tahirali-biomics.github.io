@@ -1,0 +1,28 @@
+---
+title: "Arabis · Climate Explorer"
+format:
+  html:
+    toc: false
+---
+
+**Arabis · Climate Explorer**
+
+Explore 71 collection sites and 301 samples. Click a site to compare temperature, precipitation, and elevation, or select samples to download their WorldClim 2.1 bioclimatic values.
+
+[Open app in a new tab](https://tahirali-biomics2.shinyapps.io/arabis-climate-explorer/)
+
+::: {.small}
+### Cite this application
+
+**Citation:** Ali, T. (2026). *Arabis · Climate Explorer* [Computer software]. shinyapps.io. [Application URL](https://tahirali-biomics2.shinyapps.io/arabis-climate-explorer/)
+:::
+
+[← Back to Interactive Apps](interactive.html)
+
+<div class="app-container" style="position:relative;padding-bottom:95%;height:0;overflow:hidden;">
+  <iframe src="https://tahirali-biomics2.shinyapps.io/arabis-climate-explorer/"
+          style="position:absolute;top:0;left:0;width:100%;height:100%;"
+          frameborder="0"
+          sandbox="allow-scripts allow-same-origin allow-forms allow-downloads"
+          title="Arabis Climate Explorer Shiny app"></iframe>
+</div>
