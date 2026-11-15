@@ -232,7 +232,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
   <p class="lead">I started PopGenLM Bench with 100 variants and a question I could test end to end: could I reproduce a genomic model’s scores and trace them back to the right alleles? Each release added a harder test. In v0.4, I ask whether adding a model score changes which linked variants I would follow up at an Arabidopsis expression locus.</p>
   <p class="hero-support">The benchmark brings my population-genetics experience into the software itself, through reference checks, explicit score definitions, matched comparisons, and reproducible reports. Follow the learning story in <a href="genomes-to-ai.html">Genomes to AI</a>.</p>
   <div class="tag-row">
-    <span class="status-badge blue">v0.4.0 · latest release</span>
+    <span class="status-badge blue">v0.4.0 · Latest release</span>
     <span class="tag">Seven evidence sources</span><span class="tag">Population genomics</span><span class="tag">Scientific AI engineering</span><span class="tag">Apache-2.0 code · source-specific data terms</span>
   </div>
   <div class="hero-actions">
@@ -243,6 +243,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </section>
 <section id="v04" class="level2">
 <h2 class="anchored" data-anchor-id="v04">v0.4.0 — Regulatory Variant Prioritization Pilot</h2>
+<p><strong>v0.4.0 · Latest release</strong></p>
 <p>v0.4 adds frozen discovery/holdout inputs, restartable model scoring, candidate-matched comparisons, and a shared CPU reproduction path. I can now inspect how a model changes the shortlist at an expression locus, including the variants it displaces. The endpoint is <strong>held-out association-signal recovery</strong> in the same study—not independent causal-nucleotide validation. <strong>Causal-SNP recovery remains unestimable: zero eligible loci.</strong></p>
 <figure class="benchmark-figure popgenlm-release-figure figure">
   <img src="https://raw.githubusercontent.com/tahirali-biomics/popgenlm-bench/v0.4.0/figures/v0.4/benchmark.svg" alt="v0.4 paired target ranks for all 34 eligible loci; PlantCAD2-S gains and losses at top five; recovery across shortlist sizes; four individual AlphaGenome outcomes." loading="eager" class="figure-img">
@@ -309,9 +310,9 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <h3 class="anchored" data-anchor-id="v04-worked-locus">A shortlist gain—and the SNP that leaves</h3>
 <figure class="benchmark-figure popgenlm-release-figure figure">
   <img src="https://raw.githubusercontent.com/tahirali-biomics/popgenlm-bench/v0.4.0/figures/v0.4/locus_AT1G01690.svg" alt="AT1G01690 on a shared TAIR10.1 axis: transcript model, discovery and holdout association, LD, PhyloP, available signed model scores and exact candidate-rank changes." loading="lazy" class="figure-img">
-  <figcaption><strong>AT1G01690.</strong> PlantCAD2-S moves the held-out association target <code>1:249256:T:C</code> from rank 6 to4; <code>1:247721:C:T</code> leaves the shortlist, rank 3 to6. A gene model, association evidence, LD, site conservation and model outputs share a TAIR10.1 axis. <strong>PopGenLM adaptation</strong> from frozen <a href="#v04-references">1001 Genomes, TAIR10.1, GSE80744 and model evidence</a>; the association target is a proxy, not causal truth. <a href="https://raw.githubusercontent.com/tahirali-biomics/popgenlm-bench/v0.4.0/figures/v0.4/AT1G01690_shortlist_changes.tsv">Exact membership</a> · <a href="https://raw.githubusercontent.com/tahirali-biomics/popgenlm-bench/v0.4.0/figures/v0.4/locus_AT1G01690.svg">Open SVG</a> · <a href="https://raw.githubusercontent.com/tahirali-biomics/popgenlm-bench/v0.4.0/figures/v0.4/locus_AT1G01690.png">Download PNG</a>.</figcaption>
+  <figcaption><strong>AT1G01690.</strong> PlantCAD2-S moves the held-out association target <code>1:249256:T:C</code> from rank 6 to 4; <code>1:247721:C:T</code> leaves the shortlist, rank 3 to 6. A gene model, association evidence, LD, site conservation and model outputs share a TAIR10.1 axis. <strong>PopGenLM adaptation</strong> from frozen <a href="#v04-references">1001 Genomes, TAIR10.1, GSE80744 and model evidence</a>; the association target is a proxy, not causal truth. <a href="https://raw.githubusercontent.com/tahirali-biomics/popgenlm-bench/v0.4.0/figures/v0.4/AT1G01690_shortlist_changes.tsv">Exact membership</a> · <a href="https://raw.githubusercontent.com/tahirali-biomics/popgenlm-bench/v0.4.0/figures/v0.4/locus_AT1G01690.svg">Open SVG</a> · <a href="https://raw.githubusercontent.com/tahirali-biomics/popgenlm-bench/v0.4.0/figures/v0.4/locus_AT1G01690.png">Download PNG</a>.</figcaption>
 </figure>
-<p>The package also shows the loss at <a href="https://raw.githubusercontent.com/tahirali-biomics/popgenlm-bench/v0.4.0/figures/v0.4/locus_AT4G02405.svg">AT4G02405</a>: its target moves from rank 3 to11. Showing both outcomes changed how I report the benchmark: a net gain of one signal does not mean every locus improves.</p>
+<p>The package also shows the loss at <a href="https://raw.githubusercontent.com/tahirali-biomics/popgenlm-bench/v0.4.0/figures/v0.4/locus_AT4G02405.svg">AT4G02405</a>: its target moves from rank 3 to 11. Showing both outcomes changed how I report the benchmark: a net gain of one signal does not mean every locus improves.</p>
 </section>
 <section id="v04-models" class="level3">
 <h3 class="anchored" data-anchor-id="v04-models">Seven models and evidence sources</h3>
@@ -363,8 +364,8 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 </tbody>
 </table>
 <p><strong>Figure provenance and limits.</strong> All are PopGenLM adaptations from cached evidence. AlphaGenome adapts <strong>Avsec et al.&nbsp;Fig. 4b and 6b</strong>: paired REF/ALT predictions and differences, with the focal SNP and gene model. Its display is human plus-strand neuronal stem-cell polyA RNA-seq track 0, API v1 <code>ALL_FOLDS</code>, SDK 0.11.0; ranking retains all 667 tracks. <a href="https://raw.githubusercontent.com/tahirali-biomics/popgenlm-bench/v0.4.0/figures/v0.4/observed_arabidopsis.svg">Observed Arabidopsis expression by genotype</a> is a separate GSE80744 panel, not measured RNA-seq coverage or mammalian-track calibration. The four eligible AlphaGenome target-rank changes are AT3G23110:6→4, AT3G53880:47→41, AT4G14840:15→13, AT4G33940:1→2. AT2G22240 is illustrative and ineligible.</p>
-<p>The nemo figure adapts the expression-contrast idea of <strong>Rockenbach et al.&nbsp;Fig. 3a</strong>, showing predicted ALT−REF expression changes by promoter/terminator position and the coverage-matched 8/14 versus8/14 result. It does not reproduce native Arabidopsis accuracy: family-safe native weights/folds, reconciled expression inputs and scalers remain missing. <em>B. napus</em> transfer and native <em>A. thaliana</em> nemo are not interchangeable.</p>
-<p>Botanic’s Arabidopsis <strong>ATAC-seq reproduction of Barozet et al., bioRxiv v3 Fig. 4b/4d remains separate and blocked</strong>: verified accessibility measurements, held-out chromosome 4 peaks/labels/split, fine-tuned ATAC head or official predictions, and matched ChromBPNet outputs are unavailable. Full v3 caption access was blocked, so that panel correspondence is not independently verified. The completed zero-shot context comparison is not a substitute for accessibility prediction.</p>
+<p>The nemo figure adapts the expression-contrast idea of <strong>Rockenbach et al.&nbsp;Fig. 3a</strong>, showing predicted ALT−REF expression changes by promoter/terminator position and the coverage-matched 8/14 versus 8/14 result. It does not reproduce native Arabidopsis accuracy: family-safe native weights/folds, reconciled expression inputs and scalers remain missing. <em>B. napus</em> transfer and native <em>A. thaliana</em> nemo are not interchangeable.</p>
+<p>In <strong>Barozet et al., bioRxiv v3</strong>, <strong>Fig. 4b</strong> compares predicted and observed ATAC-seq signal on held-out peaks, and <strong>Fig. 4d</strong> shows the representative <em>Arabidopsis</em> HY5 locus. PopGenLM’s separate <strong>Arabidopsis ATAC-seq reproduction remains blocked</strong>: verified accessibility measurements, held-out chromosome 4 peaks/labels/split, the fine-tuned ATAC head or official predictions, and matched ChromBPNet outputs are unavailable. The completed zero-shot context comparison is not a substitute for accessibility prediction.</p>
 </section>
 <section id="v04-reproduction" class="level3">
 <h3 class="anchored" data-anchor-id="v04-reproduction">Reproduce the public package</h3>
@@ -384,7 +385,7 @@ gtag('config', 'G-0LPGXESG7T', { 'anonymize_ip': true});
 <li><strong>GPN:</strong> Benegas, Batra and Song (2023), <em>DNA language models are powerful predictors of genome-wide variant effects</em>. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10622914/">10.1073/pnas.2311219120</a>.</li>
 <li><strong>PlantCaduceus:</strong> Zhai et al.&nbsp;(2025), <em>Cross-species modeling of plant genomes at single-nucleotide resolution using a pretrained DNA language model</em>. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12184517/">10.1073/pnas.2421738122</a>.</li>
 <li><strong>PlantCAD2:</strong> Zhai et al.&nbsp;(2026), <em>PlantCAD2: A DNA foundation model for interpreting genomes across flowering plants</em>. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC13576720/">10.1016/j.xgen.2026.101329</a>.</li>
-<li><strong>Botanic1:</strong> Barozet et al.&nbsp;(2026), <em>BOTANIC-1</em>, bioRxiv <strong>v3</strong>. <a href="https://www.biorxiv.org/content/10.64898/2026.09.04.749355v3.full">10.64898/2026.09.04.749355</a>; separate requested ATAC panels4b/4d, limits above.</li>
+<li><strong>Botanic1:</strong> Barozet et al.&nbsp;(2026), <em>BOTANIC-1</em>, bioRxiv <strong>v3</strong>. <a href="https://www.biorxiv.org/content/10.64898/2026.09.04.749355v3.full">10.64898/2026.09.04.749355</a>; separate requested ATAC panels 4b/4d, limits above.</li>
 <li><strong>nemo:</strong> Rockenbach et al.&nbsp;(2026), <em>A deep learning model captures position-specific effects of plant regulatory sequences and suggests genes under complex regulation</em>. <a href="https://pubmed.ncbi.nlm.nih.gov/42413033/">10.1093/plphys/kiag473</a>, Fig. 3a.</li>
 <li><strong>AlphaGenome:</strong> Avsec et al.&nbsp;(2026), <em>Advancing regulatory variant effect prediction with AlphaGenome</em>. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12851941/">10.1038/s41586-025-10014-0</a>, Fig. 4b/6b.</li>
 <li><strong>PhyloP method:</strong> Pollard et al.&nbsp;(2010), <em>Detection of nonneutral substitution rates on mammalian phylogenies</em>. <a href="https://pubmed.ncbi.nlm.nih.gov/19858363/">10.1101/gr.097857.109</a>. <strong>Actual plant track:</strong> PlantRegMap <code>Ath_PhyloP.bedGraph.gz</code>; Tian et al.&nbsp;(2020), <a href="https://pubmed.ncbi.nlm.nih.gov/31701126/">10.1093/nar/gkz1020</a>. <a href="https://github.com/tahirali-biomics/popgenlm-bench/blob/v0.4.0/data/benchmarks/v0.4/acquisition.json">Track URL and exact hash</a>.</li>
@@ -410,6 +411,7 @@ Producing a score is an inference step. Establishing what that score means is an
 </section>
 <section id="v0.3.0-evolutionary-evidence" class="level2">
 <h2 class="anchored" data-anchor-id="v0.3.0-evolutionary-evidence">v0.3.0 — Evolutionary evidence</h2>
+<p><strong>v0.3.0 · Released</strong></p>
 <p>v0.3.0 added the ability to integrate frozen model outputs with genomic annotations and LD-aware descriptive checks. It integrates population-oriented GPN and PlantCAD scores with evolutionary and genomic evidence for <strong>10,000 real <em>Arabidopsis thaliana</em> population variants selected using a deterministic procedure.</strong> The release is organized around a frozen <strong>10,000 × 39 annotated master table</strong>, with exclusive genomic-context annotations, signed site-oriented PhyloP conservation, fixed physical-bin and LD-sensitivity analyses, genotype-quality summaries, and UMAP population-structure summaries.</p>
 <p>The v0.3 release assets are frozen and hash-verified. Its primary population score is <code>log P(minor allele) − log P(major allele)</code>. Raw model scores retain <code>log P(ALT) − log P(REF)</code>. PhyloP is <strong>site-oriented, not allele-oriented</strong>, so its sign is not treated as an allele preference.</p>
 <section id="validated-descriptive-results" class="level3">
@@ -440,13 +442,15 @@ Producing a score is an inference step. Establishing what that score means is an
 <section id="v0.3.0-colab-inspect-the-frozen-release" class="level2">
 <h2 class="anchored" data-anchor-id="v0.3.0-colab-inspect-the-frozen-release">v0.3.0 Colab — inspect the frozen release</h2>
 <p>The public notebook loads, verifies, summarizes, and displays the frozen v0.3.0 assets. It does not rerun PlantCAD/GPN inference, VCF processing, UMAP fitting, or bootstrap production analysis.</p>
-<div class="colab-panel"><div><div class="card-kicker">Active v0.3 reproducible notebook</div><h3 class="anchored">Frozen assets with transparent validation</h3><p>The notebook is pinned to v0.3.0 and checks the released files before loading the descriptive summaries and displaying the frozen figures.</p></div><a class="button-colab" href="https://colab.research.google.com/github/tahirali-biomics/popgenlm-bench/blob/v0.3.0/notebooks/popgenlm-bench-v0.3.ipynb">Open v0.3.0 in Google Colab</a></div>
+<div class="colab-panel"><div><div class="card-kicker">v0.3.0 · Released</div><h3 class="anchored">Frozen assets with transparent validation</h3><p>The notebook is pinned to v0.3.0 and checks the released files before loading the descriptive summaries and displaying the frozen figures.</p></div><a class="button-colab" href="https://colab.research.google.com/github/tahirali-biomics/popgenlm-bench/blob/v0.3.0/notebooks/popgenlm-bench-v0.3.ipynb">Open v0.3.0 in Google Colab</a></div>
+<p><span id="v0.2.0-population-aware-gpn-benchmark"></span></p>
 </section>
-<section id="v0.2.0-population-aware-gpn-benchmark" class="level2">
-<h2 class="anchored" data-anchor-id="v0.2.0-population-aware-gpn-benchmark">v0.2.0 — population-aware GPN benchmark</h2>
+<section id="v0.2.0-population-aware-benchmark" class="level2">
+<h2 class="anchored" data-anchor-id="v0.2.0-population-aware-benchmark">v0.2.0 — Population-aware benchmark</h2>
+<p><strong>v0.2.0 · Released</strong></p>
 <section class="benchmark-summary" aria-label="PopGenLM Bench v0.2.0 summary">
   <div class="benchmark-copy">
-    <div class="card-kicker">Active release · population-aware benchmark</div>
+    <div class="card-kicker">v0.2.0 · Released · Population-aware benchmark</div>
     <h3 class="anchored">10,000 real <em>Arabidopsis thaliana</em> variants</h3>
     <p>v0.2.0 added deterministic population sampling, exact reference validation and explicit minor-versus-major score orientation. It uses deterministically selected biallelic SNPs from the 1001 Genomes Project, validates every REF allele against TAIR10.1, combines population summaries with reproducible GPN Brassicales scores, and evaluates the relationship between minor-allele frequency and model score.</p>
   </div>
@@ -538,7 +542,7 @@ Producing a score is an inference step. Establishing what that score means is an
 </ol>
 <div class="colab-panel">
   <div>
-    <div class="card-kicker">ACTIVE v0.2 REPRODUCIBLE NOTEBOOK</div>
+    <div class="card-kicker">v0.2.0 · Released</div>
     <h3 class="anchored">Population-aware validation without rerunning model inference</h3>
     <p>The notebook is pinned to the v0.2.0 release and can be run directly in Google Colab. It verifies the released artifacts before reproducing the main analysis.</p>
   </div>
@@ -546,12 +550,13 @@ Producing a score is an inference step. Establishing what that score means is an
 </div>
 </section>
 <section id="v0.1.0-reproducible-analysis-foundation" class="level2">
-<h2 class="anchored" data-anchor-id="v0.1.0-reproducible-analysis-foundation">v0.1.0 — reproducible analysis foundation</h2>
+<h2 class="anchored" data-anchor-id="v0.1.0-reproducible-analysis-foundation">v0.1.0 — Reproducible analysis foundation</h2>
+<p><strong>v0.1.0 · Released</strong></p>
 <p>v0.1.0 established the engineering foundation: verify a score table, preserve allele/metadata contracts, and reproduce a report end to end. It remains an active, frozen PopGenLM Bench analysis fixture. It contains <strong>100 deterministic SNVs with verified GPN scores</strong>, together with the score table, metadata, schema checks, descriptive statistics, bootstrap uncertainty, figures, and a CPU-compatible Colab notebook.</p>
 <p>The important distinction is that v0.1.0 is an <strong>engineering and analysis fixture</strong>, not a sampled population benchmark. It established a reproducible analysis path before population-aware evaluation was added in v0.2.0.</p>
 <section class="benchmark-summary" aria-label="PopGenLM Bench v0.1.0 summary">
   <div class="benchmark-copy">
-    <div class="card-kicker">Active release · reproducible analysis foundation</div>
+    <div class="card-kicker">v0.1.0 · Released · Reproducible analysis foundation</div>
     <h3 class="anchored">100 deterministic variants with verified GPN scores</h3>
     <p>v0.1.0 validates score-table structure, metadata, descriptive analysis, bootstrap uncertainty, and figure generation. It does not by itself support population-genetic or evolutionary claims.</p>
   </div>
@@ -592,56 +597,23 @@ Producing a score is an inference step. Establishing what that score means is an
 </section>
 <section id="version-history-and-roadmap" class="level2">
 <h2 class="anchored" data-anchor-id="version-history-and-roadmap">Version history and roadmap</h2>
+<p>The learning path is chronological: v0.1 verified a 100-variant fixture end to end; v0.2 made the reference and population allele comparison explicit; v0.3 added evolutionary evidence and LD checks; v0.4 tests which linked SNPs a researcher would follow up. Each step adds something a researcher can verify or run; the planned stable release will make the exact version citable.</p>
+<section id="released-versions" class="level3">
+<h3 class="anchored" data-anchor-id="released-versions">Released versions</h3>
 <div class="roadmap">
-<div class="roadmap-item">
-<h3 class="anchored">
-v0.4.0 · Regulatory Variant Prioritization Pilot · released
-</h3>
-<p>
-Seven evidence sources, fixed discovery/holdout inputs, candidate-matched ranks, gain/loss loci, checkpoint-pinned provenance and eight CPU notebooks. Held-out association-signal recovery; causal-SNP recovery remains unestimable.
-</p>
+  <div class="roadmap-item"><h4 class="anchored"><a href="#v04">v0.4.0 · Latest release</a></h4><p><strong>Regulatory Variant Prioritization Pilot.</strong> Candidate-matched per-locus rankings, seven evidence sources, and CPU reproduction from the public release bundle.</p></div>
+  <div class="roadmap-item"><h4 class="anchored"><a href="#v0.3.0-evolutionary-evidence">v0.3.0 · Released</a></h4><p><strong>Evolutionary evidence.</strong> Multi-model comparison with PhyloP, genomic context, and LD sensitivity.</p></div>
+  <div class="roadmap-item"><h4 class="anchored"><a href="#v0.2.0-population-aware-benchmark">v0.2.0 · Released</a></h4><p><strong>Population-aware benchmark.</strong> 10,000 <em>Arabidopsis thaliana</em> SNPs from 1001 Genomes, TAIR10.1 reference checks, and explicit minor-versus-major score orientation.</p></div>
+  <div class="roadmap-item"><h4 class="anchored"><a href="#v0.1.0-reproducible-analysis-foundation">v0.1.0 · Released</a></h4><p><strong>Reproducible analysis foundation.</strong> A verified 100-variant GPN fixture with validation and reproducible reporting.</p></div>
 </div>
-<div class="roadmap-item">
-<h3 class="anchored">
-v0.1.0 · Reproducible analysis foundation · released and active
-</h3>
-<p>
-Frozen 100-variant GPN score fixture, schema and metadata checks, descriptive statistics, bootstrap uncertainty, figures, and CPU-compatible Colab analysis.
-</p>
+</section>
+<section id="planned-releases" class="level3">
+<h3 class="anchored" data-anchor-id="planned-releases">Planned releases</h3>
+<div class="roadmap">
+  <div class="roadmap-item"><h4 class="anchored">v0.5 · Independent evaluation and researcher beta · Planned</h4><p>Freeze the scoring rules before testing them on new, non-overlapping <em>Arabidopsis</em> loci. Evaluate association-signal recovery and report causal-SNP recovery if enough independently supported regulatory SNPs qualify. If the evidence is sparse, document the eligible cases and evidence gaps. Stabilize the model adapters and precomputed-score inputs, add a containerized workflow, and test whether an external researcher can reproduce the results.</p></div>
+  <div class="roadmap-item"><h4 class="anchored">v1.0 · Stable, citable release · Planned</h4><p>Incorporate beta feedback, freeze the public data and score schemas and the evaluation protocol, and add end-to-end release checks and documented case studies. Archive the tagged software and benchmark version with a DOI so researchers can reproduce and cite the exact version they used.</p></div>
 </div>
-<div class="roadmap-item">
-<h3 class="anchored">
-v0.2.0 · Population-aware benchmark · released and active
-</h3>
-<p>
-10,000 real 1001 Genomes SNPs, exact TAIR10.1 REF validation, reproducible GPN scores, minor-vs-major orientation, population-frequency evaluation, effect sizes, chromosome-stratified permutation, robustness analyses, figures, tests, CI, and release-pinned Colab.
-</p>
-</div>
-<div class="roadmap-item">
-<h3 class="anchored">
-v0.3.0 · Evolutionary evidence · released and active
-</h3>
-<p>
-Integrated GPN and PlantCAD scores, PhyloP, genomic contexts, physical-bin and LD sensitivity, genotype quality, UMAP population structure, frozen assets, and release-pinned documentation.
-</p>
-</div>
-<div class="roadmap-item">
-<h3 class="anchored">
-v0.5 · Independent evaluation and researcher beta · future development
-</h3>
-<p>
-Stabilize model adapters, support additional model or precomputed-score inputs, expand reporting, add containerized workflows, and test with external users.
-</p>
-</div>
-<div class="roadmap-item">
-<h3 class="anchored">
-v1.0 · Citable release
-</h3>
-<p>
-Freeze public schemas, incorporate beta feedback, add end-to-end release checks and case studies, and mint a software DOI.
-</p>
-</div>
-</div>
+</section>
 </section>
 <section id="reproduce-v0.3.0-locally" class="level2">
 <h2 class="anchored" data-anchor-id="reproduce-v0.3.0-locally">Reproduce v0.3.0 locally</h2>
