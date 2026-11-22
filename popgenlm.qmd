@@ -10,6 +10,7 @@ body-classes: popgenlm-page
 ```{=html}
 <style>
 #v04-models table { display: block; max-width: 100%; overflow-x: auto; }
+#v05-matrix table { min-width: 1040px; }
 </style>
 <section class="page-hero popgenlm-hero" aria-labelledby="popgenlm-title">
   <div class="eyebrow">Open-source scientific AI</div>
@@ -40,6 +41,8 @@ v0.5 extends the benchmark from variant prioritization to two separate questions
 ### Current model and task coverage {#v05-model-status}
 
 The table retains the complete 22-row model/architecture/baseline scope. “Evaluated” means the named development analysis only; “validated” can refer to an adapter or paired-score check and does not mean an independent evaluation. Full evidence, software/inference/head/effect sub-statuses, exact paths, blockers and next actions are in the [development status and evidence registry](https://github.com/tahirali-biomics/popgenlm-bench/blob/c1cb283f734b8d60546923314ccef027e8b09eb3/docs/v0.5_development_status.md). The [focused Panel D notebook](https://colab.research.google.com/github/tahirali-biomics/popgenlm-bench/blob/8601f6eefa4bb111ecee5c64ac29c2269c2a49be/notebooks/v0.5/nemo_figure2_panel_d_public.ipynb) is a runnable cached-data reanalysis; it is not the overview notebook or a complete Figure 2 reproduction.
+
+<p class="small">On a phone, swipe horizontally across the table to inspect all five task columns.</p>
 
 <div id="v05-matrix" style="max-width:100%; overflow-x:auto">
 
