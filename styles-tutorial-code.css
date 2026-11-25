@@ -1,0 +1,105 @@
+/* Reusable tutorial code styling. Linked only by build_tutorial.py outputs. */
+
+/* Quarto and Pandoc/RStudio code containers share this visual treatment. */
+.tutorial-code-ready .code-copy-outer-scaffold,
+.tutorial-code-ready .qbio-copy-wrap {
+  position: relative;
+  max-width: 100%;
+  min-width: 0;
+  margin: 1.1rem 0;
+}
+
+.tutorial-code-ready .code-copy-outer-scaffold > .sourceCode,
+.tutorial-code-ready .qbio-copy-wrap > pre,
+.tutorial-code-ready pre.sourceCode,
+.tutorial-code-ready pre.r,
+.tutorial-code-ready pre.bash {
+  box-sizing: border-box;
+  display: block;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 2.8rem 1.15rem 1rem;
+  overflow-x: auto;
+  border: 1px solid #d8dde2;
+  border-radius: 5px;
+  background: #f0f2f4;
+  color: #263746;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  white-space: pre;
+  overflow-wrap: normal;
+}
+
+/* The source div is transparent so it cannot create an inner box. */
+.tutorial-code-ready .code-copy-outer-scaffold > .sourceCode {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.tutorial-code-ready .code-copy-outer-scaffold pre.sourceCode {
+  margin: 0;
+}
+
+.tutorial-code-ready .code-copy-outer-scaffold > .code-copy-button,
+.tutorial-code-ready .qbio-copy-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  min-height: 1.9rem;
+  padding: 0.3rem 0.55rem;
+  border: 1px solid #c8d0d8;
+  border-radius: 4px;
+  background: #fff;
+  color: #43515c;
+  cursor: pointer;
+  opacity: 1;
+}
+
+.tutorial-code-ready .code-copy-outer-scaffold > .code-copy-button:hover,
+.tutorial-code-ready .qbio-copy-button:hover,
+.tutorial-code-ready .code-copy-outer-scaffold > .code-copy-button:focus,
+.tutorial-code-ready .qbio-copy-button:focus {
+  border-color: #526e82;
+  color: #1b3448;
+}
+
+/* Avoid double borders when legacy copy controls wrap a pre element. */
+.tutorial-code-ready .qbio-copy-wrap > pre,
+.tutorial-code-ready .code-copy-outer-scaffold pre {
+  border: 1px solid #d8dde2;
+  background: #f0f2f4;
+}
+
+.tutorial-code-ready p code,
+.tutorial-code-ready li code {
+  display: inline;
+  padding: 0.08em 0.25em;
+  border: 0;
+  border-radius: 3px;
+  background: #f0f2f4;
+  white-space: normal;
+}
+
+.tutorial-code-ready main,
+.tutorial-code-ready #quarto-document-content,
+.tutorial-code-ready .content,
+.tutorial-code-ready .code-copy-outer-scaffold,
+.tutorial-code-ready .qbio-copy-wrap {
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .tutorial-code-ready .code-copy-outer-scaffold > .sourceCode,
+  .tutorial-code-ready .qbio-copy-wrap > pre,
+  .tutorial-code-ready pre.sourceCode,
+  .tutorial-code-ready pre.r,
+  .tutorial-code-ready pre.bash {
+    font-size: 0.82rem;
+  }
+}
