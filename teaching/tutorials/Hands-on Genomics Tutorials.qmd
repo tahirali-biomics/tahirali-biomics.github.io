@@ -16,6 +16,36 @@ Each tutorial is written for guided or independent use. Commands can be inspecte
 
 ::: {.tutorial-grid}
 ::: {.tutorial-card}
+<span class="eyebrow">QBio305 · Project design</span>
+
+### From Climate Maps to Genomic Hypotheses
+
+Design your own *Arabidopsis thaliana* population genomics project: explore environmental contrasts, formulate testable hypotheses, select accessions and identify candidate genes.
+
+[Open project design guide](climate-maps-to-genomic-hypotheses.qmd){.card-link}
+:::
+
+::: {.tutorial-card}
+<span class="eyebrow">QBio305 · HPC & RStudio access</span>
+
+### RAMSES (HPC) & RStudio Server
+
+Step-by-step Mac and Windows instructions for university VPN, SSH authentication, Slurm compute-node access and opening the course RStudio Server.
+
+[Open RAMSES & RStudio guide](ramses-rstudio-guide.qmd){.card-link}
+:::
+
+::: {.tutorial-card}
+<span class="eyebrow">QBio305 · Population Genetic Project Part 1</span>
+
+### Population differentiation and candidate-gene discovery
+
+Investigate population structure, nucleotide diversity, Tajima's D and FST in *Arabidopsis thaliana*. Compare candidate regions with genomic backgrounds and identify empirical differentiation outliers.
+
+[Open Population Genetic Project Part 1](qbio305/qbio305_project_part1/QBio305_Practical_Day_4_Final.html){.card-link}
+:::
+
+::: {.tutorial-card}
 <span class="eyebrow">Pipeline · Part 1</span>
 
 ### FASTQ to VCF

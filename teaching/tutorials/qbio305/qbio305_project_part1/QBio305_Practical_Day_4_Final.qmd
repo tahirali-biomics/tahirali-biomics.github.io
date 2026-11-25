@@ -1,0 +1,1299 @@
+---
+title: "Population structure, genetic diversity and differentiation"
+author: "Dr Tahir Ali | AG de Meaux | University of Cologne"
+format:
+  html:
+    toc: true
+    code-copy: true
+    embed-resources: true
+    theme: cosmo
+    toc-depth: 2
+    page-layout: full
+execute:
+  eval: false
+  echo: true
+  fig-width: 14
+  fig-height: 7
+  fig-dpi: 150
+---
+
+```{=html}
+<style>
+.qbio-important { background: #fff0f0; border-left: 4px solid #c65b5b; border-radius: 4px; padding: 12px 16px; margin: 16px 0; color: #392727; }
+.qbio-important p:last-child { margin-bottom: 0; }
+.qbio-copy-wrap { position: relative; }
+.qbio-copy-wrap > pre { padding-top: 2.5em; }
+.qbio-copy-button { position: absolute; top: 6px; right: 6px; z-index: 2; padding: 5px 7px; border: 1px solid #b9c1c7; border-radius: 4px; background: #fff; color: #43515c; cursor: pointer; line-height: 1; display: inline-flex; align-items: center; gap: 4px; }
+.qbio-copy-button:hover, .qbio-copy-button:focus { color: #1b3448; border-color: #526e82; }
+.qbio-copy-button svg { width: 15px; height: 15px; }
+.code-copy-button { opacity: 1 !important; }
+</style>
+<script>
+(function () {
+  function addCopyButtons() {
+    document.querySelectorAll('pre.r, pre.bash, pre.sourceCode').forEach(function (pre) {
+      if (!pre.querySelector('code') || pre.querySelector('.code-copy-button') ||
+          (pre.parentElement && pre.parentElement.querySelector('.code-copy-button')) ||
+          pre.closest('.qbio-copy-wrap')) return;
+      var code = pre.querySelector('code');
+      var wrap = document.createElement('div'); wrap.className = 'qbio-copy-wrap';
+      pre.parentNode.insertBefore(wrap, pre); wrap.appendChild(pre);
+      var button = document.createElement('button'); button.type = 'button';
+      button.className = 'qbio-copy-button'; button.title = 'Copy code';
+      button.setAttribute('aria-label', 'Copy code');
+      var icon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>';
+      button.innerHTML = icon; wrap.appendChild(button);
+      function feedback(ok) {
+        button.innerHTML = icon + (ok ? ' Copied' : ' Copy failed');
+        window.setTimeout(function () { button.innerHTML = icon; }, 1600);
+      }
+      function fallback(value) {
+        var t = document.createElement('textarea'); t.value = value;
+        t.style.position = 'fixed'; t.style.opacity = '0'; document.body.appendChild(t);
+        t.select(); var ok = false;
+        try { ok = document.execCommand('copy'); } catch (e) {}
+        t.remove(); feedback(ok);
+      }
+      button.addEventListener('click', function () {
+        var value = code.textContent;
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(value).then(function () { feedback(true); }, function () { fallback(value); });
+        } else fallback(value);
+      });
+    });
+  }
+  if (document.readyState === 'complete') addCopyButtons();
+  else window.addEventListener('load', addCopyButtons);
+})();
+</script>
+```
+**Research question:** Do genomic windows overlapping selected candidate genes differ in diversity or differentiation from the rest of the genome?
+
+The worked example uses defence genes in Spanish (ESP) and Swedish (SWE) *Arabidopsis thaliana* accessions. The same workflow works for other pairs of *A. thaliana* populations and candidate gene sets on the same reference assembly.
+
+You will examine population structure using PCA, calculate five window-based population-genetic statistics using PopGenome, and compare candidate and background windows using spatial permutation tests.
+
+## 1. Connect to RAMSES
+
+Follow the [RAMSES login guide](https://tahirali-biomics.github.io/teaching/tutorials/ramses-rstudio-guide.html) to configure your SSH key, VPN and authentication. If you are off campus, connect to the university VPN first.
+
+**Terminal 1: Log in to RAMSES**
+
+::: qbio-important
+**Important: Change**
+
+Mac Terminal — Replace the example username **qbixd035** in both places with your own RAMSES account. Copy the whole command as one line.
+:::
+
+``` bash
+ssh -i ~/.ssh/ramses_qbixd035 -o IdentitiesOnly=yes qbixd035@ramses4.itcc.uni-koeln.de
+```
+
+Windows — Open MobaXterm → Session → SSH. Use ramses4.itcc.uni-koeln.de, your assigned username and your private SSH key (without .pub) under Advanced SSH settings. Click OK.
+
+At login, enter the current six-digit verification code from Google Authenticator. A previously used or expired code may not be accepted.
+
+Check your identity and working directory:
+
+``` bash
+whoami
+pwd
+```
+
+You should see your own course username and home directory. Never type the displayed terminal prompt itself.
+
+**Request computing resources**
+
+Run the following command inside RAMSES. Copy it as one continuous line; do not add backslashes.
+
+``` bash
+srun --partition=interactive --time=02:00:00 --ntasks=1 --cpus-per-task=4 --mem=16G --pty bash
+```
+
+Wait until the job is allocated. Your prompt changes to a compute node, for example ramses15229. Check the job:
+
+``` bash
+squeue -u "$USER"
+hostname
+```
+
+R means running; PD means waiting. Do not request another allocation while the first is running.
+
+**Start RStudio Server**
+
+On the allocated compute node, run:
+
+``` bash
+bash -l /scratch/QBIO_WS27/bin/qbio-rstudio
+```
+
+The launcher prints your compute-node name and RStudio port. For example: ramses15229 and PORT=8787. Write down your actual values and keep Terminal 1 open. No additional package installation or Conda activation is needed.
+
+**Terminal 2: Connect your laptop to RStudio**
+
+Open a new local Mac Terminal or a new MobaXterm Start local terminal tab on Windows, not another RAMSES shell. Use the private key created on that computer.
+
+``` bash
+ssh -i ~/.ssh/ramses_qbixd035 -o IdentitiesOnly=yes -o ExitOnForwardFailure=yes -N -L 8790:ramses15229:8787 qbixd035@ramses1.itcc.uni-koeln.de
+```
+
+Change: qbixd035 in both places, ramses15229 to your compute node, and 8787 to your RStudio port. Keep 8790 as the local port (if it is already in use, close your previous tunnel first). Enter a fresh Google Authenticator code. No further terminal output is normal. Keep Terminal 2 open.
+
+::: qbio-important
+**Important: Change**
+
+**qbixd035** in both places, **ramses15229** to your compute node, and **8787** to your RStudio port. Keep 8790 as the local port (if it is already in use, close your previous tunnel first). Enter a fresh Google Authenticator code. No further terminal output is normal. Keep Terminal 2 open.
+:::
+
+**Open RStudio in your browser**
+
+On the same laptop, open <http://localhost:8790>. Keep both terminals open. In the RStudio Console, enter:
+
+```{r}
+R.home()
+library(vcfR)
+library(adegenet)
+library(PopGenome)
+getwd()
+```
+
+The R installation should be under /scratch/QBIO_WS27/envs/qbio_popgen_ws27/. Package startup messages are normal; if a package reports an error, tell the instructor. Do not install or update shared packages.
+
+**Locate your input files**
+
+The login steps above apply to every practical. **Replace `qbixd035` with your own RAMSES username in every SSH command.** See the [RAMSES login guide](https://tahirali-biomics.github.io/teaching/tutorials/ramses-rstudio-guide.html).
+
+**Input files**
+
+| Directory | Input                                             | Purpose                                  |
+|------------------------|------------------------|------------------------|
+| `vcf/`    | Genome-wide `.vcf.gz` and `.tbi`                  | PCA and all window-based statistics      |
+| `vcf/`    | Candidate-only `.vcf.gz` and `.tbi`               | Candidate SNP PCA                        |
+| `vcf/`    | Population text file                              | Sample ID and group (two columns)        |
+| `At_gff/` | Selected-gene GFF, course annotation table or BED | Candidate genomic intervals (choose one) |
+
+The full gene annotation and Stacks outputs are used in later practicals, not required here.
+
+**Copy the data to your home directory**
+
+In RStudio, open the **Terminal** tab (Linux commands, not the R Console). Run these commands once for Days 4–6. If you already copied the folder, skip the copy command.
+
+``` bash
+cd "$HOME"
+cp -r /scratch/QBIO_WS27/teaching_inputs/Practical_Day_4-6 .
+cd Practical_Day_4-6
+ls -lh
+```
+
+You should see `vcf`, `At_gff`, `stacks` and `GO_Enrichment_Analysis`. Switch to the **Console** for R commands. For your project, put your files in the same subdirectories and edit only the configuration chunk in Section 2.
+
+Open this QMD file in RStudio. Run each R chunk from top to bottom using its green Run button. The HTML is a reading/copying guide, not an executing notebook. To render a report with results, change the YAML eval setting to true after testing all required chunks; optional PLINK chunks remain disabled unless you enable them. Save your results in your own home directory.
+
+## 2. Set up R and read the inputs
+
+### 2.1 Configuration: change only this chunk for your project
+
+Keep the directory structure unchanged. Replace the two VCF filenames, the population filename and the candidate annotation filename. Set `candidate_format` to match your annotation. Population labels and sample sizes are read automatically; do not change the downstream code.
+
+| `candidate_format` | Input file                                                                                                            |
+|------------------------------------|------------------------------------|
+| `course_gff`       | Course-specific transcript table (ID, chromosome, source, feature, start, end, …; 1-based)                            |
+| `gff`              | Standard GFF/GTF containing **only selected genes** (gene records, or transcript records if no gene records; 1-based) |
+| `bed`              | Standard BED of selected regions (0-based start, exclusive end)                                                       |
+| `bed1`             | Course-specific BED with 1-based inclusive starts and ends; **not** standard BED                                      |
+
+Use a candidate-only annotation, not the complete genome GFF. Both VCFs and the annotation must use the same reference genome. The VCFs must be BGZF-compressed, tabix-indexed, diploid biallelic SNP files with matching samples. This practical assumes TAIR10 and nuclear chromosomes 1–5.
+
+```{r}
+#| label: configuration
+DATA <- path.expand("~/Practical_Day_4-6")
+
+# EDIT these filenames for your project (keep the directories).
+vcf_full_name <- "1001genomes_snp-short-indel_only_ACGTN_Dp10GQ20Q30_NoIndel_Bialleleic_80PcMissing_80SwEs.vcf.recode.vcf.gz"
+vcf_selected_name <- "1001genomes_snp-short-indel_only_ACGTN_Dp10GQ20Q30_NoIndel_Bialleleic_80PcMissing_80SwEs_DefenseOnly.vcf.gz"
+pop_name <- "pop1.txt"
+candidate_name <- "At_defense_only.gff"
+candidate_format <- "course_gff"
+candidate_description <- "Defence-related genes"  # e.g. "Drought-response genes"
+
+# Optional: use a different output folder for each project/run.
+results_folder <- "Day4"
+window_size <- 10000L
+pca_spacing <- 5000L
+n_perm <- 999L
+extra_figures <- FALSE  # TRUE: labelled PCA, scree, ECDF and violin plots
+optional_wilcoxon <- FALSE  # exploratory; assumes independent windows
+
+# Keep TAIR10 unless the instructor supplies matching reference lengths.
+reference_assembly <- "TAIR10"
+nuclear_chr <- as.character(1:5)
+```
+
+### 2.2 Packages, input checks and population labels
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(ggrepel)
+library(GenomicRanges)
+library(PopGenome)
+
+stopifnot(dir.exists(DATA), window_size > 0, window_size == floor(window_size),
+          pca_spacing > 0, pca_spacing == floor(pca_spacing), n_perm >= 1, n_perm == floor(n_perm))
+setwd(DATA)
+OUT <- file.path(DATA, "Results", results_folder)
+dir.create(OUT, recursive = TRUE, showWarnings = FALSE)
+vcf_full <- file.path(DATA, "vcf", vcf_full_name)
+vcf_selected <- file.path(DATA, "vcf", vcf_selected_name)
+pop_file <- file.path(DATA, "vcf", pop_name)
+candidate_file <- file.path(DATA, "At_gff", candidate_name)
+required <- c(vcf_full, paste0(vcf_full, ".tbi"), vcf_selected,
+              paste0(vcf_selected, ".tbi"), pop_file, candidate_file)
+if (any(!file.exists(required))) {
+  stop("Missing files: ", paste(required[!file.exists(required)], collapse = ", "))
+}
+
+# First two columns: sample ID and population; optional header.
+meta <- read.table(pop_file, header = FALSE, colClasses = "character",
+                   comment.char = "", quote = "", stringsAsFactors = FALSE)
+stopifnot(ncol(meta) >= 2)
+meta <- meta[, 1:2]
+names(meta) <- c("sample", "pop")
+if (tolower(meta$sample[1]) %in% c("sample", "sample_id", "sampleid", "id", "iid", "individual", "accession") &&
+    tolower(meta$pop[1]) %in% c("pop", "population", "group")) meta <- meta[-1, ]
+stopifnot(!anyNA(meta), all(nzchar(meta$sample)), all(nzchar(meta$pop)),
+          !anyDuplicated(meta$sample))
+pop_labels <- sort(unique(meta$pop))
+stopifnot(length(pop_labels) == 2)
+pops <- setNames(lapply(pop_labels, function(g) meta$sample[meta$pop == g]), c("P1", "P2"))
+stopifnot(all(lengths(pops) >= 2))
+meta$label <- meta$sample
+pop_key <- data.frame(Code = names(pops), Population = pop_labels, N = lengths(pops))
+print(pop_key)
+
+# Check VCF sample IDs before any calculation.
+header <- VariantAnnotation::scanVcfHeader(vcf_full)
+focus_header <- VariantAnnotation::scanVcfHeader(vcf_selected)
+stopifnot(setequal(VariantAnnotation::samples(header), meta$sample),
+          setequal(VariantAnnotation::samples(focus_header), meta$sample))
+
+chr_name <- function(x) sub("^chr", "", as.character(x), ignore.case = TRUE)
+vcf_chr <- Rsamtools::seqnamesTabix(Rsamtools::TabixFile(vcf_full))
+vcf_chr <- vcf_chr[chr_name(vcf_chr) %in% nuclear_chr]
+chr_lookup <- setNames(vcf_chr, chr_name(vcf_chr))
+stopifnot(!anyDuplicated(names(chr_lookup)), setequal(names(chr_lookup), nuclear_chr))
+chr_lookup <- chr_lookup[nuclear_chr]
+header_lengths <- GenomeInfoDb::seqlengths(GenomeInfoDb::seqinfo(header))
+names(header_lengths) <- chr_name(names(header_lengths))
+chr_lengths <- setNames(as.numeric(header_lengths[nuclear_chr]), nuclear_chr)
+if (reference_assembly == "TAIR10") {
+  ref <- c(`1` = 30427671, `2` = 19698289, `3` = 23459830, `4` = 18585056, `5` = 26975502)[nuclear_chr]
+  stopifnot(!anyNA(ref))
+  known <- !is.na(chr_lengths)
+  if (any(chr_lengths[known] != ref[known])) stop("VCF chromosome lengths disagree with TAIR10.")
+  chr_lengths[!known] <- ref[!known]
+} else if (anyNA(chr_lengths)) {
+  stop("Supply reference chromosome lengths in the VCF header.")
+}
+stopifnot(all(is.finite(chr_lengths)), all(chr_lengths >= window_size))
+focus_lengths <- GenomeInfoDb::seqlengths(GenomeInfoDb::seqinfo(focus_header))
+names(focus_lengths) <- chr_name(names(focus_lengths))
+known_focus <- intersect(names(focus_lengths)[!is.na(focus_lengths)], nuclear_chr)
+if (any(focus_lengths[known_focus] != chr_lengths[known_focus])) {
+  stop("Candidate VCF chromosome lengths disagree with the genome-wide reference.")
+}
+
+pop_colours <- setNames(c("#2676B8", "#C44E52"), pop_labels)
+region_colours <- c(Background = "#394957", Candidate = "#008C65")
+course_theme <- theme_bw(base_size = 12) + theme(
+  legend.position = "bottom", panel.grid.minor = element_blank(),
+  panel.spacing.x = grid::unit(1.3, "cm"), plot.margin = margin(12, 18, 12, 12))
+
+save_plot <- function(p, name, width = 10, height = 5) {
+  print(p) # displays once; do not call print again
+  ggsave(file.path(OUT, paste0(name, ".png")), p, width = width, height = height, dpi = 300)
+  ggsave(file.path(OUT, paste0(name, ".pdf")), p, width = width, height = height,
+         device = if (capabilities("cairo")) grDevices::cairo_pdf else grDevices::pdf)
+  invisible(NULL)
+}
+save_table <- function(x, name) {
+  write.table(x, file.path(OUT, paste0(name, ".tsv")), sep = "\t", quote = FALSE, row.names = FALSE)
+}
+save_table(pop_key, "00_population_key")
+save_table(data.frame(Setting = c("Genome VCF", "Candidate VCF", "Population file", "Candidate annotation", "Annotation format", "Candidate description", "Reference", "Window size", "PCA spacing", "Permutations", "Seed"),
+  Value = c(vcf_full_name, vcf_selected_name, pop_name, candidate_name, candidate_format,
+    candidate_description, reference_assembly, window_size, pca_spacing, n_perm, 305)), "00_run_settings")
+cat("Results directory:", OUT, "\n")
+```
+
+### 2.3 Candidate gene intervals
+
+Convert coordinates to 1-based, inclusive genomic intervals. Merge overlaps so multiple transcripts do not count the same region twice. Check chromosome names and bounds; these checks cannot independently establish assembly identity.
+
+```{r}
+stopifnot(candidate_format %in% c("course_gff", "gff", "bed", "bed1"))
+annotation_lines <- readLines(candidate_file, warn = FALSE)
+fasta_line <- which(startsWith(annotation_lines, "##FASTA"))
+if (length(fasta_line)) annotation_lines <- head(annotation_lines, fasta_line[1] - 1L)
+annotation_lines <- annotation_lines[!grepl("^\\s*(#|$|track[[:space:]]|browser[[:space:]])", annotation_lines, perl = TRUE)]
+stopifnot(length(annotation_lines) > 0)
+a <- read.delim(text = paste(annotation_lines, collapse = "\n"), header = FALSE,
+                quote = "", comment.char = "", fill = TRUE, colClasses = "character")
+if (candidate_format == "course_gff") {
+  stopifnot(ncol(a) >= 6)
+  intervals <- data.frame(chr = chr_name(a[[2]]), start = as.numeric(a[[5]]), end = as.numeric(a[[6]]))
+} else if (candidate_format == "gff") {
+  stopifnot(ncol(a) == 9)
+  a <- a[chr_name(a[[1]]) %in% nuclear_chr, , drop = FALSE]
+  features <- tolower(a[[3]])
+  keep <- if (any(features == "gene")) features == "gene" else features %in% c("mrna", "transcript")
+  if (!any(keep)) stop("Selected GFF must contain gene or transcript records.")
+  intervals <- data.frame(chr = chr_name(a[[1]][keep]), start = as.numeric(a[[4]][keep]), end = as.numeric(a[[5]][keep]))
+} else {
+  stopifnot(ncol(a) >= 3)
+  intervals <- data.frame(chr = chr_name(a[[1]]),
+    start = as.numeric(a[[2]]) + as.integer(candidate_format == "bed"), end = as.numeric(a[[3]]))
+}
+excluded <- sum(!intervals$chr %in% nuclear_chr)
+if (excluded > 0) message("Excluded non-nuclear or unrecognised records: ", excluded)
+intervals <- intervals[intervals$chr %in% nuclear_chr, , drop = FALSE]
+stopifnot(nrow(intervals) > 0, !anyNA(intervals),
+          all(is.finite(intervals$start)), all(is.finite(intervals$end)),
+          all(intervals$start == floor(intervals$start)), all(intervals$end == floor(intervals$end)),
+          all(intervals$start >= 1), all(intervals$end >= intervals$start),
+          all(intervals$end <= chr_lengths[intervals$chr]))
+selected <- GenomicRanges::reduce(GRanges(intervals$chr, IRanges(intervals$start, intervals$end)), ignore.strand = TRUE)
+print(table(as.character(seqnames(selected))))
+cat("Merged intervals:", length(selected), "; covered bases:", sum(width(selected)), "\n")
+save_table(as.data.frame(selected), "00_candidate_intervals")
+```
+
+## 3. Estimate population structure using PCA
+
+A full VCF may contain millions of SNPs. The reader below works in small batches and keeps a manageable subset for PCA only. We retain SNPs with at least 90% called genotypes and minor allele frequency of at least 5%, then choose one SNP per 5 kb by default. This is physical thinning, not LD pruning. Missing PCA genotypes are replaced by the SNP mean. PopGenome will separately calculate all diversity and FST statistics from the original, unpruned VCF.
+
+**Define the VCF reader**
+
+```{r}
+# Read a VCF sequentially. No external program is called.
+read_genotypes <- function(path) {
+  con <- gzfile(path, "rt")
+  on.exit(close(con))
+  repeat {
+    line <- readLines(con, n = 1L)
+    if (!length(line)) stop("VCF header not found")
+    if (startsWith(line, "#CHROM")) break
+  }
+  ids <- strsplit(line, "\t", fixed = TRUE)[[1]][-(1:9)]
+  stopifnot(!anyDuplicated(ids), setequal(ids, meta$sample))
+  pca_blocks <- list(); seen <- character(); n_sites <- 0L; outside <- 0L
+  repeat {
+    lines <- readLines(con, n = 5000L)
+    if (!length(lines)) break
+    a <- do.call(rbind, strsplit(lines, "\t", fixed = TRUE))
+    # Keep biallelic SNPs on nuclear chromosomes; GT must be first in FORMAT.
+    ch <- chr_name(a[, 1]); pos <- as.integer(a[, 2])
+    keep <- ch %in% nuclear_chr & grepl("^[ACGT]$", a[, 4]) &
+      grepl("^[ACGT]$", a[, 5]) & grepl("^GT(:|$)", a[, 9])
+    if (!any(keep)) next
+    a <- a[keep, , drop = FALSE]; ch <- ch[keep]; pos <- pos[keep]
+    gt <- sub(":.*$", "", a[, -(1:9), drop = FALSE])
+    # Translate phased and unphased diploid genotypes; other calls become NA.
+    codes <- c("0/0", "0|0", "0/1", "1/0", "0|1", "1|0", "1/1", "1|1")
+    dosage <- matrix(c(0,0,1,1,1,1,2,2)[match(gt, codes)], nrow = nrow(a), ncol = length(ids))
+    colnames(dosage) <- ids
+    n_sites <- n_sites + nrow(dosage)
+    # Count SNPs outside the selected intervals (for the selected VCF check).
+    outside <- outside + sum(!overlapsAny(GRanges(ch, IRanges(pos, pos)), selected))
+    # A small, reproducible set of SNPs for PCA only.
+    freq <- rowMeans(dosage, na.rm = TRUE) / 2
+    good <- which(rowMeans(!is.na(dosage)) >= 0.90 & pmin(freq, 1-freq) >= 0.05)
+    bins <- paste(ch[good], (pos[good]-1L) %/% pca_spacing, sep = ":")
+    take <- !duplicated(bins) & !bins %in% seen
+    if (any(take)) {
+      pca_blocks[[length(pca_blocks)+1L]] <- dosage[good[take], , drop = FALSE]
+      seen <- c(seen, bins[take])
+    }
+  }
+  stopifnot(length(pca_blocks) > 0L)
+  list(dosage = do.call(rbind, pca_blocks), n_sites = n_sites, outside = outside)
+}
+```
+
+**Read your two VCF files**
+
+The full VCF takes longer to read. Run this chunk once, then continue when the R prompt returns. The candidate VCF is analysed separately for PCA only. It must be extracted from the same filtered full VCF.
+
+```{r}
+full <- read_genotypes(vcf_full)
+focus <- read_genotypes(vcf_selected)
+print(c(genome_wide_SNPs = full$n_sites, selected_SNPs = focus$n_sites))
+if (focus$outside > 0) stop("Candidate VCF contains SNPs outside selected intervals; check annotation and extraction.")
+print(c(genome_wide_PCA_SNPs = nrow(full$dosage), selected_PCA_SNPs = nrow(focus$dosage)))
+```
+
+**PCA in R: genome-wide and selected genes**
+
+Each row of the PCA input is an accession and each column is a SNP. Centre and scale the allele counts so that differences in allele frequencies do not dominate simply because some SNPs have larger variance. `prcomp()` calculates the principal components. The percentage on each axis is its share of the total variance in the matrix used for that PCA. Set `extra_figures = TRUE` for scree plots and labelled PCA views. The within-population labelled panels have different axes, so do not compare distances between panels.
+
+```{r}
+run_pca <- function(dosage, title, tag) {
+  X <- t(dosage)
+  # Mean imputation is used only for PCA.
+  X <- X[, colSums(!is.na(X)) > 0, drop = FALSE]
+  for (j in seq_len(ncol(X))) X[is.na(X[, j]), j] <- mean(X[, j], na.rm = TRUE)
+  sd_x <- apply(X, 2, sd)
+  X <- X[, is.finite(sd_x) & sd_x > 0, drop = FALSE]
+  stopifnot(ncol(X) >= 3, nrow(X) >= 4)
+  fit <- prcomp(X, center = TRUE, scale. = TRUE, rank. = 3)
+  variance <- 100 * fit$sdev^2 / sum(fit$sdev^2)
+  pc <- data.frame(sample = rownames(fit$x), fit$x[, 1:3, drop = FALSE])
+  pc$pop <- meta$pop[match(pc$sample, meta$sample)]
+  pc$label <- meta$label[match(pc$sample, meta$sample)]
+  stopifnot(!anyNA(pc$pop))
+  eig <- data.frame(PC = seq_along(variance), percent = variance)
+  if (extra_figures) save_plot(ggplot(head(eig, 10), aes(PC, percent)) + geom_col(fill = "steelblue") +
+    scale_x_continuous(breaks = 1:10) + labs(title = paste(title, "- scree plot"), y = "Variance explained (%)") + course_theme,
+    paste0(tag, "_scree"))
+  # First show the population structure without text covering the points.
+  p <- ggplot(pc, aes(PC1, PC2, colour = pop)) +
+    geom_point(size = 2.5, alpha = 0.85) +
+    scale_colour_manual(values = pop_colours) +
+    scale_x_continuous(expand = expansion(mult = 0.12)) +
+    scale_y_continuous(expand = expansion(mult = 0.12)) +
+    coord_equal() + course_theme +
+    labs(title = title, colour = "Population",
+         x = sprintf("PC1 (%.1f%%)", variance[1]),
+         y = sprintf("PC2 (%.1f%%)", variance[2]))
+  save_plot(p, paste0(tag, "_PC1_PC2"), width = 10, height = 7)
+
+  if (extra_figures) {
+  # Label all accessions. Repel labels away from each other and use
+  # thin grey connecting lines so the actual point stays identifiable.
+  labels <- geom_text_repel(aes(label = label), size = 3,
+    seed = 305, max.overlaps = Inf, max.iter = 30000,
+    max.time = 5, box.padding = 0.35, point.padding = 0.15,
+    segment.colour = "grey55", segment.size = 0.25,
+    min.segment.length = 0, show.legend = FALSE)
+  save_plot(p + labels, paste0(tag, "_labelled"), width = 16, height = 11)
+
+  # A second labelled view separates the populations into panels.
+  # Free axes zoom into each group; scores are unchanged, not recalculated.
+  # Do not use this view to compare distances between populations.
+  detail <- p + coord_cartesian() + facet_wrap(~pop, scales = "free", ncol = 2) +
+    theme(panel.spacing.x = grid::unit(1.5, "cm")) +
+    labels + labs(subtitle = "Within-population view; axes differ between panels")
+  save_plot(detail, paste0(tag, "_labelled_by_population"), width = 16, height = 8)
+  }
+  save_table(pc, paste0(tag, "_scores")); save_table(eig, paste0(tag, "_variance"))
+  pc
+}
+pc_full <- run_pca(full$dosage, "PCA: genome-wide SNPs", "01_genome_PCA")
+pc_focus <- run_pca(focus$dosage, paste("PCA:", candidate_description), "02_candidate_PCA")
+```
+
+::: {.callout-note collapse="true"}
+### Optional: interactive 3D PCA
+
+Rotate the first three principal components in the RStudio Viewer. Hover over a point to read its accession name and population. This requires the optional `plotly` and `htmlwidgets` packages.
+
+```{r}
+#| eval: false
+if (requireNamespace("plotly", quietly = TRUE) && requireNamespace("htmlwidgets", quietly = TRUE)) {
+  p3 <- plotly::plot_ly(pc_full, x = ~PC1, y = ~PC2, z = ~PC3,
+    color = ~pop, colors = pop_colours, text = ~paste(label, pop),
+    hoverinfo = "text", type = "scatter3d", mode = "markers")
+  print(p3)
+  htmlwidgets::saveWidget(p3, file.path(OUT, "PCA_3D.html"), selfcontained = FALSE)
+}
+```
+:::
+
+**Interpretation:** Do the two populations form distinct groups? Compare the genome-wide and candidate PCA. Their axes and percentages of explained variance are not directly comparable because the SNP sets differ. Axis signs can reverse without changing the interpretation. PCA does not prove selection.
+
+::: {.callout-note collapse="true"}
+### Optional: LD pruning with PLINK, then PCA in RStudio
+
+Nearby SNPs can be inherited together (linkage disequilibrium, LD). Many correlated SNPs can give one region too much influence on PCA. PLINK removes strongly correlated SNPs, so the genome-wide PCA may better represent overall population structure. This step is optional; skip all three chunks if PLINK is unavailable. PLINK runs on RAMSES from the R Console through `system2()`; no additional SSH session is required. The following commands assume PLINK 1.9 and nuclear chromosome names 1–5 and unique variant IDs (missing IDs are replaced by chromosome and position). If PLINK reports duplicate IDs, ask the instructor to prepare unique IDs before pruning.
+
+```{r}
+#| eval: false
+# Optional chunk 1: convert the genome-wide VCF to PLINK format.
+plink <- "/scratch/QBIO_WS27/envs/qbio_popgen_ws27/bin/plink"
+if (!file.exists(plink)) stop("PLINK is not installed at the expected path")
+plink_run <- function(args) {
+  status <- system2(plink, args)
+  if (status != 0) stop("PLINK failed; inspect its log")
+}
+
+# Define output filenames for PLINK.
+raw <- file.path(OUT, "plink_genome")
+pruned <- file.path(OUT, "plink_pruned")
+
+# Convert the genome-wide VCF into PLINK binary format.
+plink_run(c(
+  "--vcf", shQuote(vcf_full),
+  "--double-id",
+  "--chr-set", "5", "no-x", "no-y", "no-xy", "no-mt",
+  "--allow-extra-chr",
+  "--chr", "1-5",
+  "--biallelic-only", "strict",
+  "--snps-only", "just-acgt",
+  "--set-missing-var-ids", "@:#",
+  "--maf", "0.05",
+  "--geno", "0.10",
+  "--make-bed",
+  "--threads", "2",
+  "--memory", "2048",
+  "--out", shQuote(raw)
+))
+```
+
+```{r}
+#| eval: false
+
+# ============================================================
+# Optional: LD pruning of genome-wide SNPs
+# ============================================================
+
+# Define the output location.
+pruned <- file.path(OUT, "plink_pruned")
+
+# Identify highly correlated SNPs.
+#
+# Window size: 50 kb
+# Step size: 5 SNPs
+# LD threshold: r-squared = 0.2
+
+plink_run(c(
+  "--bfile", shQuote(raw),
+  "--chr-set", "5", "no-x", "no-y", "no-xy", "no-mt",
+  "--indep-pairwise", "50kb", "5", "0.2",
+  "--threads", "2",
+  "--memory", "2048",
+  "--out", shQuote(pruned)
+))
+
+# Read the IDs of retained and excluded SNPs.
+retained_snps <- readLines(paste0(pruned, ".prune.in"))
+excluded_snps <- readLines(paste0(pruned, ".prune.out"))
+
+# Compare SNP numbers before and after LD pruning.
+data.frame(
+  Dataset = c(
+    "Before LD pruning",
+    "After LD pruning",
+    "Removed by LD pruning"
+  ),
+  Number_of_SNPs = c(
+    length(retained_snps) + length(excluded_snps),
+    length(retained_snps),
+    length(excluded_snps)
+  )
+)
+
+# ------------------------------------------------------------
+# Export the retained SNP genotypes for PCA in R.
+# ------------------------------------------------------------
+
+# --extract retains only the SNPs listed in the prune.in file.
+# --recode A exports genotypes as numerical allele counts.
+
+plink_run(c(
+  "--bfile", shQuote(raw),
+  "--chr-set", "5", "no-x", "no-y", "no-xy", "no-mt",
+  "--extract", shQuote(paste0(pruned, ".prune.in")),
+  "--recode", "A",
+  "--threads", "2",
+  "--memory", "2048",
+  "--out", shQuote(pruned)
+))
+
+# Check that the genotype file was successfully created.
+stopifnot(file.exists(paste0(pruned, ".raw")))
+
+# Display the output files.
+list.files(OUT, pattern = "^plink_pruned")
+```
+
+**Understanding the LD-pruning parameters**
+
+| Parameter    | Value  | Meaning                                                                                |
+|------------------|------------------|-----------------------------------|
+| Window size  | 50 kb  | Examine SNPs within a 50,000-base-pair window                                          |
+| Step size    | 5 SNPs | Move the window forward by five SNPs                                                   |
+| LD threshold | 0.2    | Reduce pairs of SNPs with strong allele-count correlations exceeding this r² threshold |
+
+The objective is to reduce redundant genetic information before performing PCA.
+
+```{r}
+#| eval: false
+
+# ============================================================
+# Optional: PCA using LD-pruned genome-wide SNPs
+# ============================================================
+
+# Read the numerical genotype file generated by PLINK.
+a <- read.table(
+  paste0(pruned, ".raw"),
+  header = TRUE,
+  check.names = FALSE,
+  colClasses = "character"
+)
+
+# Inspect the first few rows and columns.
+head(a[, seq_len(min(10, ncol(a))), drop = FALSE])
+
+# The first six columns contain sample information.
+# The remaining columns contain SNP genotypes.
+
+# Extract only the genotype columns.
+X <- as.matrix(a[, -(1:6), drop = FALSE])
+
+# Convert the genotype values to numbers.
+storage.mode(X) <- "numeric"
+
+# Assign accession IDs to the matrix rows.
+rownames(X) <- a$IID
+
+# Check the dimensions of the genotype matrix.
+dim(X)
+
+# Check that the accession IDs match the population file.
+stopifnot(
+  !anyDuplicated(rownames(X)),
+  setequal(rownames(X), meta$sample)
+)
+
+# Number of accessions.
+nrow(X)
+
+# Number of LD-pruned SNPs.
+ncol(X)
+
+# Calculate PCA using the function defined earlier.
+# t(X) transposes the matrix because run_pca()
+# expects SNPs in rows and accessions in columns.
+
+pc_ld <- run_pca(
+  t(X),
+  "PCA: LD-pruned genome-wide SNPs",
+  "03_LD_PCA"
+)
+```
+:::
+
+## 4. Estimate genetic diversity and differentiation using PopGenome
+
+**Nucleotide diversity (pi)** is the average number of nucleotide differences per pair of sampled chromosomes, expressed per site when the denominator is known. PopGenome returns a sum over the recorded sites. Here we divide by the physical window length. Our SNP-only VCF does not tell us which invariant bases were callable, so this is diversity from recorded SNPs per window base, not an exact estimate of diversity at all callable sites.
+
+**Tajima's D** compares pairwise differences with the number of segregating sites. Negative values suggest relatively more rare alleles, and positive values relatively more intermediate-frequency alleles. SNP ascertainment and missing data can distort the spectrum; treat D as exploratory, not a formal neutrality test. D has no units; never divide it by window length or log-transform it. **FST** measures genetic differentiation between the two populations. Higher values indicate stronger differentiation. Small negative estimates can occur and are retained. Filtering, missing data, population history and selection can influence these statistics.
+
+**Window size:** We use 10 kb non-overlapping windows by default. Smaller windows offer finer resolution but fewer SNPs. Change `window_size` only in Section 2.1; do not choose it based on the smallest P-value.
+
+The following uses the [PopGenome whole-genome vignette](https://rdrr.io/cran/PopGenome/f/inst/doc/Whole_genome_analyses_using_VCF_files.pdf) and the documented [sliding windows](https://rdrr.io/cran/PopGenome/man/sliding.window.transform-methods.html), [diversity](https://rdrr.io/cran/PopGenome/man/diversity.stats-methods.html), [neutrality](https://rdrr.io/cran/PopGenome/man/neutrality.stats-methods.html) and [FST](https://rdrr.io/cran/PopGenome/man/F_ST.stats-methods.html) functions. The coordinate checks follow the course's previously audited PopGenome 2.7.5 workflow.
+
+```{r}
+window_jump <- window_size
+print(data.frame(Chromosome = nuclear_chr, VCF_name = unname(chr_lookup),
+                 Length_bp = as.numeric(chr_lengths)))
+```
+
+The two populations can have different sample sizes. Output columns P1 and P2 correspond to the labels in `00_population_key.tsv`.
+
+**Examine the genomic coordinates of your dataset**
+
+> The first and last SNP positions may differ between datasets depending on the selected accessions and filtering criteria. Extract these positions and compare them with the actual reference chromosome lengths.
+
+Because your full VCF contains millions of SNPs, I would extract the coordinates without loading all genotypes into R.
+
+You can use BCFtools, which is already installed in your QBIO RAMSES environment.
+
+```{r}
+# Path to BCFtools in the course environment.
+bcftools <- "/scratch/QBIO_WS27/envs/qbio_popgen_ws27/bin/bcftools"
+
+# Extract chromosome names and variant positions.
+cmd <- paste(
+  shQuote(bcftools),
+  "query -f",
+  shQuote("%CHROM\\t%POS\\n"),
+  shQuote(vcf_full)
+)
+
+# Check the command exit status before reading the coordinates.
+positions_file <- tempfile(fileext = ".tsv")
+status <- system(paste(cmd, ">", shQuote(positions_file)))
+if (status != 0) stop("BCFtools query failed; check the VCF and installation.")
+variant_positions <- read.table(positions_file, header = FALSE, col.names = c("CHROM", "POS"))
+unlink(positions_file)
+
+# Standardise chromosome names and summarise SNP positions.
+chromosome_ranges <- variant_positions |>
+  mutate(CHROM = chr_name(CHROM)) |>
+  filter(CHROM %in% nuclear_chr) |>
+  group_by(CHROM) |>
+  summarise(
+    Start = min(POS),
+    End = max(POS),
+    Number_of_variants = n(),
+    .groups = "drop"
+  ) |>
+  mutate(
+    Reference_length = unname(chr_lengths[CHROM])
+  )
+
+print(chromosome_ranges)
+stopifnot(setequal(chromosome_ranges$CHROM, nuclear_chr),
+          all(chromosome_ranges$Start >= 1), all(chromosome_ranges$End <= chromosome_ranges$Reference_length))
+
+# Release memory.
+rm(variant_positions)
+gc()
+```
+
+**Calculate the statistics.** We read one chromosome at a time with the indexed VCF. This avoids reading the complete genome into memory. PopGenome calculates all five statistics; R only organises, normalises and plots the results. Missing genotypes are retained for PopGenome's own handling. Do not replace them by the mean as in PCA.
+
+```{r}
+# A helper to extract one chromosome's PopGenome results.
+# PopGenome 2.7.5 uses an exclusive lower read boundary and a window offset.
+# Check the first base explicitly rather than silently losing a SNP.
+pg_chromosome <- function(chr) {
+  message("Analysing chromosome ", chr)
+  tid <- unname(chr_lookup[chr])
+  L <- unname(chr_lengths[chr])
+  first <- Rsamtools::scanTabix(vcf_full,
+    param = GRanges(tid, IRanges(1, 1)))[[1]]
+  if (length(first)) stop("A record exists at base 1; ask the instructor to adapt the PopGenome reader.")
+
+  At_Chr <- PopGenome::readVCF(vcf_full,
+    numcols = 9 + nrow(meta), tid = tid,
+    frompos = 1, topos = L, include.unknown = TRUE)
+  At_Chr <- PopGenome::set.populations(At_Chr, pops, diploid = TRUE)
+  positions <- At_Chr@region.data@biallelic.sites[[1]]
+  stopifnot(length(positions) > 0, all(positions >= 1 & positions <= L),
+            !anyDuplicated(positions), all(diff(positions) > 0))
+  At_Chr@n.sites <- L
+  At_Chr@keep.start.pos <- 0
+
+  # type = 2 uses physical coordinates in base pairs.
+  At_sw <- PopGenome::sliding.window.transform(At_Chr,
+    width = window_size, jump = window_jump, type = 2)
+
+  # Read actual window positions from PopGenome, not a guessed grid.
+  bits <- strsplit(trimws(sub(":.*$", "", At_sw@region.names)), "\\s*-\\s*")
+  stopifnot(all(lengths(bits) == 2))
+  xy <- matrix(as.numeric(unlist(bits)), ncol = 2, byrow = TRUE)
+  stopifnot(all(is.finite(xy)), xy[1,1] == 1,
+            all(diff(xy[,1]) == window_jump),
+            all(xy[,2] - xy[,1] + 1 == window_size))
+  counts <- findInterval(xy[,2], positions) - findInterval(xy[,1]-1, positions)
+  stopifnot(identical(as.integer(lengths(At_sw@SLIDE.POS)), as.integer(counts)))
+
+  # Estimate diversity, Tajima's D and nucleotide-based pairwise FST.
+  At_sw <- PopGenome::diversity.stats(At_sw, pi = TRUE)
+  At_sw <- PopGenome::neutrality.stats(At_sw)
+  At_sw <- PopGenome::F_ST.stats(At_sw, mode = "nucleotide")
+  n <- nrow(xy)
+  stopifnot(identical(dim(At_sw@nuc.diversity.within), c(n, 2L)),
+            identical(dim(At_sw@Tajima.D), c(n, 2L)),
+            identical(dim(At_sw@nuc.F_ST.pairwise), c(1L, n)),
+            identical(names(At_sw@populations), names(pops)))
+
+  ans <- data.frame(chr = chr, start = xy[,1], end = xy[,2],
+    n_variants = counts,
+    P1_pi_sum = At_sw@nuc.diversity.within[,1],
+    P2_pi_sum = At_sw@nuc.diversity.within[,2],
+    P1_D = At_sw@Tajima.D[,1], P2_D = At_sw@Tajima.D[,2],
+    FST = At_sw@nuc.F_ST.pairwise[1,])
+  # Exclude incomplete terminal windows; empty windows have no estimates.
+  ans <- ans[ans$end <= L, ]
+  stats <- c("P1_pi_sum", "P2_pi_sum", "P1_D", "P2_D", "FST")
+  ans[ans$n_variants == 0, stats] <- NA_real_
+  for (nm in stats) ans[[nm]][!is.finite(ans[[nm]])] <- NA_real_
+  # Retain zero diversity in supported windows; negative D/FST are valid estimates.
+  ans$P1_pi <- ans$P1_pi_sum / window_size
+  ans$P2_pi <- ans$P2_pi_sum / window_size
+  ans
+}
+
+# Start with chromosome 1. If a coordinate check fails, do not continue.
+# The loop saves each chromosome separately, so completed results are available.
+genome_results <- list()
+for (chr in names(chr_lengths)) {
+  genome_results[[chr]] <- pg_chromosome(chr)
+  save_table(genome_results[[chr]], paste0("PopGenome_chr", chr, "_", window_size, "bp"))
+  gc()
+}
+
+# Combine all five chromosomes into one ordered table.
+w <- bind_rows(genome_results) |> arrange(as.integer(chr), start)
+# Restore any omitted empty windows to the physical grid before permutation.
+grid <- bind_rows(lapply(names(chr_lengths), function(ch) {
+  st <- seq.int(1L, chr_lengths[[ch]] - window_size + 1L, by = window_size)
+  data.frame(chr = ch, start = st, end = st + window_size - 1L)
+}))
+stopifnot(!anyDuplicated(w[, c("chr", "start", "end")]))
+stopifnot(nrow(anti_join(w, grid, by = c("chr", "start", "end"))) == 0)
+w <- left_join(grid, w, by = c("chr", "start", "end"))
+w$n_variants[is.na(w$n_variants)] <- 0L
+w$mid <- (w$start + w$end)/2
+print(table(w$chr))
+summary(w[, c("P1_pi", "P2_pi", "P1_D", "P2_D", "FST")])
+```
+
+**Classify windows.** A Candidate window overlaps at least one selected gene interval; all other windows are classified as Background. Candidate windows may also contain neighbouring genes and non-coding sequences. We use the ***genome-wide background as an empirical reference for patterns expected under neutrality,*** recognising that some background regions may also be under selection. Both classes are analysed using the same full VCF and window size.
+
+```{r}
+window_ranges <- GRanges(w$chr, IRanges(w$start, w$end))
+w$class <- factor(ifelse(overlapsAny(window_ranges, selected, ignore.strand = TRUE),
+                         "Candidate", "Background"), levels = c("Background", "Candidate"))
+print(table(w$chr, w$class))
+stopifnot(all(table(w$class) > 0))
+# Save the single table used by all subsequent plots and tests.
+save_table(w, "04_genome_diversity_windows")
+```
+
+### 4.1 Genome-wide and candidate-only figures
+
+Green shading and dark-green ticks locate candidate windows in the genome-wide plot. The candidate-only plot uses points rather than connecting separated windows. Both plots share genomic coordinates and y-axis ranges. Missing estimates are not plotted.
+
+```{r}
+#| fig-width: 16
+#| fig-height: 10
+chr_info <- data.frame(chr = names(chr_lengths), Length = as.numeric(chr_lengths))
+chr_info$Offset <- c(0, head(cumsum(chr_info$Length), -1))
+chr_info$Centre <- chr_info$Offset + chr_info$Length/2
+chr_info$Boundary <- chr_info$Offset + chr_info$Length
+
+genome_stats <- left_join(w, chr_info, by = "chr") |>
+  mutate(Genome_position = (mid + Offset)/1e6)
+metrics <- c("P1_pi", "P2_pi", "P1_D", "P2_D", "FST")
+metric_key <- data.frame(metric = metrics,
+  Population = c(pop_labels, pop_labels, paste(pop_labels, collapse = "–")),
+  Statistic = c("pi", "pi", "D", "D", "FST"))
+metric_key$Label <- paste0(metric_key$Population, ": ",
+  c("pi", "pi", "Tajima's D", "Tajima's D", "FST"))
+save_table(metric_key, "04_metric_key")
+plot_data <- genome_stats |>
+  pivot_longer(all_of(metrics), names_to = "metric", values_to = "Value") |>
+  mutate(Statistic = factor(metric, levels = metrics, labels = metric_key$Label)) |>
+  arrange(Statistic, chr, Genome_position)
+stat_colours <- setNames(c("#D66B64", "#898B00", "#008D77", "#008DC7", "#A64ED0"), metric_key$Label)
+candidate_windows <- filter(genome_stats, class == "Candidate")
+
+base_genome <- ggplot(plot_data, aes(Genome_position, Value, colour = Statistic, group = chr)) +
+  geom_hline(yintercept = 0, colour = "grey65", linewidth = 0.25) +
+  geom_vline(xintercept = head(chr_info$Boundary, -1)/1e6,
+    linetype = "dashed", colour = "grey45", linewidth = 0.4) +
+  facet_grid(Statistic ~ ., scales = "free_y") +
+  scale_colour_manual(values = stat_colours) +
+  scale_x_continuous(breaks = chr_info$Centre/1e6, labels = paste("Chr", chr_info$chr),
+    expand = expansion(mult = 0.015)) +
+  labs(x = "Nuclear chromosomes", y = NULL,
+       caption = "Pi: recorded SNPs per window base; Tajima's D unscaled; PopGenome nucleotide FST.") +
+  course_theme + theme(legend.position = "none", panel.grid.major.x = element_blank(),
+    strip.text.y = element_text(angle = 0, size = 10, face = "bold"),
+    panel.spacing.y = grid::unit(0.35, "cm"), plot.title = element_text(face = "bold"))
+
+p_genome <- base_genome +
+  geom_rect(data = candidate_windows,
+    aes(xmin = (start+Offset-1)/1e6, xmax = (end+Offset)/1e6, ymin = -Inf, ymax = Inf),
+    inherit.aes = FALSE, fill = "#00A88E", alpha = 0.12, colour = NA) +
+  geom_line(linewidth = 0.3, na.rm = TRUE) +
+  geom_rug(data = candidate_windows, aes(x = Genome_position), inherit.aes = FALSE,
+    sides = "t", colour = "#006B4F", alpha = 0.8, length = grid::unit(0.025, "npc")) +
+  labs(title = "Genome-wide diversity and differentiation",
+       subtitle = paste0(window_size/1000, " kb windows; green marks = ", candidate_description))
+save_plot(p_genome, "12_genomewide_candidate_regions", width = 16, height = 10)
+
+# Only candidate values are visible; geom_blank retains genome-wide scales.
+p_candidate <- base_genome +
+  geom_blank(data = plot_data) +
+  geom_point(data = filter(plot_data, class == "Candidate"), size = 1.1, alpha = 0.8, na.rm = TRUE) +
+  labs(title = "Candidate-associated genomic regions",
+       subtitle = paste0(candidate_description, "; ", window_size/1000,
+                         " kb windows (n = ", nrow(candidate_windows), ")"))
+save_plot(p_candidate, "14_candidate_windows_only", width = 16, height = 10)
+```
+
+**Interpretation:** Do candidate windows coincide with high or low values? These figures locate patterns; the next section tests whether candidate and background windows differ.
+
+### **4.2 Identify candidate windows outside the empirical background range (optional)**
+
+We use the genome-wide background as an empirical reference for patterns expected under neutrality. For each statistic, the 2.5th and 97.5th percentiles define the central 95% of the background distribution. Candidate windows outside these thresholds are highlighted as empirical outliers.
+
+```{r}
+#| fig-width: 16
+#| fig-height: 10
+
+# Define the empirical background thresholds for each statistic.
+background_thresholds <- plot_data |>
+  filter(class == "Background", is.finite(Value)) |>
+  group_by(Statistic) |>
+  summarise(
+    Lower = quantile(Value, 0.025),
+    Upper = quantile(Value, 0.975),
+    .groups = "drop"
+  )
+
+# Classify candidate windows relative to the empirical background.
+candidate_outliers <- plot_data |>
+  filter(class == "Candidate", is.finite(Value)) |>
+  left_join(background_thresholds, by = "Statistic") |>
+  mutate(
+    Status = case_when(
+      Value < Lower ~ "Lower-tail outlier",
+      Value > Upper ~ "Upper-tail outlier",
+      TRUE ~ "Within background range"
+    )
+  )
+
+# Generate the five-panel figure.
+p_candidate_outliers <- base_genome +
+
+  # Retain the original genome-wide axis ranges.
+  geom_blank(data = plot_data) +
+
+  # Shade the central 95% of the empirical background.
+  geom_rect(
+    data = background_thresholds,
+    aes(
+      xmin = -Inf, xmax = Inf,
+      ymin = Lower, ymax = Upper
+    ),
+    inherit.aes = FALSE,
+    fill = "grey70",
+    alpha = 0.15
+  ) +
+
+  # Lower empirical threshold.
+  geom_hline(
+    data = background_thresholds,
+    aes(yintercept = Lower),
+    colour = "#B22222",
+    linetype = "dashed",
+    linewidth = 0.5
+  ) +
+
+  # Upper empirical threshold.
+  geom_hline(
+    data = background_thresholds,
+    aes(yintercept = Upper),
+    colour = "#B22222",
+    linetype = "dashed",
+    linewidth = 0.5
+  ) +
+
+  # Candidate windows within the empirical background range.
+  geom_point(
+    data = filter(
+      candidate_outliers,
+      Status == "Within background range"
+    ),
+    size = 1.1,
+    alpha = 0.7
+  ) +
+
+  # Highlight empirical outliers in red.
+  geom_point(
+    data = filter(
+      candidate_outliers,
+      Status != "Within background range"
+    ),
+    colour = "#B22222",
+    size = 1.8,
+    alpha = 0.9
+  ) +
+
+  labs(
+    title = "Empirical outliers in candidate-associated regions",
+    subtitle = paste0(
+      candidate_description, "; ",
+      window_size / 1000,
+      " kb windows (n = ", nrow(candidate_windows), ")"
+    ),
+    caption = paste(
+      "Dashed red lines: 2.5th and 97.5th background percentiles.",
+      "\nRed points: empirical outliers."
+    )
+  )
+
+# Display and save the figure.
+save_plot(
+  p_candidate_outliers,
+  "14b_candidate_windows_empirical_outliers",
+  width = 16,
+  height = 10
+)
+
+# Summarise empirical outliers for each statistic.
+outlier_summary <- candidate_outliers |>
+  group_by(Statistic) |>
+  summarise(
+    n_candidate = n(),
+    n_lower = sum(Status == "Lower-tail outlier"),
+    n_upper = sum(Status == "Upper-tail outlier"),
+    n_outliers = n_lower + n_upper,
+    Percent_outliers = round(100 * n_outliers / n_candidate, 2),
+    .groups = "drop"
+  )
+
+print(outlier_summary)
+
+# Save thresholds, summary and individual outlier coordinates.
+save_table(background_thresholds, "14b_background_thresholds")
+save_table(outlier_summary, "14b_outlier_summary")
+save_table(
+  filter(candidate_outliers, Status != "Within background range"),
+  "14b_candidate_outlier_windows"
+)
+```
+
+::: callout-important
+**Interpretation**
+
+Candidate windows outside the central 95% of the empirical background distribution show unusually high or low values. These windows represent potential targets for further investigation.
+
+Approximately 5% of windows may fall outside these thresholds under the empirical reference model. Therefore, individual outliers should not be interpreted as statistically significant evidence of natural selection.
+:::
+
+-   **Red dashed lines:** lower and upper empirical background thresholds (2.5th and 97.5th percentiles).
+
+-   **Light-grey shading:** central 95% of the empirical background distribution.
+
+-   **Red points:** candidate windows outside the empirical background thresholds.
+
+-   **Statistic-specific colours:** candidate windows within the empirical background range.
+
+-   **Grey dashed vertical lines:** chromosome boundaries.
+
+**Preliminary biological interpretation**
+
+From the figure, we can observe:
+
+| Statistic       | Visual observation                                                                                   |
+|-----------------|------------------------------------------------------------------------------------------------------|
+| ESP: π          | Candidate windows with both unusually high and low diversity.                                        |
+| SWE: π          | Several upper-tail outliers distributed across chromosomes.                                          |
+| ESP: Tajima's D | Empirical outliers in both tails, with several positive extremes.                                    |
+| SWE: Tajima's D | Several pronounced positive outliers.                                                                |
+| ESP–SWE: FST    | Relatively few upper-tail outliers, with most windows falling within the empirical background range. |
+
+These are visual observations rather than formal statistical conclusions.
+
+**Suggested interpretation for the QMD**
+
+> **Interpret empirical outliers.** The dashed red lines represent the 2.5th and 97.5th percentiles of the empirical genomic background. Candidate windows outside these thresholds are highlighted in red and represent regions with unusually high or low values. These regions may be promising targets for further investigation, but their identification as empirical outliers does not necessarily indicate natural selection.
+
+One particularly useful follow-up would be to identify which selected defence genes overlap these outlier windows and whether the same genes are associated with outliers across multiple statistics.
+
+## 5. Statistical comparison: Candidate versus Background
+
+### 5.1 Check missing estimates
+
+Check how many windows have finite values for each statistic. A low percentage can reflect sparse SNPs, filtering or undefined estimates; it is not a direct measurement of callable sites. Compare the percentages before interpreting differences.
+
+```{r}
+availability <- w |>
+  group_by(class) |>
+  summarise(n_windows = n(), across(all_of(metrics), ~ round(100 * mean(is.finite(.x)), 2)), .groups = "drop")
+print(availability)
+save_table(availability, "05_finite_estimates_percent")
+```
+
+### 5.2 Test differences
+
+| Test                      | Question                                                      |
+|------------------------------------|------------------------------------|
+| Mean difference (primary) | Are the average values different?                             |
+| KS distance (secondary)   | Are the distributions different in location, spread or shape? |
+
+Nearby windows can be genetically correlated. We shift the candidate labels circularly within each chromosome while keeping the statistics fixed. This preserves the number and clustering of labels on the circularised chromosome. Missing estimates stay in place; only finite values contribute to each test. The null model assumes that shifts are exchangeable within each chromosome; gene density, centromeres and recombination may violate that assumption.
+
+We use the same 999 shifts for all five statistics by default. The two-sided mean test uses both tails of the permutation distribution rather than assuming it is centred at zero. The KS distance is non-negative and uses its upper tail. BH correction is applied separately to each family of five tests. The optional ordinary Wilcoxon test is exploratory because it assumes independent observations.
+
+```{r}
+set.seed(305)
+# w is the full ordered physical grid, including windows without estimates.
+by_chr <- split(seq_len(nrow(w)), w$chr)
+shifts <- lapply(by_chr, function(i) sample.int(length(i), n_perm, replace = TRUE) - 1L)
+compare_regions <- function(metric) {
+  y <- w[[metric]]
+  group <- w$class == "Candidate"
+  a <- y[group & is.finite(y)]; b <- y[!group & is.finite(y)]
+  ans <- data.frame(metric = metric, n_candidate = length(a), n_background = length(b),
+    mean_candidate = if (length(a)) mean(a) else NA_real_,
+    mean_background = if (length(b)) mean(b) else NA_real_,
+    median_candidate = if (length(a)) median(a) else NA_real_,
+    median_background = if (length(b)) median(b) else NA_real_,
+    difference = NA_real_, permutation_p = NA_real_, KS_D = NA_real_,
+    KS_permutation_p = NA_real_, wilcoxon_p = NA_real_)
+  if (length(a) < 2 || length(b) < 2) return(ans)
+  observed <- mean(a) - mean(b)
+  ix <- which(is.finite(y)); ix <- ix[order(y[ix])]
+  ends <- which(!duplicated(y[ix], fromLast = TRUE))
+  ks_distance <- function(g) {
+    g <- g[ix]; na <- sum(g); nb <- length(g) - na
+    if (na == 0 || nb == 0) return(NA_real_)
+    ca <- cumsum(g); cb <- seq_along(g) - ca
+    max(abs(ca[ends]/na - cb[ends]/nb))
+  }
+  ks_observed <- ks_distance(group)
+  simulated <- vapply(seq_len(n_perm), function(j) {
+    shifted <- group
+    for (ch in names(by_chr)) {
+      i <- by_chr[[ch]]; k <- shifts[[ch]][j]
+      shifted[i] <- group[i[(seq_along(i)-1L+k) %% length(i)+1L]]
+    }
+    c(mean_difference = mean(y[shifted & is.finite(y)]) -
+        mean(y[!shifted & is.finite(y)]), KS = ks_distance(shifted))
+  }, numeric(2))
+  ans$difference <- observed
+  ans$KS_D <- ks_observed
+  if (all(is.finite(simulated[1, ]))) {
+    lower <- (1 + sum(simulated[1, ] <= observed))/(n_perm + 1)
+    upper <- (1 + sum(simulated[1, ] >= observed))/(n_perm + 1)
+    ans$permutation_p <- min(1, 2 * min(lower, upper))
+  }
+  if (all(is.finite(simulated[2, ]))) {
+    ans$KS_permutation_p <- (1 + sum(simulated[2, ] >= ks_observed))/(n_perm + 1)
+  }
+  if (optional_wilcoxon) ans$wilcoxon_p <- wilcox.test(a, b, exact = FALSE)$p.value
+  ans
+}
+results <- bind_rows(lapply(metrics, compare_regions)) |>
+  left_join(metric_key, by = "metric")
+results$permutation_BH <- p.adjust(results$permutation_p, "BH", n = length(metrics))
+results$KS_permutation_BH <- p.adjust(results$KS_permutation_p, "BH", n = length(metrics))
+if (optional_wilcoxon) results$wilcoxon_BH <- p.adjust(results$wilcoxon_p, "BH", n = length(metrics))
+print(results[, c("Label", "n_candidate", "n_background", "mean_candidate", "mean_background",
+                  "difference", "permutation_BH", "KS_D", "KS_permutation_BH")])
+save_table(results, "06_diversity_tests")
+```
+
+::: qbio-important
+A positive mean difference means candidate windows have higher values; a negative difference means lower values. An adjusted P-value below 0.05 indicates evidence against the specified shift null, not proof of natural selection. `NA` indicates a test could not be estimated reliably (e.g. too few finite values or undefined permutation statistics).
+:::
+
+## 6. Compare distributions and interpret results
+
+::: qbio-important
+**Important: interpreting the KS test**
+
+The Kolmogorov–Smirnov (KS) test evaluates whether the distributions of candidate and background windows differ. The displayed P-values are obtained using chromosome-wise circular permutations to account for spatial dependence among genomic windows. Multiple-testing-adjusted P-values (q-values), KS distances and mean-difference test results are provided in the statistical results table and can be used for further interpretation.
+:::
+
+Boxplots show the median (line), middle 50% of values (box) and mean (white diamond). Density plots show distribution shape, not window counts; dashed lines indicate means. The same bandwidth is used for all curves within each statistic. For pi, reflection at zero avoids smoothing into negative values. Optional ECDFs show the actual cumulative fractions; the KS statistic is their largest vertical separation.
+
+```{r}
+#| fig-width: 15
+#| fig-height: 7
+long <- w |>
+  pivot_longer(all_of(metrics), names_to = "metric", values_to = "Value") |>
+  filter(is.finite(Value)) |>
+  left_join(results, by = "metric") |>
+  mutate(panel = paste0(Population, " (Candidate n=", n_candidate, "; Background n=", n_background,
+    ")\nKS P = ", signif(KS_permutation_p, 3)))
+
+for (stat in c("pi", "D", "FST")) {
+  z <- filter(long, Statistic == stat)
+  if (!nrow(z)) next
+  metric_label <- switch(stat, pi = "Nucleotide diversity (pi)", D = "Tajima's D", FST = "FST")
+  plot_title <- paste(metric_label, "– Candidate vs Background")
+  b <- ggplot(z, aes(class, Value, fill = class)) +
+    facet_wrap(~panel, nrow = 1) + scale_fill_manual(values = region_colours) +
+    labs(title = plot_title, subtitle = candidate_description, x = "Region", y = metric_label, fill = "Region") + course_theme
+  save_plot(b + geom_boxplot(width = 0.55, outlier.alpha = 0.15) +
+    stat_summary(fun = mean, geom = "point", shape = 23, fill = "white", size = 2.5),
+    paste0("08_", stat, "_box"), width = 15, height = 7)
+
+  # Density requires at least two finite observations per curve and positive bandwidth.
+  bw <- if (nrow(z) >= 2) stats::bw.nrd0(z$Value) else NA_real_
+  if (is.finite(bw) && bw > 0 && (stat != "pi" || all(z$Value >= 0))) {
+    lower <- if (stat == "pi") 0 else min(z$Value) - 4*bw
+    upper <- max(z$Value) + 4*bw
+    dz <- z |> group_by(panel, class) |> filter(n() >= 2) |> ungroup()
+    if (nrow(dz)) {
+      curves <- dz |> group_by(panel, class) |> group_modify(function(data, key) {
+        x <- data$Value
+        d <- density(if (stat == "pi") c(x, -x) else x, bw = bw, from = lower, to = upper, n = 2048)
+        data.frame(Value = d$x, Density = d$y * if (stat == "pi") 2 else 1)
+      }) |> ungroup()
+      means <- dz |> group_by(panel, class) |> summarise(Mean = mean(Value), .groups = "drop")
+      p <- ggplot(curves, aes(Value, Density, colour = class, fill = class)) +
+        geom_area(alpha = 0.15, position = "identity", colour = NA) + geom_line(linewidth = 0.9) +
+        geom_vline(data = means, aes(xintercept = Mean, colour = class), linetype = "dashed", show.legend = FALSE) +
+        facet_wrap(~panel, nrow = 1) + scale_colour_manual(values = region_colours) + scale_fill_manual(values = region_colours) +
+        scale_x_continuous(n.breaks = 4, labels = if (stat == "pi") scales::label_scientific(digits = 2) else scales::label_number()) +
+        labs(title = plot_title, subtitle = candidate_description, x = metric_label, y = "Density", colour = "Region", fill = "Region") + course_theme
+      save_plot(p, paste0("07_", stat, "_density"), width = 15, height = 7)
+    }
+  } else message("Density skipped for ", stat, ": insufficient variation or invalid values.")
+
+  if (extra_figures) {
+    ec <- ggplot(z, aes(Value, colour = class)) + stat_ecdf(geom = "step", linewidth = 0.9) +
+      facet_wrap(~panel, nrow = 1) + scale_colour_manual(values = region_colours) +
+      labs(title = paste(metric_label, "– cumulative distributions"), x = metric_label,
+           y = "Cumulative fraction of windows", colour = "Region") + course_theme
+    save_plot(ec, paste0("07_", stat, "_ECDF"), width = 15, height = 7)
+    save_plot(b + geom_violin(trim = TRUE, scale = "width", alpha = 0.65) +
+      geom_boxplot(width = 0.12, outlier.shape = NA, fill = "white"),
+      paste0("09_", stat, "_violin"), width = 15, height = 7)
+  }
+}
+save_table(long, "10_plot_data")
+writeLines(capture.output(sessionInfo()), file.path(OUT, "sessionInfo.txt"))
+```
+
+## 7. Interpret and discuss
+
+| Observation in candidate windows | Possible interpretation                                 |
+|------------------------------------|------------------------------------|
+| Higher/lower pi                  | More/less recorded genetic diversity per window base    |
+| More negative Tajima's D         | Relatively more rare alleles                            |
+| More positive Tajima's D         | Relatively more intermediate-frequency alleles          |
+| Higher FST                       | Greater differentiation between populations             |
+| Significant mean test            | Unusual mean difference under the shift null            |
+| Significant KS test              | Unusual difference in distribution under the shift null |
+
+Answer these questions using your own results:
+
+1.  Do the two populations cluster separately in the genome-wide and candidate PCA?
+2.  Is diversity higher or lower in candidate windows? Is the pattern similar in both populations?
+3.  How do Tajima's D and FST differ between candidate and background windows?
+4.  Do the adjusted P-values support the patterns in the plots? Consider effect sizes and missing estimates as well.
+5.  Could selection, drift, population history, selfing, linked selection, gene density or data quality explain these patterns?
+
+::: qbio-important
+Write a three- to five-sentence conclusion: describe the observation, statistical evidence and plausible explanations. A difference alone does not establish selection. The SNP-only VCF lacks callable invariant sites; pi is a relative measure here, and Tajima's D is exploratory rather than a formal neutrality test. As an optional sensitivity analysis, compare with other gene-containing windows using the full genome annotation and a suitable spatial null model.
+:::
+
+**For your project:** Return to Section 2.1, change the input filenames and candidate description, select the correct annotation format, choose a new results folder, and run all chunks from the beginning. No downstream population names need editing.
+
+**Download directly from RStudio**
+
+1.  Open the **Files** tab in RStudio.
+
+2.  Navigate to `Practical_Day_4-6/Results/Day4` (or your configured results folder).
+
+3.  Select the files you want to download.
+
+4.  Click **More → Export**.
+
+5.  Click **Download**.
+
+**Download the entire results directory**
+
+Open a new **local Terminal on your laptop**, not the RStudio Terminal.
+
+``` bash
+scp -r -i ~/.ssh/ramses_qbixd035 \
+qbixd035@ramses1.itcc.uni-koeln.de:~/Practical_Day_4-6/Results \
+~/Downloads/
+```
+
+## 8. Finish your session
+
+Save your QMD and results. Close the RStudio browser tab, stop the SSH tunnel with Ctrl+C in Terminal 2, then stop the RStudio server with Ctrl+C in Terminal 1 and type `exit` to leave the interactive job. Check `squeue -u "$USER"` on the login node. Cancel only your own remaining job if necessary.
